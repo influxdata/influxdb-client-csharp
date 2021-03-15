@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -377,8 +378,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a scraper target
@@ -389,8 +391,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete a label from a scraper target
         /// </summary>
@@ -401,8 +404,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a label from a scraper target
@@ -414,8 +418,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Remove a member from a scraper target
         /// </summary>
@@ -426,8 +431,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of member to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Remove a member from a scraper target
@@ -439,8 +445,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of member to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Remove an owner from a scraper target
         /// </summary>
@@ -451,8 +458,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of owner to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Remove an owner from a scraper target
@@ -464,8 +472,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of owner to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get all scraper targets
         /// </summary>
@@ -478,8 +487,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
         /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ScraperTargetResponses</returns>
-        System.Threading.Tasks.Task<ScraperTargetResponses> GetScrapersAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
+        System.Threading.Tasks.Task<ScraperTargetResponses> GetScrapersAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all scraper targets
@@ -493,8 +503,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
         /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponses)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> GetScrapersAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null);
+        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> GetScrapersAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get a scraper target by ID
         /// </summary>
@@ -504,8 +515,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ScraperTargetResponse</returns>
-        System.Threading.Tasks.Task<ScraperTargetResponse> GetScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ScraperTargetResponse> GetScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a scraper target by ID
@@ -516,8 +528,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> GetScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> GetScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all labels for a scraper target
         /// </summary>
@@ -527,8 +540,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> GetScrapersIDLabelsAsync (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelsResponse> GetScrapersIDLabelsAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all labels for a scraper target
@@ -539,8 +553,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all users with member privileges for a scraper target
         /// </summary>
@@ -550,8 +565,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMembers</returns>
-        System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all users with member privileges for a scraper target
@@ -562,8 +578,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all owners of a scraper target
         /// </summary>
@@ -573,8 +590,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwners</returns>
-        System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all owners of a scraper target
@@ -585,8 +603,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update a scraper target
         /// </summary>
@@ -597,8 +616,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ScraperTargetResponse</returns>
-        System.Threading.Tasks.Task<ScraperTargetResponse> PatchScrapersIDAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ScraperTargetResponse> PatchScrapersIDAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a scraper target
@@ -610,8 +630,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PatchScrapersIDAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PatchScrapersIDAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a scraper target
         /// </summary>
@@ -621,8 +642,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ScraperTargetResponse</returns>
-        System.Threading.Tasks.Task<ScraperTargetResponse> PostScrapersAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ScraperTargetResponse> PostScrapersAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a scraper target
@@ -633,8 +655,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PostScrapersAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PostScrapersAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a label to a scraper target
         /// </summary>
@@ -645,8 +668,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> PostScrapersIDLabelsAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> PostScrapersIDLabelsAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a label to a scraper target
@@ -658,8 +682,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a member to a scraper target
         /// </summary>
@@ -670,8 +695,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMember</returns>
-        System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a member to a scraper target
@@ -683,8 +709,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add an owner to a scraper target
         /// </summary>
@@ -695,8 +722,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwner</returns>
-        System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add an owner to a scraper target
@@ -708,8 +736,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -885,8 +914,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -921,7 +951,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1039,10 +1069,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteScrapersIDAsyncWithHttpInfo(scraperTargetID, zapTraceSpan);
+             return DeleteScrapersIDAsyncWithHttpInfo(scraperTargetID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1052,11 +1083,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteScrapersIDAsyncWithIRestResponse(scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteScrapersIDAsyncWithIRestResponse(scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1077,8 +1109,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -1113,7 +1146,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1206,8 +1239,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDLabelsIDWithIRestResponseAsync (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDLabelsIDWithIRestResponseAsync (string scraperTargetID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -1246,7 +1280,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1375,10 +1409,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteScrapersIDLabelsIDAsync (string scraperTargetID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteScrapersIDLabelsIDAsyncWithHttpInfo(scraperTargetID, labelID, zapTraceSpan);
+             return DeleteScrapersIDLabelsIDAsyncWithHttpInfo(scraperTargetID, labelID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1389,11 +1424,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDLabelsIDAsyncWithHttpInfo (string scraperTargetID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteScrapersIDLabelsIDAsyncWithIRestResponse(scraperTargetID, labelID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteScrapersIDLabelsIDAsyncWithIRestResponse(scraperTargetID, labelID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1415,8 +1451,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelID">The label ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDLabelsIDAsyncWithIRestResponse (string scraperTargetID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDLabelsIDAsyncWithIRestResponse (string scraperTargetID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -1455,7 +1492,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1548,8 +1585,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of member to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDMembersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDMembersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1588,7 +1626,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1717,10 +1755,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of member to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteScrapersIDMembersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteScrapersIDMembersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
+             return DeleteScrapersIDMembersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1731,11 +1770,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of member to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDMembersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteScrapersIDMembersIDAsyncWithIRestResponse(userID, scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteScrapersIDMembersIDAsyncWithIRestResponse(userID, scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1757,8 +1797,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of member to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDMembersIDAsyncWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDMembersIDAsyncWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1797,7 +1838,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1890,8 +1931,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of owner to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDOwnersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDOwnersIDWithIRestResponseAsync (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1930,7 +1972,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2059,10 +2101,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of owner to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteScrapersIDOwnersIDAsync (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteScrapersIDOwnersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan);
+             return DeleteScrapersIDOwnersIDAsyncWithHttpInfo(userID, scraperTargetID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -2073,11 +2116,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of owner to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteScrapersIDOwnersIDAsyncWithHttpInfo (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteScrapersIDOwnersIDAsyncWithIRestResponse(userID, scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteScrapersIDOwnersIDAsyncWithIRestResponse(userID, scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2099,8 +2143,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of owner to remove.</param>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDOwnersIDAsyncWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteScrapersIDOwnersIDAsyncWithIRestResponse (string userID, string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -2139,7 +2184,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2235,8 +2280,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
         /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ScraperTargetResponses</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersWithIRestResponseAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersWithIRestResponseAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/scrapers";
@@ -2271,7 +2317,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2398,10 +2444,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
         /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ScraperTargetResponses</returns>
-        public async System.Threading.Tasks.Task<ScraperTargetResponses> GetScrapersAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<ScraperTargetResponses> GetScrapersAsync (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ScraperTargetResponses> localVarResponse = await GetScrapersAsyncWithHttpInfo(zapTraceSpan, name, id, orgID, org).ConfigureAwait(false);
+             ApiResponse<ScraperTargetResponses> localVarResponse = await GetScrapersAsyncWithHttpInfo(zapTraceSpan, name, id, orgID, org, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2415,11 +2462,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
         /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponses)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> GetScrapersAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponses>> GetScrapersAsyncWithHttpInfo (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetScrapersAsyncWithIRestResponse(zapTraceSpan, name, id, orgID, org).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetScrapersAsyncWithIRestResponse(zapTraceSpan, name, id, orgID, org, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2443,8 +2491,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="id">List of scraper target IDs to return. If both &#x60;id&#x60; and &#x60;owner&#x60; are specified, only &#x60;id&#x60; is used. (optional)</param>
         /// <param name="orgID">Specifies the organization ID of the scraper target. (optional)</param>
         /// <param name="org">Specifies the organization name of the scraper target. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ScraperTargetResponses)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersAsyncWithIRestResponse (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersAsyncWithIRestResponse (string zapTraceSpan = null, string name = null, List<string> id = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/scrapers";
@@ -2479,7 +2528,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2566,8 +2615,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -2602,7 +2652,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2720,10 +2770,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ScraperTargetResponse</returns>
-        public async System.Threading.Tasks.Task<ScraperTargetResponse> GetScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ScraperTargetResponse> GetScrapersIDAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ScraperTargetResponse> localVarResponse = await GetScrapersIDAsyncWithHttpInfo(scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ScraperTargetResponse> localVarResponse = await GetScrapersIDAsyncWithHttpInfo(scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2734,11 +2785,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> GetScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> GetScrapersIDAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetScrapersIDAsyncWithIRestResponse(scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetScrapersIDAsyncWithIRestResponse(scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2759,8 +2811,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ScraperTargetResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -2795,7 +2848,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2882,8 +2935,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDLabelsWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDLabelsWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -2918,7 +2972,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3036,10 +3090,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> GetScrapersIDLabelsAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetScrapersIDLabelsAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await GetScrapersIDLabelsAsyncWithHttpInfo(scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelsResponse> localVarResponse = await GetScrapersIDLabelsAsyncWithHttpInfo(scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3050,11 +3105,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetScrapersIDLabelsAsyncWithIRestResponse(scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetScrapersIDLabelsAsyncWithIRestResponse(scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3075,8 +3131,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDLabelsAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDLabelsAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -3111,7 +3168,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3198,8 +3255,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -3234,7 +3292,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3352,10 +3410,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMembers</returns>
-        public async System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceMembers> GetScrapersIDMembersAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceMembers> localVarResponse = await GetScrapersIDMembersAsyncWithHttpInfo(scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceMembers> localVarResponse = await GetScrapersIDMembersAsyncWithHttpInfo(scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3366,11 +3425,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetScrapersIDMembersAsyncWithIRestResponse(scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetScrapersIDMembersAsyncWithIRestResponse(scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3391,8 +3451,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDMembersAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDMembersAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -3427,7 +3488,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3514,8 +3575,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -3550,7 +3612,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3668,10 +3730,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwners</returns>
-        public async System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceOwners> GetScrapersIDOwnersAsync (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceOwners> localVarResponse = await GetScrapersIDOwnersAsyncWithHttpInfo(scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceOwners> localVarResponse = await GetScrapersIDOwnersAsyncWithHttpInfo(scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3682,11 +3745,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetScrapersIDOwnersAsyncWithIRestResponse(scraperTargetID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetScrapersIDOwnersAsyncWithIRestResponse(scraperTargetID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3707,8 +3771,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDOwnersAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetScrapersIDOwnersAsyncWithIRestResponse (string scraperTargetID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -3743,7 +3808,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3845,8 +3910,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDWithIRestResponseAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDWithIRestResponseAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -3893,7 +3959,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4038,10 +4104,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ScraperTargetResponse</returns>
-        public async System.Threading.Tasks.Task<ScraperTargetResponse> PatchScrapersIDAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ScraperTargetResponse> PatchScrapersIDAsync (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ScraperTargetResponse> localVarResponse = await PatchScrapersIDAsyncWithHttpInfo(scraperTargetID, scraperTargetRequest, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ScraperTargetResponse> localVarResponse = await PatchScrapersIDAsyncWithHttpInfo(scraperTargetID, scraperTargetRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4053,11 +4120,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PatchScrapersIDAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PatchScrapersIDAsyncWithHttpInfo (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchScrapersIDAsyncWithIRestResponse(scraperTargetID, scraperTargetRequest, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchScrapersIDAsyncWithIRestResponse(scraperTargetID, scraperTargetRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4079,8 +4147,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="scraperTargetRequest">Scraper target update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ScraperTargetResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDAsyncWithIRestResponse (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchScrapersIDAsyncWithIRestResponse (string scraperTargetID, ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -4127,7 +4196,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4222,8 +4291,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ScraperTargetResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersWithIRestResponseAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersWithIRestResponseAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetRequest' is set
             if (scraperTargetRequest == null)
@@ -4266,7 +4336,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4400,10 +4470,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ScraperTargetResponse</returns>
-        public async System.Threading.Tasks.Task<ScraperTargetResponse> PostScrapersAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ScraperTargetResponse> PostScrapersAsync (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ScraperTargetResponse> localVarResponse = await PostScrapersAsyncWithHttpInfo(scraperTargetRequest, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ScraperTargetResponse> localVarResponse = await PostScrapersAsyncWithHttpInfo(scraperTargetRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4414,11 +4485,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ScraperTargetResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PostScrapersAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ScraperTargetResponse>> PostScrapersAsyncWithHttpInfo (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostScrapersAsyncWithIRestResponse(scraperTargetRequest, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostScrapersAsyncWithIRestResponse(scraperTargetRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4439,8 +4511,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scraperTargetRequest">Scraper target to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ScraperTargetResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersAsyncWithIRestResponse (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersAsyncWithIRestResponse (ScraperTargetRequest scraperTargetRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetRequest' is set
             if (scraperTargetRequest == null)
@@ -4483,7 +4556,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4585,8 +4658,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDLabelsWithIRestResponseAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDLabelsWithIRestResponseAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -4633,7 +4707,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4778,10 +4852,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> PostScrapersIDLabelsAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PostScrapersIDLabelsAsync (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PostScrapersIDLabelsAsyncWithHttpInfo(scraperTargetID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelResponse> localVarResponse = await PostScrapersIDLabelsAsyncWithHttpInfo(scraperTargetID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4793,11 +4868,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostScrapersIDLabelsAsyncWithHttpInfo (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostScrapersIDLabelsAsyncWithIRestResponse(scraperTargetID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostScrapersIDLabelsAsyncWithIRestResponse(scraperTargetID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4819,8 +4895,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDLabelsAsyncWithIRestResponse (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDLabelsAsyncWithIRestResponse (string scraperTargetID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -4867,7 +4944,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4969,8 +5046,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDMembersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -5017,7 +5095,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5162,10 +5240,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMember</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceMember> PostScrapersIDMembersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceMember> localVarResponse = await PostScrapersIDMembersAsyncWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceMember> localVarResponse = await PostScrapersIDMembersAsyncWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5177,11 +5256,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostScrapersIDMembersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostScrapersIDMembersAsyncWithIRestResponse(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostScrapersIDMembersAsyncWithIRestResponse(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5203,8 +5283,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDMembersAsyncWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDMembersAsyncWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -5251,7 +5332,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -5353,8 +5434,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDOwnersWithIRestResponseAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -5401,7 +5483,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5546,10 +5628,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwner</returns>
-        public async System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceOwner> PostScrapersIDOwnersAsync (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceOwner> localVarResponse = await PostScrapersIDOwnersAsyncWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceOwner> localVarResponse = await PostScrapersIDOwnersAsyncWithHttpInfo(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5561,11 +5644,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostScrapersIDOwnersAsyncWithHttpInfo (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostScrapersIDOwnersAsyncWithIRestResponse(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostScrapersIDOwnersAsyncWithIRestResponse(scraperTargetID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5587,8 +5671,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="scraperTargetID">The scraper target ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDOwnersAsyncWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostScrapersIDOwnersAsyncWithIRestResponse (string scraperTargetID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'scraperTargetID' is set
             if (scraperTargetID == null)
@@ -5635,7 +5720,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

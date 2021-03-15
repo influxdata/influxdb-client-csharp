@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -406,8 +407,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteBucketsIDAsync (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteBucketsIDAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a bucket
@@ -418,8 +420,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// delete a label from a bucket
         /// </summary>
@@ -430,8 +433,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteBucketsIDLabelsIDAsync (string bucketID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteBucketsIDLabelsIDAsync (string bucketID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// delete a label from a bucket
@@ -443,8 +447,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDLabelsIDAsyncWithHttpInfo (string bucketID, string labelID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDLabelsIDAsyncWithHttpInfo (string bucketID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Remove a member from a bucket
         /// </summary>
@@ -455,8 +460,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Remove a member from a bucket
@@ -468,8 +474,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDMembersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDMembersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Remove an owner from a bucket
         /// </summary>
@@ -480,8 +487,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Remove an owner from a bucket
@@ -493,8 +501,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDOwnersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDOwnersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all buckets
         /// </summary>
@@ -509,8 +518,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Buckets</returns>
-        System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null);
+        System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all buckets
@@ -526,8 +536,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null);
+        System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Retrieve a bucket
         /// </summary>
@@ -537,8 +548,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Bucket</returns>
-        System.Threading.Tasks.Task<Bucket> GetBucketsIDAsync (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Bucket> GetBucketsIDAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a bucket
@@ -549,8 +561,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Bucket>> GetBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Bucket>> GetBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all labels for a bucket
         /// </summary>
@@ -560,8 +573,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        System.Threading.Tasks.Task<LabelsResponse> GetBucketsIDLabelsAsync (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelsResponse> GetBucketsIDLabelsAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all labels for a bucket
@@ -572,8 +586,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetBucketsIDLabelsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetBucketsIDLabelsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all users with member privileges for a bucket
         /// </summary>
@@ -583,8 +598,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMembers</returns>
-        System.Threading.Tasks.Task<ResourceMembers> GetBucketsIDMembersAsync (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceMembers> GetBucketsIDMembersAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all users with member privileges for a bucket
@@ -595,8 +611,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetBucketsIDMembersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetBucketsIDMembersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all owners of a bucket
         /// </summary>
@@ -606,8 +623,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwners</returns>
-        System.Threading.Tasks.Task<ResourceOwners> GetBucketsIDOwnersAsync (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceOwners> GetBucketsIDOwnersAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all owners of a bucket
@@ -618,8 +636,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetBucketsIDOwnersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetBucketsIDOwnersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get buckets in a source
         /// </summary>
@@ -630,8 +649,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Buckets</returns>
-        System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null);
+        System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get buckets in a source
@@ -643,8 +663,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
+        System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update a bucket
         /// </summary>
@@ -655,8 +676,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Bucket</returns>
-        System.Threading.Tasks.Task<Bucket> PatchBucketsIDAsync (string bucketID, Bucket bucket, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Bucket> PatchBucketsIDAsync (string bucketID, Bucket bucket, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a bucket
@@ -668,8 +690,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Bucket>> PatchBucketsIDAsyncWithHttpInfo (string bucketID, Bucket bucket, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Bucket>> PatchBucketsIDAsyncWithHttpInfo (string bucketID, Bucket bucket, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a bucket
         /// </summary>
@@ -679,8 +702,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Bucket</returns>
-        System.Threading.Tasks.Task<Bucket> PostBucketsAsync (PostBucketRequest postBucketRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Bucket> PostBucketsAsync (PostBucketRequest postBucketRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a bucket
@@ -691,8 +715,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (PostBucketRequest postBucketRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (PostBucketRequest postBucketRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a label to a bucket
         /// </summary>
@@ -703,8 +728,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        System.Threading.Tasks.Task<LabelResponse> PostBucketsIDLabelsAsync (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<LabelResponse> PostBucketsIDLabelsAsync (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a label to a bucket
@@ -716,8 +742,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostBucketsIDLabelsAsyncWithHttpInfo (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostBucketsIDLabelsAsyncWithHttpInfo (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a member to a bucket
         /// </summary>
@@ -728,8 +755,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMember</returns>
-        System.Threading.Tasks.Task<ResourceMember> PostBucketsIDMembersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceMember> PostBucketsIDMembersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a member to a bucket
@@ -741,8 +769,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostBucketsIDMembersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostBucketsIDMembersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add an owner to a bucket
         /// </summary>
@@ -753,8 +782,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwner</returns>
-        System.Threading.Tasks.Task<ResourceOwner> PostBucketsIDOwnersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ResourceOwner> PostBucketsIDOwnersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add an owner to a bucket
@@ -766,8 +796,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostBucketsIDOwnersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostBucketsIDOwnersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -943,8 +974,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDWithIRestResponseAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -979,7 +1011,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1097,10 +1129,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteBucketsIDAsync (string bucketID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteBucketsIDAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteBucketsIDAsyncWithHttpInfo(bucketID, zapTraceSpan);
+             return DeleteBucketsIDAsyncWithHttpInfo(bucketID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1110,11 +1143,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteBucketsIDAsyncWithIRestResponse(bucketID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteBucketsIDAsyncWithIRestResponse(bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1135,8 +1169,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The ID of the bucket to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -1171,7 +1206,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1264,8 +1299,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDLabelsIDWithIRestResponseAsync (string bucketID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDLabelsIDWithIRestResponseAsync (string bucketID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -1304,7 +1340,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1433,10 +1469,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteBucketsIDLabelsIDAsync (string bucketID, string labelID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteBucketsIDLabelsIDAsync (string bucketID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteBucketsIDLabelsIDAsyncWithHttpInfo(bucketID, labelID, zapTraceSpan);
+             return DeleteBucketsIDLabelsIDAsyncWithHttpInfo(bucketID, labelID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1447,11 +1484,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDLabelsIDAsyncWithHttpInfo (string bucketID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDLabelsIDAsyncWithHttpInfo (string bucketID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteBucketsIDLabelsIDAsyncWithIRestResponse(bucketID, labelID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteBucketsIDLabelsIDAsyncWithIRestResponse(bucketID, labelID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1473,8 +1511,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelID">The ID of the label to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDLabelsIDAsyncWithIRestResponse (string bucketID, string labelID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDLabelsIDAsyncWithIRestResponse (string bucketID, string labelID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -1513,7 +1552,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1606,8 +1645,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDMembersIDWithIRestResponseAsync (string userID, string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDMembersIDWithIRestResponseAsync (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1646,7 +1686,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1775,10 +1815,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteBucketsIDMembersIDAsync (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteBucketsIDMembersIDAsyncWithHttpInfo(userID, bucketID, zapTraceSpan);
+             return DeleteBucketsIDMembersIDAsyncWithHttpInfo(userID, bucketID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -1789,11 +1830,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDMembersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDMembersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteBucketsIDMembersIDAsyncWithIRestResponse(userID, bucketID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteBucketsIDMembersIDAsyncWithIRestResponse(userID, bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1815,8 +1857,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the member to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDMembersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDMembersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1855,7 +1898,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1948,8 +1991,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDOwnersIDWithIRestResponseAsync (string userID, string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDOwnersIDWithIRestResponseAsync (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -1988,7 +2032,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2117,10 +2161,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteBucketsIDOwnersIDAsync (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteBucketsIDOwnersIDAsyncWithHttpInfo(userID, bucketID, zapTraceSpan);
+             return DeleteBucketsIDOwnersIDAsyncWithHttpInfo(userID, bucketID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -2131,11 +2176,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDOwnersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteBucketsIDOwnersIDAsyncWithHttpInfo (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteBucketsIDOwnersIDAsyncWithIRestResponse(userID, bucketID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteBucketsIDOwnersIDAsyncWithIRestResponse(userID, bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2157,8 +2203,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="userID">The ID of the owner to remove.</param>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDOwnersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteBucketsIDOwnersIDAsyncWithIRestResponse (string userID, string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'userID' is set
             if (userID == null)
@@ -2197,7 +2244,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2301,8 +2348,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsWithIRestResponseAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsWithIRestResponseAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/buckets";
@@ -2339,7 +2387,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2476,10 +2524,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Buckets</returns>
-        public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
+        public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Buckets> localVarResponse = await GetBucketsAsyncWithHttpInfo(zapTraceSpan, offset, limit, after, org, orgID, name).ConfigureAwait(false);
+             ApiResponse<Buckets> localVarResponse = await GetBucketsAsyncWithHttpInfo(zapTraceSpan, offset, limit, after, org, orgID, name, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2495,11 +2544,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsyncWithHttpInfo (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetBucketsAsyncWithIRestResponse(zapTraceSpan, offset, limit, after, org, orgID, name).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetBucketsAsyncWithIRestResponse(zapTraceSpan, offset, limit, after, org, orgID, name, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2525,8 +2575,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">The organization name. (optional)</param>
         /// <param name="orgID">The organization ID. (optional)</param>
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsAsyncWithIRestResponse (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsAsyncWithIRestResponse (string zapTraceSpan = null, int? offset = null, int? limit = null, string after = null, string org = null, string orgID = null, string name = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/buckets";
@@ -2563,7 +2614,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2650,8 +2701,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Bucket</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDWithIRestResponseAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -2686,7 +2738,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2804,10 +2856,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Bucket</returns>
-        public async System.Threading.Tasks.Task<Bucket> GetBucketsIDAsync (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Bucket> GetBucketsIDAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Bucket> localVarResponse = await GetBucketsIDAsyncWithHttpInfo(bucketID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Bucket> localVarResponse = await GetBucketsIDAsyncWithHttpInfo(bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2818,11 +2871,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> GetBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> GetBucketsIDAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetBucketsIDAsyncWithIRestResponse(bucketID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetBucketsIDAsyncWithIRestResponse(bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2843,8 +2897,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Bucket)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -2879,7 +2934,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2966,8 +3021,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDLabelsWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDLabelsWithIRestResponseAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -3002,7 +3058,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3120,10 +3176,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelsResponse</returns>
-        public async System.Threading.Tasks.Task<LabelsResponse> GetBucketsIDLabelsAsync (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelsResponse> GetBucketsIDLabelsAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelsResponse> localVarResponse = await GetBucketsIDLabelsAsyncWithHttpInfo(bucketID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelsResponse> localVarResponse = await GetBucketsIDLabelsAsyncWithHttpInfo(bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3134,11 +3191,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetBucketsIDLabelsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelsResponse>> GetBucketsIDLabelsAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetBucketsIDLabelsAsyncWithIRestResponse(bucketID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetBucketsIDLabelsAsyncWithIRestResponse(bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3159,8 +3217,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelsResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDLabelsAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDLabelsAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -3195,7 +3254,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3282,8 +3341,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceMembers</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDMembersWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDMembersWithIRestResponseAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -3318,7 +3378,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3436,10 +3496,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMembers</returns>
-        public async System.Threading.Tasks.Task<ResourceMembers> GetBucketsIDMembersAsync (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceMembers> GetBucketsIDMembersAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceMembers> localVarResponse = await GetBucketsIDMembersAsyncWithHttpInfo(bucketID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceMembers> localVarResponse = await GetBucketsIDMembersAsyncWithHttpInfo(bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3450,11 +3511,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMembers)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetBucketsIDMembersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMembers>> GetBucketsIDMembersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetBucketsIDMembersAsyncWithIRestResponse(bucketID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetBucketsIDMembersAsyncWithIRestResponse(bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3475,8 +3537,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceMembers)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDMembersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDMembersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -3511,7 +3574,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3598,8 +3661,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceOwners</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDOwnersWithIRestResponseAsync (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDOwnersWithIRestResponseAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -3634,7 +3698,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3752,10 +3816,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwners</returns>
-        public async System.Threading.Tasks.Task<ResourceOwners> GetBucketsIDOwnersAsync (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceOwners> GetBucketsIDOwnersAsync (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceOwners> localVarResponse = await GetBucketsIDOwnersAsyncWithHttpInfo(bucketID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceOwners> localVarResponse = await GetBucketsIDOwnersAsyncWithHttpInfo(bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -3766,11 +3831,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwners)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetBucketsIDOwnersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwners>> GetBucketsIDOwnersAsyncWithHttpInfo (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetBucketsIDOwnersAsyncWithIRestResponse(bucketID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetBucketsIDOwnersAsyncWithIRestResponse(bucketID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -3791,8 +3857,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceOwners)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDOwnersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetBucketsIDOwnersAsyncWithIRestResponse (string bucketID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -3827,7 +3894,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -3918,8 +3985,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -3955,7 +4023,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4078,10 +4146,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Buckets</returns>
-        public async System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Buckets> localVarResponse = await GetSourcesIDBucketsAsyncWithHttpInfo(sourceID, zapTraceSpan, org).ConfigureAwait(false);
+             ApiResponse<Buckets> localVarResponse = await GetSourcesIDBucketsAsyncWithHttpInfo(sourceID, zapTraceSpan, org, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4093,11 +4162,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetSourcesIDBucketsAsyncWithIRestResponse(sourceID, zapTraceSpan, org).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetSourcesIDBucketsAsyncWithIRestResponse(sourceID, zapTraceSpan, org, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4119,8 +4189,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -4156,7 +4227,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4258,8 +4329,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Bucket</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchBucketsIDWithIRestResponseAsync (string bucketID, Bucket bucket, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchBucketsIDWithIRestResponseAsync (string bucketID, Bucket bucket, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -4306,7 +4378,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4451,10 +4523,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Bucket</returns>
-        public async System.Threading.Tasks.Task<Bucket> PatchBucketsIDAsync (string bucketID, Bucket bucket, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Bucket> PatchBucketsIDAsync (string bucketID, Bucket bucket, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Bucket> localVarResponse = await PatchBucketsIDAsyncWithHttpInfo(bucketID, bucket, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Bucket> localVarResponse = await PatchBucketsIDAsyncWithHttpInfo(bucketID, bucket, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4466,11 +4539,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PatchBucketsIDAsyncWithHttpInfo (string bucketID, Bucket bucket, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PatchBucketsIDAsyncWithHttpInfo (string bucketID, Bucket bucket, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchBucketsIDAsyncWithIRestResponse(bucketID, bucket, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchBucketsIDAsyncWithIRestResponse(bucketID, bucket, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4492,8 +4566,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="bucket">Bucket update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Bucket)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchBucketsIDAsyncWithIRestResponse (string bucketID, Bucket bucket, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchBucketsIDAsyncWithIRestResponse (string bucketID, Bucket bucket, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -4540,7 +4615,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4635,8 +4710,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Bucket</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsWithIRestResponseAsync (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsWithIRestResponseAsync (PostBucketRequest postBucketRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'postBucketRequest' is set
             if (postBucketRequest == null)
@@ -4679,7 +4755,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4813,10 +4889,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Bucket</returns>
-        public async System.Threading.Tasks.Task<Bucket> PostBucketsAsync (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Bucket> PostBucketsAsync (PostBucketRequest postBucketRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Bucket> localVarResponse = await PostBucketsAsyncWithHttpInfo(postBucketRequest, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Bucket> localVarResponse = await PostBucketsAsyncWithHttpInfo(postBucketRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -4827,11 +4904,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Bucket)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> PostBucketsAsyncWithHttpInfo (PostBucketRequest postBucketRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostBucketsAsyncWithIRestResponse(postBucketRequest, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostBucketsAsyncWithIRestResponse(postBucketRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -4852,8 +4930,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postBucketRequest">Bucket to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Bucket)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsAsyncWithIRestResponse (PostBucketRequest postBucketRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsAsyncWithIRestResponse (PostBucketRequest postBucketRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'postBucketRequest' is set
             if (postBucketRequest == null)
@@ -4896,7 +4975,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -4998,8 +5077,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDLabelsWithIRestResponseAsync (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDLabelsWithIRestResponseAsync (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -5046,7 +5126,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5191,10 +5271,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of LabelResponse</returns>
-        public async System.Threading.Tasks.Task<LabelResponse> PostBucketsIDLabelsAsync (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<LabelResponse> PostBucketsIDLabelsAsync (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<LabelResponse> localVarResponse = await PostBucketsIDLabelsAsyncWithHttpInfo(bucketID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<LabelResponse> localVarResponse = await PostBucketsIDLabelsAsyncWithHttpInfo(bucketID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5206,11 +5287,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostBucketsIDLabelsAsyncWithHttpInfo (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<LabelResponse>> PostBucketsIDLabelsAsyncWithHttpInfo (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostBucketsIDLabelsAsyncWithIRestResponse(bucketID, labelMapping, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostBucketsIDLabelsAsyncWithIRestResponse(bucketID, labelMapping, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5232,8 +5314,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="labelMapping">Label to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (LabelResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDLabelsAsyncWithIRestResponse (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDLabelsAsyncWithIRestResponse (string bucketID, LabelMapping labelMapping, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -5280,7 +5363,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -5382,8 +5465,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceMember</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDMembersWithIRestResponseAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDMembersWithIRestResponseAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -5430,7 +5514,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5575,10 +5659,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceMember</returns>
-        public async System.Threading.Tasks.Task<ResourceMember> PostBucketsIDMembersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceMember> PostBucketsIDMembersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceMember> localVarResponse = await PostBucketsIDMembersAsyncWithHttpInfo(bucketID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceMember> localVarResponse = await PostBucketsIDMembersAsyncWithHttpInfo(bucketID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5590,11 +5675,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceMember)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostBucketsIDMembersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceMember>> PostBucketsIDMembersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostBucketsIDMembersAsyncWithIRestResponse(bucketID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostBucketsIDMembersAsyncWithIRestResponse(bucketID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5616,8 +5702,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as member</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceMember)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDMembersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDMembersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -5664,7 +5751,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -5766,8 +5853,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ResourceOwner</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDOwnersWithIRestResponseAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDOwnersWithIRestResponseAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -5814,7 +5902,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5959,10 +6047,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ResourceOwner</returns>
-        public async System.Threading.Tasks.Task<ResourceOwner> PostBucketsIDOwnersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ResourceOwner> PostBucketsIDOwnersAsync (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ResourceOwner> localVarResponse = await PostBucketsIDOwnersAsyncWithHttpInfo(bucketID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<ResourceOwner> localVarResponse = await PostBucketsIDOwnersAsyncWithHttpInfo(bucketID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5974,11 +6063,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ResourceOwner)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostBucketsIDOwnersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ResourceOwner>> PostBucketsIDOwnersAsyncWithHttpInfo (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostBucketsIDOwnersAsyncWithIRestResponse(bucketID, addResourceMemberRequestBody, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostBucketsIDOwnersAsyncWithIRestResponse(bucketID, addResourceMemberRequestBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -6000,8 +6090,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="bucketID">The bucket ID.</param>
         /// <param name="addResourceMemberRequestBody">User to add as owner</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (ResourceOwner)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDOwnersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostBucketsIDOwnersAsyncWithIRestResponse (string bucketID, AddResourceMemberRequestBody addResourceMemberRequestBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'bucketID' is set
             if (bucketID == null)
@@ -6048,7 +6139,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

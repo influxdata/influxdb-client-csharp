@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -58,8 +59,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxResponse</returns>
-        System.Threading.Tasks.Task<FluxResponse> GetNotificationRulesIDQueryAsync (string ruleID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<FluxResponse> GetNotificationRulesIDQueryAsync (string ruleID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a notification rule query
@@ -70,8 +72,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FluxResponse>> GetNotificationRulesIDQueryAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<FluxResponse>> GetNotificationRulesIDQueryAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -248,8 +251,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of FluxResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDQueryWithIRestResponseAsync (string ruleID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDQueryWithIRestResponseAsync (string ruleID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'ruleID' is set
             if (ruleID == null)
@@ -284,7 +288,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -402,10 +406,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxResponse</returns>
-        public async System.Threading.Tasks.Task<FluxResponse> GetNotificationRulesIDQueryAsync (string ruleID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<FluxResponse> GetNotificationRulesIDQueryAsync (string ruleID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<FluxResponse> localVarResponse = await GetNotificationRulesIDQueryAsyncWithHttpInfo(ruleID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<FluxResponse> localVarResponse = await GetNotificationRulesIDQueryAsyncWithHttpInfo(ruleID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -416,11 +421,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<FluxResponse>> GetNotificationRulesIDQueryAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<FluxResponse>> GetNotificationRulesIDQueryAsyncWithHttpInfo (string ruleID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetNotificationRulesIDQueryAsyncWithIRestResponse(ruleID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetNotificationRulesIDQueryAsyncWithIRestResponse(ruleID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -441,8 +447,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="ruleID">The notification rule ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (FluxResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDQueryAsyncWithIRestResponse (string ruleID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetNotificationRulesIDQueryAsyncWithIRestResponse (string ruleID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'ruleID' is set
             if (ruleID == null)
@@ -477,7 +484,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

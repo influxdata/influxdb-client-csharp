@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -190,8 +191,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to delete.</param>
         /// <param name="cellID">The ID of the cell to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteDashboardsIDCellsIDAsync (string dashboardID, string cellID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteDashboardsIDCellsIDAsync (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a dashboard cell
@@ -203,8 +205,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to delete.</param>
         /// <param name="cellID">The ID of the cell to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Retrieve the view for a cell
         /// </summary>
@@ -215,8 +218,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of View</returns>
-        System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve the view for a cell
@@ -228,8 +232,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (View)</returns>
-        System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update the non-positional information related to a cell
         /// </summary>
@@ -241,8 +246,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="cellUpdate"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Cell</returns>
-        System.Threading.Tasks.Task<Cell> PatchDashboardsIDCellsIDAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Cell> PatchDashboardsIDCellsIDAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update the non-positional information related to a cell
@@ -255,8 +261,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="cellUpdate"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Cell)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Cell>> PatchDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Cell>> PatchDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update the view for a cell
         /// </summary>
@@ -268,8 +275,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of View</returns>
-        System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update the view for a cell
@@ -282,8 +290,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (View)</returns>
-        System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Create a dashboard cell
         /// </summary>
@@ -294,8 +303,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="createCell">Cell that will be added</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Cell</returns>
-        System.Threading.Tasks.Task<Cell> PostDashboardsIDCellsAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Cell> PostDashboardsIDCellsAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a dashboard cell
@@ -307,8 +317,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="createCell">Cell that will be added</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Cell)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Cell>> PostDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Cell>> PostDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Replace cells in a dashboard
         /// </summary>
@@ -319,8 +330,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="cell"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Dashboard</returns>
-        System.Threading.Tasks.Task<Dashboard> PutDashboardsIDCellsAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Dashboard> PutDashboardsIDCellsAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Replace cells in a dashboard
@@ -332,8 +344,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="cell"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Dashboard)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Dashboard>> PutDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Dashboard>> PutDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -516,8 +529,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to delete.</param>
         /// <param name="cellID">The ID of the cell to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDashboardsIDCellsIDWithIRestResponseAsync (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDashboardsIDCellsIDWithIRestResponseAsync (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -556,7 +570,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -685,10 +699,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to delete.</param>
         /// <param name="cellID">The ID of the cell to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteDashboardsIDCellsIDAsync (string dashboardID, string cellID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteDashboardsIDCellsIDAsync (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteDashboardsIDCellsIDAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan);
+             return DeleteDashboardsIDCellsIDAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -699,11 +714,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to delete.</param>
         /// <param name="cellID">The ID of the cell to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteDashboardsIDCellsIDAsyncWithIRestResponse(dashboardID, cellID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteDashboardsIDCellsIDAsyncWithIRestResponse(dashboardID, cellID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -725,8 +741,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to delete.</param>
         /// <param name="cellID">The ID of the cell to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDashboardsIDCellsIDAsyncWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDashboardsIDCellsIDAsyncWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -765,7 +782,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -859,8 +876,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of View</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDCellsIDViewWithIRestResponseAsync (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDCellsIDViewWithIRestResponseAsync (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -899,7 +917,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1028,10 +1046,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of View</returns>
-        public async System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<View> GetDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<View> localVarResponse = await GetDashboardsIDCellsIDViewAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<View> localVarResponse = await GetDashboardsIDCellsIDViewAsyncWithHttpInfo(dashboardID, cellID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1043,11 +1062,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (View)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<View>> GetDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetDashboardsIDCellsIDViewAsyncWithIRestResponse(dashboardID, cellID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetDashboardsIDCellsIDViewAsyncWithIRestResponse(dashboardID, cellID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1069,8 +1089,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The dashboard ID.</param>
         /// <param name="cellID">The cell ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (View)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDCellsIDViewAsyncWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDashboardsIDCellsIDViewAsyncWithIRestResponse (string dashboardID, string cellID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -1109,7 +1130,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1218,8 +1239,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="cellUpdate"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Cell</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDWithIRestResponseAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDWithIRestResponseAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -1270,7 +1292,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1426,10 +1448,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="cellUpdate"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Cell</returns>
-        public async System.Threading.Tasks.Task<Cell> PatchDashboardsIDCellsIDAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Cell> PatchDashboardsIDCellsIDAsync (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Cell> localVarResponse = await PatchDashboardsIDCellsIDAsyncWithHttpInfo(dashboardID, cellID, cellUpdate, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Cell> localVarResponse = await PatchDashboardsIDCellsIDAsyncWithHttpInfo(dashboardID, cellID, cellUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1442,11 +1465,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="cellUpdate"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Cell)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Cell>> PatchDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Cell>> PatchDashboardsIDCellsIDAsyncWithHttpInfo (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchDashboardsIDCellsIDAsyncWithIRestResponse(dashboardID, cellID, cellUpdate, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchDashboardsIDCellsIDAsyncWithIRestResponse(dashboardID, cellID, cellUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1469,8 +1493,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="cellUpdate"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Cell)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDAsyncWithIRestResponse (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDAsyncWithIRestResponse (string dashboardID, string cellID, CellUpdate cellUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -1521,7 +1546,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1630,8 +1655,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of View</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDViewWithIRestResponseAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDViewWithIRestResponseAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -1682,7 +1708,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1838,10 +1864,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of View</returns>
-        public async System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<View> PatchDashboardsIDCellsIDViewAsync (string dashboardID, string cellID, View view, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<View> localVarResponse = await PatchDashboardsIDCellsIDViewAsyncWithHttpInfo(dashboardID, cellID, view, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<View> localVarResponse = await PatchDashboardsIDCellsIDViewAsyncWithHttpInfo(dashboardID, cellID, view, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1854,11 +1881,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (View)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<View>> PatchDashboardsIDCellsIDViewAsyncWithHttpInfo (string dashboardID, string cellID, View view, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchDashboardsIDCellsIDViewAsyncWithIRestResponse(dashboardID, cellID, view, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchDashboardsIDCellsIDViewAsyncWithIRestResponse(dashboardID, cellID, view, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1881,8 +1909,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="cellID">The ID of the cell to update.</param>
         /// <param name="view"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (View)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDViewAsyncWithIRestResponse (string dashboardID, string cellID, View view, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDCellsIDViewAsyncWithIRestResponse (string dashboardID, string cellID, View view, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -1933,7 +1962,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2035,8 +2064,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="createCell">Cell that will be added</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Cell</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDashboardsIDCellsWithIRestResponseAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDashboardsIDCellsWithIRestResponseAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -2083,7 +2113,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2228,10 +2258,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="createCell">Cell that will be added</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Cell</returns>
-        public async System.Threading.Tasks.Task<Cell> PostDashboardsIDCellsAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Cell> PostDashboardsIDCellsAsync (string dashboardID, CreateCell createCell, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Cell> localVarResponse = await PostDashboardsIDCellsAsyncWithHttpInfo(dashboardID, createCell, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Cell> localVarResponse = await PostDashboardsIDCellsAsyncWithHttpInfo(dashboardID, createCell, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2243,11 +2274,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="createCell">Cell that will be added</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Cell)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Cell>> PostDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Cell>> PostDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, CreateCell createCell, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostDashboardsIDCellsAsyncWithIRestResponse(dashboardID, createCell, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostDashboardsIDCellsAsyncWithIRestResponse(dashboardID, createCell, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2269,8 +2301,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="createCell">Cell that will be added</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Cell)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDashboardsIDCellsAsyncWithIRestResponse (string dashboardID, CreateCell createCell, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDashboardsIDCellsAsyncWithIRestResponse (string dashboardID, CreateCell createCell, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -2317,7 +2350,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2419,8 +2452,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="cell"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutDashboardsIDCellsWithIRestResponseAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutDashboardsIDCellsWithIRestResponseAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -2467,7 +2501,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2612,10 +2646,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="cell"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Dashboard</returns>
-        public async System.Threading.Tasks.Task<Dashboard> PutDashboardsIDCellsAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Dashboard> PutDashboardsIDCellsAsync (string dashboardID, List<Cell> cell, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Dashboard> localVarResponse = await PutDashboardsIDCellsAsyncWithHttpInfo(dashboardID, cell, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Dashboard> localVarResponse = await PutDashboardsIDCellsAsyncWithHttpInfo(dashboardID, cell, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2627,11 +2662,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="cell"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> PutDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> PutDashboardsIDCellsAsyncWithHttpInfo (string dashboardID, List<Cell> cell, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PutDashboardsIDCellsAsyncWithIRestResponse(dashboardID, cell, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PutDashboardsIDCellsAsyncWithIRestResponse(dashboardID, cell, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2653,8 +2689,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="cell"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PutDashboardsIDCellsAsyncWithIRestResponse (string dashboardID, List<Cell> cell, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PutDashboardsIDCellsAsyncWithIRestResponse (string dashboardID, List<Cell> cell, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -2701,7 +2738,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

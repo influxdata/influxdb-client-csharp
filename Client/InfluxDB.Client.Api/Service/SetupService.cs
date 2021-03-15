@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -101,8 +102,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IsOnboarding</returns>
-        System.Threading.Tasks.Task<IsOnboarding> GetSetupAsync (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<IsOnboarding> GetSetupAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Check if database has default user, org, bucket
@@ -112,8 +114,9 @@ namespace InfluxDB.Client.Api.Service
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (IsOnboarding)</returns>
-        System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> GetSetupAsyncWithHttpInfo (string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> GetSetupAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Set up initial user, org and bucket
         /// </summary>
@@ -123,8 +126,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of OnboardingResponse</returns>
-        System.Threading.Tasks.Task<OnboardingResponse> PostSetupAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<OnboardingResponse> PostSetupAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Set up initial user, org and bucket
@@ -135,8 +139,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Set up a new user, org and bucket
         /// </summary>
@@ -146,8 +151,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of OnboardingResponse</returns>
-        System.Threading.Tasks.Task<OnboardingResponse> PostSetupUserAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<OnboardingResponse> PostSetupUserAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Set up a new user, org and bucket
@@ -158,8 +164,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupUserAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupUserAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -329,8 +336,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of IsOnboarding</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSetupWithIRestResponseAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSetupWithIRestResponseAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/setup";
@@ -361,7 +369,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -468,10 +476,11 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IsOnboarding</returns>
-        public async System.Threading.Tasks.Task<IsOnboarding> GetSetupAsync (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IsOnboarding> GetSetupAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<IsOnboarding> localVarResponse = await GetSetupAsyncWithHttpInfo(zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<IsOnboarding> localVarResponse = await GetSetupAsyncWithHttpInfo(zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -481,11 +490,12 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (IsOnboarding)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> GetSetupAsyncWithHttpInfo (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<IsOnboarding>> GetSetupAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetSetupAsyncWithIRestResponse(zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetSetupAsyncWithIRestResponse(zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -505,8 +515,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (IsOnboarding)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSetupAsyncWithIRestResponse (string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSetupAsyncWithIRestResponse (string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/setup";
@@ -537,7 +548,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -632,8 +643,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostSetupWithIRestResponseAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSetupWithIRestResponseAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'onboardingRequest' is set
             if (onboardingRequest == null)
@@ -676,7 +688,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -810,10 +822,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of OnboardingResponse</returns>
-        public async System.Threading.Tasks.Task<OnboardingResponse> PostSetupAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<OnboardingResponse> PostSetupAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<OnboardingResponse> localVarResponse = await PostSetupAsyncWithHttpInfo(onboardingRequest, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<OnboardingResponse> localVarResponse = await PostSetupAsyncWithHttpInfo(onboardingRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -824,11 +837,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostSetupAsyncWithIRestResponse(onboardingRequest, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostSetupAsyncWithIRestResponse(onboardingRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -849,8 +863,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (OnboardingResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostSetupAsyncWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSetupAsyncWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'onboardingRequest' is set
             if (onboardingRequest == null)
@@ -893,7 +908,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -988,8 +1003,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of OnboardingResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostSetupUserWithIRestResponseAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSetupUserWithIRestResponseAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'onboardingRequest' is set
             if (onboardingRequest == null)
@@ -1032,7 +1048,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1166,10 +1182,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of OnboardingResponse</returns>
-        public async System.Threading.Tasks.Task<OnboardingResponse> PostSetupUserAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<OnboardingResponse> PostSetupUserAsync (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<OnboardingResponse> localVarResponse = await PostSetupUserAsyncWithHttpInfo(onboardingRequest, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<OnboardingResponse> localVarResponse = await PostSetupUserAsyncWithHttpInfo(onboardingRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1180,11 +1197,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (OnboardingResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupUserAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<OnboardingResponse>> PostSetupUserAsyncWithHttpInfo (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostSetupUserAsyncWithIRestResponse(onboardingRequest, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostSetupUserAsyncWithIRestResponse(onboardingRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1205,8 +1223,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="onboardingRequest">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (OnboardingResponse)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostSetupUserAsyncWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSetupUserAsyncWithIRestResponse (OnboardingRequest onboardingRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'onboardingRequest' is set
             if (onboardingRequest == null)
@@ -1249,7 +1268,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {

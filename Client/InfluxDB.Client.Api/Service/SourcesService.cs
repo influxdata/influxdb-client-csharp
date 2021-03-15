@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -200,8 +201,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a source
@@ -212,8 +214,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get all sources
         /// </summary>
@@ -223,8 +226,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Sources</returns>
-        System.Threading.Tasks.Task<Sources> GetSourcesAsync (string zapTraceSpan = null, string org = null);
+        System.Threading.Tasks.Task<Sources> GetSourcesAsync (string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get all sources
@@ -235,8 +239,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Sources)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Sources>> GetSourcesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null);
+        System.Threading.Tasks.Task<ApiResponse<Sources>> GetSourcesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get a source
         /// </summary>
@@ -246,8 +251,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Source</returns>
-        System.Threading.Tasks.Task<Source> GetSourcesIDAsync (string sourceID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Source> GetSourcesIDAsync (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a source
@@ -258,8 +264,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Source>> GetSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Source>> GetSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get buckets in a source
         /// </summary>
@@ -270,8 +277,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Buckets</returns>
-        System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null);
+        System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get buckets in a source
@@ -283,8 +291,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null);
+        System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Get the health of a source
         /// </summary>
@@ -294,8 +303,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of HealthCheck</returns>
-        System.Threading.Tasks.Task<HealthCheck> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<HealthCheck> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get the health of a source
@@ -306,8 +316,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (HealthCheck)</returns>
-        System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update a Source
         /// </summary>
@@ -318,8 +329,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Source</returns>
-        System.Threading.Tasks.Task<Source> PatchSourcesIDAsync (string sourceID, Source source, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Source> PatchSourcesIDAsync (string sourceID, Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a Source
@@ -331,8 +343,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Source>> PatchSourcesIDAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Source>> PatchSourcesIDAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Creates a source
         /// </summary>
@@ -342,8 +355,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Source</returns>
-        System.Threading.Tasks.Task<Source> PostSourcesAsync (Source source, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<Source> PostSourcesAsync (Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creates a source
@@ -354,8 +368,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Source>> PostSourcesAsyncWithHttpInfo (Source source, string zapTraceSpan = null);
+        System.Threading.Tasks.Task<ApiResponse<Source>> PostSourcesAsyncWithHttpInfo (Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -531,8 +546,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteSourcesIDWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteSourcesIDWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -567,7 +583,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -685,10 +701,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null)
+        public System.Threading.Tasks.Task DeleteSourcesIDAsync (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return DeleteSourcesIDAsyncWithHttpInfo(sourceID, zapTraceSpan);
+             return DeleteSourcesIDAsyncWithHttpInfo(sourceID, zapTraceSpan, cancellationToken);
 
         }
 
@@ -698,11 +715,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteSourcesIDAsyncWithIRestResponse(sourceID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteSourcesIDAsyncWithIRestResponse(sourceID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -723,8 +741,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteSourcesIDAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteSourcesIDAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -759,7 +778,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -843,8 +862,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Sources</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesWithIRestResponseAsync (string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesWithIRestResponseAsync (string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/sources";
@@ -876,7 +896,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -988,10 +1008,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Sources</returns>
-        public async System.Threading.Tasks.Task<Sources> GetSourcesAsync (string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<Sources> GetSourcesAsync (string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Sources> localVarResponse = await GetSourcesAsyncWithHttpInfo(zapTraceSpan, org).ConfigureAwait(false);
+             ApiResponse<Sources> localVarResponse = await GetSourcesAsyncWithHttpInfo(zapTraceSpan, org, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1002,11 +1023,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Sources)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Sources>> GetSourcesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Sources>> GetSourcesAsyncWithHttpInfo (string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetSourcesAsyncWithIRestResponse(zapTraceSpan, org).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetSourcesAsyncWithIRestResponse(zapTraceSpan, org, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1027,8 +1049,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Sources)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesAsyncWithIRestResponse (string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesAsyncWithIRestResponse (string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
 
             var localVarPath = "/api/v2/sources";
@@ -1060,7 +1083,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1147,8 +1170,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Source</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1183,7 +1207,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1301,10 +1325,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Source</returns>
-        public async System.Threading.Tasks.Task<Source> GetSourcesIDAsync (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Source> GetSourcesIDAsync (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Source> localVarResponse = await GetSourcesIDAsyncWithHttpInfo(sourceID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Source> localVarResponse = await GetSourcesIDAsyncWithHttpInfo(sourceID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1315,11 +1340,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Source>> GetSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Source>> GetSourcesIDAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetSourcesIDAsyncWithIRestResponse(sourceID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetSourcesIDAsyncWithIRestResponse(sourceID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1340,8 +1366,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Source)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1376,7 +1403,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1467,8 +1494,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Buckets</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1504,7 +1532,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1627,10 +1655,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Buckets</returns>
-        public async System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<Buckets> GetSourcesIDBucketsAsync (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Buckets> localVarResponse = await GetSourcesIDBucketsAsyncWithHttpInfo(sourceID, zapTraceSpan, org).ConfigureAwait(false);
+             ApiResponse<Buckets> localVarResponse = await GetSourcesIDBucketsAsyncWithHttpInfo(sourceID, zapTraceSpan, org, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1642,11 +1671,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Buckets>> GetSourcesIDBucketsAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetSourcesIDBucketsAsyncWithIRestResponse(sourceID, zapTraceSpan, org).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetSourcesIDBucketsAsyncWithIRestResponse(sourceID, zapTraceSpan, org, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1668,8 +1698,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="org">The organization name. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Buckets)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDBucketsAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, string org = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1705,7 +1736,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -1792,8 +1823,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of HealthCheck</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthWithIRestResponseAsync (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthWithIRestResponseAsync (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -1828,7 +1860,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1946,10 +1978,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of HealthCheck</returns>
-        public async System.Threading.Tasks.Task<HealthCheck> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<HealthCheck> GetSourcesIDHealthAsync (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<HealthCheck> localVarResponse = await GetSourcesIDHealthAsyncWithHttpInfo(sourceID, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<HealthCheck> localVarResponse = await GetSourcesIDHealthAsyncWithHttpInfo(sourceID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1960,11 +1993,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (HealthCheck)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<HealthCheck>> GetSourcesIDHealthAsyncWithHttpInfo (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetSourcesIDHealthAsyncWithIRestResponse(sourceID, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetSourcesIDHealthAsyncWithIRestResponse(sourceID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1985,8 +2019,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="sourceID">The source ID.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (HealthCheck)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> GetSourcesIDHealthAsyncWithIRestResponse (string sourceID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -2021,7 +2056,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2123,8 +2158,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Source</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchSourcesIDWithIRestResponseAsync (string sourceID, Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchSourcesIDWithIRestResponseAsync (string sourceID, Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -2171,7 +2207,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2316,10 +2352,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Source</returns>
-        public async System.Threading.Tasks.Task<Source> PatchSourcesIDAsync (string sourceID, Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Source> PatchSourcesIDAsync (string sourceID, Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Source> localVarResponse = await PatchSourcesIDAsyncWithHttpInfo(sourceID, source, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Source> localVarResponse = await PatchSourcesIDAsyncWithHttpInfo(sourceID, source, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2331,11 +2368,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Source>> PatchSourcesIDAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Source>> PatchSourcesIDAsyncWithHttpInfo (string sourceID, Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchSourcesIDAsyncWithIRestResponse(sourceID, source, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchSourcesIDAsyncWithIRestResponse(sourceID, source, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2357,8 +2395,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="sourceID">The source ID.</param>
         /// <param name="source">Source update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Source)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchSourcesIDAsyncWithIRestResponse (string sourceID, Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchSourcesIDAsyncWithIRestResponse (string sourceID, Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'sourceID' is set
             if (sourceID == null)
@@ -2405,7 +2444,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
@@ -2500,8 +2539,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Source</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostSourcesWithIRestResponseAsync (Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSourcesWithIRestResponseAsync (Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'source' is set
             if (source == null)
@@ -2544,7 +2584,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2678,10 +2718,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Source</returns>
-        public async System.Threading.Tasks.Task<Source> PostSourcesAsync (Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<Source> PostSourcesAsync (Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Source> localVarResponse = await PostSourcesAsyncWithHttpInfo(source, zapTraceSpan).ConfigureAwait(false);
+             ApiResponse<Source> localVarResponse = await PostSourcesAsyncWithHttpInfo(source, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2692,11 +2733,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Source)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Source>> PostSourcesAsyncWithHttpInfo (Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Source>> PostSourcesAsyncWithHttpInfo (Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostSourcesAsyncWithIRestResponse(source, zapTraceSpan).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostSourcesAsyncWithIRestResponse(source, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2717,8 +2759,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="source">Source to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Source)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostSourcesAsyncWithIRestResponse (Source source, string zapTraceSpan = null)
+        public async System.Threading.Tasks.Task<IRestResponse> PostSourcesAsyncWithIRestResponse (Source source, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'source' is set
             if (source == null)
@@ -2761,7 +2804,7 @@ namespace InfluxDB.Client.Api.Service
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType).ConfigureAwait(false);
+                localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
