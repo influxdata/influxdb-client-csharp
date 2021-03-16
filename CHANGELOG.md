@@ -3,11 +3,19 @@
 ### Features
 1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `QueryApiSync` for synchronous querying
 1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `IDomainObjectMapper` for custom mapping DomainObject from/to InfluxDB
-2. [#175](https://github.com/influxdata/influxdb-client-csharp/pull/175): Updated dependencies of `InfluxDB.Client`
 
 ### Bug Fixes
 1. [#168](https://github.com/influxdata/influxdb-client-csharp/pull/168): DateTime is always serialized into UTC
 1. [#169](https://github.com/influxdata/influxdb-client-csharp/pull/169): Fixed domain structure for Flux AST
+
+### Dependencies
+1. [#175](https://github.com/influxdata/influxdb-client-csharp/pull/175): Updated dependencies of `InfluxDB.Client`:
+    - JsonSubTypes to 1.8.0
+    - Microsoft.Extensions.ObjectPool to 5.0.4
+    - Microsoft.Net.Http.Headers to 2.2.8
+    - System.Collections.Immutable to 5.0.0
+    - System.Configuration.ConfigurationManager to 5.0.0
+    - System.Reactive to 5.0.0
 
 ## 1.16.0 [2021-03-05]
 
