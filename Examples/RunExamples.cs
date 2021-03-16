@@ -54,6 +54,9 @@ namespace Examples
                     case "CustomDomainMapping":
                         await CustomDomainMapping.Main(args);
                         break;
+                    case "QueryLinqCloud":
+                        await QueryLinqCloud.Main(args);
+                        break;
                 }
             }
             else
@@ -61,7 +64,8 @@ namespace Examples
                 Console.WriteLine("Please specify the name of example. One of: " +
                                   "FluxExample, FluxClientSimpleExample, FluxRawExample, FluxClientFactoryExample, " +
                                   "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, CustomDomainMapping" +
-                                  "PocoQueryWriteExample, CustomDomainMappingAndLinq, SynchronousQuery, InfluxDB18Example");
+                                  "PocoQueryWriteExample, CustomDomainMappingAndLinq, SynchronousQuery, InfluxDB18Example, " +
+                                  "QueryLinqCloud");
             }
         }
     }
