@@ -55,7 +55,7 @@ namespace Examples
                         await CustomDomainMapping.Main(args);
                         break;
                     case "QueryLinqCloud":
-                        await QueryLinqCloud.Main(args);
+                        QueryLinqCloud.Main(args);
                         break;
                 }
             }

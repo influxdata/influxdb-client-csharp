@@ -138,7 +138,7 @@ namespace Examples
             }
         }
 
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             const string host = "https://us-west-2-1.aws.cloud2.influxdata.com";
             const string token = "...";
