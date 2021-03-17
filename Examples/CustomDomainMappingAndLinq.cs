@@ -39,7 +39,7 @@ namespace Examples
         private class DomainEntityAttribute
         {
             public string Name { get; set; }
-            public string Value { get; set; }
+            public int Value { get; set; }
             
             public override string ToString()
             {
@@ -77,7 +77,7 @@ namespace Examples
                     {
                         var attribute = new DomainEntityAttribute
                         {
-                            Name = key.Replace("property_", string.Empty), Value = Convert.ToString(value)
+                            Name = key.Replace("property_", string.Empty), Value = Convert.ToInt32(value)
                         };
                         
                         customEntity.Properties.Add(attribute);
@@ -107,6 +107,8 @@ namespace Examples
                 {
                     point = point.Field($"property_{attribute.Name}", attribute.Value);
                 }
+                
+                Console.WriteLine($"LP: '{point.ToLineProtocol()}'");
 
                 return point;
             }
@@ -186,9 +188,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = "4"},
+                        {Name = "height", Value = 4},
                     new DomainEntityAttribute
-                        {Name = "width", Value = "110"}
+                        {Name = "width", Value = 110}
                 }
             };
             var entity2 = new DomainEntity
@@ -199,9 +201,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = "5"},
+                        {Name = "height", Value = 5},
                     new DomainEntityAttribute
-                        {Name = "width", Value = "160"}
+                        {Name = "width", Value = 160}
                 }
             };
             var entity3 = new DomainEntity
@@ -212,9 +214,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = "5"},
+                        {Name = "height", Value = 5},
                     new DomainEntityAttribute
-                        {Name = "width", Value = "110"}
+                        {Name = "width", Value = 110}
                 }
             };
             var entity4 = new DomainEntity
@@ -225,9 +227,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = "6"},
+                        {Name = "height", Value = 6},
                     new DomainEntityAttribute
-                        {Name = "width", Value = "160"}
+                        {Name = "width", Value = 160}
                 }
             };
 
@@ -282,7 +284,7 @@ namespace Examples
             // Use Any
             //
             query = from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi, converter)
-                where s.Properties.Any(a => a.Name == "width" && a.Value == "160")
+                where s.Properties.Any(a => a.Name == "width" && a.Value == 160)
                 select s;
             Console.WriteLine("==== Use Any ====");
             query.ToList().ForEach(it => Console.WriteLine(it.ToString()));
