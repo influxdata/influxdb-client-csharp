@@ -25,7 +25,6 @@ namespace InfluxDB.Client.Linq.Internal
 
             _clause = clause;
             _context = context;
-            _expressionParts.Add(new NoOp());
         }
 
         internal static IEnumerable<IExpressionPart> GetFluxExpressions(Expression expression, object clause,
@@ -147,7 +146,6 @@ namespace InfluxDB.Client.Linq.Internal
 
         private IEnumerable<IExpressionPart> GetFluxExpressions()
         {
-            _expressionParts.RemoveAll(it => it is NoOp);
             NormalizeNamedField();
             NormalizeNamedFieldValue();
             return _expressionParts;
