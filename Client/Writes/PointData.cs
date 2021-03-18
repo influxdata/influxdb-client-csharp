@@ -12,11 +12,13 @@ using NodaTime;
 
 namespace InfluxDB.Client.Writes
 {
+
+
     /// <summary>
     /// Point defines the values that will be written to the database.
     /// <a href="http://bit.ly/influxdata-point">See Go Implementation</a>.
     /// </summary>
-    public class PointData : IEquatable<PointData>
+    public partial class PointData : IEquatable<PointData>
     {
         private static readonly DateTime EpochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
