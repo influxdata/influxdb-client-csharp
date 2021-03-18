@@ -26,6 +26,12 @@ The library supports to use a LINQ expression to query the InfluxDB.
 - [Domain Converter](#domain-converter)
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
 
+## Changelog
+
+- `.dev.linq.17`
+  - optimize filtering - [see more](#filtering)
+  - rebased with `master` branch
+
 ## How to start
 
 First, add the library as a dependency for your project:
@@ -113,9 +119,9 @@ and this is also way how following LINQ operators works.
 
 ### TD;LR
 
-- [series](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#series)
-- [Flux](https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#flux)
-- [Query data with Flux](https://docs.influxdata.com/influxdb/v2.0/query-data/flux/)
+- [series](https://docs.influxdata.com/influxdb/cloud/reference/glossary/#series)
+- [Flux](https://docs.influxdata.com/influxdb/cloud/reference/glossary/#flux)
+- [Query data with Flux](https://docs.influxdata.com/influxdb/cloud/query-data/flux/)
 
 ### Client Side Evaluation
 
@@ -175,14 +181,97 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: 2021-01-10T05:10:00Z) 
+    |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-    |> filter(fn: (r) => (r["sensor_id"] == "id-1") and (r["data"] > 12)) 
+    |> filter(fn: (r) => (r["data"] > 12)) 
     |> sort(columns: ["_time"], desc: false) 
     |> limit(n: 2, offset: 2)
 ```
 
-## Time Range Filtering
+## Filtering 
+
+The [range()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/range/) and [filter()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/filter/) are `pushdown functions`
+that allow push their data manipulation down to the underlying data source rather than storing and manipulating data in memory. 
+Using pushdown functions at the beginning of query we greatly reduce the amount of server memory necessary to run a query.
+
+The LINQ provider needs to aligns fields within each input table that have the same timestamp to column-wise format:
+
+###### From
+|              _time             | _value | _measurement | _field |
+|:------------------------------:|:------:|:------------:|:------:|
+| 1970-01-01T00:00:00.000000001Z |   1.0  |     "m1"     |  "f1"  |
+| 1970-01-01T00:00:00.000000001Z |   2.0  |     "m1"     |  "f2"  |
+| 1970-01-01T00:00:00.000000002Z |   3.0  |     "m1"     |  "f1"  |
+| 1970-01-01T00:00:00.000000002Z |   4.0  |     "m1"     |  "f2"  |
+
+###### To
+|              _time             | _measurement |  f1  |  f2  |
+|:------------------------------:|:------------:|:----:|:----:|
+| 1970-01-01T00:00:00.000000001Z |     "m1"     |  1.0 |  2.0 |
+| 1970-01-01T00:00:00.000000002Z |     "m1"     |  3.0 |  4.0 |
+
+For that reason we need to use the [pivot()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/pivot/) function.
+The `pivot` is heavy and should be used at the end of our Flux query.
+
+### Mapping LINQ filters
+
+For the best performance on the both side (server, LINQ provider) we maps the LINQ expressions to FLUX query following way:
+
+#### Filter by Timestamp
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    where s.Timestamp >= new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+    select s;
+
+var sensors = query.ToList();
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 2019-11-16T08:20:15ZZ) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
+```
+
+#### Filter by Tag
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    where s.SensorId == "id-1"
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0)
+    |> filter(fn: (r) => (r["sensor_id"] == "id-1"))  
+    |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+```
+
+#### Filter by Field
+
+The filter field has to be after `pivot()` because we want to select all fields from pivoted table.
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    where s.Value < 28
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> filter(fn: (r) => (r["data"] < 28))
+```
+
+### Time Range Filtering
 
 The time filtering expressions are mapped to Flux `range()` function. 
 This function has `start` and `stop` parameters with following behaviour: `start <= _time < stop`:
@@ -287,6 +376,10 @@ from(bucket: "my-bucket")
     |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
+### TD;LR
+
+- [Optimize Flux queries](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/)
+
 ## Supported LINQ operators
 
 ### Equal
@@ -300,10 +393,10 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 Flux Query:
 ```flux
 from(bucket: "my-bucket") 
-    |> range(start: 0) 
+    |> range(start: 0)
+    |> filter(fn: (r) => (r["sensor_id"] == "id-1"))  
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-    |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
 ```
 
 ### Not Equal
@@ -317,10 +410,10 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 Flux Query:
 ```flux
 from(bucket: "my-bucket") 
-    |> range(start: 0) 
+    |> range(start: 0)
+    |> filter(fn: (r) => (r["sensor_id"] != "id-1")) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-    |> filter(fn: (r) => (r["sensor_id"] != "id-1")) 
 ```
 
 ### Less Than
@@ -403,16 +496,17 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> filter(fn: (r) => (r["sensor_id"] != "id-1"))
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
-    |> filter(fn: (r) => ((r["data"] >= 28) and (r["sensor_id"] != "id-1")))
+    |> filter(fn: (r) => (r["data"] >= 28))
 ```
 
 ### Or
 
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
-    where s.Value >= 28 || s.SensorId != "id-1"
+    where s.Value >= 28 || s.Value <= 5
     select s;
 ```
 
@@ -422,7 +516,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
-    |> filter(fn: (r) => ((r["data"] >= 28) or (r["sensor_id"] != "id-1")))
+    |> filter(fn: (r) => ((r["data"] >= 28) or (r["data"] <=> 28)))
 ```
 
 ### Any
