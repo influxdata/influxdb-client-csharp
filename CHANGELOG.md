@@ -3,6 +3,7 @@
 ### Features
 1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `QueryApiSync` for synchronous querying
 1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `IDomainObjectMapper` for custom mapping DomainObject from/to InfluxDB
+1. [#180](https://github.com/influxdata/influxdb-client-csharp/pull/180): Added a mutable `PointData.Builder` to optimize building of immutable `PointData`
 
 ### API
 1. [#174](https://github.com/influxdata/influxdb-client-csharp/pull/174): Added possibility to use `CancellationToken` in REST API
