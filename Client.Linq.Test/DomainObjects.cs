@@ -19,7 +19,7 @@ namespace Client.Linq.Test
         /// Value measured by sensor
         /// </summary>
         [Column("data")]
-        public float Value { get; set; }
+        public int Value { get; set; }
 
         [Column(IsTimestamp = true)] public DateTime Timestamp { get; set; }
     }

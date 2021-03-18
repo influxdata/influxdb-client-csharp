@@ -195,11 +195,11 @@ namespace Client.Linq.Test
         public void ResultOperatorWhereByEqual()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
-                where s.SensorId == "id-1"
+                where s.Value == 5
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"sensor_id\"] == p3))";
+            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] == p3))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -208,11 +208,11 @@ namespace Client.Linq.Test
         public void ResultOperatorWhereNotEqual()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
-                where s.SensorId != "id-1"
+                where s.Value != 5
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"sensor_id\"] != p3))";
+            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] != p3))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
@@ -273,34 +273,34 @@ namespace Client.Linq.Test
         public void ResultOperatorAnd()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
-                where s.SensorId == "my-id" && s.Value > 10
+                where s.Value < 4 && s.Value > 10
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
             const string expected = FluxStart + " " +
-                                    "|> filter(fn: (r) => ((r[\"sensor_id\"] == p3) and (r[\"data\"] > p4)))";
+                                    "|> filter(fn: (r) => (r[\"data\"] < p3) and (r[\"data\"] > p4))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
             var ast = visitor.BuildFluxAST();
-            Assert.AreEqual("my-id", GetLiteral<StringLiteral>(ast, 2).Value);
-            Assert.AreEqual(10, GetLiteral<FloatLiteral>(ast, 3).Value);
+            Assert.AreEqual("4", GetLiteral<IntegerLiteral>(ast, 2).Value);
+            Assert.AreEqual("10", GetLiteral<IntegerLiteral>(ast, 3).Value);
         }
 
         [Test]
         public void ResultOperatorOr()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
-                where s.SensorId == "my-id" || s.Value > 10
+                where s.Value < 5 || s.Value > 10
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
             const string expected = FluxStart + " " +
-                                    "|> filter(fn: (r) => ((r[\"sensor_id\"] == p3) or (r[\"data\"] > p4)))";
+                                    "|> filter(fn: (r) => (r[\"data\"] < p3) or (r[\"data\"] > p4))";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
             var ast = visitor.BuildFluxAST();
-            Assert.AreEqual("my-id", GetLiteral<StringLiteral>(ast, 2).Value);
-            Assert.AreEqual(10, GetLiteral<FloatLiteral>(ast, 3).Value);
+            Assert.AreEqual("5", GetLiteral<IntegerLiteral>(ast, 2).Value);
+            Assert.AreEqual("10", GetLiteral<IntegerLiteral>(ast, 3).Value);
         }
 
         [Test]
@@ -544,7 +544,12 @@ namespace Client.Linq.Test
                 select s;
             var visitor = BuildQueryVisitor(query.Expression);
 
-            const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"deployment\"] == p3))";
+            const string expected = "start_shifted = int(v: time(v: p2))\n\n" +
+                                    "from(bucket: p1) " +
+                                    "|> range(start: time(v: start_shifted)) " +
+                                    "|> filter(fn: (r) => (r[\"deployment\"] == p3)) " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
 
@@ -670,9 +675,10 @@ namespace Client.Linq.Test
                                     "stop_shifted = int(v: time(v: p6))\n\n" +
                                     "from(bucket: p1) " +
                                     "|> range(start: time(v: start_shifted), stop: time(v: stop_shifted)) " +
+                                    "|> filter(fn: (r) => (r[\"sensor_id\"] == p3)) " +
                                     "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> filter(fn: (r) => (r[\"sensor_id\"] == p3) and (r[\"data\"] > p4)) " +
+                                    "|> filter(fn: (r) => (r[\"data\"] > p4)) " +
                                     "|> sort(columns: [p7], desc: p8) " +
                                     "|> limit(n: p9, offset: p10)";
 

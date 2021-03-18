@@ -62,14 +62,16 @@ namespace InfluxDB.Client.Linq.Internal
         private RangeExpressionType _rangeStopExpression;
         private readonly List<LimitOffsetAssignment> _limitNOffsetAssignments;
         private ResultFunction _resultFunction;
-        private readonly List<string> _filters;
+        private readonly List<string> _filterByTags;
+        private readonly List<string> _filterByFields;
         private readonly List<(string, string)> _orders;
 
         internal QueryAggregator()
         {
             _resultFunction = ResultFunction.None;
             _limitNOffsetAssignments = new List<LimitOffsetAssignment>();
-            _filters = new List<string>();
+            _filterByTags = new List<string>();
+            _filterByFields = new List<string>();
             _orders = new List<(string, string)>();
         }
 
@@ -114,14 +116,20 @@ namespace InfluxDB.Client.Linq.Internal
             }
         }
 
-        internal void AddFilter(string filter)
+        internal void AddFilterByTags(string filter)
         {
-            _filters.Add(filter);
+            _filterByTags.Add(filter);
+        }
+
+        internal void AddFilterByFields(string filter)
+        {
+            _filterByFields.Add(filter);
         }
 
         internal void AddSubQueries(QueryAggregator aggregator)
         {
-            _filters.AddRange(aggregator._filters);
+            _filterByTags.AddRange(aggregator._filterByTags);
+            _filterByFields.AddRange(aggregator._filterByFields);
             _orders.AddRange(aggregator._orders);
         }
 
@@ -144,9 +152,10 @@ namespace InfluxDB.Client.Linq.Internal
             {
                 BuildOperator("from", "bucket", _bucketAssignment),
                 BuildRange(transforms),
+                BuildFilter(_filterByTags),
                 "drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
-                BuildFilter()
+                BuildFilter(_filterByFields)
             };
 
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/sort/
@@ -218,9 +227,9 @@ namespace InfluxDB.Client.Linq.Internal
             return BuildOperator("range", "start", rangeStartShift, "stop", rangeStopShift);
         }
 
-        private string BuildFilter()
+        private string BuildFilter(IEnumerable<string> filterBy)
         {
-            var filters = JoinList(_filters, " and ");
+            var filters = JoinList(filterBy, " and ");
             if (filters.Length == 0)
             {
                 return null;

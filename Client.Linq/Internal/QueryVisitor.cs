@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Linq.Internal.Expressions;
@@ -65,20 +67,60 @@ namespace InfluxDB.Client.Linq.Internal
             base.VisitWhereClause (whereClause, queryModel, index);
 
             var expressions = GetExpressions(whereClause.Predicate, whereClause).ToList();
+
+            var rangeFilter = new List<IExpressionPart>();
+            var tagFilter = new List<IExpressionPart>();
+            var fieldFilter = new List<IExpressionPart>();
             
-            // range
-            foreach (var expressionPart in expressions.Where(it => it is TimeRange))
+            // Map LINQ filter expresion to right place: range, tag filtering, field filtering
+            foreach (var expression in expressions)
             {
-                var timeRange = (TimeRange) expressionPart;
-                timeRange.AddRange(_context.QueryAggregator);
+                switch (expression)
+                {
+                    // Range
+                    case TimeColumnName _:
+                        rangeFilter.Add(expression);
+                        break;
+                    // Tag
+                    case TagColumnName _:
+                        tagFilter.Add(expression);
+                        break;
+                    // Field
+                    case RecordColumnName _:
+                        fieldFilter.Add(expression);
+                        break;
+                    case NamedField _:
+                        fieldFilter.Add(expression);
+                        break;
+                    case NamedFieldValue _:
+                        fieldFilter.Add(expression);
+                        break;
+                    // Other expressions: binary operator, parenthesis
+                    default:
+                        rangeFilter.Add(expression);
+                        tagFilter.Add(expression);
+                        fieldFilter.Add(expression);
+                        break;
+                }
             }
             
-            // filter
-            var expressionParts = expressions.Where(it => !(it is TimeRange)).ToList();
-            QueryExpressionTreeVisitor.NormalizeEmptyBinary(expressionParts);
+            QueryExpressionTreeVisitor.NormalizeExpressions(rangeFilter);
+            QueryExpressionTreeVisitor.NormalizeExpressions(tagFilter);
+            QueryExpressionTreeVisitor.NormalizeExpressions(fieldFilter);
             
-            var filterPart = ConcatExpression(expressionParts);
-            _context.QueryAggregator.AddFilter(filterPart);
+            Debug.WriteLine("--- normalized LINQ expressions: ---");
+            Debug.WriteLine($"range: {ConcatExpression(rangeFilter)}");
+            Debug.WriteLine($"tag: {ConcatExpression(tagFilter)}");
+            Debug.WriteLine($"field: {ConcatExpression(fieldFilter)}");
+            
+            // filter by time
+            AddFilterByRange(rangeFilter);
+
+            // filter by tags
+            _context.QueryAggregator.AddFilterByTags(ConcatExpression(tagFilter));
+            
+            // filter by fields
+            _context.QueryAggregator.AddFilterByFields(ConcatExpression(fieldFilter));
         }
 
         public override void VisitResultOperator(ResultOperatorBase resultOperator, QueryModel queryModel, int index)
@@ -139,6 +181,101 @@ namespace InfluxDB.Client.Linq.Internal
 
                 return builder;
             }).ToString();
+        }
+        
+                private void AddFilterByRange(List<IExpressionPart> rangeFilter)
+        {
+            var rangeBinaryIndexes = Enumerable.Range(0, rangeFilter.Count)
+                .Where(i => rangeFilter[i] is BinaryOperator)
+                .ToList();
+
+            foreach (var rangeBinaryIndex in rangeBinaryIndexes)
+            {
+                var assignmentValueOnLeft = false;
+                // assigned property for filter by timestamp
+                var assignmentBuilder = new StringBuilder();
+                // Timestamp on left: 'where s.Timestamp > month11'
+                if (rangeFilter[rangeBinaryIndex - 1] is TimeColumnName)
+                {
+                    rangeFilter[rangeBinaryIndex + 1].AppendFlux(assignmentBuilder);
+                }
+
+                // Timestamp on right: 'where month11 > s.Timestamp'
+                if (rangeFilter[rangeBinaryIndex + 1] is TimeColumnName)
+                {
+                    assignmentValueOnLeft = true;
+                    rangeFilter[rangeBinaryIndex - 1].AppendFlux(assignmentBuilder);
+                }
+
+                var assignment = assignmentBuilder.ToString();
+                if (assignment.Length > 0)
+                {
+                    var binaryOperator = (BinaryOperator) rangeFilter[rangeBinaryIndex];
+                    switch (binaryOperator.Expression.NodeType)
+                    {
+                        case ExpressionType.Equal:
+                            _context.QueryAggregator.AddRangeStart(assignment, RangeExpressionType.Equal);
+                            _context.QueryAggregator.AddRangeStop(assignment, RangeExpressionType.Equal);
+                            break;
+
+                        case ExpressionType.LessThan:
+                        case ExpressionType.LessThanOrEqual:
+
+                            // assignment value is on left
+                            // 'where month11 < s.Timestamp'
+                            if (assignmentValueOnLeft)
+                            {
+                                // => 'where s.Timestamp > month11'
+                                var lessExpression = binaryOperator.Expression.NodeType == ExpressionType.LessThan
+                                    ? RangeExpressionType.GreaterThan
+                                    : RangeExpressionType.GreaterThanOrEqual;
+
+                                _context.QueryAggregator.AddRangeStart(assignment, lessExpression);
+                            }
+                            else
+                            {
+                                // => 'where s.Timestamp < month11'
+                                var lessExpression = binaryOperator.Expression.NodeType == ExpressionType.LessThan
+                                    ? RangeExpressionType.LessThan
+                                    : RangeExpressionType.LessThanOrEqual;
+
+                                _context.QueryAggregator.AddRangeStop(assignment, lessExpression);
+                            }
+
+                            break;
+
+                        case ExpressionType.GreaterThan:
+                        case ExpressionType.GreaterThanOrEqual:
+
+                            // assignment value is on left
+                            // 'where month11 > s.Timestamp'
+                            if (assignmentValueOnLeft)
+                            {
+                                // => 'where s.Timestamp < month11'
+                                var greaterExpression = binaryOperator.Expression.NodeType == ExpressionType.GreaterThan
+                                    ? RangeExpressionType.LessThan
+                                    : RangeExpressionType.LessThanOrEqual;
+
+                                _context.QueryAggregator.AddRangeStop(assignment, greaterExpression);
+                            }
+                            else
+                            {
+                                // => 'where s.Timestamp > month11'
+                                var greaterExpression = binaryOperator.Expression.NodeType == ExpressionType.GreaterThan
+                                    ? RangeExpressionType.GreaterThan
+                                    : RangeExpressionType.GreaterThanOrEqual;
+
+                                _context.QueryAggregator.AddRangeStart(assignment, greaterExpression);
+                            }
+
+                            break;
+
+                        default:
+                            binaryOperator.NotSupported(binaryOperator.Expression);
+                            break;
+                    }
+                }
+            }
         }
     }
 }

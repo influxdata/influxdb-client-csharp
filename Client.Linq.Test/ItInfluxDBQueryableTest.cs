@@ -22,17 +22,17 @@ namespace Client.Linq.Test
             _client.SetLogLevel(LogLevel.Body);
 
             // DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor11 = "sensor,deployment=production,sensor_id=id-1 data=15 1602750015";
-            const string sensor21 = "sensor,deployment=production,sensor_id=id-2 data=15 1602750015";
+            const string sensor11 = "sensor,deployment=production,sensor_id=id-1 data=15i 1602750015";
+            const string sensor21 = "sensor,deployment=production,sensor_id=id-2 data=15i 1602750015";
             // new DateTime(2020, 11, 15, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor12 = "sensor,deployment=production,sensor_id=id-1 data=28 1605428415";
-            const string sensor22 = "sensor,deployment=production,sensor_id=id-2 data=28 1605428415";
+            const string sensor12 = "sensor,deployment=production,sensor_id=id-1 data=28i 1605428415";
+            const string sensor22 = "sensor,deployment=production,sensor_id=id-2 data=28i 1605428415";
             // new DateTime(2020, 11, 16, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor13 = "sensor,deployment=production,sensor_id=id-1 data=12 1605514815";
-            const string sensor23 = "sensor,deployment=production,sensor_id=id-2 data=12 1605514815";
+            const string sensor13 = "sensor,deployment=production,sensor_id=id-1 data=12i 1605514815";
+            const string sensor23 = "sensor,deployment=production,sensor_id=id-2 data=12i 1605514815";
             // new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc)
-            const string sensor14 = "sensor,deployment=production,sensor_id=id-1 data=89 1605601215";
-            const string sensor24 = "sensor,deployment=production,sensor_id=id-2 data=89 1605601215";
+            const string sensor14 = "sensor,deployment=production,sensor_id=id-1 data=89i 1605601215";
+            const string sensor24 = "sensor,deployment=production,sensor_id=id-2 data=89i 1605601215";
 
             await _client
                 .GetWriteApiAsync()
@@ -222,7 +222,7 @@ namespace Client.Linq.Test
         public void QueryOr()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
-                where s.Value >= 28 || s.SensorId != "id-1"
+                where s.Value >= 28 || s.Value <= 12
                 select s;
 
             var sensors = query.ToList();

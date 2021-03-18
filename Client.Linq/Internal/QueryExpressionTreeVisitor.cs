@@ -104,7 +104,10 @@ namespace InfluxDB.Client.Linq.Internal
                 switch (_context.MemberResolver.ResolveMemberType(expression.Member))
                 {
                     case MemberType.Timestamp:
-                        _expressionParts.Add(new TimeRange());
+                        _expressionParts.Add(new TimeColumnName(expression.Member, _context.MemberResolver));
+                        break;
+                    case MemberType.Tag:
+                        _expressionParts.Add(new TagColumnName(expression.Member, _context.MemberResolver));
                         break;
                     case MemberType.NamedField:
                         _expressionParts.Add(new NamedField(expression.Member, _context.MemberResolver));
@@ -145,49 +148,11 @@ namespace InfluxDB.Client.Linq.Internal
         private IEnumerable<IExpressionPart> GetFluxExpressions()
         {
             _expressionParts.RemoveAll(it => it is NoOp);
-            NormalizeTimeRange();
             NormalizeNamedField();
             NormalizeNamedFieldValue();
             return _expressionParts;
         }
 
-        private void NormalizeTimeRange()
-        {
-            var index = _expressionParts
-                .FindIndex(it => it is TimeRange tr && tr.Left == null && tr.Right == null);
-
-            if (index == -1)
-            {
-                return;
-            }
-
-            var timeRange = (TimeRange) _expressionParts[index];
-            // Timestamp on left: 'where s.Timestamp > month11'
-            if (_expressionParts[index + 1] is BinaryOperator)
-            {
-                timeRange.Operator = _expressionParts[index + 1] as BinaryOperator;
-                timeRange.Right = _expressionParts[index + 2];
-
-                _expressionParts.RemoveAt(index + 3);
-                _expressionParts.RemoveAt(index + 2);
-                _expressionParts.RemoveAt(index + 1);
-                _expressionParts.RemoveAt(index - 1);
-            }
-            // Timestamp on right: 'where month11 > s.Timestamp'
-            else
-            {
-                timeRange.Operator = _expressionParts[index - 1] as BinaryOperator;
-                timeRange.Left = _expressionParts[index - 2];
-
-                _expressionParts.RemoveAt(index + 1);
-                _expressionParts.RemoveAt(index - 1);
-                _expressionParts.RemoveAt(index - 2);
-                _expressionParts.RemoveAt(index - 3);
-            }
-
-            NormalizeTimeRange();
-        }
-        
         private void NormalizeNamedField()
         {
             var index = _expressionParts
@@ -279,20 +244,103 @@ namespace InfluxDB.Client.Linq.Internal
         }
 
         /// <summary>
-        /// Remove "( and )"
+        /// Normalize generated expression.
         /// </summary>
-        internal static void NormalizeEmptyBinary(List<IExpressionPart> parts)
+        internal static void NormalizeExpressions(List<IExpressionPart> parts)
         {
-            var index = parts.FindIndex(it => it is BinaryOperator);
-
-            if (index != -1 && parts[index - 1] is LeftParenthesis && parts[index + 1] is RightParenthesis)
+            // Binary Expressions
             {
+                var indexes = Enumerable.Range(0, parts.Count)
+                    .Where(i => parts[i] is BinaryOperator)
+                    .ToList();
+            
+                foreach (var index in indexes)
+                {
+                    // "( and )"
+                    if (index >= 1 && parts[index - 1] is LeftParenthesis && parts[index + 1] is RightParenthesis)
+                    {
 
-                parts.RemoveAt(index + 1);
-                parts.RemoveAt(index);
-                parts.RemoveAt(index - 1);
+                        parts.RemoveAt(index + 1);
+                        parts.RemoveAt(index);
+                        parts.RemoveAt(index - 1);
+
+                        NormalizeExpressions(parts);
+                        return;
+                    }
+
+                    // "( timestamp > )"
+                    if (index >= 2 && parts[index - 2] is LeftParenthesis && parts[index + 1] is RightParenthesis)
+                    {
+
+                        parts.RemoveAt(index + 1);
+                        parts.RemoveAt(index);
+                        parts.RemoveAt(index - 1);
+                        parts.RemoveAt(index - 2);
+
+                        NormalizeExpressions(parts);
+                        return;
+                    }
+
+                    // "( < timestamp )"  
+                    if (index >= 1 && parts[index - 1] is LeftParenthesis && parts[index + 2] is RightParenthesis)
+                    {
+
+                        parts.RemoveAt(index + 2);
+                        parts.RemoveAt(index + 1);
+                        parts.RemoveAt(index);
+                        parts.RemoveAt(index - 1);
+
+                        NormalizeExpressions(parts);
+                        return;
+                    }
+
+                    // "( or (r["sensor_id"] != p4))"
+                    if (index >= 1 && parts[index - 1] is LeftParenthesis && parts[index + 1] is LeftParenthesis)
+                    {
+                        parts.RemoveAt(index);
+
+                        NormalizeExpressions(parts);
+                        return;
+                    }
+
+                    // "(r["sensor_id"] != p4) or )"
+                    if (index >= 1 && parts[index - 1] is RightParenthesis && parts[index + 1] is RightParenthesis)
+                    {
+                        parts.RemoveAt(index);
+
+                        NormalizeExpressions(parts);
+                        return;
+                    }
+
+                }
+            }
+            
+            // Parenthesis
+            {
+                var indexes = Enumerable.Range(0, parts.Count)
+                    .Where(i => parts[i] is LeftParenthesis)
+                    .ToList();
+
+                foreach (var index in indexes)
+                {
+                    // ()
+                    if (parts[index + 1] is RightParenthesis)
+                    {
+                        parts.RemoveAt(index + 1);
+                        parts.RemoveAt(index);
+
+                        NormalizeExpressions(parts);
+                        return;
+                    }
+                }
                 
-                NormalizeEmptyBinary(parts);
+                // (( ))
+                if (parts.Count >= 4 && parts[0] is LeftParenthesis && parts[1] is LeftParenthesis &&
+                    parts[parts.Count - 2] is RightParenthesis && parts[parts.Count - 1] is RightParenthesis)
+                {
+                    parts.RemoveAt(parts.Count - 1);
+                    parts.RemoveAt(0);
+                }
             }
         }
     }
