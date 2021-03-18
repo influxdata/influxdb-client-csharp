@@ -30,7 +30,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
 ## Changelog
 
 - `.dev.linq.17`
-  - optimize filtering - [see more](#filtering)
+  - Optimize filtering by tag - [see more](#filtering)
   - rebased with `master` branch
 
 ## How to start
@@ -272,6 +272,49 @@ from(bucket: "my-bucket")
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => (r["data"] < 28))
 ```
+
+If we move the `filter()` for **fields** before the `pivot()` then we will gets wrong results:
+
+##### Data
+
+```
+m1 f1=1,f2=2 1
+m1 f1=3,f2=4 2
+```
+
+##### Without filter
+
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+```
+
+Results:
+
+|              _time             | _measurement |  f1  |  f2  |
+|:------------------------------:|:------------:|:----:|:----:|
+| 1970-01-01T00:00:00.000000001Z |     "m1"     |  1.0 |  2.0 |
+| 1970-01-01T00:00:00.000000002Z |     "m1"     |  3.0 |  4.0 |
+
+##### Filter before pivot()
+
+> filter: `f1 > 0`
+
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> filter(fn: (r) => (r["_field"] == "f1" and r["_value"] > 0))
+    |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+```
+Results:
+
+|              _time             | _measurement |  f1  |
+|:------------------------------:|:------------:|:----:|
+| 1970-01-01T00:00:00.000000001Z |     "m1"     |  1.0 |
+| 1970-01-01T00:00:00.000000002Z |     "m1"     |  3.0 |
 
 ### Time Range Filtering
 
