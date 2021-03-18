@@ -40,7 +40,7 @@ First, add the library as a dependency for your project:
 ```bash
 # For actual version please check: https://www.nuget.org/packages/InfluxDB.Client.Linq/
 
-dotnet add package InfluxDB.Client.Linq --version 1.17.0-dev.linq.16
+dotnet add package InfluxDB.Client.Linq --version 1.17.0-dev.linq.17
 ```
 
 Next, you should add additional using statement to your program:
