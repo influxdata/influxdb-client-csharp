@@ -6,6 +6,7 @@
 
 ### API
 1. [#174](https://github.com/influxdata/influxdb-client-csharp/pull/174): Added possibility to use `CancellationToken` in REST API
+1. [#179](https://github.com/influxdata/influxdb-client-csharp/pull/179): Added possibility to use `CancellationToken` in the async write API (WriteApiAsync)
 
 ### Bug Fixes
 1. [#168](https://github.com/influxdata/influxdb-client-csharp/pull/168): DateTime is always serialized into UTC
