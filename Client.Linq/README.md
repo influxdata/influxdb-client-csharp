@@ -4,6 +4,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
 
 #### Disclaimer: This library is a work in progress and should not be considered production ready yet.
 
+- [Changelog](#changelog)
 - [How to start](#how-to-start)
 - [Time Series](#time-series)
 - [Perform Query](#perform-query)
@@ -216,7 +217,7 @@ The `pivot` is heavy and should be used at the end of our Flux query.
 
 ### Mapping LINQ filters
 
-For the best performance on the both side (server, LINQ provider) we maps the LINQ expressions to FLUX query following way:
+For the best performance on the both side - `server`, `LINQ provider` we maps the LINQ expressions to FLUX query following way:
 
 #### Filter by Timestamp
 
@@ -233,6 +234,7 @@ Flux Query:
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15ZZ) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
 
 #### Filter by Tag
@@ -254,7 +256,7 @@ from(bucket: "my-bucket")
 
 #### Filter by Field
 
-The filter field has to be after `pivot()` because we want to select all fields from pivoted table.
+The filter by field has to be after the `pivot()` because we want to select all fields from pivoted table.
 
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
@@ -299,6 +301,7 @@ start_shifted = int(v: time(v: "2019-11-16T08:20:15Z")) + 1
 from(bucket: "my-bucket") 
     |> range(start: time(v: start_shifted), stop: 2021-01-10T05:10:00Z) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
 
 #### Example 2:
@@ -319,6 +322,7 @@ stop_shifted = int(v: time(v: "2021-01-10T05:10:00Z")) + 1
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: time(v: stop_shifted)) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
 
 #### Example 3:
@@ -336,6 +340,7 @@ Flux Query:
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15ZZ) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
 
 #### Example 4:
@@ -355,6 +360,7 @@ stop_shifted = int(v: time(v: "2021-01-10T05:10:00Z")) + 1
 from(bucket: "my-bucket") 
     |> range(start: 0, stop: time(v: stop_shifted)) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
 
 #### Example 5:
@@ -374,6 +380,7 @@ stop_shifted = int(v: time(v: "2019-11-16T08:20:15Z")) + 1
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: time(v: stop_shifted)) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 ```
 
 ### TD;LR
