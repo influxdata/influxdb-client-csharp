@@ -8,7 +8,9 @@ The library supports to use a LINQ expression to query the InfluxDB.
 - [How to start](#how-to-start)
 - [Time Series](#time-series)
 - [Perform Query](#perform-query)
-- [Time Range Filtering](#time-range-filtering)
+- [Filtering](#filtering)
+    - [Mapping LINQ filters](#mapping-linq-filters)
+    - [Time Range Filtering](#time-range-filtering)
 - [Supported LINQ operators](#supported-linq-operators)
     - [Equal](#equal)
     - [Not Equal](#not-equal)
@@ -221,6 +223,8 @@ For the best performance on the both side - `server`, `LINQ provider` we maps th
 
 #### Filter by Timestamp
 
+Mapped to [range()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/range/).
+
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.Timestamp >= new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
@@ -239,6 +243,8 @@ from(bucket: "my-bucket")
 
 #### Filter by Tag
 
+Mapped to [filter()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/filter/) **before** `pivot()`.
+
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
     where s.SensorId == "id-1"
@@ -256,7 +262,7 @@ from(bucket: "my-bucket")
 
 #### Filter by Field
 
-The filter by field has to be after the `pivot()` because we want to select all fields from pivoted table.
+The filter by field has to be **after** the `pivot()` because we want to select all fields from pivoted table.
 
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
