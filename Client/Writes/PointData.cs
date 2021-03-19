@@ -12,11 +12,13 @@ using NodaTime;
 
 namespace InfluxDB.Client.Writes
 {
+
+
     /// <summary>
     /// Point defines the values that will be written to the database.
     /// <a href="http://bit.ly/influxdata-point">See Go Implementation</a>.
     /// </summary>
-    public class PointData : IEquatable<PointData>
+    public partial class PointData : IEquatable<PointData>
     {
         private static readonly DateTime EpochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
@@ -216,23 +218,7 @@ namespace InfluxDB.Client.Writes
         /// <returns></returns>
         public PointData Timestamp(TimeSpan timestamp, WritePrecision timeUnit)
         {
-            BigInteger? time = null;
-            switch (timeUnit)
-            {
-                case WritePrecision.Ns:
-                    time = timestamp.Ticks * 100;
-                    break;
-                case WritePrecision.Us:
-                    time = (BigInteger)(timestamp.Ticks * 0.1);
-                    break;
-                case WritePrecision.Ms:
-                    time = (BigInteger)timestamp.TotalMilliseconds;
-                    break;
-                case WritePrecision.S:
-                    time = (BigInteger)timestamp.TotalSeconds;
-                    break;
-            }
-
+            var time = TimeSpanToBigInteger(timestamp, timeUnit);
             return new PointData(_measurementName,
                                 timeUnit,
                                 time,
@@ -277,24 +263,7 @@ namespace InfluxDB.Client.Writes
         /// <returns></returns>
         public PointData Timestamp(Instant timestamp, WritePrecision timeUnit)
         {
-            BigInteger? time = null;
-            switch (timeUnit)
-            {
-                case WritePrecision.S:
-                    time = timestamp.ToUnixTimeSeconds();
-                    break;
-                case WritePrecision.Ms:
-                    time = timestamp.ToUnixTimeMilliseconds();
-                    break;
-                case WritePrecision.Us:
-                    time = (long)(timestamp.ToUnixTimeTicks() * 0.1);
-                    break;
-                default:
-                    time = (timestamp - NodaConstants.UnixEpoch).ToBigIntegerNanoseconds();
-                    break;
-            }
-
-
+            var time = InstantToBigInteger(timestamp, timeUnit);
             return new PointData(_measurementName,
                                 timeUnit,
                                 time,
@@ -349,6 +318,54 @@ namespace InfluxDB.Client.Writes
                                 _time,
                                 _tags,
                                 fields);
+        }
+
+        private static BigInteger TimeSpanToBigInteger(TimeSpan timestamp, WritePrecision timeUnit)
+        {
+            BigInteger time;
+            switch (timeUnit)
+            {
+                case WritePrecision.Ns:
+                    time = timestamp.Ticks * 100;
+                    break;
+                case WritePrecision.Us:
+                    time = (BigInteger)(timestamp.Ticks * 0.1);
+                    break;
+                case WritePrecision.Ms:
+                    time = (BigInteger)timestamp.TotalMilliseconds;
+                    break;
+                case WritePrecision.S:
+                    time = (BigInteger)timestamp.TotalSeconds;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit, "WritePrecision value is not supported");
+            }
+
+            return time;
+        }
+
+        private static BigInteger InstantToBigInteger(Instant timestamp, WritePrecision timeUnit)
+        {
+            BigInteger time;
+            switch (timeUnit)
+            {
+                case WritePrecision.S:
+                    time = timestamp.ToUnixTimeSeconds();
+                    break;
+                case WritePrecision.Ms:
+                    time = timestamp.ToUnixTimeMilliseconds();
+                    break;
+                case WritePrecision.Us:
+                    time = (long)(timestamp.ToUnixTimeTicks() * 0.1);
+                    break;
+                case WritePrecision.Ns:
+                    time = (timestamp - NodaConstants.UnixEpoch).ToBigIntegerNanoseconds();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit, "WritePrecision value is not supported");
+            }
+
+            return time;
         }
 
         /// <summary>
