@@ -119,7 +119,6 @@ namespace InfluxDB.Client.Core.Internal
                     throw asyncResponse.ErrorException;
                 }
                 
-                // ReSharper disable once HeuristicUnreachableCode
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
@@ -159,7 +158,6 @@ namespace InfluxDB.Client.Core.Internal
                     throw asyncResponse.ErrorException;
                 }
                 
-                // ReSharper disable once HeuristicUnreachableCode
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
