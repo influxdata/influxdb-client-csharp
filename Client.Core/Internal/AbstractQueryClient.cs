@@ -113,7 +113,7 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                await Task.Run(() => { RestClient.DownloadData(query, true); }).ConfigureAwait(false);
+                await RestClient.ExecuteAsync(query, Method.POST).ConfigureAwait(false);
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
@@ -147,7 +147,7 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                RestClient.DownloadData(query, true);
+                RestClient.Execute(query, Method.POST);
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
