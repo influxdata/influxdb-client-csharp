@@ -113,7 +113,13 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                await RestClient.ExecuteAsync(query, Method.POST).ConfigureAwait(false);
+                var asyncResponse = await RestClient.ExecuteAsync(query, Method.POST).ConfigureAwait(false);
+                if (asyncResponse.ErrorException != null)
+                {
+                    throw asyncResponse.ErrorException;
+                }
+                
+                // ReSharper disable once HeuristicUnreachableCode
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
@@ -147,7 +153,13 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                RestClient.Execute(query, Method.POST);
+                var asyncResponse = RestClient.Execute(query, Method.POST);
+                if (asyncResponse.ErrorException != null)
+                {
+                    throw asyncResponse.ErrorException;
+                }
+                
+                // ReSharper disable once HeuristicUnreachableCode
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
