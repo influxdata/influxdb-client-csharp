@@ -38,6 +38,8 @@ commands:
             cp -r Client.Linq.Test/TestResults/*.xml test-results/client-linq || true
             mkdir test-results/client
             cp -r Client.Test/TestResults/*.xml test-results/client || true
+            mkdir test-results/client-core
+            cp -r Client.Core.Test/TestResults/*.xml test-results/client-core || true
       - store_test_results:
           path: test-results
   

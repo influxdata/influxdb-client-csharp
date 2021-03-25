@@ -58,8 +58,9 @@ dotnet build --no-restore ${BUILD_PARAMS}
 #
 # Test
 #
-dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
+dotnet test Client.Core.Test/Client.Core.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
 dotnet test Client.Test/Client.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
+dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
 dotnet test Client.Linq.Test/Client.Linq.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
 
 #
