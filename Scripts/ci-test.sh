@@ -31,37 +31,36 @@ sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<
 sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Legacy/Client.Legacy.csproj
 sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Linq/Client.Linq.csproj
 
+TRX2JUNIT_VERSION=""
+BUILD_PARAMS=""
+TEST_PARAMS=""
+
+if [[ "$CODE_COVERAGE_REPORT" = true ]]
+then
+  TRX2JUNIT_VERSION="1.5.0"
+  BUILD_PARAMS="/p:ContinuousIntegrationBuild=true"
+  TEST_PARAMS="/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
+else
+  TRX2JUNIT_VERSION="1.3.2"
+fi
+
 #
 # Install testing tools
 #
-if [[ "$CODE_COVERAGE_REPORT" = true ]]
-then
-  dotnet tool install --tool-path="./Coverlet/" coverlet.console --version 1.7.2
-  dotnet tool install --tool-path="./trx2junit/" trx2junit --version 1.3.2
-else
-  dotnet tool install --tool-path="./trx2junit/" trx2junit --version 1.3.2
-fi
+dotnet tool install --tool-path="./trx2junit/" trx2junit --version ${TRX2JUNIT_VERSION}
 
 #
 # Build
 #
 dotnet restore
-dotnet build
+dotnet build --no-restore ${BUILD_PARAMS}
 
 #
 # Test
 #
-if [[ "$CODE_COVERAGE_REPORT" = true ]]
-then
-  ./Coverlet/coverlet Client.Legacy.Test/bin/Debug/"$NET_VERSION"/Client.Legacy.Test.dll --target "dotnet" --targetargs "test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build  --logger trx" --format opencover --output "./Client.Legacy.Test/"
-  ./Coverlet/coverlet Client.Test/bin/Debug/"$NET_VERSION"/Client.Test.dll --target "dotnet"  --targetargs "test Client.Test/Client.Test.csproj --no-build --logger trx" --format opencover --output "./Client.Test/"
-  ./Coverlet/coverlet Client.Linq.Test/bin/Debug/"$NET_VERSION"/Client.Linq.Test.dll --target "dotnet" --targetargs "test Client.Linq.Test/Client.Linq.Test.csproj --no-build  --logger trx" --format opencover --output "./Client.Linq.Test/"
-
-else
-  dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build  --logger trx
-  dotnet test Client.Test/Client.Test.csproj --no-build --logger trx
-  dotnet test Client.Linq.Test/Client.Linq.Test.csproj --no-build  --logger trx
-fi
+dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
+dotnet test Client.Test/Client.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
+dotnet test Client.Linq.Test/Client.Linq.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
 
 #
 # Convert test results to Junit format
