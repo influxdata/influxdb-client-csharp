@@ -1,6 +1,7 @@
 ## 1.17.0 [unreleased]
 
 ### Features
+1. [#146](https://github.com/influxdata/influxdb-client-csharp/pull/146): Added support for querying by `LINQ`
 1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `QueryApiSync` for synchronous querying
 1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `IDomainObjectMapper` for custom mapping DomainObject from/to InfluxDB
 1. [#180](https://github.com/influxdata/influxdb-client-csharp/pull/180): Added a mutable `PointData.Builder` to optimize building of immutable `PointData`

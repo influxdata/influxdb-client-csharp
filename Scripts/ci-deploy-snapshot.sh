@@ -15,3 +15,4 @@ dotnet pack --version-suffix=dev.$CIRCLE_BUILD_NUM
 dotnet nuget push ./Client.Core/bin/Debug/InfluxDB.Client.Core.*-dev.$CIRCLE_BUILD_NUM.nupkg -s ${BONITOO_NUGET_URL} -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
 dotnet nuget push ./Client.Legacy/bin/Debug/InfluxDB.Client.Flux.*-dev.$CIRCLE_BUILD_NUM.nupkg -s ${BONITOO_NUGET_URL} -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
 dotnet nuget push ./Client/bin/Debug/InfluxDB.Client.*-dev.$CIRCLE_BUILD_NUM.nupkg -s ${BONITOO_NUGET_URL} -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}
+dotnet nuget push ./Client.Linq/bin/Debug/InfluxDB.Client.Linq.*-dev.$CIRCLE_BUILD_NUM.nupkg -s ${BONITOO_NUGET_URL} -k ${BONITOO_SNAPSHOT_APIKEY} -sk ${BONITOO_SNAPSHOT_APIKEY}

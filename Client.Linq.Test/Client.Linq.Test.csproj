@@ -1,22 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
         <TargetFrameworks>netcoreapp2.2;netcoreapp3.1</TargetFrameworks>
         <LangVersion>8</LangVersion>
-        <VersionPrefix>1.17.0</VersionPrefix>
-        <VersionSuffix>dev</VersionSuffix>
+
         <IsPackable>false</IsPackable>
         
         <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
-        <StartupObject>Examples.RunExamples</StartupObject>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Client.Legacy\Client.Legacy.csproj" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+        <PackageReference Include="Moq" Version="4.15.2" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.12.0" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\Client.Linq\Client.Linq.csproj" />
-      <ProjectReference Include="..\Client\Client.csproj" />
+      <ProjectReference Include="..\Client.Core.Test\Client.Core.Test.csproj" />
     </ItemGroup>
 
 </Project>
