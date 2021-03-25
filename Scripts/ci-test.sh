@@ -32,14 +32,12 @@ sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<
 sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Linq/Client.Linq.csproj
 
 TRX2JUNIT_VERSION=""
-BUILD_PARAMS=""
-TEST_PARAMS=""
+TEST_PARAMS=()
 
 if [[ "$CODE_COVERAGE_REPORT" = true ]]
 then
   TRX2JUNIT_VERSION="1.5.0"
-  BUILD_PARAMS="/p:ContinuousIntegrationBuild=true"
-  TEST_PARAMS="/p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
+  TEST_PARAMS=(--collect:"XPlat Code Coverage")
 else
   TRX2JUNIT_VERSION="1.3.2"
 fi
@@ -53,15 +51,15 @@ dotnet tool install --tool-path="./trx2junit/" trx2junit --version ${TRX2JUNIT_V
 # Build
 #
 dotnet restore
-dotnet build --no-restore ${BUILD_PARAMS}
+dotnet build --no-restore
 
 #
 # Test
 #
-dotnet test Client.Core.Test/Client.Core.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
-dotnet test Client.Test/Client.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
-dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
-dotnet test Client.Linq.Test/Client.Linq.Test.csproj --no-build --verbosity normal --logger trx ${TEST_PARAMS}
+dotnet test Client.Core.Test/Client.Core.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
+dotnet test Client.Test/Client.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
+dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
+dotnet test Client.Linq.Test/Client.Linq.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
 
 #
 # Convert test results to Junit format
