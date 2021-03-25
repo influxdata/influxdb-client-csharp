@@ -19,7 +19,7 @@ commands:
     steps:
       - run:
           name: "Running tests"
-          command: ./Scripts/ci-test.sh
+          command: ./Scripts/ci-test.sh << parameters.code-coverage-report >>
       - run:
           name: "Converting test results to Junit format"
           when: on_fail

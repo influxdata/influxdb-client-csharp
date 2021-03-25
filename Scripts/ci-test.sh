@@ -9,7 +9,7 @@ else
     CODE_COVERAGE_REPORT=false 
 fi
 
-echo "Test configuration: $*, generate coverage report: $CODE_COVERAGE_REPORT"
+echo "Configuration: $*, Coverage Report: $CODE_COVERAGE_REPORT"
 
 #
 # Prepare compatible version
@@ -34,8 +34,13 @@ sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<
 #
 # Install testing tools
 #
-dotnet tool install --tool-path="./Coverlet/" coverlet.console --version 1.7.2
-dotnet tool install --tool-path="./trx2junit/" trx2junit --version 1.3.2
+if [[ "$CODE_COVERAGE_REPORT" = true ]]
+then
+  dotnet tool install --tool-path="./Coverlet/" coverlet.console --version 1.7.2
+  dotnet tool install --tool-path="./trx2junit/" trx2junit --version 1.3.2
+else
+  dotnet tool install --tool-path="./trx2junit/" trx2junit --version 1.3.2
+fi
 
 #
 # Build
@@ -46,9 +51,17 @@ dotnet build
 #
 # Test
 #
-./Coverlet/coverlet Client.Legacy.Test/bin/Debug/"$NET_VERSION"/Client.Legacy.Test.dll --target "dotnet" --targetargs "test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build  --logger trx" --format opencover --output "./Client.Legacy.Test/"
-./Coverlet/coverlet Client.Test/bin/Debug/"$NET_VERSION"/Client.Test.dll --target "dotnet"  --targetargs "test Client.Test/Client.Test.csproj --no-build --logger trx" --format opencover --output "./Client.Test/"
-./Coverlet/coverlet Client.Linq.Test/bin/Debug/"$NET_VERSION"/Client.Linq.Test.dll --target "dotnet" --targetargs "test Client.Linq.Test/Client.Linq.Test.csproj --no-build  --logger trx" --format opencover --output "./Client.Linq.Test/"
+if [[ "$CODE_COVERAGE_REPORT" = true ]]
+then
+  ./Coverlet/coverlet Client.Legacy.Test/bin/Debug/"$NET_VERSION"/Client.Legacy.Test.dll --target "dotnet" --targetargs "test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build  --logger trx" --format opencover --output "./Client.Legacy.Test/"
+  ./Coverlet/coverlet Client.Test/bin/Debug/"$NET_VERSION"/Client.Test.dll --target "dotnet"  --targetargs "test Client.Test/Client.Test.csproj --no-build --logger trx" --format opencover --output "./Client.Test/"
+  ./Coverlet/coverlet Client.Linq.Test/bin/Debug/"$NET_VERSION"/Client.Linq.Test.dll --target "dotnet" --targetargs "test Client.Linq.Test/Client.Linq.Test.csproj --no-build  --logger trx" --format opencover --output "./Client.Linq.Test/"
+
+else
+  dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build  --logger trx
+  dotnet test Client.Test/Client.Test.csproj --no-build --logger trx
+  dotnet test Client.Linq.Test/Client.Linq.Test.csproj --no-build  --logger trx
+fi
 
 #
 # Convert test results to Junit format
