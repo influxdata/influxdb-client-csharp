@@ -113,7 +113,12 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                await Task.Run(() => { RestClient.DownloadData(query, true); }).ConfigureAwait(false);
+                var restResponse = await RestClient.ExecuteAsync(query, Method.POST).ConfigureAwait(false);
+                if (restResponse.ErrorException != null)
+                {
+                    throw restResponse.ErrorException;
+                }
+                
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();
@@ -147,7 +152,12 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                RestClient.DownloadData(query, true);
+                var restResponse = RestClient.Execute(query, Method.POST);
+                if (restResponse.ErrorException != null)
+                {
+                    throw restResponse.ErrorException;
+                }
+                
                 if (!cancellable.IsCancelled())
                 {
                     onComplete();

@@ -423,7 +423,7 @@ namespace InfluxDB.Client.Flux
         {
             BeforeIntercept(request);
 
-            var response = await Task.Run(() => RestClient.Execute(request)).ConfigureAwait(false);
+            var response = await RestClient.ExecuteAsync(request).ConfigureAwait(false);
 
             RaiseForInfluxError(response, response.Content);
 
