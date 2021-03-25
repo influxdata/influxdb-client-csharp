@@ -13,8 +13,9 @@ commands:
       - influxdb-onboarding
   client-test:
     parameters:
-      dotnet-image:
-        type: string
+      code-coverage-report:
+        type: boolean
+        default: false
     steps:
       - run:
           name: "Running tests"
@@ -33,6 +34,8 @@ commands:
             mkdir test-results
             mkdir test-results/client-legacy
             cp -r Client.Legacy.Test/TestResults/*.xml test-results/client-legacy || true
+            mkdir test-results/client-linq
+            cp -r Client.Linq.Test/TestResults/*.xml test-results/client-linq || true
             mkdir test-results/client
             cp -r Client.Test/TestResults/*.xml test-results/client || true
       - store_test_results:
@@ -46,6 +49,7 @@ commands:
             mkdir artifacts
             cp -r Client.Core/bin/Debug/*/*.dll artifacts/
             cp -r Client.Legacy/bin/Debug/*/*.dll artifacts/
+            cp -r Client.Linq/bin/Debug/*/*.dll artifacts/
             cp -r Client/bin/Debug/*/*.dll artifacts/
       - store_artifacts:
           path: artifacts
@@ -62,6 +66,9 @@ jobs:
       influxdb-image:
         type: string
         default: &default-influxdb-image "influxdb:latest"
+      code-coverage-report:
+        type: boolean
+        default: false
     docker:
       - image: << parameters.dotnet-image >>
         environment:
@@ -82,12 +89,17 @@ jobs:
     steps:
       - prepare
       - client-test:
-          dotnet-image: << parameters.dotnet-image >>
+          code-coverage-report: << parameters.code-coverage-report >>
       - storing-test-results
       - storing-artifacts
-      - run:
-          name: "Collecting coverage reports"
-          command: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+      - when:
+          condition:
+            and:
+              - equal: [ true, << parameters.code-coverage-report >> ]
+          steps:
+            - run:
+                name: "Collecting coverage reports"
+                command: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 
   tests-windows:
     machine:
@@ -161,6 +173,7 @@ workflows:
           dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.0"
       - tests-dotnet:
           name: dotnet-3.1
+          code-coverage-report: true
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:

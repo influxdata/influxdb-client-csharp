@@ -2,6 +2,15 @@
 
 set -e
 
+if [[ "$*" == *true* ]]
+then
+    CODE_COVERAGE_REPORT=true
+else
+    CODE_COVERAGE_REPORT=false 
+fi
+
+echo "Test configuration: $*, generate coverage report: $CODE_COVERAGE_REPORT"
+
 #
 # Prepare compatible version
 #
