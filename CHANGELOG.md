@@ -1,28 +1,34 @@
 ## 1.17.0 [unreleased]
 
 ### Features
-1. [#146](https://github.com/influxdata/influxdb-client-csharp/pull/146): Added support for querying by `LINQ`
-1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `QueryApiSync` for synchronous querying
-1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Added `IDomainObjectMapper` for custom mapping DomainObject from/to InfluxDB
-1. [#180](https://github.com/influxdata/influxdb-client-csharp/pull/180): Added a mutable `PointData.Builder` to optimize building of immutable `PointData`
+1. [#146](https://github.com/influxdata/influxdb-client-csharp/pull/146): Add support for querying by `LINQ`
+1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Add `QueryApiSync` for synchronous querying
+1. [#171](https://github.com/influxdata/influxdb-client-csharp/pull/171): Add `IDomainObjectMapper` for custom mapping DomainObject from/to InfluxDB
+1. [#180](https://github.com/influxdata/influxdb-client-csharp/pull/180): Add a mutable `PointData.Builder` to optimize building of immutable `PointData`
 
 ### API
-1. [#174](https://github.com/influxdata/influxdb-client-csharp/pull/174): Added possibility to use `CancellationToken` in REST API
-1. [#179](https://github.com/influxdata/influxdb-client-csharp/pull/179): Added possibility to use `CancellationToken` in the async write API (WriteApiAsync)
+1. [#174](https://github.com/influxdata/influxdb-client-csharp/pull/174): Add possibility to use `CancellationToken` in REST API
+1. [#179](https://github.com/influxdata/influxdb-client-csharp/pull/179): Add possibility to use `CancellationToken` in the async write API (WriteApiAsync)
 
 ### Bug Fixes
 1. [#168](https://github.com/influxdata/influxdb-client-csharp/pull/168): DateTime is always serialized into UTC
-1. [#169](https://github.com/influxdata/influxdb-client-csharp/pull/169): Fixed domain structure for Flux AST
-1. [#181](https://github.com/influxdata/influxdb-client-csharp/pull/181): Removed download overhead for Queries
+1. [#169](https://github.com/influxdata/influxdb-client-csharp/pull/169): Fix domain structure for Flux AST
+1. [#181](https://github.com/influxdata/influxdb-client-csharp/pull/181): Remove download overhead for Queries
 
 ### Dependencies
-1. [#175](https://github.com/influxdata/influxdb-client-csharp/pull/175): Updated dependencies of `InfluxDB.Client`:
+1. [#175](https://github.com/influxdata/influxdb-client-csharp/pull/175): Update dependencies of `InfluxDB.Client`:
     - JsonSubTypes to 1.8.0
     - Microsoft.Extensions.ObjectPool to 5.0.4
     - Microsoft.Net.Http.Headers to 2.2.8
     - System.Collections.Immutable to 5.0.0
     - System.Configuration.ConfigurationManager to 5.0.0
     - System.Reactive to 5.0.0
+1. [#182](https://github.com/influxdata/influxdb-client-csharp/pull/182): Update test dependencies:
+    - Microsoft.NET.Test.Sdk to 16.5.0
+
+### CI
+1. [#182](https://github.com/influxdata/influxdb-client-csharp/pull/182): Add build for `dotnet5`, Fix code coverage report
+
 
 ## 1.16.0 [2021-03-05]
 
