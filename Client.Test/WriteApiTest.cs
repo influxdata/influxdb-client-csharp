@@ -463,7 +463,7 @@ namespace InfluxDB.Client.Test
             var error = listener.Get<WriteRuntimeExceptionEvent>();
             
             Assert.IsNotNull(error);
-            Assert.AreEqual("Timestamps must be specified as UTC (Parameter 'timestamp')", error.Exception.Message);
+            StringAssert.StartsWith("Timestamps must be specified as UTC", error.Exception.Message);
             
             Assert.AreEqual(0, MockServer.LogEntries.Count());
         }

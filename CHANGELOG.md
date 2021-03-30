@@ -16,6 +16,7 @@
 1. [#168](https://github.com/influxdata/influxdb-client-csharp/pull/168): DateTime is always serialized into UTC
 1. [#169](https://github.com/influxdata/influxdb-client-csharp/pull/169): Fix domain structure for Flux AST
 1. [#181](https://github.com/influxdata/influxdb-client-csharp/pull/181): Remove download overhead for Queries
+1. [#183](https://github.com/influxdata/influxdb-client-csharp/pull/183): Propagate runtime exception to EventHandler
 
 ### Dependencies
 1. [#175](https://github.com/influxdata/influxdb-client-csharp/pull/175): Update dependencies of `InfluxDB.Client`:
