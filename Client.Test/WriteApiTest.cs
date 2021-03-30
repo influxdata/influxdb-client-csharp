@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
@@ -441,5 +442,43 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(1_800_000, options.MaxRetryDelay);
             Assert.AreEqual(2, options.ExponentialBase);
         }
+
+        [Test]
+        public void WriteRuntimeException()
+        {
+            var listener = new EventListener(_writeApi);
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            var measurement = new SimpleModel
+            {
+                Time = new DateTime(2020, 11, 15, 8, 20, 15), 
+                Device = "id-1", 
+                Value = 15
+            };
+            _writeApi.WriteMeasurement("b1", "org1", WritePrecision.S, measurement);
+
+            var error = listener.Get<WriteRuntimeExceptionEvent>();
+            
+            Assert.IsNotNull(error);
+            Assert.AreEqual("Timestamps must be specified as UTC (Parameter 'timestamp')", error.Exception.Message);
+            
+            Assert.AreEqual(0, MockServer.LogEntries.Count());
+        }
+    }
+    
+    [Measurement("m")]
+    public class SimpleModel
+    {
+        [Column(IsTimestamp = true)] 
+        public DateTime Time { get; set; }
+
+        [Column("device", IsTag = true)] 
+        public string Device { get; set; }
+
+        [Column("value")]
+        public int Value { get; set; }
     }
 }

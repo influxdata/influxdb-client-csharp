@@ -352,9 +352,10 @@ For writing data we use [WriteApi](https://github.com/influxdata/influxdb-client
 1. writing data using [InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/), Data Point, POCO 
 2. use batching for writes
 4. produces events that allow user to be notified and react to this events
-    - `WriteSuccessEvent` - published when arrived the success response from Platform server
-    - `WriteErrorEvent` - published when occurs a unhandled exception
-    - `WriteRetriableErrorEvent` - published when occurs a retriable error
+    - `WriteSuccessEvent` - published when arrived the success response from server
+    - `WriteErrorEvent` - published when occurs a unhandled exception from server
+    - `WriteRetriableErrorEvent` - published when occurs a retriable error from server
+    - `WriteRuntimeExceptionEvent` - published when occurs a runtime exception in background batch processing
 5. use GZIP compression for data
 
 The writes are processed in batches which are configurable by `WriteOptions`:

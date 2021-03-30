@@ -204,6 +204,7 @@ namespace InfluxDB.Client
                     },
                     exception =>
                     {
+                        Publish(new WriteRuntimeExceptionEvent(exception));
                         _disposed = true;
                         Trace.WriteLine($"The unhandled exception occurs: {exception}");
                     },
