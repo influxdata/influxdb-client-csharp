@@ -1,4 +1,4 @@
-## 1.17.0 [unreleased]
+## 1.17.0 [2021-04-01]
 
 ### Features
 1. [#146](https://github.com/influxdata/influxdb-client-csharp/pull/146): Add support for querying by `LINQ`
