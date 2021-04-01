@@ -1,5 +1,8 @@
 ## 1.18.0 [unreleased]
 
+### Bug Fixes
+1. [#183](https://github.com/influxdata/influxdb-client-csharp/pull/183): Propagate runtime exception to EventHandler
+
 ## 1.17.0 [2021-04-01]
 
 ### Features

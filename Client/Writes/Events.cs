@@ -72,6 +72,27 @@ namespace InfluxDB.Client.Writes
         }
     }
 
+    /// <summary>
+    /// Published when occurs a runtime exception in background batch processing.
+    /// </summary>
+    public class WriteRuntimeExceptionEvent : InfluxDBEventArgs
+    {
+        /// <summary>
+        /// The Runtime Exception that was throw.
+        /// </summary>
+        public Exception Exception { get; }
+
+        internal WriteRuntimeExceptionEvent(Exception exception)
+        {
+            Exception = exception;
+        }
+
+        internal override void LogEvent()
+        {
+            Trace.TraceError($"The unhandled exception occurs: {Exception}");
+        }
+    }
+
     public abstract class AbstractWriteEvent : InfluxDBEventArgs
     {
         /// <summary>
