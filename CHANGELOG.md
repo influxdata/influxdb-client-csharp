@@ -1,5 +1,8 @@
 ## 1.18.0 [unreleased]
 
+### Features
+1. [#184](https://github.com/influxdata/influxdb-client-csharp/pull/184): Add possibility to specify `WebProxy` for Client
+
 ### Bug Fixes
 1. [#183](https://github.com/influxdata/influxdb-client-csharp/pull/183): Propagate runtime exception to EventHandler
 
