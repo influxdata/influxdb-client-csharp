@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
@@ -37,6 +38,28 @@ namespace InfluxDB.Client.Test
             var serialized = _apiClient.Serialize(dateTime);
             
             Assert.AreEqual("\"2020-03-05T00:00:00Z\"", serialized);
+        }
+
+        [Test]
+        public void ProxyDefault()
+        {
+            Assert.AreEqual(null, _apiClient.RestClient.Proxy);
+        }
+
+        [Test]
+        public void ProxyDefaultConfigured()
+        {
+            var webProxy = new WebProxy("my-proxy", 8088);
+            
+            var options = new InfluxDBClientOptions.Builder()
+                .Url("http://localhost:8086")
+                .AuthenticateToken("my-token".ToCharArray())
+                .Proxy(webProxy)
+                .Build();
+            
+            _apiClient = new ApiClient(options, new LoggingHandler(LogLevel.Body), new GzipHandler());
+            
+            Assert.AreEqual(webProxy, _apiClient.RestClient.Proxy);
         }
     }
 }

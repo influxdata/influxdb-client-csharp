@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
 using InfluxDB.Client.Configurations;
@@ -33,6 +34,8 @@ namespace InfluxDB.Client
 
         public TimeSpan Timeout { get; }
         public TimeSpan ReadWriteTimeout { get; }
+        
+        public IWebProxy WebProxy { get; }
 
         public PointSettings PointSettings { get; }
 
@@ -52,6 +55,8 @@ namespace InfluxDB.Client
 
             Timeout = builder.Timeout;
             ReadWriteTimeout = builder.ReadWriteTimeout;
+            
+            WebProxy = builder.WebProxy;
 
             PointSettings = builder.PointSettings;
         }
@@ -89,6 +94,8 @@ namespace InfluxDB.Client
 
             internal string OrgString;
             internal string BucketString;
+
+            internal IWebProxy WebProxy = null;
 
             internal PointSettings PointSettings = new PointSettings();
 
@@ -235,13 +242,27 @@ namespace InfluxDB.Client
             /// </summary>
             /// <param name="tagName">the tag name</param>
             /// <param name="expression">the tag value expression</param>
-            /// <returns></returns>
+            /// <returns><see cref="Builder"/></returns>
             public Builder AddDefaultTag(string tagName, string expression)
             {
                 Arguments.CheckNotNull(tagName, nameof(tagName));
 
                 PointSettings.AddDefaultTag(tagName, expression);
 
+                return this;
+            }
+
+            /// <summary>
+            /// Specify the WebProxy instance to use by the WebRequest to connect to external InfluxDB.
+            /// </summary>
+            /// <param name="webProxy">The WebProxy to use to access the InfluxDB.</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder Proxy(IWebProxy webProxy)
+            {
+                Arguments.CheckNotNull(webProxy, nameof(webProxy));
+
+                WebProxy = webProxy;
+                
                 return this;
             }
 

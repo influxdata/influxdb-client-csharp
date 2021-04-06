@@ -39,6 +39,7 @@ namespace InfluxDB.Client.Api.Client
                 Timeout = timeoutTotalMilliseconds,
                 ReadWriteTimeout = totalMilliseconds,
             };
+            RestClient.Proxy = options.WebProxy;
         }
 
         partial void InterceptRequest(IRestRequest request)

@@ -40,6 +40,7 @@ namespace InfluxDB.Client.Flux
                 }
             }
             RestClient.UserAgent = $"influxdb-client-csharp/{version}";
+            RestClient.Proxy = options.WebProxy;
         }
 
         /// <summary>

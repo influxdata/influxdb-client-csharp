@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 
 namespace InfluxDB.Client.Flux
 {
@@ -18,6 +19,8 @@ namespace InfluxDB.Client.Flux
         public char[] Password { get; }
 
         public AuthenticationType Authentication { get; }
+        
+        public IWebProxy WebProxy { get; }
 
         public FluxConnectionOptions(string url) : this(url, TimeSpan.FromSeconds(60))
         {
@@ -30,13 +33,15 @@ namespace InfluxDB.Client.Flux
         }
 
         public FluxConnectionOptions(string url, TimeSpan timeout, string username = "", char[] password = null, 
-                        AuthenticationType authentication = AuthenticationType.UrlQueryParameters)
+                        AuthenticationType authentication = AuthenticationType.UrlQueryParameters, 
+                        IWebProxy webProxy = null)
         {
             Url = url;
             Timeout = timeout;
             Username = username;
             Password = password;
             Authentication = authentication;
+            WebProxy = webProxy;
         }
     }
 }
