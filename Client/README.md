@@ -28,6 +28,7 @@ The reference client that allows query, write and management (bucket, organizati
     - [Client configuration file](#client-configuration-file)
     - [Client connection string](#client-connection-string)
     - [Gzip support](#gzip-support)
+    - [How to use WebProxy](#how-to-use-webproxy)
 
 ## Queries
 
@@ -1123,6 +1124,20 @@ The `readWriteTimeout` and `timeout` supports `ms`, `s` and `m` as unit. Default
 
 ```c#
 influxDBClient.EnableGzip();
+```
+
+### How to use WebProxy
+
+The `WebProxy` could be configured via `InfluxDBClientOptions.Builder`:
+
+```c#
+var options = new InfluxDBClientOptions.Builder()
+    .Url("http://localhost:8086")
+    .AuthenticateToken("my-token".ToCharArray())
+    .Proxy(new WebProxy("http://proxyserver:80/", true))
+    .Build();
+
+var client = InfluxDBClientFactory.Create(options);
 ```
 
 #### Log HTTP Request and Response
