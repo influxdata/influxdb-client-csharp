@@ -30,7 +30,8 @@ The library supports to use a LINQ expression to query the InfluxDB.
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
 
 ## Changelog
-
+### 1.18.0 [unreleased]
+  - use `group()` function in output Flux query. See details - [Group function](#group-function)
 ### 1.17.0-dev.linq.17 [2021-03-18]
   - Optimize filtering by tag - [see more](#filtering)
   - rebased with `master` branch
@@ -118,7 +119,9 @@ sensor,deployment=production,sensor_id=id-1 data=15
 sensor,deployment=testing,sensor_id=id-1 data=28
 ```
 
-That is reason why the library have to use [group()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/) function.
+### Group function
+
+That is reason why the library **have to use [group()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/) function**.
 
 The following query works correctly:
 
@@ -137,9 +140,9 @@ and corresponding result:
 sensor,deployment=production,sensor_id=id-1 data=15
 ```
 
-### Group does not guarantee sort order
+#### Group does not guarantee sort order
 
-**The `group()` [does not guarantee sort order](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/#group-does-not-guarantee-sort-order) of output records. 
+The `group()` [does not guarantee sort order](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/#group-does-not-guarantee-sort-order) of output records. 
 To ensure data is sorted correctly, use `orderby` expression.
 
 ### TD;LR
