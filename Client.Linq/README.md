@@ -118,49 +118,35 @@ sensor,deployment=production,sensor_id=id-1 data=15
 sensor,deployment=testing,sensor_id=id-1 data=28
 ```
 
-and this is also way how following LINQ operators works.
+That is reason why the library have to use [group()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/) function.
 
-### TD;LR
-
-- [series](https://docs.influxdata.com/influxdb/cloud/reference/glossary/#series)
-- [Flux](https://docs.influxdata.com/influxdb/cloud/reference/glossary/#flux)
-- [Query data with Flux](https://docs.influxdata.com/influxdb/cloud/query-data/flux/)
-
-### Client Side Evaluation
-
-The library attempts to evaluate a query on the server as much as possible. 
-The client side evaluations is required for aggregation function if there is more then one time series.
-
-If you want to count your data with following Flux:
+The following query works correctly:
 
 ```flux
 from(bucket: "my-bucket")
   |> range(start: 0)
   |> drop(columns: ["_start", "_stop", "_measurement"])
   |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-  |> stateCount(fn: (r) => true, column: "linq_result_column") 
-  |> last(column: "linq_result_column") 
-  |> keep(columns: ["linq_result_column"])
+  |> group()
+  |> limit(n:1)
 ```
 
-The result will be one count for each time-series:
-
-```csv
-#group,false,false,false
-#datatype,string,long,long
-#default,_result,,
-,result,table,linq_result_column
-,,0,1
-,,0,1
+and corresponding result:
 
 ```
+sensor,deployment=production,sensor_id=id-1 data=15
+```
 
-and client has to aggregate this multiple results into one scalar value.
+### Group does not guarantee sort order
 
-Operators that could cause client side evaluation:
+**The `group()` [does not guarantee sort order](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/#group-does-not-guarantee-sort-order) of output records. 
+To ensure data is sorted correctly, use `orderby` expression.
 
-- `Count`
-- `CountLong`
+### TD;LR
+
+- [series](https://docs.influxdata.com/influxdb/cloud/reference/glossary/#series)
+- [Flux](https://docs.influxdata.com/influxdb/cloud/reference/glossary/#flux)
+- [Query data with Flux](https://docs.influxdata.com/influxdb/cloud/query-data/flux/)
 
 ## Perform Query
 
@@ -187,6 +173,7 @@ from(bucket: "my-bucket")
     |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
     |> filter(fn: (r) => (r["data"] > 12)) 
     |> sort(columns: ["_time"], desc: false) 
     |> limit(n: 2, offset: 2)
@@ -239,6 +226,7 @@ from(bucket: "my-bucket")
     |> range(start: 2019-11-16T08:20:15ZZ) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
 ```
 
 #### Filter by Tag
@@ -258,6 +246,7 @@ from(bucket: "my-bucket")
     |> filter(fn: (r) => (r["sensor_id"] == "id-1"))  
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
 ```
 
 #### Filter by Field
@@ -277,6 +266,7 @@ from(bucket: "my-bucket")
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => (r["data"] < 28))
+    |> group()
 ```
 
 If we move the `filter()` for **fields** before the `pivot()` then we will gets wrong results:
@@ -295,6 +285,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
 ```
 
 Results:
@@ -314,6 +305,7 @@ from(bucket: "my-bucket")
     |> filter(fn: (r) => (r["_field"] == "f1" and r["_value"] > 0))
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
 ```
 Results:
 
@@ -351,6 +343,7 @@ from(bucket: "my-bucket")
     |> range(start: time(v: start_shifted), stop: 2021-01-10T05:10:00Z) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
 ```
 
 #### Example 2:
@@ -372,6 +365,7 @@ from(bucket: "my-bucket")
     |> range(start: 2019-11-16T08:20:15Z, stop: time(v: stop_shifted)) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
 ```
 
 #### Example 3:
@@ -390,6 +384,7 @@ from(bucket: "my-bucket")
     |> range(start: 2019-11-16T08:20:15ZZ) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
 ```
 
 #### Example 4:
@@ -410,6 +405,7 @@ from(bucket: "my-bucket")
     |> range(start: 0, stop: time(v: stop_shifted)) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
 ```
 
 #### Example 5:
@@ -430,6 +426,7 @@ from(bucket: "my-bucket")
     |> range(start: 2019-11-16T08:20:15Z, stop: time(v: stop_shifted)) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
 ```
 
 ### TD;LR
@@ -453,6 +450,7 @@ from(bucket: "my-bucket")
     |> filter(fn: (r) => (r["sensor_id"] == "id-1"))  
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
 ```
 
 ### Not Equal
@@ -470,6 +468,7 @@ from(bucket: "my-bucket")
     |> filter(fn: (r) => (r["sensor_id"] != "id-1")) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> group()
 ```
 
 ### Less Than
@@ -486,6 +485,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> filter(fn: (r) => (r["data"] < 28))
 ```
 
@@ -503,6 +503,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> filter(fn: (r) => (r["data"] <= 28))
 ```
 
@@ -520,6 +521,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> filter(fn: (r) => (r["data"] > 28))
 ```
 
@@ -537,6 +539,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> filter(fn: (r) => (r["data"] >= 28))
 ```
 
@@ -555,6 +558,7 @@ from(bucket: "my-bucket")
     |> filter(fn: (r) => (r["sensor_id"] != "id-1"))
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> filter(fn: (r) => (r["data"] >= 28))
 ```
 
@@ -572,6 +576,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> filter(fn: (r) => ((r["data"] >= 28) or (r["data"] <=> 28)))
 ```
 
@@ -768,6 +773,7 @@ from(bucket: "my-bucket")
     |> range(start: 0)
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> filter(fn: (r) => (r["attribute_quality"] == "good"))
 ```
 
@@ -788,6 +794,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> limit(n: 10)
 ```
 
@@ -807,6 +814,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> limit(n: 10, offset: 50)
 ```
 
@@ -826,6 +834,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> sort(columns: ["deployment"], desc: false)
 ```
 
@@ -843,6 +852,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> sort(columns: ["_time"], desc: true)
 ```
 
@@ -863,6 +873,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> stateCount(fn: (r) => true, column: "linq_result_column") 
     |> last(column: "linq_result_column") 
     |> keep(columns: ["linq_result_column"])
@@ -885,6 +896,7 @@ from(bucket: "my-bucket")
     |> range(start: 0) 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> group()
     |> stateCount(fn: (r) => true, column: "linq_result_column") 
     |> last(column: "linq_result_column") 
     |> keep(columns: ["linq_result_column"])

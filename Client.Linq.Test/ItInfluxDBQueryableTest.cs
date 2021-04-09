@@ -92,7 +92,7 @@ namespace Client.Linq.Test
 
             var sensors = query.ToList();
 
-            Assert.AreEqual(2*2, sensors.Count);
+            Assert.AreEqual(2, sensors.Count);
         }
 
         [Test]
