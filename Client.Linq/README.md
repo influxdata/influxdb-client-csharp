@@ -30,7 +30,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
 
 ## Changelog
-### 1.18.0 [unreleased]
+### 1.18.0-dev.2880 [2021-04-12]
   - use `group()` function in output Flux query. See details - [Group function](#group-function)
 ### 1.17.0-dev.linq.17 [2021-03-18]
   - Optimize filtering by tag - [see more](#filtering)
