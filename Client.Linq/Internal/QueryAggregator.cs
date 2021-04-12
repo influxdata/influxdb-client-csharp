@@ -155,6 +155,7 @@ namespace InfluxDB.Client.Linq.Internal
                 BuildFilter(_filterByTags),
                 "drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                "group()",
                 BuildFilter(_filterByFields)
             };
 

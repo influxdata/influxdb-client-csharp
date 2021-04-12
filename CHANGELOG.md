@@ -2,6 +2,7 @@
 
 ### Features
 1. [#184](https://github.com/influxdata/influxdb-client-csharp/pull/184): Add possibility to specify `WebProxy` for Client
+1. [#185](https://github.com/influxdata/influxdb-client-csharp/pull/185): Use `group()` function in output Flux query. See details - [Group function](/Client.Linq/README.md#group-function) [LINQ]
 
 ### Bug Fixes
 1. [#183](https://github.com/influxdata/influxdb-client-csharp/pull/183): Propagate runtime exception to EventHandler
@@ -42,7 +43,7 @@
 
 ### Bug Fixes
 1. [#154](https://github.com/influxdata/influxdb-client-csharp/pull/154): Always use `ConfigureAwait(false)` to avoid unnecessary context switching and potential dead-locks. Avoid unnecessary await overhead.
-1. [#158](https://github.com/influxdata/influxdb-client-csharp/pull/158): Remove Unnecesary dependencies: `System.Net.Http` and `Microsoft.Bcl.AsyncInterfaces`
+1. [#158](https://github.com/influxdata/influxdb-client-csharp/pull/158): Remove unnecessary dependencies: `System.Net.Http` and `Microsoft.Bcl.AsyncInterfaces`
 
 ### CI
 1. [#165](https://github.com/influxdata/influxdb-client-csharp/pull/165): Updated stable image to `influxdb:latest` and nightly to `quay.io/influxdb/influxdb:nightly`

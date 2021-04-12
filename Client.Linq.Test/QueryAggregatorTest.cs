@@ -76,7 +76,8 @@ namespace Client.Linq.Test
                                "from(bucket: p1) " +
                                $"|> {range} " +
                                "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                               "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+                               "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                               "|> group()";
 
                 Assert.AreEqual(expected, _aggregator.BuildFluxQuery(), $"Expected Range: {range}, Shift: {shift}");
             }
