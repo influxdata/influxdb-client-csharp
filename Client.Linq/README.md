@@ -145,7 +145,7 @@ sensor,deployment=production,sensor_id=id-1 data=15
 The `group()` [does not guarantee sort order](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/#group-does-not-guarantee-sort-order) of output records. 
 To ensure data is sorted correctly, use `orderby` expression.
 
-### TD;LR
+### TL;DR
 
 - [series](https://docs.influxdata.com/influxdb/cloud/reference/glossary/#series)
 - [Flux](https://docs.influxdata.com/influxdb/cloud/reference/glossary/#flux)
