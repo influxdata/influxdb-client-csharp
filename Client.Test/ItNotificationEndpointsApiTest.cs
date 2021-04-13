@@ -260,7 +260,7 @@ namespace InfluxDB.Client.Test
             var update = new NotificationEndpointUpdate("not exists name",
                 "not exists description", status: NotificationEndpointUpdate.StatusEnum.Active);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationEndpointsApi
                 .UpdateEndpointAsync("020f755c3c082000", update));
 
             Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
@@ -278,7 +278,7 @@ namespace InfluxDB.Client.Test
 
             await _notificationEndpointsApi.DeleteNotificationEndpointAsync(found);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationEndpointsApi
                 .FindNotificationEndpointByIdAsync(found.Id));
 
             Assert.AreEqual($"notification endpoint not found for key \"{found.Id}\"", ioe.Message);
@@ -287,7 +287,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void DeleteEndpointNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationEndpointsApi
                 .DeleteNotificationEndpointAsync("020f755c3c082000"));
 
             Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
@@ -309,7 +309,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindNotificationEndpointByIdNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationEndpointsApi
                 .FindNotificationEndpointByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
@@ -428,27 +428,27 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationEndpointsApi
                 .CloneSlackEndpointAsync("not-found-cloned", "token", "020f755c3c082000"));
 
             Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
 
-            ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationEndpointsApi
                 .ClonePagerDutyEndpointAsync("not-found-cloned", "token", "020f755c3c082000"));
 
             Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
 
-            ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationEndpointsApi
                 .CloneHttpEndpointAsync("not-found-cloned", "020f755c3c082000"));
 
             Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
 
-            ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationEndpointsApi
                 .CloneHttpEndpointBearerAsync("not-found-cloned", "token", "020f755c3c082000"));
 
             Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);
 
-            ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationEndpointsApi
+            ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationEndpointsApi
                 .CloneHttpEndpointBasicAuthAsync("not-found-cloned", "username", "password", "020f755c3c082000"));
 
             Assert.AreEqual("notification endpoint not found for key \"020f755c3c082000\"", ioe.Message);

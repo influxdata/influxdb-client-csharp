@@ -98,7 +98,7 @@ namespace InfluxDB.Client.Test
         {
             var onboarding = new OnboardingRequest("admin", "11111111", "Testing", "test");
 
-            var ex = Assert.ThrowsAsync<HttpException>(async () => await Client.OnboardingAsync(onboarding));
+            var ex = Assert.ThrowsAsync<UnprocessableEntityException>(async () => await Client.OnboardingAsync(onboarding));
 
             Assert.AreEqual("onboarding has already been completed", ex.Message);
             Assert.AreEqual(422, ex.Status);

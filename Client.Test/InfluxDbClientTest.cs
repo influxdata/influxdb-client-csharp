@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
+using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
@@ -221,6 +222,19 @@ namespace InfluxDB.Client.Test
             {
                 StringAssert.StartsWith(MockServerUrl + "/api/v2/", logEntry.RequestMessage.AbsoluteUrl);
             }
+        }
+        
+        [Test]
+        public void ProduceTypedException()
+        {
+            MockServer
+                .Given(Request.Create().UsingGet())
+                .RespondWith(CreateErrorResponse("unauthorized", 401));
+
+            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () =>
+                await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id"));
+
+            Assert.AreEqual("unauthorized", ioe.Message);
         }
     }
 }

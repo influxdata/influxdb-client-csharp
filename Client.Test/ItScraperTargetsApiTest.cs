@@ -55,11 +55,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneScraperNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _scraperTargetsApi.CloneScraperTargetAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.AreEqual("scraper target is not found", ioe.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual(typeof(NotFoundException), ioe.GetType());
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace InfluxDB.Client.Test
             // delete scraper
             await _scraperTargetsApi.DeleteScraperTargetAsync(createdScraper);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _scraperTargetsApi.FindScraperTargetByIdAsync(createdScraper.Id));
 
             Assert.AreEqual("scraper target is not found", ioe.Message);
@@ -119,7 +119,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindScraperByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _scraperTargetsApi.FindScraperTargetByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("scraper target is not found", ioe.Message);

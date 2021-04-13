@@ -49,7 +49,7 @@ namespace InfluxDB.Client.Test
             // delete user
             await _usersApi.DeleteUserAsync(createdUser);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.FindUserByIdAsync(createdUser.Id));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _usersApi.FindUserByIdAsync(createdUser.Id));
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.Message);
         }
@@ -71,7 +71,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindUserByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.FindUserByIdAsync("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _usersApi.FindUserByIdAsync("020f755c3c082000"));
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.Message);
@@ -103,7 +103,7 @@ namespace InfluxDB.Client.Test
         {
             Client.Dispose();
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.MeAsync());
+            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () => await _usersApi.MeAsync());
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("unauthorized access", ioe.Message);
@@ -122,12 +122,12 @@ namespace InfluxDB.Client.Test
         {
             Client.Dispose();
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () =>
                 await _usersApi.MeUpdatePasswordAsync("my-password-wrong", "my-password"));
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("unauthorized access", ioe.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual(typeof(UnauthorizedException), ioe.GetType());
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.InnerException.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.InnerException.GetType());
+            Assert.AreEqual(typeof(NotFoundException), ioe.InnerException.GetType());
         }
 
         [Test]
@@ -191,11 +191,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneUserNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _usersApi.CloneUserAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.AreEqual("user not found", ioe.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual(typeof(NotFoundException), ioe.GetType());
         }
     }
 }

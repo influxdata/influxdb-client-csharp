@@ -3,6 +3,7 @@
 ### Features
 1. [#184](https://github.com/influxdata/influxdb-client-csharp/pull/184): Add possibility to specify `WebProxy` for Client
 1. [#185](https://github.com/influxdata/influxdb-client-csharp/pull/185): Use `group()` function in output Flux query. See details - [Group function](/Client.Linq/README.md#group-function) [LINQ]
+1. [#186](https://github.com/influxdata/influxdb-client-csharp/pull/186): Produce a typed HTTP exception
 
 ### Bug Fixes
 1. [#183](https://github.com/influxdata/influxdb-client-csharp/pull/183): Propagate runtime exception to EventHandler

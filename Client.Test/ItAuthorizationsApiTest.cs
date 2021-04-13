@@ -136,7 +136,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindAuthorizationsByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _authorizationsApi.FindAuthorizationByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("authorization not found", ioe.Message);
@@ -154,7 +154,7 @@ namespace InfluxDB.Client.Test
             // delete authorization
             await _authorizationsApi.DeleteAuthorizationAsync(createdAuthorization);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _authorizationsApi.FindAuthorizationByIdAsync(createdAuthorization.Id));
 
             Assert.AreEqual("authorization not found", ioe.Message);
@@ -206,11 +206,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneAuthorizationNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _authorizationsApi.CloneAuthorizationAsync("020f755c3c082000"));
 
             Assert.AreEqual("authorization not found", ioe.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual(typeof(NotFoundException), ioe.GetType());
         }
 
         private List<Permission> NewPermissions()

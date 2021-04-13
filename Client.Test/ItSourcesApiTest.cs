@@ -58,11 +58,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneSourceNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _sourcesApi.CloneSourceAsync(GenerateName("bucket"), "020f755c3d082000"));
 
             Assert.AreEqual("source not found", ioe.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual(typeof(NotFoundException), ioe.GetType());
         }
 
         [Test]
@@ -116,7 +116,7 @@ namespace InfluxDB.Client.Test
             // delete source
             await _sourcesApi.DeleteSourceAsync(createdSource);
 
-            var nfe = Assert.ThrowsAsync<HttpException>(async () =>
+            var nfe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _sourcesApi.FindSourceByIdAsync(createdSource.Id));
 
             Assert.IsNotNull(nfe);
@@ -137,12 +137,12 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindBucketsBySourceByUnknownSource()
         {
-            var nfe = Assert.ThrowsAsync<HttpException>(async () =>
+            var nfe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _sourcesApi.FindBucketsBySourceIdAsync("020f755c3d082000"));
 
             Assert.IsNotNull(nfe);
             Assert.AreEqual("source not found", nfe.Message);
-            Assert.AreEqual(typeof(HttpException), nfe.GetType());
+            Assert.AreEqual(typeof(NotFoundException), nfe.GetType());
         }
 
         [Test]
@@ -164,7 +164,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindSourceByIdNull()
         {
-            var nfe = Assert.ThrowsAsync<HttpException>(
+            var nfe = Assert.ThrowsAsync<NotFoundException>(
                 async () => await _sourcesApi.FindSourceByIdAsync("020f755c3d082000"));
 
             Assert.IsNotNull(nfe);
