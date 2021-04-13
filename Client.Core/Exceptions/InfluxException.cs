@@ -126,8 +126,191 @@ namespace InfluxDB.Client.Core.Exceptions
             if (string.IsNullOrEmpty(errorMessage)) errorMessage = ErrorMessage;
             if (string.IsNullOrEmpty(errorMessage)) errorMessage = stringBody;
 
-            return new HttpException(errorMessage, (int) statusCode, exception)
-                {ErrorBody = errorBody, RetryAfter = retryAfter};
+            var err = (int) statusCode switch
+            {
+                400 => new BadRequestException(errorMessage, exception),
+                401 => new UnauthorizedException(errorMessage, exception),
+                402 => new PaymentRequiredException(errorMessage, exception),
+                403 => new ForbiddenException(errorMessage, exception),
+                404 => new NotFoundException(errorMessage, exception),
+                405 => new MethodNotAllowedException(errorMessage, exception),
+                406 => new NotAcceptableException(errorMessage, exception),
+                407 => new ProxyAuthenticationRequiredException(errorMessage, exception),
+                408 => new RequestTimeoutException(errorMessage, exception),
+                413 => new RequestEntityTooLargeException(errorMessage, exception),
+                422 => new UnprocessableEntityException(errorMessage, exception),
+                429 => new TooManyRequestsException(errorMessage, exception),
+                500 => new InternalServerErrorException(errorMessage, exception),
+                501 => new HttpNotImplementedException(errorMessage, exception),
+                502 => new BadGatewayException(errorMessage, exception),
+                503 => new ServiceUnavailableException(errorMessage, exception),
+                _ => new HttpException(errorMessage, (int) statusCode, exception)
+            };
+
+            err.ErrorBody = errorBody;
+            err.RetryAfter = retryAfter;
+
+            return err;
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 400 - Bad Request.
+    /// </summary>
+    public class BadRequestException : HttpException
+    {
+        public BadRequestException(string message, Exception exception = null) : base(message, 400, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 401 - Unauthorized.
+    /// </summary>
+    public class UnauthorizedException : HttpException
+    {
+        public UnauthorizedException(string message, Exception exception = null) : base(message, 401, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 402 - Payment Required.
+    /// </summary>
+    public class PaymentRequiredException : HttpException
+    {
+        public PaymentRequiredException(string message, Exception exception = null) : base(message, 402, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 403 - Forbidden.
+    /// </summary>
+    public class ForbiddenException : HttpException
+    {
+        public ForbiddenException(string message, Exception exception = null) : base(message, 403, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 404 - Not Found.
+    /// </summary>
+    public class NotFoundException : HttpException
+    {
+        public NotFoundException(string message, Exception exception = null) : base(message, 404, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 405 - Method Not Allowed.
+    /// </summary>
+    public class MethodNotAllowedException : HttpException
+    {
+        public MethodNotAllowedException(string message, Exception exception = null) : base(message, 405, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 406 - Not Acceptable.
+    /// </summary>
+    public class NotAcceptableException : HttpException
+    {
+        public NotAcceptableException(string message, Exception exception = null) : base(message, 406, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 407 - Proxy Authentication Required.
+    /// </summary>
+    public class ProxyAuthenticationRequiredException : HttpException
+    {
+        public ProxyAuthenticationRequiredException(string message, Exception exception = null) : base(message, 407, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 408 - Request Timeout.
+    /// </summary>
+    public class RequestTimeoutException : HttpException
+    {
+        public RequestTimeoutException(string message, Exception exception = null) : base(message, 408, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 413 - Request Entity Too Large.
+    /// </summary>
+    public class RequestEntityTooLargeException : HttpException
+    {
+        public RequestEntityTooLargeException(string message, Exception exception = null) : base(message, 413, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 422 - Unprocessable Entity.
+    /// </summary>
+    public class UnprocessableEntityException : HttpException
+    {
+        public UnprocessableEntityException(string message, Exception exception = null) : base(message, 422, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 429 - Too Many Requests.
+    /// </summary>
+    public class TooManyRequestsException : HttpException
+    {
+        public TooManyRequestsException(string message, Exception exception = null) : base(message, 429, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 500 - Internal Server Error.
+    /// </summary>
+    public class InternalServerErrorException : HttpException
+    {
+        public InternalServerErrorException(string message, Exception exception = null) : base(message, 500, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 501 - Not Implemented.
+    /// </summary>
+    public class HttpNotImplementedException : HttpException
+    {
+        public HttpNotImplementedException(string message, Exception exception = null) : base(message, 501, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 502 - Bad Gateway.
+    /// </summary>
+    public class BadGatewayException : HttpException
+    {
+        public BadGatewayException(string message, Exception exception = null) : base(message, 502, exception)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The exception for response: HTTP 503 - Service Unavailable.
+    /// </summary>
+    public class ServiceUnavailableException : HttpException
+    {
+        public ServiceUnavailableException(string message, Exception exception = null) : base(message, 503, exception)
+        {
         }
     }
 }

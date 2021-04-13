@@ -38,11 +38,11 @@ namespace InfluxDB.Client.Core.Test
             MockServer?.Stop();
         }
 
-        protected IResponseBuilder CreateErrorResponse(string influxDbError)
+        protected IResponseBuilder CreateErrorResponse(string influxDbError, int statusCode = 500)
         {
             var body = "{\"error\":\"" + influxDbError + "\"}";
 
-            return Response.Create().WithStatusCode(500)
+            return Response.Create().WithStatusCode(statusCode)
                 .WithHeader("X-Influx-Error", influxDbError)
                 .WithBody(body);
         }
