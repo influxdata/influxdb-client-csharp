@@ -174,7 +174,7 @@ namespace InfluxDB.Client.Test
             var update = new CheckPatch(name: "not exits name", description: "not exists update",
                 status: CheckPatch.StatusEnum.Active);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _checksApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _checksApi
                 .UpdateCheckAsync("020f755c3c082000", update));
 
             Assert.AreEqual("check not found for key \"020f755c3c082000\"", ioe.Message);
@@ -198,7 +198,7 @@ namespace InfluxDB.Client.Test
 
             await _checksApi.DeleteCheckAsync(found);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _checksApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _checksApi
                 .FindCheckByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("check not found for key \"020f755c3c082000\"", ioe.Message);
@@ -207,7 +207,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void DeleteCheckNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _checksApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _checksApi
                 .DeleteCheckAsync("020f755c3c082000"));
 
             Assert.AreEqual("check not found for key \"020f755c3c082000\"", ioe.Message);
@@ -235,7 +235,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindCheckByIdNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _checksApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _checksApi
                 .FindCheckByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("check not found for key \"020f755c3c082000\"", ioe.Message);

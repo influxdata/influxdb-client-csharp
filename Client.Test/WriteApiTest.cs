@@ -187,7 +187,7 @@ namespace InfluxDB.Client.Test
             var error = listener.Get<WriteErrorEvent>();
 
             Assert.IsNotNull(error);
-            Assert.AreEqual(typeof(HttpException), error.Exception.GetType());
+            Assert.AreEqual(typeof(BadRequestException), error.Exception.GetType());
             Assert.AreEqual("line protocol poorly formed and no points were written", error.Exception.Message);
             Assert.AreEqual(400, ((HttpException) error.Exception).Status);
 
@@ -208,11 +208,11 @@ namespace InfluxDB.Client.Test
             error = listener.Get<WriteErrorEvent>();
 
             Assert.IsNotNull(error);
-            Assert.AreEqual(typeof(HttpException), error.Exception.GetType());
+            Assert.AreEqual(typeof(UnauthorizedException), error.Exception.GetType());
             Assert.AreEqual(
                 "token does not have sufficient permissions to write to this organization and bucket or the organization and bucket do not exist",
                 error.Exception.Message);
-            Assert.AreEqual(401, ((HttpException) error.Exception).Status);
+            Assert.AreEqual(401, ((UnauthorizedException) error.Exception).Status);
 
             //
             // 403
@@ -229,9 +229,9 @@ namespace InfluxDB.Client.Test
             error = listener.Get<WriteErrorEvent>();
 
             Assert.IsNotNull(error);
-            Assert.AreEqual(typeof(HttpException), error.Exception.GetType());
+            Assert.AreEqual(typeof(ForbiddenException), error.Exception.GetType());
             Assert.AreEqual("no token was sent and they are required", error.Exception.Message);
-            Assert.AreEqual(403, ((HttpException) error.Exception).Status);
+            Assert.AreEqual(403, ((ForbiddenException) error.Exception).Status);
 
             //
             // 413
@@ -250,11 +250,11 @@ namespace InfluxDB.Client.Test
             error = listener.Get<WriteErrorEvent>();
 
             Assert.IsNotNull(error);
-            Assert.AreEqual(typeof(HttpException), error.Exception.GetType());
+            Assert.AreEqual(typeof(RequestEntityTooLargeException), error.Exception.GetType());
             Assert.AreEqual(
                 "write has been rejected because the payload is too large. Error message returns max size supported. All data in body was rejected and not written",
                 error.Exception.Message);
-            Assert.AreEqual(413, ((HttpException) error.Exception).Status);
+            Assert.AreEqual(413, ((RequestEntityTooLargeException) error.Exception).Status);
         }
 
         [Test]

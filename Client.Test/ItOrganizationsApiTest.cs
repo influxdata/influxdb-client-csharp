@@ -36,11 +36,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneOrganizationNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _organizationsApi.CloneOrganizationAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.AreEqual("organization not found", ioe.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual(typeof(NotFoundException), ioe.GetType());
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Test
             // delete task
             await _organizationsApi.DeleteOrganizationAsync(createdOrganization);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _organizationsApi.FindOrganizationByIdAsync(createdOrganization.Id));
 
             Assert.AreEqual("organization not found", ioe.Message);
@@ -116,7 +116,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindOrganizationByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _organizationsApi.FindOrganizationByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("organization not found", ioe.Message);

@@ -65,7 +65,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneBucketNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _bucketsApi.CloneBucketAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.AreEqual("bucket not found", ioe.Message);
@@ -117,7 +117,7 @@ namespace InfluxDB.Client.Test
             // delete task
             await _bucketsApi.DeleteBucketAsync(createBucket);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _bucketsApi.FindBucketByIdAsync(createBucket.Id));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _bucketsApi.FindBucketByIdAsync(createBucket.Id));
 
             Assert.AreEqual("bucket not found", ioe.Message);
         }
@@ -142,7 +142,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindBucketByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _bucketsApi.FindBucketByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("bucket not found", ioe.Message);

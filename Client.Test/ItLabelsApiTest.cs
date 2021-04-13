@@ -46,10 +46,10 @@ namespace InfluxDB.Client.Test
         public void CloneLabelNotFound()
         {
             var exception =
-                Assert.ThrowsAsync<HttpException>(async () => await _labelsApi.CloneLabelAsync(GenerateName("bucket"), "020f755c3c082000"));
+                Assert.ThrowsAsync<NotFoundException>(async () => await _labelsApi.CloneLabelAsync(GenerateName("bucket"), "020f755c3c082000"));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual(typeof(HttpException), exception.GetType());
+            Assert.AreEqual(typeof(NotFoundException), exception.GetType());
             Assert.AreEqual("label not found", exception.Message);
         }
 
@@ -98,11 +98,11 @@ namespace InfluxDB.Client.Test
             // delete user
             await _labelsApi.DeleteLabelAsync(createdLabel);
 
-            var exception = Assert.ThrowsAsync<HttpException>(async () => await _labelsApi.FindLabelByIdAsync(createdLabel.Id));
+            var exception = Assert.ThrowsAsync<NotFoundException>(async () => await _labelsApi.FindLabelByIdAsync(createdLabel.Id));
 
             Assert.IsNotNull(exception);
             Assert.AreEqual("label not found", exception.Message);
-            Assert.AreEqual(typeof(HttpException), exception.GetType());
+            Assert.AreEqual(typeof(NotFoundException), exception.GetType());
         }
 
         [Test]
@@ -121,11 +121,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindLabelByIdNull()
         {
-            var exception = Assert.ThrowsAsync<HttpException>(async () => await _labelsApi.FindLabelByIdAsync("020f755c3c082000"));
+            var exception = Assert.ThrowsAsync<NotFoundException>(async () => await _labelsApi.FindLabelByIdAsync("020f755c3c082000"));
 
             Assert.IsNotNull(exception);
             Assert.AreEqual("label not found", exception.Message);
-            Assert.AreEqual(typeof(HttpException), exception.GetType());
+            Assert.AreEqual(typeof(NotFoundException), exception.GetType());
         }
 
         [Test]

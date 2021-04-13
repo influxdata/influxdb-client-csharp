@@ -81,10 +81,10 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneTelegrafNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _telegrafsApi.CloneTelegrafAsync(GenerateName("tc"), "020f755c3c082000"));
 
-            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual(typeof(NotFoundException), ioe.GetType());
             Assert.AreEqual("telegraf configuration not found", ioe.Message);
         }
 
@@ -151,17 +151,17 @@ namespace InfluxDB.Client.Test
             // delete source
             await _telegrafsApi.DeleteTelegrafAsync(createdConfig);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _telegrafsApi.FindTelegrafByIdAsync(createdConfig.Id));
 
             Assert.AreEqual("telegraf configuration not found", ioe.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual(typeof(NotFoundException), ioe.GetType());
         }
 
         [Test]
         public void DeleteTelegrafNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _telegrafsApi.DeleteTelegrafAsync("020f755c3d082000"));
 
             Assert.AreEqual("telegraf configuration not found", ioe.Message);
@@ -192,11 +192,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindTelegrafByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _telegrafsApi.FindTelegrafByIdAsync("020f755c3d082000"));
 
             Assert.AreEqual("telegraf configuration not found", ioe.Message);
-            Assert.AreEqual(typeof(HttpException), ioe.GetType());
+            Assert.AreEqual(typeof(NotFoundException), ioe.GetType());
         }
 
         [Test]
@@ -249,7 +249,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void GetTomlNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () =>
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
                 await _telegrafsApi.GetTOMLAsync("020f755c3d082000"));
 
             Assert.AreEqual("telegraf configuration not found", ioe.Message);

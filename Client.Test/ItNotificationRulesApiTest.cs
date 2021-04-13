@@ -218,7 +218,7 @@ namespace InfluxDB.Client.Test
             var update = new NotificationRuleUpdate(name: "not exists name", description: "not exists update",
                 status: NotificationRuleUpdate.StatusEnum.Active);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationRulesApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationRulesApi
                 .UpdateNotificationRuleAsync("020f755c3c082000", update));
 
             Assert.AreEqual("notification rule not found", ioe.Message);
@@ -242,7 +242,7 @@ namespace InfluxDB.Client.Test
 
             await _notificationRulesApi.DeleteNotificationRuleAsync(created);
 
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationRulesApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationRulesApi
                 .FindNotificationRuleByIdAsync(created.Id));
 
             Assert.AreEqual("notification rule not found", ioe.Message);
@@ -251,7 +251,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void DeleteRuleNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationRulesApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationRulesApi
                 .DeleteNotificationRuleAsync("020f755c3c082000"));
 
             Assert.AreEqual("notification rule not found", ioe.Message);
@@ -282,7 +282,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindRuleByIdNotFound()
         {
-            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _notificationRulesApi
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationRulesApi
                 .FindNotificationRuleByIdAsync("020f755c3c082000"));
 
             Assert.AreEqual("notification rule not found", ioe.Message);
