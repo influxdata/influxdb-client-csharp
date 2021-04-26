@@ -135,7 +135,7 @@ jobs:
           command: /c/influxdata/influxdb-1.8.0-1/influxd.exe -config "Scripts/influxdb.conf"
           background: true
       - run: dotnet nuget locals --clear all
-      - run: dotnet restore --no-cache --force
+      - run: dotnet restore --no-cache --force -s https://api.nuget.org/v3/index.json
       - run: dotnet build
       - run: dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build
       
