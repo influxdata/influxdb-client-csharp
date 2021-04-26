@@ -107,8 +107,8 @@ If you query your data with following Flux:
 ```flux
 from(bucket: "my-bucket")
   |> range(start: 0)
-  |> drop(columns: ["_start", "_stop", "_measurement"])
   |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> drop(columns: ["_start", "_stop", "_measurement"])
   |> limit(n:1)
 ```
 
@@ -128,8 +128,8 @@ The following query works correctly:
 ```flux
 from(bucket: "my-bucket")
   |> range(start: 0)
-  |> drop(columns: ["_start", "_stop", "_measurement"])
   |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+  |> drop(columns: ["_start", "_stop", "_measurement"])
   |> group()
   |> limit(n:1)
 ```
@@ -174,8 +174,8 @@ Flux Query:
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: 2021-01-10T05:10:00Z) 
     |> filter(fn: (r) => (r["sensor_id"] == "id-1")) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> filter(fn: (r) => (r["data"] > 12)) 
     |> sort(columns: ["_time"], desc: false) 
@@ -227,8 +227,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15ZZ) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
 ```
 
@@ -247,8 +247,8 @@ Flux Query:
 from(bucket: "my-bucket") 
     |> range(start: 0)
     |> filter(fn: (r) => (r["sensor_id"] == "id-1"))  
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
 ```
 
@@ -265,9 +265,9 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 Flux Query:
 ```flux
 from(bucket: "my-bucket") 
-    |> range(start: 0) 
+    |> range(start: 0)
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")  
     |> drop(columns: ["_start", "_stop", "_measurement"])
-    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> filter(fn: (r) => (r["data"] < 28))
     |> group()
 ```
@@ -285,9 +285,9 @@ m1 f1=3,f2=4 2
 
 ```flux
 from(bucket: "my-bucket") 
-    |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> range(start: 0)
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
 ```
 
@@ -306,8 +306,8 @@ Results:
 from(bucket: "my-bucket") 
     |> range(start: 0) 
     |> filter(fn: (r) => (r["_field"] == "f1" and r["_value"] > 0))
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
 ```
 Results:
@@ -343,9 +343,9 @@ Flux Query:
 start_shifted = int(v: time(v: "2019-11-16T08:20:15Z")) + 1
 
 from(bucket: "my-bucket") 
-    |> range(start: time(v: start_shifted), stop: 2021-01-10T05:10:00Z) 
+    |> range(start: time(v: start_shifted), stop: 2021-01-10T05:10:00Z)
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> drop(columns: ["_start", "_stop", "_measurement"])
-    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> group()
 ```
 
@@ -366,8 +366,8 @@ stop_shifted = int(v: time(v: "2021-01-10T05:10:00Z")) + 1
 
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: time(v: stop_shifted)) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
 ```
 
@@ -385,8 +385,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15ZZ) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
 ```
 
@@ -405,9 +405,9 @@ Flux Query:
 stop_shifted = int(v: time(v: "2021-01-10T05:10:00Z")) + 1
 
 from(bucket: "my-bucket") 
-    |> range(start: 0, stop: time(v: stop_shifted)) 
+    |> range(start: 0, stop: time(v: stop_shifted))
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> drop(columns: ["_start", "_stop", "_measurement"])
-    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> group()
 ```
 
@@ -427,8 +427,8 @@ stop_shifted = int(v: time(v: "2019-11-16T08:20:15Z")) + 1
 
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: time(v: stop_shifted)) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
 ```
 
@@ -451,8 +451,8 @@ Flux Query:
 from(bucket: "my-bucket") 
     |> range(start: 0)
     |> filter(fn: (r) => (r["sensor_id"] == "id-1"))  
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
 ```
 
@@ -469,8 +469,8 @@ Flux Query:
 from(bucket: "my-bucket") 
     |> range(start: 0)
     |> filter(fn: (r) => (r["sensor_id"] != "id-1")) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
 ```
 
@@ -486,8 +486,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> filter(fn: (r) => (r["data"] < 28))
 ```
@@ -504,8 +504,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> filter(fn: (r) => (r["data"] <= 28))
 ```
@@ -522,8 +522,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
     |> drop(columns: ["_start", "_stop", "_measurement"])
-    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> group()
     |> filter(fn: (r) => (r["data"] > 28))
 ```
@@ -540,8 +540,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> filter(fn: (r) => (r["data"] >= 28))
 ```
@@ -559,8 +559,8 @@ Flux Query:
 from(bucket: "my-bucket") 
     |> range(start: 0) 
     |> filter(fn: (r) => (r["sensor_id"] != "id-1"))
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> filter(fn: (r) => (r["data"] >= 28))
 ```
@@ -577,8 +577,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> filter(fn: (r) => ((r["data"] >= 28) or (r["data"] <=> 28)))
 ```
@@ -774,8 +774,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket")
     |> range(start: 0)
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> filter(fn: (r) => (r["attribute_quality"] == "good"))
 ```
@@ -795,8 +795,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> limit(n: 10)
 ```
@@ -815,8 +815,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> limit(n: 10, offset: 50)
 ```
@@ -835,8 +835,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> sort(columns: ["deployment"], desc: false)
 ```
@@ -853,8 +853,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> sort(columns: ["_time"], desc: true)
 ```
@@ -874,8 +874,8 @@ Flux Query:
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> stateCount(fn: (r) => true, column: "linq_result_column") 
     |> last(column: "linq_result_column") 
@@ -896,9 +896,9 @@ var sensors = query.LongCount();
 Flux Query:
 ```flux
 from(bucket: "my-bucket") 
-    |> range(start: 0) 
-    |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> range(start: 0)
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
     |> group()
     |> stateCount(fn: (r) => true, column: "linq_result_column") 
     |> last(column: "linq_result_column") 
