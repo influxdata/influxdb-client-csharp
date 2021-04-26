@@ -31,7 +31,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
 
 ## Changelog
 ### 1.18.0-dev.???? [????-??-??]
-- switch `pivot()` and `drop()` function to achieve better performance. See details - [#???](https://github.com/influxdata/influxdb-client-csharp/pull/???)
+  - switch `pivot()` and `drop()` function to achieve better performance. See details - [#188](https://github.com/influxdata/influxdb-client-csharp/pull/188)
 ### 1.18.0-dev.2880 [2021-04-12]
   - use `group()` function in output Flux query. See details - [Group function](#group-function)
 ### 1.17.0-dev.linq.17 [2021-03-18]
