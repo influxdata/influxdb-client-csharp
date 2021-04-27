@@ -153,8 +153,8 @@ namespace InfluxDB.Client.Linq.Internal
                 BuildOperator("from", "bucket", _bucketAssignment),
                 BuildRange(transforms),
                 BuildFilter(_filterByTags),
-                "drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
+                "drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
                 "group()",
                 BuildFilter(_filterByFields)
             };
