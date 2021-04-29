@@ -336,6 +336,20 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Create a service for specified type.
+        /// </summary>
+        /// <param name="serviceType">type of service</param>
+        /// <typeparam name="TS">type of service</typeparam>
+        /// <returns>new instance of service</returns>
+        public TS CreateService<TS>(Type serviceType) where TS: IApiAccessor
+        {
+            var instance = (TS) Activator.CreateInstance(serviceType, (Configuration) _apiClient.Configuration);
+            instance.ExceptionFactory = _exceptionFactory;
+
+            return instance;
+        }
+
+        /// <summary>
         /// Set the log level for the request and response information.
         /// </summary>
         /// <param name="logLevel">the log level to set</param>
