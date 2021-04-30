@@ -1,4 +1,4 @@
-## 1.18.0 [unreleased]
+## 1.18.0 [2021-04-30]
 
 ### Features
 1. [#184](https://github.com/influxdata/influxdb-client-csharp/pull/184): Add possibility to specify `WebProxy` for Client
