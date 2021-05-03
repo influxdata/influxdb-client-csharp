@@ -1,10 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
 using NUnit.Framework;
+using RestSharp;
 using WireMock.RequestBuilders;
 
 namespace InfluxDB.Client.Test
@@ -88,9 +92,9 @@ namespace InfluxDB.Client.Test
             MockServer
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
-            
+
             var writeApi = _influxDbClient.GetWriteApiAsync();
-            
+
             var points = new List<PointData>
             {
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
@@ -120,7 +124,7 @@ namespace InfluxDB.Client.Test
             };
 
             var batches = points
-                .Select((x, i) => new { Index = i, Value = x })
+                .Select((x, i) => new {Index = i, Value = x})
                 .GroupBy(x => x.Index / 5)
                 .Select(x => x.Select(v => v.Value).ToList())
                 .ToList();
@@ -129,8 +133,91 @@ namespace InfluxDB.Client.Test
             {
                 await writeApi.WritePointsAsync("my-bucket", "my-org", batch);
             }
-           
+
             Assert.AreEqual(3, MockServer.LogEntries.Count());
+        }
+
+        [Test]
+        public async Task WriteRecordsWithIRestResponse()
+        {
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var response = await writeApi.WriteRecordsAsyncWithIRestResponse(
+                new[] {"h2o,location=coyote_creek water_level=9 1"},
+                "my-bucket",
+                "my-org",
+                WritePrecision.Ms);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+
+            var request = MockServer.LogEntries.ToList()[0];
+            StringAssert.EndsWith("/api/v2/write?org=my-org&bucket=my-bucket&precision=ms",
+                request.RequestMessage.AbsoluteUrl);
+            Assert.AreEqual("h2o,location=coyote_creek water_level=9 1", GetRequestBody(response));
+        }
+
+        [Test]
+        public async Task WritePointsWithIRestResponse()
+        {
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var responses = await writeApi.WritePointsAsyncWithIRestResponse(
+                new[]
+                {
+                    PointData.Measurement("h2o")
+                        .Tag("location", "coyote_creek")
+                        .Field("water_level", 9.0D)
+                        .Timestamp(9L, WritePrecision.S),
+                    PointData.Measurement("h2o")
+                        .Tag("location", "coyote_creek")
+                        .Field("water_level", 10.0D)
+                        .Timestamp(10L, WritePrecision.Ms)
+                },
+                "my-bucket",
+                "my-org");
+
+            Assert.AreEqual(2, responses.Length);
+            Assert.AreEqual(HttpStatusCode.OK, responses[0].StatusCode);
+            Assert.AreEqual("h2o,location=coyote_creek water_level=9 9", GetRequestBody(responses[0]));
+            Assert.AreEqual(HttpStatusCode.OK, responses[1].StatusCode);
+            Assert.AreEqual("h2o,location=coyote_creek water_level=10 10", GetRequestBody(responses[1]));
+        }
+
+        [Test]
+        public async Task WriteMeasurementsWithIRestResponse()
+        {
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var response = await writeApi.WriteMeasurementsAsyncWithIRestResponse(
+                new[]
+                {
+                    new SimpleModel
+                    {
+                        Time = new DateTime(2020, 11, 15, 8, 20, 15, DateTimeKind.Utc),
+                        Device = "id-1",
+                        Value = 16
+                    }
+                },
+                "my-bucket",
+                "my-org");
+
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.AreEqual("m,device=id-1 value=16i 1605428415000000000", GetRequestBody(response));
+        }
+
+        private string GetRequestBody(IRestResponse restResponse)
+        {
+            var bytes = (byte[]) restResponse.Request.Body?.Value ??
+                        throw new AssertionException("The body is required.");
+            return System.Text.Encoding.Default.GetString(bytes);
         }
     }
 }
