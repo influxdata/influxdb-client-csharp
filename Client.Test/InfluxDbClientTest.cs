@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
@@ -235,6 +236,15 @@ namespace InfluxDB.Client.Test
                 await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id"));
 
             Assert.AreEqual("unauthorized", ioe.Message);
+        }
+
+        [Test]
+        public void CreateService()
+        {
+            var service = _client.CreateService<DBRPsService>(typeof(DBRPsService));
+            
+            Assert.IsNotNull(service);
+            Assert.IsInstanceOf(typeof(DBRPsService), service);
         }
     }
 }

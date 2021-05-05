@@ -828,6 +828,12 @@ namespace Examples
 }
 ```
 
+If there is no API implementation for particular service you could create the service by:
+
+```c#
+var dbrpService = _client.CreateService<DBRPsService>(typeof(DBRPsService));
+```
+
 ## Advanced Usage
 
 ### Monitoring & Alerting

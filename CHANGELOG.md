@@ -1,5 +1,8 @@
 ## 1.19.0 [unreleased]
 
+### Bug Fixes
+1. [#193](https://github.com/influxdata/influxdb-client-csharp/pull/193): Create services without API implementation
+
 ## 1.18.0 [2021-04-30]
 
 ### Features
