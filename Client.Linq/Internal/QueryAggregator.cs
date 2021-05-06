@@ -162,10 +162,10 @@ namespace InfluxDB.Client.Linq.Internal
             };
 
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/sort/
-            foreach (var (column, columnVariable, descending, descendingVariable) in _orders)
+            foreach (var ((column, columnVariable, descending, descendingVariable), index) in _orders.Select((value, i) => (value, i)))
             {
                 // skip default sorting if don't query to multiple time series
-                if (!settings.QueryMultipleTimeSeries && _orders.Count == 1 && column == "_time" && !descending)
+                if (!settings.QueryMultipleTimeSeries && index == 0 && column == "_time" && !descending)
                 {
                     continue;
                 }
