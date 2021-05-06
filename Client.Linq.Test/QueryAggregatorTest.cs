@@ -1,4 +1,5 @@
 using InfluxDB.Client.Core.Test;
+using InfluxDB.Client.Linq;
 using InfluxDB.Client.Linq.Internal;
 using NUnit.Framework;
 
@@ -76,10 +77,10 @@ namespace Client.Linq.Test
                                "from(bucket: p1) " +
                                $"|> {range} " +
                                "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                               "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                               "|> group()";
+                               "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
 
-                Assert.AreEqual(expected, _aggregator.BuildFluxQuery(), $"Expected Range: {range}, Shift: {shift}");
+                var settings = new QueryableOptimizerSettings();
+                Assert.AreEqual(expected, _aggregator.BuildFluxQuery(settings), $"Expected Range: {range}, Shift: {shift}");
             }
         }
     }
