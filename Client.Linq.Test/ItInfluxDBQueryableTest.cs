@@ -92,6 +92,18 @@ namespace Client.Linq.Test
 
             var sensors = query.ToList();
 
+            Assert.AreEqual(2*2, sensors.Count);
+        }
+
+        [Test]
+        public void QueryTakeMultipleTimeSeries()
+        {
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync(),
+                    new QueryableOptimizerSettings {QueryMultipleTimeSeries = true})
+                select s).Take(2);
+
+            var sensors = query.ToList();
+
             Assert.AreEqual(2, sensors.Count);
         }
 

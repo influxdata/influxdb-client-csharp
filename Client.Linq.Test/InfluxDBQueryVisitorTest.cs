@@ -13,6 +13,7 @@ using InfluxDB.Client.Linq;
 using InfluxDB.Client.Linq.Internal;
 using Moq;
 using NUnit.Framework;
+using Remotion.Linq;
 using Remotion.Linq.Parsing.ExpressionVisitors;
 using Remotion.Linq.Parsing.Structure;
 using Expression = System.Linq.Expressions.Expression;
@@ -26,8 +27,7 @@ namespace Client.Linq.Test
                                          "from(bucket: p1) " +
                                          "|> range(start: time(v: start_shifted)) " +
                                          "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                         "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                         "|> group()";
+                                         "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
 
         private QueryApiSync _queryApi;
 
@@ -47,7 +47,7 @@ namespace Client.Linq.Test
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart;
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
@@ -58,7 +58,7 @@ namespace Client.Linq.Test
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             var ast = visitor.BuildFluxAST();
 
@@ -82,7 +82,7 @@ namespace Client.Linq.Test
                 select s;
 
             var nse = Assert.Throws<NotSupportedException>(() =>
-                BuildQueryVisitor(MakeExpression(query, q => q.Max())));
+                BuildQueryVisitor(query, MakeExpression(query, q => q.Max())));
 
             Assert.AreEqual("MaxResultOperator is not supported.", nse.Message);
         }
@@ -92,7 +92,7 @@ namespace Client.Linq.Test
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 select s;
-            var visitor = BuildQueryVisitor(MakeExpression(query, q => q.Take(10)));
+            var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.Take(10)));
 
             const string expected = FluxStart + " " + "|> limit(n: p3)";
 
@@ -104,7 +104,7 @@ namespace Client.Linq.Test
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 select s;
-            var visitor = BuildQueryVisitor(MakeExpression(query, q => q.Skip(5)));
+            var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.Skip(5)));
 
             const string expected = FluxStart;
 
@@ -116,7 +116,7 @@ namespace Client.Linq.Test
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 select s;
-            var visitor = BuildQueryVisitor(MakeExpression(query, q => q.Take(10).Skip(5)));
+            var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.Take(10).Skip(5)));
 
             const string expected = FluxStart + " " + "|> limit(n: p3, offset: p4)";
 
@@ -176,7 +176,7 @@ namespace Client.Linq.Test
             foreach (var (expression, flux, assignments) in queries)
             {
                 var queryable = MakeExpression(query, expression);
-                var visitor = BuildQueryVisitor(queryable);
+                var visitor = BuildQueryVisitor(query, queryable);
                 var ast = visitor.BuildFluxAST();
             
                 var expected = FluxStart + " " + flux;
@@ -198,7 +198,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Value == 5
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] == p3))";
 
@@ -211,7 +211,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Value != 5
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] != p3))";
 
@@ -224,7 +224,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Value < 10
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] < p3))";
 
@@ -237,7 +237,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Value <= 10
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] <= p3))";
 
@@ -250,7 +250,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Value > 10
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] > p3))";
 
@@ -263,7 +263,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Value >= 10
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " + "|> filter(fn: (r) => (r[\"data\"] >= p3))";
 
@@ -276,7 +276,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Value < 4 && s.Value > 10
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " +
                                     "|> filter(fn: (r) => (r[\"data\"] < p3) and (r[\"data\"] > p4))";
@@ -293,7 +293,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Value < 5 || s.Value > 10
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " +
                                     "|> filter(fn: (r) => (r[\"data\"] < p3) or (r[\"data\"] > p4))";
@@ -408,15 +408,14 @@ namespace Client.Linq.Test
 
             foreach (var (queryable, shift, range, assignments) in queries)
             {
-                var visitor = BuildQueryVisitor(queryable.Expression);
+                var visitor = BuildQueryVisitor(queryable);
                 var ast = visitor.BuildFluxAST();
 
                 var expected = shift + 
                                "from(bucket: p1) " +
                                $"|> {range} " +
                                "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                               "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                               "|> group()";
+                               "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
 
                 Assert.AreEqual(expected, visitor.BuildFluxQuery(),
                     $"Expected Range: {range}, Shift: {shift}, Queryable expression: {queryable.Expression}");
@@ -441,15 +440,14 @@ namespace Client.Linq.Test
                 where s.Timestamp >= start
                 where s.Timestamp <= stop
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = "start_shifted = int(v: time(v: p3))\n" +
                                     "stop_shifted = int(v: time(v: p4)) + 1\n\n" +
                                     "from(bucket: p1) " +
                                     "|> range(start: time(v: start_shifted), stop: time(v: stop_shifted)) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> group()";
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
             var ast = visitor.BuildFluxAST();
@@ -487,12 +485,12 @@ namespace Client.Linq.Test
                     select s,
                     "(p3 == r[\"attribute_quality\"])",
                     new Dictionary<int, string> {{2, "good"}}
-                ),
+                )
             };
 
             foreach (var (queryable, filter, assignments) in queries)
             {
-                var visitor = BuildQueryVisitor(queryable.Expression, memberResolver);
+                var visitor = BuildQueryVisitor(queryable);
                 var ast = visitor.BuildFluxAST();
 
                 var expected = FluxStart + " " +
@@ -514,7 +512,7 @@ namespace Client.Linq.Test
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 select s;
-            var visitor = BuildQueryVisitor(MakeExpression(query, q => q.Count()));
+            var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.Count()));
 
             const string expected = FluxStart + " " +
                                     "|> stateCount(fn: (r) => true, column: \"linq_result_column\") " +
@@ -529,7 +527,7 @@ namespace Client.Linq.Test
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 select s;
-            var visitor = BuildQueryVisitor(MakeExpression(query, q => q.LongCount()));
+            var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.LongCount()));
 
             const string expected = FluxStart + " " +
                                     "|> stateCount(fn: (r) => true, column: \"linq_result_column\") " +
@@ -545,15 +543,14 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Deployment == Convert.ToString("d")
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = "start_shifted = int(v: time(v: p2))\n\n" +
                                     "from(bucket: p1) " +
                                     "|> range(start: time(v: start_shifted)) " +
                                     "|> filter(fn: (r) => (r[\"deployment\"] == p3)) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
-                                    "|> group()";
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
 
@@ -567,7 +564,11 @@ namespace Client.Linq.Test
 
             var aggregator = new VariableAggregator();
             var context =
-                new QueryGenerationContext(new QueryAggregator(), aggregator, new DefaultMemberNameResolver());
+                new QueryGenerationContext(
+                    new QueryAggregator(), 
+                    aggregator, 
+                    new DefaultMemberNameResolver(),
+                    new QueryableOptimizerSettings());
             var flux = QueryExpressionTreeVisitor.GetFluxExpressions(equalExpr, equalExpr, context).Aggregate(
                 new StringBuilder(), (builder, part) =>
                 {
@@ -620,7 +621,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 orderby s.Deployment
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " + "|> sort(columns: [p3], desc: p4)";
 
@@ -636,7 +637,7 @@ namespace Client.Linq.Test
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 orderby s.Deployment descending
                 select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var visitor = BuildQueryVisitor(query);
 
             const string expected = FluxStart + " " + "|> sort(columns: [p3], desc: p4)";
 
@@ -649,23 +650,98 @@ namespace Client.Linq.Test
         [Test]
         public void OrderByTime()
         {
-            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
-                orderby s.Timestamp
-                select s;
-            var visitor = BuildQueryVisitor(query.Expression);
+            var queries = new[]
+            {
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                    orderby s.Timestamp
+                    select s,
+                    "",
+                    new Dictionary<int, object> {{2, "_time"}, {3, false}}
+                ),
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                    orderby s.Timestamp descending
+                    select s,
+                    " |> sort(columns: [p3], desc: p4)",
+                    new Dictionary<int, object> {{2, "_time"}, {3, true}}
+                ),
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
+                        new QueryableOptimizerSettings {QueryMultipleTimeSeries = true})
+                    orderby s.Timestamp
+                    select s,
+                    " |> group() |> sort(columns: [p3], desc: p4)",
+                    new Dictionary<int, object> {{2, "_time"}, {3, false}}
+                ),
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
+                        new QueryableOptimizerSettings {QueryMultipleTimeSeries = true})
+                    orderby s.Timestamp descending
+                    select s,
+                    " |> group() |> sort(columns: [p3], desc: p4)",
+                    new Dictionary<int, object> {{2, "_time"}, {3, true}}
+                )
+            };
 
-            const string expected = FluxStart + " " + "|> sort(columns: [p3], desc: p4)";
+            foreach (var (queryable, sort, assignments) in queries)
+            {
+                var visitor = BuildQueryVisitor(queryable);
+                var ast = visitor.BuildFluxAST();
 
-            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+                var expected = FluxStart + sort;
 
-            var ast = visitor.BuildFluxAST();
-            Assert.AreEqual("_time", GetLiteral<StringLiteral>(ast, 2).Value);
+                Assert.AreEqual(expected, visitor.BuildFluxQuery(),
+                    $"Expected Sort: {sort}, Queryable expression: {queryable.Expression}");
+                
+                foreach (var (index, value) in assignments)
+                {
+                    var message = $"Expected Literal: {value} with index: {index} for Queryable expression: {queryable.Expression}";
+                    
+                    switch (value)
+                    {
+                        case string _:
+                            Assert.AreEqual(value, GetLiteral<StringLiteral>(ast, index).Value, message);
+                            break;
+                        case bool _:
+                            Assert.AreEqual(value, GetLiteral<BooleanLiteral>(ast, index).Value, message);
+                            break;
+                    }
+                }
+            }
         }
 
         [Test]
         public void ToDebugQuery()
         {
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                    where s.SensorId == "id-1"
+                    where s.Value > 12
+                    where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+                    where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
+                    orderby s.Timestamp
+                    select s)
+                .Take(2)
+                .Skip(2);
+
+            const string expected = "start_shifted = int(v: time(v: p5)) + 1\n" +
+                                    "stop_shifted = int(v: time(v: p6))\n\n" +
+                                    "from(bucket: p1) " +
+                                    "|> range(start: time(v: start_shifted), stop: time(v: stop_shifted)) " +
+                                    "|> filter(fn: (r) => (r[\"sensor_id\"] == p3)) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
+                                    "|> filter(fn: (r) => (r[\"data\"] > p4)) " +
+                                    "|> limit(n: p9, offset: p10)";
+
+            Assert.AreEqual(expected, ((InfluxDBQueryable<Sensor>) query).ToDebugQuery()._Query);
+        }
+
+        [Test]
+        public void ToDebugQueryMultipleTimeSeries()
+        {
+            var settings = new QueryableOptimizerSettings {QueryMultipleTimeSeries = true};
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi, settings)
                     where s.SensorId == "id-1"
                     where s.Value > 12
                     where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
@@ -690,19 +766,11 @@ namespace Client.Linq.Test
             Assert.AreEqual(expected, ((InfluxDBQueryable<Sensor>) query).ToDebugQuery()._Query);
         }
 
-        private InfluxDBQueryVisitor BuildQueryVisitor(Expression expression)
+        private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)
         {
-            return BuildQueryVisitor(expression, new DefaultMemberNameResolver());
-        }
-
-        private InfluxDBQueryVisitor BuildQueryVisitor(Expression expression, IMemberNameResolver memberResolver)
-        {
-            var queryModel = QueryParser.CreateDefault().GetParsedQuery(expression);
-
-            var visitor = new InfluxDBQueryVisitor("my-bucket", memberResolver);
-            visitor.VisitQueryModel(queryModel);
-
-            return visitor;
+            var queryExecutor = (InfluxDBQueryExecutor) ((DefaultQueryProvider) queryable.Provider).Executor;
+            var queryModel = QueryParser.CreateDefault().GetParsedQuery(expression ?? queryable.Expression);
+            return queryExecutor.QueryVisitor(queryModel);
         }
 
         private Expression MakeExpression<TSource, TResult>(IQueryable<TSource> queryable,

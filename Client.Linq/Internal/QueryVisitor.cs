@@ -17,8 +17,11 @@ namespace InfluxDB.Client.Linq.Internal
     {
         private readonly QueryGenerationContext _context;
 
-        internal InfluxDBQueryVisitor(string bucket, IMemberNameResolver memberResolver) : 
-            this(new QueryGenerationContext(new QueryAggregator(), new VariableAggregator(), memberResolver))
+        internal InfluxDBQueryVisitor(
+            string bucket, 
+            IMemberNameResolver memberResolver,
+            QueryableOptimizerSettings queryableOptimizerSettings) :
+            this(new QueryGenerationContext(new QueryAggregator(), new VariableAggregator(), memberResolver, queryableOptimizerSettings))
         {
             var bucketVariable = _context.Variables.AddNamedVariable(bucket);
             _context.QueryAggregator.AddBucket(bucketVariable);
@@ -59,7 +62,7 @@ namespace InfluxDB.Client.Linq.Internal
 
         internal string BuildFluxQuery()
         {
-            return _context.QueryAggregator.BuildFluxQuery();
+            return _context.QueryAggregator.BuildFluxQuery(_context.QueryableOptimizerSettings);
         }
 
         public override void VisitWhereClause(WhereClause whereClause, QueryModel queryModel, int index)
@@ -155,11 +158,11 @@ namespace InfluxDB.Client.Linq.Internal
 
             foreach (var ordering in orderByClause.Orderings)
             {
-                var orderPart = _context.Variables
-                    .AddNamedVariable(GetFluxExpression(ordering.Expression, orderByClause));
-                var desc = _context.Variables
-                    .AddNamedVariable(ordering.OrderingDirection == OrderingDirection.Desc);
-                _context.QueryAggregator.AddOrder(orderPart, desc);
+                var column = GetFluxExpression(ordering.Expression, orderByClause);
+                var columnVariable = _context.Variables.AddNamedVariable(column);
+                var descending = ordering.OrderingDirection == OrderingDirection.Desc;
+                var descendingVariable = _context.Variables.AddNamedVariable(descending);
+                _context.QueryAggregator.AddOrder(column, columnVariable, descending, descendingVariable);
             }
         }
 

@@ -64,7 +64,7 @@ namespace InfluxDB.Client.Linq.Internal
         private ResultFunction _resultFunction;
         private readonly List<string> _filterByTags;
         private readonly List<string> _filterByFields;
-        private readonly List<(string, string)> _orders;
+        private readonly List<(string, string, bool, string)> _orders;
 
         internal QueryAggregator()
         {
@@ -72,7 +72,7 @@ namespace InfluxDB.Client.Linq.Internal
             _limitNOffsetAssignments = new List<LimitOffsetAssignment>();
             _filterByTags = new List<string>();
             _filterByFields = new List<string>();
-            _orders = new List<(string, string)>();
+            _orders = new List<(string, string, bool, string)>();
         }
 
         internal void AddBucket(string bucket)
@@ -133,9 +133,9 @@ namespace InfluxDB.Client.Linq.Internal
             _orders.AddRange(aggregator._orders);
         }
 
-        internal void AddOrder(string orderPart, string desc)
+        internal void AddOrder(string column, string columnVariable, bool descending, string descendingVariable)
         {
-            _orders.Add((orderPart, desc));
+            _orders.Add((column, columnVariable, descending, descendingVariable));
         }
 
         internal void AddResultFunction(ResultFunction resultFunction)
@@ -145,8 +145,10 @@ namespace InfluxDB.Client.Linq.Internal
             _resultFunction = resultFunction;
         }
 
-        internal string BuildFluxQuery()
+        internal string BuildFluxQuery(QueryableOptimizerSettings settings)
         {
+            Arguments.CheckNotNull(settings, nameof(settings));
+            
             var transforms = new List<string>();
             var parts = new List<string>
             {
@@ -155,14 +157,20 @@ namespace InfluxDB.Client.Linq.Internal
                 BuildFilter(_filterByTags),
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
                 "drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
-                "group()",
+                settings.QueryMultipleTimeSeries ? "group()" : "",
                 BuildFilter(_filterByFields)
             };
 
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/sort/
-            foreach (var (column, desc) in _orders)
+            foreach (var ((column, columnVariable, descending, descendingVariable), index) in _orders.Select((value, i) => (value, i)))
             {
-                parts.Add(BuildOperator("sort", "columns", new List<string> {column}, "desc", desc));
+                // skip default sorting if don't query to multiple time series
+                if (!settings.QueryMultipleTimeSeries && index == 0 && column == "_time" && !descending)
+                {
+                    continue;
+                }
+                
+                parts.Add(BuildOperator("sort", "columns", new List<string> {columnVariable}, "desc", descendingVariable));
             }
 
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/limit/

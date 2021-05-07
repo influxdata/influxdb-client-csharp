@@ -2,6 +2,7 @@
 
 ### Features
 1. [#194](https://github.com/influxdata/influxdb-client-csharp/pull/194): Add possibility to handle HTTP response from InfluxDB server [write]
+1. [#197](https://github.com/influxdata/influxdb-client-csharp/pull/197): Optimize Flux Query for querying one time-series [LINQ]
 
 ### Bug Fixes
 1. [#193](https://github.com/influxdata/influxdb-client-csharp/pull/193): Create services without API implementation

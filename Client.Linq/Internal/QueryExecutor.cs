@@ -21,6 +21,7 @@ namespace InfluxDB.Client.Linq.Internal
         private readonly string _org;
         private readonly QueryApiSync _queryApi;
         private readonly IMemberNameResolver _memberResolver;
+        private readonly QueryableOptimizerSettings _queryableOptimizerSettings;
 
         /// <summary>
         /// 
@@ -28,12 +29,16 @@ namespace InfluxDB.Client.Linq.Internal
         /// <param name="bucket">Specifies the source bucket.</param>
         /// <param name="org">Specifies the source organization.</param>
         /// <param name="queryApi">The underlying API to execute Flux Query.</param>
-        public InfluxDBQueryExecutor(string bucket, string org, QueryApiSync queryApi, IMemberNameResolver memberResolver)
+        /// <param name="memberResolver">Resolver for customized names.</param>
+        /// <param name="queryableOptimizerSettings">Settings for a Query optimization</param>
+        public InfluxDBQueryExecutor(string bucket, string org, QueryApiSync queryApi,
+            IMemberNameResolver memberResolver, QueryableOptimizerSettings queryableOptimizerSettings)
         {
             _bucket = bucket;
             _org = org;
             _queryApi = queryApi;
             _memberResolver = memberResolver;
+            _queryableOptimizerSettings = queryableOptimizerSettings;
         }
 
         /// <summary>
@@ -85,11 +90,22 @@ namespace InfluxDB.Client.Linq.Internal
         /// <returns>Query to Invoke</returns>
         internal Query GenerateQuery(QueryModel queryModel, out QueryResultsSettings settings)
         {
-            var visitor = new InfluxDBQueryVisitor(_bucket, _memberResolver);
-            visitor.VisitQueryModel(queryModel);
+            var visitor = QueryVisitor(queryModel);
 
             settings = new QueryResultsSettings(queryModel);
             return visitor.GenerateQuery();
+        }
+
+        /// <summary>
+        /// Create QueryVisitor for specified model.
+        /// </summary>
+        /// <param name="queryModel">Query Model</param>
+        /// <returns>Query Visitor</returns>
+        internal InfluxDBQueryVisitor QueryVisitor(QueryModel queryModel)
+        {
+            var visitor = new InfluxDBQueryVisitor(_bucket, _memberResolver, _queryableOptimizerSettings);
+            visitor.VisitQueryModel(queryModel);
+            return visitor;
         }
     }
 }
