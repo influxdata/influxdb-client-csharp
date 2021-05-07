@@ -22,7 +22,7 @@ namespace InfluxDB.Client.Linq
         /// Gets or sets whether the drive is used to query multiple time series.
         /// Setting this variable to true will change how the produced Flux Query looks like:
         /// <list type="bullet">
-        /// <item>appends <a href="http://stackoverflow.com">group operator</a></item>
+        /// <item>appends <a href="https://docs.influxdata.com/influxdb/v2.0/reference/flux/stdlib/built-in/transformations/group/">group operator</a></item>
         /// <item>enable use default sorting: <i>sort(columns: ["_time"], desc: false)</i></item>
         /// </list>
         /// </summary>
