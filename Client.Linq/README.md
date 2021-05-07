@@ -32,7 +32,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
 
 ## Changelog
-### 1.19.0-dev.???? [2021-05-??]
+### 1.19.0-dev.3084 [2021-05-07]
   - optimize Flux Query for querying one time-series. See details - [#197](https://github.com/influxdata/influxdb-client-csharp/pull/197)
 ### 1.18.0-dev.2973 [2021-04-27]
   - switch `pivot()` and `drop()` function to achieve better performance. See details - [#188](https://github.com/influxdata/influxdb-client-csharp/pull/188)
