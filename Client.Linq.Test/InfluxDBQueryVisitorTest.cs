@@ -770,24 +770,40 @@ namespace Client.Linq.Test
         public void TagIsNotDefinedAsString()
         {
             var fromDateTime = new DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc);
-            var query = from s in InfluxDBQueryable<TagIsNotDefinedAsString>.Queryable("my-bucket", "my-org", _queryApi)
-                where s.Timestamp >= fromDateTime
-                where s.Id == 123456
-                select s;
-            
-            var visitor = BuildQueryVisitor(query);
+            var queries = new[]
+            {
+                (
+                    from s in InfluxDBQueryable<TagIsNotDefinedAsString>.Queryable("my-bucket", "my-org", _queryApi)
+                    where s.Timestamp >= fromDateTime
+                    where s.Id == 123456
+                    select s,
+                    "(r[\"Id\"] == p4)"
+                ),
+                (
+                    from s in InfluxDBQueryable<TagIsNotDefinedAsString>.Queryable("my-bucket", "my-org", _queryApi)
+                    where s.Timestamp >= fromDateTime
+                    where 123456 == s.Id
+                    select s,
+                    "(p4 == r[\"Id\"])"
+                ),
+            };
 
-            const string expected = "start_shifted = int(v: time(v: p3))\n\n" +
-                                    "from(bucket: p1) " +
-                                    "|> range(start: time(v: start_shifted)) " +
-                                    "|> filter(fn: (r) => (r[\"Id\"] == p4)) " +
-                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
+            foreach (var (queryable, expression) in queries)
+            {
+                var visitor = BuildQueryVisitor(queryable);
 
-            Assert.AreEqual(expected, visitor.BuildFluxQuery());
-            var ast = visitor.BuildFluxAST();
-            Assert.AreEqual(fromDateTime, GetLiteral<DateTimeLiteral>(ast, 2).Value);
-            Assert.AreEqual("123456", GetLiteral<StringLiteral>(ast, 3).Value);
+                var expected = "start_shifted = int(v: time(v: p3))\n\n" +
+                               "from(bucket: p1) " +
+                               "|> range(start: time(v: start_shifted)) " +
+                               $"|> filter(fn: (r) => {expression}) " +
+                               "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                               "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
+                
+                Assert.AreEqual(expected, visitor.BuildFluxQuery());
+                var ast = visitor.BuildFluxAST();
+                Assert.AreEqual(fromDateTime, GetLiteral<DateTimeLiteral>(ast, 2).Value);
+                Assert.AreEqual("123456", GetLiteral<StringLiteral>(ast, 3).Value);
+            }
         }
 
         private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)

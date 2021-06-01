@@ -268,7 +268,6 @@ namespace InfluxDB.Client.Linq.Internal
             }
         }
 
-
         /// <summary>
         /// Normalize generated expression.
         /// </summary>
