@@ -185,7 +185,7 @@ namespace InfluxDB.Client.Linq.Internal
 
             NormalizeNamedField();
         }
-        
+
         private void NormalizeNamedFieldValue()
         {
             var index = _expressionParts
@@ -240,6 +240,34 @@ namespace InfluxDB.Client.Linq.Internal
 
             NormalizeNamedFieldValue();
         }
+
+        /// <summary>
+        /// Mark variables that are use to filter by tag by tag as tag.
+        /// </summary>
+        internal static void NormalizeTagsAssignments(List<IExpressionPart> parts, QueryGenerationContext context)
+        {
+            var indexes = Enumerable.Range(0, parts.Count)
+                .Where(i => parts[i] is BinaryOperator)
+                .ToList();
+
+            foreach (var index in indexes)
+            {
+                // "sensorId == 123456"
+                if (index >= 1 && parts[index - 1] is TagColumnName && parts[index + 1] is AssignmentValue)
+                {
+                    var assignmentValue = (AssignmentValue) parts[index + 1];
+                    context.Variables.VariableIsTag(assignmentValue.Assignment);
+                }
+
+                // "123456 == sensorId"
+                if (index >= 1 && parts[index - 1] is AssignmentValue && parts[index + 1] is TagColumnName)
+                {
+                    var assignmentValue = (AssignmentValue) parts[index - 1];
+                    context.Variables.VariableIsTag(assignmentValue.Assignment);
+                }
+            }
+        }
+
 
         /// <summary>
         /// Normalize generated expression.

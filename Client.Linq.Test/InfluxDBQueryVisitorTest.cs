@@ -766,6 +766,30 @@ namespace Client.Linq.Test
             Assert.AreEqual(expected, ((InfluxDBQueryable<Sensor>) query).ToDebugQuery()._Query);
         }
 
+        [Test]
+        public void TagIsNotDefinedAsString()
+        {
+            var fromDateTime = new DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc);
+            var query = from s in InfluxDBQueryable<TagIsNotDefinedAsString>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.Timestamp >= fromDateTime
+                where s.Id == 123456
+                select s;
+            
+            var visitor = BuildQueryVisitor(query);
+
+            const string expected = "start_shifted = int(v: time(v: p3))\n\n" +
+                                    "from(bucket: p1) " +
+                                    "|> range(start: time(v: start_shifted)) " +
+                                    "|> filter(fn: (r) => (r[\"Id\"] == p4)) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
+
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+            var ast = visitor.BuildFluxAST();
+            Assert.AreEqual(fromDateTime, GetLiteral<DateTimeLiteral>(ast, 2).Value);
+            Assert.AreEqual("123456", GetLiteral<StringLiteral>(ast, 3).Value);
+        }
+
         private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)
         {
             var queryExecutor = (InfluxDBQueryExecutor) ((DefaultQueryProvider) queryable.Provider).Executor;

@@ -53,4 +53,20 @@ namespace Client.Linq.Test
         public string Name { get; set; }
         public string Value { get; set; }
     }
+    
+    [Measurement(nameof(TagIsNotDefinedAsString))]
+    class TagIsNotDefinedAsString
+    {
+        [Column(IsTag = true)]
+        public int Id { get; set; }
+
+        [Column(IsTag = true)]
+        public string Tag { get; set; }
+
+        [Column(nameof(Energy))]
+        public decimal Energy { get; set; }
+
+        [Column(IsTimestamp = true)]
+        public DateTime Timestamp { get; set; }
+    }
 }
