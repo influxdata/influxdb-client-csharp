@@ -32,7 +32,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
 
 ## Changelog
-### 1.19.0-dev.??? [???]
+### 1.19.0-dev.3159 [2021-06-02]
   - Fix Flux AST for Tag parameters which are not `String`. See details - [#202](https://github.com/influxdata/influxdb-client-csharp/pull/202)
 ### 1.19.0-dev.3084 [2021-05-07]
   - optimize Flux Query for querying one time-series. See details - [#197](https://github.com/influxdata/influxdb-client-csharp/pull/197)
