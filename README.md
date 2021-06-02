@@ -50,10 +50,6 @@ The C# clients are implemented for the InfluxDB 2.0 and InfluxDB 1.7+:
 
 ## How To Use 
 
-This clients are a work in progress and hosted in Bonitoo.io Nuget Repository.
-
-If you want to use it with a .Net CLI or Package Manager, you have to specify source of packages. See examples below.
-
 ### Writes and Queries in InfluxDB 2.0
 
 The following example demonstrates how to write data to InfluxDB 2.0 and read them back using the Flux language:
