@@ -5,16 +5,16 @@ namespace InfluxDB.Client.Linq.Internal.Expressions
     internal class AssignmentValue: IExpressionPart
     {
         internal readonly object Value;
-        private readonly string _assignment;
+        internal readonly string Assignment;
         internal AssignmentValue(object value, string assignment)
         {
             Value = value;
-            _assignment = assignment;
+            Assignment = assignment;
         }
 
         public void AppendFlux(StringBuilder builder)
         {
-            builder.Append(_assignment);
+            builder.Append(Assignment);
         }
     }
 }

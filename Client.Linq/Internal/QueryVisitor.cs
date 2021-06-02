@@ -109,6 +109,7 @@ namespace InfluxDB.Client.Linq.Internal
             
             QueryExpressionTreeVisitor.NormalizeExpressions(rangeFilter);
             QueryExpressionTreeVisitor.NormalizeExpressions(tagFilter);
+            QueryExpressionTreeVisitor.NormalizeTagsAssignments(tagFilter, _context);
             QueryExpressionTreeVisitor.NormalizeExpressions(fieldFilter);
             
             Debug.WriteLine("--- normalized LINQ expressions: ---");

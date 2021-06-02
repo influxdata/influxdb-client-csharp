@@ -6,6 +6,7 @@
 
 ### Bug Fixes
 1. [#193](https://github.com/influxdata/influxdb-client-csharp/pull/193): Create services without API implementation
+1. [#202](https://github.com/influxdata/influxdb-client-csharp/pull/202): Flux AST for Tag parameters which are not `String` [LINQ]
 
 ## 1.18.0 [2021-04-30]
 
