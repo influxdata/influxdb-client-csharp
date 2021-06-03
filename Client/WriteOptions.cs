@@ -23,9 +23,9 @@ namespace InfluxDB.Client
         private const int DefaultFlushInterval = 1000;
         private const int DefaultJitterInterval = 0;
         private const int DefaultRetryInterval = 5000;
-        private const int DefaultMaxRetries = 3;
-        private const int DefaultMaxRetryDelay = 180_000;
-        private const int DefaultExponentialBase = 5;
+        private const int DefaultMaxRetries = 5;
+        private const int DefaultMaxRetryDelay = 125_000;
+        private const int DefaultExponentialBase = 2;
 
         /// <summary>
         /// The number of data point to collect in batch.

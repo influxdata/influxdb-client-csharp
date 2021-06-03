@@ -31,6 +31,7 @@ namespace InfluxDB.Client.Internal
         internal Exception Error { get; }
         private readonly int _count;
         private readonly WriteOptions _writeOptions;
+        private readonly Random _random = new Random();
 
         internal RetryAttempt(Exception error, int count, WriteOptions writeOptions)
         {
@@ -82,25 +83,37 @@ namespace InfluxDB.Client.Internal
         /// <returns>retry interval to sleep</returns>
         internal long GetRetryInterval()
         {
-            long retryInterval;
-
             // from header
             if (Error is HttpException httpException && httpException.RetryAfter.HasValue)
             {
-                retryInterval = httpException.RetryAfter.Value * 1000;
+                return httpException.RetryAfter.Value * 1000 + JitterDelay(_writeOptions);
             }
+
             // from configuration
-            else
-            {
-                retryInterval = _writeOptions.RetryInterval
-                                * (long) (Math.Pow(_writeOptions.ExponentialBase, _count - 1));
-                retryInterval = Math.Min(retryInterval, _writeOptions.MaxRetryDelay);
+            var rangeStart = _writeOptions.RetryInterval;
+            var rangeStop = _writeOptions.RetryInterval * _writeOptions.ExponentialBase;
 
-                Trace.WriteLine($"The InfluxDB does not specify \"Retry-After\". " +
-                                $"Use the default retryInterval: {retryInterval}");
+            var i = 1;
+            while (i < _count)
+            {
+                i++;
+                rangeStart = rangeStop;
+                rangeStop = rangeStop * _writeOptions.ExponentialBase;
+                if (rangeStop > _writeOptions.MaxRetryDelay)
+                {
+                    break;
+                }
             }
 
-            retryInterval += JitterDelay(_writeOptions);
+            if (rangeStop > _writeOptions.MaxRetryDelay)
+            {
+                rangeStop = _writeOptions.MaxRetryDelay;
+            }
+
+            var retryInterval = (long) (rangeStart + (rangeStop - rangeStart) * _random.NextDouble());
+
+            Trace.WriteLine("The InfluxDB does not specify \"Retry-After\". " +
+                            $"Use the default retryInterval: {retryInterval}");
 
             return retryInterval;
         }

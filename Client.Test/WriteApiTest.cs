@@ -145,7 +145,8 @@ namespace InfluxDB.Client.Test
             var retriableErrorEvent = listener.Get<WriteRetriableErrorEvent>();
             Assert.AreEqual("token is temporarily over quota", retriableErrorEvent.Exception.Message);
             Assert.AreEqual(429, ((HttpException) retriableErrorEvent.Exception).Status);
-            Assert.AreEqual(1000, retriableErrorEvent.RetryInterval);
+            Assert.GreaterOrEqual(retriableErrorEvent.RetryInterval, 1000);
+            Assert.LessOrEqual(retriableErrorEvent.RetryInterval, 2000);
 
             //
             // Second request success
@@ -422,9 +423,9 @@ namespace InfluxDB.Client.Test
             var options = WriteOptions.CreateNew().Build();
             
             Assert.AreEqual(5_000, options.RetryInterval);
-            Assert.AreEqual(3, options.MaxRetries);
-            Assert.AreEqual(180_000, options.MaxRetryDelay);
-            Assert.AreEqual(5, options.ExponentialBase);
+            Assert.AreEqual(5, options.MaxRetries);
+            Assert.AreEqual(125_000, options.MaxRetryDelay);
+            Assert.AreEqual(2, options.ExponentialBase);
         }
 
         [Test]

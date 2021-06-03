@@ -78,7 +78,8 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(10_000, retry.GetRetryInterval());
 
             retry = new RetryAttempt(new HttpException("", 429), 1, _default);
-            Assert.AreEqual(5_000, retry.GetRetryInterval());
+            Assert.GreaterOrEqual( retry.GetRetryInterval(), 5_000);
+            Assert.LessOrEqual( retry.GetRetryInterval(), 10_000);
         }
 
         [Test]
@@ -87,29 +88,49 @@ namespace InfluxDB.Client.Test
             var options = WriteOptions.CreateNew()
                 .RetryInterval(5_000)
                 .ExponentialBase(5)
+                .MaxRetries(4)
                 .MaxRetryDelay(int.MaxValue)
                 .Build();
 
             var retry = new RetryAttempt(new HttpException("", 429), 1, options);
-            Assert.AreEqual(5_000, retry.GetRetryInterval());
+            var retryInterval = retry.GetRetryInterval();
+            Assert.GreaterOrEqual(retryInterval, 5_000);
+            Assert.LessOrEqual(retryInterval, 25_000);
+            Assert.IsTrue(retry.IsRetry());
 
             retry = new RetryAttempt(new HttpException("", 429), 2, options);
-            Assert.AreEqual(25_000, retry.GetRetryInterval());
+            retryInterval = retry.GetRetryInterval();
+            Assert.GreaterOrEqual(retryInterval, 25_000);
+            Assert.LessOrEqual(retryInterval, 125_000);
+            Assert.IsTrue(retry.IsRetry());
 
             retry = new RetryAttempt(new HttpException("", 429), 3, options);
-            Assert.AreEqual(125_000, retry.GetRetryInterval());
+            retryInterval = retry.GetRetryInterval();           
+            Assert.GreaterOrEqual(retryInterval, 125_000);
+            Assert.LessOrEqual(retryInterval, 625_000);
+            Assert.IsTrue(retry.IsRetry());
 
             retry = new RetryAttempt(new HttpException("", 429), 4, options);
-            Assert.AreEqual(625_000, retry.GetRetryInterval());
+            retryInterval = retry.GetRetryInterval();
+            Assert.GreaterOrEqual(retryInterval, 625_000);
+            Assert.LessOrEqual(retryInterval, 3_125_000);
+            Assert.IsTrue(retry.IsRetry());
 
             retry = new RetryAttempt(new HttpException("", 429), 5, options);
-            Assert.AreEqual(3_125_000, retry.GetRetryInterval());
+            retryInterval = retry.GetRetryInterval();
+            Assert.GreaterOrEqual(retryInterval, 3_125_000);
+            Assert.LessOrEqual(retryInterval, 15_625_000);
+            Assert.IsFalse(retry.IsRetry());
 
             retry = new RetryAttempt(new HttpException("", 429), 6, options);
-            Assert.AreEqual(15_625_000, retry.GetRetryInterval());
+            retryInterval = retry.GetRetryInterval();
+            Assert.GreaterOrEqual(retryInterval, 15_625_000);
+            Assert.LessOrEqual(retryInterval, 78_125_000);
+            Assert.IsFalse(retry.IsRetry());
 
             retry = new RetryAttempt(CreateException(3), 7, options);
-            Assert.AreEqual(3_000, retry.GetRetryInterval());
+            retryInterval = retry.GetRetryInterval();
+            Assert.AreEqual(3_000, retryInterval);
         }
 
         [Test]
@@ -118,26 +139,32 @@ namespace InfluxDB.Client.Test
             var options = WriteOptions.CreateNew()
                 .RetryInterval(2_000)
                 .ExponentialBase(2)
+                .MaxRetries(10)
                 .MaxRetryDelay(50_000)
                 .Build();
 
             var retry = new RetryAttempt(new HttpException("", 429), 1, options);
-            Assert.AreEqual(2_000, retry.GetRetryInterval());
+            Assert.GreaterOrEqual(retry.GetRetryInterval(), 2_000);
+            Assert.LessOrEqual(retry.GetRetryInterval(), 4_000);
 
             retry = new RetryAttempt(new HttpException("", 429), 2, options);
-            Assert.AreEqual(4_000, retry.GetRetryInterval());
+            Assert.GreaterOrEqual(retry.GetRetryInterval(), 4_000);
+            Assert.LessOrEqual(retry.GetRetryInterval(), 8_000);
 
             retry = new RetryAttempt(new HttpException("", 429), 3, options);
-            Assert.AreEqual(8_000, retry.GetRetryInterval());
+            Assert.GreaterOrEqual(retry.GetRetryInterval(), 8_000);
+            Assert.LessOrEqual(retry.GetRetryInterval(), 16_000);
 
             retry = new RetryAttempt(new HttpException("", 429), 4, options);
-            Assert.AreEqual(16_000, retry.GetRetryInterval());
+            Assert.GreaterOrEqual(retry.GetRetryInterval(), 16_000);
+            Assert.LessOrEqual(retry.GetRetryInterval(), 32_000);
 
             retry = new RetryAttempt(new HttpException("", 429), 5, options);
-            Assert.AreEqual(32_000, retry.GetRetryInterval());
+            Assert.GreaterOrEqual(retry.GetRetryInterval(), 32_000);
+            Assert.LessOrEqual(retry.GetRetryInterval(), 50_000);
 
             retry = new RetryAttempt(new HttpException("", 429), 6, options);
-            Assert.AreEqual(50_000, retry.GetRetryInterval());
+            Assert.LessOrEqual(retry.GetRetryInterval(), 50_000);
         }
 
         private HttpException CreateException(int retryAfter = 10)
