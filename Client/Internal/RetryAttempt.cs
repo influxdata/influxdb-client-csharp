@@ -110,9 +110,9 @@ namespace InfluxDB.Client.Internal
                 rangeStop = _writeOptions.MaxRetryDelay;
             }
 
-            var retryInterval = _random.Next(rangeStart, rangeStop);
+            var retryInterval = (long) (rangeStart + (rangeStop - rangeStart) * _random.NextDouble());
 
-            Trace.WriteLine($"The InfluxDB does not specify \"Retry-After\". " +
+            Trace.WriteLine("The InfluxDB does not specify \"Retry-After\". " +
                             $"Use the default retryInterval: {retryInterval}");
 
             return retryInterval;
