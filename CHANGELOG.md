@@ -1,4 +1,4 @@
-## 1.19.0 [unreleased]
+## 1.19.0 [2021-06-04]
 
 ### Features
 1. [#194](https://github.com/influxdata/influxdb-client-csharp/pull/194): Add possibility to handle HTTP response from InfluxDB server [write]

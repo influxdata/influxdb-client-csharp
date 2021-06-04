@@ -7,7 +7,7 @@
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Linq</AssemblyName>
         <VersionPrefix>1.19.0</VersionPrefix>
-        <VersionSuffix>dev</VersionSuffix>
+        <VersionSuffix></VersionSuffix>
 
         <PackageId>InfluxDB.Client.Linq</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb;linq</PackageTags>
