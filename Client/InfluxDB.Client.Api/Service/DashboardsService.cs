@@ -313,9 +313,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <returns>Dashboard</returns>
-        Dashboard PatchDashboardsID (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null);
+        Dashboard PatchDashboardsID (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null);
 
         /// <summary>
         /// Update a dashboard
@@ -326,9 +326,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        ApiResponse<Dashboard> PatchDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null);
+        ApiResponse<Dashboard> PatchDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null);
         /// <summary>
         /// Update the non-positional information related to a cell
         /// </summary>
@@ -843,10 +843,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Dashboard</returns>
-        System.Threading.Tasks.Task<Dashboard> PatchDashboardsIDAsync (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Dashboard> PatchDashboardsIDAsync (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a dashboard
@@ -857,10 +857,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Dashboard)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Dashboard>> PatchDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Dashboard>> PatchDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update the non-positional information related to a cell
         /// </summary>
@@ -4924,11 +4924,11 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <returns>Dashboard</returns>
-        public Dashboard PatchDashboardsID (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null)
+        public Dashboard PatchDashboardsID (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null)
         {
-             ApiResponse<Dashboard> localVarResponse = PatchDashboardsIDWithHttpInfo(dashboardID, zapTraceSpan, patchDashboardRequest1);
+             ApiResponse<Dashboard> localVarResponse = PatchDashboardsIDWithHttpInfo(dashboardID, zapTraceSpan, patchDashboardRequest);
              return localVarResponse.Data;
         }
 
@@ -4938,9 +4938,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public ApiResponse< Dashboard > PatchDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null)
+        public ApiResponse< Dashboard > PatchDashboardsIDWithHttpInfo (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -4962,13 +4962,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (patchDashboardRequest1 != null && patchDashboardRequest1.GetType() != typeof(byte[]))
+            if (patchDashboardRequest != null && patchDashboardRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest1); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = patchDashboardRequest1; // byte array
+                localVarPostBody = patchDashboardRequest; // byte array
             }
 
             // to determine the Accept header
@@ -5005,10 +5005,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDWithIRestResponseAsync (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDWithIRestResponseAsync (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -5030,13 +5030,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (patchDashboardRequest1 != null && patchDashboardRequest1.GetType() != typeof(byte[]))
+            if (patchDashboardRequest != null && patchDashboardRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest1); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = patchDashboardRequest1; // byte array
+                localVarPostBody = patchDashboardRequest; // byte array
             }
 
             // to determine the Accept header
@@ -5071,9 +5071,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public IRestResponse PatchDashboardsIDWithIRestResponse (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null)
+        public IRestResponse PatchDashboardsIDWithIRestResponse (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -5095,13 +5095,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (patchDashboardRequest1 != null && patchDashboardRequest1.GetType() != typeof(byte[]))
+            if (patchDashboardRequest != null && patchDashboardRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest1); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = patchDashboardRequest1; // byte array
+                localVarPostBody = patchDashboardRequest; // byte array
             }
 
             // to determine the Accept header
@@ -5136,9 +5136,9 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <returns>ApiResponse of Dashboard</returns>
-        public RestRequest PatchDashboardsIDWithRestRequest (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null)
+        public RestRequest PatchDashboardsIDWithRestRequest (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -5160,13 +5160,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (patchDashboardRequest1 != null && patchDashboardRequest1.GetType() != typeof(byte[]))
+            if (patchDashboardRequest != null && patchDashboardRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest1); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = patchDashboardRequest1; // byte array
+                localVarPostBody = patchDashboardRequest; // byte array
             }
 
             // to determine the Accept header
@@ -5190,12 +5190,12 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Dashboard</returns>
-        public async System.Threading.Tasks.Task<Dashboard> PatchDashboardsIDAsync (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Dashboard> PatchDashboardsIDAsync (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Dashboard> localVarResponse = await PatchDashboardsIDAsyncWithHttpInfo(dashboardID, zapTraceSpan, patchDashboardRequest1, cancellationToken).ConfigureAwait(false);
+             ApiResponse<Dashboard> localVarResponse = await PatchDashboardsIDAsyncWithHttpInfo(dashboardID, zapTraceSpan, patchDashboardRequest, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -5206,13 +5206,13 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> PatchDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Dashboard>> PatchDashboardsIDAsyncWithHttpInfo (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchDashboardsIDAsyncWithIRestResponse(dashboardID, zapTraceSpan, patchDashboardRequest1, cancellationToken).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchDashboardsIDAsyncWithIRestResponse(dashboardID, zapTraceSpan, patchDashboardRequest, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -5233,10 +5233,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="dashboardID">The ID of the dashboard to update.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <param name="patchDashboardRequest1"> (optional)</param>
+        /// <param name="patchDashboardRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (Dashboard)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDAsyncWithIRestResponse (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest1 patchDashboardRequest1 = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDashboardsIDAsyncWithIRestResponse (string dashboardID, string zapTraceSpan = null, PatchDashboardRequest patchDashboardRequest = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dashboardID' is set
             if (dashboardID == null)
@@ -5258,13 +5258,13 @@ namespace InfluxDB.Client.Api.Service
 
             if (dashboardID != null) localVarPathParams.Add("dashboardID", this.Configuration.ApiClient.ParameterToString(dashboardID)); // path parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (patchDashboardRequest1 != null && patchDashboardRequest1.GetType() != typeof(byte[]))
+            if (patchDashboardRequest != null && patchDashboardRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest1); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(patchDashboardRequest); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = patchDashboardRequest1; // byte array
+                localVarPostBody = patchDashboardRequest; // byte array
             }
 
             // to determine the Accept header
