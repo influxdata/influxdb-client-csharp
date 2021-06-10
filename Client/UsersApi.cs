@@ -192,10 +192,16 @@ namespace InfluxDB.Client
         /// <summary>
         /// List all users.
         /// </summary>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
+        /// <param name="name"> (optional)</param>
+        /// <param name="id"> (optional)</param>
         /// <returns>List all users</returns>
-        public async Task<List<User>> FindUsersAsync()
+        public async Task<List<User>> FindUsersAsync(int? offset = null, int? limit = null, string after = null, string name = null, string id = null)
         {
-            var response = await _service.GetUsersAsync().ConfigureAwait(false);
+            var response = await _service.GetUsersAsync(offset: offset, limit: limit, after: after, name: name, id: id)
+                .ConfigureAwait(false);
             return response._Users;
         }
 

@@ -237,17 +237,26 @@ namespace InfluxDB.Client
         /// <returns>A list of buckets</returns>
         public async Task<List<Bucket>> FindBucketsByOrgNameAsync(string orgName)
         {
-            var buckets = await FindBucketsAsync(orgName, new FindOptions()).ConfigureAwait(false);
+            var buckets = await FindBucketsAsync(org: orgName).ConfigureAwait(false);
             return buckets._Buckets;
         }
 
         /// <summary>
         /// List all buckets.
         /// </summary>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
+        /// <param name="org">The name of the organization. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
+        /// <param name="id">Only returns buckets with a specific ID. (optional)</param>
         /// <returns>List all buckets</returns>
-        public Task<List<Bucket>> FindBucketsAsync()
+        public Task<Buckets> FindBucketsAsync(int? offset = null, int? limit = null, string after = null,
+            string org = null, string orgID = null, string name = null, string id = null)
         {
-            return FindBucketsByOrgNameAsync(null);
+            return _service.GetBucketsAsync(offset: offset, limit: limit, after: after, org: org, orgID: orgID,
+                name: name, id: id);
         }
 
         /// <summary>
@@ -259,7 +268,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return FindBucketsAsync(null, findOptions);
+            return FindBucketsAsync(offset: findOptions.Offset, limit: findOptions.Limit, after: findOptions.After);
         }
 
         /// <summary>
@@ -510,13 +519,6 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             return _service.DeleteBucketsIDLabelsIDAsync(bucketId, labelId);
-        }
-
-        private Task<Buckets> FindBucketsAsync(string orgName, FindOptions findOptions)
-        {
-            Arguments.CheckNotNull(findOptions, nameof(findOptions));
-
-            return _service.GetBucketsAsync(null, findOptions.Offset, findOptions.Limit, after: findOptions.After,org: orgName);
         }
     }
 }
