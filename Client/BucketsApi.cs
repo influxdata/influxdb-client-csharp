@@ -235,10 +235,9 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgName">filter buckets to a specific organization</param>
         /// <returns>A list of buckets</returns>
-        public async Task<List<Bucket>> FindBucketsByOrgNameAsync(string orgName)
+        public Task<List<Bucket>> FindBucketsByOrgNameAsync(string orgName)
         {
-            var buckets = await FindBucketsAsync(org: orgName).ConfigureAwait(false);
-            return buckets._Buckets;
+            return FindBucketsAsync(org: orgName);
         }
 
         /// <summary>
@@ -252,11 +251,11 @@ namespace InfluxDB.Client
         /// <param name="name">Only returns buckets with a specific name. (optional)</param>
         /// <param name="id">Only returns buckets with a specific ID. (optional)</param>
         /// <returns>List all buckets</returns>
-        public Task<Buckets> FindBucketsAsync(int? offset = null, int? limit = null, string after = null,
+        public async Task<List<Bucket>> FindBucketsAsync(int? offset = null, int? limit = null, string after = null,
             string org = null, string orgID = null, string name = null, string id = null)
         {
-            return _service.GetBucketsAsync(offset: offset, limit: limit, after: after, org: org, orgID: orgID,
-                name: name, id: id);
+            var buckets = await GetBucketsAsync(offset, limit, after, org, orgID, name, id).ConfigureAwait(false);
+            return buckets._Buckets;
         }
 
         /// <summary>
@@ -268,7 +267,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return FindBucketsAsync(offset: findOptions.Offset, limit: findOptions.Limit, after: findOptions.After);
+            return GetBucketsAsync(offset: findOptions.Offset, limit: findOptions.Limit, after: findOptions.After);
         }
 
         /// <summary>
@@ -519,6 +518,13 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             return _service.DeleteBucketsIDLabelsIDAsync(bucketId, labelId);
+        }
+
+        private Task<Buckets> GetBucketsAsync(int? offset = null, int? limit = null, string after = null,
+            string org = null, string orgID = null, string name = null, string id = null)
+        {
+            return _service.GetBucketsAsync(offset: offset, limit: limit, after: after, org: org, orgID: orgID,
+                name: name, id: id);
         }
     }
 }
