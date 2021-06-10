@@ -24,24 +24,24 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Dashboard
+    /// DashboardWithViewProperties
     /// </summary>
     [DataContract]
-    public partial class Dashboard : CreateDashboardRequest,  IEquatable<Dashboard>
+    public partial class DashboardWithViewProperties : CreateDashboardRequest,  IEquatable<DashboardWithViewProperties>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Dashboard" /> class.
+        /// Initializes a new instance of the <see cref="DashboardWithViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Dashboard() { }
+        protected DashboardWithViewProperties() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Dashboard" /> class.
+        /// Initializes a new instance of the <see cref="DashboardWithViewProperties" /> class.
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="meta">meta.</param>
         /// <param name="cells">cells.</param>
         /// <param name="labels">labels.</param>
-        public Dashboard(DashboardLinks links = default(DashboardLinks), DashboardMeta meta = default(DashboardMeta), List<Cell> cells = default(List<Cell>), List<Label> labels = default(List<Label>), string orgID = default(string), string name = default(string), string description = default(string)) : base(orgID, name, description)
+        public DashboardWithViewProperties(DashboardLinks links = default(DashboardLinks), DashboardMeta meta = default(DashboardMeta), List<CellWithViewProperties> cells = default(List<CellWithViewProperties>), List<Label> labels = default(List<Label>), string orgID = default(string), string name = default(string), string description = default(string)) : base(orgID, name, description)
         {
             this.Links = links;
             this.Meta = meta;
@@ -71,7 +71,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Cells
         /// </summary>
         [DataMember(Name="cells", EmitDefaultValue=false)]
-        public List<Cell> Cells { get; set; }
+        public List<CellWithViewProperties> Cells { get; set; }
 
         /// <summary>
         /// Gets or Sets Labels
@@ -86,7 +86,7 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Dashboard {\n");
+            sb.Append("class DashboardWithViewProperties {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
@@ -113,15 +113,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Dashboard);
+            return this.Equals(input as DashboardWithViewProperties);
         }
 
         /// <summary>
-        /// Returns true if Dashboard instances are equal
+        /// Returns true if DashboardWithViewProperties instances are equal
         /// </summary>
-        /// <param name="input">Instance of Dashboard to be compared</param>
+        /// <param name="input">Instance of DashboardWithViewProperties to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Dashboard input)
+        public bool Equals(DashboardWithViewProperties input)
         {
             if (input == null)
                 return false;
