@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
@@ -41,7 +40,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return _service.PostOrgsAsync(organization);
+            var request = new PostOrganizationRequest(organization.Name, organization.Description);
+            return _service.PostOrgsAsync(request);
         }
 
         /// <summary>
@@ -53,7 +53,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return _service.PatchOrgsIDAsync(organization.Id, organization);
+            var request = new PatchOrganizationRequest(organization.Name, organization.Description);
+            return _service.PatchOrgsIDAsync(organization.Id, request);
         }
 
         /// <summary>
