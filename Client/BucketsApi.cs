@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -102,7 +103,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var bucket = new Bucket(null, name, null, orgId, null, new List<BucketRetentionRules>());
+            var bucket = new Bucket(null, name, null, orgId, null, null, new List<BucketRetentionRules>());
             if (bucketRetentionRules != null) bucket.RetentionRules.Add(bucketRetentionRules);
 
             return CreateBucketAsync(bucket);
@@ -117,7 +118,14 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            return _service.PatchBucketsIDAsync(bucket.Id, bucket);
+            var retentionRules = bucket.RetentionRules.Select(rules =>
+            {
+                Enum.TryParse(rules.Type.ToString(), true, out PatchRetentionRule.TypeEnum type);
+                return new PatchRetentionRule(type, rules.EverySeconds, rules.ShardGroupDurationSeconds);
+            }).ToList();
+            
+            var request = new PatchBucketRequest(bucket.Name, bucket.Description, retentionRules);
+            return _service.PatchBucketsIDAsync(bucket.Id, request);
         }
 
         /// <summary>
@@ -170,7 +178,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            var cloned = new Bucket(null, clonedName, null, bucket.OrgID, bucket.Rp, bucket.RetentionRules);
+            var cloned = new Bucket(null, clonedName, null, bucket.OrgID, bucket.Rp, null, bucket.RetentionRules);
 
             var created = await CreateBucketAsync(cloned).ConfigureAwait(false);
 
