@@ -352,7 +352,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            return _service.GetTelegrafsIDstringAsync(telegrafId, null, "application/toml");
+            return _service.GetTelegrafsIDAsync(telegrafId, null, "application/toml");
         }
 
         /// <summary>
