@@ -78,10 +78,11 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(tagRules, nameof(tagRules));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var rule = new SlackNotificationRule(SlackNotificationRuleBase.TypeEnum.Slack,
-                messageTemplate: messageTemplate);
+            var rule = new SlackNotificationRule(messageTemplate: messageTemplate, name: name, every: every,
+                orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> {new StatusRule(status)},
+                endpointID: endpoint.Id, status: TaskStatusType.Active);
 
-            return (SlackNotificationRule) await CreateRuleAsync(name, every, status, tagRules, endpoint, orgId, rule).ConfigureAwait(false);
+            return (SlackNotificationRule) await CreateRuleAsync(rule).ConfigureAwait(false);
         }
 
         /**
@@ -120,11 +121,11 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(tagRules, nameof(tagRules));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var rule = new PagerDutyNotificationRule(PagerDutyNotificationRuleBase.TypeEnum.Pagerduty,
-                messageTemplate);
+            var rule = new PagerDutyNotificationRule(messageTemplate: messageTemplate, name: name, every: every,
+                orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> {new StatusRule(status)},
+                endpointID: endpoint.Id, status: TaskStatusType.Active);
 
-            return (PagerDutyNotificationRule) await CreateRuleAsync(name, every, status, tagRules, endpoint, orgId,
-                rule).ConfigureAwait(false);
+            return (PagerDutyNotificationRule) await CreateRuleAsync(rule).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -141,10 +142,11 @@ namespace InfluxDB.Client
             List<TagRule> tagRules,
             HTTPNotificationEndpoint endpoint, string orgId)
         {
-            var rule = new HTTPNotificationRule(HTTPNotificationRuleBase.TypeEnum.Http);
+            var rule = new HTTPNotificationRule(name: name, every: every,
+                orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> {new StatusRule(status)},
+                endpointID: endpoint.Id, status: TaskStatusType.Active);
 
-            return (HTTPNotificationRule) await CreateRuleAsync(name, every, status, tagRules, endpoint, orgId,
-                rule).ConfigureAwait(false);
+            return (HTTPNotificationRule) await CreateRuleAsync(rule).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -340,22 +342,6 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             return _service.DeleteNotificationRulesIDLabelsIDAsync(ruleId, labelId);
-        }
-
-        private Task<NotificationRule> CreateRuleAsync(string name, string every, RuleStatusLevel status,
-            List<TagRule> tagRules, NotificationEndpoint notificationEndpoint, string orgId, NotificationRule rule)
-        {
-            Arguments.CheckNotNull(rule, "rule");
-
-            rule.Name = name;
-            rule.Every = every;
-            rule.OrgID = orgId;
-            rule.TagRules = tagRules;
-            rule.StatusRules = new List<StatusRule> {new StatusRule(status)};
-            rule.EndpointID = notificationEndpoint.Id;
-            rule.Status = TaskStatusType.Active;
-
-            return CreateRuleAsync(rule);
         }
     }
 }
