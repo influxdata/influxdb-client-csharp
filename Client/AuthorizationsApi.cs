@@ -58,7 +58,12 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(authorization, nameof(authorization));
 
-            return _service.PostAuthorizationsAsync(authorization);
+            var request =
+                new AuthorizationPostRequest(authorization.OrgID,
+                    authorization.UserID,
+                    authorization.Permissions, description: authorization.Description);
+
+            return _service.PostAuthorizationsAsync(request);
         }
 
         /// <summary>
