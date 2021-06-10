@@ -24,10 +24,10 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// LinePlusSingleStatProperties
+    /// MosaicViewProperties
     /// </summary>
     [DataContract]
-    public partial class LinePlusSingleStatProperties : ViewProperties,  IEquatable<LinePlusSingleStatProperties>
+    public partial class MosaicViewProperties : ViewProperties,  IEquatable<MosaicViewProperties>
     {
         /// <summary>
         /// Defines Type
@@ -36,10 +36,10 @@ namespace InfluxDB.Client.Api.Domain
         public enum TypeEnum
         {
             /// <summary>
-            /// Enum LinePlusSingleStat for value: line-plus-single-stat
+            /// Enum Mosaic for value: mosaic
             /// </summary>
-            [EnumMember(Value = "line-plus-single-stat")]
-            LinePlusSingleStat = 1
+            [EnumMember(Value = "mosaic")]
+            Mosaic = 1
 
         }
 
@@ -105,73 +105,48 @@ namespace InfluxDB.Client.Api.Domain
         [DataMember(Name="hoverDimension", EmitDefaultValue=false)]
         public HoverDimensionEnum? HoverDimension { get; set; }
         /// <summary>
-        /// Defines Position
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum PositionEnum
-        {
-            /// <summary>
-            /// Enum Overlaid for value: overlaid
-            /// </summary>
-            [EnumMember(Value = "overlaid")]
-            Overlaid = 1,
-
-            /// <summary>
-            /// Enum Stacked for value: stacked
-            /// </summary>
-            [EnumMember(Value = "stacked")]
-            Stacked = 2
-
-        }
-
-        /// <summary>
-        /// Gets or Sets Position
-        /// </summary>
-        [DataMember(Name="position", EmitDefaultValue=false)]
-        public PositionEnum Position { get; set; }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LinePlusSingleStatProperties" /> class.
+        /// Initializes a new instance of the <see cref="MosaicViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected LinePlusSingleStatProperties() { }
+        protected MosaicViewProperties() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinePlusSingleStatProperties" /> class.
+        /// Initializes a new instance of the <see cref="MosaicViewProperties" /> class.
         /// </summary>
         /// <param name="timeFormat">timeFormat.</param>
-        /// <param name="type">type (required) (default to TypeEnum.LinePlusSingleStat).</param>
+        /// <param name="type">type (required) (default to TypeEnum.Mosaic).</param>
         /// <param name="queries">queries (required).</param>
         /// <param name="colors">Colors define color encoding of data into a visualization (required).</param>
         /// <param name="shape">shape (required) (default to ShapeEnum.ChronografV2).</param>
         /// <param name="note">note (required).</param>
         /// <param name="showNoteWhenEmpty">If true, will display note when empty (required).</param>
-        /// <param name="axes">axes (required).</param>
-        /// <param name="staticLegend">staticLegend.</param>
-        /// <param name="xColumn">xColumn.</param>
+        /// <param name="xColumn">xColumn (required).</param>
         /// <param name="generateXAxisTicks">generateXAxisTicks.</param>
         /// <param name="xTotalTicks">xTotalTicks.</param>
         /// <param name="xTickStart">xTickStart.</param>
         /// <param name="xTickStep">xTickStep.</param>
-        /// <param name="yColumn">yColumn.</param>
-        /// <param name="generateYAxisTicks">generateYAxisTicks.</param>
-        /// <param name="yTotalTicks">yTotalTicks.</param>
-        /// <param name="yTickStart">yTickStart.</param>
-        /// <param name="yTickStep">yTickStep.</param>
-        /// <param name="shadeBelow">shadeBelow.</param>
+        /// <param name="yLabelColumnSeparator">yLabelColumnSeparator.</param>
+        /// <param name="yLabelColumns">yLabelColumns.</param>
+        /// <param name="ySeriesColumns">ySeriesColumns (required).</param>
+        /// <param name="fillColumns">fillColumns (required).</param>
+        /// <param name="xDomain">xDomain (required).</param>
+        /// <param name="yDomain">yDomain (required).</param>
+        /// <param name="xAxisLabel">xAxisLabel (required).</param>
+        /// <param name="yAxisLabel">yAxisLabel (required).</param>
+        /// <param name="xPrefix">xPrefix (required).</param>
+        /// <param name="xSuffix">xSuffix (required).</param>
+        /// <param name="yPrefix">yPrefix (required).</param>
+        /// <param name="ySuffix">ySuffix (required).</param>
         /// <param name="hoverDimension">hoverDimension.</param>
-        /// <param name="position">position (required).</param>
-        /// <param name="prefix">prefix (required).</param>
-        /// <param name="suffix">suffix (required).</param>
-        /// <param name="decimalPlaces">decimalPlaces (required).</param>
         /// <param name="legendColorizeRows">legendColorizeRows.</param>
         /// <param name="legendHide">legendHide.</param>
         /// <param name="legendOpacity">legendOpacity.</param>
         /// <param name="legendOrientationThreshold">legendOrientationThreshold.</param>
-        public LinePlusSingleStatProperties(string timeFormat = default(string), TypeEnum type = TypeEnum.LinePlusSingleStat, List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?), Axes axes = default(Axes), StaticLegend staticLegend = default(StaticLegend), string xColumn = default(string), List<string> generateXAxisTicks = default(List<string>), int? xTotalTicks = default(int?), float? xTickStart = default(float?), float? xTickStep = default(float?), string yColumn = default(string), List<string> generateYAxisTicks = default(List<string>), int? yTotalTicks = default(int?), float? yTickStart = default(float?), float? yTickStep = default(float?), bool? shadeBelow = default(bool?), HoverDimensionEnum? hoverDimension = default(HoverDimensionEnum?), PositionEnum position = default(PositionEnum), string prefix = default(string), string suffix = default(string), DecimalPlaces decimalPlaces = default(DecimalPlaces), bool? legendColorizeRows = default(bool?), bool? legendHide = default(bool?), float? legendOpacity = default(float?), int? legendOrientationThreshold = default(int?)) : base()
+        public MosaicViewProperties(string timeFormat = default(string), TypeEnum type = TypeEnum.Mosaic, List<DashboardQuery> queries = default(List<DashboardQuery>), List<string> colors = default(List<string>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?), string xColumn = default(string), List<string> generateXAxisTicks = default(List<string>), int? xTotalTicks = default(int?), float? xTickStart = default(float?), float? xTickStep = default(float?), string yLabelColumnSeparator = default(string), List<string> yLabelColumns = default(List<string>), List<string> ySeriesColumns = default(List<string>), List<string> fillColumns = default(List<string>), List<decimal?> xDomain = default(List<decimal?>), List<decimal?> yDomain = default(List<decimal?>), string xAxisLabel = default(string), string yAxisLabel = default(string), string xPrefix = default(string), string xSuffix = default(string), string yPrefix = default(string), string ySuffix = default(string), HoverDimensionEnum? hoverDimension = default(HoverDimensionEnum?), bool? legendColorizeRows = default(bool?), bool? legendHide = default(bool?), float? legendOpacity = default(float?), int? legendOrientationThreshold = default(int?)) : base()
         {
             // to ensure "type" is required (not null)
             if (type == null)
             {
-                throw new InvalidDataException("type is a required property for LinePlusSingleStatProperties and cannot be null");
+                throw new InvalidDataException("type is a required property for MosaicViewProperties and cannot be null");
             }
             else
             {
@@ -180,7 +155,7 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
-                throw new InvalidDataException("queries is a required property for LinePlusSingleStatProperties and cannot be null");
+                throw new InvalidDataException("queries is a required property for MosaicViewProperties and cannot be null");
             }
             else
             {
@@ -189,7 +164,7 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
-                throw new InvalidDataException("colors is a required property for LinePlusSingleStatProperties and cannot be null");
+                throw new InvalidDataException("colors is a required property for MosaicViewProperties and cannot be null");
             }
             else
             {
@@ -198,7 +173,7 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "shape" is required (not null)
             if (shape == null)
             {
-                throw new InvalidDataException("shape is a required property for LinePlusSingleStatProperties and cannot be null");
+                throw new InvalidDataException("shape is a required property for MosaicViewProperties and cannot be null");
             }
             else
             {
@@ -207,7 +182,7 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "note" is required (not null)
             if (note == null)
             {
-                throw new InvalidDataException("note is a required property for LinePlusSingleStatProperties and cannot be null");
+                throw new InvalidDataException("note is a required property for MosaicViewProperties and cannot be null");
             }
             else
             {
@@ -216,70 +191,118 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "showNoteWhenEmpty" is required (not null)
             if (showNoteWhenEmpty == null)
             {
-                throw new InvalidDataException("showNoteWhenEmpty is a required property for LinePlusSingleStatProperties and cannot be null");
+                throw new InvalidDataException("showNoteWhenEmpty is a required property for MosaicViewProperties and cannot be null");
             }
             else
             {
                 this.ShowNoteWhenEmpty = showNoteWhenEmpty;
             }
-            // to ensure "axes" is required (not null)
-            if (axes == null)
+            // to ensure "xColumn" is required (not null)
+            if (xColumn == null)
             {
-                throw new InvalidDataException("axes is a required property for LinePlusSingleStatProperties and cannot be null");
+                throw new InvalidDataException("xColumn is a required property for MosaicViewProperties and cannot be null");
             }
             else
             {
-                this.Axes = axes;
+                this.XColumn = xColumn;
             }
-            // to ensure "position" is required (not null)
-            if (position == null)
+            // to ensure "ySeriesColumns" is required (not null)
+            if (ySeriesColumns == null)
             {
-                throw new InvalidDataException("position is a required property for LinePlusSingleStatProperties and cannot be null");
-            }
-            else
-            {
-                this.Position = position;
-            }
-            // to ensure "prefix" is required (not null)
-            if (prefix == null)
-            {
-                throw new InvalidDataException("prefix is a required property for LinePlusSingleStatProperties and cannot be null");
+                throw new InvalidDataException("ySeriesColumns is a required property for MosaicViewProperties and cannot be null");
             }
             else
             {
-                this.Prefix = prefix;
+                this.YSeriesColumns = ySeriesColumns;
             }
-            // to ensure "suffix" is required (not null)
-            if (suffix == null)
+            // to ensure "fillColumns" is required (not null)
+            if (fillColumns == null)
             {
-                throw new InvalidDataException("suffix is a required property for LinePlusSingleStatProperties and cannot be null");
-            }
-            else
-            {
-                this.Suffix = suffix;
-            }
-            // to ensure "decimalPlaces" is required (not null)
-            if (decimalPlaces == null)
-            {
-                throw new InvalidDataException("decimalPlaces is a required property for LinePlusSingleStatProperties and cannot be null");
+                throw new InvalidDataException("fillColumns is a required property for MosaicViewProperties and cannot be null");
             }
             else
             {
-                this.DecimalPlaces = decimalPlaces;
+                this.FillColumns = fillColumns;
+            }
+            // to ensure "xDomain" is required (not null)
+            if (xDomain == null)
+            {
+                throw new InvalidDataException("xDomain is a required property for MosaicViewProperties and cannot be null");
+            }
+            else
+            {
+                this.XDomain = xDomain;
+            }
+            // to ensure "yDomain" is required (not null)
+            if (yDomain == null)
+            {
+                throw new InvalidDataException("yDomain is a required property for MosaicViewProperties and cannot be null");
+            }
+            else
+            {
+                this.YDomain = yDomain;
+            }
+            // to ensure "xAxisLabel" is required (not null)
+            if (xAxisLabel == null)
+            {
+                throw new InvalidDataException("xAxisLabel is a required property for MosaicViewProperties and cannot be null");
+            }
+            else
+            {
+                this.XAxisLabel = xAxisLabel;
+            }
+            // to ensure "yAxisLabel" is required (not null)
+            if (yAxisLabel == null)
+            {
+                throw new InvalidDataException("yAxisLabel is a required property for MosaicViewProperties and cannot be null");
+            }
+            else
+            {
+                this.YAxisLabel = yAxisLabel;
+            }
+            // to ensure "xPrefix" is required (not null)
+            if (xPrefix == null)
+            {
+                throw new InvalidDataException("xPrefix is a required property for MosaicViewProperties and cannot be null");
+            }
+            else
+            {
+                this.XPrefix = xPrefix;
+            }
+            // to ensure "xSuffix" is required (not null)
+            if (xSuffix == null)
+            {
+                throw new InvalidDataException("xSuffix is a required property for MosaicViewProperties and cannot be null");
+            }
+            else
+            {
+                this.XSuffix = xSuffix;
+            }
+            // to ensure "yPrefix" is required (not null)
+            if (yPrefix == null)
+            {
+                throw new InvalidDataException("yPrefix is a required property for MosaicViewProperties and cannot be null");
+            }
+            else
+            {
+                this.YPrefix = yPrefix;
+            }
+            // to ensure "ySuffix" is required (not null)
+            if (ySuffix == null)
+            {
+                throw new InvalidDataException("ySuffix is a required property for MosaicViewProperties and cannot be null");
+            }
+            else
+            {
+                this.YSuffix = ySuffix;
             }
             this.TimeFormat = timeFormat;
-            this.StaticLegend = staticLegend;
-            this.XColumn = xColumn;
             this.GenerateXAxisTicks = generateXAxisTicks;
             this.XTotalTicks = xTotalTicks;
             this.XTickStart = xTickStart;
             this.XTickStep = xTickStep;
-            this.YColumn = yColumn;
-            this.GenerateYAxisTicks = generateYAxisTicks;
-            this.YTotalTicks = yTotalTicks;
-            this.YTickStart = yTickStart;
-            this.YTickStep = yTickStep;
-            this.ShadeBelow = shadeBelow;
+            this.YLabelColumnSeparator = yLabelColumnSeparator;
+            this.YLabelColumns = yLabelColumns;
             this.HoverDimension = hoverDimension;
             this.LegendColorizeRows = legendColorizeRows;
             this.LegendHide = legendHide;
@@ -305,7 +328,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <value>Colors define color encoding of data into a visualization</value>
         [DataMember(Name="colors", EmitDefaultValue=false)]
-        public List<DashboardColor> Colors { get; set; }
+        public List<string> Colors { get; set; }
 
 
         /// <summary>
@@ -320,18 +343,6 @@ namespace InfluxDB.Client.Api.Domain
         /// <value>If true, will display note when empty</value>
         [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
         public bool? ShowNoteWhenEmpty { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Axes
-        /// </summary>
-        [DataMember(Name="axes", EmitDefaultValue=false)]
-        public Axes Axes { get; set; }
-
-        /// <summary>
-        /// Gets or Sets StaticLegend
-        /// </summary>
-        [DataMember(Name="staticLegend", EmitDefaultValue=false)]
-        public StaticLegend StaticLegend { get; set; }
 
         /// <summary>
         /// Gets or Sets XColumn
@@ -364,60 +375,77 @@ namespace InfluxDB.Client.Api.Domain
         public float? XTickStep { get; set; }
 
         /// <summary>
-        /// Gets or Sets YColumn
+        /// Gets or Sets YLabelColumnSeparator
         /// </summary>
-        [DataMember(Name="yColumn", EmitDefaultValue=false)]
-        public string YColumn { get; set; }
+        [DataMember(Name="yLabelColumnSeparator", EmitDefaultValue=false)]
+        public string YLabelColumnSeparator { get; set; }
 
         /// <summary>
-        /// Gets or Sets GenerateYAxisTicks
+        /// Gets or Sets YLabelColumns
         /// </summary>
-        [DataMember(Name="generateYAxisTicks", EmitDefaultValue=false)]
-        public List<string> GenerateYAxisTicks { get; set; }
+        [DataMember(Name="yLabelColumns", EmitDefaultValue=false)]
+        public List<string> YLabelColumns { get; set; }
 
         /// <summary>
-        /// Gets or Sets YTotalTicks
+        /// Gets or Sets YSeriesColumns
         /// </summary>
-        [DataMember(Name="yTotalTicks", EmitDefaultValue=false)]
-        public int? YTotalTicks { get; set; }
+        [DataMember(Name="ySeriesColumns", EmitDefaultValue=false)]
+        public List<string> YSeriesColumns { get; set; }
 
         /// <summary>
-        /// Gets or Sets YTickStart
+        /// Gets or Sets FillColumns
         /// </summary>
-        [DataMember(Name="yTickStart", EmitDefaultValue=false)]
-        public float? YTickStart { get; set; }
+        [DataMember(Name="fillColumns", EmitDefaultValue=false)]
+        public List<string> FillColumns { get; set; }
 
         /// <summary>
-        /// Gets or Sets YTickStep
+        /// Gets or Sets XDomain
         /// </summary>
-        [DataMember(Name="yTickStep", EmitDefaultValue=false)]
-        public float? YTickStep { get; set; }
+        [DataMember(Name="xDomain", EmitDefaultValue=false)]
+        public List<decimal?> XDomain { get; set; }
 
         /// <summary>
-        /// Gets or Sets ShadeBelow
+        /// Gets or Sets YDomain
         /// </summary>
-        [DataMember(Name="shadeBelow", EmitDefaultValue=false)]
-        public bool? ShadeBelow { get; set; }
-
-
+        [DataMember(Name="yDomain", EmitDefaultValue=false)]
+        public List<decimal?> YDomain { get; set; }
 
         /// <summary>
-        /// Gets or Sets Prefix
+        /// Gets or Sets XAxisLabel
         /// </summary>
-        [DataMember(Name="prefix", EmitDefaultValue=false)]
-        public string Prefix { get; set; }
+        [DataMember(Name="xAxisLabel", EmitDefaultValue=false)]
+        public string XAxisLabel { get; set; }
 
         /// <summary>
-        /// Gets or Sets Suffix
+        /// Gets or Sets YAxisLabel
         /// </summary>
-        [DataMember(Name="suffix", EmitDefaultValue=false)]
-        public string Suffix { get; set; }
+        [DataMember(Name="yAxisLabel", EmitDefaultValue=false)]
+        public string YAxisLabel { get; set; }
 
         /// <summary>
-        /// Gets or Sets DecimalPlaces
+        /// Gets or Sets XPrefix
         /// </summary>
-        [DataMember(Name="decimalPlaces", EmitDefaultValue=false)]
-        public DecimalPlaces DecimalPlaces { get; set; }
+        [DataMember(Name="xPrefix", EmitDefaultValue=false)]
+        public string XPrefix { get; set; }
+
+        /// <summary>
+        /// Gets or Sets XSuffix
+        /// </summary>
+        [DataMember(Name="xSuffix", EmitDefaultValue=false)]
+        public string XSuffix { get; set; }
+
+        /// <summary>
+        /// Gets or Sets YPrefix
+        /// </summary>
+        [DataMember(Name="yPrefix", EmitDefaultValue=false)]
+        public string YPrefix { get; set; }
+
+        /// <summary>
+        /// Gets or Sets YSuffix
+        /// </summary>
+        [DataMember(Name="ySuffix", EmitDefaultValue=false)]
+        public string YSuffix { get; set; }
+
 
         /// <summary>
         /// Gets or Sets LegendColorizeRows
@@ -450,7 +478,7 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class LinePlusSingleStatProperties {\n");
+            sb.Append("class MosaicViewProperties {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  TimeFormat: ").Append(TimeFormat).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
@@ -459,24 +487,24 @@ namespace InfluxDB.Client.Api.Domain
             sb.Append("  Shape: ").Append(Shape).Append("\n");
             sb.Append("  Note: ").Append(Note).Append("\n");
             sb.Append("  ShowNoteWhenEmpty: ").Append(ShowNoteWhenEmpty).Append("\n");
-            sb.Append("  Axes: ").Append(Axes).Append("\n");
-            sb.Append("  StaticLegend: ").Append(StaticLegend).Append("\n");
             sb.Append("  XColumn: ").Append(XColumn).Append("\n");
             sb.Append("  GenerateXAxisTicks: ").Append(GenerateXAxisTicks).Append("\n");
             sb.Append("  XTotalTicks: ").Append(XTotalTicks).Append("\n");
             sb.Append("  XTickStart: ").Append(XTickStart).Append("\n");
             sb.Append("  XTickStep: ").Append(XTickStep).Append("\n");
-            sb.Append("  YColumn: ").Append(YColumn).Append("\n");
-            sb.Append("  GenerateYAxisTicks: ").Append(GenerateYAxisTicks).Append("\n");
-            sb.Append("  YTotalTicks: ").Append(YTotalTicks).Append("\n");
-            sb.Append("  YTickStart: ").Append(YTickStart).Append("\n");
-            sb.Append("  YTickStep: ").Append(YTickStep).Append("\n");
-            sb.Append("  ShadeBelow: ").Append(ShadeBelow).Append("\n");
+            sb.Append("  YLabelColumnSeparator: ").Append(YLabelColumnSeparator).Append("\n");
+            sb.Append("  YLabelColumns: ").Append(YLabelColumns).Append("\n");
+            sb.Append("  YSeriesColumns: ").Append(YSeriesColumns).Append("\n");
+            sb.Append("  FillColumns: ").Append(FillColumns).Append("\n");
+            sb.Append("  XDomain: ").Append(XDomain).Append("\n");
+            sb.Append("  YDomain: ").Append(YDomain).Append("\n");
+            sb.Append("  XAxisLabel: ").Append(XAxisLabel).Append("\n");
+            sb.Append("  YAxisLabel: ").Append(YAxisLabel).Append("\n");
+            sb.Append("  XPrefix: ").Append(XPrefix).Append("\n");
+            sb.Append("  XSuffix: ").Append(XSuffix).Append("\n");
+            sb.Append("  YPrefix: ").Append(YPrefix).Append("\n");
+            sb.Append("  YSuffix: ").Append(YSuffix).Append("\n");
             sb.Append("  HoverDimension: ").Append(HoverDimension).Append("\n");
-            sb.Append("  Position: ").Append(Position).Append("\n");
-            sb.Append("  Prefix: ").Append(Prefix).Append("\n");
-            sb.Append("  Suffix: ").Append(Suffix).Append("\n");
-            sb.Append("  DecimalPlaces: ").Append(DecimalPlaces).Append("\n");
             sb.Append("  LegendColorizeRows: ").Append(LegendColorizeRows).Append("\n");
             sb.Append("  LegendHide: ").Append(LegendHide).Append("\n");
             sb.Append("  LegendOpacity: ").Append(LegendOpacity).Append("\n");
@@ -501,15 +529,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LinePlusSingleStatProperties);
+            return this.Equals(input as MosaicViewProperties);
         }
 
         /// <summary>
-        /// Returns true if LinePlusSingleStatProperties instances are equal
+        /// Returns true if MosaicViewProperties instances are equal
         /// </summary>
-        /// <param name="input">Instance of LinePlusSingleStatProperties to be compared</param>
+        /// <param name="input">Instance of MosaicViewProperties to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(LinePlusSingleStatProperties input)
+        public bool Equals(MosaicViewProperties input)
         {
             if (input == null)
                 return false;
@@ -551,16 +579,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
                 ) && base.Equals(input) && 
                 (
-                    
-                    (this.Axes != null &&
-                    this.Axes.Equals(input.Axes))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.StaticLegend != null &&
-                    this.StaticLegend.Equals(input.StaticLegend))
-                ) && base.Equals(input) && 
-                (
                     this.XColumn == input.XColumn ||
                     (this.XColumn != null &&
                     this.XColumn.Equals(input.XColumn))
@@ -586,59 +604,69 @@ namespace InfluxDB.Client.Api.Domain
                     this.XTickStep.Equals(input.XTickStep))
                 ) && base.Equals(input) && 
                 (
-                    this.YColumn == input.YColumn ||
-                    (this.YColumn != null &&
-                    this.YColumn.Equals(input.YColumn))
+                    this.YLabelColumnSeparator == input.YLabelColumnSeparator ||
+                    (this.YLabelColumnSeparator != null &&
+                    this.YLabelColumnSeparator.Equals(input.YLabelColumnSeparator))
                 ) && base.Equals(input) && 
                 (
-                    this.GenerateYAxisTicks == input.GenerateYAxisTicks ||
-                    this.GenerateYAxisTicks != null &&
-                    this.GenerateYAxisTicks.SequenceEqual(input.GenerateYAxisTicks)
+                    this.YLabelColumns == input.YLabelColumns ||
+                    this.YLabelColumns != null &&
+                    this.YLabelColumns.SequenceEqual(input.YLabelColumns)
                 ) && base.Equals(input) && 
                 (
-                    this.YTotalTicks == input.YTotalTicks ||
-                    (this.YTotalTicks != null &&
-                    this.YTotalTicks.Equals(input.YTotalTicks))
+                    this.YSeriesColumns == input.YSeriesColumns ||
+                    this.YSeriesColumns != null &&
+                    this.YSeriesColumns.SequenceEqual(input.YSeriesColumns)
                 ) && base.Equals(input) && 
                 (
-                    this.YTickStart == input.YTickStart ||
-                    (this.YTickStart != null &&
-                    this.YTickStart.Equals(input.YTickStart))
+                    this.FillColumns == input.FillColumns ||
+                    this.FillColumns != null &&
+                    this.FillColumns.SequenceEqual(input.FillColumns)
                 ) && base.Equals(input) && 
                 (
-                    this.YTickStep == input.YTickStep ||
-                    (this.YTickStep != null &&
-                    this.YTickStep.Equals(input.YTickStep))
+                    this.XDomain == input.XDomain ||
+                    this.XDomain != null &&
+                    this.XDomain.SequenceEqual(input.XDomain)
                 ) && base.Equals(input) && 
                 (
-                    this.ShadeBelow == input.ShadeBelow ||
-                    (this.ShadeBelow != null &&
-                    this.ShadeBelow.Equals(input.ShadeBelow))
+                    this.YDomain == input.YDomain ||
+                    this.YDomain != null &&
+                    this.YDomain.SequenceEqual(input.YDomain)
+                ) && base.Equals(input) && 
+                (
+                    this.XAxisLabel == input.XAxisLabel ||
+                    (this.XAxisLabel != null &&
+                    this.XAxisLabel.Equals(input.XAxisLabel))
+                ) && base.Equals(input) && 
+                (
+                    this.YAxisLabel == input.YAxisLabel ||
+                    (this.YAxisLabel != null &&
+                    this.YAxisLabel.Equals(input.YAxisLabel))
+                ) && base.Equals(input) && 
+                (
+                    this.XPrefix == input.XPrefix ||
+                    (this.XPrefix != null &&
+                    this.XPrefix.Equals(input.XPrefix))
+                ) && base.Equals(input) && 
+                (
+                    this.XSuffix == input.XSuffix ||
+                    (this.XSuffix != null &&
+                    this.XSuffix.Equals(input.XSuffix))
+                ) && base.Equals(input) && 
+                (
+                    this.YPrefix == input.YPrefix ||
+                    (this.YPrefix != null &&
+                    this.YPrefix.Equals(input.YPrefix))
+                ) && base.Equals(input) && 
+                (
+                    this.YSuffix == input.YSuffix ||
+                    (this.YSuffix != null &&
+                    this.YSuffix.Equals(input.YSuffix))
                 ) && base.Equals(input) && 
                 (
                     this.HoverDimension == input.HoverDimension ||
                     (this.HoverDimension != null &&
                     this.HoverDimension.Equals(input.HoverDimension))
-                ) && base.Equals(input) && 
-                (
-                    this.Position == input.Position ||
-                    (this.Position != null &&
-                    this.Position.Equals(input.Position))
-                ) && base.Equals(input) && 
-                (
-                    this.Prefix == input.Prefix ||
-                    (this.Prefix != null &&
-                    this.Prefix.Equals(input.Prefix))
-                ) && base.Equals(input) && 
-                (
-                    this.Suffix == input.Suffix ||
-                    (this.Suffix != null &&
-                    this.Suffix.Equals(input.Suffix))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.DecimalPlaces != null &&
-                    this.DecimalPlaces.Equals(input.DecimalPlaces))
                 ) && base.Equals(input) && 
                 (
                     this.LegendColorizeRows == input.LegendColorizeRows ||
@@ -685,10 +713,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Note.GetHashCode();
                 if (this.ShowNoteWhenEmpty != null)
                     hashCode = hashCode * 59 + this.ShowNoteWhenEmpty.GetHashCode();
-                if (this.Axes != null)
-                    hashCode = hashCode * 59 + this.Axes.GetHashCode();
-                if (this.StaticLegend != null)
-                    hashCode = hashCode * 59 + this.StaticLegend.GetHashCode();
                 if (this.XColumn != null)
                     hashCode = hashCode * 59 + this.XColumn.GetHashCode();
                 if (this.GenerateXAxisTicks != null)
@@ -699,28 +723,32 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.XTickStart.GetHashCode();
                 if (this.XTickStep != null)
                     hashCode = hashCode * 59 + this.XTickStep.GetHashCode();
-                if (this.YColumn != null)
-                    hashCode = hashCode * 59 + this.YColumn.GetHashCode();
-                if (this.GenerateYAxisTicks != null)
-                    hashCode = hashCode * 59 + this.GenerateYAxisTicks.GetHashCode();
-                if (this.YTotalTicks != null)
-                    hashCode = hashCode * 59 + this.YTotalTicks.GetHashCode();
-                if (this.YTickStart != null)
-                    hashCode = hashCode * 59 + this.YTickStart.GetHashCode();
-                if (this.YTickStep != null)
-                    hashCode = hashCode * 59 + this.YTickStep.GetHashCode();
-                if (this.ShadeBelow != null)
-                    hashCode = hashCode * 59 + this.ShadeBelow.GetHashCode();
+                if (this.YLabelColumnSeparator != null)
+                    hashCode = hashCode * 59 + this.YLabelColumnSeparator.GetHashCode();
+                if (this.YLabelColumns != null)
+                    hashCode = hashCode * 59 + this.YLabelColumns.GetHashCode();
+                if (this.YSeriesColumns != null)
+                    hashCode = hashCode * 59 + this.YSeriesColumns.GetHashCode();
+                if (this.FillColumns != null)
+                    hashCode = hashCode * 59 + this.FillColumns.GetHashCode();
+                if (this.XDomain != null)
+                    hashCode = hashCode * 59 + this.XDomain.GetHashCode();
+                if (this.YDomain != null)
+                    hashCode = hashCode * 59 + this.YDomain.GetHashCode();
+                if (this.XAxisLabel != null)
+                    hashCode = hashCode * 59 + this.XAxisLabel.GetHashCode();
+                if (this.YAxisLabel != null)
+                    hashCode = hashCode * 59 + this.YAxisLabel.GetHashCode();
+                if (this.XPrefix != null)
+                    hashCode = hashCode * 59 + this.XPrefix.GetHashCode();
+                if (this.XSuffix != null)
+                    hashCode = hashCode * 59 + this.XSuffix.GetHashCode();
+                if (this.YPrefix != null)
+                    hashCode = hashCode * 59 + this.YPrefix.GetHashCode();
+                if (this.YSuffix != null)
+                    hashCode = hashCode * 59 + this.YSuffix.GetHashCode();
                 if (this.HoverDimension != null)
                     hashCode = hashCode * 59 + this.HoverDimension.GetHashCode();
-                if (this.Position != null)
-                    hashCode = hashCode * 59 + this.Position.GetHashCode();
-                if (this.Prefix != null)
-                    hashCode = hashCode * 59 + this.Prefix.GetHashCode();
-                if (this.Suffix != null)
-                    hashCode = hashCode * 59 + this.Suffix.GetHashCode();
-                if (this.DecimalPlaces != null)
-                    hashCode = hashCode * 59 + this.DecimalPlaces.GetHashCode();
                 if (this.LegendColorizeRows != null)
                     hashCode = hashCode * 59 + this.LegendColorizeRows.GetHashCode();
                 if (this.LegendHide != null)
