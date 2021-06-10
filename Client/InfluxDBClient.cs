@@ -327,7 +327,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Delete API</returns>
         public DeleteApi GetDeleteApi()
         {
-            var service = new DefaultService((Configuration) _apiClient.Configuration)
+            var service = new DeleteService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
