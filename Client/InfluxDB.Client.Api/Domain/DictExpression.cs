@@ -24,20 +24,20 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Allows the declaration of an anonymous object within a declaration
+    /// Used to create and directly specify the elements of a dictionary
     /// </summary>
     [DataContract]
-    public partial class ObjectExpression : Expression,  IEquatable<ObjectExpression>
+    public partial class DictExpression : Expression,  IEquatable<DictExpression>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectExpression" /> class.
+        /// Initializes a new instance of the <see cref="DictExpression" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
-        /// <param name="properties">Object properties.</param>
-        public ObjectExpression(string type = default(string), List<Property> properties = default(List<Property>)) : base()
+        /// <param name="elements">Elements of the dictionary.</param>
+        public DictExpression(string type = default(string), List<DictItem> elements = default(List<DictItem>)) : base()
         {
             this.Type = type;
-            this.Properties = properties;
+            this.Elements = elements;
         }
 
         /// <summary>
@@ -48,11 +48,11 @@ namespace InfluxDB.Client.Api.Domain
         public string Type { get; set; }
 
         /// <summary>
-        /// Object properties
+        /// Elements of the dictionary
         /// </summary>
-        /// <value>Object properties</value>
-        [DataMember(Name="properties", EmitDefaultValue=false)]
-        public List<Property> Properties { get; set; }
+        /// <value>Elements of the dictionary</value>
+        [DataMember(Name="elements", EmitDefaultValue=false)]
+        public List<DictItem> Elements { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -61,10 +61,10 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ObjectExpression {\n");
+            sb.Append("class DictExpression {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Properties: ").Append(Properties).Append("\n");
+            sb.Append("  Elements: ").Append(Elements).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,15 +85,15 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ObjectExpression);
+            return this.Equals(input as DictExpression);
         }
 
         /// <summary>
-        /// Returns true if ObjectExpression instances are equal
+        /// Returns true if DictExpression instances are equal
         /// </summary>
-        /// <param name="input">Instance of ObjectExpression to be compared</param>
+        /// <param name="input">Instance of DictExpression to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ObjectExpression input)
+        public bool Equals(DictExpression input)
         {
             if (input == null)
                 return false;
@@ -105,9 +105,9 @@ namespace InfluxDB.Client.Api.Domain
                     this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
-                    this.Properties == input.Properties ||
-                    this.Properties != null &&
-                    this.Properties.SequenceEqual(input.Properties)
+                    this.Elements == input.Elements ||
+                    this.Elements != null &&
+                    this.Elements.SequenceEqual(input.Elements)
                 );
         }
 
@@ -122,8 +122,8 @@ namespace InfluxDB.Client.Api.Domain
                 int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Properties != null)
-                    hashCode = hashCode * 59 + this.Properties.GetHashCode();
+                if (this.Elements != null)
+                    hashCode = hashCode * 59 + this.Elements.GetHashCode();
                 return hashCode;
             }
         }
