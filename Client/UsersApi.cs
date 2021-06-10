@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            return _service.PostUsersAsync(user);
+            return _service.PostUsersAsync(ToPostUser(user));
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(user, nameof(user));
 
-            return _service.PatchUsersIDAsync(user.Id, user);
+            return _service.PatchUsersIDAsync(user.Id, ToPostUser(user));
         }
 
         /// <summary>
@@ -209,6 +210,13 @@ namespace InfluxDB.Client
             var header = InfluxDBClient.AuthorizationHeader(userName, oldPassword);
 
             return _service.PostUsersIDPasswordAsync(userId, new PasswordResetBody(newPassword), null, header);
+        }
+        
+        private PostUser ToPostUser(User user)
+        {
+            Enum.TryParse(user.Status.ToString(), true, out PostUser.StatusEnum status);
+            var postUser = new PostUser(user.OauthID, user.Name, status);
+            return postUser;
         }
     }
 }
