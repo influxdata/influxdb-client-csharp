@@ -19,32 +19,57 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Check
+    /// CustomCheck
     /// </summary>
     [DataContract]
-    [JsonConverter(typeof(JsonSubtypes), "type")]
-    [JsonSubtypes.KnownSubType(typeof(DeadmanCheck), "deadman")]
-    [JsonSubtypes.KnownSubType(typeof(CustomCheck), "custom")]
-    [JsonSubtypes.KnownSubType(typeof(ThresholdCheck), "threshold")]
-    public partial class Check : CheckDiscriminator,  IEquatable<Check>
+    public partial class CustomCheck : Check,  IEquatable<CustomCheck>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Check" /> class.
+        /// Defines Type
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum TypeEnum
+        {
+            /// <summary>
+            /// Enum Custom for value: custom
+            /// </summary>
+            [EnumMember(Value = "custom")]
+            Custom = 1
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public TypeEnum Type { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomCheck" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Check() { }
+        protected CustomCheck() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Check" /> class.
+        /// Initializes a new instance of the <see cref="CustomCheck" /> class.
         /// </summary>
-        public Check(string name = default(string), string orgID = default(string), string taskID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string description = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks)) : base(name, orgID, taskID, query, status, description, labels, links)
+        /// <param name="type">type (required) (default to TypeEnum.Custom).</param>
+        public CustomCheck(TypeEnum type = TypeEnum.Custom, string name = default(string), string orgID = default(string), string taskID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string description = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks)) : base(name, orgID, taskID, query, status, description, labels, links)
         {
+            // to ensure "type" is required (not null)
+            if (type == null)
+            {
+                throw new InvalidDataException("type is a required property for CustomCheck and cannot be null");
+            }
+            else
+            {
+                this.Type = type;
+            }
         }
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -53,8 +78,9 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Check {\n");
+            sb.Append("class CustomCheck {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,20 +101,25 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Check);
+            return this.Equals(input as CustomCheck);
         }
 
         /// <summary>
-        /// Returns true if Check instances are equal
+        /// Returns true if CustomCheck instances are equal
         /// </summary>
-        /// <param name="input">Instance of Check to be compared</param>
+        /// <param name="input">Instance of CustomCheck to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Check input)
+        public bool Equals(CustomCheck input)
         {
             if (input == null)
                 return false;
 
-            return base.Equals(input);
+            return base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                );
         }
 
         /// <summary>
@@ -100,6 +131,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
