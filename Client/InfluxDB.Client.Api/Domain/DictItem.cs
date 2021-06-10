@@ -24,22 +24,22 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Represents a function call
+    /// A key/value pair in a dictionary
     /// </summary>
     [DataContract]
-    public partial class CallExpression : Expression,  IEquatable<CallExpression>
+    public partial class DictItem :  IEquatable<DictItem>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CallExpression" /> class.
+        /// Initializes a new instance of the <see cref="DictItem" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
-        /// <param name="callee">callee.</param>
-        /// <param name="arguments">Function arguments.</param>
-        public CallExpression(string type = default(string), Expression callee = default(Expression), List<Expression> arguments = default(List<Expression>)) : base()
+        /// <param name="key">key.</param>
+        /// <param name="val">val.</param>
+        public DictItem(string type = default(string), Expression key = default(Expression), Expression val = default(Expression))
         {
             this.Type = type;
-            this.Callee = callee;
-            this.Arguments = arguments;
+            this.Key = key;
+            this.Val = val;
         }
 
         /// <summary>
@@ -50,19 +50,18 @@ namespace InfluxDB.Client.Api.Domain
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Callee
+        /// Gets or Sets Key
         /// </summary>
-        [DataMember(Name="callee", EmitDefaultValue=false)]
-        [JsonConverter(typeof(CallExpressionCalleeAdapter))]
-        public Expression Callee { get; set; }
+        [DataMember(Name="key", EmitDefaultValue=false)]
+        [JsonConverter(typeof(DictItemKeyAdapter))]
+        public Expression Key { get; set; }
 
         /// <summary>
-        /// Function arguments
+        /// Gets or Sets Val
         /// </summary>
-        /// <value>Function arguments</value>
-        [DataMember(Name="arguments", EmitDefaultValue=false)]
-        [JsonConverter(typeof(CallExpressionArgumentsAdapter))]
-        public List<Expression> Arguments { get; set; }
+        [DataMember(Name="val", EmitDefaultValue=false)]
+        [JsonConverter(typeof(DictItemValAdapter))]
+        public Expression Val { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -71,11 +70,10 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class CallExpression {\n");
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("class DictItem {\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Callee: ").Append(Callee).Append("\n");
-            sb.Append("  Arguments: ").Append(Arguments).Append("\n");
+            sb.Append("  Key: ").Append(Key).Append("\n");
+            sb.Append("  Val: ").Append(Val).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public override string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -96,34 +94,34 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as CallExpression);
+            return this.Equals(input as DictItem);
         }
 
         /// <summary>
-        /// Returns true if CallExpression instances are equal
+        /// Returns true if DictItem instances are equal
         /// </summary>
-        /// <param name="input">Instance of CallExpression to be compared</param>
+        /// <param name="input">Instance of DictItem to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(CallExpression input)
+        public bool Equals(DictItem input)
         {
             if (input == null)
                 return false;
 
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     
-                    (this.Callee != null &&
-                    this.Callee.Equals(input.Callee))
-                ) && base.Equals(input) && 
+                    (this.Key != null &&
+                    this.Key.Equals(input.Key))
+                ) && 
                 (
-                    this.Arguments == input.Arguments ||
-                    this.Arguments != null &&
-                    this.Arguments.SequenceEqual(input.Arguments)
+                    
+                    (this.Val != null &&
+                    this.Val.Equals(input.Val))
                 );
         }
 
@@ -135,18 +133,18 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Callee != null)
-                    hashCode = hashCode * 59 + this.Callee.GetHashCode();
-                if (this.Arguments != null)
-                    hashCode = hashCode * 59 + this.Arguments.GetHashCode();
+                if (this.Key != null)
+                    hashCode = hashCode * 59 + this.Key.GetHashCode();
+                if (this.Val != null)
+                    hashCode = hashCode * 59 + this.Val.GetHashCode();
                 return hashCode;
             }
         }
 
-    public class CallExpressionArgumentsAdapter : JsonConverter
+    public class DictItemValAdapter : JsonConverter
     {
         private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
         {
@@ -225,7 +223,7 @@ namespace InfluxDB.Client.Api.Domain
             return list;
         }
     }
-    public class CallExpressionCalleeAdapter : JsonConverter
+    public class DictItemKeyAdapter : JsonConverter
     {
         private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
         {

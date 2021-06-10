@@ -24,18 +24,33 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Expression
+    /// CellWithViewProperties
     /// </summary>
     [DataContract]
-    public partial class Expression : Node,  IEquatable<Expression>
+    public partial class CellWithViewProperties : Cell,  IEquatable<CellWithViewProperties>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Expression" /> class.
+        /// Initializes a new instance of the <see cref="CellWithViewProperties" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        public Expression() : base()
+        /// <param name="name">name.</param>
+        /// <param name="properties">properties.</param>
+        public CellWithViewProperties(string name = default(string), ViewProperties properties = default(ViewProperties), string id = default(string), CellLinks links = default(CellLinks), int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?), string viewID = default(string)) : base(id, links, x, y, w, h, viewID)
         {
+            this.Name = name;
+            this.Properties = properties;
         }
+
+        /// <summary>
+        /// Gets or Sets Name
+        /// </summary>
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Properties
+        /// </summary>
+        [DataMember(Name="properties", EmitDefaultValue=false)]
+        public ViewProperties Properties { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -44,8 +59,10 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Expression {\n");
+            sb.Append("class CellWithViewProperties {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Properties: ").Append(Properties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -66,20 +83,30 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Expression);
+            return this.Equals(input as CellWithViewProperties);
         }
 
         /// <summary>
-        /// Returns true if Expression instances are equal
+        /// Returns true if CellWithViewProperties instances are equal
         /// </summary>
-        /// <param name="input">Instance of Expression to be compared</param>
+        /// <param name="input">Instance of CellWithViewProperties to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Expression input)
+        public bool Equals(CellWithViewProperties input)
         {
             if (input == null)
                 return false;
 
-            return base.Equals(input);
+            return base.Equals(input) && 
+                (
+                    this.Name == input.Name ||
+                    (this.Name != null &&
+                    this.Name.Equals(input.Name))
+                ) && base.Equals(input) && 
+                (
+                    
+                    (this.Properties != null &&
+                    this.Properties.Equals(input.Properties))
+                );
         }
 
         /// <summary>
@@ -91,6 +118,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Properties != null)
+                    hashCode = hashCode * 59 + this.Properties.GetHashCode();
                 return hashCode;
             }
         }
