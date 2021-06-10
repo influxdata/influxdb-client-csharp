@@ -10,9 +10,9 @@ namespace InfluxDB.Client
 {
     public class DeleteApi
     {
-        private readonly DefaultService _service;
+        private readonly DeleteService _service;
 
-        protected internal DeleteApi(DefaultService service)
+        protected internal DeleteApi(DeleteService service)
         {
             Arguments.CheckNotNull(service, nameof(service));
 
@@ -71,7 +71,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucket, "Bucket is required");
             Arguments.CheckNonEmptyString(org, "Organization is required");
             
-            return _service.DeletePostAsync(predicate, null, org, bucket, null, null);
+            return _service.PostDeleteAsync(predicate, null, org, bucket, null, null);
         }
     }
 }
