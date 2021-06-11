@@ -219,7 +219,7 @@ namespace Client.Legacy.Test
             await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
 
             var request= MockServer.LogEntries.Last();
-            StringAssert.StartsWith("influxdb-client-csharp/1.", request.RequestMessage.Headers["User-Agent"].First());
+            StringAssert.StartsWith("influxdb-client-csharp/2.", request.RequestMessage.Headers["User-Agent"].First());
             StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
         }
 
