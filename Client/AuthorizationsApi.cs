@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
@@ -44,7 +45,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(permissions, "permissions");
 
             var authorization =
-                new Authorization(orgId, permissions, null, AuthorizationUpdateRequest.StatusEnum.Active);
+                new AuthorizationPostRequest(orgId, null, permissions, AuthorizationUpdateRequest.StatusEnum.Active);
 
             return CreateAuthorizationAsync(authorization);
         }
@@ -54,7 +55,25 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="authorization">authorization to create</param>
         /// <returns>the created authorization</returns>
+        [Obsolete("This method is obsolete. Call 'CreateAuthorizationAsync(AuthorizationPostRequest)' instead.", false)]
         public Task<Authorization> CreateAuthorizationAsync(Authorization authorization)
+        {
+            Arguments.CheckNotNull(authorization, nameof(authorization));
+
+            var request =
+                new AuthorizationPostRequest(authorization.OrgID,
+                    authorization.UserID,
+                    authorization.Permissions, description: authorization.Description);
+
+            return CreateAuthorizationAsync(request);
+        }
+
+        /// <summary>
+        /// Create an authorization with defined permissions.
+        /// </summary>
+        /// <param name="authorization">authorization to create</param>
+        /// <returns>the created authorization</returns>
+        public Task<Authorization> CreateAuthorizationAsync(AuthorizationPostRequest authorization)
         {
             Arguments.CheckNotNull(authorization, nameof(authorization));
 
@@ -121,7 +140,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(authorization, nameof(authorization));
 
-            var cloned = new Authorization(authorization.OrgID, authorization.Permissions, authorization.Links,
+            var cloned = new AuthorizationPostRequest(authorization.OrgID, authorization.UserID, authorization.Permissions,
                 authorization.Status, authorization.Description);
 
             return CreateAuthorizationAsync(cloned);

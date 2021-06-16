@@ -69,7 +69,7 @@ namespace InfluxDB.Client.Test
                 new PermissionResource {Type = PermissionResource.TypeEnum.Sources, OrgID = _organization.Id}
             );
 
-            var authorization = new Authorization
+            var authorization = new AuthorizationPostRequest
             {
                 OrgID = _organization.Id,
                 Permissions = new List<Permission> {writeSources},

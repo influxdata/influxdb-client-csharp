@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
@@ -41,7 +40,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return _service.PostOrgsAsync(organization);
+            var request = new PostOrganizationRequest(organization.Name, organization.Description);
+            return _service.PostOrgsAsync(request);
         }
 
         /// <summary>
@@ -53,7 +53,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return _service.PatchOrgsIDAsync(organization.Id, organization);
+            var request = new PatchOrganizationRequest(organization.Name, organization.Description);
+            return _service.PatchOrgsIDAsync(organization.Id, request);
         }
 
         /// <summary>
@@ -127,10 +128,18 @@ namespace InfluxDB.Client
         /// List all organizations.
         /// </summary>
         /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="descending"> (optional, default to false)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
+        /// <param name="userID">Filter organizations to a specific user ID. (optional)</param>
         /// <returns>List all organizations</returns>
-        public async Task<List<Organization>> FindOrganizationsAsync(int? limit = null)
+        public async Task<List<Organization>> FindOrganizationsAsync(int? limit = null, int? offset = null,
+            bool? descending = null, string org = null, string orgID = null, string userID = null)
         {
-            var response = await _service.GetOrgsAsync(limit: limit).ConfigureAwait(false);
+            var response = await _service.GetOrgsAsync(limit: limit, offset: offset, descending: descending, org: org,
+                orgID: orgID, userID: userID).ConfigureAwait(false);
+
             return response.Orgs;
         }
 

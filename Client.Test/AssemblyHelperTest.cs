@@ -11,8 +11,8 @@ namespace InfluxDB.Client.Test
         public void GetAssemblyVersion()
         {
             var version = AssemblyHelper.GetVersion(typeof(InfluxDBClient));
-            Assert.AreEqual(1, Version.Parse(version).Major);
-            Assert.Greater(Version.Parse(version).Minor, 5);
+            Assert.AreEqual(2, Version.Parse(version).Major);
+            Assert.GreaterOrEqual(Version.Parse(version).Minor, 0);
             Assert.AreEqual(0, Version.Parse(version).Build);
             Assert.AreEqual(0, Version.Parse(version).Revision);
         }
