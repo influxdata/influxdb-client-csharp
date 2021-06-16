@@ -28,6 +28,14 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 ### API
 1. [#206](https://github.com/influxdata/influxdb-client-csharp/pull/206): Use InfluxDB OSS API definitions to generated APIs
 
+### Dependencies
+1. [#209](https://github.com/influxdata/influxdb-client-csharp/pull/209): Update dependencies:
+    - CsvHelper to 27.1.0
+    - Newtonsoft.Json 13.0.1
+    - NodaTime to 3.0.5
+    - NodaTime.Serialization.JsonNet to 3.0.0
+    - Microsoft.Extensions.ObjectPool to 5.0.7
+
 ## 1.19.0 [2021-06-04]
 
 ### Features
