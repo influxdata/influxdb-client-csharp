@@ -26,7 +26,7 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 1. [#206](https://github.com/influxdata/influxdb-client-csharp/pull/206): Use optional args to pass query parameters into API list call - useful for the ability to use pagination.
 
 ### API
-1. [#206](https://github.com/influxdata/influxdb-client-csharp/pull/206): Use InfluxDB OSS API definitions to generated APIs
+1. [#206](https://github.com/influxdata/influxdb-client-csharp/pull/206), [#210](https://github.com/influxdata/influxdb-client-csharp/pull/210): Use InfluxDB OSS API definitions to generated APIs
 
 ## 1.19.0 [2021-06-04]
 
