@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// A valid Flux identifier
     /// </summary>
     [DataContract]
-    public partial class Identifier : Expression,  IEquatable<Identifier>
+    public partial class Identifier : PropertyKey,  IEquatable<Identifier>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Identifier" /> class.

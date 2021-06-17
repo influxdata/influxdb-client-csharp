@@ -27,13 +27,13 @@ namespace InfluxDB.Client.Api.Domain
     /// PropertyKey
     /// </summary>
     [DataContract]
-    public partial class PropertyKey :  IEquatable<PropertyKey>
+    public partial class PropertyKey : Expression,  IEquatable<PropertyKey>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyKey" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public PropertyKey()
+        public PropertyKey() : base()
         {
         }
 
@@ -45,6 +45,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             var sb = new StringBuilder();
             sb.Append("class PropertyKey {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -53,7 +54,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -78,7 +79,7 @@ namespace InfluxDB.Client.Api.Domain
             if (input == null)
                 return false;
 
-            return false;
+            return base.Equals(input);
         }
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 return hashCode;
             }
         }

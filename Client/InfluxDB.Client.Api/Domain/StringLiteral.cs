@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Expressions begin and end with double quote marks
     /// </summary>
     [DataContract]
-    public partial class StringLiteral : Expression,  IEquatable<StringLiteral>
+    public partial class StringLiteral : PropertyKey,  IEquatable<StringLiteral>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StringLiteral" /> class.
