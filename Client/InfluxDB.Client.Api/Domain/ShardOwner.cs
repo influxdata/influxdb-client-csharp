@@ -24,34 +24,39 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Expressions begin and end with double quote marks
+    /// ShardOwner
     /// </summary>
     [DataContract]
-    public partial class StringLiteral : PropertyKey,  IEquatable<StringLiteral>
+    public partial class ShardOwner :  IEquatable<ShardOwner>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="StringLiteral" /> class.
+        /// Initializes a new instance of the <see cref="ShardOwner" /> class.
         /// </summary>
-        /// <param name="type">Type of AST node.</param>
-        /// <param name="value">value.</param>
-        public StringLiteral(string type = default(string), string value = default(string)) : base()
+        [JsonConstructorAttribute]
+        protected ShardOwner() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShardOwner" /> class.
+        /// </summary>
+        /// <param name="nodeID">ID of the node that owns a shard. (required).</param>
+        public ShardOwner(long? nodeID = default(long?))
         {
-            this.Type = type;
-            this.Value = value;
+            // to ensure "nodeID" is required (not null)
+            if (nodeID == null)
+            {
+                throw new InvalidDataException("nodeID is a required property for ShardOwner and cannot be null");
+            }
+            else
+            {
+                this.NodeID = nodeID;
+            }
         }
 
         /// <summary>
-        /// Type of AST node
+        /// ID of the node that owns a shard.
         /// </summary>
-        /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Value
-        /// </summary>
-        [DataMember(Name="value", EmitDefaultValue=false)]
-        public string Value { get; set; }
+        /// <value>ID of the node that owns a shard.</value>
+        [DataMember(Name="nodeID", EmitDefaultValue=false)]
+        public long? NodeID { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -60,10 +65,8 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class StringLiteral {\n");
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Value: ").Append(Value).Append("\n");
+            sb.Append("class ShardOwner {\n");
+            sb.Append("  NodeID: ").Append(NodeID).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -72,7 +75,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public override string ToJson()
+        public virtual string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -84,29 +87,24 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as StringLiteral);
+            return this.Equals(input as ShardOwner);
         }
 
         /// <summary>
-        /// Returns true if StringLiteral instances are equal
+        /// Returns true if ShardOwner instances are equal
         /// </summary>
-        /// <param name="input">Instance of StringLiteral to be compared</param>
+        /// <param name="input">Instance of ShardOwner to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(StringLiteral input)
+        public bool Equals(ShardOwner input)
         {
             if (input == null)
                 return false;
 
-            return base.Equals(input) && 
+            return 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
-                    this.Value == input.Value ||
-                    (this.Value != null &&
-                    this.Value.Equals(input.Value))
+                    this.NodeID == input.NodeID ||
+                    (this.NodeID != null &&
+                    this.NodeID.Equals(input.NodeID))
                 );
         }
 
@@ -118,11 +116,9 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
+                int hashCode = 41;
+                if (this.NodeID != null)
+                    hashCode = hashCode * 59 + this.NodeID.GetHashCode();
                 return hashCode;
             }
         }
