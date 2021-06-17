@@ -9,12 +9,15 @@ namespace InfluxDB.Client
     public class OrganizationsApi
     {
         private readonly OrganizationsService _service;
+        private readonly SecretsService _secretsService;
 
-        protected internal OrganizationsApi(OrganizationsService service)
+        protected internal OrganizationsApi(OrganizationsService service, SecretsService secretsService)
         {
             Arguments.CheckNotNull(service, nameof(service));
+            Arguments.CheckNotNull(secretsService, nameof(secretsService));
 
             _service = service;
+            _secretsService = secretsService;
         }
 
         /// <summary>
@@ -174,7 +177,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _service.GetOrgsIDSecretsAsync(orgId).ConfigureAwait(false);
+            var response = await _secretsService.GetOrgsIDSecretsAsync(orgId).ConfigureAwait(false);
             return response.Secrets;
         }
 
@@ -203,7 +206,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.PatchOrgsIDSecretsAsync(orgId, secrets);
+            return _secretsService.PatchOrgsIDSecretsAsync(orgId, secrets);
         }
 
         /// <summary>
@@ -245,7 +248,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.PostOrgsIDSecretsAsync(orgId, secrets);
+            return _secretsService.PostOrgsIDSecretsAsync(orgId, secrets);
         }
 
         /// <summary>

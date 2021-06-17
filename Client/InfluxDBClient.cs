@@ -163,8 +163,12 @@ namespace InfluxDB.Client
             {
                 ExceptionFactory = _exceptionFactory
             };
+            var secretService = new SecretsService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
 
-            return new OrganizationsApi(service);
+            return new OrganizationsApi(service, secretService);
         }
 
         /// <summary>
