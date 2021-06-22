@@ -24,34 +24,25 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// DBRPUpdate
+    /// DBRPGet
     /// </summary>
     [DataContract]
-    public partial class DBRPUpdate :  IEquatable<DBRPUpdate>
+    public partial class DBRPGet :  IEquatable<DBRPGet>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DBRPUpdate" /> class.
+        /// Initializes a new instance of the <see cref="DBRPGet" /> class.
         /// </summary>
-        /// <param name="retentionPolicy">InfluxDB v1 retention policy.</param>
-        /// <param name="_default">_default.</param>
-        public DBRPUpdate(string retentionPolicy = default(string), bool? _default = default(bool?))
+        /// <param name="content">content.</param>
+        public DBRPGet(DBRP content = default(DBRP))
         {
-            this.RetentionPolicy = retentionPolicy;
-            this.Default = _default;
+            this.Content = content;
         }
 
         /// <summary>
-        /// InfluxDB v1 retention policy
+        /// Gets or Sets Content
         /// </summary>
-        /// <value>InfluxDB v1 retention policy</value>
-        [DataMember(Name="retention_policy", EmitDefaultValue=false)]
-        public string RetentionPolicy { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Default
-        /// </summary>
-        [DataMember(Name="default", EmitDefaultValue=false)]
-        public bool? Default { get; set; }
+        [DataMember(Name="content", EmitDefaultValue=false)]
+        public DBRP Content { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -60,9 +51,8 @@ namespace InfluxDB.Client.Api.Domain
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DBRPUpdate {\n");
-            sb.Append("  RetentionPolicy: ").Append(RetentionPolicy).Append("\n");
-            sb.Append("  Default: ").Append(Default).Append("\n");
+            sb.Append("class DBRPGet {\n");
+            sb.Append("  Content: ").Append(Content).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,29 +73,24 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DBRPUpdate);
+            return this.Equals(input as DBRPGet);
         }
 
         /// <summary>
-        /// Returns true if DBRPUpdate instances are equal
+        /// Returns true if DBRPGet instances are equal
         /// </summary>
-        /// <param name="input">Instance of DBRPUpdate to be compared</param>
+        /// <param name="input">Instance of DBRPGet to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DBRPUpdate input)
+        public bool Equals(DBRPGet input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.RetentionPolicy == input.RetentionPolicy ||
-                    (this.RetentionPolicy != null &&
-                    this.RetentionPolicy.Equals(input.RetentionPolicy))
-                ) && 
-                (
-                    this.Default == input.Default ||
-                    (this.Default != null &&
-                    this.Default.Equals(input.Default))
+                    
+                    (this.Content != null &&
+                    this.Content.Equals(input.Content))
                 );
         }
 
@@ -118,10 +103,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.RetentionPolicy != null)
-                    hashCode = hashCode * 59 + this.RetentionPolicy.GetHashCode();
-                if (this.Default != null)
-                    hashCode = hashCode * 59 + this.Default.GetHashCode();
+                if (this.Content != null)
+                    hashCode = hashCode * 59 + this.Content.GetHashCode();
                 return hashCode;
             }
         }

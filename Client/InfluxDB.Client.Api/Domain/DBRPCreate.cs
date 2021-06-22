@@ -24,40 +24,31 @@ using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// DBRP
+    /// DBRPCreate
     /// </summary>
     [DataContract]
-    public partial class DBRP :  IEquatable<DBRP>
+    public partial class DBRPCreate :  IEquatable<DBRPCreate>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DBRP" /> class.
+        /// Initializes a new instance of the <see cref="DBRPCreate" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DBRP() { }
+        protected DBRPCreate() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="DBRP" /> class.
+        /// Initializes a new instance of the <see cref="DBRPCreate" /> class.
         /// </summary>
-        /// <param name="orgID">the organization ID that owns this mapping. (required).</param>
+        /// <param name="orgID">the organization ID that owns this mapping..</param>
+        /// <param name="org">the organization that owns this mapping..</param>
         /// <param name="bucketID">the bucket ID used as target for the translation. (required).</param>
         /// <param name="database">InfluxDB v1 database (required).</param>
         /// <param name="retentionPolicy">InfluxDB v1 retention policy (required).</param>
-        /// <param name="_default">Specify if this mapping represents the default retention policy for the database specificed. (required).</param>
-        /// <param name="links">links.</param>
-        public DBRP(string orgID = default(string), string bucketID = default(string), string database = default(string), string retentionPolicy = default(string), bool? _default = default(bool?), Links links = default(Links))
+        /// <param name="_default">Specify if this mapping represents the default retention policy for the database specificed..</param>
+        public DBRPCreate(string orgID = default(string), string org = default(string), string bucketID = default(string), string database = default(string), string retentionPolicy = default(string), bool? _default = default(bool?))
         {
-            // to ensure "orgID" is required (not null)
-            if (orgID == null)
-            {
-                throw new InvalidDataException("orgID is a required property for DBRP and cannot be null");
-            }
-            else
-            {
-                this.OrgID = orgID;
-            }
             // to ensure "bucketID" is required (not null)
             if (bucketID == null)
             {
-                throw new InvalidDataException("bucketID is a required property for DBRP and cannot be null");
+                throw new InvalidDataException("bucketID is a required property for DBRPCreate and cannot be null");
             }
             else
             {
@@ -66,7 +57,7 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "database" is required (not null)
             if (database == null)
             {
-                throw new InvalidDataException("database is a required property for DBRP and cannot be null");
+                throw new InvalidDataException("database is a required property for DBRPCreate and cannot be null");
             }
             else
             {
@@ -75,30 +66,16 @@ namespace InfluxDB.Client.Api.Domain
             // to ensure "retentionPolicy" is required (not null)
             if (retentionPolicy == null)
             {
-                throw new InvalidDataException("retentionPolicy is a required property for DBRP and cannot be null");
+                throw new InvalidDataException("retentionPolicy is a required property for DBRPCreate and cannot be null");
             }
             else
             {
                 this.RetentionPolicy = retentionPolicy;
             }
-            // to ensure "_default" is required (not null)
-            if (_default == null)
-            {
-                throw new InvalidDataException("_default is a required property for DBRP and cannot be null");
-            }
-            else
-            {
-                this.Default = _default;
-            }
-            this.Links = links;
+            this.OrgID = orgID;
+            this.Org = org;
+            this.Default = _default;
         }
-
-        /// <summary>
-        /// the mapping identifier
-        /// </summary>
-        /// <value>the mapping identifier</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; private set; }
 
         /// <summary>
         /// the organization ID that owns this mapping.
@@ -106,6 +83,13 @@ namespace InfluxDB.Client.Api.Domain
         /// <value>the organization ID that owns this mapping.</value>
         [DataMember(Name="orgID", EmitDefaultValue=false)]
         public string OrgID { get; set; }
+
+        /// <summary>
+        /// the organization that owns this mapping.
+        /// </summary>
+        /// <value>the organization that owns this mapping.</value>
+        [DataMember(Name="org", EmitDefaultValue=false)]
+        public string Org { get; set; }
 
         /// <summary>
         /// the bucket ID used as target for the translation.
@@ -136,26 +120,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool? Default { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
-        /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
-        public Links Links { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DBRP {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("class DBRPCreate {\n");
             sb.Append("  OrgID: ").Append(OrgID).Append("\n");
+            sb.Append("  Org: ").Append(Org).Append("\n");
             sb.Append("  BucketID: ").Append(BucketID).Append("\n");
             sb.Append("  Database: ").Append(Database).Append("\n");
             sb.Append("  RetentionPolicy: ").Append(RetentionPolicy).Append("\n");
             sb.Append("  Default: ").Append(Default).Append("\n");
-            sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -176,29 +153,29 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DBRP);
+            return this.Equals(input as DBRPCreate);
         }
 
         /// <summary>
-        /// Returns true if DBRP instances are equal
+        /// Returns true if DBRPCreate instances are equal
         /// </summary>
-        /// <param name="input">Instance of DBRP to be compared</param>
+        /// <param name="input">Instance of DBRPCreate to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DBRP input)
+        public bool Equals(DBRPCreate input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
-                ) && 
-                (
                     this.OrgID == input.OrgID ||
                     (this.OrgID != null &&
                     this.OrgID.Equals(input.OrgID))
+                ) && 
+                (
+                    this.Org == input.Org ||
+                    (this.Org != null &&
+                    this.Org.Equals(input.Org))
                 ) && 
                 (
                     this.BucketID == input.BucketID ||
@@ -219,11 +196,6 @@ namespace InfluxDB.Client.Api.Domain
                     this.Default == input.Default ||
                     (this.Default != null &&
                     this.Default.Equals(input.Default))
-                ) && 
-                (
-                    
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
                 );
         }
 
@@ -236,10 +208,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
+                if (this.Org != null)
+                    hashCode = hashCode * 59 + this.Org.GetHashCode();
                 if (this.BucketID != null)
                     hashCode = hashCode * 59 + this.BucketID.GetHashCode();
                 if (this.Database != null)
@@ -248,8 +220,6 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.RetentionPolicy.GetHashCode();
                 if (this.Default != null)
                     hashCode = hashCode * 59 + this.Default.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
                 return hashCode;
             }
         }
