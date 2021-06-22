@@ -13,6 +13,7 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 - `DeleteService` is used to delete time series data instead of `DefaultService`
 - `Run` contains list of `LogEvent` in `Log` property
 - `DBRPs` contains list of `DBRP` in `Content` property
+- `DBRPsService` uses `DBRPCreate` to create `DBRP`
 - Inheritance structure:
   - `Check` <- `CheckDiscriminator` <- `CheckBase`
   - `NotificationEndpoint` <- `NotificationEndpointDiscriminator` <- `NotificationEndpointBase`
@@ -26,7 +27,7 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 1. [#206](https://github.com/influxdata/influxdb-client-csharp/pull/206): Use optional args to pass query parameters into API list call - useful for the ability to use pagination.
 
 ### API
-1. [#206](https://github.com/influxdata/influxdb-client-csharp/pull/206), [#210](https://github.com/influxdata/influxdb-client-csharp/pull/210): Use InfluxDB OSS API definitions to generated APIs
+1. [#206](https://github.com/influxdata/influxdb-client-csharp/pull/206), [#210](https://github.com/influxdata/influxdb-client-csharp/pull/210), [#211](https://github.com/influxdata/influxdb-client-csharp/pull/211): Use InfluxDB OSS API definitions to generated APIs
 
 ## 1.19.0 [2021-06-04]
 
