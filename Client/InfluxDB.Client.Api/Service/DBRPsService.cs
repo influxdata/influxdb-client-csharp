@@ -32,11 +32,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns></returns>
-        void DeleteDBRPID (string orgID, string dbrpID, string zapTraceSpan = null);
+        void DeleteDBRPID (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
 
         /// <summary>
         /// Delete a database retention policy
@@ -45,11 +46,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteDBRPIDWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null);
+        ApiResponse<Object> DeleteDBRPIDWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
         /// <summary>
         /// List all database retention policy mappings
         /// </summary>
@@ -57,15 +59,16 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>DBRPs</returns>
-        DBRPs GetDBRPs (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null);
+        DBRPs GetDBRPs (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null);
 
         /// <summary>
         /// List all database retention policy mappings
@@ -74,15 +77,16 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        ApiResponse<DBRPs> GetDBRPsWithHttpInfo (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null);
+        ApiResponse<DBRPs> GetDBRPsWithHttpInfo (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null);
         /// <summary>
         /// Retrieve a database retention policy mapping
         /// </summary>
@@ -90,11 +94,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>DBRP</returns>
-        DBRP GetDBRPsID (string orgID, string dbrpID, string zapTraceSpan = null);
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>DBRPGet</returns>
+        DBRPGet GetDBRPsID (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
 
         /// <summary>
         /// Retrieve a database retention policy mapping
@@ -103,11 +108,12 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        ApiResponse<DBRP> GetDBRPsIDWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null);
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>ApiResponse of DBRPGet</returns>
+        ApiResponse<DBRPGet> GetDBRPsIDWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
         /// <summary>
         /// Update a database retention policy mapping
         /// </summary>
@@ -115,12 +121,13 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>DBRP</returns>
-        DBRP PatchDBRPID (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null);
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>DBRPGet</returns>
+        DBRPGet PatchDBRPID (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null);
 
         /// <summary>
         /// Update a database retention policy mapping
@@ -129,12 +136,13 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        ApiResponse<DBRP> PatchDBRPIDWithHttpInfo (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null);
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>ApiResponse of DBRPGet</returns>
+        ApiResponse<DBRPGet> PatchDBRPIDWithHttpInfo (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null);
         /// <summary>
         /// Add a database retention policy mapping
         /// </summary>
@@ -142,10 +150,10 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>DBRP</returns>
-        DBRP PostDBRP (DBRP DBRP, string zapTraceSpan = null);
+        DBRP PostDBRP (DBRPCreate dBRPCreate, string zapTraceSpan = null);
 
         /// <summary>
         /// Add a database retention policy mapping
@@ -154,10 +162,10 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of DBRP</returns>
-        ApiResponse<DBRP> PostDBRPWithHttpInfo (DBRP DBRP, string zapTraceSpan = null);
+        ApiResponse<DBRP> PostDBRPWithHttpInfo (DBRPCreate dBRPCreate, string zapTraceSpan = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -167,12 +175,13 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteDBRPIDAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task DeleteDBRPIDAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a database retention policy
@@ -181,12 +190,13 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// List all database retention policy mappings
         /// </summary>
@@ -194,8 +204,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
@@ -203,7 +214,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPs</returns>
-        System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all database retention policy mappings
@@ -212,8 +223,9 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
@@ -221,7 +233,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Retrieve a database retention policy mapping
         /// </summary>
@@ -229,12 +241,13 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of DBRP</returns>
-        System.Threading.Tasks.Task<DBRP> GetDBRPsIDAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        /// <returns>Task of DBRPGet</returns>
+        System.Threading.Tasks.Task<DBRPGet> GetDBRPsIDAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a database retention policy mapping
@@ -243,12 +256,13 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of ApiResponse (DBRP)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRP>> GetDBRPsIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        /// <returns>Task of ApiResponse (DBRPGet)</returns>
+        System.Threading.Tasks.Task<ApiResponse<DBRPGet>> GetDBRPsIDAsyncWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Update a database retention policy mapping
         /// </summary>
@@ -256,13 +270,14 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of DBRP</returns>
-        System.Threading.Tasks.Task<DBRP> PatchDBRPIDAsync (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        /// <returns>Task of DBRPGet</returns>
+        System.Threading.Tasks.Task<DBRPGet> PatchDBRPIDAsync (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a database retention policy mapping
@@ -271,13 +286,14 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of ApiResponse (DBRP)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRP>> PatchDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        /// <returns>Task of ApiResponse (DBRPGet)</returns>
+        System.Threading.Tasks.Task<ApiResponse<DBRPGet>> PatchDBRPIDAsyncWithHttpInfo (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
         /// <summary>
         /// Add a database retention policy mapping
         /// </summary>
@@ -285,11 +301,11 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a database retention policy mapping
@@ -298,11 +314,11 @@ namespace InfluxDB.Client.Api.Service
         /// 
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -407,28 +423,27 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a database retention policy 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns></returns>
-        public void DeleteDBRPID (string orgID, string dbrpID, string zapTraceSpan = null)
+        public void DeleteDBRPID (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-             DeleteDBRPIDWithHttpInfo(orgID, dbrpID, zapTraceSpan);
+             DeleteDBRPIDWithHttpInfo(dbrpID, zapTraceSpan, orgID, org);
         }
 
         /// <summary>
         /// Delete a database retention policy 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteDBRPIDWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null)
+        public ApiResponse<Object> DeleteDBRPIDWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->DeleteDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
@@ -448,6 +463,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -482,16 +498,14 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a database retention policy 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDBRPIDWithIRestResponseAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDBRPIDWithIRestResponseAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->DeleteDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
@@ -511,6 +525,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -543,15 +558,13 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a database retention policy 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public IRestResponse DeleteDBRPIDWithIRestResponse (string orgID, string dbrpID, string zapTraceSpan = null)
+        public IRestResponse DeleteDBRPIDWithIRestResponse (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->DeleteDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
@@ -571,6 +584,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -603,15 +617,13 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a database retention policy 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DeleteDBRPIDWithRestRequest (string orgID, string dbrpID, string zapTraceSpan = null)
+        public RestRequest DeleteDBRPIDWithRestRequest (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->DeleteDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
@@ -631,6 +643,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -652,14 +665,15 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a database retention policy 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteDBRPIDAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task DeleteDBRPIDAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-             return DeleteDBRPIDAsyncWithHttpInfo(orgID, dbrpID, zapTraceSpan, cancellationToken);
+             return DeleteDBRPIDAsyncWithHttpInfo(dbrpID, zapTraceSpan, orgID, org, cancellationToken);
 
         }
 
@@ -667,15 +681,16 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a database retention policy 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await DeleteDBRPIDAsyncWithIRestResponse(orgID, dbrpID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            IRestResponse localVarResponse = await DeleteDBRPIDAsyncWithIRestResponse(dbrpID, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -694,16 +709,14 @@ namespace InfluxDB.Client.Api.Service
         /// Delete a database retention policy 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> DeleteDBRPIDAsyncWithIRestResponse (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<IRestResponse> DeleteDBRPIDAsyncWithIRestResponse (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->DeleteDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
@@ -723,6 +736,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -753,17 +767,18 @@ namespace InfluxDB.Client.Api.Service
         /// List all database retention policy mappings 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>DBRPs</returns>
-        public DBRPs GetDBRPs (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public DBRPs GetDBRPs (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
         {
-             ApiResponse<DBRPs> localVarResponse = GetDBRPsWithHttpInfo(orgID, zapTraceSpan, id, bucketID, _default, db, rp);
+             ApiResponse<DBRPs> localVarResponse = GetDBRPsWithHttpInfo(zapTraceSpan, orgID, org, id, bucketID, _default, db, rp);
              return localVarResponse.Data;
         }
 
@@ -771,19 +786,17 @@ namespace InfluxDB.Client.Api.Service
         /// List all database retention policy mappings 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        public ApiResponse< DBRPs > GetDBRPsWithHttpInfo (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public ApiResponse< DBRPs > GetDBRPsWithHttpInfo (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPs");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -799,6 +812,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
             if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
             if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
@@ -838,8 +852,9 @@ namespace InfluxDB.Client.Api.Service
         /// List all database retention policy mappings 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
@@ -847,11 +862,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPs");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -867,6 +879,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
             if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
             if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
@@ -904,19 +917,17 @@ namespace InfluxDB.Client.Api.Service
         /// List all database retention policy mappings 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        public IRestResponse GetDBRPsWithIRestResponse (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public IRestResponse GetDBRPsWithIRestResponse (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPs");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -932,6 +943,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
             if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
             if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
@@ -969,19 +981,17 @@ namespace InfluxDB.Client.Api.Service
         /// List all database retention policy mappings 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        public RestRequest GetDBRPsWithRestRequest (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public RestRequest GetDBRPsWithRestRequest (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPs");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -997,6 +1007,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
             if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
             if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
@@ -1023,8 +1034,9 @@ namespace InfluxDB.Client.Api.Service
         /// List all database retention policy mappings 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
@@ -1032,9 +1044,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPs</returns>
-        public async System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRPs> localVarResponse = await GetDBRPsAsyncWithHttpInfo(orgID, zapTraceSpan, id, bucketID, _default, db, rp, cancellationToken).ConfigureAwait(false);
+             ApiResponse<DBRPs> localVarResponse = await GetDBRPsAsyncWithHttpInfo(zapTraceSpan, orgID, org, id, bucketID, _default, db, rp, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1043,8 +1055,9 @@ namespace InfluxDB.Client.Api.Service
         /// List all database retention policy mappings 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
@@ -1052,10 +1065,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetDBRPsAsyncWithIRestResponse(orgID, zapTraceSpan, id, bucketID, _default, db, rp, cancellationToken).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetDBRPsAsyncWithIRestResponse(zapTraceSpan, orgID, org, id, bucketID, _default, db, rp, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1074,8 +1087,9 @@ namespace InfluxDB.Client.Api.Service
         /// List all database retention policy mappings 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID to filter on</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID to filter on (optional)</param>
+        /// <param name="org">Specifies the organization name to filter on (optional)</param>
         /// <param name="id">Specifies the mapping ID to filter on (optional)</param>
         /// <param name="bucketID">Specifies the bucket ID to filter on (optional)</param>
         /// <param name="_default">Specifies filtering on default (optional)</param>
@@ -1083,11 +1097,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (DBRPs)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsAsyncWithIRestResponse (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPs");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1103,6 +1114,7 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
             if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
             if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
@@ -1138,13 +1150,14 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>DBRP</returns>
-        public DBRP GetDBRPsID (string orgID, string dbrpID, string zapTraceSpan = null)
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>DBRPGet</returns>
+        public DBRPGet GetDBRPsID (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-             ApiResponse<DBRP> localVarResponse = GetDBRPsIDWithHttpInfo(orgID, dbrpID, zapTraceSpan);
+             ApiResponse<DBRPGet> localVarResponse = GetDBRPsIDWithHttpInfo(dbrpID, zapTraceSpan, orgID, org);
              return localVarResponse.Data;
         }
 
@@ -1152,15 +1165,13 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        public ApiResponse< DBRP > GetDBRPsIDWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null)
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>ApiResponse of DBRPGet</returns>
+        public ApiResponse< DBRPGet > GetDBRPsIDWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPsID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
@@ -1180,6 +1191,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -1205,25 +1217,23 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<DBRP>(localVarStatusCode,
+            return new ApiResponse<DBRPGet>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRP) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRP)));
+                (DBRPGet) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
         }
 
         /// <summary>
         /// Retrieve a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsIDWithIRestResponseAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        /// <returns>ApiResponse of DBRPGet</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsIDWithIRestResponseAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPsID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
@@ -1243,6 +1253,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -1275,15 +1286,13 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        public IRestResponse GetDBRPsIDWithIRestResponse (string orgID, string dbrpID, string zapTraceSpan = null)
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>ApiResponse of DBRPGet</returns>
+        public IRestResponse GetDBRPsIDWithIRestResponse (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPsID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
@@ -1303,6 +1312,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -1335,15 +1345,13 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        public RestRequest GetDBRPsIDWithRestRequest (string orgID, string dbrpID, string zapTraceSpan = null)
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>ApiResponse of DBRPGet</returns>
+        public RestRequest GetDBRPsIDWithRestRequest (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPsID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
@@ -1363,6 +1371,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -1384,14 +1393,15 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of DBRP</returns>
-        public async System.Threading.Tasks.Task<DBRP> GetDBRPsIDAsync (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        /// <returns>Task of DBRPGet</returns>
+        public async System.Threading.Tasks.Task<DBRPGet> GetDBRPsIDAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRP> localVarResponse = await GetDBRPsIDAsyncWithHttpInfo(orgID, dbrpID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+             ApiResponse<DBRPGet> localVarResponse = await GetDBRPsIDAsyncWithHttpInfo(dbrpID, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1400,15 +1410,16 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of ApiResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> GetDBRPsIDAsyncWithHttpInfo (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        /// <returns>Task of ApiResponse (DBRPGet)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<DBRPGet>> GetDBRPsIDAsyncWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await GetDBRPsIDAsyncWithIRestResponse(orgID, dbrpID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            IRestResponse localVarResponse = await GetDBRPsIDAsyncWithIRestResponse(dbrpID, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1418,25 +1429,23 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<DBRP>(localVarStatusCode,
+            return new ApiResponse<DBRPGet>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRP) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRP)));
+                (DBRPGet) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
         }
             
         /// <summary>
         /// Retrieve a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping ID</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of IRestResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsIDAsyncWithIRestResponse (string orgID, string dbrpID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        /// <returns>Task of IRestResponse (DBRPGet)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> GetDBRPsIDAsyncWithIRestResponse (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->GetDBRPsID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
@@ -1456,6 +1465,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
 
             // to determine the Accept header
@@ -1486,14 +1496,15 @@ namespace InfluxDB.Client.Api.Service
         /// Update a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>DBRP</returns>
-        public DBRP PatchDBRPID (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null)
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>DBRPGet</returns>
+        public DBRPGet PatchDBRPID (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-             ApiResponse<DBRP> localVarResponse = PatchDBRPIDWithHttpInfo(orgID, dbrpID, dBRPUpdate, zapTraceSpan);
+             ApiResponse<DBRPGet> localVarResponse = PatchDBRPIDWithHttpInfo(dbrpID, dBRPUpdate, zapTraceSpan, orgID, org);
              return localVarResponse.Data;
         }
 
@@ -1501,16 +1512,14 @@ namespace InfluxDB.Client.Api.Service
         /// Update a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        public ApiResponse< DBRP > PatchDBRPIDWithHttpInfo (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null)
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>ApiResponse of DBRPGet</returns>
+        public ApiResponse< DBRPGet > PatchDBRPIDWithHttpInfo (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->PatchDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
@@ -1534,6 +1543,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
@@ -1567,26 +1577,24 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<DBRP>(localVarStatusCode,
+            return new ApiResponse<DBRPGet>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRP) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRP)));
+                (DBRPGet) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
         }
 
         /// <summary>
         /// Update a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDBRPIDWithIRestResponseAsync (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        /// <returns>ApiResponse of DBRPGet</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDBRPIDWithIRestResponseAsync (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->PatchDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
@@ -1610,6 +1618,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
@@ -1650,16 +1659,14 @@ namespace InfluxDB.Client.Api.Service
         /// Update a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        public IRestResponse PatchDBRPIDWithIRestResponse (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null)
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>ApiResponse of DBRPGet</returns>
+        public IRestResponse PatchDBRPIDWithIRestResponse (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->PatchDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
@@ -1683,6 +1690,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
@@ -1723,16 +1731,14 @@ namespace InfluxDB.Client.Api.Service
         /// Update a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
-        /// <returns>ApiResponse of DBRP</returns>
-        public RestRequest PatchDBRPIDWithRestRequest (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null)
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
+        /// <returns>ApiResponse of DBRPGet</returns>
+        public RestRequest PatchDBRPIDWithRestRequest (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->PatchDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
@@ -1756,6 +1762,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
@@ -1785,15 +1792,16 @@ namespace InfluxDB.Client.Api.Service
         /// Update a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of DBRP</returns>
-        public async System.Threading.Tasks.Task<DBRP> PatchDBRPIDAsync (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        /// <returns>Task of DBRPGet</returns>
+        public async System.Threading.Tasks.Task<DBRPGet> PatchDBRPIDAsync (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRP> localVarResponse = await PatchDBRPIDAsyncWithHttpInfo(orgID, dbrpID, dBRPUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+             ApiResponse<DBRPGet> localVarResponse = await PatchDBRPIDAsyncWithHttpInfo(dbrpID, dBRPUpdate, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -1802,16 +1810,17 @@ namespace InfluxDB.Client.Api.Service
         /// Update a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of ApiResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> PatchDBRPIDAsyncWithHttpInfo (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        /// <returns>Task of ApiResponse (DBRPGet)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<DBRPGet>> PatchDBRPIDAsyncWithHttpInfo (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PatchDBRPIDAsyncWithIRestResponse(orgID, dbrpID, dBRPUpdate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PatchDBRPIDAsyncWithIRestResponse(dbrpID, dBRPUpdate, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -1821,26 +1830,24 @@ namespace InfluxDB.Client.Api.Service
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<DBRP>(localVarStatusCode,
+            return new ApiResponse<DBRPGet>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRP) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRP)));
+                (DBRPGet) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
         }
             
         /// <summary>
         /// Update a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orgID">Specifies the organization ID of the mapping</param>
         /// <param name="dbrpID">The database retention policy mapping.</param>
         /// <param name="dBRPUpdate">Database retention policy update to apply</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
+        /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
+        /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <returns>Task of IRestResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PatchDBRPIDAsyncWithIRestResponse (string orgID, string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        /// <returns>Task of IRestResponse (DBRPGet)</returns>
+        public async System.Threading.Tasks.Task<IRestResponse> PatchDBRPIDAsyncWithIRestResponse (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'orgID' is set
-            if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling DBRPsService->PatchDBRPID");
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
                 throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
@@ -1864,6 +1871,7 @@ namespace InfluxDB.Client.Api.Service
 
             if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
             if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
@@ -1902,12 +1910,12 @@ namespace InfluxDB.Client.Api.Service
         /// Add a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>DBRP</returns>
-        public DBRP PostDBRP (DBRP DBRP, string zapTraceSpan = null)
+        public DBRP PostDBRP (DBRPCreate dBRPCreate, string zapTraceSpan = null)
         {
-             ApiResponse<DBRP> localVarResponse = PostDBRPWithHttpInfo(DBRP, zapTraceSpan);
+             ApiResponse<DBRP> localVarResponse = PostDBRPWithHttpInfo(dBRPCreate, zapTraceSpan);
              return localVarResponse.Data;
         }
 
@@ -1915,14 +1923,14 @@ namespace InfluxDB.Client.Api.Service
         /// Add a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public ApiResponse< DBRP > PostDBRPWithHttpInfo (DBRP DBRP, string zapTraceSpan = null)
+        public ApiResponse< DBRP > PostDBRPWithHttpInfo (DBRPCreate dBRPCreate, string zapTraceSpan = null)
         {
-            // verify the required parameter 'DBRP' is set
-            if (DBRP == null)
-                throw new ApiException(400, "Missing required parameter 'DBRP' when calling DBRPsService->PostDBRP");
+            // verify the required parameter 'dBRPCreate' is set
+            if (dBRPCreate == null)
+                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1939,13 +1947,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (DBRP != null && DBRP.GetType() != typeof(byte[]))
+            if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(DBRP); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = DBRP; // byte array
+                localVarPostBody = dBRPCreate; // byte array
             }
 
             // to determine the Accept header
@@ -1980,15 +1988,15 @@ namespace InfluxDB.Client.Api.Service
         /// Add a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDBRPWithIRestResponseAsync (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDBRPWithIRestResponseAsync (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'DBRP' is set
-            if (DBRP == null)
-                throw new ApiException(400, "Missing required parameter 'DBRP' when calling DBRPsService->PostDBRP");
+            // verify the required parameter 'dBRPCreate' is set
+            if (dBRPCreate == null)
+                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2005,13 +2013,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (DBRP != null && DBRP.GetType() != typeof(byte[]))
+            if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(DBRP); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = DBRP; // byte array
+                localVarPostBody = dBRPCreate; // byte array
             }
 
             // to determine the Accept header
@@ -2044,14 +2052,14 @@ namespace InfluxDB.Client.Api.Service
         /// Add a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public IRestResponse PostDBRPWithIRestResponse (DBRP DBRP, string zapTraceSpan = null)
+        public IRestResponse PostDBRPWithIRestResponse (DBRPCreate dBRPCreate, string zapTraceSpan = null)
         {
-            // verify the required parameter 'DBRP' is set
-            if (DBRP == null)
-                throw new ApiException(400, "Missing required parameter 'DBRP' when calling DBRPsService->PostDBRP");
+            // verify the required parameter 'dBRPCreate' is set
+            if (dBRPCreate == null)
+                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2068,13 +2076,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (DBRP != null && DBRP.GetType() != typeof(byte[]))
+            if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(DBRP); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = DBRP; // byte array
+                localVarPostBody = dBRPCreate; // byte array
             }
 
             // to determine the Accept header
@@ -2107,14 +2115,14 @@ namespace InfluxDB.Client.Api.Service
         /// Add a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public RestRequest PostDBRPWithRestRequest (DBRP DBRP, string zapTraceSpan = null)
+        public RestRequest PostDBRPWithRestRequest (DBRPCreate dBRPCreate, string zapTraceSpan = null)
         {
-            // verify the required parameter 'DBRP' is set
-            if (DBRP == null)
-                throw new ApiException(400, "Missing required parameter 'DBRP' when calling DBRPsService->PostDBRP");
+            // verify the required parameter 'dBRPCreate' is set
+            if (dBRPCreate == null)
+                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2131,13 +2139,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (DBRP != null && DBRP.GetType() != typeof(byte[]))
+            if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(DBRP); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = DBRP; // byte array
+                localVarPostBody = dBRPCreate; // byte array
             }
 
             // to determine the Accept header
@@ -2159,13 +2167,13 @@ namespace InfluxDB.Client.Api.Service
         /// Add a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        public async System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRP> localVarResponse = await PostDBRPAsyncWithHttpInfo(DBRP, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+             ApiResponse<DBRP> localVarResponse = await PostDBRPAsyncWithHttpInfo(dBRPCreate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
              return localVarResponse.Data;
 
         }
@@ -2174,14 +2182,14 @@ namespace InfluxDB.Client.Api.Service
         /// Add a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            IRestResponse localVarResponse = await PostDBRPAsyncWithIRestResponse(DBRP, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            IRestResponse localVarResponse = await PostDBRPAsyncWithIRestResponse(dBRPCreate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
 
@@ -2200,15 +2208,15 @@ namespace InfluxDB.Client.Api.Service
         /// Add a database retention policy mapping 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="DBRP">The database retention policy mapping to add</param>
+        /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of IRestResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<IRestResponse> PostDBRPAsyncWithIRestResponse (DBRP DBRP, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<IRestResponse> PostDBRPAsyncWithIRestResponse (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'DBRP' is set
-            if (DBRP == null)
-                throw new ApiException(400, "Missing required parameter 'DBRP' when calling DBRPsService->PostDBRP");
+            // verify the required parameter 'dBRPCreate' is set
+            if (dBRPCreate == null)
+                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
 
             var localVarPath = "/api/v2/dbrps";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2225,13 +2233,13 @@ namespace InfluxDB.Client.Api.Service
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (DBRP != null && DBRP.GetType() != typeof(byte[]))
+            if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(DBRP); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = DBRP; // byte array
+                localVarPostBody = dBRPCreate; // byte array
             }
 
             // to determine the Accept header
