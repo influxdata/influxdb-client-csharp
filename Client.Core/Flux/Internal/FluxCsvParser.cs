@@ -186,7 +186,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             }
             else if (AnnotationGroup.Equals(token))
             {
-                state.groups = state.csv.Context.Record;
+                state.groups = state.csv.Parser.Record;
             }
             else if (AnnotationDefault.Equals(token))
             {
@@ -306,7 +306,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(dataTypes, "dataTypes");
 
-            for (var index = 1; index < dataTypes.Context.Record.Length; index++)
+            for (var index = 1; index < dataTypes.Parser.Record.Length; index++)
             {
                 var dataType = dataTypes[index];
 
