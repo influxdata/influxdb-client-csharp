@@ -22,8 +22,8 @@ SCRIPT_PATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
 #
 # Remove old docs
 #
-rm -rf "${SCRIPT_PATH}"/../docfx_project/api
-rm -rf "${SCRIPT_PATH}"/../docfx_project/_site
+rm -rf "${SCRIPT_PATH}"/../docfx_project/api || true 
+rm -rf "${SCRIPT_PATH}"/../docfx_project/_site || true 
 
 #
 # Build docs
