@@ -37,6 +37,9 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
     - NodaTime.Serialization.JsonNet to 3.0.0
     - Microsoft.Extensions.ObjectPool to 5.0.7
 
+### Documentation
+1. [#213](https://github.com/influxdata/influxdb-client-csharp/pull/213): API documentation is deploy to [GitHub Pages](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.html) 
+
 ## 1.19.0 [2021-06-04]
 
 ### Features
