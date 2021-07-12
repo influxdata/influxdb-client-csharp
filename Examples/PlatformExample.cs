@@ -20,6 +20,11 @@ namespace Examples
             [Column("value")] public double Value { get; set; }
 
             [Column(IsTimestamp = true)] public DateTime Time { get; set; }
+            
+            public override string ToString()
+            {
+                return $"{Time:MM/dd/yyyy hh:mm:ss.fff tt} {Location} value: {Value}";
+            }
         }
 
         public static async Task Main(string[] args)
@@ -45,17 +50,9 @@ namespace Examples
             //
             var resource = new PermissionResource
                 {Type = PermissionResource.TypeEnum.Buckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id};
-            var readBucket = new Permission
-            {
-                Resource = resource, 
-                Action = Permission.ActionEnum.Read
-            };
 
-            var writeBucket = new Permission
-            {
-                Resource = resource, 
-                Action = Permission.ActionEnum.Write
-            };
+            var readBucket = new Permission(Permission.ActionEnum.Read, resource);
+            var writeBucket = new Permission(Permission.ActionEnum.Write, resource);
 
             var authorization = await influxDB.GetAuthorizationsApi()
                 .CreateAuthorizationAsync(medicalGMBH, new List<Permission> {readBucket, writeBucket});
@@ -68,7 +65,7 @@ namespace Examples
             // Create new client with specified authorization token
             //
 
-            influxDB = InfluxDBClientFactory.Create("http://localhost:8086", authorization.Token);
+            influxDB = InfluxDBClientFactory.Create("http://localhost:9999", authorization.Token);
 
             var writeOptions = WriteOptions
                 .CreateNew()
