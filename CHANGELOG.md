@@ -1,5 +1,8 @@
 ## 2.1.0 [unreleased]
 
+### Bug Fixes
+1. [#221](https://github.com/influxdata/influxdb-client-csharp/pull/221): Parsing Infinite numbers into `Double`
+
 ### Dependencies
 1. [#222](https://github.com/influxdata/influxdb-client-csharp/pull/222): Update dependencies:
     - RestSharp to 106.12.0
