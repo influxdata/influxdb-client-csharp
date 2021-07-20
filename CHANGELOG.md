@@ -1,5 +1,9 @@
 ## 2.1.0 [unreleased]
 
+### Dependencies
+1. [#222](https://github.com/influxdata/influxdb-client-csharp/pull/222): Update dependencies:
+    - RestSharp to 106.12.0
+
 ## 2.0.0 [2021-07-09]
 
 ### Breaking Changes
