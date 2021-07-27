@@ -4,6 +4,15 @@
 
 The reference C# library for the InfluxDB 1.7+ `/api/v2/query` REST API using the [Flux language](http://bit.ly/flux-spec). 
 
+## Documentation
+
+This section contains links to the client library documentation.
+
+* [Product documentation](https://docs.influxdata.com/influxdb/v2.0/api-guide/client-libraries/), [Getting Started](#how-to-use)
+* [Examples](../Examples)
+* [API Reference](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.Flux.FluxClient.html)
+* [Changelog](../CHANGELOG.md)
+
 ## How To Use
 
 ### Create client
