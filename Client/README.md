@@ -4,6 +4,15 @@
 
 The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.0.
 
+## Documentation
+
+This section contains links to the client library documentation.
+
+* [Product documentation](https://docs.influxdata.com/influxdb/v2.0/api-guide/client-libraries/), [Getting Started](#queries)
+* [Examples](../Examples)
+* [API Reference](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.html)
+* [Changelog](../CHANGELOG.md)
+
 ## Features
  
 - [Querying data using Flux language](#queries)

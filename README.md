@@ -21,6 +21,22 @@ This repository contains the reference C# client for the InfluxDB 2.0.
 - [Contributing](#contributing)
 - [License](#license)
 
+
+## Documentation
+
+This section contains links to the client library documentation.
+
+* [Product documentation](https://docs.influxdata.com/influxdb/v2.0/api-guide/client-libraries/), [Getting Started](#how-to-use)
+* [Examples](Examples)
+* [API Reference](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.html)
+* [Changelog](CHANGELOG.md)
+
+| Client | Description | Documentation | Compatibility |
+| --- | --- | --- |                                      --- |
+| **[Client](./Client#influxdbclient)** | The reference C# client that allows query, write and InfluxDB 2.0 management. | [readme](./Client#influxdbclient)| 2.0 |
+| **[Client.Linq](./Client.Linq#influxdbclientlinq)**  | The library supports to use a LINQ expression to query the InfluxDB. | [readme](./Client.Linq#influxdbclientlinq) | 2.0 |
+| **[Client.Legacy](./Client.Legacy#influxdbclientflux)**  | The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+. | [readme](./Client.Legacy#influxdbclientflux) | 1.7+ |
+
 ## Features
 
 - Supports querying using the Flux language over the InfluxDB 1.7+ REST API (`/api/v2/query endpoint`) 
@@ -37,17 +53,6 @@ This repository contains the reference C# client for the InfluxDB 2.0.
         - health check
         - ...
     
-## Documentation
-
-The C# clients are implemented for the InfluxDB 2.0 and InfluxDB 1.7+:
-
-| Client | Description | Documentation | Compatibility |
-| --- | --- | --- |                                      --- |
-| **[Client](./Client#influxdbclient)** | The reference C# client that allows query, write and InfluxDB 2.0 management. | [readme](./Client#influxdbclient)| 2.0 |
-| **[Client.Linq](./Client.Linq#influxdbclientlinq)**  | The library supports to use a LINQ expression to query the InfluxDB. | [readme](./Client.Linq#influxdbclientlinq) | 2.0 |
-| **[Client.Legacy](./Client.Legacy#influxdbclientflux)**  | The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+. | [readme](./Client.Legacy#influxdbclientflux) | 1.7+ |
-
-
 ## How To Use 
 
 ### Writes and Queries in InfluxDB 2.0
