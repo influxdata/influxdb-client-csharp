@@ -209,9 +209,9 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 {
                     currentId = Convert.ToInt32(state.csv[1 + 1]);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    throw new FluxCsvParserException("Unable to parse CSV response.");
+                    throw new FluxCsvParserException("Unable to parse CSV response.", e);
                 }
                 if (state.tableId == -1)
                 {
@@ -273,7 +273,12 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     case "long":
                         return Convert.ToInt64(strValue);
                     case "double":
-                        return Convert.ToDouble(strValue, CultureInfo.InvariantCulture);
+                        return strValue switch
+                        {
+                            "+Inf" => double.PositiveInfinity,
+                            "-Inf" => double.NegativeInfinity,
+                            _ => Convert.ToDouble(strValue, CultureInfo.InvariantCulture)
+                        };
                     case "base64Binary":
                         return Convert.FromBase64String(strValue);
                     case "dateTime:RFC3339":
@@ -285,9 +290,9 @@ namespace InfluxDB.Client.Core.Flux.Internal
                         return strValue;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw new FluxCsvParserException("Unable to parse CSV response.");
+                throw new FluxCsvParserException("Unable to parse CSV response.", e);
             }
         }
 

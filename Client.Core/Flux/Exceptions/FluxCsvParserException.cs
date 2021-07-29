@@ -1,3 +1,4 @@
+using System;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Flux.Domain;
 
@@ -9,6 +10,10 @@ namespace InfluxDB.Client.Core.Flux.Exceptions
     public class FluxCsvParserException : InfluxException
     {
         public FluxCsvParserException(string message) : base(message)
+        {
+        }
+
+        public FluxCsvParserException(string message, Exception exception = null) : base(message, exception)
         {
         }
     }
