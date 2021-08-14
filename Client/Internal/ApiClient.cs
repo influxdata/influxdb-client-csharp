@@ -64,7 +64,7 @@ namespace InfluxDB.Client.Api.Client
             {
                 InitToken();
 
-                if (_sessionToken != null) request.AddHeader("Cookie", "session=" + new string(_sessionToken));
+                if (_sessionToken != null) request.AddCookie("session", new string(_sessionToken)); 
             }
             
             _loggingHandler.BeforeIntercept(request);
@@ -125,9 +125,12 @@ namespace InfluxDB.Client.Api.Client
             }
 
             _signout = true;
+
+            var signOutSessionToken = _sessionToken;
             _sessionToken = null;
 
             var request = new RestRequest("/api/v2/signout", Method.POST);
+            if (signOutSessionToken != null) request.AddCookie("session", new string(signOutSessionToken)); 
             RestClient.Execute(request);
         }
     }
