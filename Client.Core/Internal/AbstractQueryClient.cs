@@ -35,7 +35,8 @@ namespace InfluxDB.Client.Core.Internal
 
         protected Task Query(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
             Action<Exception> onError,
-            Action onComplete)
+            Action onComplete,
+            CancellationToken cancellationToken = default)
         {
             void Consumer(ICancellable cancellable, Stream bufferedStream)
             {
@@ -49,13 +50,14 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
 
-            return Query(query, Consumer, onError, onComplete);
+            return Query(query, Consumer, onError, onComplete, cancellationToken);
         }
 
         protected Task QueryRaw(RestRequest query,
             Action<ICancellable, string> onResponse,
             Action<Exception> onError,
-            Action onComplete)
+            Action onComplete, 
+            CancellationToken cancellationToken = default)
         {
             void Consumer(ICancellable cancellable, Stream bufferedStream)
             {
@@ -69,7 +71,7 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
 
-            return Query(query, Consumer, onError, onComplete);
+            return Query(query, Consumer, onError, onComplete, cancellationToken);
         }
         
         protected void QuerySync(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
@@ -92,7 +94,7 @@ namespace InfluxDB.Client.Core.Internal
         }
 
         private async Task Query(RestRequest query, Action<ICancellable, Stream> consumer,
-            Action<Exception> onError, Action onComplete)
+            Action<Exception> onError, Action onComplete, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(query, "query");
             Arguments.CheckNotNull(consumer, "consumer");
@@ -101,7 +103,7 @@ namespace InfluxDB.Client.Core.Internal
 
             try
             {
-                var cancellable = new DefaultCancellable();
+                var cancellable = new DefaultCancellable(cancellationToken);
 
                 BeforeIntercept(query);
                     
@@ -113,7 +115,9 @@ namespace InfluxDB.Client.Core.Internal
                     consumer(cancellable, responseStream);
                 };
 
-                var restResponse = await RestClient.ExecuteAsync(query, Method.POST).ConfigureAwait(false);
+                var restResponse = await RestClient
+                    .ExecuteAsync(query, Method.POST, cancellable.CancellationToken.Token)
+                    .ConfigureAwait(false);
                 if (restResponse.ErrorException != null)
                 {
                     throw restResponse.ErrorException;
