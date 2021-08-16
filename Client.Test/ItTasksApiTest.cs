@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -148,7 +149,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("1h", task.Every);
             Assert.AreEqual("testing task", task.Description);
             Assert.IsNull(task.Cron);
-            Assert.IsTrue(task.Flux.Equals(flux, StringComparison.OrdinalIgnoreCase));
+            Assert.That(task.Flux, Is.EqualTo(flux).IgnoreCase);
         }
 
         [Test]
@@ -599,7 +600,10 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(TaskStatusType.Inactive, updatedTask.Status);
             Assert.AreEqual("3m", updatedTask.Every);
             Assert.IsNull(updatedTask.Cron);
-            Assert.AreEqual(updatedTask.Flux, flux);
+            Assert.AreEqual(0, CultureInfo.CurrentCulture.CompareInfo.Compare(
+                updatedTask.Flux, flux, CompareOptions.IgnoreSymbols),
+                $"Queries are not same: '{updatedTask.Flux}', '{flux}'.");
+
             Assert.IsNotNull(updatedTask.UpdatedAt);
         }
     }
