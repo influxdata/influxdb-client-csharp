@@ -1,3 +1,4 @@
+using System;
 using InfluxDB.Client.Core.Flux.Domain;
 
 namespace InfluxDB.Client.Core.Flux.Internal
@@ -14,5 +15,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
         /// <typeparam name="T">Type of DomainObject</typeparam>
         /// <returns>Converted DomainObject</returns>
         T ConvertToEntity<T>(FluxRecord fluxRecord);
+
+        object ConvertToEntity(FluxRecord fluxRecord, Type type);
     }
 }

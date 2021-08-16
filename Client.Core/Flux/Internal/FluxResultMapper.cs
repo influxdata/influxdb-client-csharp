@@ -29,164 +29,180 @@ using NodaTime;
 
 namespace InfluxDB.Client.Core.Flux.Internal
 {
-    internal class FluxResultMapper : IFluxResultMapper
-    {
-        private readonly AttributesCache _attributesCache = new AttributesCache();
+	internal class FluxResultMapper : IFluxResultMapper
+	{
+		private readonly AttributesCache _attributesCache = new AttributesCache();
 
-        public T ConvertToEntity<T>(FluxRecord fluxRecord)
-        {
-            return ToPoco<T>(fluxRecord);
-        }
+		public T ConvertToEntity<T>(FluxRecord fluxRecord)
+		{
+			return ToPoco<T>(fluxRecord);
+		}
 
-        /// <summary>
-        /// Maps FluxRecord into custom POCO class.
-        /// </summary>
-        /// <param name="record">the Flux record</param>
-        /// <typeparam name="T">the POCO type</typeparam>
-        /// <returns></returns>
-        /// <exception cref="InfluxException"></exception>
-        internal T ToPoco<T>(FluxRecord record)
-        {
-            Arguments.CheckNotNull(record, "Record is required");
+		public object ConvertToEntity(FluxRecord fluxRecord, Type type)
+		{
+			return ToPoco(fluxRecord, type);
+		}
 
-            try
-            {
-                var type = typeof(T);
-                var poco = (T) Activator.CreateInstance(type);
 
-                // copy record to case insensitive dictionary (do this once)
-                var recordValues =
-                    new Dictionary<string, object>(record.Values, StringComparer.InvariantCultureIgnoreCase);
+		/// <summary>
+		/// Maps FluxRecord into custom POCO class.
+		/// </summary>
+		/// <param name="record">the Flux record</param>
+		/// <param name="type">the POCO type</param>
+		/// <returns>An POCO object</returns>
+		/// <exception cref="InfluxException"></exception>
+		internal object ToPoco(FluxRecord record, Type type)
+		{
+			Arguments.CheckNotNull(record, "Record is required");
 
-                var properties = _attributesCache.GetProperties(type);
+			try
+			{
+				var poco = Activator.CreateInstance(type);
 
-                foreach (var property in properties)
-                {
-                    var attribute = _attributesCache.GetAttribute(property);
+				// copy record to case insensitive dictionary (do this once)
+				var recordValues =
+					new Dictionary<string, object>(record.Values, StringComparer.InvariantCultureIgnoreCase);
 
-                    if (attribute != null && attribute.IsTimestamp)
-                    {
-                        SetFieldValue(poco, property, record.GetTime());
-                    }
-                    else
-                    {
-                        var columnName = _attributesCache.GetColumnName(attribute, property);
+				var properties = _attributesCache.GetProperties(type);
 
-                        string col = null;
+				foreach (var property in properties)
+				{
+					var attribute = _attributesCache.GetAttribute(property);
 
-                        if (recordValues.ContainsKey(columnName))
-                        {
-                            col = columnName;
-                        }
-                        else if (recordValues.ContainsKey("_" + columnName))
-                        {
-                            col = "_" + columnName;
-                        }
+					if (attribute != null && attribute.IsTimestamp)
+					{
+						SetFieldValue(poco, property, record.GetTime());
+					}
+					else
+					{
+						var columnName = _attributesCache.GetColumnName(attribute, property);
 
-                        if (!string.IsNullOrEmpty(col))
-                        {
-                            // No need to set field value when column does not exist (default poco field value will be the same)
-                            if (recordValues.TryGetValue(col, out var value))
-                                SetFieldValue(poco, property, value);
-                        }
-                    }
-                }
+						string col = null;
 
-                return poco;
-            }
-            catch (Exception e)
-            {
-                throw new InfluxException(e);
-            }
-        }
+						if (recordValues.ContainsKey(columnName))
+						{
+							col = columnName;
+						}
+						else if (recordValues.ContainsKey("_" + columnName))
+						{
+							col = "_" + columnName;
+						}
 
-        private void SetFieldValue<T>(T poco, PropertyInfo property, object value)
-        {
-            if (property == null || value == null || !property.CanWrite)
-            {
-                return;
-            }
+						if (!string.IsNullOrEmpty(col))
+						{
+							// No need to set field value when column does not exist (default poco field value will be the same)
+							if (recordValues.TryGetValue(col, out var value))
+								SetFieldValue(poco, property, value);
+						}
+					}
+				}
 
-            try
-            {
-                var propertyType = property.PropertyType;
+				return poco;
+			}
+			catch (Exception e)
+			{
+				throw new InfluxException(e);
+			}
+		}
 
-                //the same type
-                if (propertyType == value.GetType())
-                {
-                    property.SetValue(poco, value);
-                    return;
-                }
 
-                //handle time primitives
-                if (propertyType == typeof(DateTime))
-                {
-                    property.SetValue(poco, ToDateTimeValue(value));
-                    return;
-                }
+		/// <summary>
+		/// Maps FluxRecord into custom POCO class.
+		/// </summary>
+		/// <param name="record">the Flux record</param>
+		/// <typeparam name="T">the POCO type</typeparam>
+		/// <returns></returns>
+		/// <exception cref="InfluxException"></exception>
+		internal T ToPoco<T>(FluxRecord record)
+			=> (T)ToPoco(record, typeof(T));
 
-                if (propertyType == typeof(Instant))
-                {
-                    property.SetValue(poco, ToInstantValue(value));
-                    return;
-                }
+		private void SetFieldValue<T>(T poco, PropertyInfo property, object value)
+		{
+			if (property == null || value == null || !property.CanWrite)
+			{
+				return;
+			}
 
-                if (value is IConvertible)
-                {
-                    // Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
-                    // to determine whether the type is nullable and convert to the underlying type instead
-                    var targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
-                    property.SetValue(poco, Convert.ChangeType(value, targetType));
-                }
-                else
-                {
-                    property.SetValue(poco, value);
-                }
-            }
-            catch (InvalidCastException ex)
-            {
-                throw new InfluxException(
-                    $"Class '{poco.GetType().Name}' field '{property.Name}' was defined with a different field type and caused an exception. " +
-                    $"The correct type is '{value.GetType().Name}' (current field value: '{value}'). Exception: {ex.Message}",
-                    ex);
-            }
-        }
+			try
+			{
+				var propertyType = property.PropertyType;
 
-        private DateTime ToDateTimeValue(object value)
-        {
-            if (value is DateTime dateTime)
-            {
-                return dateTime;
-            }
+				//the same type
+				if (propertyType == value.GetType())
+				{
+					property.SetValue(poco, value);
+					return;
+				}
 
-            if (value is Instant instant)
-            {
-                return instant.InUtc().ToDateTimeUtc();
-            }
+				//handle time primitives
+				if (propertyType == typeof(DateTime))
+				{
+					property.SetValue(poco, ToDateTimeValue(value));
+					return;
+				}
 
-            if (value is IConvertible)
-            {
-                return (DateTime) Convert.ChangeType(value, typeof(DateTime));
-            }
+				if (propertyType == typeof(Instant))
+				{
+					property.SetValue(poco, ToInstantValue(value));
+					return;
+				}
 
-            throw new InvalidCastException(
-                $"Object value of type {value.GetType().Name} cannot be converted to {nameof(DateTime)}");
-        }
+				if (value is IConvertible)
+				{
+					// Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
+					// to determine whether the type is nullable and convert to the underlying type instead
+					var targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+					property.SetValue(poco, Convert.ChangeType(value, targetType));
+				}
+				else
+				{
+					property.SetValue(poco, value);
+				}
+			}
+			catch (InvalidCastException ex)
+			{
+				throw new InfluxException(
+					$"Class '{poco.GetType().Name}' field '{property.Name}' was defined with a different field type and caused an exception. " +
+					$"The correct type is '{value.GetType().Name}' (current field value: '{value}'). Exception: {ex.Message}",
+					ex);
+			}
+		}
 
-        private Instant ToInstantValue(object value)
-        {
-            if (value is Instant instant)
-            {
-                return instant;
-            }
+		private DateTime ToDateTimeValue(object value)
+		{
+			if (value is DateTime dateTime)
+			{
+				return dateTime;
+			}
 
-            if (value is DateTime dateTime)
-            {
-                return Instant.FromDateTimeUtc(dateTime);
-            }
+			if (value is Instant instant)
+			{
+				return instant.InUtc().ToDateTimeUtc();
+			}
 
-            throw new InvalidCastException(
-                $"Object value of type {value.GetType().Name} cannot be converted to {nameof(Instant)}");
-        }
-    }
+			if (value is IConvertible)
+			{
+				return (DateTime)Convert.ChangeType(value, typeof(DateTime));
+			}
+
+			throw new InvalidCastException(
+				$"Object value of type {value.GetType().Name} cannot be converted to {nameof(DateTime)}");
+		}
+
+		private Instant ToInstantValue(object value)
+		{
+			if (value is Instant instant)
+			{
+				return instant;
+			}
+
+			if (value is DateTime dateTime)
+			{
+				return Instant.FromDateTimeUtc(dateTime);
+			}
+
+			throw new InvalidCastException(
+				$"Object value of type {value.GetType().Name} cannot be converted to {nameof(Instant)}");
+		}
+	}
 }

@@ -3,6 +3,7 @@
 ### Bug Fixes
 1. [#221](https://github.com/influxdata/influxdb-client-csharp/pull/221): Parsing infinite numbers
 2. [#229](https://github.com/influxdata/influxdb-client-csharp/pull/229): Fix cookie handling in session mode
+3. [#230](https://github.com/influxdata/influxdb-client-csharp/issues/230): Adds an `Type` overload for POCOs to `QueryAsync`
 
 ### Dependencies
 1. [#222](https://github.com/influxdata/influxdb-client-csharp/pull/222): Update dependencies:

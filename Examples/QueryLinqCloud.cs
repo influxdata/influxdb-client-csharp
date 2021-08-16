@@ -58,8 +58,11 @@ namespace Examples
             /// Convert to DomainObject.
             /// </summary>
             public T ConvertToEntity<T>(FluxRecord fluxRecord)
+                => (T)ConvertToEntity(fluxRecord, typeof(T));
+
+            public object ConvertToEntity(FluxRecord fluxRecord, Type type)
             {
-                if (typeof(T) != typeof(DomainEntity))
+                if (type != typeof(DomainEntity))
                 {
                     throw new NotSupportedException($"This converter doesn't supports: {typeof(DomainEntity)}");
                 }
@@ -85,7 +88,7 @@ namespace Examples
                     }
                 }
 
-                return (T) Convert.ChangeType(customEntity, typeof(T));
+                return Convert.ChangeType(customEntity, type);
             }
 
             public PointData ConvertToPointData<T>(T entity, WritePrecision precision)
