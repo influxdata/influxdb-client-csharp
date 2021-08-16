@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 1. [#221](https://github.com/influxdata/influxdb-client-csharp/pull/221): Parsing infinite numbers
+2. [#229](https://github.com/influxdata/influxdb-client-csharp/pull/229): Fix cookie handling in session mode
 
 ### Dependencies
 1. [#222](https://github.com/influxdata/influxdb-client-csharp/pull/222): Update dependencies:
