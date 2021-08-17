@@ -325,7 +325,7 @@ namespace InfluxDB.Client.Test
             var logs = await _tasksApi.GetLogsAsync(task);
             Assert.IsNotEmpty(logs);
             Assert.IsTrue(logs.First().Message.StartsWith("Started task from script:"));
-            Assert.IsTrue(logs.Last().Message.EndsWith("Completed(success)"));
+            Assert.That(logs.Any(p => p.Message.EndsWith("Completed(success)")));
         }
 
         [Test]
@@ -364,7 +364,8 @@ namespace InfluxDB.Client.Test
 
             var logs = await _tasksApi.GetRunLogsAsync(runs[0]);
             Assert.IsNotNull(logs);
-            Assert.IsTrue(logs.Last().Message.EndsWith("Completed(success)"));
+            Assert.IsNotEmpty(logs);
+            Assert.That(logs.Any(p => p.Message.EndsWith("Completed(success)")));
         }
 
         [Test]
