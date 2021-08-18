@@ -831,6 +831,18 @@ namespace InfluxDB.Client
             return QueryAsync(CreateQuery(query, DefaultDialect), org, onNext, onError, onComplete, pocoType);
         }
 
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
+        /// <param name="pocoType">the type of measurement</param>
+        /// <returns>async task</returns>
         public Task QueryAsync(Query query, string org, Action<ICancellable, object> onNext, Action<Exception> onError,
             Action onComplete, Type pocoType)
         {
