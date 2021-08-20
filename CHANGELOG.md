@@ -1,4 +1,3 @@
-
 ## 3.0.0 [unreleased]
 
 ### Breaking Changes
