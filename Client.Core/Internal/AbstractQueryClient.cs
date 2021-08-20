@@ -206,6 +206,29 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
         }
+        
+        public class FluxResponseConsumerPoco : FluxCsvParser.IFluxResponseConsumer
+        {
+            private readonly Action<ICancellable, object> _onNext;
+            private readonly IFluxResultMapper _converter;
+            private readonly Type _type;
+
+            public FluxResponseConsumerPoco(Action<ICancellable, object> onNext, IFluxResultMapper converter, Type type)
+            {
+                _onNext = onNext;
+                _converter = converter;
+                _type = type;
+            }
+
+            public void Accept(int index, ICancellable cancellable, FluxTable table)
+            {
+            }
+
+            public void Accept(int index, ICancellable cancellable, FluxRecord record)
+            {
+                _onNext(cancellable, _converter.ConvertToEntity(record,_type));
+            }
+        }
 
         public class FluxResponseConsumerPoco<T> : FluxCsvParser.IFluxResponseConsumer
         {

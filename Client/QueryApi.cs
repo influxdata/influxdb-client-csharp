@@ -736,6 +736,128 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// to list of object with given type.
+        /// 
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync(string,string,System.Action{InfluxDB.Client.Core.ICancellable,object},System.Action{System.Exception},System.Action,System.Type)"/>
+        /// for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="pocoType">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public Task<List<object>> QueryAsync(string query, Type pocoType)
+        {
+            return QueryAsync(query, _options.Org, pocoType);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// to list of object with given type.
+        /// 
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync(string,string,System.Action{InfluxDB.Client.Core.ICancellable,object},System.Action{System.Exception},System.Action,System.Type)"/>
+        /// for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">the organization</param>
+        /// <param name="pocoType">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public Task<List<object>> QueryAsync(string query, string org, Type pocoType) 
+        {   
+            return QueryAsync(CreateQuery(query),org, pocoType);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// to list of object with given type.
+        /// 
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync(string,string,System.Action{InfluxDB.Client.Core.ICancellable,object},System.Action{System.Exception},System.Action,System.Type)"/>
+        /// for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="pocoType">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public Task<List<object>> QueryAsync(Query query, Type pocoType)
+        {
+            return QueryAsync(query, _options.Org, pocoType);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// to list of object with given type.
+        /// 
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// Use <see cref="QueryAsync(string,string,System.Action{InfluxDB.Client.Core.ICancellable,object},System.Action{System.Exception},System.Action,System.Type)"/>
+        /// for large data streaming.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">the organization</param>
+        /// <param name="pocoType">the type of measurement</param>
+        /// <returns>Measurements which are matched the query</returns>
+        public async Task<List<object>> QueryAsync(Query query, string org, Type pocoType) 
+        {   
+            var measurements = new List<object>();
+            var consumer = new FluxResponseConsumerPoco((cancellable, poco) => { measurements.Add(poco); }, Mapper, pocoType);
+            await QueryAsync(query, org, consumer, ErrorConsumer, EmptyAction).ConfigureAwait(false);
+            return measurements;
+        }
+
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
+        /// <param name="pocoType">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(string query, string org, Action<ICancellable, object> onNext, Action<Exception> onError,
+            Action onComplete, Type pocoType)
+        {
+            return QueryAsync(CreateQuery(query, DefaultDialect), org, onNext, onError, onComplete, pocoType);
+        }
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// to a <see cref="onNext"/> consumer.
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="onNext">the callback to consume the mapped Measurements with capability
+        /// to discontinue a streaming query</param>
+        /// <param name="onError">the callback to consume any error notification</param>
+        /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
+        /// <param name="pocoType">the type of measurement</param>
+        /// <returns>async task</returns>
+        public Task QueryAsync(Query query, string org, Action<ICancellable, object> onNext, Action<Exception> onError,
+            Action onComplete, Type pocoType)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNotNull(onNext, nameof(onNext));
+            Arguments.CheckNotNull(onError, nameof(onError));
+            Arguments.CheckNotNull(onComplete, nameof(onComplete));
+            
+            var consumer = new FluxResponseConsumerPoco(onNext, Mapper, pocoType);
+
+            return QueryAsync(query, org, consumer, onError, onComplete);
+            
+        }
+
+        /// <summary>
         /// Executes the Flux query against the InfluxDB and synchronously map whole response to <see cref="string"/> result.
         ///
         /// <para>

@@ -1,3 +1,4 @@
+using System;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Internal;
@@ -16,6 +17,11 @@ namespace InfluxDB.Client.Internal
         public T ConvertToEntity<T>(FluxRecord fluxRecord)
         {
             return _resultMapper.ToPoco<T>(fluxRecord);
+        }
+
+        public object ConvertToEntity(FluxRecord fluxRecord, Type type)
+        {
+            return _resultMapper.ToPoco(fluxRecord, type);
         }
 
         public PointData ConvertToPointData<T>(T entity, WritePrecision precision)

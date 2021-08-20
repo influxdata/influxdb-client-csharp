@@ -60,5 +60,39 @@ namespace InfluxDB.Client.Test
             var ts = stopWatch.Elapsed;
             Assert.LessOrEqual(ts.TotalSeconds, 10, $"Elapsed time: {ts}");
         }
+
+        [Test]
+        public async Task GenericAndTypeofCalls()
+        {
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/query").UsingPost())
+                .RespondWith(CreateResponse(Data));
+            
+            
+            var measurements = await _queryApi.QueryAsync<SyncPoco>("from(...");
+            var measurementsTypeof = await _queryApi.QueryAsync("from(...",typeof(SyncPoco));
+
+            Assert.AreEqual(2, measurements.Count);
+            Assert.AreEqual(2, measurementsTypeof.Count);
+            Assert.AreEqual(12.25, measurements[0].Value);
+            Assert.AreEqual(13.00, measurements[1].Value);
+            Assert.IsAssignableFrom<SyncPoco>(measurementsTypeof[0]);
+            var cast = measurementsTypeof.Cast<SyncPoco>().ToList();
+            Assert.AreEqual(measurements[0].Timestamp, cast[0].Timestamp);
+            Assert.AreEqual(12.25, cast[0].Value);
+            Assert.AreEqual(13.00, cast[1].Value);
+        }
+        
+        
+        
+        
+        private class SyncPoco
+        {
+            [Column("id", IsTag = true)] public string Tag { get; set; }
+
+            [Column("_value")] public double Value { get; set; }
+
+            [Column(IsTimestamp = true)] public Object Timestamp { get; set; }
+        }
     }
 }

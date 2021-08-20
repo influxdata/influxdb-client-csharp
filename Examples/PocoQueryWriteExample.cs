@@ -84,6 +84,8 @@ namespace Examples
                         "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
 
             var list = await client.GetQueryApi().QueryAsync<Sensor>(query);
+            //or as an alternative:
+            // var list = await client.GetQueryApi().QueryAsync(query, typeof(Sensor));
             
             //
             // Print result

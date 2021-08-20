@@ -46,10 +46,13 @@ namespace Examples
             /// Convert to DomainObject.
             /// </summary>
             public T ConvertToEntity<T>(FluxRecord fluxRecord)
+                => (T)ConvertToEntity(fluxRecord, typeof(T));
+
+            public object ConvertToEntity(FluxRecord fluxRecord, Type type)
             {
-                if (typeof(T) != typeof(Sensor))
+                if (type != typeof(Sensor))
                 {
-                    throw new NotSupportedException($"This converter doesn't supports: {typeof(T)}");
+                    throw new NotSupportedException($"This converter doesn't supports: {type}");
                 }
 
                 var customEntity = new Sensor
@@ -59,8 +62,7 @@ namespace Examples
                     Value = Convert.ToDouble(fluxRecord.GetValueByKey("data")),
                     Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
                 };
-                
-                return (T) Convert.ChangeType(customEntity, typeof(T));
+                return Convert.ChangeType(customEntity, type);
             }
 
             /// <summary>

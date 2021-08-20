@@ -38,21 +38,26 @@ namespace InfluxDB.Client.Core.Flux.Internal
             return ToPoco<T>(fluxRecord);
         }
 
+        public object ConvertToEntity(FluxRecord fluxRecord, Type type)
+        {
+            return ToPoco(fluxRecord, type);
+        }
+
+
         /// <summary>
         /// Maps FluxRecord into custom POCO class.
         /// </summary>
         /// <param name="record">the Flux record</param>
-        /// <typeparam name="T">the POCO type</typeparam>
-        /// <returns></returns>
+        /// <param name="type">the POCO type</param>
+        /// <returns>An POCO object</returns>
         /// <exception cref="InfluxException"></exception>
-        internal T ToPoco<T>(FluxRecord record)
+        internal object ToPoco(FluxRecord record, Type type)
         {
             Arguments.CheckNotNull(record, "Record is required");
 
             try
             {
-                var type = typeof(T);
-                var poco = (T) Activator.CreateInstance(type);
+                var poco = Activator.CreateInstance(type);
 
                 // copy record to case insensitive dictionary (do this once)
                 var recordValues =
@@ -99,6 +104,17 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 throw new InfluxException(e);
             }
         }
+
+
+        /// <summary>
+        /// Maps FluxRecord into custom POCO class.
+        /// </summary>
+        /// <param name="record">the Flux record</param>
+        /// <typeparam name="T">the POCO type</typeparam>
+        /// <returns></returns>
+        /// <exception cref="InfluxException"></exception>
+        internal T ToPoco<T>(FluxRecord record)
+            => (T)ToPoco(record, typeof(T));
 
         private void SetFieldValue<T>(T poco, PropertyInfo property, object value)
         {
@@ -166,7 +182,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
             if (value is IConvertible)
             {
-                return (DateTime) Convert.ChangeType(value, typeof(DateTime));
+                return (DateTime)Convert.ChangeType(value, typeof(DateTime));
             }
 
             throw new InvalidCastException(
