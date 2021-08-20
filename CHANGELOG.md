@@ -1,4 +1,4 @@
-## 2.1.0 [unreleased]
+## 2.1.0 [2021-08-20]
 
 ### Bug Fixes
 1. [#221](https://github.com/influxdata/influxdb-client-csharp/pull/221): Parsing infinite numbers
