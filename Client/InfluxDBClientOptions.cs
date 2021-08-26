@@ -36,6 +36,7 @@ namespace InfluxDB.Client
         public TimeSpan ReadWriteTimeout { get; }
         
         public IWebProxy WebProxy { get; }
+        public bool AllowHttpRedirects { get; }
 
         public PointSettings PointSettings { get; }
 
@@ -57,6 +58,7 @@ namespace InfluxDB.Client
             ReadWriteTimeout = builder.ReadWriteTimeout;
             
             WebProxy = builder.WebProxy;
+            AllowHttpRedirects = builder.AllowHttpRedirects;
 
             PointSettings = builder.PointSettings;
         }
@@ -95,7 +97,8 @@ namespace InfluxDB.Client
             internal string OrgString;
             internal string BucketString;
 
-            internal IWebProxy WebProxy = null;
+            internal IWebProxy WebProxy;
+            internal bool AllowHttpRedirects;
 
             internal PointSettings PointSettings = new PointSettings();
 
@@ -265,6 +268,20 @@ namespace InfluxDB.Client
                 
                 return this;
             }
+            
+            /// <summary>
+            /// Allow or disable to the client automatically follows HTTP 3xx redirects.
+            /// </summary>
+            /// <param name="allowHttpRedirects">configure HTTP redirects</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder AllowRedirects(bool allowHttpRedirects)
+            {
+                Arguments.CheckNotNull(allowHttpRedirects, nameof(allowHttpRedirects));
+
+                AllowHttpRedirects = allowHttpRedirects;
+                
+                return this;
+            }
 
             /// <summary>
             /// Configure Builder via App.config.
@@ -291,6 +308,7 @@ namespace InfluxDB.Client
                 var logLevel = config.LogLevel;
                 var timeout = config.Timeout;
                 var readWriteTimeout = config.ReadWriteTimeout;
+                var allowHttpRedirects = config.AllowHttpRedirects;
 
                 var tags = config.Tags;
                 if (tags != null)
@@ -301,7 +319,7 @@ namespace InfluxDB.Client
                     }
                 }
 
-                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout);
+                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout, allowHttpRedirects);
             }
 
             /// <summary>
@@ -324,12 +342,13 @@ namespace InfluxDB.Client
                 var logLevel = query.Get("logLevel");
                 var timeout = query.Get("timeout");
                 var readWriteTimeout = query.Get("readWriteTimeout");
+                var allowHttpRedirects = Convert.ToBoolean(query.Get("allowHttpRedirects"));
 
-                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout);
+                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout, allowHttpRedirects);
             }
 
             private Builder Configure(string url, string org, string bucket, string token, string logLevel,
-                string timeout, string readWriteTimeout)
+                string timeout, string readWriteTimeout, bool allowHttpRedirects = false)
             {
                 Url(url);
                 Org(org);
@@ -354,6 +373,8 @@ namespace InfluxDB.Client
                 {
                     ReadWriteTimeOut(ToTimeout(readWriteTimeout));
                 }
+
+                AllowRedirects(allowHttpRedirects);
 
                 return this;
             }
