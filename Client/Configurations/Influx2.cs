@@ -76,7 +76,7 @@ namespace InfluxDB.Client.Configurations
         }
         
         /// <summary>
-        /// Allow or disable to the client automatically follows HTTP 3xx redirects.
+        /// Configure automatically following HTTP 3xx redirects.
         /// </summary>
         [ConfigurationProperty("allowHttpRedirects", IsKey = true, IsRequired = false)]
         public bool AllowHttpRedirects

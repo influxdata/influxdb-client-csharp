@@ -1084,7 +1084,7 @@ The following options are supported:
 | LogLevel          | NONE      | rest client verbosity level |
 | ReadWriteTimeout  | 10000 ms  | read and write timeout |
 | Timeout           | 10000 ms  | socket timeout |
-| AllowHttpRedirects| false | Allow or disable to the client automatically follows HTTP 3xx redirects. |
+| AllowHttpRedirects| false     | Configure automatically following HTTP 3xx redirects. |
 
 The `ReadWriteTimeout` and `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
@@ -1133,7 +1133,7 @@ The following options are supported:
 | logLevel          | NONE      | rest client verbosity level |
 | readWriteTimeout  | 10000 ms  | read and write timeout |
 | timeout           | 10000 ms  | socket timeout |
-| allowHttpRedirects| false | Allow or disable to the client automatically follows HTTP 3xx redirects. |
+| allowHttpRedirects| false | Configure automatically following HTTP 3xx redirects. |
 
 The `readWriteTimeout` and `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 

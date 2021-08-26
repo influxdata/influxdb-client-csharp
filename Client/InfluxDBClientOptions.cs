@@ -270,7 +270,7 @@ namespace InfluxDB.Client
             }
             
             /// <summary>
-            /// Allow or disable to the client automatically follows HTTP 3xx redirects.
+            /// Configure automatically following HTTP 3xx redirects.
             /// </summary>
             /// <param name="allowHttpRedirects">configure HTTP redirects</param>
             /// <returns><see cref="Builder"/></returns>
