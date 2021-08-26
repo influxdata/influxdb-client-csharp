@@ -1160,7 +1160,7 @@ var client = InfluxDBClientFactory.Create(options);
 
 ### Proxy and redirects configuration
 
-You can configure the client to tunnel requests through an HTTP proxy. To configure the proxy use a `Proxy` configuration option:
+You can configure the client to tunnel requests through an HTTP proxy. To configure the proxy use `Proxy` configuration option:
 
  ```csharp
 var options = new InfluxDBClientOptions.Builder()
@@ -1172,7 +1172,7 @@ var options = new InfluxDBClientOptions.Builder()
 using var client = InfluxDBClientFactory.Create(options);
 ```
 
-Client automatically **doesn't** follows HTTP redirects. You can enable redirects by a `AllowRedirects` configuration option:
+Client automatically **doesn't** follows HTTP redirects. You can enable redirects by `AllowRedirects` configuration option:
 
 ```csharp
 var options = new InfluxDBClientOptions.Builder()
@@ -1184,7 +1184,7 @@ using var client = InfluxDBClientFactory.Create(options);
 ```
 
 > :warning: Due to a security reason `Authorization` header is not forwarded when redirect leads to a different domain.
-> You can create custom `Authenticator` which change this behaviour - [more info](https://stackoverflow.com/a/28285735/1953325)
+> You can create custom `Authenticator` which change this behaviour - [see more](https://stackoverflow.com/a/28285735/1953325).
 
 #### Log HTTP Request and Response
 
