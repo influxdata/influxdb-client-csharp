@@ -46,6 +46,10 @@ namespace InfluxDB.Client.Linq.Internal
                 {
                     literal = new IntegerLiteral("IntegerLiteral", Convert.ToString(i));
                 }
+                else if (variable.Value is long l)
+                {
+                    literal = new IntegerLiteral("IntegerLiteral", Convert.ToString(l));
+                }
                 else if (variable.Value is bool b)
                 {
                     literal = new BooleanLiteral("BooleanLiteral", b);

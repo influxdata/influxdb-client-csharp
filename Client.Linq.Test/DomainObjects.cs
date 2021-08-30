@@ -69,4 +69,9 @@ namespace Client.Linq.Test
         [Column(IsTimestamp = true)]
         public DateTime Timestamp { get; set; }
     }
+    
+    public class DataEntityWithLong
+    {
+        public long EndWithTicks { get; set; }
+    }
 }
