@@ -805,6 +805,35 @@ namespace Client.Linq.Test
                 Assert.AreEqual("123456", GetLiteral<StringLiteral>(ast, 3).Value);
             }
         }
+        
+        [Test]
+        public void FilterByLong()
+        {
+            var query = from s in InfluxDBQueryable<DataEntityWithLong>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.EndWithTicks <= 637656739543829486
+                select s;
+            var visitor = BuildQueryVisitor(query);
+
+            Assert.AreEqual(FluxStart + " |> filter(fn: (r) => (r[\"EndWithTicks\"] <= p3))", visitor.BuildFluxQuery());
+            
+            var ast = visitor.BuildFluxAST();
+
+            Assert.NotNull(ast);
+            Assert.NotNull(ast.Body);
+            Assert.AreEqual(3, ast.Body.Count);
+
+            var bucketAssignment = ((OptionStatement) ast.Body[0]).Assignment as VariableAssignment;
+            Assert.AreEqual("p1", bucketAssignment?.Id.Name);
+            Assert.AreEqual("my-bucket", (bucketAssignment?.Init as StringLiteral)?.Value);
+
+            var rangeAssignment = ((OptionStatement) ast.Body[1]).Assignment as VariableAssignment;
+            Assert.AreEqual("p2", rangeAssignment?.Id.Name);
+            Assert.AreEqual("0", (rangeAssignment?.Init as IntegerLiteral)?.Value);
+
+            var endWithTicksAssignment = ((OptionStatement) ast.Body[2]).Assignment as VariableAssignment;
+            Assert.AreEqual("p3", endWithTicksAssignment?.Id.Name);
+            Assert.AreEqual("637656739543829486", (endWithTicksAssignment?.Init as IntegerLiteral)?.Value);
+        }
 
         private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)
         {
