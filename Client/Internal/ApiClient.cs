@@ -31,6 +31,7 @@ namespace InfluxDB.Client.Api.Client
             var totalMilliseconds = (int) options.ReadWriteTimeout.TotalMilliseconds;
 
             RestClient = new RestClient(options.Url);
+            RestClient.FollowRedirects = options.AllowHttpRedirects;
             RestClient.AutomaticDecompression = false;
             Configuration = new Configuration
             {

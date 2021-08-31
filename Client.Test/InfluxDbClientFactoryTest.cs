@@ -24,6 +24,9 @@ namespace InfluxDB.Client.Test
             var client = InfluxDBClientFactory.Create("http://localhost:9999");
 
             Assert.IsNotNull(client);
+            
+            var options = GetDeclaredField<InfluxDBClientOptions>(client.GetType(), client, "_options");
+            Assert.AreEqual(false, options.AllowHttpRedirects);
         }
 
         [Test]
@@ -46,13 +49,14 @@ namespace InfluxDB.Client.Test
         public void LoadFromConnectionString()
         {
             var client = InfluxDBClientFactory.Create("http://localhost:9999?" +
-                                                      "timeout=1000&readWriteTimeout=3000&logLevel=HEADERS&token=my-token&bucket=my-bucket&org=my-org");
+                                                      "timeout=1000&readWriteTimeout=3000&logLevel=HEADERS&token=my-token&bucket=my-bucket&org=my-org&allowHttpRedirects=true");
 
             var options = GetDeclaredField<InfluxDBClientOptions>(client.GetType(), client, "_options");
             Assert.AreEqual("http://localhost:9999/", options.Url);
             Assert.AreEqual("my-org", options.Org);
             Assert.AreEqual("my-bucket", options.Bucket);
             Assert.AreEqual("my-token".ToCharArray(), options.Token);
+            Assert.AreEqual(true, options.AllowHttpRedirects);
             Assert.AreEqual(LogLevel.Headers, options.LogLevel);
             Assert.AreEqual(LogLevel.Headers, client.GetLogLevel());
 

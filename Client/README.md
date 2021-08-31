@@ -38,6 +38,7 @@ This section contains links to the client library documentation.
     - [Client connection string](#client-connection-string)
     - [Gzip support](#gzip-support)
     - [How to use WebProxy](#how-to-use-webproxy)
+    - [Proxy and redirects configuration](#proxy-and-redirects-configuration)
 
 ## Queries
 
@@ -1083,6 +1084,7 @@ The following options are supported:
 | LogLevel          | NONE      | rest client verbosity level |
 | ReadWriteTimeout  | 10000 ms  | read and write timeout |
 | Timeout           | 10000 ms  | socket timeout |
+| AllowHttpRedirects| false     | Configure automatically following HTTP 3xx redirects. |
 
 The `ReadWriteTimeout` and `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
@@ -1131,6 +1133,7 @@ The following options are supported:
 | logLevel          | NONE      | rest client verbosity level |
 | readWriteTimeout  | 10000 ms  | read and write timeout |
 | timeout           | 10000 ms  | socket timeout |
+| allowHttpRedirects| false | Configure automatically following HTTP 3xx redirects. |
 
 The `readWriteTimeout` and `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
@@ -1154,6 +1157,34 @@ var options = new InfluxDBClientOptions.Builder()
 
 var client = InfluxDBClientFactory.Create(options);
 ```
+
+### Proxy and redirects configuration
+
+You can configure the client to tunnel requests through an HTTP proxy. To configure the proxy use `Proxy` configuration option:
+
+ ```csharp
+var options = new InfluxDBClientOptions.Builder()
+    .Url("http://localhost:8086")
+    .AuthenticateToken("my-token")
+    .Proxy(new WebProxy("http://proxyserver:80/", true))
+    .Build();
+
+using var client = InfluxDBClientFactory.Create(options);
+```
+
+Client automatically **doesn't** follows HTTP redirects. You can enable redirects by `AllowRedirects` configuration option:
+
+```csharp
+var options = new InfluxDBClientOptions.Builder()
+    .Url("http://localhost:8086")
+    .AllowRedirects(true)
+    .Build();
+
+using var client = InfluxDBClientFactory.Create(options);
+```
+
+> :warning: Due to a security reason `Authorization` header is not forwarded when redirect leads to a different domain.
+> You can create custom `Authenticator` which change this behaviour - [see more](https://stackoverflow.com/a/28285735/1953325).
 
 #### Log HTTP Request and Response
 

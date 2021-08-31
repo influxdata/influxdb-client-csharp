@@ -74,6 +74,16 @@ namespace InfluxDB.Client.Configurations
             get => (string) base["timeout"];
             set => base["timeout"] = value;
         }
+        
+        /// <summary>
+        /// Configure automatically following HTTP 3xx redirects.
+        /// </summary>
+        [ConfigurationProperty("allowHttpRedirects", IsKey = true, IsRequired = false)]
+        public bool AllowHttpRedirects
+        {
+            get => (bool) base["allowHttpRedirects"];
+            set => base["allowHttpRedirects"] = value;
+        }
 
         [ConfigurationProperty("tags", IsRequired = false)]
         public TagCollection Tags

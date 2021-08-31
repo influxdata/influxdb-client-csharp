@@ -10,6 +10,9 @@ using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Test;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
+using WireMock.Server;
+using WireMock.Settings;
 
 namespace InfluxDB.Client.Test
 {
@@ -105,9 +108,9 @@ namespace InfluxDB.Client.Test
         {
             var writer = new StringWriter();
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
-            
+
             _client.SetLogLevel(LogLevel.Headers);
-            
+
             MockServer
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
@@ -117,20 +120,20 @@ namespace InfluxDB.Client.Test
                 writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
                     "h2o_feet,location=coyote_creek water_level=1.0 1");
             }
-            
+
             StringAssert.Contains("org=org1", writer.ToString());
             StringAssert.Contains("bucket=b1", writer.ToString());
             StringAssert.Contains("precision=ns", writer.ToString());
         }
-        
+
         [Test]
         public void LogLevelWithoutQueryString()
         {
             var writer = new StringWriter();
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
-            
+
             _client.SetLogLevel(LogLevel.Basic);
-            
+
             MockServer
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
@@ -140,12 +143,12 @@ namespace InfluxDB.Client.Test
                 writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
                     "h2o_feet,location=coyote_creek water_level=1.0 1");
             }
-            
+
             StringAssert.DoesNotContain("org=org1", writer.ToString());
             StringAssert.DoesNotContain("bucket=b1", writer.ToString());
             StringAssert.DoesNotContain("precision=ns", writer.ToString());
         }
-        
+
         [Test]
         public async Task UserAgentHeader()
         {
@@ -155,11 +158,11 @@ namespace InfluxDB.Client.Test
 
             await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
 
-            var request= MockServer.LogEntries.Last();
+            var request = MockServer.LogEntries.Last();
             StringAssert.StartsWith("influxdb-client-csharp/3.", request.RequestMessage.Headers["User-Agent"].First());
             StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
         }
-        
+
         [Test]
         public void TrailingSlashInUrl()
         {
@@ -217,14 +220,14 @@ namespace InfluxDB.Client.Test
             request = MockServer.LogEntries.Last();
             Assert.AreEqual(MockServerUrl + "/api/v2/write?org=org1&bucket=b1&precision=ns",
                 request.RequestMessage.AbsoluteUrl);
-            
+
             Assert.True(MockServer.LogEntries.Any());
             foreach (var logEntry in MockServer.LogEntries)
             {
                 StringAssert.StartsWith(MockServerUrl + "/api/v2/", logEntry.RequestMessage.AbsoluteUrl);
             }
         }
-        
+
         [Test]
         public void ProduceTypedException()
         {
@@ -242,9 +245,45 @@ namespace InfluxDB.Client.Test
         public void CreateService()
         {
             var service = _client.CreateService<DBRPsService>(typeof(DBRPsService));
-            
+
             Assert.IsNotNull(service);
             Assert.IsInstanceOf(typeof(DBRPsService), service);
+        }
+
+        [Test]
+        public async Task RedirectToken()
+        {
+            _client.Dispose();
+            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder()
+                .Url(MockServerUrl)
+                .AuthenticateToken("my-token")
+                .AllowRedirects(true)
+                .Build());
+            
+            var anotherServer = WireMockServer.Start(new WireMockServerSettings
+            {
+                UseSSL = false
+            });
+
+            // redirect to another server
+            MockServer
+                .Given(Request.Create().UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(301).WithHeader("location", anotherServer.Urls[0]));
+
+
+            // success response
+            anotherServer
+                .Given(Request.Create().UsingGet())
+                .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
+
+            var authorization = await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
+            Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, authorization.Status);
+
+            StringAssert.StartsWith("Token my-token",
+                MockServer.LogEntries.Last().RequestMessage.Headers["Authorization"].First());
+            Assert.False(anotherServer.LogEntries.Last().RequestMessage.Headers.ContainsKey("Authorization"));
+
+            anotherServer.Stop();
         }
     }
 }

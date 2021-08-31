@@ -4,7 +4,8 @@
 Adds a `Type` overload for POCOs to `QueryAsync`. This will add `object ConvertToEntity(FluxRecord, Type)` to `IFluxResultMapper`
 
 ### Features
-1. [#232](https://github.com/influxdata/influxdb-client-csharp/pull/232): Adds a `Type` overload for POCOs to `QueryAsync`.
+1. [#232](https://github.com/influxdata/influxdb-client-csharp/pull/232): Add a `Type` overload for POCOs to `QueryAsync`.
+1. [#233](https://github.com/influxdata/influxdb-client-csharp/pull/233): Add possibility to follow HTTP redirects
 
 ## 2.1.0 [2021-08-20]
 
