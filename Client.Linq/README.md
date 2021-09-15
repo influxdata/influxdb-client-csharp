@@ -13,7 +13,6 @@ This section contains links to the client library documentation.
 
 ## Usage
 
-- [Changelog](#changelog)
 - [How to start](#how-to-start)
 - [Time Series](#time-series)
     - [Enable querying multiple time-series](#enable-querying-multiple-time-series)
@@ -40,19 +39,6 @@ This section contains links to the client library documentation.
 - [Domain Converter](#domain-converter)
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
 - [Asynchronous Queries](#asynchronous-queries)
-
-## Changelog
-### 1.19.0-dev.3160 [2021-06-02]
-  - Fix Flux AST for Tag parameters which are not `String`. See details - [#202](https://github.com/influxdata/influxdb-client-csharp/pull/202)
-### 1.19.0-dev.3084 [2021-05-07]
-  - optimize Flux Query for querying one time-series. See details - [#197](https://github.com/influxdata/influxdb-client-csharp/pull/197)
-### 1.18.0-dev.2973 [2021-04-27]
-  - switch `pivot()` and `drop()` function to achieve better performance. See details - [#188](https://github.com/influxdata/influxdb-client-csharp/pull/188)
-### 1.18.0-dev.2880 [2021-04-12]
-  - use `group()` function in output Flux query. See details - [Group function](#enable-querying-multiple-time-series)
-### 1.17.0-dev.linq.17 [2021-03-18]
-  - Optimize filtering by tag - [see more](#filtering)
-  - rebased with `master` branch
 
 ## How to start
 
