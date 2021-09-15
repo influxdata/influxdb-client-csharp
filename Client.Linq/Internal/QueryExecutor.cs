@@ -172,7 +172,6 @@ namespace InfluxDB.Client.Linq.Internal
             var aggregated = queryResultsSettings.AggregateFunction(enumerable);
 
             return (T)Convert.ChangeType(aggregated, typeof(T));
-            ;
         }
     }
 }
