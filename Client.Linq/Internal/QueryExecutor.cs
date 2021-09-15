@@ -93,7 +93,7 @@ namespace InfluxDB.Client.Linq.Internal
 
             if (_queryApiSync == null)
             {
-                throw new ArgumentException("The 'QueryApiSync' has to be used for use sync queries.");
+                throw new ArgumentException("The 'QueryApiSync' has to be configured for sync queries.");
             }
 
             if (queryResultsSettings.ScalarAggregated)
@@ -116,7 +116,7 @@ namespace InfluxDB.Client.Linq.Internal
 
             if (_queryApi == null)
             {
-                throw new ArgumentException("The 'QueryApi' has to be used for use Async queries.");
+                throw new ArgumentException("The 'QueryApi' has to be configured for Async queries.");
             }
 
             if (queryResultsSettings.ScalarAggregated)

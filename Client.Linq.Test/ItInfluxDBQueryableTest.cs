@@ -356,7 +356,7 @@ namespace Client.Linq.Test
                 select s;
 
             var ae = Assert.Throws<ArgumentException>(() => query.ToList());
-            Assert.AreEqual("The 'QueryApiSync' has to be used for use sync queries.", ae.Message);
+            Assert.AreEqual("The 'QueryApiSync' has to be configured for sync queries.", ae.Message);
         }
 
         [Test]
@@ -366,7 +366,7 @@ namespace Client.Linq.Test
                 select s;
 
             var ae = Assert.Throws<ArgumentException>(() => query.ToInfluxQueryable().GetAsyncEnumerator());
-            Assert.AreEqual("The 'QueryApi' has to be used for use Async queries.", ae.Message);
+            Assert.AreEqual("The 'QueryApi' has to be configured for Async queries.", ae.Message);
         }
 
         [Test]
