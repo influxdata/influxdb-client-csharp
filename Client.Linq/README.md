@@ -39,6 +39,7 @@ This section contains links to the client library documentation.
     - [LongCount](#longcount)
 - [Domain Converter](#domain-converter)
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
+- [Asynchronous Queries](#asynchronous-queries)
 
 ## Changelog
 ### 1.19.0-dev.3160 [2021-06-02]
@@ -1008,4 +1009,20 @@ foreach (var statement in influxQuery.Extern.Body)
 }
 Console.WriteLine();
 Console.WriteLine(influxQuery._Query);
+```
+
+## Asynchronous Queries
+
+The LINQ driver also supports asynchronous querying. For asynchronous queries you have to initialize `InfluxDBQueryable` with asynchronous version of [QueryApi](/Client/QueryApi.cs) and transform `IQueryable<T>` to `IAsyncEnumerable<T>`:
+
+```c#
+var client = InfluxDBClientFactory.Create("http://localhost:8086", "my-token");
+var queryApi = client.GetQueryApi();
+
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    select s;
+
+IAsyncEnumerable<Sensor> enumerable = query
+    .ToInfluxQueryable()
+    .GetAsyncEnumerator();
 ```

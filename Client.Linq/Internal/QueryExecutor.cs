@@ -160,7 +160,7 @@ namespace InfluxDB.Client.Linq.Internal
             var result = tables
                 .ContinueWith(t => ApplyAggregate<T>(t.Result, queryResultsSettings), cancellationToken);
 
-            yield return await result;
+            yield return await result.ConfigureAwait(false);
         }
 
         private static T ApplyAggregate<T>(IEnumerable<FluxTable> tables, QueryResultsSettings queryResultsSettings)
