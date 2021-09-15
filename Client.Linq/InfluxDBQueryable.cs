@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Linq.Internal;
 using Remotion.Linq;
@@ -17,7 +19,7 @@ namespace InfluxDB.Client.Linq
         {
             QueryMultipleTimeSeries = false;
         }
-        
+
         /// <summary>
         /// Gets or sets whether the drive is used to query multiple time series.
         /// Setting this variable to true will change how the produced Flux Query looks like:
@@ -35,7 +37,7 @@ namespace InfluxDB.Client.Linq
     public class InfluxDBQueryable<T> : QueryableBase<T>
     {
         /// <summary>
-        /// Create a new instance of IQueryable.
+        /// Create a new instance of IQueryable for synchronous Queries.
         /// </summary>
         /// <param name="bucket">Specifies the source bucket.</param>
         /// <param name="org">Specifies the source organization.</param>
@@ -47,9 +49,23 @@ namespace InfluxDB.Client.Linq
         {
             return Queryable(bucket, org, queryApi, new DefaultMemberNameResolver(), queryableOptimizerSettings);
         }
+     
+        /// <summary>
+        /// Create a new instance of IQueryable for asynchronous Queries.
+        /// </summary>
+        /// <param name="bucket">Specifies the source bucket.</param>
+        /// <param name="org">Specifies the source organization.</param>
+        /// <param name="queryApi">The underlying API to execute Flux Query.</param>
+        /// <param name="queryableOptimizerSettings">Settings for a Query optimization</param>
+        /// <returns>new instance for of Queryable</returns>
+        public static InfluxDBQueryable<T> Queryable(string bucket, string org, QueryApi queryApi,
+            QueryableOptimizerSettings queryableOptimizerSettings = default)
+        {
+            return Queryable(bucket, org, queryApi, new DefaultMemberNameResolver(), queryableOptimizerSettings);
+        }
 
         /// <summary>
-        /// Create a new instance of IQueryable.
+        /// Create a new instance of IQueryable for synchronous Queries.
         /// </summary>
         /// <param name="bucket">Specifies the source bucket.</param>
         /// <param name="org">Specifies the source organization.</param>
@@ -64,7 +80,22 @@ namespace InfluxDB.Client.Linq
         }
 
         /// <summary>
-        /// Create a new instance of IQueryable.
+        /// Create a new instance of IQueryable for asynchronous Queries.
+        /// </summary>
+        /// <param name="bucket">Specifies the source bucket.</param>
+        /// <param name="org">Specifies the source organization.</param>
+        /// <param name="queryApi">The underlying API to execute Flux Query.</param>
+        /// <param name="memberResolver">Resolver for customized names.</param>
+        /// <param name="queryableOptimizerSettings">Settings for a Query optimization</param>
+        /// <returns>new instance for of Queryable</returns>
+        public static InfluxDBQueryable<T> Queryable(string bucket, string org, QueryApi queryApi,
+            IMemberNameResolver memberResolver, QueryableOptimizerSettings queryableOptimizerSettings = default)
+        {
+            return new InfluxDBQueryable<T>(bucket, org, queryApi, memberResolver, queryableOptimizerSettings);
+        }
+
+        /// <summary>
+        /// Create a new instance of IQueryable for synchronous Queries.
         /// </summary>
         /// <param name="bucket">Specifies the source bucket.</param>
         /// <param name="org">Specifies the source organization.</param>
@@ -72,6 +103,20 @@ namespace InfluxDB.Client.Linq
         /// <param name="memberResolver">Resolver for customized names.</param>
         /// <param name="queryableOptimizerSettings">Settings for a Query optimization</param>
         public InfluxDBQueryable(string bucket, string org, QueryApiSync queryApi, IMemberNameResolver memberResolver,
+            QueryableOptimizerSettings queryableOptimizerSettings = default) : base(CreateQueryParser(),
+            CreateExecutor(bucket, org, queryApi, memberResolver, queryableOptimizerSettings))
+        {
+        }
+
+        /// <summary>
+        /// Create a new instance of IQueryable for asynchronous Queries.
+        /// </summary>
+        /// <param name="bucket">Specifies the source bucket.</param>
+        /// <param name="org">Specifies the source organization.</param>
+        /// <param name="queryApi">The underlying API to execute Flux Query.</param>
+        /// <param name="memberResolver">Resolver for customized names.</param>
+        /// <param name="queryableOptimizerSettings">Settings for a Query optimization</param>
+        public InfluxDBQueryable(string bucket, string org, QueryApi queryApi, IMemberNameResolver memberResolver,
             QueryableOptimizerSettings queryableOptimizerSettings = default) : base(CreateQueryParser(),
             CreateExecutor(bucket, org, queryApi, memberResolver, queryableOptimizerSettings))
         {
@@ -94,7 +139,7 @@ namespace InfluxDB.Client.Linq
         {
             var provider = Provider as DefaultQueryProvider;
             var executor = provider?.Executor as InfluxDBQueryExecutor;
-            
+
             if (executor == null)
                 throw new NotSupportedException("InfluxDBQueryable should use InfluxDBQueryExecutor");
 
@@ -115,9 +160,49 @@ namespace InfluxDB.Client.Linq
                 queryableOptimizerSettings ?? new QueryableOptimizerSettings());
         }
 
+        private static IQueryExecutor CreateExecutor(string bucket, string org, QueryApi queryApi,
+            IMemberNameResolver memberResolver, QueryableOptimizerSettings queryableOptimizerSettings = default)
+        {
+            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
+            Arguments.CheckNonEmptyString(org, nameof(org));
+            Arguments.CheckNotNull(queryApi, nameof(queryApi));
+
+            return new InfluxDBQueryExecutor(bucket, org, queryApi, memberResolver,
+                queryableOptimizerSettings ?? new QueryableOptimizerSettings());
+        }
+
         private static QueryParser CreateQueryParser()
         {
             return QueryParser.CreateDefault();
+        }
+
+        public IAsyncEnumerable<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+        {
+            var provider = Provider as DefaultQueryProvider;
+
+            if (!(provider?.Executor is InfluxDBQueryExecutor executor))
+            {
+                throw new NotSupportedException("InfluxDBQueryable should use InfluxDBQueryExecutor");
+            }
+
+            var parsedQuery = provider.QueryParser.GetParsedQuery(Expression);
+            return executor.ExecuteCollectionAsync<T>(parsedQuery, cancellationToken);
+        }
+    }
+
+    public static class QueryableExtensions
+    {
+        public static InfluxDBQueryable<T> ToInfluxQueryable<T>(this IQueryable<T> source)
+        {
+            if (source == null)
+            {
+                throw new InvalidCastException("Queryable source is null");
+            }
+
+            if (!(source is InfluxDBQueryable<T> queryable))
+                throw new InvalidCastException("Queryable should be InfluxDBQueryable");
+
+            return queryable;
         }
     }
 }
