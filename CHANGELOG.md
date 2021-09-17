@@ -1,4 +1,4 @@
-## 3.0.0 [unreleased]
+## 3.0.0 [2021-09-17]
 
 ### Breaking Changes
 Adds a `Type` overload for POCOs to `QueryAsync`. This will add `object ConvertToEntity(FluxRecord, Type)` to `IFluxResultMapper`
