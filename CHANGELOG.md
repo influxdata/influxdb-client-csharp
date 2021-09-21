@@ -1,5 +1,8 @@
 ## 3.1.0 [unreleased]
 
+### Features
+1. [#239](https://github.com/influxdata/influxdb-client-csharp/pull/239): Add support for Asynchronous queries [LINQ]
+
 ## 3.0.0 [2021-09-17]
 
 ### Breaking Changes
