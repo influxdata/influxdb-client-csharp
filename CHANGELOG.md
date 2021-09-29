@@ -1,5 +1,8 @@
 ## 3.1.0 [unreleased]
 
+### Features
+1. [#239](https://github.com/influxdata/influxdb-client-csharp/pull/239): Add support for Asynchronous queries [LINQ]
+
 ## 3.0.0 [2021-09-17]
 
 ### Breaking Changes
@@ -8,6 +11,7 @@ Adds a `Type` overload for POCOs to `QueryAsync`. This will add `object ConvertT
 ### Features
 1. [#232](https://github.com/influxdata/influxdb-client-csharp/pull/232): Add a `Type` overload for POCOs to `QueryAsync`.
 1. [#233](https://github.com/influxdata/influxdb-client-csharp/pull/233): Add possibility to follow HTTP redirects
+1. [#239](https://github.com/influxdata/influxdb-client-csharp/pull/239): Add support for Asynchronous queries [LINQ]
 
 ### Bug Fixes
 1. [#236](https://github.com/influxdata/influxdb-client-csharp/pull/236): Mapping `long` type into Flux AST [LINQ]

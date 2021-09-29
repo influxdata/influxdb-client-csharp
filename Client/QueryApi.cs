@@ -185,6 +185,25 @@ namespace InfluxDB.Client
             await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken).ConfigureAwait(false))
                 yield return record;
         }
+        
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps
+        /// response to enumerable of objects of type <typeparamref name="T"/>. 
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization</param>
+        /// <param name="cancellationToken">cancellation token</param>
+        /// <typeparam name="T">the type of measurement</typeparam>
+        /// <returns>Measurements which are matched the query</returns>
+        public async IAsyncEnumerable<T> QueryAsyncEnumerable<T>(Query query, string org, [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            Arguments.CheckNotNull(query, nameof(query));
+
+            var requestMessage = CreateRequest(query, org);
+
+            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken).ConfigureAwait(false))
+                yield return record;
+        }
 
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps

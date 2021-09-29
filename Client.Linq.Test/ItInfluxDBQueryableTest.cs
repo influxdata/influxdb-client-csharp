@@ -36,7 +36,7 @@ namespace Client.Linq.Test
 
             await _client
                 .GetWriteApiAsync()
-                .WriteRecordsAsync("my-bucket", "my-org", WritePrecision.S, 
+                .WriteRecordsAsync("my-bucket", "my-org", WritePrecision.S,
                     sensor11, sensor21, sensor12, sensor22, sensor13, sensor23, sensor14, sensor24);
         }
 
@@ -50,17 +50,17 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(8, sensors.Count);
         }
-        
+
         [Test]
         public void QueryExample()
         {
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
-                where s.SensorId == "id-1"
-                where s.Value > 12
-                where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
-                where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
-                orderby s.Timestamp
-                select s)
+                    where s.SensorId == "id-1"
+                    where s.Value > 12
+                    where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+                    where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
+                    orderby s.Timestamp
+                    select s)
                 .Take(2)
                 .Skip(2);
 
@@ -68,17 +68,17 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(1, sensors.Count);
         }
-        
+
         [Test]
         public void QueryExampleCount()
         {
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
-                where s.SensorId == "id-1"
-                where s.Value > 12
-                where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
-                where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
-                orderby s.Timestamp
-                select s)
+                    where s.SensorId == "id-1"
+                    where s.Value > 12
+                    where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+                    where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
+                    orderby s.Timestamp
+                    select s)
                 .Count();
 
             Assert.AreEqual(3, query);
@@ -92,14 +92,14 @@ namespace Client.Linq.Test
 
             var sensors = query.ToList();
 
-            Assert.AreEqual(2*2, sensors.Count);
+            Assert.AreEqual(2 * 2, sensors.Count);
         }
 
         [Test]
         public void QueryTakeMultipleTimeSeries()
         {
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync(),
-                    new QueryableOptimizerSettings {QueryMultipleTimeSeries = true})
+                    new QueryableOptimizerSettings { QueryMultipleTimeSeries = true })
                 select s).Take(2);
 
             var sensors = query.ToList();
@@ -115,9 +115,9 @@ namespace Client.Linq.Test
 
             var sensors = query.ToList();
 
-            Assert.AreEqual(1+1, sensors.Count);
+            Assert.AreEqual(1 + 1, sensors.Count);
         }
-        
+
         [Test]
         public void QueryWhereEqual()
         {
@@ -133,7 +133,7 @@ namespace Client.Linq.Test
                 Assert.AreEqual("id-1", sensor.SensorId);
             }
         }
-        
+
         [Test]
         public void QueryWhereNotEqual()
         {
@@ -229,7 +229,7 @@ namespace Client.Linq.Test
                 Assert.GreaterOrEqual(sensor.Value, 28);
             }
         }
-        
+
         [Test]
         public void QueryOr()
         {
@@ -241,7 +241,7 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(6, sensors.Count);
         }
-        
+
         [Test]
         public void QueryTimeRange()
         {
@@ -257,7 +257,7 @@ namespace Client.Linq.Test
                 Assert.GreaterOrEqual(sensor.Value, 89);
             }
         }
-        
+
         [Test]
         public void QueryTimeGreaterEqual()
         {
@@ -269,7 +269,7 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(4, sensors.Count);
         }
-        
+
         [Test]
         public void QueryTimeEqual()
         {
@@ -285,7 +285,7 @@ namespace Client.Linq.Test
                 Assert.GreaterOrEqual(sensor.Value, 15);
             }
         }
-        
+
         [Test]
         public void QueryWhereNothing()
         {
@@ -297,7 +297,7 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(0, sensors.Count);
         }
-        
+
         [Test]
         public void QueryOrderBy()
         {
@@ -310,19 +310,19 @@ namespace Client.Linq.Test
             Assert.AreEqual(12, sensors.First().Value);
             Assert.AreEqual(89, sensors.Last().Value);
         }
-        
+
         [Test]
         public void QueryOrderByTime()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
-                orderby s.Timestamp descending 
+                orderby s.Timestamp descending
                 select s;
 
             var sensors = query.ToList();
 
-            Assert.AreEqual(new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc), 
+            Assert.AreEqual(new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc),
                 sensors.First().Timestamp);
-            Assert.AreEqual(new DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc), 
+            Assert.AreEqual(new DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc),
                 sensors.Last().Timestamp);
         }
 
@@ -347,6 +347,84 @@ namespace Client.Linq.Test
             var sensors = query.LongCount();
 
             Assert.AreEqual(8, sensors);
+        }
+
+        [Test]
+        public void SyncQueryConfiguration()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                select s;
+
+            var ae = Assert.Throws<ArgumentException>(() => query.ToList());
+            Assert.AreEqual("The 'QueryApiSync' has to be configured for sync queries.", ae.Message);
+        }
+
+        [Test]
+        public void ASyncQueryConfiguration()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
+                select s;
+
+            var ae = Assert.Throws<ArgumentException>(() => query.ToInfluxQueryable().GetAsyncEnumerator());
+            Assert.AreEqual("The 'QueryApi' has to be configured for Async queries.", ae.Message);
+        }
+
+        [Test]
+        public async Task ASyncQuery()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                select s;
+
+            var sensors = await query
+                .ToInfluxQueryable()
+                .GetAsyncEnumerator()
+                .ToListAsync();
+
+            Assert.AreEqual(8, sensors.Count);
+        }
+
+        [Test]
+        public async Task ASyncQueryFirst()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                select s;
+
+            var sensor = await query
+                .ToInfluxQueryable()
+                .GetAsyncEnumerator()
+                .FirstOrDefaultAsync();
+
+            Assert.IsNotNull(sensor);
+        }
+
+        [Test]
+        public void AggregateFunction()
+        {
+            var count = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
+                    where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+                    where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
+                    orderby s.Timestamp
+                    select s)
+                .Count();
+
+            Assert.AreEqual(8, count);
+        }
+
+        [Test]
+        public async Task AggregateFunctionAsync()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
+                where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+                where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
+                orderby s.Timestamp
+                select s;
+
+            var count = await query
+                .ToInfluxQueryable()
+                .GetAsyncEnumerator()
+                .CountAsync();
+
+            Assert.AreEqual(8, count);
         }
 
         [TearDown]

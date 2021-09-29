@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Test;
@@ -68,7 +70,6 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                 .RespondWith(CreateResponse(Data));
             
-            
             var measurements = await _queryApi.QueryAsync<SyncPoco>("from(...");
             var measurementsTypeof = await _queryApi.QueryAsync("from(...",typeof(SyncPoco));
 
@@ -82,9 +83,26 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(12.25, cast[0].Value);
             Assert.AreEqual(13.00, cast[1].Value);
         }
-        
-        
-        
+
+        [Test]
+        public async Task QueryAsyncEnumerable()
+        {
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/query").UsingPost())
+                .RespondWith(CreateResponse(Data));
+
+            var measurements = _queryApi.QueryAsyncEnumerable<SyncPoco>(
+                new Query(null, "from(...)"),
+                "my-org", new CancellationToken());
+            
+            var list = new List<SyncPoco>();
+            await foreach (var item in measurements.ConfigureAwait(false))
+            {
+                list.Add(item);
+            }
+
+            Assert.AreEqual(2, list.Count);
+        }
         
         private class SyncPoco
         {

@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Core.Flux.Domain;
 using Remotion.Linq;
 
 [assembly: InternalsVisibleTo("Client.Linq.Test, PublicKey=002400000480000094000000060200000024000052534131" +
@@ -10,6 +13,7 @@ using Remotion.Linq;
                               "95804a1aeeb0de18ac3728782f9dc8dbae2e806167a8bb64c0402278edcefd78c13dbe7f8d13de36eb362" +
                               "21ec215c66ee2dfe7943de97b869c5eea4d92f92d345ced67de5ac8fc3cd2f8dd7e3c0c53bdb0cc433af8" +
                               "59033d069cad397a7")]
+
 namespace InfluxDB.Client.Linq.Internal
 {
     /// <summary>
@@ -19,12 +23,13 @@ namespace InfluxDB.Client.Linq.Internal
     {
         private readonly string _bucket;
         private readonly string _org;
-        private readonly QueryApiSync _queryApi;
+        private readonly QueryApiSync _queryApiSync;
+        private readonly QueryApi _queryApi;
         private readonly IMemberNameResolver _memberResolver;
         private readonly QueryableOptimizerSettings _queryableOptimizerSettings;
 
         /// <summary>
-        /// 
+        /// Create InfluxDBQuery Executor for synchronous Queries.
         /// </summary>
         /// <param name="bucket">Specifies the source bucket.</param>
         /// <param name="org">Specifies the source organization.</param>
@@ -32,6 +37,24 @@ namespace InfluxDB.Client.Linq.Internal
         /// <param name="memberResolver">Resolver for customized names.</param>
         /// <param name="queryableOptimizerSettings">Settings for a Query optimization</param>
         public InfluxDBQueryExecutor(string bucket, string org, QueryApiSync queryApi,
+            IMemberNameResolver memberResolver, QueryableOptimizerSettings queryableOptimizerSettings)
+        {
+            _bucket = bucket;
+            _org = org;
+            _queryApiSync = queryApi;
+            _memberResolver = memberResolver;
+            _queryableOptimizerSettings = queryableOptimizerSettings;
+        }
+
+        /// <summary>
+        /// Create InfluxDBQuery Executor for asynchronous Queries.
+        /// </summary>
+        /// <param name="bucket">Specifies the source bucket.</param>
+        /// <param name="org">Specifies the source organization.</param>
+        /// <param name="queryApi">The underlying API to execute Flux Query.</param>
+        /// <param name="memberResolver">Resolver for customized names.</param>
+        /// <param name="queryableOptimizerSettings">Settings for a Query optimization</param>
+        public InfluxDBQueryExecutor(string bucket, string org, QueryApi queryApi,
             IMemberNameResolver memberResolver, QueryableOptimizerSettings queryableOptimizerSettings)
         {
             _bucket = bucket;
@@ -68,18 +91,40 @@ namespace InfluxDB.Client.Linq.Internal
         {
             var query = GenerateQuery(queryModel, out var queryResultsSettings);
 
+            if (_queryApiSync == null)
+            {
+                throw new ArgumentException("The 'QueryApiSync' has to be configured for sync queries.");
+            }
+
             if (queryResultsSettings.ScalarAggregated)
             {
-                var enumerable = _queryApi.QuerySync(query, _org)
-                    .SelectMany(it => it.Records)
-                    .Select(it => it.GetValueByKey("linq_result_column"));
-                
-                var result = queryResultsSettings.AggregateFunction(enumerable);
+                var result = ApplyAggregate<T>(_queryApiSync.QuerySync(query, _org), queryResultsSettings);
 
-                return new List<T> {(T) Convert.ChangeType(result, typeof(T))};
+                return new List<T> { result };
             }
-            
-            return _queryApi.QuerySync<T>(query, _org);
+
+            return _queryApiSync.QuerySync<T>(query, _org);
+        }
+
+        /// <summary>
+        /// Executes an async query with a collection result.
+        /// </summary>
+        public IAsyncEnumerable<T> ExecuteCollectionAsync<T>(QueryModel queryModel,
+            CancellationToken cancellationToken = new CancellationToken())
+        {
+            var query = GenerateQuery(queryModel, out var queryResultsSettings);
+
+            if (_queryApi == null)
+            {
+                throw new ArgumentException("The 'QueryApi' has to be configured for Async queries.");
+            }
+
+            if (queryResultsSettings.ScalarAggregated)
+            {
+                return AggregateAsync<T>(_queryApi.QueryAsync(query, _org), queryResultsSettings, cancellationToken);
+            }
+
+            return _queryApi.QueryAsyncEnumerable<T>(query, _org, cancellationToken);
         }
 
         /// <summary>
@@ -106,6 +151,27 @@ namespace InfluxDB.Client.Linq.Internal
             var visitor = new InfluxDBQueryVisitor(_bucket, _memberResolver, _queryableOptimizerSettings);
             visitor.VisitQueryModel(queryModel);
             return visitor;
+        }
+
+        private async IAsyncEnumerable<T> AggregateAsync<T>(Task<List<FluxTable>> tables,
+            QueryResultsSettings queryResultsSettings,
+            [EnumeratorCancellation] CancellationToken cancellationToken)
+        {
+            var result = tables
+                .ContinueWith(t => ApplyAggregate<T>(t.Result, queryResultsSettings), cancellationToken);
+
+            yield return await result.ConfigureAwait(false);
+        }
+
+        private static T ApplyAggregate<T>(IEnumerable<FluxTable> tables, QueryResultsSettings queryResultsSettings)
+        {
+            var enumerable = tables
+                .SelectMany(it => it.Records)
+                .Select(it => it.GetValueByKey("linq_result_column"));
+
+            var aggregated = queryResultsSettings.AggregateFunction(enumerable);
+
+            return (T)Convert.ChangeType(aggregated, typeof(T));
         }
     }
 }
