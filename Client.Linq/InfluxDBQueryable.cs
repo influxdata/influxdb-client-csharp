@@ -18,17 +18,50 @@ namespace InfluxDB.Client.Linq
         public QueryableOptimizerSettings()
         {
             QueryMultipleTimeSeries = false;
+            DropMeasurementColumn = true;
+            DropStartColumn = true;
+            DropStopColumn = true;
         }
 
         /// <summary>
         /// Gets or sets whether the drive is used to query multiple time series.
         /// Setting this variable to true will change how the produced Flux Query looks like:
         /// <list type="bullet">
-        /// <item>appends <a href="https://docs.influxdata.com/influxdb/v2.0/reference/flux/stdlib/built-in/transformations/group/">group operator</a></item>
-        /// <item>enable use default sorting: <i>sort(columns: ["_time"], desc: false)</i></item>
+        /// <item>Appends <a href="https://docs.influxdata.com/flux/v0.x/stdlib/universe/group/">group operator</a></item>
+        /// <item>Enable use default sorting: <i>sort(columns: ["_time"], desc: false)</i></item>
         /// </list>
         /// </summary>
         public bool QueryMultipleTimeSeries { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the _measurement column will be dropped from query results.
+        /// Setting this variable to true will change how the produced Flux Query looks like:
+        /// <list type="bullet">
+        /// <item>Appends <a href="https://docs.influxdata.com/flux/v0.x/stdlib/universe/drop/">drop operator</a></item>
+        /// <item>Drops the _measurement column: <i>drop(columns: ["_measurement"])</i></item>
+        /// </list>
+        /// </summary>
+        public bool DropMeasurementColumn { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the _start column will be dropped from query results.
+        /// Setting this variable to true will change how the produced Flux Query looks like:
+        /// <list type="bullet">
+        /// <item>Appends <a href="https://docs.influxdata.com/flux/v0.x/stdlib/universe/drop/">drop operator</a></item>
+        /// <item>Drops the _start column: <i>drop(columns: ["_start"])</i></item>
+        /// </list>
+        /// </summary>
+        public bool DropStartColumn { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the _stop column will be dropped from query results.
+        /// Setting this variable to true will change how the produced Flux Query looks like:
+        /// <list type="bullet">
+        /// <item>Appends <a href="https://docs.influxdata.com/flux/v0.x/stdlib/universe/drop/">drop operator</a></item>
+        /// <item>Drops the _stop column: <i>drop(columns: ["_stop"])</i></item>
+        /// </list>
+        /// </summary>
+        public bool DropStopColumn { get; set; }
     }
 
     /// <summary>

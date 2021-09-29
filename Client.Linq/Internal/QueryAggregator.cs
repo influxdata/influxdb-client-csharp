@@ -155,11 +155,17 @@ namespace InfluxDB.Client.Linq.Internal
                 BuildOperator("from", "bucket", _bucketAssignment),
                 BuildRange(transforms),
                 BuildFilter(_filterByTags),
-                "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")",
-                "drop(columns: [\"_start\", \"_stop\", \"_measurement\"])",
-                settings.QueryMultipleTimeSeries ? "group()" : "",
-                BuildFilter(_filterByFields)
+                "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")"
             };
+
+            var drop = BuildDrop(settings);
+            if (!string.IsNullOrEmpty(drop))
+            {
+                parts.Add(drop);
+            }
+
+            parts.Add(settings.QueryMultipleTimeSeries ? "group()" : "");
+            parts.Add(BuildFilter(_filterByFields));
 
             // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/sort/
             foreach (var ((column, columnVariable, descending, descendingVariable), index) in _orders.Select((value, i) => (value, i)))
@@ -201,6 +207,33 @@ namespace InfluxDB.Client.Linq.Internal
             query.Append(JoinList(parts, " |> "));
 
             return query.ToString();
+        }
+
+        private string BuildDrop(QueryableOptimizerSettings settings)
+        {
+            var columns = new List<string>();
+
+            if (settings.DropStartColumn)
+            {
+                columns.Add("\"_start\"");
+            }
+
+            if (settings.DropStopColumn)
+            {
+                columns.Add("\"_stop\"");
+            }
+
+            if (settings.DropMeasurementColumn)
+            {
+                columns.Add("\"_measurement\"");
+            }
+
+            if (columns.Count == 0)
+            {
+                return null;
+            }
+
+            return $"drop(columns: [{string.Join(", ", columns)}])";
         }
 
         private string BuildRange(List<string> transforms)

@@ -69,6 +69,10 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 {
                     var attribute = _attributesCache.GetAttribute(property);
 
+                    if (attribute != null && attribute.IsMeasurement)
+                    {
+                        SetFieldValue(poco, property, record.GetMeasurement());
+                    }
                     if (attribute != null && attribute.IsTimestamp)
                     {
                         SetFieldValue(poco, property, record.GetTime());

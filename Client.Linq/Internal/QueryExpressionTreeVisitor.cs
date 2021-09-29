@@ -102,6 +102,9 @@ namespace InfluxDB.Client.Linq.Internal
             {
                 switch (_context.MemberResolver.ResolveMemberType(expression.Member))
                 {
+                    case MemberType.Measurement:
+                        _expressionParts.Add(new MeasurementColumnName(expression.Member, _context.MemberResolver));
+                        break;
                     case MemberType.Timestamp:
                         _expressionParts.Add(new TimeColumnName(expression.Member, _context.MemberResolver));
                         break;

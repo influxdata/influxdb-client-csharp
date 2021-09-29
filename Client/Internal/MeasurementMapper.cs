@@ -35,18 +35,30 @@ namespace InfluxDB.Client.Internal
 
             var measurementType = measurement.GetType();
             CacheMeasurementClass(measurementType);
-            
+
             var measurementAttribute = (Measurement) measurementType.GetCustomAttribute(typeof(Measurement));
-            if (measurementAttribute == null)
+            var measurementColumn = CACHE[measurementType.Name].SingleOrDefault(p => p.Column.IsMeasurement);
+
+            if (((measurementAttribute == null) ^ (measurementColumn == null)) == false)
             {
                 throw new InvalidOperationException(
-                    $"Measurement {measurement} does not have a {typeof(Measurement)} attribute.");
+                    $"Unable to determine Measurement for {measurement}. Does it have a {typeof(Measurement)} or IsMessage {typeof(Column)} attribute?");
             }
 
-            var point = PointData.Measurement(measurementAttribute.Name);
+            string measurementName =
+                measurementAttribute == null
+                    ? (string)measurementColumn.Property.GetValue(measurement)
+                    : measurementAttribute.Name;
+
+            var point = PointData.Measurement(measurementName);
 
             foreach (var propertyInfo in CACHE[measurementType.Name])
             {
+                if (propertyInfo.Column.IsMeasurement)
+                {
+                    continue;
+                }
+
                 var value = propertyInfo.Property.GetValue(measurement);
                 if (value == null)
                 {

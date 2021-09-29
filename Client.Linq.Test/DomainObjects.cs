@@ -37,6 +37,18 @@ namespace Client.Linq.Test
         [Column(IsTimestamp = true)] public DateTimeOffset Timestamp { get; set; }
     }
 
+    class SensorWithCustomMeasurement
+    {
+        [Column(IsMeasurement = true)]
+        public string Measurement { get; set; }
+
+        [Column("sensor_id", IsTag = true)]
+        public string SensorId { get; set; }
+
+        [Column("data")]
+        public int Value { get; set; }
+    }
+
     class SensorCustom
     {
         public Guid Id { get; set; }
