@@ -18,6 +18,9 @@ namespace InfluxDB.Client.Linq.Internal.Expressions
         {
             switch (_memberResolver.ResolveMemberType(_member))
             {
+                case MemberType.Measurement:
+                    builder.Append("_measurement");
+                    break;
                 case MemberType.Timestamp:
                     builder.Append("_time");
                     break;

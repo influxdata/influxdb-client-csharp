@@ -91,7 +91,36 @@ namespace InfluxDB.Client.Test
             
             Assert.LessOrEqual(ts.Seconds, 10, $"Elapsed time: {elapsedTime}");
         }
-        
+
+        [Test]
+        public void MeasurementProperty()
+        {
+            var poco = new MeasurementPropertyPoco
+            {
+                Measurement = "poco",
+                Tag = "tag val",
+                Value = 15.444,
+                ValueWithoutDefaultName = 20,
+                ValueWithEmptyName = 25d,
+                Timestamp = TimeSpan.FromDays(10)
+            };
+
+            var lineProtocol = _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol();
+
+            Assert.AreEqual("poco,tag=tag\\ val value=15.444,ValueWithEmptyName=25,ValueWithoutDefaultName=20i 864000", lineProtocol);
+        }
+
+        [Test]
+        public void MeasurementPropertyValidation()
+        {
+            var poco = new BadMeasurementAttributesPoco
+            {
+                Measurement = "poco"
+            };
+
+            Assert.Throws<InvalidOperationException>(() => _mapper.ToPoint(poco, WritePrecision.S));
+        }
+
         private class MyClass
         {
             public override string ToString()
@@ -117,6 +146,34 @@ namespace InfluxDB.Client.Test
  
             [Column(IsTimestamp = true)]
             public Object Timestamp { get; set; }
+        }
+
+        private class MeasurementPropertyPoco
+        {
+            [Column(IsMeasurement = true)]
+            public string Measurement { get; set; }
+
+            [Column("tag", IsTag = true)]
+            public string Tag { get; set; }
+
+            [Column("value")]
+            public Object Value { get; set; }
+
+            [Column]
+            public int? ValueWithoutDefaultName { get; set; }
+
+            [Column("")]
+            public Double? ValueWithEmptyName { get; set; }
+
+            [Column(IsTimestamp = true)]
+            public Object Timestamp { get; set; }
+        }
+
+        [Measurement("poco")]
+        private class BadMeasurementAttributesPoco
+        {
+            [Column(IsMeasurement = true)]
+            public string Measurement { get; set; }
         }
     }
 }

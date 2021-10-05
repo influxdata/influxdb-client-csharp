@@ -114,13 +114,13 @@ namespace InfluxDB.Client.Core.Test
             try
             {
                 var response = await httpClient.SendAsync(request);
-                Assert.IsTrue(response.IsSuccessStatusCode);
+                Assert.IsTrue(response.IsSuccessStatusCode, $"Failed to make HTTP request: {response.ReasonPhrase}");
                 
                 Thread.Sleep(DefaultInfluxDBSleep);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Assert.Fail("Unexpected exception");
+                Assert.Fail("Unexpected exception: " + e);
             }
         }
     }

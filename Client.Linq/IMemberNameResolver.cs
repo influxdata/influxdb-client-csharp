@@ -33,6 +33,7 @@ namespace InfluxDB.Client.Linq
 
     public enum MemberType
     {
+        Measurement,
         Tag,
         Field,
         Timestamp,
@@ -52,6 +53,11 @@ namespace InfluxDB.Client.Linq
 
             if (attribute != null)
             {
+                if (attribute.IsMeasurement)
+                {
+                    return MemberType.Measurement;
+                }
+
                 if (attribute.IsTag)
                 {
                     return MemberType.Tag;

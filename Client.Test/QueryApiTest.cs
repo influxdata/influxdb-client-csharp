@@ -79,6 +79,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(13.00, measurements[1].Value);
             Assert.IsAssignableFrom<SyncPoco>(measurementsTypeof[0]);
             var cast = measurementsTypeof.Cast<SyncPoco>().ToList();
+            Assert.AreEqual(measurements[0].Measurement, cast[0].Measurement);
             Assert.AreEqual(measurements[0].Timestamp, cast[0].Timestamp);
             Assert.AreEqual(12.25, cast[0].Value);
             Assert.AreEqual(13.00, cast[1].Value);
@@ -106,6 +107,8 @@ namespace InfluxDB.Client.Test
         
         private class SyncPoco
         {
+            [Column(IsMeasurement = true)] public string Measurement { get; set; }
+
             [Column("id", IsTag = true)] public string Tag { get; set; }
 
             [Column("_value")] public double Value { get; set; }

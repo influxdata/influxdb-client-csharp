@@ -30,7 +30,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
         }
         
         /// <summary>
-        /// Get Mapping attribute for specified propery.
+        /// Get Mapping attribute for specified property.
         /// </summary>
         /// <param name="property">property of DomainObject</param>
         /// <returns>Property Attribute</returns>

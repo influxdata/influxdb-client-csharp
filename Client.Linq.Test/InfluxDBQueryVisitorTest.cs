@@ -429,6 +429,36 @@ namespace Client.Linq.Test
         }
 
         [Test]
+        public void ResultOperatorByMeasurement()
+        {
+            var settings = new QueryableOptimizerSettings
+            {
+                DropMeasurementColumn = false
+            };
+
+            var query = from s in InfluxDBQueryable<SensorWithCustomMeasurement>.Queryable("my-bucket", "my-org", _queryApi, settings)
+                        where s.Value > 10
+                        where s.Measurement == "my-measurement"
+                        select s;
+            var visitor = BuildQueryVisitor(query);
+
+            const string expected = "start_shifted = int(v: time(v: p2))\n\nfrom(bucket: p1) " +
+                                    "|> range(start: time(v: start_shifted)) " +
+                                    "|> filter(fn: (r) => (r[\"_measurement\"] == p4)) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> drop(columns: [\"_start\", \"_stop\"]) " +
+                                    "|> filter(fn: (r) => (r[\"data\"] > p3))";
+
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+
+            var ast = visitor.BuildFluxAST();
+
+            var measurementAssignment = ((OptionStatement)ast.Body[3]).Assignment as VariableAssignment;
+            Assert.AreEqual("p4", measurementAssignment?.Id.Name);
+            Assert.AreEqual("my-measurement", (measurementAssignment?.Init as StringLiteral)?.Value);
+        }
+
+        [Test]
         public void TimestampAsDateTimeOffset()
         {
             var start = new DateTimeOffset(2020, 10, 15, 8, 20, 15,

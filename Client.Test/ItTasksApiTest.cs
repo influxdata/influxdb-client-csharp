@@ -527,9 +527,9 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(run.Id);
             Assert.AreEqual(task.Id, run.TaskID);
             Assert.AreEqual(Run.StatusEnum.Success, run.Status);
-            Assert.Greater(DateTime.Now, run.StartedAt);
-            Assert.Greater(DateTime.Now, run.FinishedAt);
-            Assert.Greater(DateTime.Now, run.ScheduledFor);
+            Assert.Greater(DateTime.UtcNow, run.StartedAt);
+            Assert.Greater(DateTime.UtcNow, run.FinishedAt);
+            Assert.Greater(DateTime.UtcNow, run.ScheduledFor);
             Assert.IsNull(run.RequestedAt);
 
             task = await _tasksApi.FindTaskByIdAsync(task.Id);

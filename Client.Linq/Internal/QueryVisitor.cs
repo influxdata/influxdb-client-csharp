@@ -75,7 +75,7 @@ namespace InfluxDB.Client.Linq.Internal
             var tagFilter = new List<IExpressionPart>();
             var fieldFilter = new List<IExpressionPart>();
             
-            // Map LINQ filter expresion to right place: range, tag filtering, field filtering
+            // Map LINQ filter expression to right place: range, tag filtering, field filtering
             foreach (var expression in expressions)
             {
                 switch (expression)
@@ -86,6 +86,7 @@ namespace InfluxDB.Client.Linq.Internal
                         break;
                     // Tag
                     case TagColumnName _:
+                    case MeasurementColumnName _:
                         tagFilter.Add(expression);
                         break;
                     // Field
@@ -187,7 +188,7 @@ namespace InfluxDB.Client.Linq.Internal
             }).ToString();
         }
         
-                private void AddFilterByRange(List<IExpressionPart> rangeFilter)
+        private void AddFilterByRange(List<IExpressionPart> rangeFilter)
         {
             var rangeBinaryIndexes = Enumerable.Range(0, rangeFilter.Count)
                 .Where(i => rangeFilter[i] is BinaryOperator)
