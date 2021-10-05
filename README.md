@@ -75,11 +75,9 @@ Install-Package InfluxDB.Client
 
 ```c#
 using System;
-using System.Linq;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Linq;
 using InfluxDB.Client.Writes;
 using Task = System.Threading.Tasks.Task;
 
@@ -135,33 +133,9 @@ namespace Examples
                 });
             });
 
-            //
-            // Query data with LINQ
-            //
-            var queryApi = influxDBClient.GetQueryApi();
-            var optimizerSettings =
-                new QueryableOptimizerSettings
-                {
-                    DropMeasurementColumn = false
-                };
-            var queryable =
-                new InfluxDBQueryable<InfluxPoint>("temperature-sensors", "org_id", queryApi, new DefaultMemberNameResolver(), optimizerSettings);
-
-            var latest =
-                await queryable.Where(p => p.Measurement == "temperature")
-                               .OrderByDescending(p => p.Time)
-                               .ToInfluxQueryable()
-                               .GetAsyncEnumerator()
-                               .FirstOrDefaultAsync();
-
-            Console.WriteLine($"Latest {latest.Measurement} - {latest.Time}: {latest.Value}");
-
             influxDBClient.Dispose();
         }
         
-        //
-        // POCO for specific measurement
-        //
         [Measurement("temperature")]
         private class Temperature
         {
@@ -169,21 +143,7 @@ namespace Examples
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
-        }
-
-        //
-        // POCO for different measurements
-        //
-        private class InfluxPoint
-        {
-            [Column(IsMeasurement = true)] public string Measurement { get; set; }
-
-            [Column("location", IsTag = true)] public string Location { get; set; }
-
-            [Column("value")] public double Value { get; set; }
-
-            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
+            [Column(IsTimestamp = true)] public DateTime Time;
         }
     }
 }
