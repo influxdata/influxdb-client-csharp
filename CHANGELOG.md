@@ -3,6 +3,7 @@
 ### Features
 1. [#239](https://github.com/influxdata/influxdb-client-csharp/pull/239): Add support for Asynchronous queries [LINQ]
 1. [#240](https://github.com/influxdata/influxdb-client-csharp/pull/240): Add IsMeasurement option to Column attribute for dynamic measurement names in POCO classes
+1. [#246](https://github.com/influxdata/influxdb-client-csharp/pull/246): Add support for deserialization of POCO column property types with a "Parse" method, such as Guid
 
 ## 3.0.0 [2021-09-17]
 
