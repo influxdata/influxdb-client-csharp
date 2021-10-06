@@ -57,6 +57,9 @@ namespace Examples
                     case "QueryLinqCloud":
                         QueryLinqCloud.Main(args);
                         break;
+                    case "ManagementExample":
+                        await ManagementExample.Main(args);
+                        break;
                 }
             }
             else
@@ -65,7 +68,7 @@ namespace Examples
                                   "FluxExample, FluxClientSimpleExample, FluxRawExample, FluxClientFactoryExample, " +
                                   "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, CustomDomainMapping" +
                                   "PocoQueryWriteExample, CustomDomainMappingAndLinq, SynchronousQuery, InfluxDB18Example, " +
-                                  "QueryLinqCloud");
+                                  "QueryLinqCloud, ManagementExample");
             }
         }
     }
