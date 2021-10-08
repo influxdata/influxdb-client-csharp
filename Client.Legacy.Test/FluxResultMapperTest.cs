@@ -99,5 +99,37 @@ namespace Client.Legacy.Test
             [Column("avg")] public Double Average { get; set; }
             [Column(IsTimestamp = true)] public DateTime Timestamp { get; set; }
         }
+
+        [Test]
+        public void ParseableProperty()
+        {
+            string expectedTag = "test";
+            Guid expectedValue = Guid.NewGuid();
+            Instant expectedTime = Instant.FromDateTimeUtc(DateTime.UtcNow);
+
+            var record = new FluxRecord(0);
+            record.Values["tag"] = expectedTag;
+            record.Values["value"] = expectedValue.ToString();
+            record.Values["_time"] = expectedTime;
+
+            var poco = _parser.ToPoco<ParseablePoco>(record);
+
+            Assert.AreEqual(expectedTag, poco.Tag);
+            Assert.AreEqual(expectedValue, poco.Value);
+            Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Timestamp));
+        }
+
+        [Measurement("poco")]
+        private class ParseablePoco
+        {
+            [Column("tag", IsTag = true)]
+            public string Tag { get; set; }
+
+            [Column("value")]
+            public Guid Value { get; set; }
+
+            [Column(IsTimestamp = true)]
+            public DateTime Timestamp { get; set; }
+        }
     }
 }

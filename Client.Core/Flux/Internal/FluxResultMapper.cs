@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using InfluxDB.Client.Core.Exceptions;
@@ -33,6 +34,9 @@ namespace InfluxDB.Client.Core.Flux.Internal
     {
         private readonly AttributesCache _attributesCache = new AttributesCache();
 
+        private readonly Dictionary<Tuple<Type, Type>, MethodInfo> _parseMethodCache =
+            new Dictionary<Tuple<Type, Type>, MethodInfo>();
+
         public T ConvertToEntity<T>(FluxRecord fluxRecord)
         {
             return ToPoco<T>(fluxRecord);
@@ -42,7 +46,6 @@ namespace InfluxDB.Client.Core.Flux.Internal
         {
             return ToPoco(fluxRecord, type);
         }
-
 
         /// <summary>
         /// Maps FluxRecord into custom POCO class.
@@ -109,7 +112,6 @@ namespace InfluxDB.Client.Core.Flux.Internal
             }
         }
 
-
         /// <summary>
         /// Maps FluxRecord into custom POCO class.
         /// </summary>
@@ -130,38 +132,48 @@ namespace InfluxDB.Client.Core.Flux.Internal
             try
             {
                 var propertyType = property.PropertyType;
+                var valueType = value.GetType();
 
-                //the same type
-                if (propertyType == value.GetType())
+                // The same type
+                if (propertyType == valueType)
                 {
                     property.SetValue(poco, value);
                     return;
                 }
 
-                //handle time primitives
+                // Handle time primitives
                 if (propertyType == typeof(DateTime))
                 {
                     property.SetValue(poco, ToDateTimeValue(value));
                     return;
                 }
-
                 if (propertyType == typeof(Instant))
                 {
                     property.SetValue(poco, ToInstantValue(value));
                     return;
                 }
 
+                // Handle parseables
+                var parseMethod = GetParseMethod(propertyType, valueType);
+                if (parseMethod != null)
+                {
+                    var parsed = parseMethod.Invoke(null, new[] { value });
+                    property.SetValue(poco, parsed);
+                    return;
+                }
+
+                // Handle convertibles 
                 if (value is IConvertible)
                 {
                     // Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
                     // to determine whether the type is nullable and convert to the underlying type instead
                     var targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
                     property.SetValue(poco, Convert.ChangeType(value, targetType));
+                    return;
                 }
-                else
-                {
-                    property.SetValue(poco, value);
-                }
+
+                // Give up and try anyway
+                property.SetValue(poco, value);
             }
             catch (InvalidCastException ex)
             {
@@ -170,6 +182,42 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     $"The correct type is '{value.GetType().Name}' (current field value: '{value}'). Exception: {ex.Message}",
                     ex);
             }
+        }
+
+        /// <summary>
+        /// Gets the static Parse method on the target type taking the value type as a single parameter.
+        /// </summary>
+        /// <param name="parserType">The type declaring the Parse method.</param>
+        /// <param name="valueType">The type that will be passed to the Parse method.</param>
+        /// <returns>The matching Parse method.</returns>
+        private MethodInfo GetParseMethod(Type parserType, Type valueType)
+        {
+            var key = new Tuple<Type, Type>(parserType, valueType);
+
+            MethodInfo method;
+            if (!_parseMethodCache.TryGetValue(key, out method))
+            {
+                method = parserType.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                                   .Where(m => m.Name == "Parse")
+                                   .Where(m => m.ReturnType == parserType)
+                                   .Where(m =>
+                                   {
+                                       var parameters = m.GetParameters();
+                                       if (parameters.Length != 1)
+                                       {
+                                           return false;
+                                       }
+
+                                       var paramType = parameters[0].ParameterType;
+                                       paramType = Nullable.GetUnderlyingType(paramType) ?? paramType;
+
+                                       return valueType == paramType;
+                                   })
+                                   .FirstOrDefault();
+                _parseMethodCache[key] = method;
+            }
+
+            return method;
         }
 
         private DateTime ToDateTimeValue(object value)
