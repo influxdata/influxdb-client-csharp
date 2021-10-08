@@ -109,7 +109,7 @@ namespace InfluxDB.Client.Api.Client
 
                     if (cookies.Count == 1)
                         _sessionToken = cookies
-                            .First(cookie => cookie.Name.ToString().Equals("session"))
+                            .First(cookie => cookie.Name.Contains("session"))
                             .Value
                             .ToCharArray();
                 }
