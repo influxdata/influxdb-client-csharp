@@ -153,8 +153,12 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     return;
                 }
 
+                // Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
+                // to determine whether the type is nullable and convert to the underlying type instead
+                var targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
+
                 // Handle parseables
-                var parseMethod = GetParseMethod(propertyType, valueType);
+                var parseMethod = GetParseMethod(targetType, valueType);
                 if (parseMethod != null)
                 {
                     var parsed = parseMethod.Invoke(null, new[] { value });
@@ -165,9 +169,6 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 // Handle convertibles 
                 if (value is IConvertible)
                 {
-                    // Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
-                    // to determine whether the type is nullable and convert to the underlying type instead
-                    var targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
                     property.SetValue(poco, Convert.ChangeType(value, targetType));
                     return;
                 }
@@ -209,8 +210,10 @@ namespace InfluxDB.Client.Core.Flux.Internal
                                        }
 
                                        var paramType = parameters[0].ParameterType;
-                                       paramType = Nullable.GetUnderlyingType(paramType) ?? paramType;
+                                       if (valueType == paramType)
+                                           return true;
 
+                                       paramType = Nullable.GetUnderlyingType(paramType) ?? paramType;
                                        return valueType == paramType;
                                    })
                                    .FirstOrDefault();
