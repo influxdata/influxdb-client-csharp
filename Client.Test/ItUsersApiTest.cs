@@ -143,6 +143,7 @@ namespace InfluxDB.Client.Test
 
         [Test]
         [Property("basic_auth", "true")]
+        [Ignore("TODO not implemented set password https://github.com/influxdata/influxdb/pull/15981")]
         public async Task UpdatePasswordById()
         {
             var user = await _usersApi.MeAsync();
