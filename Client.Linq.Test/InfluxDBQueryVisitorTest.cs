@@ -568,6 +568,71 @@ namespace Client.Linq.Test
         }
 
         [Test]
+        public void ResultOperatorContainsField()
+        {
+            int[] values = { 15, 28 };
+
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where values.Contains(s.Value)
+                select s;
+            var visitor = BuildQueryVisitor(query);
+
+            const string expected = "start_shifted = int(v: time(v: p2))\n\nfrom(bucket: p1) " +
+                                    "|> range(start: time(v: start_shifted)) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) " +
+                                    "|> filter(fn: (r) => contains(value: r[\"data\"], set: p3))";
+
+            string actual = visitor.BuildFluxQuery();
+            Assert.AreEqual(expected, actual);
+
+            var ast = visitor.BuildFluxAST();
+
+            var arrayAssignment = ((OptionStatement)ast.Body[2]).Assignment as VariableAssignment;
+            var arrayAssignmentValues =
+                (arrayAssignment.Init as ArrayExpression).Elements
+                                                         .Cast<IntegerLiteral>()
+                                                         .Select(i => i.Value)
+                                                         .Select(int.Parse)
+                                                         .ToArray();
+
+            Assert.AreEqual("p3", arrayAssignment.Id.Name);
+            Assert.AreEqual(values, arrayAssignmentValues);
+        }
+
+        [Test]
+        public void ResultOperatorContainsTag()
+        {
+            string[] deployment = { "production", "testing" };
+
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                        where deployment.Contains(s.Deployment)
+                        select s;
+            var visitor = BuildQueryVisitor(query);
+
+            const string expected = "start_shifted = int(v: time(v: p2))\n\nfrom(bucket: p1) " +
+                                    "|> range(start: time(v: start_shifted)) " +
+                                    "|> filter(fn: (r) => contains(value: r[\"deployment\"], set: p3)) " +
+                                    "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
+
+            string actual = visitor.BuildFluxQuery();
+            Assert.AreEqual(expected, actual);
+
+            var ast = visitor.BuildFluxAST();
+
+            var arrayAssignment = ((OptionStatement)ast.Body[2]).Assignment as VariableAssignment;
+            var arrayAssignmentValues =
+                (arrayAssignment.Init as ArrayExpression).Elements
+                                                         .Cast<StringLiteral>()
+                                                         .Select(i => i.Value)
+                                                         .ToArray();
+
+            Assert.AreEqual("p3", arrayAssignment.Id.Name);
+            Assert.AreEqual(deployment, arrayAssignmentValues);
+        }
+
+        [Test]
         public void UnaryExpressionConvert()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)

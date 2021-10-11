@@ -167,7 +167,7 @@ namespace InfluxDB.Client.Linq.Internal
             parts.Add(settings.QueryMultipleTimeSeries ? "group()" : "");
             parts.Add(BuildFilter(_filterByFields));
 
-            // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/sort/
+            // https://docs.influxdata.com/flux/v0.x/stdlib/universe/sort/
             foreach (var ((column, columnVariable, descending, descendingVariable), index) in _orders.Select((value, i) => (value, i)))
             {
                 // skip default sorting if don't query to multiple time series
@@ -179,7 +179,7 @@ namespace InfluxDB.Client.Linq.Internal
                 parts.Add(BuildOperator("sort", "columns", new List<string> {columnVariable}, "desc", descendingVariable));
             }
 
-            // https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/limit/
+            // https://docs.influxdata.com/flux/v0.x/stdlib/universe/limit/
             foreach (var limitNOffsetAssignment in _limitNOffsetAssignments)
             {
                 if (limitNOffsetAssignment.N != null)

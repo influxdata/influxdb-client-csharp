@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Api.Domain;
@@ -37,45 +38,49 @@ namespace InfluxDB.Client.Linq.Internal
         {
             return _variables.Select(variable =>
             {
-                Expression literal;
-                if (variable.IsTag)
-                {
-                    literal = CreateStringLiteral(variable);
-                }
-                else if (variable.Value is int i)
-                {
-                    literal = new IntegerLiteral("IntegerLiteral", Convert.ToString(i));
-                }
-                else if (variable.Value is long l)
-                {
-                    literal = new IntegerLiteral("IntegerLiteral", Convert.ToString(l));
-                }
-                else if (variable.Value is bool b)
-                {
-                    literal = new BooleanLiteral("BooleanLiteral", b);
-                }
-                else if (variable.Value is float f)
-                {
-                    literal = new FloatLiteral("FloatLiteral", Convert.ToDecimal(f));
-                }
-                else if (variable.Value is DateTime d)
-                {
-                    literal = new DateTimeLiteral("DateTimeLiteral", d);
-                }
-                else if (variable.Value is DateTimeOffset o)
-                {
-                    literal = new DateTimeLiteral("DateTimeLiteral", o.UtcDateTime);
-                }
-                else
-                {
-                    literal = CreateStringLiteral(variable);
-                }
+                var literal = CreateExpression(variable);
 
                 var assignment = new VariableAssignment("VariableAssignment",
                     new Identifier("Identifier", variable.Name), literal);
 
                 return new OptionStatement("OptionStatement", assignment) as Statement;
             }).ToList();
+        }
+
+        private Expression CreateExpression(NamedVariable variable)
+        {
+            // Handle string here to avoid conflict with IEnumerable
+            if (variable.IsTag || variable.Value is string)
+            {
+                return CreateStringLiteral(variable);
+            }
+
+            switch (variable.Value)
+            {
+                case int i:
+                    return new IntegerLiteral("IntegerLiteral", Convert.ToString(i));
+                case long l:
+                    return new IntegerLiteral("IntegerLiteral", Convert.ToString(l));
+                case bool b:
+                    return new BooleanLiteral("BooleanLiteral", b);
+                case float f:
+                    return new FloatLiteral("FloatLiteral", Convert.ToDecimal(f));
+                case DateTime d:
+                    return new DateTimeLiteral("DateTimeLiteral", d);
+                case DateTimeOffset o:
+                    return new DateTimeLiteral("DateTimeLiteral", o.UtcDateTime);
+                case IEnumerable e:
+                {
+                    var expressions =
+                        e.Cast<object>()
+                         .Select(o => new NamedVariable { Value = o, IsTag = variable.IsTag })
+                         .Select(CreateExpression)
+                         .ToList();
+                    return new ArrayExpression("ArrayExpression", expressions);
+                }
+                default:
+                    return CreateStringLiteral(variable);
+            }
         }
 
         private StringLiteral CreateStringLiteral(NamedVariable variable)

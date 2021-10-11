@@ -50,7 +50,8 @@ namespace InfluxDB.Client.Linq.Internal
 
         protected override Expression VisitSubQuery(SubQueryExpression subQuery)
         {
-            if (subQuery.QueryModel.ResultOperators.All(p => p is AnyResultOperator))
+            if (subQuery.QueryModel.ResultOperators.All(p => p is AnyResultOperator) ||
+                subQuery.QueryModel.ResultOperators.All(p => p is ContainsResultOperator))
             {
                 var query = new QueryAggregator();
 
@@ -98,7 +99,7 @@ namespace InfluxDB.Client.Linq.Internal
 
         protected override Expression VisitMember(MemberExpression expression)
         {
-            if (_clause is WhereClause)
+            if (_clause is WhereClause || _clause is MainFromClause)
             {
                 switch (_context.MemberResolver.ResolveMemberType(expression.Member))
                 {

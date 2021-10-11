@@ -350,6 +350,34 @@ namespace Client.Linq.Test
         }
 
         [Test]
+        public void QueryContainsField()
+        {
+            int[] values = {15, 28};
+
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
+                where values.Contains(s.Value)
+                select s;
+
+            var sensors = query.Count();
+
+            Assert.AreEqual(4, sensors);
+        }
+
+        [Test]
+        public void QueryContainsTag()
+        {
+            string[] deployment = { "production", "testing" };
+
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
+                        where deployment.Contains(s.Deployment)
+                        select s;
+
+            var sensors = query.Count();
+
+            Assert.AreEqual(8, sensors);
+        }
+
+        [Test]
         public void SyncQueryConfiguration()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApi())
