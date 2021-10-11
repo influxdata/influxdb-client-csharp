@@ -118,6 +118,26 @@ namespace Client.Legacy.Test
             Assert.AreEqual(expectedValue, poco.Value);
             Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Timestamp));
         }
+        
+        [TestCase(null)]
+        [TestCase("e11351a6-62ec-468b-8b64-e1414aca2c7d")]
+        public void NullableParseableProperty(string guid)
+        {
+            string expectedTag = "test";
+            Guid? expectedValue = guid == null ? (Guid?)null : Guid.Parse(guid);
+            Instant expectedTime = Instant.FromDateTimeUtc(DateTime.UtcNow);
+
+            var record = new FluxRecord(0);
+            record.Values["tag"] = expectedTag;
+            record.Values["value"] = guid;
+            record.Values["_time"] = expectedTime;
+
+            var poco = _parser.ToPoco<NullableParseablePoco>(record);
+
+            Assert.AreEqual(expectedTag, poco.Tag);
+            Assert.AreEqual(expectedValue, poco.Value);
+            Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Timestamp));
+        }
 
         [Measurement("poco")]
         private class ParseablePoco
@@ -127,6 +147,19 @@ namespace Client.Legacy.Test
 
             [Column("value")]
             public Guid Value { get; set; }
+
+            [Column(IsTimestamp = true)]
+            public DateTime Timestamp { get; set; }
+        }
+
+        [Measurement("poco")]
+        private class NullableParseablePoco
+        {
+            [Column("tag", IsTag = true)]
+            public string Tag { get; set; }
+
+            [Column("value")]
+            public Guid? Value { get; set; }
 
             [Column(IsTimestamp = true)]
             public DateTime Timestamp { get; set; }
