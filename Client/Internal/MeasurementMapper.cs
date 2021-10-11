@@ -42,7 +42,7 @@ namespace InfluxDB.Client.Internal
             if (((measurementAttribute == null) ^ (measurementColumn == null)) == false)
             {
                 throw new InvalidOperationException(
-                    $"Unable to determine Measurement for {measurement}. Does it have a {typeof(Measurement)} or IsMessage {typeof(Column)} attribute?");
+                    $"Unable to determine Measurement for {measurement}. Does it have a {typeof(Measurement)} or IsMeasurement {typeof(Column)} attribute?");
             }
 
             string measurementName =
