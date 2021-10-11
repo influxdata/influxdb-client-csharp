@@ -118,20 +118,7 @@ namespace Client.Legacy.Test
             Assert.AreEqual(expectedValue, poco.Value);
             Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Timestamp));
         }
-
-        [Measurement("poco")]
-        private class ParseablePoco
-        {
-            [Column("tag", IsTag = true)]
-            public string Tag { get; set; }
-
-            [Column("value")]
-            public Guid Value { get; set; }
-
-            [Column(IsTimestamp = true)]
-            public DateTime Timestamp { get; set; }
-        }
-
+        
         [TestCase(null)]
         [TestCase("e11351a6-62ec-468b-8b64-e1414aca2c7d")]
         public void NullableParseableProperty(string guid)
@@ -150,6 +137,19 @@ namespace Client.Legacy.Test
             Assert.AreEqual(expectedTag, poco.Tag);
             Assert.AreEqual(expectedValue, poco.Value);
             Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Timestamp));
+        }
+
+        [Measurement("poco")]
+        private class ParseablePoco
+        {
+            [Column("tag", IsTag = true)]
+            public string Tag { get; set; }
+
+            [Column("value")]
+            public Guid Value { get; set; }
+
+            [Column(IsTimestamp = true)]
+            public DateTime Timestamp { get; set; }
         }
 
         [Measurement("poco")]
