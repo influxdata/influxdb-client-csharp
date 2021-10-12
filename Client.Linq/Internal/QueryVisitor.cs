@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Linq.Internal
 
         public override void VisitWhereClause(WhereClause whereClause, QueryModel queryModel, int index)
         {
-            base.VisitWhereClause (whereClause, queryModel, index);
+            base.VisitWhereClause(whereClause, queryModel, index);
 
             var expressions = GetExpressions(whereClause.Predicate, whereClause).ToList();
 
@@ -84,21 +84,20 @@ namespace InfluxDB.Client.Linq.Internal
                     case TimeColumnName _:
                         rangeFilter.Add(expression);
                         break;
-                    // Tag
+
+                    // Tag & Measurement
                     case TagColumnName _:
                     case MeasurementColumnName _:
                         tagFilter.Add(expression);
                         break;
+
                     // Field
                     case RecordColumnName _:
-                        fieldFilter.Add(expression);
-                        break;
                     case NamedField _:
-                        fieldFilter.Add(expression);
-                        break;
                     case NamedFieldValue _:
                         fieldFilter.Add(expression);
                         break;
+
                     // Other expressions: binary operator, parenthesis
                     default:
                         rangeFilter.Add(expression);
@@ -135,20 +134,38 @@ namespace InfluxDB.Client.Linq.Internal
             switch (resultOperator)
             {
                 case TakeResultOperator takeResultOperator:
-                    var takeVariable = GetFluxExpression(takeResultOperator.Count, resultOperator);
+                    var takeVariable = GetFluxExpression(takeResultOperator.Count, takeResultOperator);
                     _context.QueryAggregator.AddLimitN(takeVariable);
                     break;
 
                 case SkipResultOperator skipResultOperator:
-                    var skipVariable = GetFluxExpression(skipResultOperator.Count, resultOperator);
+                    var skipVariable = GetFluxExpression(skipResultOperator.Count, skipResultOperator);
                     _context.QueryAggregator.AddLimitOffset(skipVariable);
                     break;
+
                 case AnyResultOperator _:
                     break;
+
                 case LongCountResultOperator _:
                 case CountResultOperator _:
                     _context.QueryAggregator.AddResultFunction(ResultFunction.Count);
                     break;
+
+                case ContainsResultOperator containsResultOperator:
+                    var setVariable = GetFluxExpression(queryModel.MainFromClause.FromExpression, queryModel.MainFromClause);
+                    var columnExpression = GetExpressions(containsResultOperator.Item, queryModel.MainFromClause).First();
+                    var columnVariable = ConcatExpression(new[] { columnExpression });
+                    var filter = $"contains(value: {columnVariable}, set: {setVariable})";
+                    if (columnExpression is TagColumnName || columnExpression is MeasurementColumnName)
+                    {
+                        _context.QueryAggregator.AddFilterByTags(filter);
+                    }
+                    else
+                    {
+                        _context.QueryAggregator.AddFilterByFields(filter);
+                    }
+                    break;
+
                 default:
                     throw new NotSupportedException($"{resultOperator.GetType().Name} is not supported.");
             }
@@ -183,7 +200,6 @@ namespace InfluxDB.Client.Linq.Internal
             return expressions.Aggregate(new StringBuilder(), (builder, part) =>
             {
                 part.AppendFlux(builder);
-
                 return builder;
             }).ToString();
         }

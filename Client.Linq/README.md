@@ -36,6 +36,7 @@ This section contains links to the client library documentation.
     - [OrderBy](#orderby)
     - [Count](#count)
     - [LongCount](#longcount)
+    - [Contains](#contains)
 - [Domain Converter](#domain-converter)
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
 - [How to filter by Measurement](#how-to-filter-by-measurement)
@@ -931,6 +932,27 @@ from(bucket: "my-bucket")
     |> stateCount(fn: (r) => true, column: "linq_result_column") 
     |> last(column: "linq_result_column") 
     |> keep(columns: ["linq_result_column"])
+```
+
+### Contains
+
+```c#
+int[] values = {15, 28};
+
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    where values.Contains(s.Value)
+    select s;
+
+var sensors = query.Count();
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket")
+    |> range(start: 0)
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+    |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> filter(fn: (r) => contains(value: r["data"], set: [15, 28]))
 ```
 
 ## Domain Converter
