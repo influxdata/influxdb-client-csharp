@@ -69,6 +69,11 @@ namespace InfluxDB.Client
         public enum AuthenticationScheme
         {
             /// <summary>
+            /// Anonymous.
+            /// </summary>
+            Anonymous,
+            
+            /// <summary>
             /// Basic auth.
             /// </summary>
             Session,
