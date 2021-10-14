@@ -5,6 +5,7 @@
 1. [#240](https://github.com/influxdata/influxdb-client-csharp/pull/240): Add IsMeasurement option to Column attribute for dynamic measurement names in POCO classes
 1. [#246](https://github.com/influxdata/influxdb-client-csharp/pull/246), [#251](https://github.com/influxdata/influxdb-client-csharp/pull/251): Add support for deserialization of POCO column property types with a "Parse" method, such as Guid
 1. [#249](https://github.com/influxdata/influxdb-client-csharp/pull/249): Add support for LINQ Contains subqueries [LINQ]
+1. [#256](https://github.com/influxdata/influxdb-client-csharp/pull/256): Add support for Anonymous authentication
 
 ## 3.0.0 [2021-09-17]
 

@@ -209,6 +209,7 @@ namespace InfluxDB.Client
             /// <returns><see cref="Builder"/></returns>
             public Builder AuthenticateToken(string token)
             {
+                Arguments.CheckNonEmptyString(token, "token");
                 return AuthenticateToken(token.ToCharArray());
             }
 
