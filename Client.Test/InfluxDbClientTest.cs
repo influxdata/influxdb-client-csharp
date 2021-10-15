@@ -285,5 +285,23 @@ namespace InfluxDB.Client.Test
 
             anotherServer.Stop();
         }
+        
+        [Test]
+        public async Task Anonymous()
+        {
+            _client.Dispose();
+            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder()
+                .Url(MockServerUrl)
+                .Build());
+
+            MockServer
+                .Given(Request.Create().UsingGet())
+                .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
+            
+            await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
+            var request = MockServer.LogEntries.Last();
+            
+            CollectionAssert.DoesNotContain(request.RequestMessage.Headers.Keys, "Authorization");
+        }
     }
 }

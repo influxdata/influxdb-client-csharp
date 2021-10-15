@@ -44,6 +44,13 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(client);
         }
+        
+        [Test]
+        public void CreateInstanceEmptyToken()
+        {
+            var empty = Assert.Throws<ArgumentException>(() => InfluxDBClientFactory.Create("http://localhost:9999?", ""));
+            Assert.AreEqual("Expecting a non-empty string for token", empty.Message);
+        }
 
         [Test]
         public void LoadFromConnectionString()
@@ -205,6 +212,15 @@ namespace InfluxDB.Client.Test
             var apiClient = GetDeclaredField<ApiClient>(client.GetType(), client, "_apiClient");
             Assert.AreEqual(20_000, apiClient.Configuration.Timeout);
             Assert.AreEqual(30_000, apiClient.Configuration.ReadWriteTimeout);
+        }
+        
+        [Test]
+
+        public void AnonymousSchema() {
+            var options = new InfluxDBClientOptions.Builder()
+                .Url("http://localhost:9999")
+                .Build();
+            Assert.AreEqual(InfluxDBClientOptions.AuthenticationScheme.Anonymous, options.AuthScheme);
         }
         
         private static T GetDeclaredField<T>(IReflect type, object instance, string fieldName)
