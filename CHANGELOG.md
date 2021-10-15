@@ -7,6 +7,11 @@
 1. [#249](https://github.com/influxdata/influxdb-client-csharp/pull/249): Add support for LINQ Contains subqueries [LINQ]
 1. [#256](https://github.com/influxdata/influxdb-client-csharp/pull/256): Add support for Anonymous authentication - _anonymous authentication is used if the user does not specify a token or an username with password_
 
+### Dependencies
+1. [#252](https://github.com/influxdata/influxdb-client-csharp/pull/252): Update dependencies:
+   - NUnit to 3.13.2
+   - NUnit3TestAdapter to 4.0.0
+
 ## 3.0.0 [2021-09-17]
 
 ### Breaking Changes
