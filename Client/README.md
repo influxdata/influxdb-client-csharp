@@ -1202,7 +1202,7 @@ influxDBClient.SetLogLevel(LogLevel.Body)
 
 #### Check the server status and version
 
-Server availability can be checked using the `influxDBClient.healthAsync()` endpoint.
+Server availability can be checked using the `influxDBClient.PingAsync()` endpoint.
  
 ## Version
 

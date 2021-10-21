@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Subjects;
 using System.Text;
@@ -22,6 +24,7 @@ namespace InfluxDB.Client
         private readonly LoggingHandler _loggingHandler;
         private readonly GzipHandler _gzipHandler;
         private readonly ReadyService _readyService;
+        private readonly PingService _pingService;
 
         private readonly SetupService _setupService;
         private readonly InfluxDBClientOptions _options;
@@ -53,6 +56,10 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
             _readyService = new ReadyService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            _pingService = new PingService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -410,9 +417,33 @@ namespace InfluxDB.Client
         /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
+        [Obsolete("This method is obsolete. Call 'PingAsync()' instead.", false)]
         public Task<HealthCheck> HealthAsync()
         {
             return GetHealthAsync(_healthService.GetHealthAsync());
+        }
+
+        /// <summary>
+        /// Checks the status of InfluxDB instance and version of InfluxDB.
+        /// </summary>
+        /// <returns>Tuple which contains the version of InfluxDB and the type of InfluxDB build.</returns>
+        public async Task<(object version, object build)> PingAsync()
+        {
+            var response = await _pingService.GetPingAsyncWithIRestResponse().ConfigureAwait(false);
+            
+            var exception = _exceptionFactory("GetPing", response);
+            if (exception != null)
+            {
+                throw exception;
+            }
+
+            var foo = (
+                response.Headers.First(it => it.Name == "X-Influxdb-Version").Value ?? "",
+                response.Headers.First(it => it.Name == "X-Influxdb-Build").Value ?? ""
+
+            );
+
+            return foo;
         }
 
         /// <summary>
