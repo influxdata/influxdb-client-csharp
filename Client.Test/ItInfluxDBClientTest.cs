@@ -54,7 +54,7 @@ namespace InfluxDB.Client.Test
             var ex = Assert.ThrowsAsync<HttpException>(async () => await clientNotRunning.PingAsync());
 
             Assert.NotNull(ex);
-            StringAssert.StartsWith("Connection refused", ex.Message);
+            Assert.IsNotEmpty(ex.Message);
             Assert.AreEqual(0, ex.Status);
 
             clientNotRunning.Dispose();
