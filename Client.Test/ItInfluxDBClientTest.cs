@@ -39,19 +39,31 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task Ping()
         {
-            var health = await Client.PingAsync();
-
-            Assert.IsNotNull(health);
-            Assert.IsNotEmpty(health.version.ToString());
-            Assert.IsNotEmpty(health.build.ToString());
+            Assert.IsTrue(await Client.PingAsync());
         }
 
         [Test]
-        public void PingNotRunningInstance()
+        public async Task PingNotRunningInstance()
         {
             var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
 
-            var ex = Assert.ThrowsAsync<HttpException>(async () => await clientNotRunning.PingAsync());
+            Assert.IsFalse(await clientNotRunning.PingAsync());
+
+            clientNotRunning.Dispose();
+        }
+        
+        [Test]
+        public async Task Version()
+        {
+            Assert.IsNotEmpty(await Client.VersionAsync());
+        }
+
+        [Test]
+        public void VersionNotRunningInstance()
+        {
+            var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
+
+            var ex = Assert.ThrowsAsync<InfluxException>(async () => await clientNotRunning.VersionAsync());
 
             Assert.NotNull(ex);
             Assert.IsNotEmpty(ex.Message);

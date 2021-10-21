@@ -368,17 +368,9 @@ namespace InfluxDB.Client.Flux
         /// <returns>true if server is healthy otherwise return false</returns>
         public async Task<bool> PingAsync()
         {
-            try
-            {
-                await ExecuteAsync(PingRequest()).ConfigureAwait(false);
+            var request = ExecuteAsync(PingRequest());
 
-                return true;
-            }
-            catch (Exception e)
-            {
-                Trace.WriteLine($"Error: {e.Message}");
-                return false;
-            }
+            return await PingAsync(request);
         }
 
         /// <summary>
@@ -388,16 +380,9 @@ namespace InfluxDB.Client.Flux
         /// <exception cref="InfluxException">throws when request did not succesfully ends</exception>
         public async Task<string> VersionAsync()
         {
-            try
-            {
-                var response = await ExecuteAsync(PingRequest()).ConfigureAwait(false);
+            var request = ExecuteAsync(PingRequest());
 
-                return GetVersion(response);
-            }
-            catch (Exception e)
-            {
-                throw new InfluxException(e);
-            }
+            return await VersionAsync(request);
         }
 
         /// <summary>
@@ -444,26 +429,6 @@ namespace InfluxDB.Client.Flux
         protected override T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
         {
             return (T) _loggingHandler.AfterIntercept(statusCode, headers, body);
-        }
-
-        private string GetVersion(IRestResponse responseHttp)
-        {
-            Arguments.CheckNotNull(responseHttp, "responseHttp");
-
-            var value = responseHttp.Headers
-                .Where(header => header.Name.Equals("X-Influxdb-Version"))
-                .Select(header => header.Value.ToString())
-                .FirstOrDefault();
-
-            if (value != null)
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    return value;
-                }
-            }
-
-            return "unknown";
         }
 
         private RestRequest PingRequest()

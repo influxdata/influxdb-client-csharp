@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
@@ -16,7 +15,7 @@ using InfluxDB.Client.Internal;
 
 namespace InfluxDB.Client
 {
-    public class InfluxDBClient : IDisposable
+    public class InfluxDBClient : AbstractRestClient, IDisposable
     {
         private readonly ApiClient _apiClient;
         private readonly ExceptionFactory _exceptionFactory;
@@ -424,26 +423,22 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Checks the status of InfluxDB instance and version of InfluxDB.
+        /// Check the status of InfluxDB Server.
         /// </summary>
-        /// <returns>Tuple which contains the version of InfluxDB and the type of InfluxDB build.</returns>
-        public async Task<(object version, object build)> PingAsync()
+        /// <returns>true if server is healthy otherwise return false</returns>
+        public async Task<bool> PingAsync()
         {
-            var response = await _pingService.GetPingAsyncWithIRestResponse().ConfigureAwait(false);
-            
-            var exception = _exceptionFactory("GetPing", response);
-            if (exception != null)
-            {
-                throw exception;
-            }
+            return await PingAsync(_pingService.GetPingAsyncWithIRestResponse());
+        }
 
-            var foo = (
-                response.Headers.First(it => it.Name == "X-Influxdb-Version").Value ?? "",
-                response.Headers.First(it => it.Name == "X-Influxdb-Build").Value ?? ""
-
-            );
-
-            return foo;
+        /// <summary>
+        ///  Return the version of the connected InfluxDB Server.
+        /// </summary>
+        /// <returns>the version String, otherwise unknown</returns>
+        /// <exception cref="InfluxException">throws when request did not succesfully ends</exception>
+        public async Task<string> VersionAsync()
+        {
+            return await VersionAsync(_pingService.GetPingAsyncWithIRestResponse());
         }
 
         /// <summary>
