@@ -1,5 +1,11 @@
 ## 3.2.0 [unreleased]
 
+### Deprecates
+- `InfluxDBClient.HealthAsync()`: instead use `InfluxDBClient.PingAsync()`
+
+### Features
+1. [#257](https://github.com/influxdata/influxdb-client-csharp/pull/257): Add `PingService` to check status of OSS and Cloud instance
+
 ## 3.1.0 [2021-10-22]
 
 ### Features

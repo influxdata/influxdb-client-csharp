@@ -229,9 +229,9 @@ The following forward compatible APIs are available:
 
 | API | Endpoint | Description |
 |:----------|:----------|:----------|
-| [QueryApi.cs](Client/QueryApi.cs) | [/api/v2/query](https://docs.influxdata.com/influxdb/latest/tools/api/#api-v2-query-http-endpoint) | Query data in InfluxDB 1.8.0+ using the InfluxDB 2.0 API and [Flux](https://docs.influxdata.com/flux/latest/) _(endpoint should be enabled by [`flux-enabled` option](https://docs.influxdata.com/influxdb/latest/administration/config/#flux-enabled-false))_ |
-| [WriteApi.cs](Client/WriteApi.cs) | [/api/v2/write](https://docs.influxdata.com/influxdb/latest/tools/api/#api-v2-write-http-endpoint) | Write data to InfluxDB 1.8.0+ using the InfluxDB 2.0 API |
-| [HealthAsync](Client/InfluxDBClient.cs#L362) | [/health](https://docs.influxdata.com/influxdb/latest/tools/api/#health-http-endpoint) | Check the health of your InfluxDB instance |    
+| [QueryApi.cs](Client/QueryApi.cs) | [/api/v2/query](https://docs.influxdata.com/influxdb/v1.8/tools/api/#apiv2query-http-endpoint) | Query data in InfluxDB 1.8.0+ using the InfluxDB 2.0 API and [Flux](https://docs.influxdata.com/flux/latest/) _(endpoint should be enabled by [`flux-enabled` option](https://docs.influxdata.com/influxdb/latest/administration/config/#flux-enabled-false))_ |
+| [WriteApi.cs](Client/WriteApi.cs) | [/api/v2/write](https://docs.influxdata.com/influxdb/v1.8/tools/api/#apiv2write-http-endpoint) | Write data to InfluxDB 1.8.0+ using the InfluxDB 2.0 API |
+| [PingAsync](Client/InfluxDBClient.cs#L431) | [/ping](https://docs.influxdata.com/influxdb/v1.8/tools/api/#ping-http-endpoint) | Checks the status of InfluxDB instance and version of InfluxDB. |    
 
 For detail info see [InfluxDB 1.8 example](Examples/InfluxDB18Example.cs).
 

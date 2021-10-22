@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Subjects;
 using System.Text;
@@ -14,7 +15,7 @@ using InfluxDB.Client.Internal;
 
 namespace InfluxDB.Client
 {
-    public class InfluxDBClient : IDisposable
+    public class InfluxDBClient : AbstractRestClient, IDisposable
     {
         private readonly ApiClient _apiClient;
         private readonly ExceptionFactory _exceptionFactory;
@@ -22,6 +23,7 @@ namespace InfluxDB.Client
         private readonly LoggingHandler _loggingHandler;
         private readonly GzipHandler _gzipHandler;
         private readonly ReadyService _readyService;
+        private readonly PingService _pingService;
 
         private readonly SetupService _setupService;
         private readonly InfluxDBClientOptions _options;
@@ -53,6 +55,10 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
             _readyService = new ReadyService((Configuration) _apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+            _pingService = new PingService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -410,9 +416,29 @@ namespace InfluxDB.Client
         /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
+        [Obsolete("This method is obsolete. Call 'PingAsync()' instead.", false)]
         public Task<HealthCheck> HealthAsync()
         {
             return GetHealthAsync(_healthService.GetHealthAsync());
+        }
+
+        /// <summary>
+        /// Check the status of InfluxDB Server.
+        /// </summary>
+        /// <returns>true if server is healthy otherwise return false</returns>
+        public async Task<bool> PingAsync()
+        {
+            return await PingAsync(_pingService.GetPingAsyncWithIRestResponse());
+        }
+
+        /// <summary>
+        ///  Return the version of the connected InfluxDB Server.
+        /// </summary>
+        /// <returns>the version String, otherwise unknown</returns>
+        /// <exception cref="InfluxException">throws when request did not succesfully ends</exception>
+        public async Task<string> VersionAsync()
+        {
+            return await VersionAsync(_pingService.GetPingAsyncWithIRestResponse());
         }
 
         /// <summary>

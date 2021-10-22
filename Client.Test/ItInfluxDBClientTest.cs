@@ -35,6 +35,42 @@ namespace InfluxDB.Client.Test
 
             clientNotRunning.Dispose();
         }
+        
+        [Test]
+        public async Task Ping()
+        {
+            Assert.IsTrue(await Client.PingAsync());
+        }
+
+        [Test]
+        public async Task PingNotRunningInstance()
+        {
+            var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
+
+            Assert.IsFalse(await clientNotRunning.PingAsync());
+
+            clientNotRunning.Dispose();
+        }
+        
+        [Test]
+        public async Task Version()
+        {
+            Assert.IsNotEmpty(await Client.VersionAsync());
+        }
+
+        [Test]
+        public void VersionNotRunningInstance()
+        {
+            var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
+
+            var ex = Assert.ThrowsAsync<InfluxException>(async () => await clientNotRunning.VersionAsync());
+
+            Assert.NotNull(ex);
+            Assert.IsNotEmpty(ex.Message);
+            Assert.AreEqual(0, ex.Status);
+
+            clientNotRunning.Dispose();
+        }
 
         [Test]
         public async Task IsOnBoardingNotAllowed()

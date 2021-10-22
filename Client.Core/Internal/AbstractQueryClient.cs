@@ -13,7 +13,7 @@ using RestSharp;
 
 namespace InfluxDB.Client.Core.Internal
 {
-    public abstract class AbstractQueryClient
+    public abstract class AbstractQueryClient: AbstractRestClient
     {
         protected static readonly Action EmptyAction = () => { };
 
