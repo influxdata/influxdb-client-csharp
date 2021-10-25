@@ -333,7 +333,7 @@ namespace InfluxDB.Client
             /// </summary>
             /// <param name="connectionString">connection string with various configurations</param>
             /// <returns><see cref="Builder"/></returns>
-            internal Builder ConnectionString(string connectionString)
+            public Builder ConnectionString(string connectionString)
             {
                 Arguments.CheckNonEmptyString(connectionString, nameof(connectionString));
 
