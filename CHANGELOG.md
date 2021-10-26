@@ -5,6 +5,7 @@
 
 ### Features
 1. [#257](https://github.com/influxdata/influxdb-client-csharp/pull/257): Add `PingService` to check status of OSS and Cloud instance
+2. [#260](https://github.com/influxdata/influxdb-client-csharp/pull/260): Changed `internal` to `public` visiblity of `InfluxDBClientOptions.Builder.ConnectionString`
 
 ## 3.1.0 [2021-10-22]
 
