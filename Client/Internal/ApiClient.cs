@@ -19,7 +19,9 @@ namespace InfluxDB.Client.Api.Client
         private readonly GzipHandler _gzipHandler;
 
         private char[] _sessionToken;
+        private string _sessionCookieName;
         private bool _signout;
+        private string SessionCookieName => _sessionCookieName ?? "session";
 
         public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler, GzipHandler gzipHandler)
         {
@@ -65,7 +67,7 @@ namespace InfluxDB.Client.Api.Client
             {
                 InitToken();
 
-                if (_sessionToken != null) request.AddCookie("session", new string(_sessionToken)); 
+                if (_sessionToken != null) request.AddCookie(SessionCookieName, new string(_sessionToken)); 
             }
             
             _loggingHandler.BeforeIntercept(request);
@@ -108,10 +110,17 @@ namespace InfluxDB.Client.Api.Client
                     var cookies = authResponse.Cookies.ToList();
 
                     if (cookies.Count == 1)
-                        _sessionToken = cookies
-                            .First(cookie => cookie.Name.ToString().Equals("session"))
+                    {
+                        //InfluxDB 2.1 changed the cookie name to something ending with session
+                        //e.g. OSS returns influxdb-oss-session now
+
+                        var cookieWithName = cookies
+                            .First(cookie => cookie.Name.ToString().EndsWith("session"));
+                        _sessionCookieName = cookieWithName.Name;
+                        _sessionToken = cookieWithName
                             .Value
                             .ToCharArray();
+                    }
                 }
             }
         }
@@ -131,7 +140,7 @@ namespace InfluxDB.Client.Api.Client
             _sessionToken = null;
 
             var request = new RestRequest("/api/v2/signout", Method.POST);
-            if (signOutSessionToken != null) request.AddCookie("session", new string(signOutSessionToken)); 
+            if (signOutSessionToken != null) request.AddCookie(SessionCookieName, new string(signOutSessionToken)); 
             RestClient.Execute(request);
         }
     }

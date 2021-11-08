@@ -7,6 +7,9 @@
 1. [#257](https://github.com/influxdata/influxdb-client-csharp/pull/257): Add `PingService` to check status of OSS and Cloud instance
 2. [#260](https://github.com/influxdata/influxdb-client-csharp/pull/260): Changed `internal` to `public` visiblity of `InfluxDBClientOptions.Builder.ConnectionString`
 
+### Bug Fixes
+1. [#262](https://github.com/influxdata/influxdb-client-csharp/issues/262): InfluxDB 2.1 Incompatibility with Session Cookie
+
 ## 3.1.0 [2021-10-22]
 
 ### Features
