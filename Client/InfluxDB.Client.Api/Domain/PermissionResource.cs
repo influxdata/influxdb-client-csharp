@@ -162,7 +162,7 @@ namespace InfluxDB.Client.Api.Domain
             Remotes = 21,
 
             /// <summary>
-            /// Enum Annotations for value: remotes
+            /// Enum Annotations for value: replications
             /// </summary>
             [EnumMember(Value = "replications")]
             Replications = 22
