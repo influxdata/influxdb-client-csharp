@@ -110,30 +110,13 @@ jobs:
       shell: bash
     steps:
       - checkout
-#      - run:
-#          name: "Enable Docker experimental to run Linux containers"
-#          command: |
-#            $progressPreference = 'silentlyContinue'
-#            Install-WindowsFeature Containers
-#            Set-Content -Value "`{`"experimental`":true`}" -Path C:\ProgramData\docker\config\daemon.json
-#            restart-service docker
-#            docker info
-#      - run:
-#          name: "Install Linux Kernel"
-#          command: |
-#            $progressPreference = 'silentlyContinue'
-#            cd 'C:\Program Files\'
-#            mkdir "Linux Containers"
-#            cd '.\Linux Containers\'
-#            curl -OutFile release.zip https://github.com/linuxkit/lcow/releases/download/v4.14.35-v0.3.9/release.zip
-#            Expand-Archive -DestinationPath . .\release.zip
-#            rm release.zip
       - run: choco install influxdb1 --version=1.8.0
       - run: export INFLUXDB_HTTP_FLUX_ENABLED=true 
       - run:
           name: "Start InfluxDB"
           command: /c/influxdata/influxdb-1.8.0-1/influxd.exe -config "Scripts/influxdb.conf"
           background: true
+      - run: sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
       - run: dotnet nuget locals --clear all
       - run: dotnet restore --no-cache --force -s https://api.nuget.org/v3/index.json
       - run: dotnet build

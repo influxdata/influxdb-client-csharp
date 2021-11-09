@@ -5,7 +5,10 @@
 
 ### Features
 1. [#257](https://github.com/influxdata/influxdb-client-csharp/pull/257): Add `PingService` to check status of OSS and Cloud instance
-2. [#260](https://github.com/influxdata/influxdb-client-csharp/pull/260): Changed `internal` to `public` visiblity of `InfluxDBClientOptions.Builder.ConnectionString`
+2. [#260](https://github.com/influxdata/influxdb-client-csharp/pull/260): Changed `internal` to `public` visibility of `InfluxDBClientOptions.Builder.ConnectionString`
+
+### CI
+1. [#264](https://github.com/influxdata/influxdb-client-csharp/pull/264): Add build for `dotnet6`
 
 ## 3.1.0 [2021-10-22]
 
@@ -137,7 +140,6 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 
 ### CI
 1. [#182](https://github.com/influxdata/influxdb-client-csharp/pull/182): Add build for `dotnet5`, Fix code coverage report
-
 
 ## 1.16.0 [2021-03-05]
 
