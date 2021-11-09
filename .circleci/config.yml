@@ -117,7 +117,7 @@ jobs:
           command: /c/influxdata/influxdb-1.8.0-1/influxd.exe -config "Scripts/influxdb.conf"
           background: true
       - run: |
-          sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
           sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
           sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
           sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
