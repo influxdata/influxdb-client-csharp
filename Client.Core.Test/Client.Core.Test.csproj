@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
+        <TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0</TargetFrameworks>
         <LangVersion>8</LangVersion>
 
         <IsPackable>false</IsPackable>
@@ -23,7 +23,11 @@
       <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp5.0' ">
+    <PropertyGroup>
+        <NetCore5PlusFrameworks>|netcoreapp5.0|netcoreapp6.0|</NetCore5PlusFrameworks>
+    </PropertyGroup>
+
+    <ItemGroup Condition="$(NetCore5PlusFrameworks.Contains('|$(TargetFramework)|'))">
         <PackageReference Include="coverlet.collector" Version="3.0.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
