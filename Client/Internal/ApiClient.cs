@@ -18,7 +18,7 @@ namespace InfluxDB.Client.Api.Client
         private readonly LoggingHandler _loggingHandler;
         private readonly GzipHandler _gzipHandler;
 
-        private char[] _sessionToken;
+        private IList<KeyValuePair<string, string>> _sessionTokens; //key is name of cookie, value is the value
         private bool _signout;
 
         public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler, GzipHandler gzipHandler)
@@ -65,7 +65,7 @@ namespace InfluxDB.Client.Api.Client
             {
                 InitToken();
 
-                if (_sessionToken != null) request.AddCookie("session", new string(_sessionToken)); 
+                AddRequestTokens(request, _sessionTokens);
             }
             
             _loggingHandler.BeforeIntercept(request);
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Client
         {
             if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout) return;
 
-            if (_sessionToken == null)
+            if (_sessionTokens == null)
             {
                 IRestResponse authResponse;
                 try
@@ -105,13 +105,9 @@ namespace InfluxDB.Client.Api.Client
 
                 if (authResponse.Cookies != null)
                 {
-                    var cookies = authResponse.Cookies.ToList();
-
-                    if (cookies.Count == 1)
-                        _sessionToken = cookies
-                            .First(cookie => cookie.Name.ToString().Equals("session"))
-                            .Value
-                            .ToCharArray();
+                    _sessionTokens = authResponse.Cookies
+                        .Select(rrc => new KeyValuePair<string, string>(rrc.Name, rrc.Value))
+                        .ToArray();
                 }
             }
         }
@@ -127,12 +123,20 @@ namespace InfluxDB.Client.Api.Client
 
             _signout = true;
 
-            var signOutSessionToken = _sessionToken;
-            _sessionToken = null;
+            var signOutSessionToken = _sessionTokens;
+            _sessionTokens = null;
 
             var request = new RestRequest("/api/v2/signout", Method.POST);
-            if (signOutSessionToken != null) request.AddCookie("session", new string(signOutSessionToken)); 
+            AddRequestTokens(request, signOutSessionToken);
             RestClient.Execute(request);
+        }
+
+        private static void AddRequestTokens(IRestRequest request, IList<KeyValuePair<string, string>> tokens)
+        {
+            if (tokens == null)
+                return;
+            foreach (var kvp in tokens)
+                request.AddCookie(kvp.Key, kvp.Value);
         }
     }
 }
