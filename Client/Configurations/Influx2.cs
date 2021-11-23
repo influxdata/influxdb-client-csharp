@@ -85,6 +85,16 @@ namespace InfluxDB.Client.Configurations
             set => base["allowHttpRedirects"] = value;
         }
 
+        /// <summary>
+        /// Ignore Certificate Validation Errors when false
+        /// </summary>
+        [ConfigurationProperty("verifySsl", IsKey = true, IsRequired = false)]
+        public bool VerifySsl
+        {
+            get => (bool)base["verifySsl"];
+            set => base["verifySsl"] = value;
+        }
+
         [ConfigurationProperty("tags", IsRequired = false)]
         public TagCollection Tags
         {

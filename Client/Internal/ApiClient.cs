@@ -32,6 +32,10 @@ namespace InfluxDB.Client.Api.Client
 
             RestClient = new RestClient(options.Url);
             RestClient.FollowRedirects = options.AllowHttpRedirects;
+            if (!options.VerifySsl)
+            {
+                RestClient.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+            }
             RestClient.AutomaticDecompression = false;
             Configuration = new Configuration
             {

@@ -40,6 +40,8 @@ namespace InfluxDB.Client
 
         public PointSettings PointSettings { get; }
 
+        public bool VerifySsl { get; }
+
         private InfluxDBClientOptions(Builder builder)
         {
             Arguments.CheckNotNull(builder, nameof(builder));
@@ -61,6 +63,8 @@ namespace InfluxDB.Client
             AllowHttpRedirects = builder.AllowHttpRedirects;
 
             PointSettings = builder.PointSettings;
+
+            VerifySsl = builder.VerifySslCertificates;
         }
 
         /// <summary>
@@ -104,6 +108,7 @@ namespace InfluxDB.Client
 
             internal IWebProxy WebProxy;
             internal bool AllowHttpRedirects;
+            internal bool VerifySslCertificates = true;
 
             internal PointSettings PointSettings = new PointSettings();
 
@@ -290,6 +295,20 @@ namespace InfluxDB.Client
             }
 
             /// <summary>
+            /// Ignore Certificate Validation Errors when false
+            /// </summary>
+            /// <param name="verifySsl">validates Certificates</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder VerifySsl(bool verifySsl)
+            {
+                Arguments.CheckNotNull(verifySsl, nameof(verifySsl));
+
+                VerifySslCertificates = verifySsl;
+
+                return this;
+            }
+
+            /// <summary>
             /// Configure Builder via App.config.
             /// </summary>
             /// <param name="sectionName">Name of configuration section. Useful for tests.</param>
@@ -315,6 +334,7 @@ namespace InfluxDB.Client
                 var timeout = config.Timeout;
                 var readWriteTimeout = config.ReadWriteTimeout;
                 var allowHttpRedirects = config.AllowHttpRedirects;
+                var verifySsl = config.VerifySsl;
 
                 var tags = config.Tags;
                 if (tags != null)
@@ -325,7 +345,7 @@ namespace InfluxDB.Client
                     }
                 }
 
-                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout, allowHttpRedirects);
+                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout, allowHttpRedirects, verifySsl);
             }
 
             /// <summary>
@@ -354,7 +374,7 @@ namespace InfluxDB.Client
             }
 
             private Builder Configure(string url, string org, string bucket, string token, string logLevel,
-                string timeout, string readWriteTimeout, bool allowHttpRedirects = false)
+                string timeout, string readWriteTimeout, bool allowHttpRedirects = false, bool verifySsl = true)
             {
                 Url(url);
                 Org(org);
@@ -381,6 +401,8 @@ namespace InfluxDB.Client
                 }
 
                 AllowRedirects(allowHttpRedirects);
+
+                VerifySsl(verifySsl);
 
                 return this;
             }

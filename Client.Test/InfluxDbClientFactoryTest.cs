@@ -30,6 +30,17 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        public void CreateInstanceVerifySsl()
+        {
+            var client = InfluxDBClientFactory.Create("http://localhost:9999");
+
+            Assert.IsNotNull(client);
+
+            var options = GetDeclaredField<InfluxDBClientOptions>(client.GetType(), client, "_options");
+            Assert.AreEqual(true, options.VerifySsl);
+        }
+
+        [Test]
         public void CreateInstanceUsername() {
 
             var client = InfluxDBClientFactory.Create("http://localhost:9999", "user", "secret".ToCharArray());
