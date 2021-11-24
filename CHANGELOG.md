@@ -6,6 +6,7 @@
 ### Features
 1. [#257](https://github.com/influxdata/influxdb-client-csharp/pull/257): Add `PingService` to check status of OSS and Cloud instance
 1. [#260](https://github.com/influxdata/influxdb-client-csharp/pull/260): Changed `internal` to `public` visibility of `InfluxDBClientOptions.Builder.ConnectionString`
+1. [#266](https://github.com/influxdata/influxdb-client-csharp/pull/266): Add option to accept self-signed certificates
 
 ### CI
 1. [#264](https://github.com/influxdata/influxdb-client-csharp/pull/264): Add build for `dotnet6`
