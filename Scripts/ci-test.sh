@@ -36,7 +36,7 @@ TEST_PARAMS=()
 
 if [[ "$CODE_COVERAGE_REPORT" = true ]]
 then
-  TRX2JUNIT_VERSION="1.5.0"
+  TRX2JUNIT_VERSION="1.6.0"
   TEST_PARAMS=(--collect:"XPlat Code Coverage")
 else
   TRX2JUNIT_VERSION="1.3.2"
@@ -44,9 +44,7 @@ fi
 
 if [[ "$NET_TEST_VERSION" = "netcoreapp6.0" ]]
 then
-  # Temporally solution before https://github.com/gfoidl/trx2junit/pull/86 
-  export DOTNET_ROLL_FORWARD=Major
-  TRX2JUNIT_VERSION="1.5.0"
+  TRX2JUNIT_VERSION="1.6.0"
 fi
 
 #
