@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using RestSharp;
+using System.Web;
 
 namespace InfluxDB.Client.Core.Internal
 {
@@ -29,36 +29,26 @@ namespace InfluxDB.Client.Core.Internal
             var isBody = Level == LogLevel.Body;
             var isHeader = isBody || Level == LogLevel.Headers;
 
-            Trace.WriteLine($"--> {request.Method} {request.Resource}");
+            Trace.WriteLine($"--> {req.Method} {req.RequestUri}");
 
             if (isHeader)
             {
-                var query = ToHeaders(request.Parameters, ParameterType.QueryString);
+                var queryString = HttpUtility.ParseQueryString(req.RequestUri.Query);
+                var query = queryString
+                    .AllKeys
+                    .Select(key => (key, Enumerable.Repeat(queryString.Get(key), 1)));
                 LogHeaders(query, "-->", "Query");
-                
-                var headers = ToHeaders(request.Parameters);
+
+                var headers = req.Headers.Select(ToKeyValue());
                 LogHeaders(headers, "-->");
             }
 
             if (isBody)
             {
-                var body = request.Parameters.FirstOrDefault(parameter =>
-                    parameter.Type.Equals(ParameterType.RequestBody));
-
+                var body = req.Content;
                 if (body != null)
                 {
-                    string stringBody;
-                    
-                    if (body.Value is byte[] bytes)
-                    {
-                        stringBody = Encoding.UTF8.GetString(bytes);
-                    }
-                    else
-                    {
-                        stringBody = body.Value.ToString();
-                    }
-                    
-                    Trace.WriteLine($"--> Body: {stringBody}");
+                    Trace.WriteLine($"--> Body: {body}");
                 }
             }
 
@@ -81,7 +71,7 @@ namespace InfluxDB.Client.Core.Internal
 
             if (isHeader)
             {
-                LogHeaders(headers.Invoke(), "<--");
+                LogHeaders(headers.Invoke().Select(ToKeyValue()), "<--");
             }
 
             if (isBody && body != null)
@@ -112,20 +102,23 @@ namespace InfluxDB.Client.Core.Internal
             return freshBody;
         }
 
-        public static List<HttpHeader> ToHeaders(HttpResponseHeaders parameters, ParameterType type = ParameterType.HttpHeader)
+        public static IDictionary<string, IList<string>> ToHeaders(HttpResponseHeaders parameters)
         {
-            return parameters
-                .Where(parameter => parameter.Type.Equals(type))
-                .Select(h => new HttpHeader(h.Name, h.Value.ToString()))
-                .ToList();
+            return parameters.ToDictionary(it => it.Key, a => a.Value.ToList() as IList<string>);
         }
 
-        private void LogHeaders(IList<HttpHeader> headers, string direction, string type = "Header")
+        private void LogHeaders(IEnumerable<(string key, IEnumerable<string>)> headers, string direction,
+            string type = "Header")
         {
-            foreach (var emp in headers)
+            foreach (var keyValue in headers)
             {
-                Trace.WriteLine($"{direction} {type}: {emp.Name}={emp.Value}");
+                Trace.WriteLine($"{direction} {type}: {keyValue.Item1}={string.Join(", ", keyValue.Item2)}");
             }
+        }
+
+        private static Func<KeyValuePair<string, IEnumerable<string>>, (string Key, IEnumerable<string>)> ToKeyValue()
+        {
+            return it => (it.Key, it.Value);
         }
     }
 }
