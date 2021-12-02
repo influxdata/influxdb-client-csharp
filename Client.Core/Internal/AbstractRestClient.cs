@@ -1,15 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using InfluxDB.Client.Core.Exceptions;
-using RestSharp;
 
 namespace InfluxDB.Client.Core.Internal
 {
     public abstract class AbstractRestClient
     {
-        protected async Task<bool> PingAsync(Task<IRestResponse> request)
+        protected async Task<bool> PingAsync(Task request)
         {
             try
             {
@@ -24,26 +23,12 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-        protected async Task<string> VersionAsync(Task<IRestResponse> request)
+        protected string VersionAsync(IDictionary<string, IList<string>> headers)
         {
-            try
-            {
-                var response = await request.ConfigureAwait(false);
+            Arguments.CheckNotNull(headers, "headers");
 
-                return GetVersion(response);
-            }
-            catch (Exception e)
-            {
-                throw new InfluxException(e);
-            }
-        }
-        
-        private string GetVersion(IRestResponse responseHttp)
-        {
-            Arguments.CheckNotNull(responseHttp, "responseHttp");
-
-            var value = responseHttp.Headers
-                .Where(header => header.Name.Equals("X-Influxdb-Version"))
+            var value = headers
+                .Where(header => header.Key.Equals("X-Influxdb-Version"))
                 .Select(header => header.Value.ToString())
                 .FirstOrDefault();
 

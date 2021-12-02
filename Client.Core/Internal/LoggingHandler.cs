@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using RestSharp;
 
@@ -17,7 +19,7 @@ namespace InfluxDB.Client.Core.Internal
             Level = logLevel;
         }
 
-        public void BeforeIntercept(IRestRequest request)
+        public void BeforeIntercept(HttpRequestMessage req)
         {
             if (Level == LogLevel.None)
             {
@@ -64,7 +66,7 @@ namespace InfluxDB.Client.Core.Internal
             Trace.WriteLine("-->");
         }
 
-        public object AfterIntercept(int statusCode, Func<IList<HttpHeader>> headers, object body)
+        public object AfterIntercept(int statusCode, Func<HttpResponseHeaders> headers, object body)
         {
             var freshBody = body;
             if (Level == LogLevel.None)
@@ -110,7 +112,7 @@ namespace InfluxDB.Client.Core.Internal
             return freshBody;
         }
 
-        public static List<HttpHeader> ToHeaders(IList<Parameter> parameters, ParameterType type = ParameterType.HttpHeader)
+        public static List<HttpHeader> ToHeaders(HttpResponseHeaders parameters, ParameterType type = ParameterType.HttpHeader)
         {
             return parameters
                 .Where(parameter => parameter.Type.Equals(type))

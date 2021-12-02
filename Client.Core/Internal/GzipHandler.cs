@@ -5,6 +5,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
 using RestSharp;
@@ -33,7 +35,7 @@ namespace InfluxDB.Client.Core.Internal
             return _enabled;
         }
 
-        public void BeforeIntercept(IRestRequest request)
+        public void BeforeIntercept(HttpRequestMessage req)
         {
             if (!_enabled)
             {
@@ -96,7 +98,7 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-        public object AfterIntercept(int statusCode, Func<IList<HttpHeader>> headers, object body)
+        public object AfterIntercept(int statusCode, Func<HttpResponseHeaders> headers, object body)
         {
             return body;
         }

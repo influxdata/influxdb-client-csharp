@@ -6,7 +6,6 @@ using System.Net;
 using InfluxDB.Client.Core.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using RestSharp;
 
 namespace InfluxDB.Client.Core.Exceptions
 {
@@ -73,7 +72,7 @@ namespace InfluxDB.Client.Core.Exceptions
                 requestResult.ErrorException);
         }
         
-        public static HttpException Create(object content, IList<HttpHeader> headers, string ErrorMessage, 
+        public static HttpException Create(object content, IDictionary<string, IList<string>> headers, string ErrorMessage, 
             HttpStatusCode statusCode, Exception exception = null)
         {
             string stringBody = null;
@@ -82,8 +81,12 @@ namespace InfluxDB.Client.Core.Exceptions
 
             int? retryAfter = null;
             {
-                var retryHeader = headers.FirstOrDefault(header => header.Name.Equals("Retry-After"));
-                if (retryHeader != null) retryAfter = Convert.ToInt32(retryHeader.Value);
+                var retryHeader = headers
+                    .Where(header => header.Key.Equals("Retry-After"))
+                    .Select(it => it.Value.FirstOrDefault())
+                    .FirstOrDefault();
+                
+                if (retryHeader != null) retryAfter = Convert.ToInt32(retryHeader);
             }
 
             if (content != null)
@@ -120,7 +123,7 @@ namespace InfluxDB.Client.Core.Exceptions
 
             if (string.IsNullOrEmpty(errorMessage))
                 errorMessage = headers
-                    .Where(header => keys.Contains(header.Name, StringComparer.OrdinalIgnoreCase))
+                    .Where(header => keys.Contains(header.Key, StringComparer.OrdinalIgnoreCase))
                     .Select(header => header.Value.ToString()).FirstOrDefault();
 
             if (string.IsNullOrEmpty(errorMessage)) errorMessage = ErrorMessage;
