@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Writes;
-using RestSharp;
 
 namespace InfluxDB.Client
 {
@@ -182,7 +182,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <returns>Write Task with IRestResponse</returns>
-        public Task<IRestResponse> WriteRecordsAsyncWithIRestResponse(IEnumerable<string> records, string bucket = null,
+        public Task<ApiResponse<object>> WriteRecordsAsyncWithIRestResponse(IEnumerable<string> records, string bucket = null,
             string org = null, WritePrecision precision = WritePrecision.Ns,
             CancellationToken cancellationToken = default)
         {
@@ -311,10 +311,10 @@ namespace InfluxDB.Client
         /// </param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <returns>Write Tasks with IRestResponses.</returns>
-        public Task<IRestResponse[]> WritePointsAsyncWithIRestResponse(IEnumerable<PointData> points,
+        public Task<ApiResponse<object>[]> WritePointsAsyncWithIRestResponse(IEnumerable<PointData> points,
             string bucket = null, string org = null, CancellationToken cancellationToken = default)
         {
-            var tasks = new List<Task<IRestResponse>>();
+            var tasks = new List<Task<ApiResponse<object>>>();
             foreach (var grouped in points.GroupBy(it => it.Precision))
             {
                 var options = new BatchWriteOptions(bucket, org, grouped.Key);
@@ -481,7 +481,7 @@ namespace InfluxDB.Client
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
         /// <returns>Write Task with IRestResponse</returns>
-        public Task<IRestResponse> WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM> measurements, string bucket = null,
+        public Task<ApiResponse<object>> WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM> measurements, string bucket = null,
             string org = null, WritePrecision precision = WritePrecision.Ns,
             CancellationToken cancellationToken = default)
         {
@@ -509,7 +509,7 @@ namespace InfluxDB.Client
                 cancellationToken);
         }
 
-        private Task<IRestResponse> WriteDataAsyncWithIRestResponse(IEnumerable<BatchWriteData> batch,string bucket = null, string org = null,
+        private Task<ApiResponse<object>> WriteDataAsyncWithIRestResponse(IEnumerable<BatchWriteData> batch,string bucket = null, string org = null,
             WritePrecision precision = WritePrecision.Ns, CancellationToken cancellationToken = default)
         {
             var localBucket = bucket ?? _options.Bucket;
@@ -521,7 +521,7 @@ namespace InfluxDB.Client
             
             var sb = ToLineProtocolBody(batch);
 
-            return _service.PostWriteAsyncWithIRestResponse(org, bucket, Encoding.UTF8.GetBytes(sb.ToString()), null,
+           return _service.PostWriteWithHttpInfoAsync(org, bucket, Encoding.UTF8.GetBytes(sb.ToString()), null,
                 PostHeaderEncoding, PostHeaderContentType, null, PostHeaderAccept, null, precision,
                 cancellationToken);
         }

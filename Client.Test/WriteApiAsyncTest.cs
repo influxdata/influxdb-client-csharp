@@ -4,11 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
 using NUnit.Framework;
-using RestSharp;
 using WireMock.RequestBuilders;
 
 namespace InfluxDB.Client.Test
@@ -155,7 +153,7 @@ namespace InfluxDB.Client.Test
             var request = MockServer.LogEntries.ToList()[0];
             StringAssert.EndsWith("/api/v2/write?org=my-org&bucket=my-bucket&precision=ms",
                 request.RequestMessage.AbsoluteUrl);
-            Assert.AreEqual("h2o,location=coyote_creek water_level=9 1", GetRequestBody(response));
+            Assert.AreEqual("h2o,location=coyote_creek water_level=9 1", request.RequestMessage.Body);
         }
 
         [Test]
@@ -181,11 +179,13 @@ namespace InfluxDB.Client.Test
                 "my-bucket",
                 "my-org");
 
+            var requests = MockServer.LogEntries.ToList();
+            Assert.AreEqual(2, requests);
             Assert.AreEqual(2, responses.Length);
             Assert.AreEqual(HttpStatusCode.OK, responses[0].StatusCode);
-            Assert.AreEqual("h2o,location=coyote_creek water_level=9 9", GetRequestBody(responses[0]));
+            Assert.AreEqual("h2o,location=coyote_creek water_level=9 9", requests[0].RequestMessage.Body);
             Assert.AreEqual(HttpStatusCode.OK, responses[1].StatusCode);
-            Assert.AreEqual("h2o,location=coyote_creek water_level=10 10", GetRequestBody(responses[1]));
+            Assert.AreEqual("h2o,location=coyote_creek water_level=10 10", requests[1].RequestMessage.Body);
         }
 
         [Test]
@@ -210,14 +210,8 @@ namespace InfluxDB.Client.Test
                 "my-org");
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-            Assert.AreEqual("m,device=id-1 value=16i 1605428415000000000", GetRequestBody(response));
-        }
-
-        private string GetRequestBody(IRestResponse restResponse)
-        {
-            var bytes = (byte[]) restResponse.Request.Body?.Value ??
-                        throw new AssertionException("The body is required.");
-            return System.Text.Encoding.Default.GetString(bytes);
+            var request = MockServer.LogEntries.ToList()[0];
+            Assert.AreEqual("m,device=id-1 value=16i 1605428415000000000", request.RequestMessage.Body);
         }
     }
 }
