@@ -1,7 +1,7 @@
 using System.Net;
+using System.Net.Http;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
-using RestSharp;
 
 namespace InfluxDB.Client.Core.Test
 {
@@ -31,9 +31,9 @@ namespace InfluxDB.Client.Core.Test
             Assert.IsInstanceOf(typeof(HttpException), HttpException.Create(Response(390), ""));
         }
 
-        private static HttpResponse Response(int statusCode)
+        private static HttpResponseMessage Response(int statusCode)
         {
-            return new HttpResponse {StatusCode = (HttpStatusCode) statusCode};
+            return new HttpResponseMessage((HttpStatusCode)statusCode);
         }
     }
 }

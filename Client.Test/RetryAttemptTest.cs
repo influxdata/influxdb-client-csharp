@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Internal;
 using NUnit.Framework;
-using RestSharp;
 
 namespace InfluxDB.Client.Test
 {
@@ -169,9 +168,10 @@ namespace InfluxDB.Client.Test
 
         private HttpException CreateException(int retryAfter = 10)
         {
-            var headers = new List<HttpHeader> {new HttpHeader("Retry-After", retryAfter.ToString())};
-            var exception = HttpException.Create("", headers, "", HttpStatusCode.TooManyRequests);
-            return exception;
+            var response = new HttpResponseMessage(HttpStatusCode.TooManyRequests);
+            response.Headers.Add("Retry-After", retryAfter.ToString());
+            
+            return HttpException.Create(response, "");
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using InfluxDB.Client.Core.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -64,12 +66,11 @@ namespace InfluxDB.Client.Core.Exceptions
                 requestResult.ErrorException);
         }
 
-        public static HttpException Create(IHttpResponse requestResult, object body)
+        public static HttpException Create(HttpResponseMessage requestResult, object body)
         {
             Arguments.CheckNotNull(requestResult, nameof(requestResult));
 
-            return Create(body, requestResult.Headers, requestResult.ErrorMessage, requestResult.StatusCode, 
-                requestResult.ErrorException);
+            return Create(body, LoggingHandler.ToHeaders(requestResult.Headers), "", requestResult.StatusCode);
         }
         
         public static HttpException Create(object content, IDictionary<string, IList<string>> headers, string ErrorMessage, 
