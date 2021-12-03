@@ -42,16 +42,8 @@ namespace InfluxDB.Client
             _apiClient = new ApiClient(options, _loggingHandler, _gzipHandler);
             _apiClient.Configuration.UserAgent = $"influxdb-client-csharp/{version}";
 
-            _exceptionFactory = (methodName, response) =>
-            {
-                var status = (int) response.StatusCode;
-                if (status >= 200 && status <= 299)
-                {
-                    return null;
-                }
-
-                return HttpException.Create(response.Content, response.Headers, response.ErrorText, response.StatusCode);
-            };
+            _exceptionFactory = (methodName, response) => 
+                response.StatusCode.IsSuccessStatusCode() ? null : HttpExceptionExtensions.Create(response);
 
             _setupService = new SetupService(_apiClient, _apiClient, _apiClient.Configuration)
             {

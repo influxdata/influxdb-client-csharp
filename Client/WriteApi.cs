@@ -8,6 +8,7 @@ using System.Reactive.Subjects;
 using System.Reactive.Threading.Tasks;
 using System.Text;
 using System.Threading;
+using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
@@ -15,7 +16,6 @@ using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Internal;
 using InfluxDB.Client.Writes;
 using Microsoft.Extensions.ObjectPool;
-using RestSharp;
 
 namespace InfluxDB.Client
 {
@@ -138,7 +138,7 @@ namespace InfluxDB.Client
 
                     return Observable
                         .Defer(() =>
-                            service.PostWriteAsyncWithIRestResponse(org, bucket,
+                            service.PostWriteWithHttpInfoAsync(org, bucket,
                                     Encoding.UTF8.GetBytes(lineProtocol), null,
                                     "identity", "text/plain; charset=utf-8", null, "application/json", null, precision)
                                 .ToObservable())
@@ -165,16 +165,16 @@ namespace InfluxDB.Client
                         .Select(result =>
                         {
                             // ReSharper disable once ConvertIfStatementToReturnStatement
-                            if (result.IsSuccessful) return Notification.CreateOnNext(result);
+                            if (result.StatusCode.IsSuccessStatusCode()) return Notification.CreateOnNext(result);
 
-                            return Notification.CreateOnError<IRestResponse>(HttpException.Create(result, result.Content));
+                            return Notification.CreateOnError<ApiResponse<object>>(HttpExceptionExtensions.Create(result));
                         })
-                        .Catch<Notification<IRestResponse>, Exception>(ex =>
+                        .Catch<Notification<ApiResponse<object>>, Exception>(ex =>
                         {
                             var error = new WriteErrorEvent(org, bucket, precision, lineProtocol, ex);
                             Publish(error);
 
-                            return Observable.Return(Notification.CreateOnError<IRestResponse>(ex));
+                            return Observable.Return(Notification.CreateOnError<ApiResponse<object>>(ex));
                         }).Do(res =>
                         {
                             if (res.Kind == NotificationKind.OnNext)
