@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
+using Newtonsoft.Json;
 
 namespace InfluxDB.Client
 {
@@ -14,12 +16,15 @@ namespace InfluxDB.Client
     public class TelegrafsApi
     {
         private readonly TelegrafsService _service;
+        private readonly ApiClient _apiClient;
 
-        protected internal TelegrafsApi(TelegrafsService service)
+        protected internal TelegrafsApi(TelegrafsService service, ApiClient apiClient)
         {
             Arguments.CheckNotNull(service, nameof(service));
+            Arguments.CheckNotNull(apiClient, nameof(apiClient));
 
             _service = service;
+            _apiClient = apiClient;
         }
 
         /// <summary>
@@ -181,14 +186,14 @@ namespace InfluxDB.Client
         {
             return new Dictionary<string, object>
             {
-                {"interval", "10s"},
-                {"round_interval", true},
-                {"metric_batch_size", 1000},
-                {"metric_buffer_limit", 10000},
-                {"collection_jitter", "0s"},
-                {"flush_jitter", "0s"},
-                {"precision", ""},
-                {"omit_hostname", false}
+                { "interval", "10s" },
+                { "round_interval", true },
+                { "metric_batch_size", 1000 },
+                { "metric_buffer_limit", 10000 },
+                { "collection_jitter", "0s" },
+                { "flush_jitter", "0s" },
+                { "precision", "" },
+                { "omit_hostname", false }
             };
         }
 
@@ -257,7 +262,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
             var telegraf = await FindTelegrafByIdAsync(telegrafId).ConfigureAwait(false);
-            
+
             return await CloneTelegrafAsync(clonedName, telegraf).ConfigureAwait(false);
         }
 
@@ -294,9 +299,12 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var response = await _service.GetTelegrafsIDWithIRestResponseAsync(telegrafId, null, "application/json").ConfigureAwait(false);
-            
-            return (Telegraf) _service.Configuration.ApiClient.Deserialize(response, typeof(Telegraf));
+            var response = await _service
+                .GetTelegrafsIDWithHttpInfoAsync(telegrafId, null, "application/json")
+                .ConfigureAwait(false);
+
+            return (Telegraf)JsonConvert.DeserializeObject(response.RawContent, typeof(Telegraf),
+                _apiClient.SerializerSettings);
         }
 
         /// <summary>
@@ -567,7 +575,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            var response = await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId)).ConfigureAwait(false);
+            var response = await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId))
+                .ConfigureAwait(false);
             return response.Label;
         }
 

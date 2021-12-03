@@ -271,7 +271,7 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
 
-            return new TelegrafsApi(service);
+            return new TelegrafsApi(service, _apiClient);
         }
 
         /// <summary>

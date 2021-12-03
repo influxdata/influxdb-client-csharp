@@ -12,7 +12,6 @@ using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
-using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Internal;
 using InfluxDB.Client.Writes;
 using Microsoft.Extensions.ObjectPool;

@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
