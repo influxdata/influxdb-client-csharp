@@ -1,10 +1,9 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
-using Task = System.Threading.Tasks.Task;
+using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
@@ -61,8 +60,14 @@ namespace InfluxDB.Client
         public Task<ScraperTargetResponse> UpdateScraperTargetAsync(ScraperTargetResponse scraperTargetResponse)
         {
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
+            
+            Enum.TryParse(scraperTargetResponse.Type.ToString(), true,
+                out ScraperTargetRequest.TypeEnum type);
+            
+            var request = new ScraperTargetRequest(scraperTargetResponse.Name, type, scraperTargetResponse.Url,
+                scraperTargetResponse.OrgID, scraperTargetResponse.BucketID, scraperTargetResponse.AllowInsecure);
 
-            return UpdateScraperTargetAsync(scraperTargetResponse.Id, scraperTargetResponse);
+            return UpdateScraperTargetAsync(scraperTargetResponse.Id, request);
         }
 
         /// <summary>
@@ -130,8 +135,11 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(scraperTargetResponse, nameof(scraperTargetResponse));
+            
+            Enum.TryParse(scraperTargetResponse.Type.ToString(), true,
+                out ScraperTargetRequest.TypeEnum type);
 
-            var cloned = new ScraperTargetRequest(clonedName, scraperTargetResponse.Type, scraperTargetResponse.Url,
+            var cloned = new ScraperTargetRequest(clonedName, type, scraperTargetResponse.Url,
                 scraperTargetResponse.OrgID, scraperTargetResponse.BucketID);
 
             var created = await CreateScraperTargetAsync(cloned).ConfigureAwait(false);
