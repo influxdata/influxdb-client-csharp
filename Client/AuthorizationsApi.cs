@@ -44,8 +44,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, "orgId");
             Arguments.CheckNotNull(permissions, "permissions");
 
-            var authorization =
-                new AuthorizationPostRequest(orgId, null, permissions, AuthorizationUpdateRequest.StatusEnum.Active);
+            var authorization = new AuthorizationPostRequest(orgID: orgId, permissions: permissions,
+                status: AuthorizationPostRequest.StatusEnum.Active);
 
             return CreateAuthorizationAsync(authorization);
         }
@@ -60,10 +60,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(authorization, nameof(authorization));
 
-            var request =
-                new AuthorizationPostRequest(authorization.OrgID,
-                    authorization.UserID,
-                    authorization.Permissions, description: authorization.Description);
+            var request = new AuthorizationPostRequest(orgID: authorization.OrgID, userID: authorization.UserID,
+                permissions: authorization.Permissions, description: authorization.Description);
 
             return CreateAuthorizationAsync(request);
         }
@@ -89,7 +87,10 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(authorization, nameof(authorization));
 
-            var request = new AuthorizationUpdateRequest(authorization.Status, authorization.Description);
+            Enum.TryParse(authorization.Status.ToString(), true,
+                out AuthorizationUpdateRequest.StatusEnum status);
+
+            var request = new AuthorizationUpdateRequest(status, authorization.Description);
 
             return _service.PatchAuthorizationsIDAsync(authorization.Id, request);
         }
@@ -140,8 +141,11 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(authorization, nameof(authorization));
 
-            var cloned = new AuthorizationPostRequest(authorization.OrgID, authorization.UserID, authorization.Permissions,
-                authorization.Status, authorization.Description);
+            Enum.TryParse(authorization.Status.ToString(), true,
+                out AuthorizationPostRequest.StatusEnum status);
+
+            var cloned = new AuthorizationPostRequest(orgID: authorization.OrgID, userID: authorization.UserID,
+                permissions: authorization.Permissions, status: status, description: authorization.Description);
 
             return CreateAuthorizationAsync(cloned);
         }
