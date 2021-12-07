@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Reflection;
-using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Core;
+using InfluxDB.Client.Core.Api;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
 

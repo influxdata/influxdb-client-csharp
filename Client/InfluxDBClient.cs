@@ -4,10 +4,10 @@ using System.Reactive;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
-using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
+using InfluxDB.Client.Core.Api;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Internal;
@@ -39,10 +39,10 @@ namespace InfluxDB.Client
 
             var version = AssemblyHelper.GetVersion(typeof(InfluxDBClient));
 
-            _apiClient = new ApiClient(options, _loggingHandler, _gzipHandler);
+            _apiClient = options.ToApiClient(_loggingHandler, _gzipHandler);
             _apiClient.Configuration.UserAgent = $"influxdb-client-csharp/{version}";
 
-            _exceptionFactory = (methodName, response) => 
+            _exceptionFactory = (methodName, response) =>
                 response.StatusCode.IsSuccessStatusCode() ? null : HttpExceptionExtensions.Create(response);
 
             _setupService = new SetupService(_apiClient, _apiClient, _apiClient.Configuration)
@@ -233,7 +233,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="InfluxDB.Client.Api.Domain.Task" /> client.
+        /// Get the <see cref="Task" /> client.
         /// </summary>
         /// <returns>the new client instance for Task API</returns>
         public TasksApi GetTasksApi()
