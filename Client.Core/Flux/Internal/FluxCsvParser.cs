@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             /// <param name="index">index of table</param>
             /// <param name="cancellable">cancellable</param>
             /// <param name="table">new <see cref="FluxTable"/></param>
-            void Accept(int index, ICancellable cancellable, FluxTable table);
+            void Accept(int index, CancellationToken cancellable, FluxTable table);
 
             /// <summary>
             /// Add new <see cref="FluxRecord"/> to a consumer.
@@ -45,25 +45,25 @@ namespace InfluxDB.Client.Core.Flux.Internal
             /// <param name="index">index of table</param>
             /// <param name="cancellable">cancellable</param>
             /// <param name="record">new <see cref="FluxRecord"/></param>
-            void Accept(int index, ICancellable cancellable, FluxRecord record);
+            void Accept(int index, CancellationToken cancellable, FluxRecord record);
         }
 
         public class FluxResponseConsumerTable : IFluxResponseConsumer
         {
             public List<FluxTable> Tables { get; } = new List<FluxTable>();
 
-            public void Accept(int index, ICancellable cancellable, FluxTable table)
+            public void Accept(int index, CancellationToken cancellable, FluxTable table)
             {
                 Tables.Insert(index, table);
             }
 
-            public void Accept(int index, ICancellable cancellable, FluxRecord record)
+            public void Accept(int index, CancellationToken cancellable, FluxRecord record)
             {
                 Tables[index].Records.Add(record);
             }
         }
 
-        public void ParseFluxResponse(string source, ICancellable cancellable, IFluxResponseConsumer consumer)
+        public void ParseFluxResponse(string source, CancellationToken cancellable, IFluxResponseConsumer consumer)
         {
             Arguments.CheckNonEmptyString(source, "source");
 
@@ -76,7 +76,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
         /// <param name="source">CSV Data source</param>
         /// <param name="cancellable">to cancel parsing</param>
         /// <param name="consumer">to accept <see cref="FluxTable"/> or <see cref="FluxRecord"/></param>
-        public void ParseFluxResponse(Stream source, ICancellable cancellable, IFluxResponseConsumer consumer)
+        public void ParseFluxResponse(Stream source, CancellationToken cancellable, IFluxResponseConsumer consumer)
         {
             Arguments.CheckNotNull(source, "source");
 
@@ -85,7 +85,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
             while (csv.Read())
             {
-                if (cancellable != null && cancellable.IsCancelled())
+                if (cancellable != null && cancellable.IsCancellationRequested)
                 {
                     return;
                 }
@@ -105,7 +105,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
         /// </summary>
         /// <param name="reader">CSV Data source reader</param>
         /// <param name="cancellationToken">cancellation token</param>
-        public async IAsyncEnumerable<(FluxTable, FluxRecord)> ParseFluxResponseAsync(StringReader reader, [EnumeratorCancellation] CancellationToken cancellationToken)
+        public async IAsyncEnumerable<(FluxTable, FluxRecord)> ParseFluxResponseAsync(TextReader reader, [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNotNull(reader, nameof(reader));
 
