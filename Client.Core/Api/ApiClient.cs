@@ -158,7 +158,7 @@ namespace InfluxDB.Client.Core.Api
         }
     }
     /// <summary>
-    /// Provides a default implementation of an Api client (both synchronous and asynchronous implementations),
+    /// Provides a default implementation of an Api client (both synchronous and asynchronous implementatios),
     /// encapsulating general REST accessor use cases.
     /// </summary>
     /// <remarks>
@@ -169,12 +169,12 @@ namespace InfluxDB.Client.Core.Api
         private readonly string _baseUrl;
 
         private readonly HttpClientHandler _httpClientHandler;
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClient;    
         private readonly bool _disposeClient;
 
         /// <summary>
         /// Specifies the settings on a <see cref="JsonSerializer" /> object.
-        /// These settings can be adjusted to accommodate custom serialization rules.
+        /// These settings can be adjusted to accomodate custom serialization rules.
         /// </summary>
         public JsonSerializerSettings SerializerSettings { get; set; } = new JsonSerializerSettings
         {
@@ -191,23 +191,23 @@ namespace InfluxDB.Client.Core.Api
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" />, defaulting to the global configurations' base url.
-        /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-        /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+        /// **IMPORTANT** This will also create an istance of HttpClient, which is less than ideal.
+        /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHander</see>.
         /// </summary>
         public ApiClient() :
                  this(InfluxDB.Client.Core.Api.GlobalConfiguration.Instance.BasePath)
-        {
+        {    
         }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" />.
-        /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
-        /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
+        /// **IMPORTANT** This will also create an istance of HttpClient, which is less than ideal.
+        /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHander</see>.
         /// </summary>
         /// <param name="basePath">The target service's base path in URL format.</param>
         /// <exception cref="ArgumentException"></exception>
         public ApiClient(string basePath)
-        {
+        {    
             if (string.IsNullOrEmpty(basePath)) throw new ArgumentException("basePath cannot be empty");
 
             _httpClientHandler = new HttpClientHandler();
@@ -215,7 +215,7 @@ namespace InfluxDB.Client.Core.Api
             _disposeClient = true;
             _baseUrl = basePath;
         }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" />, defaulting to the global configurations' base url.
         /// </summary>
@@ -228,9 +228,9 @@ namespace InfluxDB.Client.Core.Api
         /// </remarks>
         public ApiClient(HttpClient client, HttpClientHandler handler = null) :
                  this(client, InfluxDB.Client.Core.Api.GlobalConfiguration.Instance.BasePath, handler)
-        {
+        {    
         }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" />.
         /// </summary>
@@ -244,10 +244,10 @@ namespace InfluxDB.Client.Core.Api
         /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
         /// </remarks>
         public ApiClient(HttpClient client, string basePath, HttpClientHandler handler = null)
-        {
+        {    
             if (client == null) throw new ArgumentNullException("client cannot be null");
             if (string.IsNullOrEmpty(basePath)) throw new ArgumentException("basePath cannot be empty");
-
+            
             _httpClientHandler = handler;
             _httpClient = client;
             _baseUrl = basePath;
@@ -278,7 +278,7 @@ namespace InfluxDB.Client.Core.Api
                 foreach (var fileParam in options.FileParameters)
                 {
                     var content = new StreamContent(fileParam.Value.Content);
-                    content.Headers.ContentType = new MediaTypeHeaderValue(fileParam.Value.ContentType);
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                     multipartContent.Add(content, fileParam.Key,
                         fileParam.Value.Name);
                 }
@@ -396,7 +396,7 @@ namespace InfluxDB.Client.Core.Api
         private async Task<ApiResponse<T>> ToApiResponse<T>(HttpResponseMessage response, object responseData, Uri uri)
         {
             T result = (T) responseData;
-            
+
             string rawContent;
             if (typeof(T).Name != "Stream")
             {
@@ -512,7 +512,7 @@ namespace InfluxDB.Client.Core.Api
             {
                 return await ToApiResponse<T>(response, default(T), req.RequestUri);
             }
-
+			
             object responseData;
 
             // if the response type is oneOf/anyOf, call FromJSON to deserialize the data

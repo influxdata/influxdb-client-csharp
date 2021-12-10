@@ -82,6 +82,8 @@ namespace InfluxDB.Client
                 Trace.WriteLine("The signout exception");
                 Trace.WriteLine(e);
             }
+            
+            _apiClient.Dispose();
         }
 
         /// <summary>
@@ -96,7 +98,7 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
 
-            return new QueryApi(_options, service, mapper ?? new DefaultDomainObjectMapper());
+            return new QueryApi(_options, service, _apiClient, _exceptionFactory, mapper ?? new DefaultDomainObjectMapper());
         }
 
         /// <summary>
@@ -111,7 +113,7 @@ namespace InfluxDB.Client
                 ExceptionFactory = _exceptionFactory
             };
 
-            return new QueryApiSync(_options, service, mapper ?? new DefaultDomainObjectMapper());
+            return new QueryApiSync(_options, service, _apiClient, _exceptionFactory, mapper ?? new DefaultDomainObjectMapper());
         }
 
         /// <summary>
@@ -483,7 +485,7 @@ namespace InfluxDB.Client
         {
             var isOnboarding = await _setupService.GetSetupAsync().ConfigureAwait(false);
 
-            return isOnboarding.Allowed == true;
+            return isOnboarding.Allowed;
         }
 
         internal static string AuthorizationHeader(string username, string password)

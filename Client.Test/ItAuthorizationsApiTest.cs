@@ -95,12 +95,12 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
 
-            authorization.Status = AuthorizationUpdateRequest.StatusEnum.Inactive;
+            authorization.Status = Authorization.StatusEnum.Inactive;
             authorization = await _authorizationsApi.UpdateAuthorizationAsync(authorization);
 
             Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Inactive);
 
-            authorization.Status = AuthorizationUpdateRequest.StatusEnum.Active;
+            authorization.Status = Authorization.StatusEnum.Active;
             authorization = await _authorizationsApi.UpdateAuthorizationAsync(authorization);
 
             Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);

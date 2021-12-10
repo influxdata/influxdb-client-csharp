@@ -4,7 +4,6 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Exceptions;
 using InfluxDB.Client.Core.Flux.Internal;
@@ -427,7 +426,7 @@ namespace Client.Legacy.Test
                             acceptRecord: (record) => { records.Add(record); }
             );
 
-            _parser.ParseFluxResponse(FluxCsvParser.ToStream(data), new DefaultCancellable(), consumer);
+            _parser.ParseFluxResponse(FluxCsvParser.ToStream(data), new CancellationToken(), consumer);
             Assert.That(records.Count == 2);
         }
 
@@ -465,14 +464,15 @@ namespace Client.Legacy.Test
 
             var records = new List<FluxRecord>();
 
-            var defaultCancellable = new DefaultCancellable();
+            var source = new CancellationTokenSource();
+            var defaultCancellable = source.Token;
 
             var consumer = new TestConsumer
             (
-                            acceptTable: (table) => { },
-                            acceptRecord: (record) =>
+                            table => { },
+                            record =>
                             {
-                                defaultCancellable.Cancel();
+                                source.Cancel();
                                 records.Add(record);
                             }
             );
@@ -737,24 +737,9 @@ namespace Client.Legacy.Test
         private List<FluxTable> ParseFluxResponse(string data)
         {
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();
-            _parser.ParseFluxResponse(data, new DefaultCancellable(), consumer);
+            _parser.ParseFluxResponse(data, new CancellationToken(), consumer);
 
             return consumer.Tables;
-        }
-
-        private class DefaultCancellable : ICancellable
-        {
-            private bool _cancelled;
-
-            public void Cancel()
-            {
-                _cancelled = true;
-            }
-
-            public bool IsCancelled()
-            {
-                return _cancelled;
-            }
         }
 
         public class TestConsumer : FluxCsvParser.IFluxResponseConsumer
@@ -768,12 +753,12 @@ namespace Client.Legacy.Test
                 AcceptRecord = acceptRecord;
             }
 
-            public void Accept(int index, ICancellable cancellable, FluxTable table)
+            public void Accept(int index, CancellationToken cancellable, FluxTable table)
             {
                 AcceptTable(table);
             }
 
-            public void Accept(int index, ICancellable cancellable, FluxRecord record)
+            public void Accept(int index, CancellationToken cancellable, FluxRecord record)
             {
                 AcceptRecord(record);
             }

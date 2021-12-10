@@ -104,8 +104,6 @@ namespace InfluxDB.Client.Core.Internal
 
             try
             {
-                var cancellable = new DefaultCancellable();
-
                 var restResponse = await ApiClient
                     .PostAsync<Stream>("/api/v2/query", query, ApiClient.Configuration, cancellationToken)
                     .ConfigureAwait(false);
@@ -116,7 +114,7 @@ namespace InfluxDB.Client.Core.Internal
                 
                 consumer(cancellationToken, restResponse.Data);
                 
-                if (!cancellable.IsCancelled())
+                if (!cancellationToken.IsCancellationRequested)
                 {
                     onComplete();
                 }
@@ -136,8 +134,6 @@ namespace InfluxDB.Client.Core.Internal
             Arguments.CheckNotNull(onComplete, "onComplete");
             try
             {
-                var cancellable = new DefaultCancellable();
-
                 var restResponse = ApiClient.Post<Stream>("/api/v2/query", query, ApiClient.Configuration);
 
                 // check success
@@ -146,7 +142,7 @@ namespace InfluxDB.Client.Core.Internal
                 
                 consumer(cancellationToken, restResponse.Data);
                 
-                if (!cancellable.IsCancelled())
+                if (!cancellationToken.IsCancellationRequested)
                 {
                     onComplete();
                 }
