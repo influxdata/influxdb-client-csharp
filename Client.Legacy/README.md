@@ -68,7 +68,7 @@ The library supports an asynchronous queries.
 The asynchronous query API allows streaming of `FluxRecord`s with the possibility of implementing custom
 error handling and `OnComplete` callback notification. 
 
-A `Cancellable` object is used for aborting a query while processing. 
+A `CancellationToken` object is used for aborting a query while processing. 
 
 A query example:   
 
@@ -77,8 +77,10 @@ string fluxQuery = "from(bucket: \"telegraf\")\n" +
     " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))" +
     " |> range(start: -1d)" +
     " |> sample(n: 5, pos: 1)";
+    
+var source = new CancellationTokenSource();
 
-fluxClient.QueryAsync(fluxQuery, (cancellable, record) =>
+fluxClient.QueryAsync(fluxQuery, (ecord =>
             {
                 // process the flux query records
                 Console.WriteLine(record.GetTime() + ": " + record.GetValue());
@@ -86,7 +88,7 @@ fluxClient.QueryAsync(fluxQuery, (cancellable, record) =>
                 if (some condition) 
                 {
                     // abort processing
-                    cancellable.cancel();
+                    source.cancel();
                 }
             },
             (error) =>
@@ -98,7 +100,7 @@ fluxClient.QueryAsync(fluxQuery, (cancellable, record) =>
             {
                 // on complete
                 Console.WriteLine("Query completed");
-            }).GetAwaiter().GetResult();
+            }, source.Token).GetAwaiter().GetResult();
 ```
 
 #### Raw query response
@@ -106,7 +108,7 @@ fluxClient.QueryAsync(fluxQuery, (cancellable, record) =>
 It is possible to parse a result line-by-line using the `QueryRaw` method.  
 
 ```c#
-void QueryRawAsync(string query, Action<ICancellable, string> onResponse, Action<Exception> onError, Action onComplete);
+void QueryRawAsync(string query, Action<string> onResponse, Action<Exception> onError, Action onComplete);
 ```
 
 ### Advanced Usage

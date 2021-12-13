@@ -15,7 +15,7 @@ namespace Examples
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";
 
-            await fluxClient.QueryRawAsync(fluxQuery, (cancellable, line) =>
+            await fluxClient.QueryRawAsync(fluxQuery, line =>
                             {
                                 // process the flux query result record
                                 Console.WriteLine(line);

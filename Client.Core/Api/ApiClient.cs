@@ -494,7 +494,7 @@ namespace InfluxDB.Client.Core.Api
             {
                 var policy = RetryConfiguration.AsyncRetryPolicy;
                 var policyResult = await policy
-                    .ExecuteAndCaptureAsync(() => _httpClient.SendAsync(req, cancellationToken))
+                    .ExecuteAndCaptureAsync(() => _httpClient.SendAsync(req, finalToken))
                     .ConfigureAwait(false);
                 response = (policyResult.Outcome == OutcomeType.Successful) ?
                     policyResult.Result : new HttpResponseMessage()
@@ -505,7 +505,7 @@ namespace InfluxDB.Client.Core.Api
             }
             else
             {
-                response = await _httpClient.SendAsync(req, cancellationToken).ConfigureAwait(false);
+                response = await _httpClient.SendAsync(req, finalToken).ConfigureAwait(false);
             }
 
             if (!response.IsSuccessStatusCode)

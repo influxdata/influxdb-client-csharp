@@ -38,11 +38,11 @@ namespace InfluxDB.Client.Core.Internal
             Action<Exception> onError,
             Action onComplete, CancellationToken cancellationToken)
         {
-            void Consumer(CancellationToken cancellable, Stream bufferedStream)
+            void Consumer(Stream bufferedStream)
             {
                 try
                 {
-                    _csvParser.ParseFluxResponse(bufferedStream, cancellable, responseConsumer);
+                    _csvParser.ParseFluxResponse(bufferedStream, cancellationToken, responseConsumer);
                 }
                 catch (IOException e)
                 {
@@ -53,16 +53,14 @@ namespace InfluxDB.Client.Core.Internal
             return Query(query, Consumer, onError, onComplete, cancellationToken);
         }
 
-        internal Task QueryRaw(RequestOptions query,
-            Action<CancellationToken, string> onResponse,
-            Action<Exception> onError,
+        internal Task QueryRaw(RequestOptions query, Action<string> onResponse, Action<Exception> onError,
             Action onComplete, CancellationToken cancellationToken)
         {
-            void Consumer(CancellationToken cancellable, Stream bufferedStream)
+            void Consumer(Stream bufferedStream)
             {
                 try
                 {
-                    ParseFluxResponseToLines(line => onResponse(cancellable, line), cancellable, bufferedStream);
+                    ParseFluxResponseToLines(line => onResponse(line), cancellationToken, bufferedStream);
                 }
                 catch (IOException e)
                 {
@@ -93,8 +91,8 @@ namespace InfluxDB.Client.Core.Internal
             QuerySync(query, Consumer, onError, onComplete, cancellationToken);
         }
 
-        private async Task Query(RequestOptions query, Action<CancellationToken, Stream> consumer,
-            Action<Exception> onError, Action onComplete, CancellationToken cancellationToken)
+        private async Task Query(RequestOptions query, Action<Stream> consumer, Action<Exception> onError,
+            Action onComplete, CancellationToken cancellationToken)
         {
             Arguments.CheckNotNull(query, "query");
             Arguments.CheckNotNull(consumer, "consumer");
@@ -111,7 +109,7 @@ namespace InfluxDB.Client.Core.Internal
                 var exception = _exceptionFactory("PostQuery", restResponse);
                 if (exception != null) throw exception;
 
-                consumer(cancellationToken, restResponse.Data);
+                consumer(restResponse.Data);
 
                 if (!cancellationToken.IsCancellationRequested)
                 {
@@ -190,46 +188,45 @@ namespace InfluxDB.Client.Core.Internal
 
         public class FluxResponseConsumerPoco : FluxCsvParser.IFluxResponseConsumer
         {
-            private readonly Action<CancellationToken, object> _onNext;
+            private readonly Action<object> _onNext;
             private readonly IFluxResultMapper _converter;
             private readonly Type _type;
 
-            public FluxResponseConsumerPoco(Action<CancellationToken, object> onNext, IFluxResultMapper converter,
-                Type type)
+            public FluxResponseConsumerPoco(Action<object> onNext, IFluxResultMapper converter, Type type)
             {
                 _onNext = onNext;
                 _converter = converter;
                 _type = type;
             }
 
-            public void Accept(int index, CancellationToken cancellable, FluxTable table)
+            public void Accept(int index, FluxTable table)
             {
             }
 
-            public void Accept(int index, CancellationToken cancellable, FluxRecord record)
+            public void Accept(int index, FluxRecord record)
             {
-                _onNext(cancellable, _converter.ConvertToEntity(record, _type));
+                _onNext(_converter.ConvertToEntity(record, _type));
             }
         }
 
         public class FluxResponseConsumerPoco<T> : FluxCsvParser.IFluxResponseConsumer
         {
-            private readonly Action<CancellationToken, T> _onNext;
+            private readonly Action<T> _onNext;
             private readonly IFluxResultMapper _converter;
 
-            public FluxResponseConsumerPoco(Action<CancellationToken, T> onNext, IFluxResultMapper converter)
+            public FluxResponseConsumerPoco(Action<T> onNext, IFluxResultMapper converter)
             {
                 _onNext = onNext;
                 _converter = converter;
             }
 
-            public void Accept(int index, CancellationToken cancellable, FluxTable table)
+            public void Accept(int index, FluxTable table)
             {
             }
 
-            public void Accept(int index, CancellationToken cancellable, FluxRecord record)
+            public void Accept(int index, FluxRecord record)
             {
-                _onNext(cancellable, _converter.ConvertToEntity<T>(record));
+                _onNext(_converter.ConvertToEntity<T>(record));
             }
         }
 
@@ -274,20 +271,20 @@ namespace InfluxDB.Client.Core.Internal
 
         internal class FluxResponseConsumerRecord : FluxCsvParser.IFluxResponseConsumer
         {
-            private readonly Action<CancellationToken, FluxRecord> _onNext;
+            private readonly Action<FluxRecord> _onNext;
 
-            public FluxResponseConsumerRecord(Action<CancellationToken, FluxRecord> onNext)
+            public FluxResponseConsumerRecord(Action<FluxRecord> onNext)
             {
                 _onNext = onNext;
             }
 
-            public void Accept(int index, CancellationToken cancellable, FluxTable table)
+            public void Accept(int index, FluxTable table)
             {
             }
 
-            public void Accept(int index, CancellationToken cancellable, FluxRecord record)
+            public void Accept(int index, FluxRecord record)
             {
-                _onNext(cancellable, record);
+                _onNext(record);
             }
         }
     }

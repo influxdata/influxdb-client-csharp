@@ -161,7 +161,7 @@ namespace Client.Legacy.Test
             var records = new List<FluxRecord>();
 
             await FluxClient.QueryAsync("from(bucket:\"telegraf\")",
-                            (cancellable, result) =>
+                            result =>
                             {
                                 records.Add(result);
 
@@ -184,7 +184,7 @@ namespace Client.Legacy.Test
             var records = new List<FluxRecord>();
 
             await FluxClient.QueryAsync("from(bucket:\"telegraf\")",
-                            (cancellable, result) =>
+                            result =>
                             {
                                 records.Add(result);
 
@@ -204,7 +204,7 @@ namespace Client.Legacy.Test
                             .RespondWith(CreateErrorResponse("Flux query is not valid"));
 
             await FluxClient.QueryAsync("from(bucket:\"telegraf\")",
-                            (cancellable, result) => Assert.Fail("Unreachable"), 
+                            result => Assert.Fail("Unreachable"), 
                             error => CountdownEvent.Signal());
 
             WaitToCallback();

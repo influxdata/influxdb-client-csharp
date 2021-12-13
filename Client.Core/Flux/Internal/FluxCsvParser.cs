@@ -35,29 +35,27 @@ namespace InfluxDB.Client.Core.Flux.Internal
             /// Add new <see cref="FluxTable"/> to a consumer.
             /// </summary>
             /// <param name="index">index of table</param>
-            /// <param name="cancellable">cancellable</param>
             /// <param name="table">new <see cref="FluxTable"/></param>
-            void Accept(int index, CancellationToken cancellable, FluxTable table);
+            void Accept(int index, FluxTable table);
 
             /// <summary>
             /// Add new <see cref="FluxRecord"/> to a consumer.
             /// </summary>
             /// <param name="index">index of table</param>
-            /// <param name="cancellable">cancellable</param>
             /// <param name="record">new <see cref="FluxRecord"/></param>
-            void Accept(int index, CancellationToken cancellable, FluxRecord record);
+            void Accept(int index, FluxRecord record);
         }
 
         public class FluxResponseConsumerTable : IFluxResponseConsumer
         {
             public List<FluxTable> Tables { get; } = new List<FluxTable>();
 
-            public void Accept(int index, CancellationToken cancellable, FluxTable table)
+            public void Accept(int index, FluxTable table)
             {
                 Tables.Insert(index, table);
             }
 
-            public void Accept(int index, CancellationToken cancellable, FluxRecord record)
+            public void Accept(int index, FluxRecord record)
             {
                 Tables[index].Records.Add(record);
             }
@@ -85,7 +83,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
             while (csv.Read())
             {
-                if (cancellable != null && cancellable.IsCancellationRequested)
+                if (cancellable.IsCancellationRequested)
                 {
                     return;
                 }
@@ -93,9 +91,9 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 foreach (var (table, record) in ParseNextFluxResponse(state))
                 {
                     if (record == null)
-                        consumer.Accept(state.tableIndex, cancellable, table);
+                        consumer.Accept(state.tableIndex, table);
                     else
-                        consumer.Accept(state.tableIndex - 1, cancellable, record);
+                        consumer.Accept(state.tableIndex - 1, record);
                 }
             }
         }

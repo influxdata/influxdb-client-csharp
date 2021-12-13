@@ -12,6 +12,7 @@ using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Api;
+using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Internal;
 using InfluxDB.Client.Writes;
 using Microsoft.Extensions.ObjectPool;
@@ -123,7 +124,7 @@ namespace InfluxDB.Client
                         return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)), writeOptions.WriteScheduler));
                     });
             }
-            var query = batches
+            batches
                 .Concat() 
                 //
                 // Map to Async request

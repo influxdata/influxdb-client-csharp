@@ -753,12 +753,12 @@ namespace Client.Legacy.Test
                 AcceptRecord = acceptRecord;
             }
 
-            public void Accept(int index, CancellationToken cancellable, FluxTable table)
+            public void Accept(int index, FluxTable table)
             {
                 AcceptTable(table);
             }
 
-            public void Accept(int index, CancellationToken cancellable, FluxRecord record)
+            public void Accept(int index, FluxRecord record)
             {
                 AcceptRecord(record);
             }

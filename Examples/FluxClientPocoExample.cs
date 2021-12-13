@@ -18,8 +18,7 @@ namespace Examples
                                + " |> sample(n: 5, pos: 1)";
 
             ////Example of additional result stream processing on client side
-            await fluxClient.QueryAsync<Cpu>(fluxQuery,
-                            (cancellable, cpu) =>
+            await fluxClient.QueryAsync<Cpu>(fluxQuery, cpu =>
                             {
                                 // process the flux query records
                                 Console.WriteLine(cpu.ToString());

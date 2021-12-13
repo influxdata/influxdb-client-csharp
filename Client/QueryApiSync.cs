@@ -107,7 +107,7 @@ namespace InfluxDB.Client
 
             var measurements = new List<T>();
 
-            var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); }, Mapper);
+            var consumer = new FluxResponseConsumerPoco<T>(poco => { measurements.Add(poco); }, Mapper);
 
             var requestMessage = _service.PostQueryWithRequestOptions(null, "application/json", null, org, null, query);
 
