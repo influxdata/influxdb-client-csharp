@@ -28,7 +28,6 @@ using ErrorEventArgs = Newtonsoft.Json.Serialization.ErrorEventArgs;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using InfluxDB.Client.Core.Exceptions;
-using Polly;
 
 namespace InfluxDB.Client.Core.Api
 {
@@ -491,21 +490,6 @@ namespace InfluxDB.Client.Core.Api
             InterceptRequest(req);
 
             HttpResponseMessage response;
-            if (RetryConfiguration.AsyncRetryPolicy != null)
-            {
-                var policy = RetryConfiguration.AsyncRetryPolicy;
-                var policyResult = await policy
-                    .ExecuteAndCaptureAsync(() => _httpClient.SendAsync(req, finalToken))
-                    .ConfigureAwait(false);
-                response = (policyResult.Outcome == OutcomeType.Successful) ?
-                    policyResult.Result : new HttpResponseMessage()
-                    {
-                        ReasonPhrase = policyResult.FinalException.ToString(),
-                        RequestMessage = req
-                    };
-            }
-            else
-            {
 				try
 				{
 					response = await _httpClient.SendAsync(req, finalToken).ConfigureAwait(false);
@@ -514,7 +498,6 @@ namespace InfluxDB.Client.Core.Api
 				{
 					throw new HttpException(e.Message, 0, e);
 				}
-            }
 
             if (!response.IsSuccessStatusCode)
             {
