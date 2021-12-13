@@ -21,6 +21,7 @@ namespace InfluxDB.Client.Core.Api
     {
         public enum AuthenticationType
         {
+            None,
             Session,
             Token,
         }
@@ -33,14 +34,15 @@ namespace InfluxDB.Client.Core.Api
 
         private string _sessionTokens;
         private bool _signout;
-        internal readonly Configuration Configuration;
         private readonly char[] _token;
         private readonly string _username;
         private readonly char[] _password;
         private readonly AuthenticationType _authScheme;
+        internal readonly Configuration Configuration;
+        internal readonly ExceptionFactory ExceptionFactory;
 
         public ApiClient(string url, char[] token, string username, char[] password, AuthenticationType authScheme,
-            TimeSpan timeout, TimeSpan readWriteTimeout, bool allowHttpRedirects, bool verifySsl, IWebProxy webProxy,
+            TimeSpan timeout, bool allowHttpRedirects, bool verifySsl, IWebProxy webProxy,
             LoggingHandler loggingHandler, GzipHandler gzipHandler)
         {
             _token = token;
@@ -49,23 +51,26 @@ namespace InfluxDB.Client.Core.Api
             _authScheme = authScheme;
             _loggingHandler = loggingHandler;
             _gzipHandler = gzipHandler;
-
-            var timeoutTotalMilliseconds = (int)timeout.TotalMilliseconds;
-            var totalMilliseconds = (int)readWriteTimeout.TotalMilliseconds;
-
-            RestClient = new RestClient(url);
-            RestClient.FollowRedirects = allowHttpRedirects;
+            _httpClientHandler = new HttpClientHandler
+            {
+                AllowAutoRedirect = allowHttpRedirects,
+                AutomaticDecompression = DecompressionMethods.None
+            };
             if (!verifySsl)
             {
-                RestClient.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+                _httpClientHandler.ServerCertificateCustomValidationCallback = 
+                    (sender, certificate, chain, sslPolicyErrors) => true;
             }
+            
+            ExceptionFactory = (methodName, response) =>
+                response.StatusCode.IsSuccessStatusCode() ? null : HttpExceptionExtensions.Create(response);
+            
+            var timeoutTotalMilliseconds = (int)timeout.TotalMilliseconds;
 
-            RestClient.AutomaticDecompression = false;
             Configuration = new Configuration
             {
                 BasePath = url,
                 Timeout = timeoutTotalMilliseconds,
-                ReadWriteTimeout = totalMilliseconds,
             };
             Configuration.Proxy = webProxy;
         }
@@ -96,12 +101,12 @@ namespace InfluxDB.Client.Core.Api
             }
 
             _loggingHandler.BeforeIntercept(req);
-            _gzipHandler.BeforeIntercept(req);
+            _gzipHandler?.BeforeIntercept(req);
         }
 
         internal T AfterIntercept<T>(int statusCode, Func<HttpResponseHeaders> headers, T body)
         {
-            var uncompressed = _gzipHandler.AfterIntercept(statusCode, headers, body);
+            var uncompressed = _gzipHandler?.AfterIntercept(statusCode, headers, body) ?? body;
             return (T)_loggingHandler.AfterIntercept(statusCode, headers, uncompressed);
         }
 
@@ -161,7 +166,7 @@ namespace InfluxDB.Client.Core.Api
             Post<object>("/api/v2/signout", localVarRequestOptions, Configuration);
         }
 
-        private static void AddRequestTokens(RequestOptions request, string tokens)
+        private static void AddRequestTokens(RequestOptions request, string? tokens)
         {
             if (string.IsNullOrEmpty(tokens))
                 return;
@@ -169,7 +174,7 @@ namespace InfluxDB.Client.Core.Api
             request.HeaderParameters.Add("Cookie", tokens);
         }
 
-        private static void AddRequestTokens(HttpRequestMessage request, string tokens)
+        private static void AddRequestTokens(HttpRequestMessage request, string? tokens)
         {
             if (string.IsNullOrEmpty(tokens))
                 return;

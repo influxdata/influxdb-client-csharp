@@ -56,16 +56,6 @@ namespace InfluxDB.Client.Configurations
         }
 
         /// <summary>
-        /// The timeout to read and write from the InfluxDB.
-        /// </summary>
-        [ConfigurationProperty("readWriteTimeout", IsKey = true, IsRequired = false)]
-        public string ReadWriteTimeout
-        {
-            get => (string) base["readWriteTimeout"];
-            set => base["readWriteTimeout"] = value;
-        }
-
-        /// <summary>
         /// The timeout to connect the InfluxDB.
         /// </summary>
         [ConfigurationProperty("timeout", IsKey = true, IsRequired = false)]

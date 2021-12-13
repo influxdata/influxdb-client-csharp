@@ -17,7 +17,6 @@ namespace InfluxDB.Client
     public class InfluxDBClient : AbstractRestClient, IDisposable
     {
         private readonly ApiClient _apiClient;
-        private readonly ExceptionFactory _exceptionFactory;
         private readonly HealthService _healthService;
         private readonly LoggingHandler _loggingHandler;
         private readonly GzipHandler _gzipHandler;
@@ -42,24 +41,21 @@ namespace InfluxDB.Client
             _apiClient = options.ToApiClient(_loggingHandler, _gzipHandler);
             _apiClient.Configuration.UserAgent = $"influxdb-client-csharp/{version}";
 
-            _exceptionFactory = (methodName, response) =>
-                response.StatusCode.IsSuccessStatusCode() ? null : HttpExceptionExtensions.Create(response);
-
             _setupService = new SetupService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
             _healthService = new HealthService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
             _readyService = new ReadyService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
             _pingService = new PingService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
         }
 
@@ -95,10 +91,10 @@ namespace InfluxDB.Client
         {
             var service = new QueryService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
-            return new QueryApi(_options, service, _apiClient, _exceptionFactory, mapper ?? new DefaultDomainObjectMapper());
+            return new QueryApi(_options, service, _apiClient, _apiClient.ExceptionFactory, mapper ?? new DefaultDomainObjectMapper());
         }
 
         /// <summary>
@@ -110,10 +106,10 @@ namespace InfluxDB.Client
         {
             var service = new QueryService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
-            return new QueryApiSync(_options, service, _apiClient, _exceptionFactory, mapper ?? new DefaultDomainObjectMapper());
+            return new QueryApiSync(_options, service, _apiClient, _apiClient.ExceptionFactory, mapper ?? new DefaultDomainObjectMapper());
         }
 
         /// <summary>
@@ -135,7 +131,7 @@ namespace InfluxDB.Client
         {
             var service = new WriteService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new WriteApiAsync(_options, service, mapper ?? new DefaultDomainObjectMapper(), this);
@@ -151,7 +147,7 @@ namespace InfluxDB.Client
         {
             var service = new WriteService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             var writeApi = new WriteApi(_options, service, writeOptions, mapper ?? new DefaultDomainObjectMapper(),
@@ -168,11 +164,11 @@ namespace InfluxDB.Client
         {
             var service = new OrganizationsService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
             var secretService = new SecretsService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new OrganizationsApi(service, secretService);
@@ -186,7 +182,7 @@ namespace InfluxDB.Client
         {
             var service = new UsersService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new UsersApi(service);
@@ -200,7 +196,7 @@ namespace InfluxDB.Client
         {
             var service = new BucketsService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new BucketsApi(service);
@@ -214,7 +210,7 @@ namespace InfluxDB.Client
         {
             var service = new SourcesService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new SourcesApi(service);
@@ -228,7 +224,7 @@ namespace InfluxDB.Client
         {
             var service = new AuthorizationsService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new AuthorizationsApi(service);
@@ -242,7 +238,7 @@ namespace InfluxDB.Client
         {
             var service = new TasksService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new TasksApi(service);
@@ -256,7 +252,7 @@ namespace InfluxDB.Client
         {
             var service = new ScraperTargetsService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new ScraperTargetsApi(service);
@@ -270,7 +266,7 @@ namespace InfluxDB.Client
         {
             var service = new TelegrafsService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new TelegrafsApi(service, _apiClient);
@@ -284,7 +280,7 @@ namespace InfluxDB.Client
         {
             var service = new LabelsService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new LabelsApi(service);
@@ -298,7 +294,7 @@ namespace InfluxDB.Client
         {
             var service = new NotificationEndpointsService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new NotificationEndpointsApi(service);
@@ -312,7 +308,7 @@ namespace InfluxDB.Client
         {
             var service = new NotificationRulesService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new NotificationRulesApi(service);
@@ -326,7 +322,7 @@ namespace InfluxDB.Client
         {
             var service = new ChecksService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new ChecksApi(service);
@@ -340,7 +336,7 @@ namespace InfluxDB.Client
         {
             var service = new DeleteService(_apiClient, _apiClient, _apiClient.Configuration)
             {
-                ExceptionFactory = _exceptionFactory
+                ExceptionFactory = _apiClient.ExceptionFactory
             };
 
             return new DeleteApi(service);
@@ -355,7 +351,7 @@ namespace InfluxDB.Client
         public TS CreateService<TS>(Type serviceType) where TS : IApiAccessor
         {
             var instance = (TS)Activator.CreateInstance(serviceType, _apiClient, _apiClient, _apiClient.Configuration);
-            instance.ExceptionFactory = _exceptionFactory;
+            instance.ExceptionFactory = _apiClient.ExceptionFactory;
 
             return instance;
         }

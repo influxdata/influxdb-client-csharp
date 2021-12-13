@@ -668,7 +668,6 @@ In a [configuration file](#client-configuration-file) you are able to specify de
              bucket="my-bucket"
              token="my-token"
              logLevel="BODY"
-             readWriteTimeout="5s"
              timeout="10s">
         <tags>
             <tag name="id" value="132-987-655"/>
@@ -1087,11 +1086,10 @@ The following options are supported:
 | Bucket            | -         | default destination bucket for writes |
 | Token             | -         | the token to use for the authorization |
 | LogLevel          | NONE      | rest client verbosity level |
-| ReadWriteTimeout  | 10000 ms  | read and write timeout |
 | Timeout           | 10000 ms  | socket timeout |
 | AllowHttpRedirects| false     | Configure automatically following HTTP 3xx redirects. |
 
-The `ReadWriteTimeout` and `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
+The `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
 
 ##### Configuration example
@@ -1108,7 +1106,6 @@ The `ReadWriteTimeout` and `Timeout` supports `ms`, `s` and `m` as unit. Default
              bucket="my-bucket"
              token="my-token"
              logLevel="BODY"
-             readWriteTimeout="5s"
              timeout="10s">
     </influx2>
 </configuration>
@@ -1126,7 +1123,7 @@ A client can be constructed using a connection string that can contain the Influ
  
 ```c#
 var influxDBClient = InfluxDBClientFactory
-            .Create("http://localhost:8086?timeout=5000&readWriteTimeout=5000&logLevel=BASIC")
+            .Create("http://localhost:8086?timeout=5000&logLevel=BASIC")
 ```
 The following options are supported:
 
@@ -1136,11 +1133,10 @@ The following options are supported:
 | bucket            | -         | default destination bucket for writes |
 | token             | -         | the token to use for the authorization |
 | logLevel          | NONE      | rest client verbosity level |
-| readWriteTimeout  | 10000 ms  | read and write timeout |
 | timeout           | 10000 ms  | socket timeout |
 | allowHttpRedirects| false | Configure automatically following HTTP 3xx redirects. |
 
-The `readWriteTimeout` and `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
+The `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
 ### Gzip support
 `InfluxDBClient` does not enable gzip compress for http requests by default. If you want to enable gzip to reduce transfer data's size, you can call:
