@@ -45,6 +45,7 @@ namespace InfluxDB.Client.Core.Api
             TimeSpan timeout, bool allowHttpRedirects, bool verifySsl, IWebProxy webProxy,
             LoggingHandler loggingHandler, GzipHandler gzipHandler)
         {
+            _baseUrl = url;
             _token = token;
             _username = username;
             _password = password;
@@ -56,6 +57,8 @@ namespace InfluxDB.Client.Core.Api
                 AllowAutoRedirect = allowHttpRedirects,
                 AutomaticDecompression = DecompressionMethods.None
             };
+            _httpClient = new HttpClient(_httpClientHandler, true);
+            _disposeClient = true;
             if (!verifySsl)
             {
                 _httpClientHandler.ServerCertificateCustomValidationCallback = 

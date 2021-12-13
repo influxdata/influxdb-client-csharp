@@ -114,10 +114,10 @@ namespace InfluxDB.Client.Core.Exceptions
             if (string.IsNullOrEmpty(errorMessage))
                 errorMessage = headers
                     .Where(header => keys.Contains(header.Key, StringComparer.OrdinalIgnoreCase))
-                    .Select(header => header.Value.ToString()).FirstOrDefault();
+                    .Select(header => string.Join(", ", header.Value)).FirstOrDefault();
 
-            if (string.IsNullOrEmpty(errorMessage)) errorMessage = ErrorMessage;
             if (string.IsNullOrEmpty(errorMessage)) errorMessage = stringBody;
+            if (string.IsNullOrEmpty(errorMessage)) errorMessage = ErrorMessage;
 
             var err = (int) statusCode switch
             {

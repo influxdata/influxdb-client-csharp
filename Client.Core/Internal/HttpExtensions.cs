@@ -18,7 +18,7 @@ namespace InfluxDB.Client.Core.Internal
     {
         internal static HttpException Create(IApiResponse response)
         {
-            return HttpException.Create(response.Content, response.Headers, response.ErrorText, response.StatusCode);
+            return HttpException.Create(response.RawContent, response.Headers, response.ErrorText, response.StatusCode);
         }
     }
 }

@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using InfluxDB.Client.Core.Api;
 
 namespace InfluxDB.Client.Core.Internal
 {
     public abstract class AbstractRestClient
     {
-        protected async Task<bool> PingAsync(Task request)
+        protected async Task<bool> PingAsync(Task<ApiResponse<object>> request,
+            ExceptionFactory exceptionFactory)
         {
             try
             {
-                await request.ConfigureAwait(false);
+                var response = await request.ConfigureAwait(false);
+                var exception = exceptionFactory("GetPing", response);
+                if (exception != null) throw exception;
 
                 return true;
             }
@@ -29,7 +33,7 @@ namespace InfluxDB.Client.Core.Internal
 
             var value = headers
                 .Where(header => header.Key.Equals("X-Influxdb-Version"))
-                .Select(header => header.Value.ToString())
+                .Select(header => string.Join(", ", header.Value))
                 .FirstOrDefault();
 
             if (value != null)

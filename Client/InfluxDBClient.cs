@@ -425,7 +425,7 @@ namespace InfluxDB.Client
         /// <returns>true if server is healthy otherwise return false</returns>
         public async Task<bool> PingAsync()
         {
-            return await PingAsync(_pingService.GetPingAsync());
+            return await base.PingAsync(_pingService.GetPingWithHttpInfoAsync(), _apiClient.ExceptionFactory);
         }
 
         /// <summary>

@@ -392,7 +392,7 @@ namespace InfluxDB.Client.Flux
         /// <returns>true if server is healthy otherwise return false</returns>
         public async Task<bool> PingAsync()
         {
-            return await PingAsync(PingRequest());
+            return await PingAsync(PingRequest(), _apiClient.ExceptionFactory);
         }
 
         /// <summary>
@@ -436,7 +436,7 @@ namespace InfluxDB.Client.Flux
             return _apiClient.GetAsync<Object>("/ping", request, _apiClient.Configuration);
         }
 
-        private RequestOptions QueryRequest(string query)
+        private RequestOptions QueryRequest(JObject query)
         {
             var request = new RequestOptions();
             AddDefaults(request);
@@ -455,7 +455,7 @@ namespace InfluxDB.Client.Flux
             request.QueryParameters.Add(_authorizationParams.QueryParameters);
         }
 
-        private string CreateBody(string dialect, string query)
+        private JObject CreateBody(string dialect, string query)
         {
             Arguments.CheckNonEmptyString(query, "Flux query");
 
@@ -467,7 +467,7 @@ namespace InfluxDB.Client.Flux
                 json.Add("dialect", JObject.Parse(dialect));
             }
 
-            return json.ToString();
+            return json;
         }
     }
 

@@ -27,6 +27,7 @@ using Newtonsoft.Json.Serialization;
 using ErrorEventArgs = Newtonsoft.Json.Serialization.ErrorEventArgs;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using InfluxDB.Client.Core.Exceptions;
 using Polly;
 
 namespace InfluxDB.Client.Core.Api
@@ -82,7 +83,7 @@ namespace InfluxDB.Client.Core.Api
 
         public async Task<T> Deserialize<T>(HttpResponseMessage response)
         {
-            var result = (T) await Deserialize(response, typeof(T));
+            var result = (T) await Deserialize(response, typeof(T)).ConfigureAwait(false);
             return result;
         }
 
@@ -98,13 +99,13 @@ namespace InfluxDB.Client.Core.Api
 
             if (type == typeof(byte[])) // return byte array
             {
-                return await response.Content.ReadAsByteArrayAsync();
+                return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
             }
 
             // TODO: ? if (type.IsAssignableFrom(typeof(Stream)))
             if (type == typeof(Stream))
             {
-                var bytes = await response.Content.ReadAsByteArrayAsync();
+                var bytes = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
                 if (headers != null)
                 {
                     var filePath = string.IsNullOrEmpty(_configuration.TempFolderPath)
@@ -128,18 +129,18 @@ namespace InfluxDB.Client.Core.Api
 
             if (type.Name.StartsWith("System.Nullable`1[[System.DateTime")) // return a datetime object
             {
-                return DateTime.Parse(await response.Content.ReadAsStringAsync(), null, System.Globalization.DateTimeStyles.RoundtripKind);
+                return DateTime.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false), null, System.Globalization.DateTimeStyles.RoundtripKind);
             }
 
             if (type == typeof(string) || type.Name.StartsWith("System.Nullable")) // return primitive type
             {
-                return Convert.ChangeType(await response.Content.ReadAsStringAsync(), type);
+                return Convert.ChangeType(await response.Content.ReadAsStringAsync().ConfigureAwait(false), type);
             }
 
             // at this point, it must be a model (json)
             try
             {
-                return JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync(), type, _serializerSettings);
+                return JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync().ConfigureAwait(false), type, _serializerSettings);
             }
             catch (Exception e)
             {
@@ -398,9 +399,9 @@ namespace InfluxDB.Client.Core.Api
             T result = (T) responseData;
 
             string rawContent;
-            if (typeof(T).Name != "Stream")
+            if (typeof(T).Name != "Stream" || !response.IsSuccessStatusCode)
             {
-                rawContent = await response.Content.ReadAsStringAsync();
+                rawContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             }
             else
             {
@@ -505,12 +506,19 @@ namespace InfluxDB.Client.Core.Api
             }
             else
             {
-                response = await _httpClient.SendAsync(req, finalToken).ConfigureAwait(false);
+				try
+				{
+					response = await _httpClient.SendAsync(req, finalToken).ConfigureAwait(false);
+            	}
+				catch (Exception e)
+				{
+					throw new HttpException(e.Message, 0, e);
+				}
             }
 
             if (!response.IsSuccessStatusCode)
             {
-                return await ToApiResponse<T>(response, default(T), req.RequestUri);
+                return await ToApiResponse<T>(response, default(T), req.RequestUri).ConfigureAwait(false);
             }
 			
             object responseData;
@@ -522,16 +530,16 @@ namespace InfluxDB.Client.Core.Api
             }
             else if (typeof(T).Name == "Stream") // for binary response
             {
-                responseData = (T) (object) await response.Content.ReadAsStreamAsync();
+                responseData = (T) (object) await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             }
             else
             {
-                responseData = await deserializer.Deserialize<T>(response);
+                responseData = await deserializer.Deserialize<T>(response).ConfigureAwait(false);
             }
 
             InterceptResponse(req, response);
 
-            return await ToApiResponse<T>(response, responseData, req.RequestUri);
+            return await ToApiResponse<T>(response, responseData, req.RequestUri).ConfigureAwait(false);
         }
 
         #region IAsynchronousClient
