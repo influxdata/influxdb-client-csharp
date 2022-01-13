@@ -103,10 +103,10 @@ namespace InfluxDB.Client.Test
         {
             Client.Dispose();
 
-            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () => await _usersApi.MeAsync());
+            var ioe = Assert.ThrowsAsync<HttpException>(async () => await _usersApi.MeAsync());
 
             Assert.IsNotNull(ioe);
-            Assert.AreEqual("unauthorized access", ioe.Message);
+            StringAssert.Contains("Cannot access a disposed object.", ioe.Message);
         }
 
         [Test]
@@ -115,19 +115,6 @@ namespace InfluxDB.Client.Test
         public async Task UpdateMePassword()
         {
             await _usersApi.MeUpdatePasswordAsync("my-password", "my-password");
-        }
-
-        [Test]
-        public void UpdateMePasswordWrongPassword()
-        {
-            Client.Dispose();
-
-            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () =>
-                await _usersApi.MeUpdatePasswordAsync("my-password-wrong", "my-password"));
-
-            Assert.IsNotNull(ioe);
-            Assert.AreEqual("unauthorized access", ioe.Message);
-            Assert.AreEqual(typeof(UnauthorizedException), ioe.GetType());
         }
 
         [Test]

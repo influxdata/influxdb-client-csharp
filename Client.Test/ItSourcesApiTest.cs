@@ -202,7 +202,7 @@ namespace InfluxDB.Client.Test
             source.InsecureSkipVerify = false;
 
             source = await _sourcesApi.CreateSourceAsync(source);
-            Assert.IsNull(source.InsecureSkipVerify);
+            Assert.IsFalse(source.InsecureSkipVerify);
 
             source.InsecureSkipVerify = true;
             source = await _sourcesApi.UpdateSourceAsync(source);

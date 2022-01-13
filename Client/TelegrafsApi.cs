@@ -117,8 +117,17 @@ namespace InfluxDB.Client
                 config.Append("\n");
             }
 
-            var request = new TelegrafRequest(name: name, description: description, orgID: orgId,
-                config: config.ToString());
+            var pluginsList = plugins
+                .Select(it => new TelegrafPluginRequestPlugins(
+                    it.Type.ToString().ToLower(),
+                    it.Name,
+                    description: it.Description,
+                    config: it.Config)
+                )
+                .ToList();
+
+            var request = new TelegrafPluginRequest(name, description, orgID: orgId, config: config.ToString(),
+                plugins: pluginsList);
 
             return CreateTelegrafAsync(request);
         }
@@ -131,11 +140,12 @@ namespace InfluxDB.Client
         /// <param name="org">The organization that owns this config</param>
         /// <param name="config">ConfigTOML contains the raw toml config</param>
         /// <param name="metadata">Metadata for the config</param>
+        /// <param name="plugins">Plugins to use.</param>
         /// <returns>Telegraf config created</returns>
         public Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
-            string config, TelegrafRequestMetadata metadata)
+            string config, TelegrafRequestMetadata metadata, List<TelegrafPluginRequestPlugins> plugins)
         {
-            return CreateTelegrafAsync(name, description, org.Id, config, metadata);
+            return CreateTelegrafAsync(name, description, org.Id, config, metadata, plugins);
         }
 
         /// <summary>
@@ -146,11 +156,12 @@ namespace InfluxDB.Client
         /// <param name="orgId">The organization that owns this config</param>
         /// <param name="config">ConfigTOML contains the raw toml config</param>
         /// <param name="metadata">Metadata for the config</param>
+        /// <param name="plugins">Plugins to use.</param>
         /// <returns>Telegraf config created</returns>
         public Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
-            string config, TelegrafRequestMetadata metadata)
+            string config, TelegrafRequestMetadata metadata, List<TelegrafPluginRequestPlugins> plugins)
         {
-            var request = new TelegrafRequest(name, description, metadata, config, orgId);
+            var request = new TelegrafPluginRequest(name, description, plugins, metadata, config, orgId);
 
             return CreateTelegrafAsync(request);
         }
@@ -160,7 +171,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="telegrafRequest">Telegraf Configuration to create</param>
         /// <returns>Telegraf config created</returns>
-        public Task<Telegraf> CreateTelegrafAsync(TelegrafRequest telegrafRequest)
+        public Task<Telegraf> CreateTelegrafAsync(TelegrafPluginRequest telegrafRequest)
         {
             Arguments.CheckNotNull(telegrafRequest, nameof(telegrafRequest));
 
@@ -206,7 +217,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var request = new TelegrafRequest(telegraf.Name, telegraf.Description, telegraf.Metadata, telegraf.Config,
+            var request = new TelegrafPluginRequest(telegraf.Name, telegraf.Description, default, telegraf.Metadata, telegraf.Config,
                 telegraf.OrgID);
 
             return UpdateTelegrafAsync(telegraf.Id, request);
@@ -218,7 +229,7 @@ namespace InfluxDB.Client
         /// <param name="telegrafId">ID of telegraf config</param>
         /// <param name="telegrafRequest">telegraf config update to apply</param>
         /// <returns>An updated telegraf</returns>
-        public Task<Telegraf> UpdateTelegrafAsync(string telegrafId, TelegrafRequest telegrafRequest)
+        public Task<Telegraf> UpdateTelegrafAsync(string telegrafId, TelegrafPluginRequest telegrafRequest)
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNotNull(telegrafRequest, nameof(telegrafRequest));
@@ -277,7 +288,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var cloned = new TelegrafRequest(clonedName, telegraf.Description, telegraf.Metadata, telegraf.Config,
+            var cloned = new TelegrafPluginRequest(clonedName, telegraf.Description, default, telegraf.Metadata, telegraf.Config,
                 telegraf.OrgID);
 
             var created = await CreateTelegrafAsync(cloned).ConfigureAwait(false);

@@ -44,7 +44,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(authorization.Token);
             Assert.AreEqual(authorization.UserID, _user.Id);
             Assert.AreEqual(authorization.User, _user.Name);
-            Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
+            Assert.AreEqual(authorization.Status, Authorization.StatusEnum.Active);
 
             Assert.AreEqual(authorization.Permissions.Count, 2);
             Assert.AreEqual(authorization.Permissions[0].Resource.Type, PermissionResource.TypeEnum.Users);
@@ -70,11 +70,11 @@ namespace InfluxDB.Client.Test
             );
 
             var authorization = new AuthorizationPostRequest
-            {
-                OrgID = _organization.Id,
-                Permissions = new List<Permission> {writeSources},
-                Description = "My description!"
-            };
+            (
+                orgID: _organization.Id,
+                permissions: new List<Permission> { writeSources },
+                description: "My description!"
+            );
 
             var created = await _authorizationsApi.CreateAuthorizationAsync(authorization);
 
@@ -93,17 +93,17 @@ namespace InfluxDB.Client.Test
 
             var authorization = await _authorizationsApi.CreateAuthorizationAsync(_organization, permissions);
 
-            Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
+            Assert.AreEqual(authorization.Status, Authorization.StatusEnum.Active);
 
             authorization.Status = Authorization.StatusEnum.Inactive;
             authorization = await _authorizationsApi.UpdateAuthorizationAsync(authorization);
 
-            Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Inactive);
+            Assert.AreEqual(authorization.Status, Authorization.StatusEnum.Inactive);
 
             authorization.Status = Authorization.StatusEnum.Active;
             authorization = await _authorizationsApi.UpdateAuthorizationAsync(authorization);
 
-            Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
+            Assert.AreEqual(authorization.Status, Authorization.StatusEnum.Active);
         }
 
         [Test]
@@ -195,7 +195,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(source.User, cloned.User);
             Assert.AreEqual(_organization.Id, cloned.OrgID);
             Assert.AreEqual(_organization.Name, cloned.Org);
-            Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, cloned.Status);
+            Assert.AreEqual(Authorization.StatusEnum.Active, cloned.Status);
             Assert.AreEqual(source.Description, cloned.Description);
             Assert.AreEqual(1, cloned.Permissions.Count);
             Assert.AreEqual(Permission.ActionEnum.Read, cloned.Permissions[0].Action);

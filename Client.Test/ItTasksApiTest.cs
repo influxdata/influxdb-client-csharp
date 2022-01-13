@@ -530,7 +530,7 @@ namespace InfluxDB.Client.Test
             Assert.Greater(DateTime.UtcNow, run.StartedAt);
             Assert.Greater(DateTime.UtcNow, run.FinishedAt);
             Assert.Greater(DateTime.UtcNow, run.ScheduledFor);
-            Assert.IsNull(run.RequestedAt);
+            Assert.AreEqual(DateTime.MinValue, run.RequestedAt);
 
             task = await _tasksApi.FindTaskByIdAsync(task.Id);
             Assert.IsNotNull(task.LatestCompleted);
