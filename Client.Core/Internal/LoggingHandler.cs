@@ -29,11 +29,12 @@ namespace InfluxDB.Client.Core.Internal
             var isBody = Level == LogLevel.Body;
             var isHeader = isBody || Level == LogLevel.Headers;
 
-            Trace.WriteLine($"--> {req.Method} {req.RequestUri}");
+            var uri = req.RequestUri;
+            Trace.WriteLine($"--> {req.Method} {uri.AbsoluteUri.Replace(uri.Query, "")}");
 
             if (isHeader)
             {
-                var queryString = HttpUtility.ParseQueryString(req.RequestUri.Query);
+                var queryString = HttpUtility.ParseQueryString(uri.Query);
                 var query = queryString
                     .AllKeys
                     .Select(key => (key, Enumerable.Repeat(queryString.Get(key), 1)));
@@ -48,7 +49,15 @@ namespace InfluxDB.Client.Core.Internal
                 var body = req.Content;
                 if (body != null)
                 {
-                    Trace.WriteLine($"--> Body: {body}");
+                    if (body is System.Net.Http.StringContent stringContent)
+                    {
+                        var result = stringContent.ReadAsStringAsync().Result;
+                        Trace.WriteLine($"--> Body: {result}");
+                    }
+                    else
+                    {
+                        Trace.WriteLine($"--> Body: {body}");
+                    }
                 }
             }
 
