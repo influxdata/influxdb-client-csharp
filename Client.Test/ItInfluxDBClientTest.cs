@@ -63,7 +63,7 @@ namespace InfluxDB.Client.Test
         {
             var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
 
-            var ex = Assert.ThrowsAsync<InfluxException>(async () => await clientNotRunning.VersionAsync());
+            var ex = Assert.ThrowsAsync<HttpException>(async () => await clientNotRunning.VersionAsync());
 
             Assert.NotNull(ex);
             Assert.IsNotEmpty(ex.Message);
