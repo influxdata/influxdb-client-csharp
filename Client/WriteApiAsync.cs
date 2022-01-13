@@ -504,7 +504,7 @@ namespace InfluxDB.Client
                 return Task.CompletedTask;
             }
 
-            return _service.PostWriteAsync(org, bucket, Encoding.UTF8.GetBytes(sb.ToString()), null,
+            return _service.PostWriteAsync(org, bucket, sb.ToString(), null,
                 PostHeaderEncoding, PostHeaderContentType, null, PostHeaderAccept, null, precision,
                 cancellationToken);
         }
@@ -521,7 +521,7 @@ namespace InfluxDB.Client
             
             var sb = ToLineProtocolBody(batch);
 
-           return _service.PostWriteWithHttpInfoAsync(org, bucket, Encoding.UTF8.GetBytes(sb.ToString()), null,
+           return _service.PostWriteWithHttpInfoAsync(org, bucket, sb.ToString(), null,
                 PostHeaderEncoding, PostHeaderContentType, null, PostHeaderAccept, null, precision,
                 cancellationToken);
         }
