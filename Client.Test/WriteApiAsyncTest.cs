@@ -180,7 +180,6 @@ namespace InfluxDB.Client.Test
                 "my-org");
 
             var requests = MockServer.LogEntries.ToList();
-            Assert.AreEqual(2, requests);
             Assert.AreEqual(2, responses.Length);
             Assert.AreEqual(HttpStatusCode.OK, responses[0].StatusCode);
             Assert.AreEqual("h2o,location=coyote_creek water_level=9 9", requests[0].RequestMessage.Body);

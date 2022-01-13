@@ -139,7 +139,7 @@ namespace InfluxDB.Client
                     return Observable
                         .Defer(() =>
                             service.PostWriteWithHttpInfoAsync(org, bucket,
-                                    Encoding.UTF8.GetBytes(lineProtocol), null,
+                                    lineProtocol, null,
                                     "identity", "text/plain; charset=utf-8", null, "application/json", null, precision)
                                 .ToObservable())
                         .RetryWhen(f => f

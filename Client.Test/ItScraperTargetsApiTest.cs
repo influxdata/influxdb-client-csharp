@@ -42,7 +42,7 @@ namespace InfluxDB.Client.Test
             var cloned = await _scraperTargetsApi.CloneScraperTargetAsync(name, source);
 
             Assert.AreEqual(name, cloned.Name);
-            Assert.AreEqual(ScraperTargetRequest.TypeEnum.Prometheus, cloned.Type);
+            Assert.AreEqual(ScraperTargetResponse.TypeEnum.Prometheus, cloned.Type);
             Assert.AreEqual(source.Url, cloned.Url);
             Assert.AreEqual(source.OrgID, cloned.OrgID);
             Assert.AreEqual(source.BucketID, cloned.BucketID);

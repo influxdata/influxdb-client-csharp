@@ -32,11 +32,11 @@ namespace InfluxDB.Client.Test
         {
             MockServer
                 .Given(Request.Create().UsingGet())
-                .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
+                .RespondWith(CreateResponse("{\"status\":\"active\", \"orgID\": \"id\", \"permissions\": []}", "application/json"));
 
             var authorization = await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
 
-            Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, authorization.Status);
+            Assert.AreEqual(Authorization.StatusEnum.Active, authorization.Status);
         }
 
         [Test]
@@ -154,7 +154,7 @@ namespace InfluxDB.Client.Test
         {
             MockServer
                 .Given(Request.Create().UsingGet())
-                .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
+                .RespondWith(CreateResponse("{\"status\":\"active\", \"orgID\": \"id\", \"permissions\": []}", "application/json"));
 
             await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
 
@@ -274,10 +274,10 @@ namespace InfluxDB.Client.Test
             // success response
             anotherServer
                 .Given(Request.Create().UsingGet())
-                .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
+                .RespondWith(CreateResponse("{\"status\":\"active\", \"orgID\": \"id\", \"permissions\": []}", "application/json"));
 
             var authorization = await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
-            Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, authorization.Status);
+            Assert.AreEqual(Authorization.StatusEnum.Active, authorization.Status);
 
             StringAssert.StartsWith("Token my-token",
                 MockServer.LogEntries.Last().RequestMessage.Headers["Authorization"].First());
@@ -296,7 +296,7 @@ namespace InfluxDB.Client.Test
 
             MockServer
                 .Given(Request.Create().UsingGet())
-                .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
+                .RespondWith(CreateResponse("{\"status\":\"active\", \"orgID\": \"id\", \"permissions\": []}", "application/json"));
             
             await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
             var request = MockServer.LogEntries.Last();
