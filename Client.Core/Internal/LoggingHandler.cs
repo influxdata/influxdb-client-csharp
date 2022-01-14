@@ -30,7 +30,8 @@ namespace InfluxDB.Client.Core.Internal
             var isHeader = isBody || Level == LogLevel.Headers;
 
             var uri = req.RequestUri;
-            Trace.WriteLine($"--> {req.Method} {uri.AbsoluteUri.Replace(uri.Query, "")}");
+            var uriToLog = string.IsNullOrEmpty(uri.Query) ? uri.AbsoluteUri : uri.AbsoluteUri.Replace(uri.Query, "");
+            Trace.WriteLine($"--> {req.Method} {uriToLog}");
 
             if (isHeader)
             {

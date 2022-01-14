@@ -296,7 +296,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
 
-            var cloned = new SlackNotificationEndpoint(endpoint.Url, token, name: name);
+            var cloned =
+                new SlackNotificationEndpoint(url:endpoint.Url, token:token, name: name, type: NotificationEndpointType.Slack);
 
             return (SlackNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }
@@ -333,7 +334,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(routingKey, nameof(routingKey));
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
 
-            var cloned = new PagerDutyNotificationEndpoint(endpoint.ClientURL, routingKey, name: name);
+            var cloned = new PagerDutyNotificationEndpoint(clientURL:endpoint.ClientURL, routingKey:routingKey, name: name, type:NotificationEndpointType.Pagerduty);
 
             return (PagerDutyNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }
@@ -364,9 +365,9 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
 
-            var cloned = new HTTPNotificationEndpoint(endpoint.Url, method: endpoint.Method, name: name,
+            var cloned = new HTTPNotificationEndpoint(url:endpoint.Url, method: endpoint.Method, name: name,
                 authMethod: HTTPNotificationEndpoint.AuthMethodEnum.None, contentTemplate: endpoint.ContentTemplate,
-                headers: endpoint.Headers);
+                headers: endpoint.Headers, type:NotificationEndpointType.Http);
 
             return (HTTPNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }
@@ -407,11 +408,11 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(password, nameof(password));
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
 
-            var cloned = new HTTPNotificationEndpoint(endpoint.Url, username, password,
+            var cloned = new HTTPNotificationEndpoint(url:endpoint.Url, username:username, password:password,
                 name: name,
                 method: endpoint.Method,
                 authMethod: HTTPNotificationEndpoint.AuthMethodEnum.Basic, contentTemplate: endpoint.ContentTemplate,
-                headers: endpoint.Headers);
+                headers: endpoint.Headers, type:NotificationEndpointType.Http);
 
             return (HTTPNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }
@@ -448,10 +449,10 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(token, nameof(token));
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
 
-            var cloned = new HTTPNotificationEndpoint(endpoint.Url, token: token, name: name,
+            var cloned = new HTTPNotificationEndpoint(url:endpoint.Url, token: token, name: name,
                 method: endpoint.Method,
                 authMethod: HTTPNotificationEndpoint.AuthMethodEnum.Bearer, contentTemplate: endpoint.ContentTemplate,
-                headers: endpoint.Headers);
+                headers: endpoint.Headers,type:NotificationEndpointType.Http);
 
             return (HTTPNotificationEndpoint) await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
         }

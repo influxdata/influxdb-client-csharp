@@ -80,7 +80,7 @@ namespace InfluxDB.Client
 
             var rule = new SlackNotificationRule(messageTemplate: messageTemplate, name: name, every: every,
                 orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> {new StatusRule(status)},
-                endpointID: endpoint.Id, status: TaskStatusType.Active);
+                endpointID: endpoint.Id, status: TaskStatusType.Active, type: SlackNotificationRuleBase.TypeEnum.Slack);
 
             return (SlackNotificationRule) await CreateRuleAsync(rule).ConfigureAwait(false);
         }
@@ -123,7 +123,7 @@ namespace InfluxDB.Client
 
             var rule = new PagerDutyNotificationRule(messageTemplate: messageTemplate, name: name, every: every,
                 orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> {new StatusRule(status)},
-                endpointID: endpoint.Id, status: TaskStatusType.Active);
+                endpointID: endpoint.Id, status: TaskStatusType.Active, type: PagerDutyNotificationRuleBase.TypeEnum.Pagerduty);
 
             return (PagerDutyNotificationRule) await CreateRuleAsync(rule).ConfigureAwait(false);
         }
@@ -144,7 +144,7 @@ namespace InfluxDB.Client
         {
             var rule = new HTTPNotificationRule(name: name, every: every,
                 orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> {new StatusRule(status)},
-                endpointID: endpoint.Id, status: TaskStatusType.Active);
+                endpointID: endpoint.Id, status: TaskStatusType.Active, type: HTTPNotificationRuleBase.TypeEnum.Http);
 
             return (HTTPNotificationRule) await CreateRuleAsync(rule).ConfigureAwait(false);
         }
