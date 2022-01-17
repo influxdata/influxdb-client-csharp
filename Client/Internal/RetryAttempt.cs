@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Sockets;
 using InfluxDB.Client.Core.Exceptions;
 
 namespace InfluxDB.Client.Internal
@@ -26,6 +27,25 @@ namespace InfluxDB.Client.Internal
                     WebExceptionStatus.ReceiveFailure,
                     WebExceptionStatus.RequestCanceled,
                     WebExceptionStatus.Timeout,
+                });
+     
+        private static readonly ReadOnlyCollection<SocketError> RetryableSocketErrors =
+            new ReadOnlyCollection<SocketError>(
+                new[]
+                {
+                    SocketError.Interrupted,
+                    SocketError.AccessDenied,
+                    SocketError.TryAgain,
+                    SocketError.TimedOut,
+                    SocketError.NetworkDown,
+                    SocketError.NetworkUnreachable,
+                    SocketError.NetworkReset,
+                    SocketError.ConnectionAborted,
+                    SocketError.ConnectionReset,
+                    SocketError.ConnectionRefused,
+                    SocketError.HostDown,
+                    SocketError.HostUnreachable,
+                    SocketError.HostNotFound,
                 });
 
         internal Exception Error { get; }
@@ -64,11 +84,18 @@ namespace InfluxDB.Client.Internal
                 return httpException.Status >= 429;
             }
 
-            var webException = GetWebException(Error);
+            var networkException = GetWebException(Error);
 
-            if (webException != null)
+            if (networkException is WebException webException)
             {
                 if (RetryableStatuses.Contains(webException.Status))
+                {
+                    return true;
+                }
+            }
+            else if (networkException is SocketException socketException)
+            {
+                if (RetryableSocketErrors.Contains(socketException.SocketErrorCode))
                 {
                     return true;
                 }
@@ -123,17 +150,15 @@ namespace InfluxDB.Client.Internal
             return (int) (new Random().NextDouble() * writeOptions.JitterInterval);
         }
 
-        private WebException GetWebException(Exception exception)
+        private Exception GetWebException(Exception exception)
         {
-            switch (exception)
+            return exception switch
             {
-                case null:
-                    return null;
-                case WebException webException:
-                    return webException;
-                default:
-                    return GetWebException(exception.InnerException);
-            }
+                null => null,
+                WebException webException => webException,
+                SocketException webException => webException,
+                _ => GetWebException(exception.InnerException)
+            };
         }
     }
 }
