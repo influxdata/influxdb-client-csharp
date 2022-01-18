@@ -504,11 +504,11 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task FindNotificationsPaging()
         {
-            foreach (var unused in Enumerable.Range(0,
+            foreach (var idx in Enumerable.Range(0,
                 20 - (await _notificationEndpointsApi.FindNotificationEndpointsAsync(_orgId, new FindOptions()))
                 ._NotificationEndpoints.Count))
                 await _notificationEndpointsApi
-                    .CreateHttpEndpointBasicAuthAsync(GenerateName("http"), "http://localhost:1234/mock",
+                    .CreateHttpEndpointBasicAuthAsync(GenerateName($"http_{idx}"), "http://localhost:1234/mock",
                         HTTPNotificationEndpoint.MethodEnum.PUT, "my-user", "my-password", _orgId);
 
             var findOptions = new FindOptions {Limit = 5};
