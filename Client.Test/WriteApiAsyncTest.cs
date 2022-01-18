@@ -184,8 +184,8 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(HttpStatusCode.OK, responses[0].StatusCode);
             Assert.AreEqual(HttpStatusCode.OK, responses[1].StatusCode);
             var bodies = requests.Select(it => it.RequestMessage.Body).ToList();
-            CollectionAssert.Contains("h2o,location=coyote_creek water_level=9 9", bodies);
-            CollectionAssert.Contains("h2o,location=coyote_creek water_level=10 10", bodies);
+            CollectionAssert.Contains(bodies, "h2o,location=coyote_creek water_level=9 9");
+            CollectionAssert.Contains(bodies, "h2o,location=coyote_creek water_level=10 10");
         }
 
         [Test]
