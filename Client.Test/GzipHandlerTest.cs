@@ -73,8 +73,8 @@ namespace InfluxDB.Client.Test
             var requestEntry = MockServer.LogEntries.Last();
             Assert.AreEqual($"{MockServerUrl}/api/v2/write?org=my-org&bucket=my-bucket&precision=ns",
                 requestEntry.RequestMessage.Url);
-            Assert.AreEqual("identity", requestEntry.RequestMessage.Headers["Content-Encoding"].First());
             Assert.AreEqual("identity", requestEntry.RequestMessage.Headers["Accept-Encoding"].First());
+            CollectionAssert.DoesNotContain(requestEntry.RequestMessage.Headers.Keys, "Content-Encoding");
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual($"{MockServerUrl}/api/v2/query?org=my-org",
                 requestEntry.RequestMessage.Url);
             Assert.IsFalse(requestEntry.RequestMessage.Headers.ContainsKey("Content-Encoding"));
-            Assert.AreEqual("gzip, application/json", requestEntry.RequestMessage.Headers["Accept-Encoding"].First());
+            Assert.AreEqual("gzip", requestEntry.RequestMessage.Headers["Accept-Encoding"].First());
         }
 
         [Test]

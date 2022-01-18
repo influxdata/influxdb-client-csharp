@@ -85,7 +85,7 @@ namespace InfluxDB.Client.Core.Api
 
         partial void InterceptResponse(HttpRequestMessage req, HttpResponseMessage response)
         {
-            AfterIntercept((int)response.StatusCode, () => response.Headers, response.Content);
+            AfterIntercept((int)response.StatusCode, () => response.Headers, response);
         }
 
         internal void BeforeIntercept(HttpRequestMessage req)
@@ -107,10 +107,10 @@ namespace InfluxDB.Client.Core.Api
             _gzipHandler?.BeforeIntercept(req);
         }
 
-        internal T AfterIntercept<T>(int statusCode, Func<HttpResponseHeaders> headers, T body)
+        internal void AfterIntercept(int statusCode, Func<HttpResponseHeaders> headers, HttpResponseMessage response)
         {
-            var uncompressed = _gzipHandler?.AfterIntercept(statusCode, headers, body) ?? body;
-            return (T)_loggingHandler.AfterIntercept(statusCode, headers, uncompressed);
+            _gzipHandler?.AfterIntercept(statusCode, headers, response.Content);
+            _loggingHandler.AfterIntercept(statusCode, headers, response.Content);
         }
 
         private void InitToken()

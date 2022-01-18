@@ -1,15 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Text.RegularExpressions;
-using RestSharp;
+using System.Threading.Tasks;
 
 namespace InfluxDB.Client.Core.Internal
 {
@@ -42,65 +38,70 @@ namespace InfluxDB.Client.Core.Internal
                 //
                 // Disabled
                 //
-                request.AddOrUpdateParameter("Accept-Encoding", "identity", ParameterType.HttpHeader);
-                request.AddDecompressionMethod(DecompressionMethods.None);
+                SetHeader(req.Headers, "Accept-Encoding", "identity");
             }
-            else if (ContentRegex.Match(request.Resource).Success)
+            else if (ContentRegex.Match(req.RequestUri.AbsolutePath).Success)
             {
                 //
                 // GZIP request
                 //
-                request.AddOrUpdateParameter("Content-Encoding", "gzip", ParameterType.HttpHeader);
-                request.AddOrUpdateParameter("Accept-Encoding", "identity", ParameterType.HttpHeader);
-                request.AddDecompressionMethod(DecompressionMethods.None);
-                
-                var body = request.Parameters.FirstOrDefault(parameter =>
-                    parameter.Type.Equals(ParameterType.RequestBody));
+                SetHeader(req.Content.Headers, "Content-Encoding", "gzip");
+                SetHeader(req.Headers,"Accept-Encoding", "identity");
 
-                if (body != null)
-                {
-                    byte[] bytes;
-                    
-                    if (body.Value is byte[])
-                    {
-                        bytes = (byte[]) body.Value;
-                    }
-                    else
-                    {
-                        bytes = Encoding.UTF8.GetBytes(body.Value.ToString());
-                    }
-                    
-                    using (var msi = new MemoryStream(bytes))
-                    using (var mso = new MemoryStream()) {
-                        using (var gs = new GZipStream(mso, CompressionMode.Compress)) {
-                            msi.CopyTo(gs);
-                        }
-
-                        body.Value = mso.ToArray();
-                        body.Name = "application/x-gzip";
-                    }
-                }
+                req.Content = new CompressedContent(req.Content);
             }
-            else if (AcceptRegex.Match(request.Resource).Success)
+            else if (AcceptRegex.Match(req.RequestUri.AbsolutePath).Success)
             {
                 //
                 // GZIP response
                 //
-                request.AddDecompressionMethod(DecompressionMethods.GZip);
+                SetHeader(req.Headers, "Accept-Encoding", "gzip");
             }
             else
             {
                 //
                 // Disabled
                 //
-                request.AddOrUpdateParameter("Accept-Encoding", "identity", ParameterType.HttpHeader);
-                request.AddDecompressionMethod(DecompressionMethods.None);
+                SetHeader(req.Headers, "Accept-Encoding", "identity");
             }
         }
 
-        public object AfterIntercept(int statusCode, Func<HttpResponseHeaders> headers, object body)
+        private static void SetHeader(HttpHeaders headers, string name, string value)
         {
-            return body;
+            headers.Add(name, value);
+        }
+
+        public void AfterIntercept(int statusCode, Func<HttpResponseHeaders> headers, object body)
+        {
+        }
+    }
+    
+    class CompressedContent : HttpContent
+    {
+        private readonly HttpContent _originalContent;
+
+        public CompressedContent(HttpContent originalContent)
+        {
+            _originalContent = originalContent;
+
+            foreach (var header in originalContent.Headers)
+            {
+                Headers.TryAddWithoutValidation(header.Key, header.Value);
+            }
+        }
+
+        protected override bool TryComputeLength(out long length)
+        {
+            length = -1;
+
+            return false;
+        }
+
+        protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
+        {
+            var gzipStream = new GZipStream(stream, CompressionMode.Compress, true);
+
+            return _originalContent.CopyToAsync(gzipStream).ContinueWith(t=> gzipStream.Dispose());
         }
     }
 }

@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Web;
 
 namespace InfluxDB.Client.Core.Internal
@@ -50,7 +49,7 @@ namespace InfluxDB.Client.Core.Internal
                 var body = req.Content;
                 if (body != null)
                 {
-                    if (body is System.Net.Http.StringContent stringContent)
+                    if (body is StringContent stringContent)
                     {
                         var result = stringContent.ReadAsStringAsync().Result;
                         Trace.WriteLine($"--> Body: {result}");
@@ -66,12 +65,11 @@ namespace InfluxDB.Client.Core.Internal
             Trace.WriteLine("-->");
         }
 
-        public object AfterIntercept(int statusCode, Func<HttpResponseHeaders> headers, object body)
+        public void AfterIntercept(int statusCode, Func<HttpResponseHeaders> headers, object body)
         {
-            var freshBody = body;
             if (Level == LogLevel.None)
             {
-                return freshBody;
+                return;
             }
 
             var isBody = Level == LogLevel.Body;
@@ -88,13 +86,10 @@ namespace InfluxDB.Client.Core.Internal
             {
                 string stringBody;
 
-                if (body is Stream)
+                if (body is Stream stream)
                 {
-                    var stream = body as Stream;
                     var sr = new StreamReader(stream);
                     stringBody = sr.ReadToEnd();
-
-                    freshBody = new MemoryStream(Encoding.UTF8.GetBytes(stringBody));
                 }
                 else
                 {
@@ -108,8 +103,6 @@ namespace InfluxDB.Client.Core.Internal
             }
 
             Trace.WriteLine("<-- END");
-
-            return freshBody;
         }
 
         public static IDictionary<string, IList<string>> ToHeaders(HttpResponseHeaders parameters)
