@@ -7,6 +7,7 @@ using System.Text;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
+using InfluxDB.Client.Core.Api;
 using InfluxDB.Client.Core.Flux.Internal;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Linq;
@@ -39,7 +40,9 @@ namespace Client.Linq.Test
                 .AuthenticateToken("my-token")
                 .Build();
             var queryService = new Mock<QueryService>("http://localhost:8086/api/v2");
-            _queryApi = new Mock<QueryApiSync>(options, queryService.Object, new FluxResultMapper()).Object;
+            var apiClient = new Mock<ApiClient>();
+            var exceptionFactory = new Mock<ExceptionFactory>();
+            _queryApi = new Mock<QueryApiSync>(options, queryService.Object, apiClient.Object, exceptionFactory.Object, new FluxResultMapper()).Object;
         }
 
         [Test]
