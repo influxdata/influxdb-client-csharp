@@ -182,9 +182,10 @@ namespace InfluxDB.Client.Test
             var requests = MockServer.LogEntries.ToList();
             Assert.AreEqual(2, responses.Length);
             Assert.AreEqual(HttpStatusCode.OK, responses[0].StatusCode);
-            Assert.AreEqual("h2o,location=coyote_creek water_level=9 9", requests[0].RequestMessage.Body);
             Assert.AreEqual(HttpStatusCode.OK, responses[1].StatusCode);
-            Assert.AreEqual("h2o,location=coyote_creek water_level=10 10", requests[1].RequestMessage.Body);
+            var bodies = requests.Select(it => it.RequestMessage.Body).ToList();
+            CollectionAssert.Contains("h2o,location=coyote_creek water_level=9 9", bodies);
+            CollectionAssert.Contains("h2o,location=coyote_creek water_level=10 10", bodies);
         }
 
         [Test]
