@@ -26,7 +26,7 @@ namespace InfluxDB.Client.Internal
                     WebExceptionStatus.UnknownError,
                     WebExceptionStatus.ReceiveFailure,
                     WebExceptionStatus.RequestCanceled,
-                    WebExceptionStatus.Timeout,
+                    WebExceptionStatus.Timeout
                 });
      
         private static readonly ReadOnlyCollection<SocketError> RetryableSocketErrors =
@@ -46,6 +46,7 @@ namespace InfluxDB.Client.Internal
                     SocketError.HostDown,
                     SocketError.HostUnreachable,
                     SocketError.HostNotFound,
+                    SocketError.AddressNotAvailable
                 });
 
         internal Exception Error { get; }
