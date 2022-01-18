@@ -1,5 +1,5 @@
 /*
- * Influx OSS API Service
+ * InfluxDB OSS API Service
  *
  * The InfluxDB v2 API provides a programmatic interface for all interactions with InfluxDB. Access the InfluxDB API using the `/api/v2/` endpoint. 
  *
@@ -48,7 +48,8 @@ namespace InfluxDB.Client.Core.Api
                 {
                     OverrideSpecifiedNames = false
                 }
-            }
+            },
+            DateTimeZoneHandling = DateTimeZoneHandling.Utc
         };
 
         public CustomJsonCodec(IReadableConfiguration configuration)
@@ -186,7 +187,8 @@ namespace InfluxDB.Client.Core.Api
                 {
                     OverrideSpecifiedNames = false
                 }
-            }
+            },
+            DateTimeZoneHandling = DateTimeZoneHandling.Utc
         };
 
         /// <summary>
@@ -358,6 +360,11 @@ namespace InfluxDB.Client.Core.Api
             {
                 request.Content = new FormUrlEncodedContent(options.FormParameters);
             }
+            else if (contentType == "text/plain")
+            {
+                request.Content = new StringContent(Convert.ToString(options.Data, CultureInfo.InvariantCulture),
+                	new UTF8Encoding(), "text/plain");
+            }
             else
             {
                 if (options.Data != null)
@@ -490,20 +497,22 @@ namespace InfluxDB.Client.Core.Api
             InterceptRequest(req);
 
             HttpResponseMessage response;
-				try
-				{
-					response = await _httpClient.SendAsync(req, finalToken).ConfigureAwait(false);
-            	}
-				catch (Exception e)
-				{
-					throw new HttpException(e.Message, 0, e);
-				}
+            try
+            {
+            	response = await _httpClient.SendAsync(req, finalToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+            	throw new HttpException(e.Message, 0, e);
+            }
+
+            InterceptResponse(req, response);
 
             if (!response.IsSuccessStatusCode)
             {
                 return await ToApiResponse<T>(response, default(T), req.RequestUri).ConfigureAwait(false);
             }
-			
+
             object responseData;
 
             // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
@@ -519,8 +528,6 @@ namespace InfluxDB.Client.Core.Api
             {
                 responseData = await deserializer.Deserialize<T>(response).ConfigureAwait(false);
             }
-
-            InterceptResponse(req, response);
 
             return await ToApiResponse<T>(response, responseData, req.RequestUri).ConfigureAwait(false);
         }

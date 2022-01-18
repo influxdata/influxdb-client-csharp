@@ -1415,7 +1415,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(org, nameof(org));
 
-            var request = _service.PostQueryWithRequestOptions(null, "application/json", null, org, null, query);
+            var request = _service.PostQueryWithRequestOptions(null,null, "application/json", org, null, query);
             return request;
         }
 
