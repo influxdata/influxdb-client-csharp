@@ -156,16 +156,28 @@ namespace InfluxDB.Client.Api.Domain
             Annotations = 20,
 
             /// <summary>
-            /// Enum Annotations for value: remotes
+            /// Enum Remotes for value: remotes
             /// </summary>
             [EnumMember(Value = "remotes")]
             Remotes = 21,
 
             /// <summary>
-            /// Enum Annotations for value: replications
+            /// Enum Replications for value: replications
             /// </summary>
             [EnumMember(Value = "replications")]
-            Replications = 22
+            Replications = 22,
+
+            /// <summary>
+            /// Enum Flows for value: flows
+            /// </summary>
+            [EnumMember(Value = "flows")]
+            Flows = 23,
+
+            /// <summary>
+            /// Enum Functions for value: functions
+            /// </summary>
+            [EnumMember(Value = "functions")]
+            Functions = 24
 
         }
 
