@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 1. [#277](https://github.com/influxdata/influxdb-client-csharp/pull/277): Add missing PermissionResources from Cloud API definition
+1. [#281](https://github.com/influxdata/influxdb-client-csharp/pull/281): Serialization query response into POCO with optional DateTime
 
 ## 3.2.0 [2021-11-26]
 
