@@ -955,6 +955,29 @@ from(bucket: "my-bucket")
     |> filter(fn: (r) => contains(value: r["data"], set: [15, 28]))
 ```
 
+## Custom LINQ operators
+
+### AggregateWindow
+
+The `AggregateWindow` applies an aggregate function to fixed windows of time. 
+Can be used only for field which is defined as `timestamp` - `[Column(IsTimestamp = true)]`. 
+For more info about `aggregateWindow() function` see Flux's documentation - https://docs.influxdata.com/flux/v0.x/stdlib/universe/aggregatewindow/.
+
+```c#
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    where s.Timestamp.AggregateWindow(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(40), "mean")
+    select s;
+```
+
+Flux Query:
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> aggregateWindow(every: 20s, period: 40s, fn: mean) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
+```
+
 ## Domain Converter
 
 There is also possibility to use custom domain converter to transform data from/to your `DomainObject`.
