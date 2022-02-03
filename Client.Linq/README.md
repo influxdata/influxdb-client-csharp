@@ -37,6 +37,8 @@ This section contains links to the client library documentation.
     - [Count](#count)
     - [LongCount](#longcount)
     - [Contains](#contains)
+- [Custom LINQ operators](#custom-linq-operators)
+    - [AggregateWindow](#aggregatewindow)
 - [Domain Converter](#domain-converter)
 - [How to debug output Flux Query](#how-to-debug-output-flux-query)
 - [How to filter by Measurement](#how-to-filter-by-measurement)
@@ -960,7 +962,7 @@ from(bucket: "my-bucket")
 ### AggregateWindow
 
 The `AggregateWindow` applies an aggregate function to fixed windows of time. 
-Can be used only for field which is defined as `timestamp` - `[Column(IsTimestamp = true)]`. 
+Can be used only for a field which is defined as `timestamp` - `[Column(IsTimestamp = true)]`. 
 For more info about `aggregateWindow() function` see Flux's documentation - https://docs.influxdata.com/flux/v0.x/stdlib/universe/aggregatewindow/.
 
 ```c#
