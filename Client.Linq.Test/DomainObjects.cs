@@ -86,4 +86,12 @@ namespace Client.Linq.Test
     {
         public long EndWithTicks { get; set; }
     }
+    
+    class SensorDateTimeAsField
+    {
+        [Column("data")]
+        public int Value { get; set; }
+
+        [Column( "dataTime")] public DateTime DateTimeField { get; set; }
+    }
 }

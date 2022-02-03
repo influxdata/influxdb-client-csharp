@@ -2,12 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Linq.Internal.Expressions;
 using Remotion.Linq.Clauses;
 using Remotion.Linq.Clauses.Expressions;
 using Remotion.Linq.Clauses.ResultOperators;
 using Remotion.Linq.Parsing;
+using BinaryExpression = System.Linq.Expressions.BinaryExpression;
+using Expression = System.Linq.Expressions.Expression;
+using MemberExpression = System.Linq.Expressions.MemberExpression;
+using UnaryExpression = System.Linq.Expressions.UnaryExpression;
 
 namespace InfluxDB.Client.Linq.Internal
 {
@@ -140,7 +145,51 @@ namespace InfluxDB.Client.Linq.Internal
 
             return base.VisitUnary(expression);
         }
-        
+
+        protected override Expression VisitMethodCall(MethodCallExpression expression)
+        {
+            if (expression.Method.Name.Equals("AggregateWindow"))
+            {
+                var member = (MemberExpression)expression.Arguments[0];
+                if (_context.MemberResolver.ResolveMemberType(member.Member) != MemberType.Timestamp)
+                {
+                    throw new NotSupportedException(
+                        "AggregateWindow() has to be used only for Timestamp member, e.g. [Column(IsTimestamp = true)].");
+                }
+
+                //
+                // every
+                //
+                var every = (TimeSpan) ((ConstantExpression)expression.Arguments[1]).Value;
+                Arguments.CheckNotNull(every, "every");
+                var everyVariable = _context.Variables.AddNamedVariable(every);
+
+                //
+                // period
+                //
+                string periodVariable = null;
+                var period = ((ConstantExpression)expression.Arguments[2]).Value as TimeSpan?;
+                if (period.HasValue)
+                {
+                    Arguments.CheckNotNull(period, "period");
+                    periodVariable = _context.Variables.AddNamedVariable(period);
+                }
+
+                //
+                // fn
+                //
+                var fn = ((ConstantExpression)expression.Arguments[3]).Value as string;
+                Arguments.CheckNonEmptyString(fn, "fn");
+                var fnVariable = _context.Variables.AddNamedVariable(new Identifier("Identifier", "mean"));
+
+                _context.QueryAggregator.AddAggregateWindow(everyVariable, periodVariable, fnVariable);
+
+                return expression;
+            }
+
+            return base.VisitMethodCall(expression);
+        }
+
         protected override Exception CreateUnhandledItemException<T>(T unhandledItem, string visitMethod)
         {
             var message = $"The expression '{unhandledItem}', type: '{typeof(T)}' is not supported.";
@@ -353,7 +402,7 @@ namespace InfluxDB.Client.Linq.Internal
                 foreach (var index in indexes)
                 {
                     // ()
-                    if (parts[index + 1] is RightParenthesis)
+                    if (parts.Count > index + 1 && parts[index + 1] is RightParenthesis)
                     {
                         parts.RemoveAt(index + 1);
                         parts.RemoveAt(index);
@@ -369,6 +418,8 @@ namespace InfluxDB.Client.Linq.Internal
                 {
                     parts.RemoveAt(parts.Count - 1);
                     parts.RemoveAt(0);
+                    
+                    NormalizeExpressions(parts);
                 }
             }
         }
