@@ -244,7 +244,7 @@ namespace InfluxDB.Client.Linq
         /// <example>
         /// <code>
         /// var query = from s in InfluxDBQueryable&lt;Sensor&gt;.Queryable("my-bucket", "my-org", _queryApi)
-        ///     where s.Timestamp.AggregateWindow(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(40))
+        ///     where s.Timestamp.AggregateWindow(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(40), "mean")
         ///     where s.Value == 5
         ///     select s;
         /// </code>
@@ -260,7 +260,7 @@ namespace InfluxDB.Client.Linq
         public static bool AggregateWindow(this DateTime timestamp, TimeSpan every, TimeSpan? period = null, string fn = "mean")
         {
             throw new NotSupportedException("This should be used only in LINQ expression. " +
-                                            "Something like: 'where s.Timestamp.AggregateWindow(\"20s\", \"40s\")'.");
+                                            "Something like: 'where s.Timestamp.AggregateWindow(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(40), \"mean\")'.");
         }
     }
 }

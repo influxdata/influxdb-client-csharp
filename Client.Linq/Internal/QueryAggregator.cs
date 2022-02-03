@@ -94,7 +94,7 @@ namespace InfluxDB.Client.Linq.Internal
             _rangeStopExpression = expressionType;
         }
         
-        public void AddAggregateWindow(string everyVariable, string periodVariable, string fnVariable)
+        internal void AddAggregateWindow(string everyVariable, string periodVariable, string fnVariable)
         {
             _aggregateWindow = (everyVariable, periodVariable, fnVariable);
         }
