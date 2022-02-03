@@ -131,7 +131,9 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
             try
             {
-                var propertyType = property.PropertyType;
+                // Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
+                // to determine whether the type is nullable and convert to the underlying type instead
+                var propertyType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
                 var valueType = value.GetType();
 
                 // The same type
@@ -153,12 +155,8 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     return;
                 }
 
-                // Nullable types cannot be used in type conversion, but we can use Nullable.GetUnderlyingType()
-                // to determine whether the type is nullable and convert to the underlying type instead
-                var targetType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
-
                 // Handle parseables
-                var parseMethod = GetParseMethod(targetType, valueType);
+                var parseMethod = GetParseMethod(propertyType, valueType);
                 if (parseMethod != null)
                 {
                     var parsed = parseMethod.Invoke(null, new[] { value });
@@ -169,7 +167,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 // Handle convertibles 
                 if (value is IConvertible)
                 {
-                    property.SetValue(poco, Convert.ChangeType(value, targetType));
+                    property.SetValue(poco, Convert.ChangeType(value, propertyType));
                     return;
                 }
 
