@@ -103,9 +103,9 @@ namespace Client.Legacy.Test
         [Test]
         public void ParseableProperty()
         {
-            string expectedTag = "test";
-            Guid expectedValue = Guid.NewGuid();
-            Instant expectedTime = Instant.FromDateTimeUtc(DateTime.UtcNow);
+            var expectedTag = "test";
+            var expectedValue = Guid.NewGuid();
+            var expectedTime = Instant.FromDateTimeUtc(DateTime.UtcNow);
 
             var record = new FluxRecord(0);
             record.Values["tag"] = expectedTag;
@@ -123,9 +123,9 @@ namespace Client.Legacy.Test
         [TestCase("e11351a6-62ec-468b-8b64-e1414aca2c7d")]
         public void NullableParseableProperty(string guid)
         {
-            string expectedTag = "test";
-            Guid? expectedValue = guid == null ? (Guid?)null : Guid.Parse(guid);
-            Instant expectedTime = Instant.FromDateTimeUtc(DateTime.UtcNow);
+            var expectedTag = "test";
+            var expectedValue = guid == null ? (Guid?)null : Guid.Parse(guid);
+            var expectedTime = Instant.FromDateTimeUtc(DateTime.UtcNow);
 
             var record = new FluxRecord(0);
             record.Values["tag"] = expectedTag;
@@ -137,6 +137,29 @@ namespace Client.Legacy.Test
             Assert.AreEqual(expectedTag, poco.Tag);
             Assert.AreEqual(expectedValue, poco.Value);
             Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Timestamp));
+        }
+        
+        [Test]
+        public void NullableTimestamp()
+        {
+            var expectedTime = Instant.FromDateTimeUtc(DateTime.UtcNow);
+
+            var record = new FluxRecord(0)
+            {
+                Values =
+                {
+                    ["tag"] = "test",
+                    ["value"] = 20D,
+                    ["_time"] = expectedTime
+                }
+            };
+
+            var poco = _parser.ToPoco<NullableTimestampPoco>(record);
+
+            Assert.AreEqual("test", poco.Tag);
+            Assert.AreEqual(20D, poco.Value);
+            Assert.NotNull(poco.Time);
+            Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Time.Value));
         }
 
         [Measurement("poco")]
@@ -163,6 +186,19 @@ namespace Client.Legacy.Test
 
             [Column(IsTimestamp = true)]
             public DateTime Timestamp { get; set; }
+        }
+
+        [Measurement("poco")]
+        private class NullableTimestampPoco
+        {
+            [Column("tag", IsTag = true)]
+            public string Tag { get; set; }
+
+            [Column("value")]
+            public double Value { get; set; }
+
+            [Column(IsTimestamp = true)]
+            public DateTime? Time { get; set; }
         }
     }
 }
