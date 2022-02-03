@@ -2,6 +2,12 @@
 
 ## 3.3.0 [2022-02-04]
 
+### Breaking Changes
+Changed type of `Duration.magnitude` from `int?` to `long?`.
+
+### Features
+1. [#282](https://github.com/influxdata/influxdb-client-csharp/pull/282): Add support for AggregateWindow function [LINQ]
+
 ### Bug Fixes
 1. [#277](https://github.com/influxdata/influxdb-client-csharp/pull/277): Add missing PermissionResources from Cloud API definition
 1. [#281](https://github.com/influxdata/influxdb-client-csharp/pull/281): Serialization query response into POCO with optional DateTime
