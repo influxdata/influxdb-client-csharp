@@ -1,4 +1,4 @@
-## 3.3.0 [unreleased]
+## 3.3.0 [2022-02-04]
 
 ### Bug Fixes
 1. [#277](https://github.com/influxdata/influxdb-client-csharp/pull/277): Add missing PermissionResources from Cloud API definition
