@@ -237,5 +237,30 @@ namespace InfluxDB.Client.Linq
 
             return queryable;
         }
+        
+        /// <summary>
+        /// The extension to use Flux window operator. For more info see https://docs.influxdata.com/flux/v0.x/stdlib/universe/aggregatewindow/
+        ///
+        /// <example>
+        /// <code>
+        /// var query = from s in InfluxDBQueryable&lt;Sensor&gt;.Queryable("my-bucket", "my-org", _queryApi)
+        ///     where s.Timestamp.AggregateWindow(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(40), "mean")
+        ///     where s.Value == 5
+        ///     select s;
+        /// </code>
+        /// </example>
+        /// </summary>
+        /// <param name="timestamp">The entity value which is market as a Timestamp.</param>
+        /// <param name="every">Duration of time between windows.</param>
+        /// <param name="period">Duration of the window.</param>
+        /// <param name="fn">Aggregate or selector function used to operate on each window of time.</param>
+        /// <returns>NotSupportedException if it's called outside LINQ expression.</returns>
+        /// <exception cref="NotSupportedException">Caused by calling outside of LINQ expression.</exception>
+        // ReSharper disable UnusedParameter.Global
+        public static bool AggregateWindow(this DateTime timestamp, TimeSpan every, TimeSpan? period = null, string fn = "mean")
+        {
+            throw new NotSupportedException("This should be used only in LINQ expression. " +
+                                            "Something like: 'where s.Timestamp.AggregateWindow(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(40), \"mean\")'.");
+        }
     }
 }

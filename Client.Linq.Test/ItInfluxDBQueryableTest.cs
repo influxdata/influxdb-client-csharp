@@ -454,6 +454,23 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(8, count);
         }
+        
+        [Test]
+        public void QueryAggregateWindow()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
+                where s.Timestamp.AggregateWindow(TimeSpan.FromDays(4), null, "mean")
+                where s.Timestamp > new DateTime(2020, 11, 15, 0, 0, 0, DateTimeKind.Utc)
+                where s.Timestamp < new DateTime(2020, 11, 18, 0, 0, 0, DateTimeKind.Utc)
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(2, sensors.Count);
+            // (28 + 12 + 89) / 3 = 43
+            Assert.AreEqual(43, sensors[0].Value);
+            Assert.AreEqual(43, sensors.Last().Value);
+        }
 
         [TearDown]
         protected void After()

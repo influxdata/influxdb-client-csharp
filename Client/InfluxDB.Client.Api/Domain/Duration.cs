@@ -35,7 +35,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="type">Type of AST node.</param>
         /// <param name="magnitude">magnitude.</param>
         /// <param name="unit">unit.</param>
-        public Duration(string type = default(string), int? magnitude = default(int?), string unit = default(string))
+        public Duration(string type = default(string), long? magnitude = default(long?), string unit = default(string))
         {
             this.Type = type;
             this.Magnitude = magnitude;
@@ -53,7 +53,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Gets or Sets Magnitude
         /// </summary>
         [DataMember(Name="magnitude", EmitDefaultValue=false)]
-        public int? Magnitude { get; set; }
+        public long? Magnitude { get; set; }
 
         /// <summary>
         /// Gets or Sets Unit

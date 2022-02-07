@@ -65,6 +65,7 @@ namespace InfluxDB.Client.Linq.Internal
         private readonly List<string> _filterByTags;
         private readonly List<string> _filterByFields;
         private readonly List<(string, string, bool, string)> _orders;
+        private (string Every, string Period, string Fn)? _aggregateWindow;
 
         internal QueryAggregator()
         {
@@ -73,6 +74,7 @@ namespace InfluxDB.Client.Linq.Internal
             _filterByTags = new List<string>();
             _filterByFields = new List<string>();
             _orders = new List<(string, string, bool, string)>();
+            _aggregateWindow = null;
         }
 
         internal void AddBucket(string bucket)
@@ -91,6 +93,12 @@ namespace InfluxDB.Client.Linq.Internal
             _rangeStopAssignment = rangeStop;
             _rangeStopExpression = expressionType;
         }
+        
+        internal void AddAggregateWindow(string everyVariable, string periodVariable, string fnVariable)
+        {
+            _aggregateWindow = (everyVariable, periodVariable, fnVariable);
+        }
+
 
         internal void AddLimitN(string limitNAssignment)
         {
@@ -155,6 +163,7 @@ namespace InfluxDB.Client.Linq.Internal
                 BuildOperator("from", "bucket", _bucketAssignment),
                 BuildRange(transforms),
                 BuildFilter(_filterByTags),
+                BuildAggregateWindow(_aggregateWindow),
                 "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")"
             };
 
@@ -207,6 +216,25 @@ namespace InfluxDB.Client.Linq.Internal
             query.Append(JoinList(parts, " |> "));
 
             return query.ToString();
+        }
+
+        private string BuildAggregateWindow((string Every, string Period, string Fn)? aggregateWindow)
+        {
+            if (aggregateWindow == null)
+            {
+                return null;
+            }
+
+            var (every, period, fn) = aggregateWindow.Value;
+            var list = new List<string>
+            {
+                $"every: {every}",
+                period != null ? $"period: {period}" : null, 
+                $"fn: {fn}"
+            };
+
+
+            return $"aggregateWindow({JoinList(list, ", ")})";
         }
 
         private string BuildDrop(QueryableOptimizerSettings settings)
