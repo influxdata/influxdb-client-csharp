@@ -175,17 +175,26 @@ namespace InfluxDB.Client.Core.Internal
         {
             Arguments.CheckNotNull(queryFn, nameof(queryFn));
 
-            var query = queryFn.Invoke(null);
+            Stream stream = null;
+            var query = queryFn.Invoke(response =>
+            {
+                stream = GetStreamFromResponse(response, cancellationToken);
+                stream = AfterIntercept((int)response.StatusCode, () => response.Headers.ToHeaderParameters(), stream);
+
+                RaiseForInfluxError(response, stream);
+
+                return FromHttpResponseMessage(response);
+            });
+            
             BeforeIntercept(query);
 
-            var response = await RestClient.ExecuteAsync(query, cancellationToken).ConfigureAwait(false);
+            var restResponse = await RestClient.ExecuteAsync(query, cancellationToken).ConfigureAwait(false);
+            if (restResponse.ErrorException != null)
+            {
+                throw restResponse.ErrorException;
+            }
 
-            AfterIntercept((int)response.StatusCode, () => response.Headers, response.Content);
-
-            RaiseForInfluxError(response, response.Content);
-
-            //TODO ??? response.stream
-            await foreach(var (_, record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken).ConfigureAwait(false))
+            await foreach(var (_, record) in _csvParser.ParseFluxResponseAsync(new StreamReader(stream), cancellationToken).ConfigureAwait(false))
             {
                 if (!(record is null))
                     yield return Mapper.ConvertToEntity<T>(record);
