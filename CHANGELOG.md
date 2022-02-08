@@ -4,6 +4,7 @@
 
 :warning: The most important change is the update RestSharp to version `v107`. The RestSharp stop using the legacy `HttpWebRequest` class, and uses well-known `HttpClient` instead.
 
+#### API
 
 - The client not longer support set the `ReadWriteTimeout` for HTTP client. This settings is not supported by `HttpClient`
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
@@ -11,6 +12,8 @@
 - Rename `TelegrafPlugin` types:
   - from `TelegrafPlugin.TypeEnum.Inputs` to `TelegrafPlugin.TypeEnum.Input`
   - from `TelegrafPlugin.TypeEnum.Outputs` to `TelegrafPlugin.TypeEnum.Output`
+
+#### Services
 
 This release also uses new version of InfluxDB OSS API definitions - [oss.yml](https://github.com/influxdata/openapi/blob/master/contracts/oss.yml). The following breaking changes are in underlying API services and doesn't affect common apis such as - `WriteApi`, `QueryApi`, `BucketsApi`, `OrganizationsApi`...
 
@@ -53,6 +56,7 @@ This release also uses new version of InfluxDB OSS API definitions - [oss.yml](h
     - Moq to 4.16.1
     - System.Linq.Async to 6.0.1
     - Tomlyn.Signed to 0.10.2
+    - coverlet.collector to 3.1.2
 
 ## 3.3.0 [2022-02-04]
 
