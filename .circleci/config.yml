@@ -184,5 +184,6 @@ workflows:
             branches:
               only:
                 - master
+                - rest-sharp-v107
     jobs:
       - tests-dotnet
