@@ -152,15 +152,8 @@ workflows:
   build:
     jobs:
       - tests-dotnet:
-          name: dotnet-2.2
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:2.2"
-          dotnet-target-version: "netstandard2.0"
-      - tests-dotnet:
           name: dotnet-3.1-nightly
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
-      - tests-dotnet:
-          name: dotnet-3.0
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.0"
       - tests-dotnet:
           name: dotnet-3.1
       - tests-dotnet:
@@ -174,9 +167,7 @@ workflows:
           name: dotnet-windows
       - deploy-preview:
           requires:
-            - dotnet-2.2
             - dotnet-3.1-nightly
-            - dotnet-3.0
             - dotnet-3.1
             - dotnet-5.0
             - dotnet-6.0
