@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using InfluxDB.Client.Flux;
 using NUnit.Framework;
@@ -27,7 +28,7 @@ namespace Client.Legacy.Test
         [Test]
         public void ProxyDefault()
         {
-            var restClient = GetRestClient(_fluxClient);
+            var restClient = GetRestClientOptions(_fluxClient);
 
             Assert.AreEqual(null, restClient?.Proxy);
         }
@@ -43,13 +44,36 @@ namespace Client.Legacy.Test
 
             var fluxClient = FluxClientFactory.Create(options);
             
-            Assert.AreEqual(webProxy, GetRestClient(fluxClient).Proxy);
+            Assert.AreEqual(webProxy, GetRestClientOptions(fluxClient).Proxy);
+        }
+        
+        [Test]
+        public void HttpClientIsDisposed()
+        {
+            _fluxClient.Dispose();
+            var restClient = GetRestClient(_fluxClient);
+            
+            var httpClientInfo =
+                restClient.GetType().GetProperty("HttpClient", BindingFlags.NonPublic | BindingFlags.Instance);
+            var httpClient = (HttpClient)httpClientInfo!.GetValue(restClient);
+            var disposedInfo =
+                httpClient!.GetType().GetField("_disposed", BindingFlags.NonPublic | BindingFlags.Instance);
+            var disposed = (bool)disposedInfo!.GetValue(httpClient)!;
+            
+            Assert.AreEqual(true, disposed);
         }
 
-        private RestClientOptions GetRestClient(FluxClient fluxClient)
+        private static RestClient GetRestClient(FluxClient fluxClient)
         {
-            var restClientInfo = fluxClient.GetType().BaseType!.GetField("RestClient", BindingFlags.NonPublic | BindingFlags.Instance);
-            var restClient = (RestClient) restClientInfo!.GetValue(fluxClient);
+            var restClientInfo =
+                fluxClient.GetType().BaseType!.GetField("RestClient", BindingFlags.NonPublic | BindingFlags.Instance);
+            var restClient = (RestClient)restClientInfo!.GetValue(fluxClient);
+            return restClient;
+        }
+
+        private RestClientOptions GetRestClientOptions(FluxClient fluxClient)
+        {
+            var restClient = GetRestClient(fluxClient);
             var restClientOptionsInfo = restClient!.GetType().GetProperty("Options", BindingFlags.NonPublic | BindingFlags.Instance);
             return (RestClientOptions) restClientOptionsInfo!.GetValue(restClient);
         }

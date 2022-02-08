@@ -6,7 +6,8 @@
 
 #### API
 
-- The client not longer support set the `ReadWriteTimeout` for HTTP client. This settings is not supported by `HttpClient`
+- The `FluxClient` uses `IDisposable` interface to releasing underlying HTTP connections.
+- The Client not longer support set the `ReadWriteTimeout` for HTTP Client. This settings is not supported by `HttpClient`
 - The Query APIs uses `CancellationToken` instead of `ICancellable`
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
 - `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
@@ -41,7 +42,7 @@ This release also uses new version of InfluxDB OSS API definitions - [oss.yml](h
 1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Remove out of support `.NET Core` versions - `2.2`, `3.0`
 
 ### Dependencies
-1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Update dependencies:
+[#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Update dependencies:
  
 #### Build:
     - CsvHelper to 27.2.1

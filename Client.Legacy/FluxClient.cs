@@ -13,7 +13,7 @@ using RestSharp;
 
 namespace InfluxDB.Client.Flux
 {
-    public class FluxClient : AbstractQueryClient
+    public class FluxClient : AbstractQueryClient, IDisposable
     {
         private readonly LoggingHandler _loggingHandler;
 
@@ -418,6 +418,14 @@ namespace InfluxDB.Client.Flux
         public LogLevel GetLogLevel()
         {
             return _loggingHandler.Level;
+        }
+
+        public void Dispose()
+        {
+            // 
+            // Dispose HttpClient 
+            // 
+            RestClient.Dispose();
         }
 
         private async Task<RestResponse> ExecuteAsync(RestRequest request)

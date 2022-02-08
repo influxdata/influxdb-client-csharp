@@ -32,6 +32,8 @@ namespace Client.Legacy.Test
         protected void After() 
         {
             InfluxDbQuery("DROP DATABASE " + DatabaseName, DatabaseName).ConfigureAwait(false).GetAwaiter().GetResult();
+            
+            FluxClient.Dispose();
         }
     }
 }

@@ -264,7 +264,7 @@ namespace Examples
     {
         public static void Run()
         {
-            var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
+            using var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
 
             var fluxQuery = "from(bucket: \"telegraf\")\n"
                                + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"

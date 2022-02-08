@@ -79,6 +79,11 @@ namespace InfluxDB.Client
                 Trace.WriteLine("The signout exception");
                 Trace.WriteLine(e);
             }
+
+            // 
+            // Dispose HttpClient 
+            // 
+            _apiClient.RestClient.Dispose();
         }
 
         /// <summary>

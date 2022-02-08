@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -302,6 +304,24 @@ namespace InfluxDB.Client.Test
             var request = MockServer.LogEntries.Last();
             
             CollectionAssert.DoesNotContain(request.RequestMessage.Headers.Keys, "Authorization");
+        }
+        
+        [Test]
+        public void HttpClientIsDisposed()
+        {
+            _client.Dispose();
+            var apiClientInfo =
+                _client.GetType().GetField("_apiClient", BindingFlags.NonPublic | BindingFlags.Instance);
+            var apiClient = (ApiClient)apiClientInfo!.GetValue(_client);
+            
+            var httpClientInfo =
+                apiClient!.RestClient.GetType().GetProperty("HttpClient", BindingFlags.NonPublic | BindingFlags.Instance);
+            var httpClient = (HttpClient)httpClientInfo!.GetValue(apiClient.RestClient);
+            var disposedInfo =
+                httpClient!.GetType().GetField("_disposed", BindingFlags.NonPublic | BindingFlags.Instance);
+            var disposed = (bool)disposedInfo!.GetValue(httpClient)!;
+            
+            Assert.AreEqual(true, disposed);
         }
     }
 }
