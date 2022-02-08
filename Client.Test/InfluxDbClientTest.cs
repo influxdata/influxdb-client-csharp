@@ -159,7 +159,7 @@ namespace InfluxDB.Client.Test
             await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
 
             var request = MockServer.LogEntries.Last();
-            StringAssert.StartsWith("influxdb-client-csharp/3.", request.RequestMessage.Headers["User-Agent"].First());
+            StringAssert.StartsWith("influxdb-client-csharp/4.", request.RequestMessage.Headers["User-Agent"].First());
             StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
         }
 
