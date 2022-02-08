@@ -7,6 +7,7 @@
 #### API
 
 - The client not longer support set the `ReadWriteTimeout` for HTTP client. This settings is not supported by `HttpClient`
+- The Query APIs uses `CancellationToken` instead of `ICancellable`
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
 - `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
 - Rename `TelegrafPlugin` types:

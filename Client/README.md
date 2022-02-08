@@ -159,12 +159,10 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryAsync(flux, "org_id", (cancellable, record) =>
+            await queryApi.QueryAsync(flux, "org_id", record =>
             {
                 //
                 // The callback to consume a FluxRecord.
-                //
-                // cancelable - object has the cancel method to stop asynchronous query
                 //
                 Console.WriteLine($"{record.GetTime()}: {record.GetValueByKey("_value")}");
             }, exception =>
@@ -212,12 +210,10 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryAsync<Temperature>(flux, "org_id", (cancellable, temperature) =>
+            await queryApi.QueryAsync<Temperature>(flux, "org_id", temperature =>
             {
                 //
                 // The callback to consume a FluxRecord mapped to POCO.
-                //
-                // cancelable - object has the cancel method to stop asynchronous query
                 //
                 Console.WriteLine($"{temperature.Location}: {temperature.Value} at {temperature.Time}");
             });
@@ -298,12 +294,10 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryRawAsync(flux, "org_id", (cancellable, line) =>
+            await queryApi.QueryRawAsync(flux, "org_id", line =>
             {
                 //
                 // The callback to consume a line of CSV response
-                //
-                // cancelable - object has the cancel method to stop asynchronous query
                 //
                 Console.WriteLine($"Response: {line}");
             });

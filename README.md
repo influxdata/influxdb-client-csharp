@@ -271,7 +271,7 @@ namespace Examples
                                + " |> range(start: -1d)"
                                + " |> sample(n: 5, pos: 1)";
 
-            fluxClient.QueryAsync(fluxQuery, (cancellable, record) =>
+            fluxClient.QueryAsync(fluxQuery, record =>
                             {
                                 // process the flux query records
                                 Console.WriteLine(record.GetTime() + ": " + record.GetValue());

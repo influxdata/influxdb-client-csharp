@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
@@ -38,9 +39,10 @@ namespace InfluxDB.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public List<T> QuerySync<T>(string query)
+        public List<T> QuerySync<T>(string query, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
 
@@ -57,14 +59,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="query">the flux query to execute</param>
         /// <param name="org">specifies the source organization</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public List<T> QuerySync<T>(string query, string org)
+        public List<T> QuerySync<T>(string query, string org, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(org, nameof(org));
 
-            return QuerySync<T>(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org);
+            return QuerySync<T>(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org, cancellationToken);
         }
         
         /// <summary>
@@ -76,13 +79,14 @@ namespace InfluxDB.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public List<T> QuerySync<T>(Query query)
+        public List<T> QuerySync<T>(Query query, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(query, nameof(query));
 
-            return QuerySync<T>(query, _options.Org);
+            return QuerySync<T>(query, _options.Org, cancellationToken);
         }
         
         /// <summary>
@@ -95,23 +99,24 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="query">the flux query to execute</param>
         /// <param name="org">specifies the source organization</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public List<T> QuerySync<T>(Query query, string org)
+        public List<T> QuerySync<T>(Query query, string org, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(org, nameof(org));
 
             var measurements = new List<T>();
 
-            var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); }, Mapper);
+            var consumer = new FluxResponseConsumerPoco<T>(poco => { measurements.Add(poco); }, Mapper);
 
-            Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn =
-                advancedResponseWriter => _service
+            RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter) =>
+                _service
                     .PostQueryWithRestRequest(null, "application/json", null, org, null, query)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
 
-            QuerySync(queryFn, consumer, ErrorConsumer, EmptyAction);
+            QuerySync(QueryFn, consumer, ErrorConsumer, EmptyAction, cancellationToken);
 
             return measurements;
         }
@@ -125,13 +130,13 @@ namespace InfluxDB.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
-        /// <param name="org">specifies the source organization</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> QuerySync(string query)
+        public List<FluxTable> QuerySync(string query, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
 
-            return QuerySync(query, _options.Org);
+            return QuerySync(query, _options.Org, cancellationToken);
         }
         
         /// <summary>
@@ -144,13 +149,14 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="query">the flux query to execute</param>
         /// <param name="org">specifies the source organization</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> QuerySync(string query, string org)
+        public List<FluxTable> QuerySync(string query, string org, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
             Arguments.CheckNonEmptyString(org, nameof(org));
 
-            return QuerySync(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org);
+            return QuerySync(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org, cancellationToken);
         }
         
         /// <summary>
@@ -162,12 +168,13 @@ namespace InfluxDB.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> QuerySync(Query query)
+        public List<FluxTable> QuerySync(Query query, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(query, nameof(query));
 
-            return QuerySync(query, _options.Org);
+            return QuerySync(query, _options.Org, cancellationToken);
         }
         
         /// <summary>
@@ -180,20 +187,21 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="query">the flux query to execute</param>
         /// <param name="org">specifies the source organization</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> QuerySync(Query query, string org)
+        public List<FluxTable> QuerySync(Query query, string org, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(org, nameof(org));
 
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();
-            
-            Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn = 
-                advancedResponseWriter => _service
+
+            RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter) =>
+                _service
                     .PostQueryWithRestRequest(null, "application/json", null, org, null, query)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
 
-            QuerySync(queryFn, consumer, ErrorConsumer, EmptyAction);
+            QuerySync(QueryFn, consumer, ErrorConsumer, EmptyAction, cancellationToken);
 
             return consumer.Tables;
         }
