@@ -2,7 +2,8 @@
 
 ### Breaking Changes
 
-> :warning: The most important change is the update RestSharp to version `v107`. The RestSharp stop using the legacy `HttpWebRequest` class, and uses well-known `HttpClient` instead.
+:warning: The most important change is the update RestSharp to version `v107`. The RestSharp stop using the legacy `HttpWebRequest` class, and uses well-known `HttpClient` instead.
+
 
 - The client not longer support set the `ReadWriteTimeout` for HTTP client. This settings is not supported by `HttpClient`
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
@@ -34,6 +35,24 @@ This release also uses new version of InfluxDB OSS API definitions - [oss.yml](h
 
 ### CI
 1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Remove out of support `.NET Core` versions - `2.2`, `3.0`
+
+### Dependencies
+1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Update dependencies:
+ 
+#### Build:
+    - CsvHelper to 27.2.1
+    - NodaTime to 3.0.9
+    - Microsoft.Extensions.ObjectPool to 6.0.1
+    - System.Collections.Immutable to 6.0.0
+    - System.Configuration.ConfigurationManager to 6.0.0
+
+#### Test:
+    - Microsoft.NET.Test.Sdk to 17.0.0
+    - NUnit3TestAdapter to 4.2.1
+    - WireMock.Net to 1.4.34
+    - Moq to 4.16.1
+    - System.Linq.Async to 6.0.1
+    - Tomlyn.Signed to 0.10.2
 
 ## 3.3.0 [2022-02-04]
 
