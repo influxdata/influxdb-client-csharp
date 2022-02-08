@@ -17,7 +17,7 @@ namespace InfluxDB.Client.Core.Internal
             Level = logLevel;
         }
 
-        public void BeforeIntercept(IRestRequest request)
+        public void BeforeIntercept(RestRequest request)
         {
             if (Level == LogLevel.None)
             {
@@ -64,7 +64,7 @@ namespace InfluxDB.Client.Core.Internal
             Trace.WriteLine("-->");
         }
 
-        public object AfterIntercept(int statusCode, Func<IList<HttpHeader>> headers, object body)
+        public object AfterIntercept(int statusCode, Func<IEnumerable<HeaderParameter>> headers, object body)
         {
             var freshBody = body;
             if (Level == LogLevel.None)
@@ -110,16 +110,20 @@ namespace InfluxDB.Client.Core.Internal
             return freshBody;
         }
 
-        public static List<HttpHeader> ToHeaders(IList<Parameter> parameters, ParameterType type = ParameterType.HttpHeader)
+        private static IEnumerable<HeaderParameter> ToHeaders(ParametersCollection parameters, ParameterType type = ParameterType.HttpHeader)
         {
             return parameters
                 .Where(parameter => parameter.Type.Equals(type))
-                .Select(h => new HttpHeader(h.Name, h.Value.ToString()))
+                .Select(h => new HeaderParameter(h.Name, h.Value?.ToString()))
                 .ToList();
         }
 
-        private void LogHeaders(IList<HttpHeader> headers, string direction, string type = "Header")
+        private void LogHeaders(IEnumerable<HeaderParameter> headers, string direction, string type = "Header")
         {
+            if (headers == null)
+            {
+                return;
+            }
             foreach (var emp in headers)
             {
                 Trace.WriteLine($"{direction} {type}: {emp.Name}={emp.Value}");

@@ -113,7 +113,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual($"{MockServerUrl}/api/v2/query?org=my-org",
                 requestEntry.RequestMessage.Url);
             Assert.IsFalse(requestEntry.RequestMessage.Headers.ContainsKey("Content-Encoding"));
-            Assert.AreEqual("gzip, application/json", requestEntry.RequestMessage.Headers["Accept-Encoding"].First());
+            Assert.AreEqual("gzip", requestEntry.RequestMessage.Headers["Accept-Encoding"].First());
         }
 
         [Test]

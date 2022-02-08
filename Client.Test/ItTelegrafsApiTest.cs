@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Test
                 {"report_active", false},
                 {"avoid_null", null},
             };
-            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Inputs, "cpu", config: config);
+            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Input, "cpu", config: config);
         }
 
         private static TelegrafPlugin NewOutputPlugin()
@@ -50,7 +50,7 @@ namespace InfluxDB.Client.Test
                 {"urls", new List<string> {"http://localhost:9999"}}
             };
 
-            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Outputs, "influxdb_v2", "my instance",
+            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Output, "influxdb_v2", "my instance",
                 config);
         }
 

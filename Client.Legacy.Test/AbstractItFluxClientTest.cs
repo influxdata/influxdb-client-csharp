@@ -31,7 +31,7 @@ namespace Client.Legacy.Test
         [TearDown]
         protected void After() 
         {
-            InfluxDbQuery("DROP DATABASE " + DatabaseName, DatabaseName).GetAwaiter().GetResult();
+            InfluxDbQuery("DROP DATABASE " + DatabaseName, DatabaseName).ConfigureAwait(false).GetAwaiter().GetResult();
         }
     }
 }

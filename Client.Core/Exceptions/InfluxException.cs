@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using InfluxDB.Client.Core.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -55,25 +56,24 @@ namespace InfluxDB.Client.Core.Exceptions
         /// </summary>
         public int? RetryAfter { get; set; }
 
-        public static HttpException Create(IRestResponse requestResult, object body)
+        public static HttpException Create(RestResponse requestResult, object body)
         {
             Arguments.CheckNotNull(requestResult, nameof(requestResult));
 
-            var httpHeaders = LoggingHandler.ToHeaders(requestResult.Headers);
+            // var httpHeaders = LoggingHandler.ToHeaders(requestResult.Headers);
             
-            return Create(body, httpHeaders, requestResult.ErrorMessage, requestResult.StatusCode, 
-                requestResult.ErrorException);
-        }
-
-        public static HttpException Create(IHttpResponse requestResult, object body)
-        {
-            Arguments.CheckNotNull(requestResult, nameof(requestResult));
-
             return Create(body, requestResult.Headers, requestResult.ErrorMessage, requestResult.StatusCode, 
                 requestResult.ErrorException);
         }
+
+        public static HttpException Create(HttpResponseMessage requestResult, object body)
+        {
+            Arguments.CheckNotNull(requestResult, nameof(requestResult));
+
+            return Create(body, requestResult.Headers.ToHeaderParameters(), "", requestResult.StatusCode);
+        }
         
-        public static HttpException Create(object content, IList<HttpHeader> headers, string ErrorMessage, 
+        public static HttpException Create(object content, IEnumerable<HeaderParameter> headers, string ErrorMessage, 
             HttpStatusCode statusCode, Exception exception = null)
         {
             string stringBody = null;
@@ -81,8 +81,9 @@ namespace InfluxDB.Client.Core.Exceptions
             string errorMessage = null;
 
             int? retryAfter = null;
+            var headerParameters = headers?.ToList();
             {
-                var retryHeader = headers.FirstOrDefault(header => header.Name.Equals("Retry-After"));
+                var retryHeader = headerParameters?.FirstOrDefault(header => header.Name.Equals("Retry-After"));
                 if (retryHeader != null) retryAfter = Convert.ToInt32(retryHeader.Value);
             }
 
@@ -119,7 +120,7 @@ namespace InfluxDB.Client.Core.Exceptions
             var keys = new[] {"X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error"};
 
             if (string.IsNullOrEmpty(errorMessage))
-                errorMessage = headers
+                errorMessage = headerParameters?
                     .Where(header => keys.Contains(header.Name, StringComparer.OrdinalIgnoreCase))
                     .Select(header => header.Value.ToString()).FirstOrDefault();
 

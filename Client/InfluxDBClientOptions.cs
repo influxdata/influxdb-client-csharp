@@ -33,7 +33,6 @@ namespace InfluxDB.Client
         public string Bucket { get; }
 
         public TimeSpan Timeout { get; }
-        public TimeSpan ReadWriteTimeout { get; }
         
         public IWebProxy WebProxy { get; }
         public bool AllowHttpRedirects { get; }
@@ -57,7 +56,6 @@ namespace InfluxDB.Client
             Bucket = builder.BucketString;
 
             Timeout = builder.Timeout;
-            ReadWriteTimeout = builder.ReadWriteTimeout;
             
             WebProxy = builder.WebProxy;
             AllowHttpRedirects = builder.AllowHttpRedirects;
@@ -101,7 +99,6 @@ namespace InfluxDB.Client
             internal string Username;
             internal char[] Password;
             internal TimeSpan Timeout;
-            internal TimeSpan ReadWriteTimeout;
 
             internal string OrgString;
             internal string BucketString;
@@ -155,20 +152,6 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(timeout, nameof(timeout));
 
                 Timeout = timeout;
-
-                return this;
-            }
-
-            /// <summary>
-            /// Set the read and write timeout from the InfluxDB.
-            /// </summary>
-            /// <param name="readWriteTimeout">the timeout to read and write from the InfluxDB. It must be defined.</param>
-            /// <returns><see cref="Builder"/></returns>
-            public Builder ReadWriteTimeOut(TimeSpan readWriteTimeout)
-            {
-                Arguments.CheckNotNull(readWriteTimeout, nameof(readWriteTimeout));
-
-                ReadWriteTimeout = readWriteTimeout;
 
                 return this;
             }
@@ -332,7 +315,6 @@ namespace InfluxDB.Client
                 var token = config.Token;
                 var logLevel = config.LogLevel;
                 var timeout = config.Timeout;
-                var readWriteTimeout = config.ReadWriteTimeout;
                 var allowHttpRedirects = config.AllowHttpRedirects;
                 var verifySsl = config.VerifySsl;
 
@@ -345,7 +327,7 @@ namespace InfluxDB.Client
                     }
                 }
 
-                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout, allowHttpRedirects, verifySsl);
+                return Configure(url, org, bucket, token, logLevel, timeout, allowHttpRedirects, verifySsl);
             }
 
             /// <summary>
@@ -367,14 +349,13 @@ namespace InfluxDB.Client
                 var token = query.Get("token");
                 var logLevel = query.Get("logLevel");
                 var timeout = query.Get("timeout");
-                var readWriteTimeout = query.Get("readWriteTimeout");
                 var allowHttpRedirects = Convert.ToBoolean(query.Get("allowHttpRedirects"));
 
-                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout, allowHttpRedirects);
+                return Configure(url, org, bucket, token, logLevel, timeout, allowHttpRedirects);
             }
 
             private Builder Configure(string url, string org, string bucket, string token, string logLevel,
-                string timeout, string readWriteTimeout, bool allowHttpRedirects = false, bool verifySsl = true)
+                string timeout, bool allowHttpRedirects = false, bool verifySsl = true)
             {
                 Url(url);
                 Org(org);
@@ -393,11 +374,6 @@ namespace InfluxDB.Client
                 if (!string.IsNullOrWhiteSpace(timeout))
                 {
                     TimeOut(ToTimeout(timeout));
-                }
-
-                if (!string.IsNullOrWhiteSpace(readWriteTimeout))
-                {
-                    ReadWriteTimeOut(ToTimeout(readWriteTimeout));
                 }
 
                 AllowRedirects(allowHttpRedirects);
@@ -455,11 +431,6 @@ namespace InfluxDB.Client
                 if (Timeout == TimeSpan.Zero || Timeout == TimeSpan.FromMilliseconds(0))
                 {
                     Timeout = TimeSpan.FromSeconds(10);
-                }
-
-                if (ReadWriteTimeout == TimeSpan.Zero || ReadWriteTimeout == TimeSpan.FromMilliseconds(0))
-                {
-                    ReadWriteTimeout = TimeSpan.FromSeconds(10);
                 }
 
                 return new InfluxDBClientOptions(this);

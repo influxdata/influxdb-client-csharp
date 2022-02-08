@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,19 +22,17 @@ namespace InfluxDB.Client.Core.Internal
 
         private readonly FluxCsvParser _csvParser = new FluxCsvParser();
 
-        protected readonly RestClient RestClient;
+        protected RestClient RestClient;
         protected readonly IFluxResultMapper Mapper;
 
-        protected AbstractQueryClient(RestClient restClient, IFluxResultMapper mapper)
+        protected AbstractQueryClient(IFluxResultMapper mapper)
         {
-            Arguments.CheckNotNull(restClient, nameof(restClient));
             Arguments.CheckNotNull(mapper, nameof(mapper));
 
-            RestClient = restClient;
             Mapper = mapper;
         }
 
-        protected Task Query(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
+        protected Task Query(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn, FluxCsvParser.IFluxResponseConsumer responseConsumer,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -49,10 +48,10 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
 
-            return Query(query, Consumer, onError, onComplete);
+            return Query(queryFn, Consumer, onError, onComplete);
         }
 
-        protected Task QueryRaw(RestRequest query,
+        protected Task QueryRaw(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn,
             Action<ICancellable, string> onResponse,
             Action<Exception> onError,
             Action onComplete)
@@ -69,10 +68,10 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
 
-            return Query(query, Consumer, onError, onComplete);
+            return Query(queryFn, Consumer, onError, onComplete);
         }
         
-        protected void QuerySync(RestRequest query, FluxCsvParser.IFluxResponseConsumer responseConsumer,
+        protected void QuerySync(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn, FluxCsvParser.IFluxResponseConsumer responseConsumer,
             Action<Exception> onError,
             Action onComplete)
         {
@@ -88,13 +87,13 @@ namespace InfluxDB.Client.Core.Internal
                 }
             }
 
-            QuerySync(query, Consumer, onError, onComplete);
+            QuerySync(queryFn, Consumer, onError, onComplete);
         }
 
-        private async Task Query(RestRequest query, Action<ICancellable, Stream> consumer,
+        private async Task Query(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn, Action<ICancellable, Stream> consumer,
             Action<Exception> onError, Action onComplete)
         {
-            Arguments.CheckNotNull(query, "query");
+            Arguments.CheckNotNull(queryFn, "queryFn");
             Arguments.CheckNotNull(consumer, "consumer");
             Arguments.CheckNotNull(onError, "onError");
             Arguments.CheckNotNull(onComplete, "onComplete");
@@ -103,17 +102,20 @@ namespace InfluxDB.Client.Core.Internal
             {
                 var cancellable = new DefaultCancellable();
 
+                var query = queryFn.Invoke(response =>
+                {
+                    var result = response.Content.ReadAsStreamAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+                    result = AfterIntercept((int)response.StatusCode, () => response.Headers.ToHeaderParameters(), result);
+
+                    RaiseForInfluxError(response, result);
+                    consumer(cancellable, result);
+
+                    return FromHttpResponseMessage(response);
+                });
+
                 BeforeIntercept(query);
                     
-                query.AdvancedResponseWriter = (responseStream, response) =>
-                {
-                    responseStream = AfterIntercept((int)response.StatusCode, () => response.Headers, responseStream);
-                    
-                    RaiseForInfluxError(response, responseStream);
-                    consumer(cancellable, responseStream);
-                };
-
-                var restResponse = await RestClient.ExecuteAsync(query, Method.POST).ConfigureAwait(false);
+                var restResponse = await RestClient.ExecuteAsync(query, Method.Post).ConfigureAwait(false);
                 if (restResponse.ErrorException != null)
                 {
                     throw restResponse.ErrorException;
@@ -130,10 +132,10 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-        private void QuerySync(RestRequest query, Action<ICancellable, Stream> consumer,
+        private void QuerySync(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn, Action<ICancellable, Stream> consumer,
             Action<Exception> onError, Action onComplete)
         {
-            Arguments.CheckNotNull(query, "query");
+            Arguments.CheckNotNull(queryFn, "queryFn");
             Arguments.CheckNotNull(consumer, "consumer");
             Arguments.CheckNotNull(onError, "onError");
             Arguments.CheckNotNull(onComplete, "onComplete");
@@ -141,18 +143,21 @@ namespace InfluxDB.Client.Core.Internal
             try
             {
                 var cancellable = new DefaultCancellable();
+                
+                var query = queryFn.Invoke(response =>
+                {
+                    var result = response.Content.ReadAsStreamAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+                    result = AfterIntercept((int)response.StatusCode, () => response.Headers.ToHeaderParameters(), result);
+
+                    RaiseForInfluxError(response, result);
+                    consumer(cancellable, result);
+
+                    return FromHttpResponseMessage(response);
+                });
 
                 BeforeIntercept(query);
                     
-                query.AdvancedResponseWriter = (responseStream, response) =>
-                {
-                    responseStream = AfterIntercept((int)response.StatusCode, () => response.Headers, responseStream);
-                    
-                    RaiseForInfluxError(response, responseStream);
-                    consumer(cancellable, responseStream);
-                };
-
-                var restResponse = RestClient.Execute(query, Method.POST);
+                var restResponse = RestClient.ExecuteAsync(query, Method.Post).ConfigureAwait(false).GetAwaiter().GetResult();
                 if (restResponse.ErrorException != null)
                 {
                     throw restResponse.ErrorException;
@@ -169,18 +174,20 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-        protected async IAsyncEnumerable<T> QueryEnumerable<T>(RestRequest query, [EnumeratorCancellation] CancellationToken cancellationToken)
+        protected async IAsyncEnumerable<T> QueryEnumerable<T>(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn, [EnumeratorCancellation] CancellationToken cancellationToken)
         {
-            Arguments.CheckNotNull(query, nameof(query));
+            Arguments.CheckNotNull(queryFn, nameof(queryFn));
 
+            var query = queryFn.Invoke(null);
             BeforeIntercept(query);
 
             var response = await RestClient.ExecuteAsync(query, cancellationToken).ConfigureAwait(false);
 
-            response.Content = AfterIntercept((int)response.StatusCode, () => LoggingHandler.ToHeaders(response.Headers), response.Content);
+            AfterIntercept((int)response.StatusCode, () => response.Headers, response.Content);
 
             RaiseForInfluxError(response, response.Content);
 
+            //TODO ??? response.stream
             await foreach(var (_, record) in _csvParser.ParseFluxResponseAsync(new StringReader(response.Content), cancellationToken).ConfigureAwait(false))
             {
                 if (!(record is null))
@@ -190,7 +197,7 @@ namespace InfluxDB.Client.Core.Internal
 
         protected abstract void BeforeIntercept(RestRequest query);
 
-        protected abstract T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body);
+        protected abstract T AfterIntercept<T>(int statusCode, Func<IEnumerable<HeaderParameter>> headers, T body);
 
         protected void ParseFluxResponseToLines(Action<String> onResponse,
             ICancellable cancellable,
@@ -307,7 +314,7 @@ namespace InfluxDB.Client.Core.Internal
 
         protected void RaiseForInfluxError(object result, object body)
         {
-            if (result is IRestResponse restResponse)
+            if (result is RestResponse restResponse)
             {
                 if (restResponse.IsSuccessful) return;
 
@@ -319,17 +326,12 @@ namespace InfluxDB.Client.Core.Internal
                 throw HttpException.Create(restResponse, body);
             }
 
-            var httpResponse = (IHttpResponse) result;
+            var httpResponse = (HttpResponseMessage) result;
             if ((int) httpResponse.StatusCode >= 200 && (int) httpResponse.StatusCode < 300)
             {
                 return;
             }
 
-            if (httpResponse.ErrorException is InfluxException)
-            {
-                throw httpResponse.ErrorException;
-            }
-            
             throw HttpException.Create(httpResponse, body);
         }
 
@@ -350,6 +352,34 @@ namespace InfluxDB.Client.Core.Internal
             {
                 _onNext(cancellable, record);
             }
+        }
+
+        private RestResponse FromHttpResponseMessage(HttpResponseMessage response)
+        {
+            var uri = response.RequestMessage!.RequestUri;
+            return new RestResponse
+            {
+                // Content = null,
+                // RawBytes = null,
+                // ContentEncoding = response.Content.Headers.ContentEncoding,
+                // Version = response.RequestMessage?.Version,
+                // ContentLength = response.Content.Headers.ContentLength,
+                // ContentType = response.Content.Headers.ContentType?.MediaType,
+                // ResponseStatus = response.IsSuccessStatusCode ? ResponseStatus.Completed : ResponseStatus.Error,
+                ErrorException = response.IsSuccessStatusCode
+                ? null
+                : new HttpRequestException($"Request failed with status code {response.StatusCode}"),
+                // ResponseUri = uri,
+                // Server = response.Headers.Server.ToString(),
+                // StatusCode = response.StatusCode,
+                // StatusDescription = response.ReasonPhrase,
+                // IsSuccessful = response.IsSuccessStatusCode,
+                // Request = null,
+                // Headers = response.Headers.ToHeaderParameters().ToList(),
+                // ContentHeaders = response.Content.Headers.ToHeaderParameters().ToList(),
+                // Cookies = RestClient.CookieContainer.GetCookies(uri),
+                // RootElement = null
+            };
         }
     }
 }

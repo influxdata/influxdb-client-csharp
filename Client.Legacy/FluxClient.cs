@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using InfluxDB.Client.Core;
@@ -17,14 +19,18 @@ namespace InfluxDB.Client.Flux
     {
         private readonly LoggingHandler _loggingHandler;
 
-        public FluxClient(FluxConnectionOptions options) : base(new RestClient(), new FluxResultMapper())
+        public FluxClient(FluxConnectionOptions options) : base(new FluxResultMapper())
         {
             _loggingHandler = new LoggingHandler(LogLevel.None);
 
             var version = AssemblyHelper.GetVersion(typeof(FluxClient));
-            
-            RestClient.BaseUrl = new Uri(options.Url);
-            RestClient.Timeout = options.Timeout.Milliseconds;
+            var restClientOptions = new RestClientOptions(options.Url)
+            {
+                Timeout = (int) options.Timeout.TotalMilliseconds,
+                UserAgent = $"influxdb-client-csharp/{version}",
+                Proxy = options.WebProxy
+            };
+            RestClient = new RestClient(restClientOptions);
             RestClient.AddDefaultHeader("Accept", "application/json");
             if (!string.IsNullOrEmpty(options.Username))
             {
@@ -39,8 +45,6 @@ namespace InfluxDB.Client.Flux
                     RestClient.AddDefaultQueryParameter("p", new string(options.Password));
                 }
             }
-            RestClient.UserAgent = $"influxdb-client-csharp/{version}";
-            RestClient.Proxy = options.WebProxy;
         }
 
         /// <summary>
@@ -405,7 +409,7 @@ namespace InfluxDB.Client.Flux
             return _loggingHandler.Level;
         }
 
-        private async Task<IRestResponse> ExecuteAsync(RestRequest request)
+        private async Task<RestResponse> ExecuteAsync(RestRequest request)
         {
             BeforeIntercept(request);
 
@@ -413,9 +417,9 @@ namespace InfluxDB.Client.Flux
 
             RaiseForInfluxError(response, response.Content);
 
-            response.Content = AfterIntercept(
+            AfterIntercept(
                 (int) response.StatusCode,
-                () => LoggingHandler.ToHeaders(response.Headers),
+                () => response.Headers,
                 response.Content);
 
             return response;
@@ -426,22 +430,21 @@ namespace InfluxDB.Client.Flux
             _loggingHandler.BeforeIntercept(request);
         }
 
-        protected override T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
+        protected override T AfterIntercept<T>(int statusCode, Func<IEnumerable<HeaderParameter>> headers, T body)
         {
             return (T) _loggingHandler.AfterIntercept(statusCode, headers, body);
         }
 
         private RestRequest PingRequest()
         {
-            return new RestRequest("ping", Method.GET);
+            return new RestRequest("ping");
         }
 
-        private RestRequest QueryRequest(string query)
+        private Func<Func<HttpResponseMessage, RestResponse>, RestRequest> QueryRequest(string query)
         {
-            var restRequest = new RestRequest("api/v2/query", Method.POST);
-            restRequest.AddParameter("application/json", query, ParameterType.RequestBody);
-
-            return restRequest;
+            return advancedResponseWriter => new RestRequest("api/v2/query", Method.Post)
+                .AddAdvancedResponseHandler(advancedResponseWriter)
+                .AddParameter(new BodyParameter("application/json", query, "application/json"));
         }
     }
 }

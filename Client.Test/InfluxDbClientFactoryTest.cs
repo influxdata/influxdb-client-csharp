@@ -67,7 +67,7 @@ namespace InfluxDB.Client.Test
         public void LoadFromConnectionString()
         {
             var client = InfluxDBClientFactory.Create("http://localhost:9999?" +
-                                                      "timeout=1000&readWriteTimeout=3000&logLevel=HEADERS&token=my-token&bucket=my-bucket&org=my-org&allowHttpRedirects=true");
+                                                      "timeout=1000&logLevel=HEADERS&token=my-token&bucket=my-bucket&org=my-org&allowHttpRedirects=true");
 
             var options = GetDeclaredField<InfluxDBClientOptions>(client.GetType(), client, "_options");
             Assert.AreEqual("http://localhost:9999/", options.Url);
@@ -79,15 +79,14 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Headers, client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(client.GetType(), client, "_apiClient");
-            Assert.AreEqual(1_000, apiClient.Configuration.Timeout);
-            Assert.AreEqual(3_000, apiClient.Configuration.ReadWriteTimeout);
+            Assert.AreEqual(1_000, apiClient.RestClientOptions.Timeout);
         }
 
         [Test]
         public void LoadFromConnectionStringUnitsMillisecondsSeconds()
         {
             var client = InfluxDBClientFactory.Create("http://localhost:9999?" +
-                                                      "timeout=1ms&readWriteTimeout=3s&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
+                                                      "timeout=1ms&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
             
             var options = GetDeclaredField<InfluxDBClientOptions>(client.GetType(), client, "_options");
             Assert.AreEqual("http://localhost:9999/", options.Url);
@@ -98,15 +97,14 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Headers, client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(client.GetType(), client, "_apiClient");
-            Assert.AreEqual(1, apiClient.Configuration.Timeout);
-            Assert.AreEqual(3_000, apiClient.Configuration.ReadWriteTimeout);
+            Assert.AreEqual(1, apiClient.RestClientOptions.Timeout);
         }
         
         [Test]
         public void LoadFromConnectionStringUnitsMinutes()
         {
             var client = InfluxDBClientFactory.Create("http://localhost:9999?" +
-                                                      "timeout=1ms&readWriteTimeout=3m&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
+                                                      "timeout=1ms&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
             
             var options = GetDeclaredField<InfluxDBClientOptions>(client.GetType(), client, "_options");
             Assert.AreEqual("http://localhost:9999/", options.Url);
@@ -117,15 +115,14 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Headers, client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(client.GetType(), client, "_apiClient");
-            Assert.AreEqual(1, apiClient.Configuration.Timeout);
-            Assert.AreEqual(180_000, apiClient.Configuration.ReadWriteTimeout);
+            Assert.AreEqual(1, apiClient.RestClientOptions.Timeout);
         }
 
         [Test]
         public void LoadFromConnectionNotValidDuration()
         {
             var ioe = Assert.Throws<InfluxException>(() => InfluxDBClientFactory.Create("http://localhost:9999?" +
-                                                                                        "timeout=x&readWriteTimeout=3m&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org"));
+                                                                                        "timeout=x&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org"));
 
             Assert.AreEqual("'x' is not a valid duration", ioe.Message);
         }
@@ -134,7 +131,7 @@ namespace InfluxDB.Client.Test
         public void LoadFromConnectionUnknownUnit()
         {
             var ioe = Assert.Throws<InfluxException>(() => InfluxDBClientFactory.Create("http://localhost:9999?" +
-                                                                                        "timeout=1y&readWriteTimeout=3m&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org"));
+                                                                                        "timeout=1y&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org"));
 
             Assert.AreEqual("unknown unit for '1y'", ioe.Message);
         }
@@ -155,8 +152,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Body, client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(client.GetType(), client, "_apiClient");
-            Assert.AreEqual(10_000, apiClient.Configuration.Timeout);
-            Assert.AreEqual(5_000, apiClient.Configuration.ReadWriteTimeout);
+            Assert.AreEqual(10_000, apiClient.RestClientOptions.Timeout);
 
             var defaultTags = GetDeclaredField<SortedDictionary<string, string>>(options.PointSettings.GetType(), options.PointSettings, "_defaultTags");
             
@@ -215,14 +211,12 @@ namespace InfluxDB.Client.Test
                 .Url("http://localhost:8086")
                 .AuthenticateToken("my-token".ToCharArray())
                 .TimeOut(TimeSpan.FromSeconds(20))
-                .ReadWriteTimeOut(TimeSpan.FromSeconds(30))
                 .Build();
 
             var client = InfluxDBClientFactory.Create(options);
             
             var apiClient = GetDeclaredField<ApiClient>(client.GetType(), client, "_apiClient");
-            Assert.AreEqual(20_000, apiClient.Configuration.Timeout);
-            Assert.AreEqual(30_000, apiClient.Configuration.ReadWriteTimeout);
+            Assert.AreEqual(20_000, apiClient.RestClientOptions.Timeout);
         }
         
         [Test]

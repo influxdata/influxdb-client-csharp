@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
 using NUnit.Framework;
@@ -213,11 +213,13 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("m,device=id-1 value=16i 1605428415000000000", GetRequestBody(response));
         }
 
-        private string GetRequestBody(IRestResponse restResponse)
+        private string GetRequestBody(RestResponse restResponse)
         {
-            var bytes = (byte[]) restResponse.Request.Body?.Value ??
+            var bytes = (byte[]) restResponse.Request?.Parameters
+                            .GetParameters(ParameterType.RequestBody)
+                            .TryFind("text/plain")?.Value ??
                         throw new AssertionException("The body is required.");
-            return System.Text.Encoding.Default.GetString(bytes);
+            return Encoding.Default.GetString(bytes);
         }
     }
 }

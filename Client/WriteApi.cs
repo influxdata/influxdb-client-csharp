@@ -167,14 +167,14 @@ namespace InfluxDB.Client
                             // ReSharper disable once ConvertIfStatementToReturnStatement
                             if (result.IsSuccessful) return Notification.CreateOnNext(result);
 
-                            return Notification.CreateOnError<IRestResponse>(HttpException.Create(result, result.Content));
+                            return Notification.CreateOnError<RestResponse>(HttpException.Create(result, result.Content));
                         })
-                        .Catch<Notification<IRestResponse>, Exception>(ex =>
+                        .Catch<Notification<RestResponse>, Exception>(ex =>
                         {
                             var error = new WriteErrorEvent(org, bucket, precision, lineProtocol, ex);
                             Publish(error);
 
-                            return Observable.Return(Notification.CreateOnError<IRestResponse>(ex));
+                            return Observable.Return(Notification.CreateOnError<RestResponse>(ex));
                         }).Do(res =>
                         {
                             if (res.Kind == NotificationKind.OnNext)

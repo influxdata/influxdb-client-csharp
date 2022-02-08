@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using RestSharp;
@@ -33,7 +31,7 @@ namespace InfluxDB.Client.Core.Internal
             return _enabled;
         }
 
-        public void BeforeIntercept(IRestRequest request)
+        public void BeforeIntercept(RestRequest request)
         {
             if (!_enabled)
             {
@@ -41,7 +39,6 @@ namespace InfluxDB.Client.Core.Internal
                 // Disabled
                 //
                 request.AddOrUpdateParameter("Accept-Encoding", "identity", ParameterType.HttpHeader);
-                request.AddDecompressionMethod(DecompressionMethods.None);
             }
             else if (ContentRegex.Match(request.Resource).Success)
             {
@@ -50,7 +47,6 @@ namespace InfluxDB.Client.Core.Internal
                 //
                 request.AddOrUpdateParameter("Content-Encoding", "gzip", ParameterType.HttpHeader);
                 request.AddOrUpdateParameter("Accept-Encoding", "identity", ParameterType.HttpHeader);
-                request.AddDecompressionMethod(DecompressionMethods.None);
                 
                 var body = request.Parameters.FirstOrDefault(parameter =>
                     parameter.Type.Equals(ParameterType.RequestBody));
@@ -74,8 +70,13 @@ namespace InfluxDB.Client.Core.Internal
                             msi.CopyTo(gs);
                         }
 
-                        body.Value = mso.ToArray();
-                        body.Name = "application/x-gzip";
+                        request.Parameters.RemoveParameter(body);
+                        var bodyParameter = new BodyParameter(
+                            "application/x-gzip", 
+                            mso.ToArray(), 
+                            "application/x-gzip",
+                            DataFormat.Binary);
+                        request.Parameters.AddParameter(bodyParameter);
                     }
                 }
             }
@@ -84,7 +85,7 @@ namespace InfluxDB.Client.Core.Internal
                 //
                 // GZIP response
                 //
-                request.AddDecompressionMethod(DecompressionMethods.GZip);
+                request.AddOrUpdateParameter("Accept-Encoding", "gzip", ParameterType.HttpHeader);
             }
             else
             {
@@ -92,11 +93,10 @@ namespace InfluxDB.Client.Core.Internal
                 // Disabled
                 //
                 request.AddOrUpdateParameter("Accept-Encoding", "identity", ParameterType.HttpHeader);
-                request.AddDecompressionMethod(DecompressionMethods.None);
             }
         }
 
-        public object AfterIntercept(int statusCode, Func<IList<HttpHeader>> headers, object body)
+        public object AfterIntercept(int statusCode, Func<IEnumerable<HeaderParameter>> headers, object body)
         {
             return body;
         }

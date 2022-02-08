@@ -1,7 +1,33 @@
-## 3.4.0 [unreleased]
+## 4.0.0 [unreleased]
 
 ### Breaking Changes
-Changed type of `Duration.magnitude` from `int?` to `long?`.
+
+> :warning: The most important change is the update RestSharp to version `v107`. The RestSharp stop using the legacy `HttpWebRequest` class, and uses well-known `HttpClient` instead.
+
+- The client not longer support set the `ReadWriteTimeout` for HTTP client. This settings is not supported by `HttpClient`
+- Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
+- `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
+- Rename `TelegrafPlugin` types:
+  - from `TelegrafPlugin.TypeEnum.Inputs` to `TelegrafPlugin.TypeEnum.Input`
+  - from `TelegrafPlugin.TypeEnum.Outputs` to `TelegrafPlugin.TypeEnum.Output`
+
+This release also uses new version of InfluxDB OSS API definitions - [oss.yml](https://github.com/influxdata/openapi/blob/master/contracts/oss.yml). The following breaking changes are in underlying API services and doesn't affect common apis such as - `WriteApi`, `QueryApi`, `BucketsApi`, `OrganizationsApi`...
+
+- Add `ConfigService` to retrieve InfluxDB's runtime configuration
+- Add `RemoteConnectionsService` to deal with registered remote InfluxDB connections
+- Add `MetricsService` to deal with exposed prometheus metrics
+- Update `TemplatesService` to deal with `Stack` and `Template` API
+- Update `BackupService` to deal with new backup functions of InfluxDB
+- Update `RestoreService` to deal with new restore functions of InfluxDB
+- Remove `DocumentApi` in favour of [InfluxDB Community Templates](https://github.com/influxdata/community-templates). For more info see - [influxdb#19300](https://github.com/influxdata/influxdb/pull/19300), [openapi#192](https://github.com/influxdata/openapi/pull/192)
+- Remove `DefaultSerive`:
+   - `GetRoutes` operation is moved to `RoutesService`
+   - `GetTelegrafPlugin` operation is moved to `TelegrafsService`
+   - `PostSignin` operation is moved to `SigninService`
+   - `PostSignout` operation is moved to `SignoutService`
+- Change type of `Duration.magnitude` from `int?` to `long?`
+- `TelegrafsService` uses `TelegrafPluginRequest` to create `Telegraf` configuration
+- `TelegrafsService` uses `TelegrafPluginRequest` to update `Telegraf` configuration
 
 ### Features
 1. [#282](https://github.com/influxdata/influxdb-client-csharp/pull/282): Add support for AggregateWindow function [LINQ]

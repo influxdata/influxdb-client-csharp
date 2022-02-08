@@ -9,7 +9,7 @@ namespace InfluxDB.Client.Core.Internal
 {
     public abstract class AbstractRestClient
     {
-        protected async Task<bool> PingAsync(Task<IRestResponse> request)
+        protected async Task<bool> PingAsync(Task<RestResponse> request)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-        protected async Task<string> VersionAsync(Task<IRestResponse> request)
+        protected async Task<string> VersionAsync(Task<RestResponse> request)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
         
-        private string GetVersion(IRestResponse responseHttp)
+        private string GetVersion(RestResponse responseHttp)
         {
             Arguments.CheckNotNull(responseHttp, "responseHttp");
 

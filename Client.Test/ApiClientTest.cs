@@ -43,7 +43,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void ProxyDefault()
         {
-            Assert.AreEqual(null, _apiClient.RestClient.Proxy);
+            Assert.AreEqual(null, _apiClient.RestClientOptions.Proxy);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace InfluxDB.Client.Test
             
             _apiClient = new ApiClient(options, new LoggingHandler(LogLevel.Body), new GzipHandler());
             
-            Assert.AreEqual(webProxy, _apiClient.RestClient.Proxy);
+            Assert.AreEqual(webProxy, _apiClient.RestClientOptions.Proxy);
         }
     }
 }

@@ -182,7 +182,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <returns>Write Task with IRestResponse</returns>
-        public Task<IRestResponse> WriteRecordsAsyncWithIRestResponse(IEnumerable<string> records, string bucket = null,
+        public Task<RestResponse> WriteRecordsAsyncWithIRestResponse(IEnumerable<string> records, string bucket = null,
             string org = null, WritePrecision precision = WritePrecision.Ns,
             CancellationToken cancellationToken = default)
         {
@@ -311,10 +311,10 @@ namespace InfluxDB.Client
         /// </param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <returns>Write Tasks with IRestResponses.</returns>
-        public Task<IRestResponse[]> WritePointsAsyncWithIRestResponse(IEnumerable<PointData> points,
+        public Task<RestResponse[]> WritePointsAsyncWithIRestResponse(IEnumerable<PointData> points,
             string bucket = null, string org = null, CancellationToken cancellationToken = default)
         {
-            var tasks = new List<Task<IRestResponse>>();
+            var tasks = new List<Task<RestResponse>>();
             foreach (var grouped in points.GroupBy(it => it.Precision))
             {
                 var options = new BatchWriteOptions(bucket, org, grouped.Key);
@@ -481,7 +481,7 @@ namespace InfluxDB.Client
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
         /// <returns>Write Task with IRestResponse</returns>
-        public Task<IRestResponse> WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM> measurements, string bucket = null,
+        public Task<RestResponse> WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM> measurements, string bucket = null,
             string org = null, WritePrecision precision = WritePrecision.Ns,
             CancellationToken cancellationToken = default)
         {
@@ -509,7 +509,7 @@ namespace InfluxDB.Client
                 cancellationToken);
         }
 
-        private Task<IRestResponse> WriteDataAsyncWithIRestResponse(IEnumerable<BatchWriteData> batch,string bucket = null, string org = null,
+        private Task<RestResponse> WriteDataAsyncWithIRestResponse(IEnumerable<BatchWriteData> batch,string bucket = null, string org = null,
             WritePrecision precision = WritePrecision.Ns, CancellationToken cancellationToken = default)
         {
             var localBucket = bucket ?? _options.Bucket;

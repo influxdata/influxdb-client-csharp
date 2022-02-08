@@ -7,7 +7,7 @@
         <Description>InfluxDB Client Core - exceptions, validations, REST client.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Core</AssemblyName>
-        <VersionPrefix>3.4.0</VersionPrefix>
+        <VersionPrefix>4.0.0</VersionPrefix>
         <VersionSuffix>dev</VersionSuffix>
 
         <PackageId>InfluxDB.Client.Core</PackageId>
@@ -36,7 +36,7 @@
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="NodaTime" Version="3.0.5" />
       <PackageReference Include="NodaTime.Serialization.JsonNet" Version="3.0.0" />
-      <PackageReference Include="RestSharp" Version="106.12.0" />
+      <PackageReference Include="RestSharp" Version="107.2.1" />
     </ItemGroup>
 
 </Project>

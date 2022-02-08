@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
@@ -18,14 +19,14 @@ namespace InfluxDB.Client
         private readonly InfluxDBClientOptions _options;
         private readonly QueryService _service;
 
-        protected internal QueryApiSync(InfluxDBClientOptions options, QueryService service, IFluxResultMapper mapper) : base(service.Configuration
-            .ApiClient.RestClient, mapper)
+        protected internal QueryApiSync(InfluxDBClientOptions options, QueryService service, IFluxResultMapper mapper) : base(mapper)
         {
             Arguments.CheckNotNull(options, nameof(options));
             Arguments.CheckNotNull(service, nameof(service));
 
             _options = options;
             _service = service;
+            RestClient = service.Configuration.ApiClient.RestClient;
         }
         
         /// <summary>
@@ -104,10 +105,13 @@ namespace InfluxDB.Client
             var measurements = new List<T>();
 
             var consumer = new FluxResponseConsumerPoco<T>((cancellable, poco) => { measurements.Add(poco); }, Mapper);
-            
-            var requestMessage = _service.PostQueryWithRestRequest(null, "application/json", null, org, null, query);
 
-            QuerySync(requestMessage, consumer, ErrorConsumer, EmptyAction);
+            Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn =
+                advancedResponseWriter => _service
+                    .PostQueryWithRestRequest(null, "application/json", null, org, null, query)
+                    .AddAdvancedResponseHandler(advancedResponseWriter);
+
+            QuerySync(queryFn, consumer, ErrorConsumer, EmptyAction);
 
             return measurements;
         }
@@ -184,9 +188,12 @@ namespace InfluxDB.Client
 
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();
             
-            var requestMessage = _service.PostQueryWithRestRequest(null, "application/json", null, org, null, query);
+            Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn = 
+                advancedResponseWriter => _service
+                    .PostQueryWithRestRequest(null, "application/json", null, org, null, query)
+                    .AddAdvancedResponseHandler(advancedResponseWriter);
 
-            QuerySync(requestMessage, consumer, ErrorConsumer, EmptyAction);
+            QuerySync(queryFn, consumer, ErrorConsumer, EmptyAction);
 
             return consumer.Tables;
         }
@@ -196,7 +203,7 @@ namespace InfluxDB.Client
             _service.Configuration.ApiClient.BeforeIntercept(request);
         }
 
-        protected override T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
+        protected override T AfterIntercept<T>(int statusCode, Func<IEnumerable<HeaderParameter>> headers, T body)
         {
             return _service.Configuration.ApiClient.AfterIntercept(statusCode, headers, body);
         }

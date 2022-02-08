@@ -1,9 +1,9 @@
 using System;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using NUnit.Framework;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client.Test
 {
@@ -169,6 +169,35 @@ namespace InfluxDB.Client.Test
             Assert.IsNull(ready);
 
             clientNotRunning.Dispose();
+        }
+
+        [Test]
+        public async Task UseUsernamePassword()
+        {
+            Client.Dispose();
+            
+            Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-user", "my-password".ToCharArray());
+
+            var measurement = $"mem_{DateTimeOffset.Now.ToUnixTimeSeconds()}";
+            await Client
+                .GetWriteApiAsync()
+                .WriteRecordAsync("my-bucket", "my-org", WritePrecision.Ns, $"{measurement},tag=a value=10i");
+            
+            var query = $@"from(bucket: ""my-bucket"")
+                |> range(start: 0)
+                |> filter(fn: (r) => r[""_measurement""] == ""{measurement}"")";
+            var tables = await Client.GetQueryApi().QueryAsync(query, "my-org");
+            Assert.AreEqual(1, tables.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.AreEqual(10, tables[0].Records[0].GetValue());
+            
+            Client.Dispose();
+            
+            // test unauthorized
+            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () =>
+                await Client.GetQueryApi().QueryAsync(query, "my-org"));
+
+            Assert.IsNotNull(ioe);
         }
     }
 }

@@ -46,11 +46,12 @@ namespace Client.Legacy.Test
             Assert.AreEqual(webProxy, GetRestClient(fluxClient).Proxy);
         }
 
-        private RestClient GetRestClient(FluxClient fluxClient)
+        private RestClientOptions GetRestClient(FluxClient fluxClient)
         {
-            var restClientInfo = fluxClient.GetType().GetField("RestClient", BindingFlags.NonPublic | BindingFlags.Instance);
-            var restClient = (RestClient) restClientInfo?.GetValue(fluxClient);
-            return restClient;
+            var restClientInfo = fluxClient.GetType().BaseType!.GetField("RestClient", BindingFlags.NonPublic | BindingFlags.Instance);
+            var restClient = (RestClient) restClientInfo!.GetValue(fluxClient);
+            var restClientOptionsInfo = restClient!.GetType().GetProperty("Options", BindingFlags.NonPublic | BindingFlags.Instance);
+            return (RestClientOptions) restClientOptionsInfo!.GetValue(restClient);
         }
     }
 }

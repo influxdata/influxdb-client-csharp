@@ -98,7 +98,7 @@ fluxClient.QueryAsync(fluxQuery, (cancellable, record) =>
             {
                 // on complete
                 Console.WriteLine("Query completed");
-            }).GetAwaiter().GetResult();
+            }).ConfigureAwait(false).GetAwaiter().GetResult();
 ```
 
 #### Raw query response

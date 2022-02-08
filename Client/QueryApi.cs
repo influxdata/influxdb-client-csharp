@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,6 @@ using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Internal;
 using InfluxDB.Client.Core.Internal;
 using RestSharp;
-using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
@@ -32,14 +32,14 @@ namespace InfluxDB.Client
         private readonly InfluxDBClientOptions _options;
         private readonly QueryService _service;
 
-        protected internal QueryApi(InfluxDBClientOptions options, QueryService service, IFluxResultMapper mapper) : base(service.Configuration
-            .ApiClient.RestClient, mapper)
+        protected internal QueryApi(InfluxDBClientOptions options, QueryService service, IFluxResultMapper mapper) : base(mapper)
         {
             Arguments.CheckNotNull(options, nameof(options));
             Arguments.CheckNotNull(service, nameof(service));
 
             _options = options;
             _service = service;
+            RestClient = service.Configuration.ApiClient.RestClient;
         }
 
         /// <summary>
@@ -1364,7 +1364,7 @@ namespace InfluxDB.Client
             _service.Configuration.ApiClient.BeforeIntercept(request);
         }
 
-        protected override T AfterIntercept<T>(int statusCode, Func<IList<HttpHeader>> headers, T body)
+        protected override T AfterIntercept<T>(int statusCode, Func<IEnumerable<HeaderParameter>> headers, T body)
         {
             return _service.Configuration.ApiClient.AfterIntercept(statusCode, headers, body);
         }
@@ -1385,13 +1385,14 @@ namespace InfluxDB.Client
             return Query(requestMessage, consumer, onError, onComplete);
         }
 
-        private RestRequest CreateRequest(Query query, string org)
+        private Func<Func<HttpResponseMessage, RestResponse>, RestRequest> CreateRequest(Query query, string org)
         {
             Arguments.CheckNotNull(query, nameof(query));
             Arguments.CheckNonEmptyString(org, nameof(org));
 
-            var request = _service.PostQueryWithRestRequest(null, "application/json", null, org, null, query);
-            return request;
+            return advancedResponseWriter => _service
+                .PostQueryWithRestRequest(null, "application/json", null, org, null, query)
+                .AddAdvancedResponseHandler(advancedResponseWriter);
         }
 
         internal static Query CreateQuery(string query, Dialect dialect = null)
