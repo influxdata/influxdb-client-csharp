@@ -190,6 +190,9 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(1, tables.Count);
             Assert.AreEqual(1, tables[0].Records.Count);
             Assert.AreEqual(10, tables[0].Records[0].GetValue());
+
+            // delete data
+            await Client.GetDeleteApi().Delete(DateTime.UtcNow.AddHours(-1), DateTime.UtcNow, "","my-bucket", "my-org");
             
             Client.Dispose();
             
