@@ -196,8 +196,8 @@ namespace InfluxDB.Client.Test
             
             Client.Dispose();
             
-            // test unauthorized
-            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () =>
+            // test already disposed
+            var ioe = Assert.ThrowsAsync<ObjectDisposedException>(async () =>
                 await Client.GetQueryApi().QueryAsync(query, "my-org"));
 
             Assert.IsNotNull(ioe);

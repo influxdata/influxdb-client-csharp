@@ -99,35 +99,11 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void MeNotAuthenticated()
-        {
-            Client.Dispose();
-
-            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () => await _usersApi.MeAsync());
-
-            Assert.IsNotNull(ioe);
-            Assert.AreEqual("unauthorized access", ioe.Message);
-        }
-
-        [Test]
         [Property("basic_auth", "true")]
         [Ignore("TODO not implemented set password https://github.com/influxdata/influxdb/pull/15981")]
         public async Task UpdateMePassword()
         {
             await _usersApi.MeUpdatePasswordAsync("my-password", "my-password");
-        }
-
-        [Test]
-        public void UpdateMePasswordWrongPassword()
-        {
-            Client.Dispose();
-
-            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () =>
-                await _usersApi.MeUpdatePasswordAsync("my-password-wrong", "my-password"));
-
-            Assert.IsNotNull(ioe);
-            Assert.AreEqual("unauthorized access", ioe.Message);
-            Assert.AreEqual(typeof(UnauthorizedException), ioe.GetType());
         }
 
         [Test]
