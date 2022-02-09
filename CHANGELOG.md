@@ -37,6 +37,7 @@ This release also uses new version of InfluxDB OSS API definitions - [oss.yml](h
 
 ### Features
 1. [#282](https://github.com/influxdata/influxdb-client-csharp/pull/282): Add support for AggregateWindow function [LINQ]
+1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Allow to set a client certificates
 
 ### CI
 1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Remove out of support `.NET Core` versions - `2.2`, `3.0`
