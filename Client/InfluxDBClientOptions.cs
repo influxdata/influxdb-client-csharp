@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Web;
 using InfluxDB.Client.Configurations;
@@ -40,6 +41,8 @@ namespace InfluxDB.Client
         public PointSettings PointSettings { get; }
 
         public bool VerifySsl { get; }
+        
+        public X509CertificateCollection ClientCertificates { get; }
 
         private InfluxDBClientOptions(Builder builder)
         {
@@ -63,6 +66,7 @@ namespace InfluxDB.Client
             PointSettings = builder.PointSettings;
 
             VerifySsl = builder.VerifySslCertificates;
+            ClientCertificates = builder.CertificateCollection;
         }
 
         /// <summary>
@@ -106,6 +110,7 @@ namespace InfluxDB.Client
             internal IWebProxy WebProxy;
             internal bool AllowHttpRedirects;
             internal bool VerifySslCertificates = true;
+            internal X509CertificateCollection CertificateCollection;
 
             internal PointSettings PointSettings = new PointSettings();
 
@@ -292,6 +297,20 @@ namespace InfluxDB.Client
             }
 
             /// <summary>
+            /// Set X509CertificateCollection to be sent with HTTP requests
+            /// </summary>
+            /// <param name="clientCertificates">certificate collections</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder ClientCertificates(X509CertificateCollection clientCertificates)
+            {
+                Arguments.CheckNotNull(clientCertificates, nameof(clientCertificates));
+
+                CertificateCollection = clientCertificates;
+
+                return this;
+            }
+
+            /// <summary>
             /// Configure Builder via App.config.
             /// </summary>
             /// <param name="sectionName">Name of configuration section. Useful for tests.</param>
@@ -350,8 +369,10 @@ namespace InfluxDB.Client
                 var logLevel = query.Get("logLevel");
                 var timeout = query.Get("timeout");
                 var allowHttpRedirects = Convert.ToBoolean(query.Get("allowHttpRedirects"));
+                var verifySslValue = query.Get("verifySsl");
+                var verifySsl = Convert.ToBoolean(string.IsNullOrEmpty(verifySslValue) ? "true" : verifySslValue);
 
-                return Configure(url, org, bucket, token, logLevel, timeout, allowHttpRedirects);
+                return Configure(url, org, bucket, token, logLevel, timeout, allowHttpRedirects, verifySsl);
             }
 
             private Builder Configure(string url, string org, string bucket, string token, string logLevel,

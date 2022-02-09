@@ -78,7 +78,7 @@ namespace InfluxDB.Client.Configurations
         /// <summary>
         /// Ignore Certificate Validation Errors when false
         /// </summary>
-        [ConfigurationProperty("verifySsl", IsKey = true, IsRequired = false)]
+        [ConfigurationProperty("verifySsl", IsKey = true, IsRequired = false, DefaultValue = true)]
         public bool VerifySsl
         {
             get => (bool)base["verifySsl"];

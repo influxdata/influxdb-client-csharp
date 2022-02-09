@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using InfluxDB.Client.Core.Internal;
 using RestSharp;
@@ -41,6 +42,12 @@ namespace InfluxDB.Client.Api.Client
             if (!options.VerifySsl)
             {
                 RestClientOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+            }
+
+            if (options.ClientCertificates != null)
+            {
+                RestClientOptions.ClientCertificates ??= new X509CertificateCollection();
+                RestClientOptions.ClientCertificates.AddRange(options.ClientCertificates);
             }
 
             RestClient = new RestClient(RestClientOptions);

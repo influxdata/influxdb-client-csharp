@@ -1073,15 +1073,16 @@ A client can be configured via `App.config` file.
 
 The following options are supported:
 
-| Property name     | default   | description |
-| ------------------|-----------|-------------| 
-| Url               | -         | the url to connect to InfluxDB |
-| Org               | -         | default destination organization for writes and queries |
-| Bucket            | -         | default destination bucket for writes |
-| Token             | -         | the token to use for the authorization |
-| LogLevel          | NONE      | rest client verbosity level |
-| Timeout           | 10000 ms  | socket timeout |
-| AllowHttpRedirects| false     | Configure automatically following HTTP 3xx redirects. |
+| Property name      | default  | description                                             |
+|--------------------|----------|---------------------------------------------------------| 
+| Url                | -        | the url to connect to InfluxDB                          |
+| Org                | -        | default destination organization for writes and queries |
+| Bucket             | -        | default destination bucket for writes                   |
+| Token              | -        | the token to use for the authorization                  |
+| LogLevel           | NONE     | rest client verbosity level                             |
+| Timeout            | 10000 ms | socket timeout                                          |
+| AllowHttpRedirects | false    | Configure automatically following HTTP 3xx redirects    |
+| VerifySsl          | true     | Ignore Certificate Validation Errors when false         |
 
 The `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
@@ -1121,14 +1122,15 @@ var influxDBClient = InfluxDBClientFactory
 ```
 The following options are supported:
 
-| Property name     | default   | description |
-| ------------------|-----------|-------------| 
-| org               | -         | default destination organization for writes and queries |
-| bucket            | -         | default destination bucket for writes |
-| token             | -         | the token to use for the authorization |
-| logLevel          | NONE      | rest client verbosity level |
-| timeout           | 10000 ms  | socket timeout |
-| allowHttpRedirects| false | Configure automatically following HTTP 3xx redirects. |
+| Property name      | default  | description                                             |
+|--------------------|----------|---------------------------------------------------------| 
+| org                | -        | default destination organization for writes and queries |
+| bucket             | -        | default destination bucket for writes                   |
+| token              | -        | the token to use for the authorization                  |
+| logLevel           | NONE     | rest client verbosity level                             |
+| timeout            | 10000 ms | socket timeout                                          |
+| allowHttpRedirects | false    | Configure automatically following HTTP 3xx redirects    |
+| verifySsl          | true     | Ignore Certificate Validation Errors when `false`       |
 
 The `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
