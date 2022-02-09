@@ -389,7 +389,7 @@ namespace InfluxDB.Client.Writes
                 {
                     entries = _tags.AddRange(defaultTags);
                 }
-                catch (ArgumentException ex)
+                catch (ArgumentException)
                 {
                     // Most cases don't expect to override existing content
                     // override don't consider as best practice
