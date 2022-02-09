@@ -67,23 +67,13 @@ namespace InfluxDB.Client.Api.Domain
         public Permission(ActionEnum action = default(ActionEnum), PermissionResource resource = default(PermissionResource))
         {
             // to ensure "action" is required (not null)
-            if (action == null)
-            {
-                throw new InvalidDataException("action is a required property for Permission and cannot be null");
-            }
-            else
-            {
-                this.Action = action;
-            }
+            this.Action = action;
             // to ensure "resource" is required (not null)
             if (resource == null)
             {
                 throw new InvalidDataException("resource is a required property for Permission and cannot be null");
             }
-            else
-            {
-                this.Resource = resource;
-            }
+            this.Resource = resource;
         }
 
 
@@ -139,13 +129,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Action == input.Action ||
-                    (this.Action != null &&
-                    this.Action.Equals(input.Action))
+                    this.Action.Equals(input.Action)
                 ) && 
                 (
                     
-                    (this.Resource != null &&
-                    this.Resource.Equals(input.Resource))
+                    (this.Resource != null && this.Resource.Equals(input.Resource))
                 );
         }
 
@@ -158,8 +146,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Action != null)
-                    hashCode = hashCode * 59 + this.Action.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Action.GetHashCode();
                 if (this.Resource != null)
                     hashCode = hashCode * 59 + this.Resource.GetHashCode();
                 return hashCode;

@@ -107,8 +107,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.ContentType == input.ContentType ||
-                    (this.ContentType != null &&
-                    this.ContentType.Equals(input.ContentType))
+                    (this.ContentType != null && this.ContentType.Equals(input.ContentType))
                 ) && 
                 (
                     this.Sources == input.Sources ||
@@ -131,6 +130,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.ContentType != null)
                     hashCode = hashCode * 59 + this.ContentType.GetHashCode();
                 if (this.Sources != null)

@@ -51,28 +51,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("username is a required property for OnboardingRequest and cannot be null");
             }
-            else
-            {
-                this.Username = username;
-            }
+            this.Username = username;
             // to ensure "org" is required (not null)
             if (org == null)
             {
                 throw new InvalidDataException("org is a required property for OnboardingRequest and cannot be null");
             }
-            else
-            {
-                this.Org = org;
-            }
+            this.Org = org;
             // to ensure "bucket" is required (not null)
             if (bucket == null)
             {
                 throw new InvalidDataException("bucket is a required property for OnboardingRequest and cannot be null");
             }
-            else
-            {
-                this.Bucket = bucket;
-            }
+            this.Bucket = bucket;
             this.Password = password;
             this.RetentionPeriodSeconds = retentionPeriodSeconds;
             this.RetentionPeriodHrs = retentionPeriodHrs;
@@ -174,38 +165,31 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Username == input.Username ||
-                    (this.Username != null &&
-                    this.Username.Equals(input.Username))
+                    (this.Username != null && this.Username.Equals(input.Username))
                 ) && 
                 (
                     this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
+                    (this.Password != null && this.Password.Equals(input.Password))
                 ) && 
                 (
                     this.Org == input.Org ||
-                    (this.Org != null &&
-                    this.Org.Equals(input.Org))
+                    (this.Org != null && this.Org.Equals(input.Org))
                 ) && 
                 (
                     this.Bucket == input.Bucket ||
-                    (this.Bucket != null &&
-                    this.Bucket.Equals(input.Bucket))
+                    (this.Bucket != null && this.Bucket.Equals(input.Bucket))
                 ) && 
                 (
                     this.RetentionPeriodSeconds == input.RetentionPeriodSeconds ||
-                    (this.RetentionPeriodSeconds != null &&
-                    this.RetentionPeriodSeconds.Equals(input.RetentionPeriodSeconds))
+                    (this.RetentionPeriodSeconds != null && this.RetentionPeriodSeconds.Equals(input.RetentionPeriodSeconds))
                 ) && 
                 (
                     this.RetentionPeriodHrs == input.RetentionPeriodHrs ||
-                    (this.RetentionPeriodHrs != null &&
-                    this.RetentionPeriodHrs.Equals(input.RetentionPeriodHrs))
+                    (this.RetentionPeriodHrs != null && this.RetentionPeriodHrs.Equals(input.RetentionPeriodHrs))
                 ) && 
                 (
                     this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
+                    (this.Token != null && this.Token.Equals(input.Token))
                 );
         }
 
@@ -218,6 +202,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Username != null)
                     hashCode = hashCode * 59 + this.Username.GetHashCode();
                 if (this.Password != null)

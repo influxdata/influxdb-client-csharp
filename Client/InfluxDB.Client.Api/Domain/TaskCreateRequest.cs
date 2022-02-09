@@ -54,10 +54,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("flux is a required property for TaskCreateRequest and cannot be null");
             }
-            else
-            {
-                this.Flux = flux;
-            }
+            this.Flux = flux;
             this.OrgID = orgID;
             this.Org = org;
             this.Status = status;
@@ -142,28 +139,23 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Org == input.Org ||
-                    (this.Org != null &&
-                    this.Org.Equals(input.Org))
+                    (this.Org != null && this.Org.Equals(input.Org))
                 ) && 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    this.Status.Equals(input.Status)
                 ) && 
                 (
                     this.Flux == input.Flux ||
-                    (this.Flux != null &&
-                    this.Flux.Equals(input.Flux))
+                    (this.Flux != null && this.Flux.Equals(input.Flux))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 );
         }
 
@@ -176,12 +168,12 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Org != null)
                     hashCode = hashCode * 59 + this.Org.GetHashCode();
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
+                hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.Flux != null)
                     hashCode = hashCode * 59 + this.Flux.GetHashCode();
                 if (this.Description != null)

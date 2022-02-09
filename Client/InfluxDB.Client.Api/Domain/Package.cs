@@ -120,18 +120,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    (this.Type != null && this.Type.Equals(input.Type))
                 ) && 
                 (
                     this.Path == input.Path ||
-                    (this.Path != null &&
-                    this.Path.Equals(input.Path))
+                    (this.Path != null && this.Path.Equals(input.Path))
                 ) && 
                 (
                     this._Package == input._Package ||
-                    (this._Package != null &&
-                    this._Package.Equals(input._Package))
+                    (this._Package != null && this._Package.Equals(input._Package))
                 ) && 
                 (
                     this.Files == input.Files ||
@@ -149,6 +146,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Path != null)

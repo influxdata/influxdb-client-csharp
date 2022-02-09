@@ -62,23 +62,13 @@ namespace InfluxDB.Client.Api.Domain
         public BucketRetentionRules(TypeEnum type = TypeEnum.Expire, long? everySeconds = default(long?), long? shardGroupDurationSeconds = default(long?))
         {
             // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for BucketRetentionRules and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
+            this.Type = type;
             // to ensure "everySeconds" is required (not null)
             if (everySeconds == null)
             {
                 throw new InvalidDataException("everySeconds is a required property for BucketRetentionRules and cannot be null");
             }
-            else
-            {
-                this.EverySeconds = everySeconds;
-            }
+            this.EverySeconds = everySeconds;
             this.ShardGroupDurationSeconds = shardGroupDurationSeconds;
         }
 
@@ -144,18 +134,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && 
                 (
                     this.EverySeconds == input.EverySeconds ||
-                    (this.EverySeconds != null &&
-                    this.EverySeconds.Equals(input.EverySeconds))
+                    (this.EverySeconds != null && this.EverySeconds.Equals(input.EverySeconds))
                 ) && 
                 (
                     this.ShardGroupDurationSeconds == input.ShardGroupDurationSeconds ||
-                    (this.ShardGroupDurationSeconds != null &&
-                    this.ShardGroupDurationSeconds.Equals(input.ShardGroupDurationSeconds))
+                    (this.ShardGroupDurationSeconds != null && this.ShardGroupDurationSeconds.Equals(input.ShardGroupDurationSeconds))
                 );
         }
 
@@ -168,8 +155,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.EverySeconds != null)
                     hashCode = hashCode * 59 + this.EverySeconds.GetHashCode();
                 if (this.ShardGroupDurationSeconds != null)

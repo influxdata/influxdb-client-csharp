@@ -46,10 +46,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("routingKey is a required property for PagerDutyNotificationEndpoint and cannot be null");
             }
-            else
-            {
-                this.RoutingKey = routingKey;
-            }
+            this.RoutingKey = routingKey;
             this.ClientURL = clientURL;
         }
 
@@ -112,13 +109,11 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.ClientURL == input.ClientURL ||
-                    (this.ClientURL != null &&
-                    this.ClientURL.Equals(input.ClientURL))
+                    (this.ClientURL != null && this.ClientURL.Equals(input.ClientURL))
                 ) && base.Equals(input) && 
                 (
                     this.RoutingKey == input.RoutingKey ||
-                    (this.RoutingKey != null &&
-                    this.RoutingKey.Equals(input.RoutingKey))
+                    (this.RoutingKey != null && this.RoutingKey.Equals(input.RoutingKey))
                 );
         }
 
@@ -131,6 +126,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                
                 if (this.ClientURL != null)
                     hashCode = hashCode * 59 + this.ClientURL.GetHashCode();
                 if (this.RoutingKey != null)

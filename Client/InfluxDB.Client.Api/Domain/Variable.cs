@@ -53,28 +53,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("orgID is a required property for Variable and cannot be null");
             }
-            else
-            {
-                this.OrgID = orgID;
-            }
+            this.OrgID = orgID;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for Variable and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "arguments" is required (not null)
             if (arguments == null)
             {
                 throw new InvalidDataException("arguments is a required property for Variable and cannot be null");
             }
-            else
-            {
-                this.Arguments = arguments;
-            }
+            this.Arguments = arguments;
             this.Links = links;
             this.Description = description;
             this.Selected = selected;
@@ -198,28 +189,23 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 ) && 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.Selected == input.Selected ||
@@ -233,18 +219,15 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     
-                    (this.Arguments != null &&
-                    this.Arguments.Equals(input.Arguments))
+                    (this.Arguments != null && this.Arguments.Equals(input.Arguments))
                 ) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null &&
-                    this.CreatedAt.Equals(input.CreatedAt))
+                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
                 ) && 
                 (
                     this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null &&
-                    this.UpdatedAt.Equals(input.UpdatedAt))
+                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
                 );
         }
 
@@ -257,6 +240,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Links != null)
                     hashCode = hashCode * 59 + this.Links.GetHashCode();
                 if (this.Id != null)

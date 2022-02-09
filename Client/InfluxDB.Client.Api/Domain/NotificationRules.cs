@@ -103,8 +103,7 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 );
         }
 
@@ -117,6 +116,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this._NotificationRules != null)
                     hashCode = hashCode * 59 + this._NotificationRules.GetHashCode();
                 if (this.Links != null)

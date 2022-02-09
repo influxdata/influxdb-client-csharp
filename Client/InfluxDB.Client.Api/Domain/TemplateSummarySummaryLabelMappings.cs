@@ -152,43 +152,35 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    (this.Status != null && this.Status.Equals(input.Status))
                 ) && 
                 (
                     this.ResourceTemplateMetaName == input.ResourceTemplateMetaName ||
-                    (this.ResourceTemplateMetaName != null &&
-                    this.ResourceTemplateMetaName.Equals(input.ResourceTemplateMetaName))
+                    (this.ResourceTemplateMetaName != null && this.ResourceTemplateMetaName.Equals(input.ResourceTemplateMetaName))
                 ) && 
                 (
                     this.ResourceName == input.ResourceName ||
-                    (this.ResourceName != null &&
-                    this.ResourceName.Equals(input.ResourceName))
+                    (this.ResourceName != null && this.ResourceName.Equals(input.ResourceName))
                 ) && 
                 (
                     this.ResourceID == input.ResourceID ||
-                    (this.ResourceID != null &&
-                    this.ResourceID.Equals(input.ResourceID))
+                    (this.ResourceID != null && this.ResourceID.Equals(input.ResourceID))
                 ) && 
                 (
                     this.ResourceType == input.ResourceType ||
-                    (this.ResourceType != null &&
-                    this.ResourceType.Equals(input.ResourceType))
+                    (this.ResourceType != null && this.ResourceType.Equals(input.ResourceType))
                 ) && 
                 (
                     this.LabelTemplateMetaName == input.LabelTemplateMetaName ||
-                    (this.LabelTemplateMetaName != null &&
-                    this.LabelTemplateMetaName.Equals(input.LabelTemplateMetaName))
+                    (this.LabelTemplateMetaName != null && this.LabelTemplateMetaName.Equals(input.LabelTemplateMetaName))
                 ) && 
                 (
                     this.LabelName == input.LabelName ||
-                    (this.LabelName != null &&
-                    this.LabelName.Equals(input.LabelName))
+                    (this.LabelName != null && this.LabelName.Equals(input.LabelName))
                 ) && 
                 (
                     this.LabelID == input.LabelID ||
-                    (this.LabelID != null &&
-                    this.LabelID.Equals(input.LabelID))
+                    (this.LabelID != null && this.LabelID.Equals(input.LabelID))
                 );
         }
 
@@ -201,6 +193,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Status != null)
                     hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.ResourceTemplateMetaName != null)

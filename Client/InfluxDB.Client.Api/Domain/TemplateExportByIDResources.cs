@@ -52,19 +52,9 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("id is a required property for TemplateExportByIDResources and cannot be null");
             }
-            else
-            {
-                this.Id = id;
-            }
+            this.Id = id;
             // to ensure "kind" is required (not null)
-            if (kind == null)
-            {
-                throw new InvalidDataException("kind is a required property for TemplateExportByIDResources and cannot be null");
-            }
-            else
-            {
-                this.Kind = kind;
-            }
+            this.Kind = kind;
             this.Name = name;
         }
 
@@ -129,18 +119,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.Kind == input.Kind ||
-                    (this.Kind != null &&
-                    this.Kind.Equals(input.Kind))
+                    this.Kind.Equals(input.Kind)
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 );
         }
 
@@ -153,10 +140,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Kind != null)
-                    hashCode = hashCode * 59 + this.Kind.GetHashCode();
+                hashCode = hashCode * 59 + this.Kind.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 return hashCode;

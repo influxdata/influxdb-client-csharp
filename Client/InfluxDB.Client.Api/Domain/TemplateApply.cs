@@ -161,23 +161,19 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.DryRun == input.DryRun ||
-                    (this.DryRun != null &&
-                    this.DryRun.Equals(input.DryRun))
+                    (this.DryRun != null && this.DryRun.Equals(input.DryRun))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.StackID == input.StackID ||
-                    (this.StackID != null &&
-                    this.StackID.Equals(input.StackID))
+                    (this.StackID != null && this.StackID.Equals(input.StackID))
                 ) && 
                 (
                     
-                    (this.Template != null &&
-                    this.Template.Equals(input.Template))
+                    (this.Template != null && this.Template.Equals(input.Template))
                 ) && 
                 (
                     this.Templates == input.Templates ||
@@ -215,6 +211,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.DryRun != null)
                     hashCode = hashCode * 59 + this.DryRun.GetHashCode();
                 if (this.OrgID != null)

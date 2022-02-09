@@ -137,7 +137,6 @@ jobs:
           name: Check compilation warnings
           command: |
             dotnet clean --configuration Release
-            dotnet restore
             dotnet build --configuration Release -warnAsError -warnAsMessage:CS0618
           
   deploy-preview:

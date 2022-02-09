@@ -117,23 +117,19 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Text == input.Text ||
-                    (this.Text != null &&
-                    this.Text.Equals(input.Text))
+                    (this.Text != null && this.Text.Equals(input.Text))
                 ) && 
                 (
                     this.EditMode == input.EditMode ||
-                    (this.EditMode != null &&
-                    this.EditMode.Equals(input.EditMode))
+                    this.EditMode.Equals(input.EditMode)
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     
-                    (this.BuilderConfig != null &&
-                    this.BuilderConfig.Equals(input.BuilderConfig))
+                    (this.BuilderConfig != null && this.BuilderConfig.Equals(input.BuilderConfig))
                 );
         }
 
@@ -146,10 +142,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Text != null)
                     hashCode = hashCode * 59 + this.Text.GetHashCode();
-                if (this.EditMode != null)
-                    hashCode = hashCode * 59 + this.EditMode.GetHashCode();
+                hashCode = hashCode * 59 + this.EditMode.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.BuilderConfig != null)

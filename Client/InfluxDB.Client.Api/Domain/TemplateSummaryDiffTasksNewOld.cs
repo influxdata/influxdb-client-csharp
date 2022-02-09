@@ -143,38 +143,31 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Cron == input.Cron ||
-                    (this.Cron != null &&
-                    this.Cron.Equals(input.Cron))
+                    (this.Cron != null && this.Cron.Equals(input.Cron))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.Every == input.Every ||
-                    (this.Every != null &&
-                    this.Every.Equals(input.Every))
+                    (this.Every != null && this.Every.Equals(input.Every))
                 ) && 
                 (
                     this.Offset == input.Offset ||
-                    (this.Offset != null &&
-                    this.Offset.Equals(input.Offset))
+                    (this.Offset != null && this.Offset.Equals(input.Offset))
                 ) && 
                 (
                     this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
+                    (this.Query != null && this.Query.Equals(input.Query))
                 ) && 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    (this.Status != null && this.Status.Equals(input.Status))
                 );
         }
 
@@ -187,6 +180,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Cron != null)

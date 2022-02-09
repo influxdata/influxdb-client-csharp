@@ -51,55 +51,37 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("id is a required property for RemoteConnection and cannot be null");
             }
-            else
-            {
-                this.Id = id;
-            }
+            this.Id = id;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for RemoteConnection and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
                 throw new InvalidDataException("orgID is a required property for RemoteConnection and cannot be null");
             }
-            else
-            {
-                this.OrgID = orgID;
-            }
+            this.OrgID = orgID;
             // to ensure "remoteURL" is required (not null)
             if (remoteURL == null)
             {
                 throw new InvalidDataException("remoteURL is a required property for RemoteConnection and cannot be null");
             }
-            else
-            {
-                this.RemoteURL = remoteURL;
-            }
+            this.RemoteURL = remoteURL;
             // to ensure "remoteOrgID" is required (not null)
             if (remoteOrgID == null)
             {
                 throw new InvalidDataException("remoteOrgID is a required property for RemoteConnection and cannot be null");
             }
-            else
-            {
-                this.RemoteOrgID = remoteOrgID;
-            }
+            this.RemoteOrgID = remoteOrgID;
             // to ensure "allowInsecureTLS" is required (not null)
             if (allowInsecureTLS == null)
             {
                 throw new InvalidDataException("allowInsecureTLS is a required property for RemoteConnection and cannot be null");
             }
-            else
-            {
-                this.AllowInsecureTLS = allowInsecureTLS;
-            }
+            this.AllowInsecureTLS = allowInsecureTLS;
             this.Description = description;
         }
 
@@ -196,38 +178,31 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.RemoteURL == input.RemoteURL ||
-                    (this.RemoteURL != null &&
-                    this.RemoteURL.Equals(input.RemoteURL))
+                    (this.RemoteURL != null && this.RemoteURL.Equals(input.RemoteURL))
                 ) && 
                 (
                     this.RemoteOrgID == input.RemoteOrgID ||
-                    (this.RemoteOrgID != null &&
-                    this.RemoteOrgID.Equals(input.RemoteOrgID))
+                    (this.RemoteOrgID != null && this.RemoteOrgID.Equals(input.RemoteOrgID))
                 ) && 
                 (
                     this.AllowInsecureTLS == input.AllowInsecureTLS ||
-                    (this.AllowInsecureTLS != null &&
-                    this.AllowInsecureTLS.Equals(input.AllowInsecureTLS))
+                    (this.AllowInsecureTLS != null && this.AllowInsecureTLS.Equals(input.AllowInsecureTLS))
                 );
         }
 
@@ -240,6 +215,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)

@@ -107,13 +107,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Version == input.Version ||
-                    (this.Version != null &&
-                    this.Version.Equals(input.Version))
+                    (this.Version != null && this.Version.Equals(input.Version))
                 ) && 
                 (
                     this.Os == input.Os ||
-                    (this.Os != null &&
-                    this.Os.Equals(input.Os))
+                    (this.Os != null && this.Os.Equals(input.Os))
                 ) && 
                 (
                     this.Plugins == input.Plugins ||
@@ -131,6 +129,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Version != null)
                     hashCode = hashCode * 59 + this.Version.GetHashCode();
                 if (this.Os != null)

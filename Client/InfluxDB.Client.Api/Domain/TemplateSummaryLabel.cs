@@ -143,33 +143,27 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Kind == input.Kind ||
-                    (this.Kind != null &&
-                    this.Kind.Equals(input.Kind))
+                    this.Kind.Equals(input.Kind)
                 ) && 
                 (
                     this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null &&
-                    this.TemplateMetaName.Equals(input.TemplateMetaName))
+                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     
-                    (this.Properties != null &&
-                    this.Properties.Equals(input.Properties))
+                    (this.Properties != null && this.Properties.Equals(input.Properties))
                 ) && 
                 (
                     this.EnvReferences == input.EnvReferences ||
@@ -187,12 +181,12 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.Kind != null)
-                    hashCode = hashCode * 59 + this.Kind.GetHashCode();
+                hashCode = hashCode * 59 + this.Kind.GetHashCode();
                 if (this.TemplateMetaName != null)
                     hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
                 if (this.Name != null)

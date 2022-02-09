@@ -100,13 +100,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.IsEnforced == input.IsEnforced ||
-                    (this.IsEnforced != null &&
-                    this.IsEnforced.Equals(input.IsEnforced))
+                    (this.IsEnforced != null && this.IsEnforced.Equals(input.IsEnforced))
                 ) && 
                 (
                     this.Digits == input.Digits ||
-                    (this.Digits != null &&
-                    this.Digits.Equals(input.Digits))
+                    (this.Digits != null && this.Digits.Equals(input.Digits))
                 );
         }
 
@@ -119,6 +117,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.IsEnforced != null)
                     hashCode = hashCode * 59 + this.IsEnforced.GetHashCode();
                 if (this.Digits != null)

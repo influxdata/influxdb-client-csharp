@@ -108,18 +108,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.InternalName == input.InternalName ||
-                    (this.InternalName != null &&
-                    this.InternalName.Equals(input.InternalName))
+                    (this.InternalName != null && this.InternalName.Equals(input.InternalName))
                 ) && 
                 (
                     this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
+                    (this.DisplayName != null && this.DisplayName.Equals(input.DisplayName))
                 ) && 
                 (
                     this.Visible == input.Visible ||
-                    (this.Visible != null &&
-                    this.Visible.Equals(input.Visible))
+                    (this.Visible != null && this.Visible.Equals(input.Visible))
                 );
         }
 
@@ -132,6 +129,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.InternalName != null)
                     hashCode = hashCode * 59 + this.InternalName.GetHashCode();
                 if (this.DisplayName != null)

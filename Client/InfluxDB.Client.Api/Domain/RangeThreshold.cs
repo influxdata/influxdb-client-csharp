@@ -63,41 +63,25 @@ namespace InfluxDB.Client.Api.Domain
         public RangeThreshold(TypeEnum type = TypeEnum.Range, float? min = default(float?), float? max = default(float?), bool? within = default(bool?), CheckStatusLevel? level = default(CheckStatusLevel?), bool? allValues = default(bool?)) : base(level, allValues)
         {
             // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for RangeThreshold and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
+            this.Type = type;
             // to ensure "min" is required (not null)
             if (min == null)
             {
                 throw new InvalidDataException("min is a required property for RangeThreshold and cannot be null");
             }
-            else
-            {
-                this.Min = min;
-            }
+            this.Min = min;
             // to ensure "max" is required (not null)
             if (max == null)
             {
                 throw new InvalidDataException("max is a required property for RangeThreshold and cannot be null");
             }
-            else
-            {
-                this.Max = max;
-            }
+            this.Max = max;
             // to ensure "within" is required (not null)
             if (within == null)
             {
                 throw new InvalidDataException("within is a required property for RangeThreshold and cannot be null");
             }
-            else
-            {
-                this.Within = within;
-            }
+            this.Within = within;
         }
 
 
@@ -168,23 +152,19 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.Min == input.Min ||
-                    (this.Min != null &&
-                    this.Min.Equals(input.Min))
+                    (this.Min != null && this.Min.Equals(input.Min))
                 ) && base.Equals(input) && 
                 (
                     this.Max == input.Max ||
-                    (this.Max != null &&
-                    this.Max.Equals(input.Max))
+                    (this.Max != null && this.Max.Equals(input.Max))
                 ) && base.Equals(input) && 
                 (
                     this.Within == input.Within ||
-                    (this.Within != null &&
-                    this.Within.Equals(input.Within))
+                    (this.Within != null && this.Within.Equals(input.Within))
                 );
         }
 
@@ -197,8 +177,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Min != null)
                     hashCode = hashCode * 59 + this.Min.GetHashCode();
                 if (this.Max != null)

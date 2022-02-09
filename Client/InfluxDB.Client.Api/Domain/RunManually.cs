@@ -90,8 +90,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.ScheduledFor == input.ScheduledFor ||
-                    (this.ScheduledFor != null &&
-                    this.ScheduledFor.Equals(input.ScheduledFor))
+                    (this.ScheduledFor != null && this.ScheduledFor.Equals(input.ScheduledFor))
                 );
         }
 
@@ -104,6 +103,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.ScheduledFor != null)
                     hashCode = hashCode * 59 + this.ScheduledFor.GetHashCode();
                 return hashCode;

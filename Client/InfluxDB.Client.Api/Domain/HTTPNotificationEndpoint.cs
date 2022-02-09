@@ -114,28 +114,11 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("url is a required property for HTTPNotificationEndpoint and cannot be null");
             }
-            else
-            {
-                this.Url = url;
-            }
+            this.Url = url;
             // to ensure "method" is required (not null)
-            if (method == null)
-            {
-                throw new InvalidDataException("method is a required property for HTTPNotificationEndpoint and cannot be null");
-            }
-            else
-            {
-                this.Method = method;
-            }
+            this.Method = method;
             // to ensure "authMethod" is required (not null)
-            if (authMethod == null)
-            {
-                throw new InvalidDataException("authMethod is a required property for HTTPNotificationEndpoint and cannot be null");
-            }
-            else
-            {
-                this.AuthMethod = authMethod;
-            }
+            this.AuthMethod = authMethod;
             this.Username = username;
             this.Password = password;
             this.Token = token;
@@ -235,38 +218,31 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.Url == input.Url ||
-                    (this.Url != null &&
-                    this.Url.Equals(input.Url))
+                    (this.Url != null && this.Url.Equals(input.Url))
                 ) && base.Equals(input) && 
                 (
                     this.Username == input.Username ||
-                    (this.Username != null &&
-                    this.Username.Equals(input.Username))
+                    (this.Username != null && this.Username.Equals(input.Username))
                 ) && base.Equals(input) && 
                 (
                     this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
+                    (this.Password != null && this.Password.Equals(input.Password))
                 ) && base.Equals(input) && 
                 (
                     this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
+                    (this.Token != null && this.Token.Equals(input.Token))
                 ) && base.Equals(input) && 
                 (
                     this.Method == input.Method ||
-                    (this.Method != null &&
-                    this.Method.Equals(input.Method))
+                    this.Method.Equals(input.Method)
                 ) && base.Equals(input) && 
                 (
                     this.AuthMethod == input.AuthMethod ||
-                    (this.AuthMethod != null &&
-                    this.AuthMethod.Equals(input.AuthMethod))
+                    this.AuthMethod.Equals(input.AuthMethod)
                 ) && base.Equals(input) && 
                 (
                     this.ContentTemplate == input.ContentTemplate ||
-                    (this.ContentTemplate != null &&
-                    this.ContentTemplate.Equals(input.ContentTemplate))
+                    (this.ContentTemplate != null && this.ContentTemplate.Equals(input.ContentTemplate))
                 ) && base.Equals(input) && 
                 (
                     this.Headers == input.Headers ||
@@ -284,6 +260,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                
                 if (this.Url != null)
                     hashCode = hashCode * 59 + this.Url.GetHashCode();
                 if (this.Username != null)
@@ -292,10 +269,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Password.GetHashCode();
                 if (this.Token != null)
                     hashCode = hashCode * 59 + this.Token.GetHashCode();
-                if (this.Method != null)
-                    hashCode = hashCode * 59 + this.Method.GetHashCode();
-                if (this.AuthMethod != null)
-                    hashCode = hashCode * 59 + this.AuthMethod.GetHashCode();
+                hashCode = hashCode * 59 + this.Method.GetHashCode();
+                hashCode = hashCode * 59 + this.AuthMethod.GetHashCode();
                 if (this.ContentTemplate != null)
                     hashCode = hashCode * 59 + this.ContentTemplate.GetHashCode();
                 if (this.Headers != null)

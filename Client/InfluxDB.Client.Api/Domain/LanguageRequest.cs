@@ -45,10 +45,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("query is a required property for LanguageRequest and cannot be null");
             }
-            else
-            {
-                this.Query = query;
-            }
+            this.Query = query;
         }
 
         /// <summary>
@@ -103,8 +100,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
+                    (this.Query != null && this.Query.Equals(input.Query))
                 );
         }
 
@@ -117,6 +113,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Query != null)
                     hashCode = hashCode * 59 + this.Query.GetHashCode();
                 return hashCode;

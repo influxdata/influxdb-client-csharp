@@ -47,19 +47,13 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("name is a required property for View and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "properties" is required (not null)
             if (properties == null)
             {
                 throw new InvalidDataException("properties is a required property for View and cannot be null");
             }
-            else
-            {
-                this.Properties = properties;
-            }
+            this.Properties = properties;
             this.Links = links;
         }
 
@@ -136,23 +130,19 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 ) && 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     
-                    (this.Properties != null &&
-                    this.Properties.Equals(input.Properties))
+                    (this.Properties != null && this.Properties.Equals(input.Properties))
                 );
         }
 
@@ -165,6 +155,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Links != null)
                     hashCode = hashCode * 59 + this.Links.GetHashCode();
                 if (this.Id != null)

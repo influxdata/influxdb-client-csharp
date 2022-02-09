@@ -108,158 +108,99 @@ namespace InfluxDB.Client.Api.Domain
         public HeatmapViewProperties(string timeFormat = default(string), TypeEnum type = TypeEnum.Heatmap, List<DashboardQuery> queries = default(List<DashboardQuery>), List<string> colors = default(List<string>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?), string xColumn = default(string), List<string> generateXAxisTicks = default(List<string>), int? xTotalTicks = default(int?), float? xTickStart = default(float?), float? xTickStep = default(float?), string yColumn = default(string), List<string> generateYAxisTicks = default(List<string>), int? yTotalTicks = default(int?), float? yTickStart = default(float?), float? yTickStep = default(float?), List<decimal?> xDomain = default(List<decimal?>), List<decimal?> yDomain = default(List<decimal?>), string xAxisLabel = default(string), string yAxisLabel = default(string), string xPrefix = default(string), string xSuffix = default(string), string yPrefix = default(string), string ySuffix = default(string), decimal? binSize = default(decimal?), bool? legendColorizeRows = default(bool?), bool? legendHide = default(bool?), float? legendOpacity = default(float?), int? legendOrientationThreshold = default(int?)) : base()
         {
             // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for HeatmapViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
+            this.Type = type;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
                 throw new InvalidDataException("queries is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.Queries = queries;
-            }
+            this.Queries = queries;
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
                 throw new InvalidDataException("colors is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.Colors = colors;
-            }
+            this.Colors = colors;
             // to ensure "shape" is required (not null)
-            if (shape == null)
-            {
-                throw new InvalidDataException("shape is a required property for HeatmapViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Shape = shape;
-            }
+            this.Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
                 throw new InvalidDataException("note is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.Note = note;
-            }
+            this.Note = note;
             // to ensure "showNoteWhenEmpty" is required (not null)
             if (showNoteWhenEmpty == null)
             {
                 throw new InvalidDataException("showNoteWhenEmpty is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.ShowNoteWhenEmpty = showNoteWhenEmpty;
-            }
+            this.ShowNoteWhenEmpty = showNoteWhenEmpty;
             // to ensure "xColumn" is required (not null)
             if (xColumn == null)
             {
                 throw new InvalidDataException("xColumn is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.XColumn = xColumn;
-            }
+            this.XColumn = xColumn;
             // to ensure "yColumn" is required (not null)
             if (yColumn == null)
             {
                 throw new InvalidDataException("yColumn is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.YColumn = yColumn;
-            }
+            this.YColumn = yColumn;
             // to ensure "xDomain" is required (not null)
             if (xDomain == null)
             {
                 throw new InvalidDataException("xDomain is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.XDomain = xDomain;
-            }
+            this.XDomain = xDomain;
             // to ensure "yDomain" is required (not null)
             if (yDomain == null)
             {
                 throw new InvalidDataException("yDomain is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.YDomain = yDomain;
-            }
+            this.YDomain = yDomain;
             // to ensure "xAxisLabel" is required (not null)
             if (xAxisLabel == null)
             {
                 throw new InvalidDataException("xAxisLabel is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.XAxisLabel = xAxisLabel;
-            }
+            this.XAxisLabel = xAxisLabel;
             // to ensure "yAxisLabel" is required (not null)
             if (yAxisLabel == null)
             {
                 throw new InvalidDataException("yAxisLabel is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.YAxisLabel = yAxisLabel;
-            }
+            this.YAxisLabel = yAxisLabel;
             // to ensure "xPrefix" is required (not null)
             if (xPrefix == null)
             {
                 throw new InvalidDataException("xPrefix is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.XPrefix = xPrefix;
-            }
+            this.XPrefix = xPrefix;
             // to ensure "xSuffix" is required (not null)
             if (xSuffix == null)
             {
                 throw new InvalidDataException("xSuffix is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.XSuffix = xSuffix;
-            }
+            this.XSuffix = xSuffix;
             // to ensure "yPrefix" is required (not null)
             if (yPrefix == null)
             {
                 throw new InvalidDataException("yPrefix is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.YPrefix = yPrefix;
-            }
+            this.YPrefix = yPrefix;
             // to ensure "ySuffix" is required (not null)
             if (ySuffix == null)
             {
                 throw new InvalidDataException("ySuffix is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.YSuffix = ySuffix;
-            }
+            this.YSuffix = ySuffix;
             // to ensure "binSize" is required (not null)
             if (binSize == null)
             {
                 throw new InvalidDataException("binSize is a required property for HeatmapViewProperties and cannot be null");
             }
-            else
-            {
-                this.BinSize = binSize;
-            }
+            this.BinSize = binSize;
             this.TimeFormat = timeFormat;
             this.GenerateXAxisTicks = generateXAxisTicks;
             this.XTotalTicks = xTotalTicks;
@@ -522,13 +463,11 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.TimeFormat == input.TimeFormat ||
-                    (this.TimeFormat != null &&
-                    this.TimeFormat.Equals(input.TimeFormat))
+                    (this.TimeFormat != null && this.TimeFormat.Equals(input.TimeFormat))
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.Queries == input.Queries ||
@@ -542,23 +481,19 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.Shape == input.Shape ||
-                    (this.Shape != null &&
-                    this.Shape.Equals(input.Shape))
+                    this.Shape.Equals(input.Shape)
                 ) && base.Equals(input) && 
                 (
                     this.Note == input.Note ||
-                    (this.Note != null &&
-                    this.Note.Equals(input.Note))
+                    (this.Note != null && this.Note.Equals(input.Note))
                 ) && base.Equals(input) && 
                 (
                     this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
-                    (this.ShowNoteWhenEmpty != null &&
-                    this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
+                    (this.ShowNoteWhenEmpty != null && this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
                 ) && base.Equals(input) && 
                 (
                     this.XColumn == input.XColumn ||
-                    (this.XColumn != null &&
-                    this.XColumn.Equals(input.XColumn))
+                    (this.XColumn != null && this.XColumn.Equals(input.XColumn))
                 ) && base.Equals(input) && 
                 (
                     this.GenerateXAxisTicks == input.GenerateXAxisTicks ||
@@ -567,23 +502,19 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.XTotalTicks == input.XTotalTicks ||
-                    (this.XTotalTicks != null &&
-                    this.XTotalTicks.Equals(input.XTotalTicks))
+                    (this.XTotalTicks != null && this.XTotalTicks.Equals(input.XTotalTicks))
                 ) && base.Equals(input) && 
                 (
                     this.XTickStart == input.XTickStart ||
-                    (this.XTickStart != null &&
-                    this.XTickStart.Equals(input.XTickStart))
+                    (this.XTickStart != null && this.XTickStart.Equals(input.XTickStart))
                 ) && base.Equals(input) && 
                 (
                     this.XTickStep == input.XTickStep ||
-                    (this.XTickStep != null &&
-                    this.XTickStep.Equals(input.XTickStep))
+                    (this.XTickStep != null && this.XTickStep.Equals(input.XTickStep))
                 ) && base.Equals(input) && 
                 (
                     this.YColumn == input.YColumn ||
-                    (this.YColumn != null &&
-                    this.YColumn.Equals(input.YColumn))
+                    (this.YColumn != null && this.YColumn.Equals(input.YColumn))
                 ) && base.Equals(input) && 
                 (
                     this.GenerateYAxisTicks == input.GenerateYAxisTicks ||
@@ -592,18 +523,15 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.YTotalTicks == input.YTotalTicks ||
-                    (this.YTotalTicks != null &&
-                    this.YTotalTicks.Equals(input.YTotalTicks))
+                    (this.YTotalTicks != null && this.YTotalTicks.Equals(input.YTotalTicks))
                 ) && base.Equals(input) && 
                 (
                     this.YTickStart == input.YTickStart ||
-                    (this.YTickStart != null &&
-                    this.YTickStart.Equals(input.YTickStart))
+                    (this.YTickStart != null && this.YTickStart.Equals(input.YTickStart))
                 ) && base.Equals(input) && 
                 (
                     this.YTickStep == input.YTickStep ||
-                    (this.YTickStep != null &&
-                    this.YTickStep.Equals(input.YTickStep))
+                    (this.YTickStep != null && this.YTickStep.Equals(input.YTickStep))
                 ) && base.Equals(input) && 
                 (
                     this.XDomain == input.XDomain ||
@@ -617,58 +545,47 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.XAxisLabel == input.XAxisLabel ||
-                    (this.XAxisLabel != null &&
-                    this.XAxisLabel.Equals(input.XAxisLabel))
+                    (this.XAxisLabel != null && this.XAxisLabel.Equals(input.XAxisLabel))
                 ) && base.Equals(input) && 
                 (
                     this.YAxisLabel == input.YAxisLabel ||
-                    (this.YAxisLabel != null &&
-                    this.YAxisLabel.Equals(input.YAxisLabel))
+                    (this.YAxisLabel != null && this.YAxisLabel.Equals(input.YAxisLabel))
                 ) && base.Equals(input) && 
                 (
                     this.XPrefix == input.XPrefix ||
-                    (this.XPrefix != null &&
-                    this.XPrefix.Equals(input.XPrefix))
+                    (this.XPrefix != null && this.XPrefix.Equals(input.XPrefix))
                 ) && base.Equals(input) && 
                 (
                     this.XSuffix == input.XSuffix ||
-                    (this.XSuffix != null &&
-                    this.XSuffix.Equals(input.XSuffix))
+                    (this.XSuffix != null && this.XSuffix.Equals(input.XSuffix))
                 ) && base.Equals(input) && 
                 (
                     this.YPrefix == input.YPrefix ||
-                    (this.YPrefix != null &&
-                    this.YPrefix.Equals(input.YPrefix))
+                    (this.YPrefix != null && this.YPrefix.Equals(input.YPrefix))
                 ) && base.Equals(input) && 
                 (
                     this.YSuffix == input.YSuffix ||
-                    (this.YSuffix != null &&
-                    this.YSuffix.Equals(input.YSuffix))
+                    (this.YSuffix != null && this.YSuffix.Equals(input.YSuffix))
                 ) && base.Equals(input) && 
                 (
                     this.BinSize == input.BinSize ||
-                    (this.BinSize != null &&
-                    this.BinSize.Equals(input.BinSize))
+                    (this.BinSize != null && this.BinSize.Equals(input.BinSize))
                 ) && base.Equals(input) && 
                 (
                     this.LegendColorizeRows == input.LegendColorizeRows ||
-                    (this.LegendColorizeRows != null &&
-                    this.LegendColorizeRows.Equals(input.LegendColorizeRows))
+                    (this.LegendColorizeRows != null && this.LegendColorizeRows.Equals(input.LegendColorizeRows))
                 ) && base.Equals(input) && 
                 (
                     this.LegendHide == input.LegendHide ||
-                    (this.LegendHide != null &&
-                    this.LegendHide.Equals(input.LegendHide))
+                    (this.LegendHide != null && this.LegendHide.Equals(input.LegendHide))
                 ) && base.Equals(input) && 
                 (
                     this.LegendOpacity == input.LegendOpacity ||
-                    (this.LegendOpacity != null &&
-                    this.LegendOpacity.Equals(input.LegendOpacity))
+                    (this.LegendOpacity != null && this.LegendOpacity.Equals(input.LegendOpacity))
                 ) && base.Equals(input) && 
                 (
                     this.LegendOrientationThreshold == input.LegendOrientationThreshold ||
-                    (this.LegendOrientationThreshold != null &&
-                    this.LegendOrientationThreshold.Equals(input.LegendOrientationThreshold))
+                    (this.LegendOrientationThreshold != null && this.LegendOrientationThreshold.Equals(input.LegendOrientationThreshold))
                 );
         }
 
@@ -681,16 +598,15 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                
                 if (this.TimeFormat != null)
                     hashCode = hashCode * 59 + this.TimeFormat.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Queries != null)
                     hashCode = hashCode * 59 + this.Queries.GetHashCode();
                 if (this.Colors != null)
                     hashCode = hashCode * 59 + this.Colors.GetHashCode();
-                if (this.Shape != null)
-                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
+                hashCode = hashCode * 59 + this.Shape.GetHashCode();
                 if (this.Note != null)
                     hashCode = hashCode * 59 + this.Note.GetHashCode();
                 if (this.ShowNoteWhenEmpty != null)

@@ -47,28 +47,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("name is a required property for SubscriptionManifest and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "mode" is required (not null)
             if (mode == null)
             {
                 throw new InvalidDataException("mode is a required property for SubscriptionManifest and cannot be null");
             }
-            else
-            {
-                this.Mode = mode;
-            }
+            this.Mode = mode;
             // to ensure "destinations" is required (not null)
             if (destinations == null)
             {
                 throw new InvalidDataException("destinations is a required property for SubscriptionManifest and cannot be null");
             }
-            else
-            {
-                this.Destinations = destinations;
-            }
+            this.Destinations = destinations;
         }
 
         /// <summary>
@@ -136,13 +127,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Mode == input.Mode ||
-                    (this.Mode != null &&
-                    this.Mode.Equals(input.Mode))
+                    (this.Mode != null && this.Mode.Equals(input.Mode))
                 ) && 
                 (
                     this.Destinations == input.Destinations ||
@@ -160,6 +149,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Mode != null)

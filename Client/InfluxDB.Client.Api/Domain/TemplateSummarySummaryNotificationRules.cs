@@ -215,58 +215,47 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Kind == input.Kind ||
-                    (this.Kind != null &&
-                    this.Kind.Equals(input.Kind))
+                    this.Kind.Equals(input.Kind)
                 ) && 
                 (
                     this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null &&
-                    this.TemplateMetaName.Equals(input.TemplateMetaName))
+                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.EndpointTemplateMetaName == input.EndpointTemplateMetaName ||
-                    (this.EndpointTemplateMetaName != null &&
-                    this.EndpointTemplateMetaName.Equals(input.EndpointTemplateMetaName))
+                    (this.EndpointTemplateMetaName != null && this.EndpointTemplateMetaName.Equals(input.EndpointTemplateMetaName))
                 ) && 
                 (
                     this.EndpointID == input.EndpointID ||
-                    (this.EndpointID != null &&
-                    this.EndpointID.Equals(input.EndpointID))
+                    (this.EndpointID != null && this.EndpointID.Equals(input.EndpointID))
                 ) && 
                 (
                     this.EndpointType == input.EndpointType ||
-                    (this.EndpointType != null &&
-                    this.EndpointType.Equals(input.EndpointType))
+                    (this.EndpointType != null && this.EndpointType.Equals(input.EndpointType))
                 ) && 
                 (
                     this.Every == input.Every ||
-                    (this.Every != null &&
-                    this.Every.Equals(input.Every))
+                    (this.Every != null && this.Every.Equals(input.Every))
                 ) && 
                 (
                     this.Offset == input.Offset ||
-                    (this.Offset != null &&
-                    this.Offset.Equals(input.Offset))
+                    (this.Offset != null && this.Offset.Equals(input.Offset))
                 ) && 
                 (
                     this.MessageTemplate == input.MessageTemplate ||
-                    (this.MessageTemplate != null &&
-                    this.MessageTemplate.Equals(input.MessageTemplate))
+                    (this.MessageTemplate != null && this.MessageTemplate.Equals(input.MessageTemplate))
                 ) && 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    (this.Status != null && this.Status.Equals(input.Status))
                 ) && 
                 (
                     this.StatusRules == input.StatusRules ||
@@ -299,8 +288,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Kind != null)
-                    hashCode = hashCode * 59 + this.Kind.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Kind.GetHashCode();
                 if (this.TemplateMetaName != null)
                     hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
                 if (this.Name != null)

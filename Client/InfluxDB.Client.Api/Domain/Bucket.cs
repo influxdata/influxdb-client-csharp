@@ -82,19 +82,13 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("name is a required property for Bucket and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "retentionRules" is required (not null)
             if (retentionRules == null)
             {
                 throw new InvalidDataException("retentionRules is a required property for Bucket and cannot be null");
             }
-            else
-            {
-                this.RetentionRules = retentionRules;
-            }
+            this.RetentionRules = retentionRules;
             this.Links = links;
             this.Description = description;
             this.OrgID = orgID;
@@ -222,53 +216,43 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 ) && 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Rp == input.Rp ||
-                    (this.Rp != null &&
-                    this.Rp.Equals(input.Rp))
+                    (this.Rp != null && this.Rp.Equals(input.Rp))
                 ) && 
                 (
                     this.SchemaType == input.SchemaType ||
-                    (this.SchemaType != null &&
-                    this.SchemaType.Equals(input.SchemaType))
+                    this.SchemaType.Equals(input.SchemaType)
                 ) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null &&
-                    this.CreatedAt.Equals(input.CreatedAt))
+                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
                 ) && 
                 (
                     this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null &&
-                    this.UpdatedAt.Equals(input.UpdatedAt))
+                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
                 ) && 
                 (
                     this.RetentionRules == input.RetentionRules ||
@@ -291,12 +275,12 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Links != null)
                     hashCode = hashCode * 59 + this.Links.GetHashCode();
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Description != null)
@@ -305,8 +289,7 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Rp != null)
                     hashCode = hashCode * 59 + this.Rp.GetHashCode();
-                if (this.SchemaType != null)
-                    hashCode = hashCode * 59 + this.SchemaType.GetHashCode();
+                hashCode = hashCode * 59 + this.SchemaType.GetHashCode();
                 if (this.CreatedAt != null)
                     hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
                 if (this.UpdatedAt != null)

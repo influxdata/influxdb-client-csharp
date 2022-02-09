@@ -102,6 +102,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Events != null)
                     hashCode = hashCode * 59 + this.Events.GetHashCode();
                 return hashCode;

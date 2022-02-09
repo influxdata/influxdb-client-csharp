@@ -47,19 +47,13 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("resourceID is a required property for PatchStackRequestAdditionalResources and cannot be null");
             }
-            else
-            {
-                this.ResourceID = resourceID;
-            }
+            this.ResourceID = resourceID;
             // to ensure "kind" is required (not null)
             if (kind == null)
             {
                 throw new InvalidDataException("kind is a required property for PatchStackRequestAdditionalResources and cannot be null");
             }
-            else
-            {
-                this.Kind = kind;
-            }
+            this.Kind = kind;
             this.TemplateMetaName = templateMetaName;
         }
 
@@ -128,18 +122,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.ResourceID == input.ResourceID ||
-                    (this.ResourceID != null &&
-                    this.ResourceID.Equals(input.ResourceID))
+                    (this.ResourceID != null && this.ResourceID.Equals(input.ResourceID))
                 ) && 
                 (
                     this.Kind == input.Kind ||
-                    (this.Kind != null &&
-                    this.Kind.Equals(input.Kind))
+                    (this.Kind != null && this.Kind.Equals(input.Kind))
                 ) && 
                 (
                     this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null &&
-                    this.TemplateMetaName.Equals(input.TemplateMetaName))
+                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
                 );
         }
 
@@ -152,6 +143,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.ResourceID != null)
                     hashCode = hashCode * 59 + this.ResourceID.GetHashCode();
                 if (this.Kind != null)

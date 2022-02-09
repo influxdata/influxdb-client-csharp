@@ -173,86 +173,43 @@ namespace InfluxDB.Client.Api.Domain
         public XYViewProperties(string timeFormat = default(string), TypeEnum type = TypeEnum.Xy, List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), Dictionary<string, string> colorMapping = default(Dictionary<string, string>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?), Axes axes = default(Axes), StaticLegend staticLegend = default(StaticLegend), string xColumn = default(string), List<string> generateXAxisTicks = default(List<string>), int? xTotalTicks = default(int?), float? xTickStart = default(float?), float? xTickStep = default(float?), string yColumn = default(string), List<string> generateYAxisTicks = default(List<string>), int? yTotalTicks = default(int?), float? yTickStart = default(float?), float? yTickStep = default(float?), bool? shadeBelow = default(bool?), HoverDimensionEnum? hoverDimension = default(HoverDimensionEnum?), PositionEnum position = default(PositionEnum), XYGeom geom = default(XYGeom), bool? legendColorizeRows = default(bool?), bool? legendHide = default(bool?), float? legendOpacity = default(float?), int? legendOrientationThreshold = default(int?)) : base()
         {
             // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for XYViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
+            this.Type = type;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
                 throw new InvalidDataException("queries is a required property for XYViewProperties and cannot be null");
             }
-            else
-            {
-                this.Queries = queries;
-            }
+            this.Queries = queries;
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
                 throw new InvalidDataException("colors is a required property for XYViewProperties and cannot be null");
             }
-            else
-            {
-                this.Colors = colors;
-            }
+            this.Colors = colors;
             // to ensure "shape" is required (not null)
-            if (shape == null)
-            {
-                throw new InvalidDataException("shape is a required property for XYViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Shape = shape;
-            }
+            this.Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
                 throw new InvalidDataException("note is a required property for XYViewProperties and cannot be null");
             }
-            else
-            {
-                this.Note = note;
-            }
+            this.Note = note;
             // to ensure "showNoteWhenEmpty" is required (not null)
             if (showNoteWhenEmpty == null)
             {
                 throw new InvalidDataException("showNoteWhenEmpty is a required property for XYViewProperties and cannot be null");
             }
-            else
-            {
-                this.ShowNoteWhenEmpty = showNoteWhenEmpty;
-            }
+            this.ShowNoteWhenEmpty = showNoteWhenEmpty;
             // to ensure "axes" is required (not null)
             if (axes == null)
             {
                 throw new InvalidDataException("axes is a required property for XYViewProperties and cannot be null");
             }
-            else
-            {
-                this.Axes = axes;
-            }
+            this.Axes = axes;
             // to ensure "position" is required (not null)
-            if (position == null)
-            {
-                throw new InvalidDataException("position is a required property for XYViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Position = position;
-            }
+            this.Position = position;
             // to ensure "geom" is required (not null)
-            if (geom == null)
-            {
-                throw new InvalidDataException("geom is a required property for XYViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Geom = geom;
-            }
+            this.Geom = geom;
             this.TimeFormat = timeFormat;
             this.ColorMapping = colorMapping;
             this.StaticLegend = staticLegend;
@@ -493,13 +450,11 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.TimeFormat == input.TimeFormat ||
-                    (this.TimeFormat != null &&
-                    this.TimeFormat.Equals(input.TimeFormat))
+                    (this.TimeFormat != null && this.TimeFormat.Equals(input.TimeFormat))
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.Queries == input.Queries ||
@@ -518,33 +473,27 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.Shape == input.Shape ||
-                    (this.Shape != null &&
-                    this.Shape.Equals(input.Shape))
+                    this.Shape.Equals(input.Shape)
                 ) && base.Equals(input) && 
                 (
                     this.Note == input.Note ||
-                    (this.Note != null &&
-                    this.Note.Equals(input.Note))
+                    (this.Note != null && this.Note.Equals(input.Note))
                 ) && base.Equals(input) && 
                 (
                     this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
-                    (this.ShowNoteWhenEmpty != null &&
-                    this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
+                    (this.ShowNoteWhenEmpty != null && this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
                 ) && base.Equals(input) && 
                 (
                     
-                    (this.Axes != null &&
-                    this.Axes.Equals(input.Axes))
+                    (this.Axes != null && this.Axes.Equals(input.Axes))
                 ) && base.Equals(input) && 
                 (
                     
-                    (this.StaticLegend != null &&
-                    this.StaticLegend.Equals(input.StaticLegend))
+                    (this.StaticLegend != null && this.StaticLegend.Equals(input.StaticLegend))
                 ) && base.Equals(input) && 
                 (
                     this.XColumn == input.XColumn ||
-                    (this.XColumn != null &&
-                    this.XColumn.Equals(input.XColumn))
+                    (this.XColumn != null && this.XColumn.Equals(input.XColumn))
                 ) && base.Equals(input) && 
                 (
                     this.GenerateXAxisTicks == input.GenerateXAxisTicks ||
@@ -553,23 +502,19 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.XTotalTicks == input.XTotalTicks ||
-                    (this.XTotalTicks != null &&
-                    this.XTotalTicks.Equals(input.XTotalTicks))
+                    (this.XTotalTicks != null && this.XTotalTicks.Equals(input.XTotalTicks))
                 ) && base.Equals(input) && 
                 (
                     this.XTickStart == input.XTickStart ||
-                    (this.XTickStart != null &&
-                    this.XTickStart.Equals(input.XTickStart))
+                    (this.XTickStart != null && this.XTickStart.Equals(input.XTickStart))
                 ) && base.Equals(input) && 
                 (
                     this.XTickStep == input.XTickStep ||
-                    (this.XTickStep != null &&
-                    this.XTickStep.Equals(input.XTickStep))
+                    (this.XTickStep != null && this.XTickStep.Equals(input.XTickStep))
                 ) && base.Equals(input) && 
                 (
                     this.YColumn == input.YColumn ||
-                    (this.YColumn != null &&
-                    this.YColumn.Equals(input.YColumn))
+                    (this.YColumn != null && this.YColumn.Equals(input.YColumn))
                 ) && base.Equals(input) && 
                 (
                     this.GenerateYAxisTicks == input.GenerateYAxisTicks ||
@@ -578,58 +523,47 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.YTotalTicks == input.YTotalTicks ||
-                    (this.YTotalTicks != null &&
-                    this.YTotalTicks.Equals(input.YTotalTicks))
+                    (this.YTotalTicks != null && this.YTotalTicks.Equals(input.YTotalTicks))
                 ) && base.Equals(input) && 
                 (
                     this.YTickStart == input.YTickStart ||
-                    (this.YTickStart != null &&
-                    this.YTickStart.Equals(input.YTickStart))
+                    (this.YTickStart != null && this.YTickStart.Equals(input.YTickStart))
                 ) && base.Equals(input) && 
                 (
                     this.YTickStep == input.YTickStep ||
-                    (this.YTickStep != null &&
-                    this.YTickStep.Equals(input.YTickStep))
+                    (this.YTickStep != null && this.YTickStep.Equals(input.YTickStep))
                 ) && base.Equals(input) && 
                 (
                     this.ShadeBelow == input.ShadeBelow ||
-                    (this.ShadeBelow != null &&
-                    this.ShadeBelow.Equals(input.ShadeBelow))
+                    (this.ShadeBelow != null && this.ShadeBelow.Equals(input.ShadeBelow))
                 ) && base.Equals(input) && 
                 (
                     this.HoverDimension == input.HoverDimension ||
-                    (this.HoverDimension != null &&
-                    this.HoverDimension.Equals(input.HoverDimension))
+                    this.HoverDimension.Equals(input.HoverDimension)
                 ) && base.Equals(input) && 
                 (
                     this.Position == input.Position ||
-                    (this.Position != null &&
-                    this.Position.Equals(input.Position))
+                    this.Position.Equals(input.Position)
                 ) && base.Equals(input) && 
                 (
                     this.Geom == input.Geom ||
-                    (this.Geom != null &&
-                    this.Geom.Equals(input.Geom))
+                    this.Geom.Equals(input.Geom)
                 ) && base.Equals(input) && 
                 (
                     this.LegendColorizeRows == input.LegendColorizeRows ||
-                    (this.LegendColorizeRows != null &&
-                    this.LegendColorizeRows.Equals(input.LegendColorizeRows))
+                    (this.LegendColorizeRows != null && this.LegendColorizeRows.Equals(input.LegendColorizeRows))
                 ) && base.Equals(input) && 
                 (
                     this.LegendHide == input.LegendHide ||
-                    (this.LegendHide != null &&
-                    this.LegendHide.Equals(input.LegendHide))
+                    (this.LegendHide != null && this.LegendHide.Equals(input.LegendHide))
                 ) && base.Equals(input) && 
                 (
                     this.LegendOpacity == input.LegendOpacity ||
-                    (this.LegendOpacity != null &&
-                    this.LegendOpacity.Equals(input.LegendOpacity))
+                    (this.LegendOpacity != null && this.LegendOpacity.Equals(input.LegendOpacity))
                 ) && base.Equals(input) && 
                 (
                     this.LegendOrientationThreshold == input.LegendOrientationThreshold ||
-                    (this.LegendOrientationThreshold != null &&
-                    this.LegendOrientationThreshold.Equals(input.LegendOrientationThreshold))
+                    (this.LegendOrientationThreshold != null && this.LegendOrientationThreshold.Equals(input.LegendOrientationThreshold))
                 );
         }
 
@@ -642,18 +576,17 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                
                 if (this.TimeFormat != null)
                     hashCode = hashCode * 59 + this.TimeFormat.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Queries != null)
                     hashCode = hashCode * 59 + this.Queries.GetHashCode();
                 if (this.Colors != null)
                     hashCode = hashCode * 59 + this.Colors.GetHashCode();
                 if (this.ColorMapping != null)
                     hashCode = hashCode * 59 + this.ColorMapping.GetHashCode();
-                if (this.Shape != null)
-                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
+                hashCode = hashCode * 59 + this.Shape.GetHashCode();
                 if (this.Note != null)
                     hashCode = hashCode * 59 + this.Note.GetHashCode();
                 if (this.ShowNoteWhenEmpty != null)
@@ -684,12 +617,9 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.YTickStep.GetHashCode();
                 if (this.ShadeBelow != null)
                     hashCode = hashCode * 59 + this.ShadeBelow.GetHashCode();
-                if (this.HoverDimension != null)
-                    hashCode = hashCode * 59 + this.HoverDimension.GetHashCode();
-                if (this.Position != null)
-                    hashCode = hashCode * 59 + this.Position.GetHashCode();
-                if (this.Geom != null)
-                    hashCode = hashCode * 59 + this.Geom.GetHashCode();
+                hashCode = hashCode * 59 + this.HoverDimension.GetHashCode();
+                hashCode = hashCode * 59 + this.Position.GetHashCode();
+                hashCode = hashCode * 59 + this.Geom.GetHashCode();
                 if (this.LegendColorizeRows != null)
                     hashCode = hashCode * 59 + this.LegendColorizeRows.GetHashCode();
                 if (this.LegendHide != null)

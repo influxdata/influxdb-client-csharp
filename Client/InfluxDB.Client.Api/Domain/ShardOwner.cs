@@ -45,10 +45,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("nodeID is a required property for ShardOwner and cannot be null");
             }
-            else
-            {
-                this.NodeID = nodeID;
-            }
+            this.NodeID = nodeID;
         }
 
         /// <summary>
@@ -103,8 +100,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.NodeID == input.NodeID ||
-                    (this.NodeID != null &&
-                    this.NodeID.Equals(input.NodeID))
+                    (this.NodeID != null && this.NodeID.Equals(input.NodeID))
                 );
         }
 
@@ -117,6 +113,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.NodeID != null)
                     hashCode = hashCode * 59 + this.NodeID.GetHashCode();
                 return hashCode;

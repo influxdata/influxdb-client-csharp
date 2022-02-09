@@ -134,23 +134,19 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.ApiVersion == input.ApiVersion ||
-                    (this.ApiVersion != null &&
-                    this.ApiVersion.Equals(input.ApiVersion))
+                    (this.ApiVersion != null && this.ApiVersion.Equals(input.ApiVersion))
                 ) && 
                 (
                     this.ResourceID == input.ResourceID ||
-                    (this.ResourceID != null &&
-                    this.ResourceID.Equals(input.ResourceID))
+                    (this.ResourceID != null && this.ResourceID.Equals(input.ResourceID))
                 ) && 
                 (
                     this.Kind == input.Kind ||
-                    (this.Kind != null &&
-                    this.Kind.Equals(input.Kind))
+                    this.Kind.Equals(input.Kind)
                 ) && 
                 (
                     this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null &&
-                    this.TemplateMetaName.Equals(input.TemplateMetaName))
+                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
                 ) && 
                 (
                     this.Associations == input.Associations ||
@@ -159,8 +155,7 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 );
         }
 
@@ -173,12 +168,12 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.ApiVersion != null)
                     hashCode = hashCode * 59 + this.ApiVersion.GetHashCode();
                 if (this.ResourceID != null)
                     hashCode = hashCode * 59 + this.ResourceID.GetHashCode();
-                if (this.Kind != null)
-                    hashCode = hashCode * 59 + this.Kind.GetHashCode();
+                hashCode = hashCode * 59 + this.Kind.GetHashCode();
                 if (this.TemplateMetaName != null)
                     hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
                 if (this.Associations != null)

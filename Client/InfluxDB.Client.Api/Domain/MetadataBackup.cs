@@ -47,28 +47,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("kv is a required property for MetadataBackup and cannot be null");
             }
-            else
-            {
-                this.Kv = kv;
-            }
+            this.Kv = kv;
             // to ensure "sql" is required (not null)
             if (sql == null)
             {
                 throw new InvalidDataException("sql is a required property for MetadataBackup and cannot be null");
             }
-            else
-            {
-                this.Sql = sql;
-            }
+            this.Sql = sql;
             // to ensure "buckets" is required (not null)
             if (buckets == null)
             {
                 throw new InvalidDataException("buckets is a required property for MetadataBackup and cannot be null");
             }
-            else
-            {
-                this.Buckets = buckets;
-            }
+            this.Buckets = buckets;
         }
 
         /// <summary>
@@ -136,13 +127,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Kv == input.Kv ||
-                    (this.Kv != null &&
-                    this.Kv.Equals(input.Kv))
+                    (this.Kv != null && this.Kv.Equals(input.Kv))
                 ) && 
                 (
                     this.Sql == input.Sql ||
-                    (this.Sql != null &&
-                    this.Sql.Equals(input.Sql))
+                    (this.Sql != null && this.Sql.Equals(input.Sql))
                 ) && 
                 (
                     this.Buckets == input.Buckets ||
@@ -160,6 +149,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Kv != null)
                     hashCode = hashCode * 59 + this.Kv.GetHashCode();
                 if (this.Sql != null)

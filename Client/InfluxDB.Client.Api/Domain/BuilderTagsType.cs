@@ -107,8 +107,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Key == input.Key ||
-                    (this.Key != null &&
-                    this.Key.Equals(input.Key))
+                    (this.Key != null && this.Key.Equals(input.Key))
                 ) && 
                 (
                     this.Values == input.Values ||
@@ -117,8 +116,7 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     this.AggregateFunctionType == input.AggregateFunctionType ||
-                    (this.AggregateFunctionType != null &&
-                    this.AggregateFunctionType.Equals(input.AggregateFunctionType))
+                    this.AggregateFunctionType.Equals(input.AggregateFunctionType)
                 );
         }
 
@@ -131,12 +129,12 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Key != null)
                     hashCode = hashCode * 59 + this.Key.GetHashCode();
                 if (this.Values != null)
                     hashCode = hashCode * 59 + this.Values.GetHashCode();
-                if (this.AggregateFunctionType != null)
-                    hashCode = hashCode * 59 + this.AggregateFunctionType.GetHashCode();
+                hashCode = hashCode * 59 + this.AggregateFunctionType.GetHashCode();
                 return hashCode;
             }
         }

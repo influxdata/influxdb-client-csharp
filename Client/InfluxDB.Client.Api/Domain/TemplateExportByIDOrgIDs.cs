@@ -98,13 +98,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     
-                    (this.ResourceFilters != null &&
-                    this.ResourceFilters.Equals(input.ResourceFilters))
+                    (this.ResourceFilters != null && this.ResourceFilters.Equals(input.ResourceFilters))
                 );
         }
 
@@ -117,6 +115,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.ResourceFilters != null)

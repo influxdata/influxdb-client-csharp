@@ -99,13 +99,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.RetentionPolicy == input.RetentionPolicy ||
-                    (this.RetentionPolicy != null &&
-                    this.RetentionPolicy.Equals(input.RetentionPolicy))
+                    (this.RetentionPolicy != null && this.RetentionPolicy.Equals(input.RetentionPolicy))
                 ) && 
                 (
                     this.Default == input.Default ||
-                    (this.Default != null &&
-                    this.Default.Equals(input.Default))
+                    (this.Default != null && this.Default.Equals(input.Default))
                 );
         }
 
@@ -118,6 +116,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.RetentionPolicy != null)
                     hashCode = hashCode * 59 + this.RetentionPolicy.GetHashCode();
                 if (this.Default != null)

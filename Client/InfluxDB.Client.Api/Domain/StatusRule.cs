@@ -116,23 +116,19 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.CurrentLevel == input.CurrentLevel ||
-                    (this.CurrentLevel != null &&
-                    this.CurrentLevel.Equals(input.CurrentLevel))
+                    this.CurrentLevel.Equals(input.CurrentLevel)
                 ) && 
                 (
                     this.PreviousLevel == input.PreviousLevel ||
-                    (this.PreviousLevel != null &&
-                    this.PreviousLevel.Equals(input.PreviousLevel))
+                    this.PreviousLevel.Equals(input.PreviousLevel)
                 ) && 
                 (
                     this.Count == input.Count ||
-                    (this.Count != null &&
-                    this.Count.Equals(input.Count))
+                    (this.Count != null && this.Count.Equals(input.Count))
                 ) && 
                 (
                     this.Period == input.Period ||
-                    (this.Period != null &&
-                    this.Period.Equals(input.Period))
+                    (this.Period != null && this.Period.Equals(input.Period))
                 );
         }
 
@@ -145,10 +141,9 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.CurrentLevel != null)
-                    hashCode = hashCode * 59 + this.CurrentLevel.GetHashCode();
-                if (this.PreviousLevel != null)
-                    hashCode = hashCode * 59 + this.PreviousLevel.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.CurrentLevel.GetHashCode();
+                hashCode = hashCode * 59 + this.PreviousLevel.GetHashCode();
                 if (this.Count != null)
                     hashCode = hashCode * 59 + this.Count.GetHashCode();
                 if (this.Period != null)

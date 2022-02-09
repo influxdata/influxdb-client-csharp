@@ -98,13 +98,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
+                    (this.Query != null && this.Query.Equals(input.Query))
                 ) && 
                 (
                     this.Language == input.Language ||
-                    (this.Language != null &&
-                    this.Language.Equals(input.Language))
+                    (this.Language != null && this.Language.Equals(input.Language))
                 );
         }
 
@@ -117,6 +115,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Query != null)
                     hashCode = hashCode * 59 + this.Query.GetHashCode();
                 if (this.Language != null)

@@ -50,46 +50,31 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("orgID is a required property for DBRP and cannot be null");
             }
-            else
-            {
-                this.OrgID = orgID;
-            }
+            this.OrgID = orgID;
             // to ensure "bucketID" is required (not null)
             if (bucketID == null)
             {
                 throw new InvalidDataException("bucketID is a required property for DBRP and cannot be null");
             }
-            else
-            {
-                this.BucketID = bucketID;
-            }
+            this.BucketID = bucketID;
             // to ensure "database" is required (not null)
             if (database == null)
             {
                 throw new InvalidDataException("database is a required property for DBRP and cannot be null");
             }
-            else
-            {
-                this.Database = database;
-            }
+            this.Database = database;
             // to ensure "retentionPolicy" is required (not null)
             if (retentionPolicy == null)
             {
                 throw new InvalidDataException("retentionPolicy is a required property for DBRP and cannot be null");
             }
-            else
-            {
-                this.RetentionPolicy = retentionPolicy;
-            }
+            this.RetentionPolicy = retentionPolicy;
             // to ensure "_default" is required (not null)
             if (_default == null)
             {
                 throw new InvalidDataException("_default is a required property for DBRP and cannot be null");
             }
-            else
-            {
-                this.Default = _default;
-            }
+            this.Default = _default;
             this.Links = links;
         }
 
@@ -192,38 +177,31 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.BucketID == input.BucketID ||
-                    (this.BucketID != null &&
-                    this.BucketID.Equals(input.BucketID))
+                    (this.BucketID != null && this.BucketID.Equals(input.BucketID))
                 ) && 
                 (
                     this.Database == input.Database ||
-                    (this.Database != null &&
-                    this.Database.Equals(input.Database))
+                    (this.Database != null && this.Database.Equals(input.Database))
                 ) && 
                 (
                     this.RetentionPolicy == input.RetentionPolicy ||
-                    (this.RetentionPolicy != null &&
-                    this.RetentionPolicy.Equals(input.RetentionPolicy))
+                    (this.RetentionPolicy != null && this.RetentionPolicy.Equals(input.RetentionPolicy))
                 ) && 
                 (
                     this.Default == input.Default ||
-                    (this.Default != null &&
-                    this.Default.Equals(input.Default))
+                    (this.Default != null && this.Default.Equals(input.Default))
                 ) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 );
         }
 
@@ -236,6 +214,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.OrgID != null)

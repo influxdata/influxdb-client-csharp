@@ -46,10 +46,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("url is a required property for TemplateApplyRemotes and cannot be null");
             }
-            else
-            {
-                this.Url = url;
-            }
+            this.Url = url;
             this.ContentType = contentType;
         }
 
@@ -111,13 +108,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Url == input.Url ||
-                    (this.Url != null &&
-                    this.Url.Equals(input.Url))
+                    (this.Url != null && this.Url.Equals(input.Url))
                 ) && 
                 (
                     this.ContentType == input.ContentType ||
-                    (this.ContentType != null &&
-                    this.ContentType.Equals(input.ContentType))
+                    (this.ContentType != null && this.ContentType.Equals(input.ContentType))
                 );
         }
 
@@ -130,6 +125,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Url != null)
                     hashCode = hashCode * 59 + this.Url.GetHashCode();
                 if (this.ContentType != null)

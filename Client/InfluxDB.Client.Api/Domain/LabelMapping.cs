@@ -89,8 +89,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.LabelID == input.LabelID ||
-                    (this.LabelID != null &&
-                    this.LabelID.Equals(input.LabelID))
+                    (this.LabelID != null && this.LabelID.Equals(input.LabelID))
                 );
         }
 
@@ -103,6 +102,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.LabelID != null)
                     hashCode = hashCode * 59 + this.LabelID.GetHashCode();
                 return hashCode;

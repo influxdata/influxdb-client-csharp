@@ -47,19 +47,13 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("orgID is a required property for CreateDashboardRequest and cannot be null");
             }
-            else
-            {
-                this.OrgID = orgID;
-            }
+            this.OrgID = orgID;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for CreateDashboardRequest and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             this.Description = description;
         }
 
@@ -131,18 +125,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 );
         }
 
@@ -155,6 +146,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Name != null)

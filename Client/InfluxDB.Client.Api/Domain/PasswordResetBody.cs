@@ -45,10 +45,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("password is a required property for PasswordResetBody and cannot be null");
             }
-            else
-            {
-                this.Password = password;
-            }
+            this.Password = password;
         }
 
         /// <summary>
@@ -102,8 +99,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
+                    (this.Password != null && this.Password.Equals(input.Password))
                 );
         }
 
@@ -116,6 +112,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Password != null)
                     hashCode = hashCode * 59 + this.Password.GetHashCode();
                 return hashCode;

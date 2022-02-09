@@ -71,10 +71,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("query is a required property for Query and cannot be null");
             }
-            else
-            {
-                this._Query = query;
-            }
+            this._Query = query;
             this.Extern = _extern;
             this.Type = type;
             this.Params = _params;
@@ -166,18 +163,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     
-                    (this.Extern != null &&
-                    this.Extern.Equals(input.Extern))
+                    (this.Extern != null && this.Extern.Equals(input.Extern))
                 ) && 
                 (
                     this._Query == input._Query ||
-                    (this._Query != null &&
-                    this._Query.Equals(input._Query))
+                    (this._Query != null && this._Query.Equals(input._Query))
                 ) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && 
                 (
                     this.Params == input.Params ||
@@ -186,13 +180,11 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     
-                    (this.Dialect != null &&
-                    this.Dialect.Equals(input.Dialect))
+                    (this.Dialect != null && this.Dialect.Equals(input.Dialect))
                 ) && 
                 (
                     this.Now == input.Now ||
-                    (this.Now != null &&
-                    this.Now.Equals(input.Now))
+                    (this.Now != null && this.Now.Equals(input.Now))
                 );
         }
 
@@ -205,12 +197,12 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Extern != null)
                     hashCode = hashCode * 59 + this.Extern.GetHashCode();
                 if (this._Query != null)
                     hashCode = hashCode * 59 + this._Query.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Params != null)
                     hashCode = hashCode * 59 + this.Params.GetHashCode();
                 if (this.Dialect != null)

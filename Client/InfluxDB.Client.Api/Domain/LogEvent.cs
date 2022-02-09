@@ -105,18 +105,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Time == input.Time ||
-                    (this.Time != null &&
-                    this.Time.Equals(input.Time))
+                    (this.Time != null && this.Time.Equals(input.Time))
                 ) && 
                 (
                     this.Message == input.Message ||
-                    (this.Message != null &&
-                    this.Message.Equals(input.Message))
+                    (this.Message != null && this.Message.Equals(input.Message))
                 ) && 
                 (
                     this.RunID == input.RunID ||
-                    (this.RunID != null &&
-                    this.RunID.Equals(input.RunID))
+                    (this.RunID != null && this.RunID.Equals(input.RunID))
                 );
         }
 
@@ -129,6 +126,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Time != null)
                     hashCode = hashCode * 59 + this.Time.GetHashCode();
                 if (this.Message != null)

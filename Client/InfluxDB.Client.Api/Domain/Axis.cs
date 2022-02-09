@@ -171,28 +171,23 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     this.Label == input.Label ||
-                    (this.Label != null &&
-                    this.Label.Equals(input.Label))
+                    (this.Label != null && this.Label.Equals(input.Label))
                 ) && 
                 (
                     this.Prefix == input.Prefix ||
-                    (this.Prefix != null &&
-                    this.Prefix.Equals(input.Prefix))
+                    (this.Prefix != null && this.Prefix.Equals(input.Prefix))
                 ) && 
                 (
                     this.Suffix == input.Suffix ||
-                    (this.Suffix != null &&
-                    this.Suffix.Equals(input.Suffix))
+                    (this.Suffix != null && this.Suffix.Equals(input.Suffix))
                 ) && 
                 (
                     this.Base == input.Base ||
-                    (this.Base != null &&
-                    this.Base.Equals(input.Base))
+                    this.Base.Equals(input.Base)
                 ) && 
                 (
                     this.Scale == input.Scale ||
-                    (this.Scale != null &&
-                    this.Scale.Equals(input.Scale))
+                    this.Scale.Equals(input.Scale)
                 );
         }
 
@@ -205,6 +200,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Bounds != null)
                     hashCode = hashCode * 59 + this.Bounds.GetHashCode();
                 if (this.Label != null)
@@ -213,10 +209,8 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Prefix.GetHashCode();
                 if (this.Suffix != null)
                     hashCode = hashCode * 59 + this.Suffix.GetHashCode();
-                if (this.Base != null)
-                    hashCode = hashCode * 59 + this.Base.GetHashCode();
-                if (this.Scale != null)
-                    hashCode = hashCode * 59 + this.Scale.GetHashCode();
+                hashCode = hashCode * 59 + this.Base.GetHashCode();
+                hashCode = hashCode * 59 + this.Scale.GetHashCode();
                 return hashCode;
             }
         }

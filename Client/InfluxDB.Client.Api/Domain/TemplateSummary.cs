@@ -130,18 +130,15 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     this.StackID == input.StackID ||
-                    (this.StackID != null &&
-                    this.StackID.Equals(input.StackID))
+                    (this.StackID != null && this.StackID.Equals(input.StackID))
                 ) && 
                 (
                     
-                    (this.Summary != null &&
-                    this.Summary.Equals(input.Summary))
+                    (this.Summary != null && this.Summary.Equals(input.Summary))
                 ) && 
                 (
                     
-                    (this.Diff != null &&
-                    this.Diff.Equals(input.Diff))
+                    (this.Diff != null && this.Diff.Equals(input.Diff))
                 ) && 
                 (
                     this.Errors == input.Errors ||
@@ -159,6 +156,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Sources != null)
                     hashCode = hashCode * 59 + this.Sources.GetHashCode();
                 if (this.StackID != null)

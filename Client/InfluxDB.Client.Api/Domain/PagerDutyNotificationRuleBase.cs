@@ -61,23 +61,13 @@ namespace InfluxDB.Client.Api.Domain
         public PagerDutyNotificationRuleBase(TypeEnum type = TypeEnum.Pagerduty, string messageTemplate = default(string), string endpointID = default(string), string orgID = default(string), string taskID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks)) : base(endpointID, orgID, taskID, status, name, sleepUntil, every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels, links)
         {
             // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for PagerDutyNotificationRuleBase and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
+            this.Type = type;
             // to ensure "messageTemplate" is required (not null)
             if (messageTemplate == null)
             {
                 throw new InvalidDataException("messageTemplate is a required property for PagerDutyNotificationRuleBase and cannot be null");
             }
-            else
-            {
-                this.MessageTemplate = messageTemplate;
-            }
+            this.MessageTemplate = messageTemplate;
         }
 
 
@@ -134,13 +124,11 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.MessageTemplate == input.MessageTemplate ||
-                    (this.MessageTemplate != null &&
-                    this.MessageTemplate.Equals(input.MessageTemplate))
+                    (this.MessageTemplate != null && this.MessageTemplate.Equals(input.MessageTemplate))
                 );
         }
 
@@ -153,8 +141,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.MessageTemplate != null)
                     hashCode = hashCode * 59 + this.MessageTemplate.GetHashCode();
                 return hashCode;

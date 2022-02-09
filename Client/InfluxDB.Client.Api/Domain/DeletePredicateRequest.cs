@@ -47,19 +47,13 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("start is a required property for DeletePredicateRequest and cannot be null");
             }
-            else
-            {
-                this.Start = start;
-            }
+            this.Start = start;
             // to ensure "stop" is required (not null)
             if (stop == null)
             {
                 throw new InvalidDataException("stop is a required property for DeletePredicateRequest and cannot be null");
             }
-            else
-            {
-                this.Stop = stop;
-            }
+            this.Stop = stop;
             this.Predicate = predicate;
         }
 
@@ -131,18 +125,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Start == input.Start ||
-                    (this.Start != null &&
-                    this.Start.Equals(input.Start))
+                    (this.Start != null && this.Start.Equals(input.Start))
                 ) && 
                 (
                     this.Stop == input.Stop ||
-                    (this.Stop != null &&
-                    this.Stop.Equals(input.Stop))
+                    (this.Stop != null && this.Stop.Equals(input.Stop))
                 ) && 
                 (
                     this.Predicate == input.Predicate ||
-                    (this.Predicate != null &&
-                    this.Predicate.Equals(input.Predicate))
+                    (this.Predicate != null && this.Predicate.Equals(input.Predicate))
                 );
         }
 
@@ -155,6 +146,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Start != null)
                     hashCode = hashCode * 59 + this.Start.GetHashCode();
                 if (this.Stop != null)

@@ -190,23 +190,19 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.TaskID == input.TaskID ||
-                    (this.TaskID != null &&
-                    this.TaskID.Equals(input.TaskID))
+                    (this.TaskID != null && this.TaskID.Equals(input.TaskID))
                 ) && 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    this.Status.Equals(input.Status)
                 ) && 
                 (
                     this.ScheduledFor == input.ScheduledFor ||
-                    (this.ScheduledFor != null &&
-                    this.ScheduledFor.Equals(input.ScheduledFor))
+                    (this.ScheduledFor != null && this.ScheduledFor.Equals(input.ScheduledFor))
                 ) && 
                 (
                     this.Log == input.Log ||
@@ -215,23 +211,19 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     this.StartedAt == input.StartedAt ||
-                    (this.StartedAt != null &&
-                    this.StartedAt.Equals(input.StartedAt))
+                    (this.StartedAt != null && this.StartedAt.Equals(input.StartedAt))
                 ) && 
                 (
                     this.FinishedAt == input.FinishedAt ||
-                    (this.FinishedAt != null &&
-                    this.FinishedAt.Equals(input.FinishedAt))
+                    (this.FinishedAt != null && this.FinishedAt.Equals(input.FinishedAt))
                 ) && 
                 (
                     this.RequestedAt == input.RequestedAt ||
-                    (this.RequestedAt != null &&
-                    this.RequestedAt.Equals(input.RequestedAt))
+                    (this.RequestedAt != null && this.RequestedAt.Equals(input.RequestedAt))
                 ) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 );
         }
 
@@ -244,12 +236,12 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.TaskID != null)
                     hashCode = hashCode * 59 + this.TaskID.GetHashCode();
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
+                hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.ScheduledFor != null)
                     hashCode = hashCode * 59 + this.ScheduledFor.GetHashCode();
                 if (this.Log != null)

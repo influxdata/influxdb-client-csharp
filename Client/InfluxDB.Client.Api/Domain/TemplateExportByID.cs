@@ -107,8 +107,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.StackID == input.StackID ||
-                    (this.StackID != null &&
-                    this.StackID.Equals(input.StackID))
+                    (this.StackID != null && this.StackID.Equals(input.StackID))
                 ) && 
                 (
                     this.OrgIDs == input.OrgIDs ||
@@ -131,6 +130,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.StackID != null)
                     hashCode = hashCode * 59 + this.StackID.GetHashCode();
                 if (this.OrgIDs != null)

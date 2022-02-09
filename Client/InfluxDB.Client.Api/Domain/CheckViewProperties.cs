@@ -88,50 +88,27 @@ namespace InfluxDB.Client.Api.Domain
         public CheckViewProperties(TypeEnum type = TypeEnum.Check, ShapeEnum shape = ShapeEnum.ChronografV2, string checkID = default(string), Check check = default(Check), List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), bool? legendColorizeRows = default(bool?), bool? legendHide = default(bool?), float? legendOpacity = default(float?), int? legendOrientationThreshold = default(int?)) : base()
         {
             // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for CheckViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
+            this.Type = type;
             // to ensure "shape" is required (not null)
-            if (shape == null)
-            {
-                throw new InvalidDataException("shape is a required property for CheckViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Shape = shape;
-            }
+            this.Shape = shape;
             // to ensure "checkID" is required (not null)
             if (checkID == null)
             {
                 throw new InvalidDataException("checkID is a required property for CheckViewProperties and cannot be null");
             }
-            else
-            {
-                this.CheckID = checkID;
-            }
+            this.CheckID = checkID;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
                 throw new InvalidDataException("queries is a required property for CheckViewProperties and cannot be null");
             }
-            else
-            {
-                this.Queries = queries;
-            }
+            this.Queries = queries;
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
                 throw new InvalidDataException("colors is a required property for CheckViewProperties and cannot be null");
             }
-            else
-            {
-                this.Colors = colors;
-            }
+            this.Colors = colors;
             this.Check = check;
             this.LegendColorizeRows = legendColorizeRows;
             this.LegendHide = legendHide;
@@ -245,23 +222,19 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.Shape == input.Shape ||
-                    (this.Shape != null &&
-                    this.Shape.Equals(input.Shape))
+                    this.Shape.Equals(input.Shape)
                 ) && base.Equals(input) && 
                 (
                     this.CheckID == input.CheckID ||
-                    (this.CheckID != null &&
-                    this.CheckID.Equals(input.CheckID))
+                    (this.CheckID != null && this.CheckID.Equals(input.CheckID))
                 ) && base.Equals(input) && 
                 (
                     
-                    (this.Check != null &&
-                    this.Check.Equals(input.Check))
+                    (this.Check != null && this.Check.Equals(input.Check))
                 ) && base.Equals(input) && 
                 (
                     this.Queries == input.Queries ||
@@ -275,23 +248,19 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.LegendColorizeRows == input.LegendColorizeRows ||
-                    (this.LegendColorizeRows != null &&
-                    this.LegendColorizeRows.Equals(input.LegendColorizeRows))
+                    (this.LegendColorizeRows != null && this.LegendColorizeRows.Equals(input.LegendColorizeRows))
                 ) && base.Equals(input) && 
                 (
                     this.LegendHide == input.LegendHide ||
-                    (this.LegendHide != null &&
-                    this.LegendHide.Equals(input.LegendHide))
+                    (this.LegendHide != null && this.LegendHide.Equals(input.LegendHide))
                 ) && base.Equals(input) && 
                 (
                     this.LegendOpacity == input.LegendOpacity ||
-                    (this.LegendOpacity != null &&
-                    this.LegendOpacity.Equals(input.LegendOpacity))
+                    (this.LegendOpacity != null && this.LegendOpacity.Equals(input.LegendOpacity))
                 ) && base.Equals(input) && 
                 (
                     this.LegendOrientationThreshold == input.LegendOrientationThreshold ||
-                    (this.LegendOrientationThreshold != null &&
-                    this.LegendOrientationThreshold.Equals(input.LegendOrientationThreshold))
+                    (this.LegendOrientationThreshold != null && this.LegendOrientationThreshold.Equals(input.LegendOrientationThreshold))
                 );
         }
 
@@ -304,10 +273,9 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Shape != null)
-                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
+                hashCode = hashCode * 59 + this.Shape.GetHashCode();
                 if (this.CheckID != null)
                     hashCode = hashCode * 59 + this.CheckID.GetHashCode();
                 if (this.Check != null)

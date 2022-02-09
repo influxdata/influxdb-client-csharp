@@ -134,33 +134,27 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.StateStatus == input.StateStatus ||
-                    (this.StateStatus != null &&
-                    this.StateStatus.Equals(input.StateStatus))
+                    (this.StateStatus != null && this.StateStatus.Equals(input.StateStatus))
                 ) && 
                 (
                     this.Kind == input.Kind ||
-                    (this.Kind != null &&
-                    this.Kind.Equals(input.Kind))
+                    this.Kind.Equals(input.Kind)
                 ) && 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null &&
-                    this.TemplateMetaName.Equals(input.TemplateMetaName))
+                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
                 ) && 
                 (
                     
-                    (this.New != null &&
-                    this.New.Equals(input.New))
+                    (this.New != null && this.New.Equals(input.New))
                 ) && 
                 (
                     
-                    (this.Old != null &&
-                    this.Old.Equals(input.Old))
+                    (this.Old != null && this.Old.Equals(input.Old))
                 );
         }
 
@@ -173,10 +167,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.StateStatus != null)
                     hashCode = hashCode * 59 + this.StateStatus.GetHashCode();
-                if (this.Kind != null)
-                    hashCode = hashCode * 59 + this.Kind.GetHashCode();
+                hashCode = hashCode * 59 + this.Kind.GetHashCode();
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.TemplateMetaName != null)

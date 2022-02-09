@@ -81,32 +81,15 @@ namespace InfluxDB.Client.Api.Domain
         public MarkdownViewProperties(TypeEnum type = TypeEnum.Markdown, ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string)) : base()
         {
             // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for MarkdownViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
+            this.Type = type;
             // to ensure "shape" is required (not null)
-            if (shape == null)
-            {
-                throw new InvalidDataException("shape is a required property for MarkdownViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Shape = shape;
-            }
+            this.Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
                 throw new InvalidDataException("note is a required property for MarkdownViewProperties and cannot be null");
             }
-            else
-            {
-                this.Note = note;
-            }
+            this.Note = note;
         }
 
 
@@ -165,18 +148,15 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.Shape == input.Shape ||
-                    (this.Shape != null &&
-                    this.Shape.Equals(input.Shape))
+                    this.Shape.Equals(input.Shape)
                 ) && base.Equals(input) && 
                 (
                     this.Note == input.Note ||
-                    (this.Note != null &&
-                    this.Note.Equals(input.Note))
+                    (this.Note != null && this.Note.Equals(input.Note))
                 );
         }
 
@@ -189,10 +169,9 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Shape != null)
-                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
+                hashCode = hashCode * 59 + this.Shape.GetHashCode();
                 if (this.Note != null)
                     hashCode = hashCode * 59 + this.Note.GetHashCode();
                 return hashCode;

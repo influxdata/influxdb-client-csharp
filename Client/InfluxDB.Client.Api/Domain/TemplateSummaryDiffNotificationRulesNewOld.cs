@@ -179,48 +179,39 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.EndpointName == input.EndpointName ||
-                    (this.EndpointName != null &&
-                    this.EndpointName.Equals(input.EndpointName))
+                    (this.EndpointName != null && this.EndpointName.Equals(input.EndpointName))
                 ) && 
                 (
                     this.EndpointID == input.EndpointID ||
-                    (this.EndpointID != null &&
-                    this.EndpointID.Equals(input.EndpointID))
+                    (this.EndpointID != null && this.EndpointID.Equals(input.EndpointID))
                 ) && 
                 (
                     this.EndpointType == input.EndpointType ||
-                    (this.EndpointType != null &&
-                    this.EndpointType.Equals(input.EndpointType))
+                    (this.EndpointType != null && this.EndpointType.Equals(input.EndpointType))
                 ) && 
                 (
                     this.Every == input.Every ||
-                    (this.Every != null &&
-                    this.Every.Equals(input.Every))
+                    (this.Every != null && this.Every.Equals(input.Every))
                 ) && 
                 (
                     this.Offset == input.Offset ||
-                    (this.Offset != null &&
-                    this.Offset.Equals(input.Offset))
+                    (this.Offset != null && this.Offset.Equals(input.Offset))
                 ) && 
                 (
                     this.MessageTemplate == input.MessageTemplate ||
-                    (this.MessageTemplate != null &&
-                    this.MessageTemplate.Equals(input.MessageTemplate))
+                    (this.MessageTemplate != null && this.MessageTemplate.Equals(input.MessageTemplate))
                 ) && 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    (this.Status != null && this.Status.Equals(input.Status))
                 ) && 
                 (
                     this.StatusRules == input.StatusRules ||
@@ -243,6 +234,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Description != null)

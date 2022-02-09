@@ -98,8 +98,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 ) && 
                 (
                     this._Views == input._Views ||
@@ -117,6 +116,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Links != null)
                     hashCode = hashCode * 59 + this.Links.GetHashCode();
                 if (this._Views != null)

@@ -145,43 +145,35 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Self == input.Self ||
-                    (this.Self != null &&
-                    this.Self.Equals(input.Self))
+                    (this.Self != null && this.Self.Equals(input.Self))
                 ) && 
                 (
                     this.Members == input.Members ||
-                    (this.Members != null &&
-                    this.Members.Equals(input.Members))
+                    (this.Members != null && this.Members.Equals(input.Members))
                 ) && 
                 (
                     this.Owners == input.Owners ||
-                    (this.Owners != null &&
-                    this.Owners.Equals(input.Owners))
+                    (this.Owners != null && this.Owners.Equals(input.Owners))
                 ) && 
                 (
                     this.Labels == input.Labels ||
-                    (this.Labels != null &&
-                    this.Labels.Equals(input.Labels))
+                    (this.Labels != null && this.Labels.Equals(input.Labels))
                 ) && 
                 (
                     this.Secrets == input.Secrets ||
-                    (this.Secrets != null &&
-                    this.Secrets.Equals(input.Secrets))
+                    (this.Secrets != null && this.Secrets.Equals(input.Secrets))
                 ) && 
                 (
                     this.Buckets == input.Buckets ||
-                    (this.Buckets != null &&
-                    this.Buckets.Equals(input.Buckets))
+                    (this.Buckets != null && this.Buckets.Equals(input.Buckets))
                 ) && 
                 (
                     this.Tasks == input.Tasks ||
-                    (this.Tasks != null &&
-                    this.Tasks.Equals(input.Tasks))
+                    (this.Tasks != null && this.Tasks.Equals(input.Tasks))
                 ) && 
                 (
                     this.Dashboards == input.Dashboards ||
-                    (this.Dashboards != null &&
-                    this.Dashboards.Equals(input.Dashboards))
+                    (this.Dashboards != null && this.Dashboards.Equals(input.Dashboards))
                 );
         }
 
@@ -194,6 +186,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Self != null)
                     hashCode = hashCode * 59 + this.Self.GetHashCode();
                 if (this.Members != null)

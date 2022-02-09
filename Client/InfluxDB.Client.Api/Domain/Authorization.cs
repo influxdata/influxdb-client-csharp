@@ -163,18 +163,15 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null &&
-                    this.CreatedAt.Equals(input.CreatedAt))
+                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
                 ) && base.Equals(input) && 
                 (
                     this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null &&
-                    this.UpdatedAt.Equals(input.UpdatedAt))
+                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
                 ) && base.Equals(input) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && base.Equals(input) && 
                 (
                     this.Permissions == input.Permissions ||
@@ -183,33 +180,27 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && base.Equals(input) && 
                 (
                     this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
+                    (this.Token != null && this.Token.Equals(input.Token))
                 ) && base.Equals(input) && 
                 (
                     this.UserID == input.UserID ||
-                    (this.UserID != null &&
-                    this.UserID.Equals(input.UserID))
+                    (this.UserID != null && this.UserID.Equals(input.UserID))
                 ) && base.Equals(input) && 
                 (
                     this.User == input.User ||
-                    (this.User != null &&
-                    this.User.Equals(input.User))
+                    (this.User != null && this.User.Equals(input.User))
                 ) && base.Equals(input) && 
                 (
                     this.Org == input.Org ||
-                    (this.Org != null &&
-                    this.Org.Equals(input.Org))
+                    (this.Org != null && this.Org.Equals(input.Org))
                 ) && base.Equals(input) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 );
         }
 
@@ -222,6 +213,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                
                 if (this.CreatedAt != null)
                     hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
                 if (this.UpdatedAt != null)

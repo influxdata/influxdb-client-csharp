@@ -75,19 +75,9 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("name is a required property for HealthCheck and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "status" is required (not null)
-            if (status == null)
-            {
-                throw new InvalidDataException("status is a required property for HealthCheck and cannot be null");
-            }
-            else
-            {
-                this.Status = status;
-            }
+            this.Status = status;
             this.Message = message;
             this.Checks = checks;
             this.Version = version;
@@ -175,13 +165,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Message == input.Message ||
-                    (this.Message != null &&
-                    this.Message.Equals(input.Message))
+                    (this.Message != null && this.Message.Equals(input.Message))
                 ) && 
                 (
                     this.Checks == input.Checks ||
@@ -190,18 +178,15 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    this.Status.Equals(input.Status)
                 ) && 
                 (
                     this.Version == input.Version ||
-                    (this.Version != null &&
-                    this.Version.Equals(input.Version))
+                    (this.Version != null && this.Version.Equals(input.Version))
                 ) && 
                 (
                     this.Commit == input.Commit ||
-                    (this.Commit != null &&
-                    this.Commit.Equals(input.Commit))
+                    (this.Commit != null && this.Commit.Equals(input.Commit))
                 );
         }
 
@@ -214,14 +199,14 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Message != null)
                     hashCode = hashCode * 59 + this.Message.GetHashCode();
                 if (this.Checks != null)
                     hashCode = hashCode * 59 + this.Checks.GetHashCode();
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
+                hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.Version != null)
                     hashCode = hashCode * 59 + this.Version.GetHashCode();
                 if (this.Commit != null)

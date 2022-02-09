@@ -98,13 +98,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.CurrentLevel == input.CurrentLevel ||
-                    (this.CurrentLevel != null &&
-                    this.CurrentLevel.Equals(input.CurrentLevel))
+                    (this.CurrentLevel != null && this.CurrentLevel.Equals(input.CurrentLevel))
                 ) && 
                 (
                     this.PreviousLevel == input.PreviousLevel ||
-                    (this.PreviousLevel != null &&
-                    this.PreviousLevel.Equals(input.PreviousLevel))
+                    (this.PreviousLevel != null && this.PreviousLevel.Equals(input.PreviousLevel))
                 );
         }
 
@@ -117,6 +115,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.CurrentLevel != null)
                     hashCode = hashCode * 59 + this.CurrentLevel.GetHashCode();
                 if (this.PreviousLevel != null)

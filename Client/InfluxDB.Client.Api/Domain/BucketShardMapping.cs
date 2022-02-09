@@ -46,19 +46,13 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("oldId is a required property for BucketShardMapping and cannot be null");
             }
-            else
-            {
-                this.OldId = oldId;
-            }
+            this.OldId = oldId;
             // to ensure "newId" is required (not null)
             if (newId == null)
             {
                 throw new InvalidDataException("newId is a required property for BucketShardMapping and cannot be null");
             }
-            else
-            {
-                this.NewId = newId;
-            }
+            this.NewId = newId;
         }
 
         /// <summary>
@@ -119,13 +113,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.OldId == input.OldId ||
-                    (this.OldId != null &&
-                    this.OldId.Equals(input.OldId))
+                    (this.OldId != null && this.OldId.Equals(input.OldId))
                 ) && 
                 (
                     this.NewId == input.NewId ||
-                    (this.NewId != null &&
-                    this.NewId.Equals(input.NewId))
+                    (this.NewId != null && this.NewId.Equals(input.NewId))
                 );
         }
 
@@ -138,6 +130,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.OldId != null)
                     hashCode = hashCode * 59 + this.OldId.GetHashCode();
                 if (this.NewId != null)

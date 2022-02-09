@@ -51,55 +51,37 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("organizationID is a required property for BucketMetadataManifest and cannot be null");
             }
-            else
-            {
-                this.OrganizationID = organizationID;
-            }
+            this.OrganizationID = organizationID;
             // to ensure "organizationName" is required (not null)
             if (organizationName == null)
             {
                 throw new InvalidDataException("organizationName is a required property for BucketMetadataManifest and cannot be null");
             }
-            else
-            {
-                this.OrganizationName = organizationName;
-            }
+            this.OrganizationName = organizationName;
             // to ensure "bucketID" is required (not null)
             if (bucketID == null)
             {
                 throw new InvalidDataException("bucketID is a required property for BucketMetadataManifest and cannot be null");
             }
-            else
-            {
-                this.BucketID = bucketID;
-            }
+            this.BucketID = bucketID;
             // to ensure "bucketName" is required (not null)
             if (bucketName == null)
             {
                 throw new InvalidDataException("bucketName is a required property for BucketMetadataManifest and cannot be null");
             }
-            else
-            {
-                this.BucketName = bucketName;
-            }
+            this.BucketName = bucketName;
             // to ensure "defaultRetentionPolicy" is required (not null)
             if (defaultRetentionPolicy == null)
             {
                 throw new InvalidDataException("defaultRetentionPolicy is a required property for BucketMetadataManifest and cannot be null");
             }
-            else
-            {
-                this.DefaultRetentionPolicy = defaultRetentionPolicy;
-            }
+            this.DefaultRetentionPolicy = defaultRetentionPolicy;
             // to ensure "retentionPolicies" is required (not null)
             if (retentionPolicies == null)
             {
                 throw new InvalidDataException("retentionPolicies is a required property for BucketMetadataManifest and cannot be null");
             }
-            else
-            {
-                this.RetentionPolicies = retentionPolicies;
-            }
+            this.RetentionPolicies = retentionPolicies;
             this.Description = description;
         }
 
@@ -196,33 +178,27 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.OrganizationID == input.OrganizationID ||
-                    (this.OrganizationID != null &&
-                    this.OrganizationID.Equals(input.OrganizationID))
+                    (this.OrganizationID != null && this.OrganizationID.Equals(input.OrganizationID))
                 ) && 
                 (
                     this.OrganizationName == input.OrganizationName ||
-                    (this.OrganizationName != null &&
-                    this.OrganizationName.Equals(input.OrganizationName))
+                    (this.OrganizationName != null && this.OrganizationName.Equals(input.OrganizationName))
                 ) && 
                 (
                     this.BucketID == input.BucketID ||
-                    (this.BucketID != null &&
-                    this.BucketID.Equals(input.BucketID))
+                    (this.BucketID != null && this.BucketID.Equals(input.BucketID))
                 ) && 
                 (
                     this.BucketName == input.BucketName ||
-                    (this.BucketName != null &&
-                    this.BucketName.Equals(input.BucketName))
+                    (this.BucketName != null && this.BucketName.Equals(input.BucketName))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.DefaultRetentionPolicy == input.DefaultRetentionPolicy ||
-                    (this.DefaultRetentionPolicy != null &&
-                    this.DefaultRetentionPolicy.Equals(input.DefaultRetentionPolicy))
+                    (this.DefaultRetentionPolicy != null && this.DefaultRetentionPolicy.Equals(input.DefaultRetentionPolicy))
                 ) && 
                 (
                     this.RetentionPolicies == input.RetentionPolicies ||
@@ -240,6 +216,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.OrganizationID != null)
                     hashCode = hashCode * 59 + this.OrganizationID.GetHashCode();
                 if (this.OrganizationName != null)

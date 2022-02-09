@@ -89,8 +89,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.StatusFeed == input.StatusFeed ||
-                    (this.StatusFeed != null &&
-                    this.StatusFeed.Equals(input.StatusFeed))
+                    (this.StatusFeed != null && this.StatusFeed.Equals(input.StatusFeed))
                 );
         }
 
@@ -103,6 +102,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.StatusFeed != null)
                     hashCode = hashCode * 59 + this.StatusFeed.GetHashCode();
                 return hashCode;

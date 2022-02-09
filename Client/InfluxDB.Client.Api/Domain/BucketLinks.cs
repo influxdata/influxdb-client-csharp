@@ -129,33 +129,27 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Labels == input.Labels ||
-                    (this.Labels != null &&
-                    this.Labels.Equals(input.Labels))
+                    (this.Labels != null && this.Labels.Equals(input.Labels))
                 ) && 
                 (
                     this.Members == input.Members ||
-                    (this.Members != null &&
-                    this.Members.Equals(input.Members))
+                    (this.Members != null && this.Members.Equals(input.Members))
                 ) && 
                 (
                     this.Org == input.Org ||
-                    (this.Org != null &&
-                    this.Org.Equals(input.Org))
+                    (this.Org != null && this.Org.Equals(input.Org))
                 ) && 
                 (
                     this.Owners == input.Owners ||
-                    (this.Owners != null &&
-                    this.Owners.Equals(input.Owners))
+                    (this.Owners != null && this.Owners.Equals(input.Owners))
                 ) && 
                 (
                     this.Self == input.Self ||
-                    (this.Self != null &&
-                    this.Self.Equals(input.Self))
+                    (this.Self != null && this.Self.Equals(input.Self))
                 ) && 
                 (
                     this.Write == input.Write ||
-                    (this.Write != null &&
-                    this.Write.Equals(input.Write))
+                    (this.Write != null && this.Write.Equals(input.Write))
                 );
         }
 
@@ -168,6 +162,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Labels != null)
                     hashCode = hashCode * 59 + this.Labels.GetHashCode();
                 if (this.Members != null)

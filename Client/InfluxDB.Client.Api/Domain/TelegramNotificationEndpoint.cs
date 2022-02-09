@@ -46,19 +46,13 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("token is a required property for TelegramNotificationEndpoint and cannot be null");
             }
-            else
-            {
-                this.Token = token;
-            }
+            this.Token = token;
             // to ensure "channel" is required (not null)
             if (channel == null)
             {
                 throw new InvalidDataException("channel is a required property for TelegramNotificationEndpoint and cannot be null");
             }
-            else
-            {
-                this.Channel = channel;
-            }
+            this.Channel = channel;
         }
 
         /// <summary>
@@ -122,13 +116,11 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
+                    (this.Token != null && this.Token.Equals(input.Token))
                 ) && base.Equals(input) && 
                 (
                     this.Channel == input.Channel ||
-                    (this.Channel != null &&
-                    this.Channel.Equals(input.Channel))
+                    (this.Channel != null && this.Channel.Equals(input.Channel))
                 );
         }
 
@@ -141,6 +133,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                
                 if (this.Token != null)
                     hashCode = hashCode * 59 + this.Token.GetHashCode();
                 if (this.Channel != null)

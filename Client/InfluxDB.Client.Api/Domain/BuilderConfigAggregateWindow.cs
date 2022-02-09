@@ -98,13 +98,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Period == input.Period ||
-                    (this.Period != null &&
-                    this.Period.Equals(input.Period))
+                    (this.Period != null && this.Period.Equals(input.Period))
                 ) && 
                 (
                     this.FillValues == input.FillValues ||
-                    (this.FillValues != null &&
-                    this.FillValues.Equals(input.FillValues))
+                    (this.FillValues != null && this.FillValues.Equals(input.FillValues))
                 );
         }
 
@@ -117,6 +115,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Period != null)
                     hashCode = hashCode * 59 + this.Period.GetHashCode();
                 if (this.FillValues != null)

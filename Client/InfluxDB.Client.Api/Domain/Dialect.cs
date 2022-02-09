@@ -210,13 +210,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Header == input.Header ||
-                    (this.Header != null &&
-                    this.Header.Equals(input.Header))
+                    (this.Header != null && this.Header.Equals(input.Header))
                 ) && 
                 (
                     this.Delimiter == input.Delimiter ||
-                    (this.Delimiter != null &&
-                    this.Delimiter.Equals(input.Delimiter))
+                    (this.Delimiter != null && this.Delimiter.Equals(input.Delimiter))
                 ) && 
                 (
                     this.Annotations == input.Annotations ||
@@ -225,13 +223,11 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     this.CommentPrefix == input.CommentPrefix ||
-                    (this.CommentPrefix != null &&
-                    this.CommentPrefix.Equals(input.CommentPrefix))
+                    (this.CommentPrefix != null && this.CommentPrefix.Equals(input.CommentPrefix))
                 ) && 
                 (
                     this.DateTimeFormat == input.DateTimeFormat ||
-                    (this.DateTimeFormat != null &&
-                    this.DateTimeFormat.Equals(input.DateTimeFormat))
+                    this.DateTimeFormat.Equals(input.DateTimeFormat)
                 );
         }
 
@@ -244,16 +240,15 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Header != null)
                     hashCode = hashCode * 59 + this.Header.GetHashCode();
                 if (this.Delimiter != null)
                     hashCode = hashCode * 59 + this.Delimiter.GetHashCode();
-                if (this.Annotations != null)
-                    hashCode = hashCode * 59 + this.Annotations.GetHashCode();
+                hashCode = hashCode * 59 + this.Annotations.GetHashCode();
                 if (this.CommentPrefix != null)
                     hashCode = hashCode * 59 + this.CommentPrefix.GetHashCode();
-                if (this.DateTimeFormat != null)
-                    hashCode = hashCode * 59 + this.DateTimeFormat.GetHashCode();
+                hashCode = hashCode * 59 + this.DateTimeFormat.GetHashCode();
                 return hashCode;
             }
         }

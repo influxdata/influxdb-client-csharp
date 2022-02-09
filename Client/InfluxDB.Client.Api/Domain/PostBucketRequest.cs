@@ -55,28 +55,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("orgID is a required property for PostBucketRequest and cannot be null");
             }
-            else
-            {
-                this.OrgID = orgID;
-            }
+            this.OrgID = orgID;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for PostBucketRequest and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "retentionRules" is required (not null)
             if (retentionRules == null)
             {
                 throw new InvalidDataException("retentionRules is a required property for PostBucketRequest and cannot be null");
             }
-            else
-            {
-                this.RetentionRules = retentionRules;
-            }
+            this.RetentionRules = retentionRules;
             this.Description = description;
             this.Rp = rp;
             this.SchemaType = schemaType;
@@ -164,23 +155,19 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.Rp == input.Rp ||
-                    (this.Rp != null &&
-                    this.Rp.Equals(input.Rp))
+                    (this.Rp != null && this.Rp.Equals(input.Rp))
                 ) && 
                 (
                     this.RetentionRules == input.RetentionRules ||
@@ -189,8 +176,7 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     this.SchemaType == input.SchemaType ||
-                    (this.SchemaType != null &&
-                    this.SchemaType.Equals(input.SchemaType))
+                    this.SchemaType.Equals(input.SchemaType)
                 );
         }
 
@@ -203,6 +189,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Name != null)
@@ -213,8 +200,7 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Rp.GetHashCode();
                 if (this.RetentionRules != null)
                     hashCode = hashCode * 59 + this.RetentionRules.GetHashCode();
-                if (this.SchemaType != null)
-                    hashCode = hashCode * 59 + this.SchemaType.GetHashCode();
+                hashCode = hashCode * 59 + this.SchemaType.GetHashCode();
                 return hashCode;
             }
         }

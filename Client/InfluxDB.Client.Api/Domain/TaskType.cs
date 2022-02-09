@@ -94,28 +94,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("orgID is a required property for TaskType and cannot be null");
             }
-            else
-            {
-                this.OrgID = orgID;
-            }
+            this.OrgID = orgID;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for TaskType and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "flux" is required (not null)
             if (flux == null)
             {
                 throw new InvalidDataException("flux is a required property for TaskType and cannot be null");
             }
-            else
-            {
-                this.Flux = flux;
-            }
+            this.Flux = flux;
             this.Type = type;
             this.Org = org;
             this.OwnerID = ownerID;
@@ -315,43 +306,35 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    (this.Type != null && this.Type.Equals(input.Type))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Org == input.Org ||
-                    (this.Org != null &&
-                    this.Org.Equals(input.Org))
+                    (this.Org != null && this.Org.Equals(input.Org))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.OwnerID == input.OwnerID ||
-                    (this.OwnerID != null &&
-                    this.OwnerID.Equals(input.OwnerID))
+                    (this.OwnerID != null && this.OwnerID.Equals(input.OwnerID))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    this.Status.Equals(input.Status)
                 ) && 
                 (
                     this.Labels == input.Labels ||
@@ -360,58 +343,47 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     this.AuthorizationID == input.AuthorizationID ||
-                    (this.AuthorizationID != null &&
-                    this.AuthorizationID.Equals(input.AuthorizationID))
+                    (this.AuthorizationID != null && this.AuthorizationID.Equals(input.AuthorizationID))
                 ) && 
                 (
                     this.Flux == input.Flux ||
-                    (this.Flux != null &&
-                    this.Flux.Equals(input.Flux))
+                    (this.Flux != null && this.Flux.Equals(input.Flux))
                 ) && 
                 (
                     this.Every == input.Every ||
-                    (this.Every != null &&
-                    this.Every.Equals(input.Every))
+                    (this.Every != null && this.Every.Equals(input.Every))
                 ) && 
                 (
                     this.Cron == input.Cron ||
-                    (this.Cron != null &&
-                    this.Cron.Equals(input.Cron))
+                    (this.Cron != null && this.Cron.Equals(input.Cron))
                 ) && 
                 (
                     this.Offset == input.Offset ||
-                    (this.Offset != null &&
-                    this.Offset.Equals(input.Offset))
+                    (this.Offset != null && this.Offset.Equals(input.Offset))
                 ) && 
                 (
                     this.LatestCompleted == input.LatestCompleted ||
-                    (this.LatestCompleted != null &&
-                    this.LatestCompleted.Equals(input.LatestCompleted))
+                    (this.LatestCompleted != null && this.LatestCompleted.Equals(input.LatestCompleted))
                 ) && 
                 (
                     this.LastRunStatus == input.LastRunStatus ||
-                    (this.LastRunStatus != null &&
-                    this.LastRunStatus.Equals(input.LastRunStatus))
+                    this.LastRunStatus.Equals(input.LastRunStatus)
                 ) && 
                 (
                     this.LastRunError == input.LastRunError ||
-                    (this.LastRunError != null &&
-                    this.LastRunError.Equals(input.LastRunError))
+                    (this.LastRunError != null && this.LastRunError.Equals(input.LastRunError))
                 ) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null &&
-                    this.CreatedAt.Equals(input.CreatedAt))
+                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
                 ) && 
                 (
                     this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null &&
-                    this.UpdatedAt.Equals(input.UpdatedAt))
+                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
                 ) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 );
         }
 
@@ -424,6 +396,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Type != null)
@@ -438,8 +411,7 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.OwnerID.GetHashCode();
                 if (this.Description != null)
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
+                hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.Labels != null)
                     hashCode = hashCode * 59 + this.Labels.GetHashCode();
                 if (this.AuthorizationID != null)
@@ -454,8 +426,7 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Offset.GetHashCode();
                 if (this.LatestCompleted != null)
                     hashCode = hashCode * 59 + this.LatestCompleted.GetHashCode();
-                if (this.LastRunStatus != null)
-                    hashCode = hashCode * 59 + this.LastRunStatus.GetHashCode();
+                hashCode = hashCode * 59 + this.LastRunStatus.GetHashCode();
                 if (this.LastRunError != null)
                     hashCode = hashCode * 59 + this.LastRunError.GetHashCode();
                 if (this.CreatedAt != null)

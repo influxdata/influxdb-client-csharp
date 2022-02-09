@@ -52,55 +52,37 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("name is a required property for ReplicationCreationRequest and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
                 throw new InvalidDataException("orgID is a required property for ReplicationCreationRequest and cannot be null");
             }
-            else
-            {
-                this.OrgID = orgID;
-            }
+            this.OrgID = orgID;
             // to ensure "remoteID" is required (not null)
             if (remoteID == null)
             {
                 throw new InvalidDataException("remoteID is a required property for ReplicationCreationRequest and cannot be null");
             }
-            else
-            {
-                this.RemoteID = remoteID;
-            }
+            this.RemoteID = remoteID;
             // to ensure "localBucketID" is required (not null)
             if (localBucketID == null)
             {
                 throw new InvalidDataException("localBucketID is a required property for ReplicationCreationRequest and cannot be null");
             }
-            else
-            {
-                this.LocalBucketID = localBucketID;
-            }
+            this.LocalBucketID = localBucketID;
             // to ensure "remoteBucketID" is required (not null)
             if (remoteBucketID == null)
             {
                 throw new InvalidDataException("remoteBucketID is a required property for ReplicationCreationRequest and cannot be null");
             }
-            else
-            {
-                this.RemoteBucketID = remoteBucketID;
-            }
+            this.RemoteBucketID = remoteBucketID;
             // to ensure "maxQueueSizeBytes" is required (not null)
             if (maxQueueSizeBytes == null)
             {
                 throw new InvalidDataException("maxQueueSizeBytes is a required property for ReplicationCreationRequest and cannot be null");
             }
-            else
-            {
-                this.MaxQueueSizeBytes = maxQueueSizeBytes;
-            }
+            this.MaxQueueSizeBytes = maxQueueSizeBytes;
             this.Description = description;
             // use default value if no "dropNonRetryableData" provided
             if (dropNonRetryableData == null)
@@ -213,43 +195,35 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.RemoteID == input.RemoteID ||
-                    (this.RemoteID != null &&
-                    this.RemoteID.Equals(input.RemoteID))
+                    (this.RemoteID != null && this.RemoteID.Equals(input.RemoteID))
                 ) && 
                 (
                     this.LocalBucketID == input.LocalBucketID ||
-                    (this.LocalBucketID != null &&
-                    this.LocalBucketID.Equals(input.LocalBucketID))
+                    (this.LocalBucketID != null && this.LocalBucketID.Equals(input.LocalBucketID))
                 ) && 
                 (
                     this.RemoteBucketID == input.RemoteBucketID ||
-                    (this.RemoteBucketID != null &&
-                    this.RemoteBucketID.Equals(input.RemoteBucketID))
+                    (this.RemoteBucketID != null && this.RemoteBucketID.Equals(input.RemoteBucketID))
                 ) && 
                 (
                     this.MaxQueueSizeBytes == input.MaxQueueSizeBytes ||
-                    (this.MaxQueueSizeBytes != null &&
-                    this.MaxQueueSizeBytes.Equals(input.MaxQueueSizeBytes))
+                    (this.MaxQueueSizeBytes != null && this.MaxQueueSizeBytes.Equals(input.MaxQueueSizeBytes))
                 ) && 
                 (
                     this.DropNonRetryableData == input.DropNonRetryableData ||
-                    (this.DropNonRetryableData != null &&
-                    this.DropNonRetryableData.Equals(input.DropNonRetryableData))
+                    (this.DropNonRetryableData != null && this.DropNonRetryableData.Equals(input.DropNonRetryableData))
                 );
         }
 
@@ -262,6 +236,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Description != null)

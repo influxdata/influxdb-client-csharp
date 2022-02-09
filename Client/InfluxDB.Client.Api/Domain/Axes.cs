@@ -46,19 +46,13 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("x is a required property for Axes and cannot be null");
             }
-            else
-            {
-                this.X = x;
-            }
+            this.X = x;
             // to ensure "y" is required (not null)
             if (y == null)
             {
                 throw new InvalidDataException("y is a required property for Axes and cannot be null");
             }
-            else
-            {
-                this.Y = y;
-            }
+            this.Y = y;
         }
 
         /// <summary>
@@ -119,13 +113,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     
-                    (this.X != null &&
-                    this.X.Equals(input.X))
+                    (this.X != null && this.X.Equals(input.X))
                 ) && 
                 (
                     
-                    (this.Y != null &&
-                    this.Y.Equals(input.Y))
+                    (this.Y != null && this.Y.Equals(input.Y))
                 );
         }
 
@@ -138,6 +130,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.X != null)
                     hashCode = hashCode * 59 + this.X.GetHashCode();
                 if (this.Y != null)

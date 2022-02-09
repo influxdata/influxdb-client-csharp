@@ -269,78 +269,63 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 ) && 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Default == input.Default ||
-                    (this.Default != null &&
-                    this.Default.Equals(input.Default))
+                    (this.Default != null && this.Default.Equals(input.Default))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && 
                 (
                     this.Url == input.Url ||
-                    (this.Url != null &&
-                    this.Url.Equals(input.Url))
+                    (this.Url != null && this.Url.Equals(input.Url))
                 ) && 
                 (
                     this.InsecureSkipVerify == input.InsecureSkipVerify ||
-                    (this.InsecureSkipVerify != null &&
-                    this.InsecureSkipVerify.Equals(input.InsecureSkipVerify))
+                    (this.InsecureSkipVerify != null && this.InsecureSkipVerify.Equals(input.InsecureSkipVerify))
                 ) && 
                 (
                     this.Telegraf == input.Telegraf ||
-                    (this.Telegraf != null &&
-                    this.Telegraf.Equals(input.Telegraf))
+                    (this.Telegraf != null && this.Telegraf.Equals(input.Telegraf))
                 ) && 
                 (
                     this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
+                    (this.Token != null && this.Token.Equals(input.Token))
                 ) && 
                 (
                     this.Username == input.Username ||
-                    (this.Username != null &&
-                    this.Username.Equals(input.Username))
+                    (this.Username != null && this.Username.Equals(input.Username))
                 ) && 
                 (
                     this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
+                    (this.Password != null && this.Password.Equals(input.Password))
                 ) && 
                 (
                     this.SharedSecret == input.SharedSecret ||
-                    (this.SharedSecret != null &&
-                    this.SharedSecret.Equals(input.SharedSecret))
+                    (this.SharedSecret != null && this.SharedSecret.Equals(input.SharedSecret))
                 ) && 
                 (
                     this.MetaUrl == input.MetaUrl ||
-                    (this.MetaUrl != null &&
-                    this.MetaUrl.Equals(input.MetaUrl))
+                    (this.MetaUrl != null && this.MetaUrl.Equals(input.MetaUrl))
                 ) && 
                 (
                     this.DefaultRP == input.DefaultRP ||
-                    (this.DefaultRP != null &&
-                    this.DefaultRP.Equals(input.DefaultRP))
+                    (this.DefaultRP != null && this.DefaultRP.Equals(input.DefaultRP))
                 ) && 
                 (
                     this.Languages == input.Languages ||
@@ -358,6 +343,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Links != null)
                     hashCode = hashCode * 59 + this.Links.GetHashCode();
                 if (this.Id != null)
@@ -368,8 +354,7 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.Default.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Url != null)
                     hashCode = hashCode * 59 + this.Url.GetHashCode();
                 if (this.InsecureSkipVerify != null)
@@ -388,8 +373,7 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.MetaUrl.GetHashCode();
                 if (this.DefaultRP != null)
                     hashCode = hashCode * 59 + this.DefaultRP.GetHashCode();
-                if (this.Languages != null)
-                    hashCode = hashCode * 59 + this.Languages.GetHashCode();
+                hashCode = hashCode * 59 + this.Languages.GetHashCode();
                 return hashCode;
             }
         }

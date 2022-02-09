@@ -141,18 +141,15 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.EventType == input.EventType ||
-                    (this.EventType != null &&
-                    this.EventType.Equals(input.EventType))
+                    (this.EventType != null && this.EventType.Equals(input.EventType))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.Sources == input.Sources ||
@@ -171,8 +168,7 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null &&
-                    this.UpdatedAt.Equals(input.UpdatedAt))
+                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
                 );
         }
 
@@ -185,6 +181,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.EventType != null)
                     hashCode = hashCode * 59 + this.EventType.GetHashCode();
                 if (this.Name != null)

@@ -142,33 +142,27 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.RemoteURL == input.RemoteURL ||
-                    (this.RemoteURL != null &&
-                    this.RemoteURL.Equals(input.RemoteURL))
+                    (this.RemoteURL != null && this.RemoteURL.Equals(input.RemoteURL))
                 ) && 
                 (
                     this.RemoteAPIToken == input.RemoteAPIToken ||
-                    (this.RemoteAPIToken != null &&
-                    this.RemoteAPIToken.Equals(input.RemoteAPIToken))
+                    (this.RemoteAPIToken != null && this.RemoteAPIToken.Equals(input.RemoteAPIToken))
                 ) && 
                 (
                     this.RemoteOrgID == input.RemoteOrgID ||
-                    (this.RemoteOrgID != null &&
-                    this.RemoteOrgID.Equals(input.RemoteOrgID))
+                    (this.RemoteOrgID != null && this.RemoteOrgID.Equals(input.RemoteOrgID))
                 ) && 
                 (
                     this.AllowInsecureTLS == input.AllowInsecureTLS ||
-                    (this.AllowInsecureTLS != null &&
-                    this.AllowInsecureTLS.Equals(input.AllowInsecureTLS))
+                    (this.AllowInsecureTLS != null && this.AllowInsecureTLS.Equals(input.AllowInsecureTLS))
                 );
         }
 
@@ -181,6 +175,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Description != null)

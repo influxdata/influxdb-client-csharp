@@ -242,93 +242,75 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Authorizations == input.Authorizations ||
-                    (this.Authorizations != null &&
-                    this.Authorizations.Equals(input.Authorizations))
+                    (this.Authorizations != null && this.Authorizations.Equals(input.Authorizations))
                 ) && 
                 (
                     this.Buckets == input.Buckets ||
-                    (this.Buckets != null &&
-                    this.Buckets.Equals(input.Buckets))
+                    (this.Buckets != null && this.Buckets.Equals(input.Buckets))
                 ) && 
                 (
                     this.Dashboards == input.Dashboards ||
-                    (this.Dashboards != null &&
-                    this.Dashboards.Equals(input.Dashboards))
+                    (this.Dashboards != null && this.Dashboards.Equals(input.Dashboards))
                 ) && 
                 (
                     
-                    (this.External != null &&
-                    this.External.Equals(input.External))
+                    (this.External != null && this.External.Equals(input.External))
                 ) && 
                 (
                     this.Variables == input.Variables ||
-                    (this.Variables != null &&
-                    this.Variables.Equals(input.Variables))
+                    (this.Variables != null && this.Variables.Equals(input.Variables))
                 ) && 
                 (
                     this.Me == input.Me ||
-                    (this.Me != null &&
-                    this.Me.Equals(input.Me))
+                    (this.Me != null && this.Me.Equals(input.Me))
                 ) && 
                 (
                     this.Flags == input.Flags ||
-                    (this.Flags != null &&
-                    this.Flags.Equals(input.Flags))
+                    (this.Flags != null && this.Flags.Equals(input.Flags))
                 ) && 
                 (
                     this.Orgs == input.Orgs ||
-                    (this.Orgs != null &&
-                    this.Orgs.Equals(input.Orgs))
+                    (this.Orgs != null && this.Orgs.Equals(input.Orgs))
                 ) && 
                 (
                     
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
+                    (this.Query != null && this.Query.Equals(input.Query))
                 ) && 
                 (
                     this.Setup == input.Setup ||
-                    (this.Setup != null &&
-                    this.Setup.Equals(input.Setup))
+                    (this.Setup != null && this.Setup.Equals(input.Setup))
                 ) && 
                 (
                     this.Signin == input.Signin ||
-                    (this.Signin != null &&
-                    this.Signin.Equals(input.Signin))
+                    (this.Signin != null && this.Signin.Equals(input.Signin))
                 ) && 
                 (
                     this.Signout == input.Signout ||
-                    (this.Signout != null &&
-                    this.Signout.Equals(input.Signout))
+                    (this.Signout != null && this.Signout.Equals(input.Signout))
                 ) && 
                 (
                     this.Sources == input.Sources ||
-                    (this.Sources != null &&
-                    this.Sources.Equals(input.Sources))
+                    (this.Sources != null && this.Sources.Equals(input.Sources))
                 ) && 
                 (
                     
-                    (this.System != null &&
-                    this.System.Equals(input.System))
+                    (this.System != null && this.System.Equals(input.System))
                 ) && 
                 (
                     this.Tasks == input.Tasks ||
-                    (this.Tasks != null &&
-                    this.Tasks.Equals(input.Tasks))
+                    (this.Tasks != null && this.Tasks.Equals(input.Tasks))
                 ) && 
                 (
                     this.Telegrafs == input.Telegrafs ||
-                    (this.Telegrafs != null &&
-                    this.Telegrafs.Equals(input.Telegrafs))
+                    (this.Telegrafs != null && this.Telegrafs.Equals(input.Telegrafs))
                 ) && 
                 (
                     this.Users == input.Users ||
-                    (this.Users != null &&
-                    this.Users.Equals(input.Users))
+                    (this.Users != null && this.Users.Equals(input.Users))
                 ) && 
                 (
                     this.Write == input.Write ||
-                    (this.Write != null &&
-                    this.Write.Equals(input.Write))
+                    (this.Write != null && this.Write.Equals(input.Write))
                 );
         }
 
@@ -341,6 +323,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Authorizations != null)
                     hashCode = hashCode * 59 + this.Authorizations.GetHashCode();
                 if (this.Buckets != null)

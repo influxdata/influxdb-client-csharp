@@ -131,8 +131,7 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     
-                    (this.AggregateWindow != null &&
-                    this.AggregateWindow.Equals(input.AggregateWindow))
+                    (this.AggregateWindow != null && this.AggregateWindow.Equals(input.AggregateWindow))
                 );
         }
 
@@ -145,6 +144,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Buckets != null)
                     hashCode = hashCode * 59 + this.Buckets.GetHashCode();
                 if (this.Tags != null)

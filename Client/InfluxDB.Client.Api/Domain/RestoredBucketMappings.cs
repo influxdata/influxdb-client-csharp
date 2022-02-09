@@ -47,28 +47,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("id is a required property for RestoredBucketMappings and cannot be null");
             }
-            else
-            {
-                this.Id = id;
-            }
+            this.Id = id;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for RestoredBucketMappings and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "shardMappings" is required (not null)
             if (shardMappings == null)
             {
                 throw new InvalidDataException("shardMappings is a required property for RestoredBucketMappings and cannot be null");
             }
-            else
-            {
-                this.ShardMappings = shardMappings;
-            }
+            this.ShardMappings = shardMappings;
         }
 
         /// <summary>
@@ -137,13 +128,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.ShardMappings == input.ShardMappings ||
@@ -161,6 +150,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)

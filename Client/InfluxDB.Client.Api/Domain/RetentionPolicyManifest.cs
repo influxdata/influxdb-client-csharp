@@ -50,55 +50,37 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("name is a required property for RetentionPolicyManifest and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "replicaN" is required (not null)
             if (replicaN == null)
             {
                 throw new InvalidDataException("replicaN is a required property for RetentionPolicyManifest and cannot be null");
             }
-            else
-            {
-                this.ReplicaN = replicaN;
-            }
+            this.ReplicaN = replicaN;
             // to ensure "duration" is required (not null)
             if (duration == null)
             {
                 throw new InvalidDataException("duration is a required property for RetentionPolicyManifest and cannot be null");
             }
-            else
-            {
-                this.Duration = duration;
-            }
+            this.Duration = duration;
             // to ensure "shardGroupDuration" is required (not null)
             if (shardGroupDuration == null)
             {
                 throw new InvalidDataException("shardGroupDuration is a required property for RetentionPolicyManifest and cannot be null");
             }
-            else
-            {
-                this.ShardGroupDuration = shardGroupDuration;
-            }
+            this.ShardGroupDuration = shardGroupDuration;
             // to ensure "shardGroups" is required (not null)
             if (shardGroups == null)
             {
                 throw new InvalidDataException("shardGroups is a required property for RetentionPolicyManifest and cannot be null");
             }
-            else
-            {
-                this.ShardGroups = shardGroups;
-            }
+            this.ShardGroups = shardGroups;
             // to ensure "subscriptions" is required (not null)
             if (subscriptions == null)
             {
                 throw new InvalidDataException("subscriptions is a required property for RetentionPolicyManifest and cannot be null");
             }
-            else
-            {
-                this.Subscriptions = subscriptions;
-            }
+            this.Subscriptions = subscriptions;
         }
 
         /// <summary>
@@ -187,23 +169,19 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.ReplicaN == input.ReplicaN ||
-                    (this.ReplicaN != null &&
-                    this.ReplicaN.Equals(input.ReplicaN))
+                    (this.ReplicaN != null && this.ReplicaN.Equals(input.ReplicaN))
                 ) && 
                 (
                     this.Duration == input.Duration ||
-                    (this.Duration != null &&
-                    this.Duration.Equals(input.Duration))
+                    (this.Duration != null && this.Duration.Equals(input.Duration))
                 ) && 
                 (
                     this.ShardGroupDuration == input.ShardGroupDuration ||
-                    (this.ShardGroupDuration != null &&
-                    this.ShardGroupDuration.Equals(input.ShardGroupDuration))
+                    (this.ShardGroupDuration != null && this.ShardGroupDuration.Equals(input.ShardGroupDuration))
                 ) && 
                 (
                     this.ShardGroups == input.ShardGroups ||
@@ -226,6 +204,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.ReplicaN != null)

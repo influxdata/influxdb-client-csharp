@@ -90,104 +90,63 @@ namespace InfluxDB.Client.Api.Domain
         public SingleStatViewProperties(TypeEnum type = TypeEnum.SingleStat, List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?), string prefix = default(string), string tickPrefix = default(string), string suffix = default(string), string tickSuffix = default(string), StaticLegend staticLegend = default(StaticLegend), DecimalPlaces decimalPlaces = default(DecimalPlaces)) : base()
         {
             // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for SingleStatViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Type = type;
-            }
+            this.Type = type;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
                 throw new InvalidDataException("queries is a required property for SingleStatViewProperties and cannot be null");
             }
-            else
-            {
-                this.Queries = queries;
-            }
+            this.Queries = queries;
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
                 throw new InvalidDataException("colors is a required property for SingleStatViewProperties and cannot be null");
             }
-            else
-            {
-                this.Colors = colors;
-            }
+            this.Colors = colors;
             // to ensure "shape" is required (not null)
-            if (shape == null)
-            {
-                throw new InvalidDataException("shape is a required property for SingleStatViewProperties and cannot be null");
-            }
-            else
-            {
-                this.Shape = shape;
-            }
+            this.Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
                 throw new InvalidDataException("note is a required property for SingleStatViewProperties and cannot be null");
             }
-            else
-            {
-                this.Note = note;
-            }
+            this.Note = note;
             // to ensure "showNoteWhenEmpty" is required (not null)
             if (showNoteWhenEmpty == null)
             {
                 throw new InvalidDataException("showNoteWhenEmpty is a required property for SingleStatViewProperties and cannot be null");
             }
-            else
-            {
-                this.ShowNoteWhenEmpty = showNoteWhenEmpty;
-            }
+            this.ShowNoteWhenEmpty = showNoteWhenEmpty;
             // to ensure "prefix" is required (not null)
             if (prefix == null)
             {
                 throw new InvalidDataException("prefix is a required property for SingleStatViewProperties and cannot be null");
             }
-            else
-            {
-                this.Prefix = prefix;
-            }
+            this.Prefix = prefix;
             // to ensure "tickPrefix" is required (not null)
             if (tickPrefix == null)
             {
                 throw new InvalidDataException("tickPrefix is a required property for SingleStatViewProperties and cannot be null");
             }
-            else
-            {
-                this.TickPrefix = tickPrefix;
-            }
+            this.TickPrefix = tickPrefix;
             // to ensure "suffix" is required (not null)
             if (suffix == null)
             {
                 throw new InvalidDataException("suffix is a required property for SingleStatViewProperties and cannot be null");
             }
-            else
-            {
-                this.Suffix = suffix;
-            }
+            this.Suffix = suffix;
             // to ensure "tickSuffix" is required (not null)
             if (tickSuffix == null)
             {
                 throw new InvalidDataException("tickSuffix is a required property for SingleStatViewProperties and cannot be null");
             }
-            else
-            {
-                this.TickSuffix = tickSuffix;
-            }
+            this.TickSuffix = tickSuffix;
             // to ensure "decimalPlaces" is required (not null)
             if (decimalPlaces == null)
             {
                 throw new InvalidDataException("decimalPlaces is a required property for SingleStatViewProperties and cannot be null");
             }
-            else
-            {
-                this.DecimalPlaces = decimalPlaces;
-            }
+            this.DecimalPlaces = decimalPlaces;
             this.StaticLegend = staticLegend;
         }
 
@@ -312,8 +271,7 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.Queries == input.Queries ||
@@ -327,48 +285,39 @@ namespace InfluxDB.Client.Api.Domain
                 ) && base.Equals(input) && 
                 (
                     this.Shape == input.Shape ||
-                    (this.Shape != null &&
-                    this.Shape.Equals(input.Shape))
+                    this.Shape.Equals(input.Shape)
                 ) && base.Equals(input) && 
                 (
                     this.Note == input.Note ||
-                    (this.Note != null &&
-                    this.Note.Equals(input.Note))
+                    (this.Note != null && this.Note.Equals(input.Note))
                 ) && base.Equals(input) && 
                 (
                     this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
-                    (this.ShowNoteWhenEmpty != null &&
-                    this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
+                    (this.ShowNoteWhenEmpty != null && this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
                 ) && base.Equals(input) && 
                 (
                     this.Prefix == input.Prefix ||
-                    (this.Prefix != null &&
-                    this.Prefix.Equals(input.Prefix))
+                    (this.Prefix != null && this.Prefix.Equals(input.Prefix))
                 ) && base.Equals(input) && 
                 (
                     this.TickPrefix == input.TickPrefix ||
-                    (this.TickPrefix != null &&
-                    this.TickPrefix.Equals(input.TickPrefix))
+                    (this.TickPrefix != null && this.TickPrefix.Equals(input.TickPrefix))
                 ) && base.Equals(input) && 
                 (
                     this.Suffix == input.Suffix ||
-                    (this.Suffix != null &&
-                    this.Suffix.Equals(input.Suffix))
+                    (this.Suffix != null && this.Suffix.Equals(input.Suffix))
                 ) && base.Equals(input) && 
                 (
                     this.TickSuffix == input.TickSuffix ||
-                    (this.TickSuffix != null &&
-                    this.TickSuffix.Equals(input.TickSuffix))
+                    (this.TickSuffix != null && this.TickSuffix.Equals(input.TickSuffix))
                 ) && base.Equals(input) && 
                 (
                     
-                    (this.StaticLegend != null &&
-                    this.StaticLegend.Equals(input.StaticLegend))
+                    (this.StaticLegend != null && this.StaticLegend.Equals(input.StaticLegend))
                 ) && base.Equals(input) && 
                 (
                     
-                    (this.DecimalPlaces != null &&
-                    this.DecimalPlaces.Equals(input.DecimalPlaces))
+                    (this.DecimalPlaces != null && this.DecimalPlaces.Equals(input.DecimalPlaces))
                 );
         }
 
@@ -381,14 +330,13 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Queries != null)
                     hashCode = hashCode * 59 + this.Queries.GetHashCode();
                 if (this.Colors != null)
                     hashCode = hashCode * 59 + this.Colors.GetHashCode();
-                if (this.Shape != null)
-                    hashCode = hashCode * 59 + this.Shape.GetHashCode();
+                hashCode = hashCode * 59 + this.Shape.GetHashCode();
                 if (this.Note != null)
                     hashCode = hashCode * 59 + this.Note.GetHashCode();
                 if (this.ShowNoteWhenEmpty != null)

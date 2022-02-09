@@ -143,38 +143,31 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.ColorizeRows == input.ColorizeRows ||
-                    (this.ColorizeRows != null &&
-                    this.ColorizeRows.Equals(input.ColorizeRows))
+                    (this.ColorizeRows != null && this.ColorizeRows.Equals(input.ColorizeRows))
                 ) && 
                 (
                     this.HeightRatio == input.HeightRatio ||
-                    (this.HeightRatio != null &&
-                    this.HeightRatio.Equals(input.HeightRatio))
+                    (this.HeightRatio != null && this.HeightRatio.Equals(input.HeightRatio))
                 ) && 
                 (
                     this.Show == input.Show ||
-                    (this.Show != null &&
-                    this.Show.Equals(input.Show))
+                    (this.Show != null && this.Show.Equals(input.Show))
                 ) && 
                 (
                     this.Opacity == input.Opacity ||
-                    (this.Opacity != null &&
-                    this.Opacity.Equals(input.Opacity))
+                    (this.Opacity != null && this.Opacity.Equals(input.Opacity))
                 ) && 
                 (
                     this.OrientationThreshold == input.OrientationThreshold ||
-                    (this.OrientationThreshold != null &&
-                    this.OrientationThreshold.Equals(input.OrientationThreshold))
+                    (this.OrientationThreshold != null && this.OrientationThreshold.Equals(input.OrientationThreshold))
                 ) && 
                 (
                     this.ValueAxis == input.ValueAxis ||
-                    (this.ValueAxis != null &&
-                    this.ValueAxis.Equals(input.ValueAxis))
+                    (this.ValueAxis != null && this.ValueAxis.Equals(input.ValueAxis))
                 ) && 
                 (
                     this.WidthRatio == input.WidthRatio ||
-                    (this.WidthRatio != null &&
-                    this.WidthRatio.Equals(input.WidthRatio))
+                    (this.WidthRatio != null && this.WidthRatio.Equals(input.WidthRatio))
                 );
         }
 
@@ -187,6 +180,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.ColorizeRows != null)
                     hashCode = hashCode * 59 + this.ColorizeRows.GetHashCode();
                 if (this.HeightRatio != null)

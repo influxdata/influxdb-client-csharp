@@ -163,33 +163,27 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    this.Type.Equals(input.Type)
                 ) && 
                 (
                     this.Url == input.Url ||
-                    (this.Url != null &&
-                    this.Url.Equals(input.Url))
+                    (this.Url != null && this.Url.Equals(input.Url))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.BucketID == input.BucketID ||
-                    (this.BucketID != null &&
-                    this.BucketID.Equals(input.BucketID))
+                    (this.BucketID != null && this.BucketID.Equals(input.BucketID))
                 ) && 
                 (
                     this.AllowInsecure == input.AllowInsecure ||
-                    (this.AllowInsecure != null &&
-                    this.AllowInsecure.Equals(input.AllowInsecure))
+                    (this.AllowInsecure != null && this.AllowInsecure.Equals(input.AllowInsecure))
                 );
         }
 
@@ -202,10 +196,10 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Url != null)
                     hashCode = hashCode * 59 + this.Url.GetHashCode();
                 if (this.OrgID != null)

@@ -144,38 +144,31 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 ) && 
                 (
                     this.X == input.X ||
-                    (this.X != null &&
-                    this.X.Equals(input.X))
+                    (this.X != null && this.X.Equals(input.X))
                 ) && 
                 (
                     this.Y == input.Y ||
-                    (this.Y != null &&
-                    this.Y.Equals(input.Y))
+                    (this.Y != null && this.Y.Equals(input.Y))
                 ) && 
                 (
                     this.W == input.W ||
-                    (this.W != null &&
-                    this.W.Equals(input.W))
+                    (this.W != null && this.W.Equals(input.W))
                 ) && 
                 (
                     this.H == input.H ||
-                    (this.H != null &&
-                    this.H.Equals(input.H))
+                    (this.H != null && this.H.Equals(input.H))
                 ) && 
                 (
                     this.ViewID == input.ViewID ||
-                    (this.ViewID != null &&
-                    this.ViewID.Equals(input.ViewID))
+                    (this.ViewID != null && this.ViewID.Equals(input.ViewID))
                 );
         }
 
@@ -188,6 +181,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Links != null)

@@ -90,8 +90,7 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
+                    (this.Token != null && this.Token.Equals(input.Token))
                 );
         }
 
@@ -104,6 +103,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Token != null)
                     hashCode = hashCode * 59 + this.Token.GetHashCode();
                 return hashCode;

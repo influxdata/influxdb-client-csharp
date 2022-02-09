@@ -149,38 +149,31 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    this.Status.Equals(input.Status)
                 ) && 
                 (
                     this.Flux == input.Flux ||
-                    (this.Flux != null &&
-                    this.Flux.Equals(input.Flux))
+                    (this.Flux != null && this.Flux.Equals(input.Flux))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.Every == input.Every ||
-                    (this.Every != null &&
-                    this.Every.Equals(input.Every))
+                    (this.Every != null && this.Every.Equals(input.Every))
                 ) && 
                 (
                     this.Cron == input.Cron ||
-                    (this.Cron != null &&
-                    this.Cron.Equals(input.Cron))
+                    (this.Cron != null && this.Cron.Equals(input.Cron))
                 ) && 
                 (
                     this.Offset == input.Offset ||
-                    (this.Offset != null &&
-                    this.Offset.Equals(input.Offset))
+                    (this.Offset != null && this.Offset.Equals(input.Offset))
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 );
         }
 
@@ -193,8 +186,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.Flux != null)
                     hashCode = hashCode * 59 + this.Flux.GetHashCode();
                 if (this.Name != null)

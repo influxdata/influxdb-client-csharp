@@ -120,23 +120,19 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    (this.Type != null && this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
                     this.Operator == input.Operator ||
-                    (this.Operator != null &&
-                    this.Operator.Equals(input.Operator))
+                    (this.Operator != null && this.Operator.Equals(input.Operator))
                 ) && base.Equals(input) && 
                 (
                     
-                    (this.Left != null &&
-                    this.Left.Equals(input.Left))
+                    (this.Left != null && this.Left.Equals(input.Left))
                 ) && base.Equals(input) && 
                 (
                     
-                    (this.Right != null &&
-                    this.Right.Equals(input.Right))
+                    (this.Right != null && this.Right.Equals(input.Right))
                 );
         }
 
@@ -149,6 +145,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Operator != null)

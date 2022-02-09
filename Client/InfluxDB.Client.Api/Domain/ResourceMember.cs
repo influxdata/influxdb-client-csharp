@@ -117,8 +117,7 @@ namespace InfluxDB.Client.Api.Domain
             return base.Equals(input) && 
                 (
                     this.Role == input.Role ||
-                    (this.Role != null &&
-                    this.Role.Equals(input.Role))
+                    this.Role.Equals(input.Role)
                 );
         }
 
@@ -131,8 +130,8 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Role != null)
-                    hashCode = hashCode * 59 + this.Role.GetHashCode();
+                
+                hashCode = hashCode * 59 + this.Role.GetHashCode();
                 return hashCode;
             }
         }

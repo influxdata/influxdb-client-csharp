@@ -50,37 +50,25 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("id is a required property for ShardGroupManifest and cannot be null");
             }
-            else
-            {
-                this.Id = id;
-            }
+            this.Id = id;
             // to ensure "startTime" is required (not null)
             if (startTime == null)
             {
                 throw new InvalidDataException("startTime is a required property for ShardGroupManifest and cannot be null");
             }
-            else
-            {
-                this.StartTime = startTime;
-            }
+            this.StartTime = startTime;
             // to ensure "endTime" is required (not null)
             if (endTime == null)
             {
                 throw new InvalidDataException("endTime is a required property for ShardGroupManifest and cannot be null");
             }
-            else
-            {
-                this.EndTime = endTime;
-            }
+            this.EndTime = endTime;
             // to ensure "shards" is required (not null)
             if (shards == null)
             {
                 throw new InvalidDataException("shards is a required property for ShardGroupManifest and cannot be null");
             }
-            else
-            {
-                this.Shards = shards;
-            }
+            this.Shards = shards;
             this.DeletedAt = deletedAt;
             this.TruncatedAt = truncatedAt;
         }
@@ -171,28 +159,23 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.StartTime == input.StartTime ||
-                    (this.StartTime != null &&
-                    this.StartTime.Equals(input.StartTime))
+                    (this.StartTime != null && this.StartTime.Equals(input.StartTime))
                 ) && 
                 (
                     this.EndTime == input.EndTime ||
-                    (this.EndTime != null &&
-                    this.EndTime.Equals(input.EndTime))
+                    (this.EndTime != null && this.EndTime.Equals(input.EndTime))
                 ) && 
                 (
                     this.DeletedAt == input.DeletedAt ||
-                    (this.DeletedAt != null &&
-                    this.DeletedAt.Equals(input.DeletedAt))
+                    (this.DeletedAt != null && this.DeletedAt.Equals(input.DeletedAt))
                 ) && 
                 (
                     this.TruncatedAt == input.TruncatedAt ||
-                    (this.TruncatedAt != null &&
-                    this.TruncatedAt.Equals(input.TruncatedAt))
+                    (this.TruncatedAt != null && this.TruncatedAt.Equals(input.TruncatedAt))
                 ) && 
                 (
                     this.Shards == input.Shards ||
@@ -210,6 +193,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.StartTime != null)

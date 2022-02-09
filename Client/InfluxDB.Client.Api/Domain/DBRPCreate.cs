@@ -50,28 +50,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("bucketID is a required property for DBRPCreate and cannot be null");
             }
-            else
-            {
-                this.BucketID = bucketID;
-            }
+            this.BucketID = bucketID;
             // to ensure "database" is required (not null)
             if (database == null)
             {
                 throw new InvalidDataException("database is a required property for DBRPCreate and cannot be null");
             }
-            else
-            {
-                this.Database = database;
-            }
+            this.Database = database;
             // to ensure "retentionPolicy" is required (not null)
             if (retentionPolicy == null)
             {
                 throw new InvalidDataException("retentionPolicy is a required property for DBRPCreate and cannot be null");
             }
-            else
-            {
-                this.RetentionPolicy = retentionPolicy;
-            }
+            this.RetentionPolicy = retentionPolicy;
             this.OrgID = orgID;
             this.Org = org;
             this.Default = _default;
@@ -169,33 +160,27 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.Org == input.Org ||
-                    (this.Org != null &&
-                    this.Org.Equals(input.Org))
+                    (this.Org != null && this.Org.Equals(input.Org))
                 ) && 
                 (
                     this.BucketID == input.BucketID ||
-                    (this.BucketID != null &&
-                    this.BucketID.Equals(input.BucketID))
+                    (this.BucketID != null && this.BucketID.Equals(input.BucketID))
                 ) && 
                 (
                     this.Database == input.Database ||
-                    (this.Database != null &&
-                    this.Database.Equals(input.Database))
+                    (this.Database != null && this.Database.Equals(input.Database))
                 ) && 
                 (
                     this.RetentionPolicy == input.RetentionPolicy ||
-                    (this.RetentionPolicy != null &&
-                    this.RetentionPolicy.Equals(input.RetentionPolicy))
+                    (this.RetentionPolicy != null && this.RetentionPolicy.Equals(input.RetentionPolicy))
                 ) && 
                 (
                     this.Default == input.Default ||
-                    (this.Default != null &&
-                    this.Default.Equals(input.Default))
+                    (this.Default != null && this.Default.Equals(input.Default))
                 );
         }
 
@@ -208,6 +193,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.OrgID != null)
                     hashCode = hashCode * 59 + this.OrgID.GetHashCode();
                 if (this.Org != null)

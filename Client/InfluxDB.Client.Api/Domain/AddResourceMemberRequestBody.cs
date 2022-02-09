@@ -46,10 +46,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("id is a required property for AddResourceMemberRequestBody and cannot be null");
             }
-            else
-            {
-                this.Id = id;
-            }
+            this.Id = id;
             this.Name = name;
         }
 
@@ -111,13 +108,11 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 );
         }
 
@@ -130,6 +125,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)

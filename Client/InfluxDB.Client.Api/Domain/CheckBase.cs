@@ -88,28 +88,19 @@ namespace InfluxDB.Client.Api.Domain
             {
                 throw new InvalidDataException("name is a required property for CheckBase and cannot be null");
             }
-            else
-            {
-                this.Name = name;
-            }
+            this.Name = name;
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
                 throw new InvalidDataException("orgID is a required property for CheckBase and cannot be null");
             }
-            else
-            {
-                this.OrgID = orgID;
-            }
+            this.OrgID = orgID;
             // to ensure "query" is required (not null)
             if (query == null)
             {
                 throw new InvalidDataException("query is a required property for CheckBase and cannot be null");
             }
-            else
-            {
-                this.Query = query;
-            }
+            this.Query = query;
             this.TaskID = taskID;
             this.Status = status;
             this.Description = description;
@@ -181,7 +172,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <value>Timestamp (in RFC3339 date/time format](https://datatracker.ietf.org/doc/html/rfc3339)) of the latest scheduled and completed run.</value>
         [DataMember(Name="latestCompleted", EmitDefaultValue=false)]
-        public DateTime? LatestCompleted { get; private set; }
+        public Object LatestCompleted { get; private set; }
 
 
         /// <summary>
@@ -261,68 +252,55 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
+                    (this.Id != null && this.Id.Equals(input.Id))
                 ) && 
                 (
                     this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    (this.Name != null && this.Name.Equals(input.Name))
                 ) && 
                 (
                     this.OrgID == input.OrgID ||
-                    (this.OrgID != null &&
-                    this.OrgID.Equals(input.OrgID))
+                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
                 ) && 
                 (
                     this.TaskID == input.TaskID ||
-                    (this.TaskID != null &&
-                    this.TaskID.Equals(input.TaskID))
+                    (this.TaskID != null && this.TaskID.Equals(input.TaskID))
                 ) && 
                 (
                     this.OwnerID == input.OwnerID ||
-                    (this.OwnerID != null &&
-                    this.OwnerID.Equals(input.OwnerID))
+                    (this.OwnerID != null && this.OwnerID.Equals(input.OwnerID))
                 ) && 
                 (
                     this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null &&
-                    this.CreatedAt.Equals(input.CreatedAt))
+                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
                 ) && 
                 (
                     this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null &&
-                    this.UpdatedAt.Equals(input.UpdatedAt))
+                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
                 ) && 
                 (
                     
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
+                    (this.Query != null && this.Query.Equals(input.Query))
                 ) && 
                 (
                     this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
+                    this.Status.Equals(input.Status)
                 ) && 
                 (
                     this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
+                    (this.Description != null && this.Description.Equals(input.Description))
                 ) && 
                 (
                     this.LatestCompleted == input.LatestCompleted ||
-                    (this.LatestCompleted != null &&
-                    this.LatestCompleted.Equals(input.LatestCompleted))
+                    (this.LatestCompleted != null && this.LatestCompleted.Equals(input.LatestCompleted))
                 ) && 
                 (
                     this.LastRunStatus == input.LastRunStatus ||
-                    (this.LastRunStatus != null &&
-                    this.LastRunStatus.Equals(input.LastRunStatus))
+                    this.LastRunStatus.Equals(input.LastRunStatus)
                 ) && 
                 (
                     this.LastRunError == input.LastRunError ||
-                    (this.LastRunError != null &&
-                    this.LastRunError.Equals(input.LastRunError))
+                    (this.LastRunError != null && this.LastRunError.Equals(input.LastRunError))
                 ) && 
                 (
                     this.Labels == input.Labels ||
@@ -331,8 +309,7 @@ namespace InfluxDB.Client.Api.Domain
                 ) && 
                 (
                     
-                    (this.Links != null &&
-                    this.Links.Equals(input.Links))
+                    (this.Links != null && this.Links.Equals(input.Links))
                 );
         }
 
@@ -345,6 +322,7 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)
@@ -361,14 +339,12 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
                 if (this.Query != null)
                     hashCode = hashCode * 59 + this.Query.GetHashCode();
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
+                hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.Description != null)
                     hashCode = hashCode * 59 + this.Description.GetHashCode();
                 if (this.LatestCompleted != null)
                     hashCode = hashCode * 59 + this.LatestCompleted.GetHashCode();
-                if (this.LastRunStatus != null)
-                    hashCode = hashCode * 59 + this.LastRunStatus.GetHashCode();
+                hashCode = hashCode * 59 + this.LastRunStatus.GetHashCode();
                 if (this.LastRunError != null)
                     hashCode = hashCode * 59 + this.LastRunError.GetHashCode();
                 if (this.Labels != null)

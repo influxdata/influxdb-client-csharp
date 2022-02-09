@@ -146,23 +146,19 @@ namespace InfluxDB.Client.Api.Domain
             return 
                 (
                     this.VerticalTimeAxis == input.VerticalTimeAxis ||
-                    (this.VerticalTimeAxis != null &&
-                    this.VerticalTimeAxis.Equals(input.VerticalTimeAxis))
+                    (this.VerticalTimeAxis != null && this.VerticalTimeAxis.Equals(input.VerticalTimeAxis))
                 ) && 
                 (
                     
-                    (this.SortBy != null &&
-                    this.SortBy.Equals(input.SortBy))
+                    (this.SortBy != null && this.SortBy.Equals(input.SortBy))
                 ) && 
                 (
                     this.Wrapping == input.Wrapping ||
-                    (this.Wrapping != null &&
-                    this.Wrapping.Equals(input.Wrapping))
+                    this.Wrapping.Equals(input.Wrapping)
                 ) && 
                 (
                     this.FixFirstColumn == input.FixFirstColumn ||
-                    (this.FixFirstColumn != null &&
-                    this.FixFirstColumn.Equals(input.FixFirstColumn))
+                    (this.FixFirstColumn != null && this.FixFirstColumn.Equals(input.FixFirstColumn))
                 );
         }
 
@@ -175,12 +171,12 @@ namespace InfluxDB.Client.Api.Domain
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                
                 if (this.VerticalTimeAxis != null)
                     hashCode = hashCode * 59 + this.VerticalTimeAxis.GetHashCode();
                 if (this.SortBy != null)
                     hashCode = hashCode * 59 + this.SortBy.GetHashCode();
-                if (this.Wrapping != null)
-                    hashCode = hashCode * 59 + this.Wrapping.GetHashCode();
+                hashCode = hashCode * 59 + this.Wrapping.GetHashCode();
                 if (this.FixFirstColumn != null)
                     hashCode = hashCode * 59 + this.FixFirstColumn.GetHashCode();
                 return hashCode;
