@@ -61,7 +61,7 @@ jobs:
     parameters:
       dotnet-image:
         type: string
-        default: &default-dotnet-image "mcr.microsoft.com/dotnet/core/sdk:3.1"
+        default: &default-dotnet-image "mcr.microsoft.com/dotnet/sdk:6.0"
       dotnet-target-version:
         type: string
         default: "netstandard2.1"
@@ -127,6 +127,19 @@ jobs:
       - run: dotnet build
       - run: dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build
       
+      
+  check-compilation-warnings:
+    docker:
+      - image: *default-dotnet-image
+    steps:
+      - checkout
+      - run:
+          name: Check compilation warnings
+          command: |
+            dotnet clean --configuration Release
+            dotnet restore
+            dotnet build --configuration Release -warnAsError -warnAsMessage:CS0618
+          
   deploy-preview:
     parameters:
       influxdb-image:
@@ -151,22 +164,25 @@ workflows:
   version: 2
   build:
     jobs:
+      - check-compilation-warnings
       - tests-dotnet:
           name: dotnet-3.1-nightly
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
+          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
       - tests-dotnet:
           name: dotnet-3.1
+          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
       - tests-dotnet:
           name: dotnet-5.0
           code-coverage-report: true
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
       - tests-dotnet:
           name: dotnet-6.0
-          dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:
           requires:
+            - check-compilation-warnings
             - dotnet-3.1-nightly
             - dotnet-3.1
             - dotnet-5.0
