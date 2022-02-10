@@ -137,7 +137,6 @@ jobs:
           command: |
             dotnet clean --configuration Release
             dotnet build --configuration Release -warnAsError -warnAsMessage:CS0618
-            git diff --exit-code
       
   check-code-formatting:
     docker:
@@ -148,7 +147,7 @@ jobs:
           name: Check code formatting
           command: |
             ./Scripts/reformat-code.sh
-            dotnet build --configuration Release -warnAsError -warnAsMessage:CS0618
+            git diff --exit-code
           
   deploy-preview:
     parameters:
