@@ -27,57 +27,63 @@ namespace InfluxDB.Client.Api.Domain
     /// MetadataBackup
     /// </summary>
     [DataContract]
-    public partial class MetadataBackup :  IEquatable<MetadataBackup>
+    public partial class MetadataBackup : IEquatable<MetadataBackup>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MetadataBackup" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected MetadataBackup() { }
+        protected MetadataBackup()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MetadataBackup" /> class.
         /// </summary>
         /// <param name="kv">kv (required).</param>
         /// <param name="sql">sql (required).</param>
         /// <param name="buckets">buckets (required).</param>
-        public MetadataBackup(System.IO.Stream kv = default(System.IO.Stream), System.IO.Stream sql = default(System.IO.Stream), List<BucketMetadataManifest> buckets = default(List<BucketMetadataManifest>))
+        public MetadataBackup(Stream kv = default, Stream sql = default, List<BucketMetadataManifest> buckets = default)
         {
             // to ensure "kv" is required (not null)
             if (kv == null)
             {
                 throw new InvalidDataException("kv is a required property for MetadataBackup and cannot be null");
             }
-            this.Kv = kv;
+
+            Kv = kv;
             // to ensure "sql" is required (not null)
             if (sql == null)
             {
                 throw new InvalidDataException("sql is a required property for MetadataBackup and cannot be null");
             }
-            this.Sql = sql;
+
+            Sql = sql;
             // to ensure "buckets" is required (not null)
             if (buckets == null)
             {
                 throw new InvalidDataException("buckets is a required property for MetadataBackup and cannot be null");
             }
-            this.Buckets = buckets;
+
+            Buckets = buckets;
         }
 
         /// <summary>
         /// Gets or Sets Kv
         /// </summary>
-        [DataMember(Name="kv", EmitDefaultValue=false)]
-        public System.IO.Stream Kv { get; set; }
+        [DataMember(Name = "kv", EmitDefaultValue = false)]
+        public Stream Kv { get; set; }
 
         /// <summary>
         /// Gets or Sets Sql
         /// </summary>
-        [DataMember(Name="sql", EmitDefaultValue=false)]
-        public System.IO.Stream Sql { get; set; }
+        [DataMember(Name = "sql", EmitDefaultValue = false)]
+        public Stream Sql { get; set; }
 
         /// <summary>
         /// Gets or Sets Buckets
         /// </summary>
-        [DataMember(Name="buckets", EmitDefaultValue=false)]
+        [DataMember(Name = "buckets", EmitDefaultValue = false)]
         public List<BucketMetadataManifest> Buckets { get; set; }
 
         /// <summary>
@@ -111,7 +117,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as MetadataBackup);
+            return Equals(input as MetadataBackup);
         }
 
         /// <summary>
@@ -122,21 +128,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(MetadataBackup input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Kv == input.Kv ||
-                    (this.Kv != null && this.Kv.Equals(input.Kv))
-                ) && 
+                    Kv == input.Kv ||
+                    Kv != null && Kv.Equals(input.Kv)
+                ) &&
                 (
-                    this.Sql == input.Sql ||
-                    (this.Sql != null && this.Sql.Equals(input.Sql))
-                ) && 
+                    Sql == input.Sql ||
+                    Sql != null && Sql.Equals(input.Sql)
+                ) &&
                 (
-                    this.Buckets == input.Buckets ||
-                    this.Buckets != null &&
-                    this.Buckets.SequenceEqual(input.Buckets)
+                    Buckets == input.Buckets ||
+                    Buckets != null &&
+                    Buckets.SequenceEqual(input.Buckets)
                 );
         }
 
@@ -148,18 +156,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Kv != null)
-                    hashCode = hashCode * 59 + this.Kv.GetHashCode();
-                if (this.Sql != null)
-                    hashCode = hashCode * 59 + this.Sql.GetHashCode();
-                if (this.Buckets != null)
-                    hashCode = hashCode * 59 + this.Buckets.GetHashCode();
+                var hashCode = 41;
+
+                if (Kv != null)
+                {
+                    hashCode = hashCode * 59 + Kv.GetHashCode();
+                }
+
+                if (Sql != null)
+                {
+                    hashCode = hashCode * 59 + Sql.GetHashCode();
+                }
+
+                if (Buckets != null)
+                {
+                    hashCode = hashCode * 59 + Buckets.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

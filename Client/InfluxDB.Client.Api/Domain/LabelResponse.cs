@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// LabelResponse
     /// </summary>
     [DataContract]
-    public partial class LabelResponse :  IEquatable<LabelResponse>
+    public partial class LabelResponse : IEquatable<LabelResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelResponse" /> class.
         /// </summary>
         /// <param name="label">label.</param>
         /// <param name="links">links.</param>
-        public LabelResponse(Label label = default(Label), Links links = default(Links))
+        public LabelResponse(Label label = default, Links links = default)
         {
-            this.Label = label;
-            this.Links = links;
+            Label = label;
+            Links = links;
         }
 
         /// <summary>
         /// Gets or Sets Label
         /// </summary>
-        [DataMember(Name="label", EmitDefaultValue=false)]
+        [DataMember(Name = "label", EmitDefaultValue = false)]
         public Label Label { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public Links Links { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LabelResponse);
+            return Equals(input as LabelResponse);
         }
 
         /// <summary>
@@ -93,17 +93,12 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(LabelResponse input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    
-                    (this.Label != null && this.Label.Equals(input.Label))
-                ) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+            return
+                Label != null && Label.Equals(input.Label) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -114,16 +109,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Label != null)
-                    hashCode = hashCode * 59 + this.Label.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = 41;
+
+                if (Label != null)
+                {
+                    hashCode = hashCode * 59 + Label.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,38 +27,38 @@ namespace InfluxDB.Client.Api.Domain
     /// Describes a field that can be renamed and made visible or invisible.
     /// </summary>
     [DataContract]
-    public partial class RenamableField :  IEquatable<RenamableField>
+    public partial class RenamableField : IEquatable<RenamableField>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RenamableField" /> class.
         /// </summary>
         /// <param name="displayName">The name that a field is renamed to by the user..</param>
         /// <param name="visible">Indicates whether this field should be visible on the table..</param>
-        public RenamableField(string displayName = default(string), bool? visible = default(bool?))
+        public RenamableField(string displayName = default, bool? visible = default)
         {
-            this.DisplayName = displayName;
-            this.Visible = visible;
+            DisplayName = displayName;
+            Visible = visible;
         }
 
         /// <summary>
         /// The calculated name of a field.
         /// </summary>
         /// <value>The calculated name of a field.</value>
-        [DataMember(Name="internalName", EmitDefaultValue=false)]
+        [DataMember(Name = "internalName", EmitDefaultValue = false)]
         public string InternalName { get; private set; }
 
         /// <summary>
         /// The name that a field is renamed to by the user.
         /// </summary>
         /// <value>The name that a field is renamed to by the user.</value>
-        [DataMember(Name="displayName", EmitDefaultValue=false)]
+        [DataMember(Name = "displayName", EmitDefaultValue = false)]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Indicates whether this field should be visible on the table.
         /// </summary>
         /// <value>Indicates whether this field should be visible on the table.</value>
-        [DataMember(Name="visible", EmitDefaultValue=false)]
+        [DataMember(Name = "visible", EmitDefaultValue = false)]
         public bool? Visible { get; set; }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as RenamableField);
+            return Equals(input as RenamableField);
         }
 
         /// <summary>
@@ -103,20 +103,22 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(RenamableField input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.InternalName == input.InternalName ||
-                    (this.InternalName != null && this.InternalName.Equals(input.InternalName))
-                ) && 
+                    InternalName == input.InternalName ||
+                    InternalName != null && InternalName.Equals(input.InternalName)
+                ) &&
                 (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null && this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                    DisplayName == input.DisplayName ||
+                    DisplayName != null && DisplayName.Equals(input.DisplayName)
+                ) &&
                 (
-                    this.Visible == input.Visible ||
-                    (this.Visible != null && this.Visible.Equals(input.Visible))
+                    Visible == input.Visible ||
+                    Visible != null && Visible.Equals(input.Visible)
                 );
         }
 
@@ -128,18 +130,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.InternalName != null)
-                    hashCode = hashCode * 59 + this.InternalName.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
-                if (this.Visible != null)
-                    hashCode = hashCode * 59 + this.Visible.GetHashCode();
+                var hashCode = 41;
+
+                if (InternalName != null)
+                {
+                    hashCode = hashCode * 59 + InternalName.GetHashCode();
+                }
+
+                if (DisplayName != null)
+                {
+                    hashCode = hashCode * 59 + DisplayName.GetHashCode();
+                }
+
+                if (Visible != null)
+                {
+                    hashCode = hashCode * 59 + Visible.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

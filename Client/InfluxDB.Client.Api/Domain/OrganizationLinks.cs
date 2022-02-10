@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// OrganizationLinks
     /// </summary>
     [DataContract]
-    public partial class OrganizationLinks :  IEquatable<OrganizationLinks>
+    public partial class OrganizationLinks : IEquatable<OrganizationLinks>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OrganizationLinks" /> class.
@@ -41,56 +41,56 @@ namespace InfluxDB.Client.Api.Domain
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [DataMember(Name = "self", EmitDefaultValue = false)]
         public string Self { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="members", EmitDefaultValue=false)]
+        [DataMember(Name = "members", EmitDefaultValue = false)]
         public string Members { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="owners", EmitDefaultValue=false)]
+        [DataMember(Name = "owners", EmitDefaultValue = false)]
         public string Owners { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="labels", EmitDefaultValue=false)]
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
         public string Labels { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="secrets", EmitDefaultValue=false)]
+        [DataMember(Name = "secrets", EmitDefaultValue = false)]
         public string Secrets { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="buckets", EmitDefaultValue=false)]
+        [DataMember(Name = "buckets", EmitDefaultValue = false)]
         public string Buckets { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="tasks", EmitDefaultValue=false)]
+        [DataMember(Name = "tasks", EmitDefaultValue = false)]
         public string Tasks { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="dashboards", EmitDefaultValue=false)]
+        [DataMember(Name = "dashboards", EmitDefaultValue = false)]
         public string Dashboards { get; private set; }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as OrganizationLinks);
+            return Equals(input as OrganizationLinks);
         }
 
         /// <summary>
@@ -140,40 +140,42 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(OrganizationLinks input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Self == input.Self ||
-                    (this.Self != null && this.Self.Equals(input.Self))
-                ) && 
+                    Self == input.Self ||
+                    Self != null && Self.Equals(input.Self)
+                ) &&
                 (
-                    this.Members == input.Members ||
-                    (this.Members != null && this.Members.Equals(input.Members))
-                ) && 
+                    Members == input.Members ||
+                    Members != null && Members.Equals(input.Members)
+                ) &&
                 (
-                    this.Owners == input.Owners ||
-                    (this.Owners != null && this.Owners.Equals(input.Owners))
-                ) && 
+                    Owners == input.Owners ||
+                    Owners != null && Owners.Equals(input.Owners)
+                ) &&
                 (
-                    this.Labels == input.Labels ||
-                    (this.Labels != null && this.Labels.Equals(input.Labels))
-                ) && 
+                    Labels == input.Labels ||
+                    Labels != null && Labels.Equals(input.Labels)
+                ) &&
                 (
-                    this.Secrets == input.Secrets ||
-                    (this.Secrets != null && this.Secrets.Equals(input.Secrets))
-                ) && 
+                    Secrets == input.Secrets ||
+                    Secrets != null && Secrets.Equals(input.Secrets)
+                ) &&
                 (
-                    this.Buckets == input.Buckets ||
-                    (this.Buckets != null && this.Buckets.Equals(input.Buckets))
-                ) && 
+                    Buckets == input.Buckets ||
+                    Buckets != null && Buckets.Equals(input.Buckets)
+                ) &&
                 (
-                    this.Tasks == input.Tasks ||
-                    (this.Tasks != null && this.Tasks.Equals(input.Tasks))
-                ) && 
+                    Tasks == input.Tasks ||
+                    Tasks != null && Tasks.Equals(input.Tasks)
+                ) &&
                 (
-                    this.Dashboards == input.Dashboards ||
-                    (this.Dashboards != null && this.Dashboards.Equals(input.Dashboards))
+                    Dashboards == input.Dashboards ||
+                    Dashboards != null && Dashboards.Equals(input.Dashboards)
                 );
         }
 
@@ -185,28 +187,50 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Self != null)
-                    hashCode = hashCode * 59 + this.Self.GetHashCode();
-                if (this.Members != null)
-                    hashCode = hashCode * 59 + this.Members.GetHashCode();
-                if (this.Owners != null)
-                    hashCode = hashCode * 59 + this.Owners.GetHashCode();
-                if (this.Labels != null)
-                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
-                if (this.Secrets != null)
-                    hashCode = hashCode * 59 + this.Secrets.GetHashCode();
-                if (this.Buckets != null)
-                    hashCode = hashCode * 59 + this.Buckets.GetHashCode();
-                if (this.Tasks != null)
-                    hashCode = hashCode * 59 + this.Tasks.GetHashCode();
-                if (this.Dashboards != null)
-                    hashCode = hashCode * 59 + this.Dashboards.GetHashCode();
+                var hashCode = 41;
+
+                if (Self != null)
+                {
+                    hashCode = hashCode * 59 + Self.GetHashCode();
+                }
+
+                if (Members != null)
+                {
+                    hashCode = hashCode * 59 + Members.GetHashCode();
+                }
+
+                if (Owners != null)
+                {
+                    hashCode = hashCode * 59 + Owners.GetHashCode();
+                }
+
+                if (Labels != null)
+                {
+                    hashCode = hashCode * 59 + Labels.GetHashCode();
+                }
+
+                if (Secrets != null)
+                {
+                    hashCode = hashCode * 59 + Secrets.GetHashCode();
+                }
+
+                if (Buckets != null)
+                {
+                    hashCode = hashCode * 59 + Buckets.GetHashCode();
+                }
+
+                if (Tasks != null)
+                {
+                    hashCode = hashCode * 59 + Tasks.GetHashCode();
+                }
+
+                if (Dashboards != null)
+                {
+                    hashCode = hashCode * 59 + Dashboards.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

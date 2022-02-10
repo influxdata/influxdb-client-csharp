@@ -27,13 +27,16 @@ namespace InfluxDB.Client.Api.Domain
     /// DBRP
     /// </summary>
     [DataContract]
-    public partial class DBRP :  IEquatable<DBRP>
+    public partial class DBRP : IEquatable<DBRP>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DBRP" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DBRP() { }
+        protected DBRP()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DBRP" /> class.
         /// </summary>
@@ -43,87 +46,93 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="retentionPolicy">InfluxDB v1 retention policy (required).</param>
         /// <param name="_default">Mapping represents the default retention policy for the database specified. (required).</param>
         /// <param name="links">links.</param>
-        public DBRP(string orgID = default(string), string bucketID = default(string), string database = default(string), string retentionPolicy = default(string), bool? _default = default(bool?), Links links = default(Links))
+        public DBRP(string orgID = default, string bucketID = default, string database = default,
+            string retentionPolicy = default, bool? _default = default, Links links = default)
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
                 throw new InvalidDataException("orgID is a required property for DBRP and cannot be null");
             }
-            this.OrgID = orgID;
+
+            OrgID = orgID;
             // to ensure "bucketID" is required (not null)
             if (bucketID == null)
             {
                 throw new InvalidDataException("bucketID is a required property for DBRP and cannot be null");
             }
-            this.BucketID = bucketID;
+
+            BucketID = bucketID;
             // to ensure "database" is required (not null)
             if (database == null)
             {
                 throw new InvalidDataException("database is a required property for DBRP and cannot be null");
             }
-            this.Database = database;
+
+            Database = database;
             // to ensure "retentionPolicy" is required (not null)
             if (retentionPolicy == null)
             {
                 throw new InvalidDataException("retentionPolicy is a required property for DBRP and cannot be null");
             }
-            this.RetentionPolicy = retentionPolicy;
+
+            RetentionPolicy = retentionPolicy;
             // to ensure "_default" is required (not null)
             if (_default == null)
             {
                 throw new InvalidDataException("_default is a required property for DBRP and cannot be null");
             }
-            this.Default = _default;
-            this.Links = links;
+
+            Default = _default;
+            Links = links;
         }
 
         /// <summary>
         /// ID of the DBRP mapping.
         /// </summary>
         /// <value>ID of the DBRP mapping.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// ID of the organization that owns this mapping.
         /// </summary>
         /// <value>ID of the organization that owns this mapping.</value>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// ID of the bucket used as the target for the translation.
         /// </summary>
         /// <value>ID of the bucket used as the target for the translation.</value>
-        [DataMember(Name="bucketID", EmitDefaultValue=false)]
+        [DataMember(Name = "bucketID", EmitDefaultValue = false)]
         public string BucketID { get; set; }
 
         /// <summary>
         /// InfluxDB v1 database
         /// </summary>
         /// <value>InfluxDB v1 database</value>
-        [DataMember(Name="database", EmitDefaultValue=false)]
+        [DataMember(Name = "database", EmitDefaultValue = false)]
         public string Database { get; set; }
 
         /// <summary>
         /// InfluxDB v1 retention policy
         /// </summary>
         /// <value>InfluxDB v1 retention policy</value>
-        [DataMember(Name="retention_policy", EmitDefaultValue=false)]
+        [DataMember(Name = "retention_policy", EmitDefaultValue = false)]
         public string RetentionPolicy { get; set; }
 
         /// <summary>
         /// Mapping represents the default retention policy for the database specified.
         /// </summary>
         /// <value>Mapping represents the default retention policy for the database specified.</value>
-        [DataMember(Name="default", EmitDefaultValue=false)]
+        [DataMember(Name = "default", EmitDefaultValue = false)]
         public bool? Default { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public Links Links { get; set; }
 
         /// <summary>
@@ -161,7 +170,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DBRP);
+            return Equals(input as DBRP);
         }
 
         /// <summary>
@@ -172,37 +181,35 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DBRP input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.BucketID == input.BucketID ||
-                    (this.BucketID != null && this.BucketID.Equals(input.BucketID))
-                ) && 
+                    BucketID == input.BucketID ||
+                    BucketID != null && BucketID.Equals(input.BucketID)
+                ) &&
                 (
-                    this.Database == input.Database ||
-                    (this.Database != null && this.Database.Equals(input.Database))
-                ) && 
+                    Database == input.Database ||
+                    Database != null && Database.Equals(input.Database)
+                ) &&
                 (
-                    this.RetentionPolicy == input.RetentionPolicy ||
-                    (this.RetentionPolicy != null && this.RetentionPolicy.Equals(input.RetentionPolicy))
-                ) && 
+                    RetentionPolicy == input.RetentionPolicy ||
+                    RetentionPolicy != null && RetentionPolicy.Equals(input.RetentionPolicy)
+                ) &&
                 (
-                    this.Default == input.Default ||
-                    (this.Default != null && this.Default.Equals(input.Default))
-                ) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+                    Default == input.Default ||
+                    Default != null && Default.Equals(input.Default)
+                ) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -213,26 +220,45 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.BucketID != null)
-                    hashCode = hashCode * 59 + this.BucketID.GetHashCode();
-                if (this.Database != null)
-                    hashCode = hashCode * 59 + this.Database.GetHashCode();
-                if (this.RetentionPolicy != null)
-                    hashCode = hashCode * 59 + this.RetentionPolicy.GetHashCode();
-                if (this.Default != null)
-                    hashCode = hashCode * 59 + this.Default.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (BucketID != null)
+                {
+                    hashCode = hashCode * 59 + BucketID.GetHashCode();
+                }
+
+                if (Database != null)
+                {
+                    hashCode = hashCode * 59 + Database.GetHashCode();
+                }
+
+                if (RetentionPolicy != null)
+                {
+                    hashCode = hashCode * 59 + RetentionPolicy.GetHashCode();
+                }
+
+                if (Default != null)
+                {
+                    hashCode = hashCode * 59 + Default.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

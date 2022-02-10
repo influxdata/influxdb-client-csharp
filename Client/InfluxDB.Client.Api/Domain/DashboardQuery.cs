@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// DashboardQuery
     /// </summary>
     [DataContract]
-    public partial class DashboardQuery :  IEquatable<DashboardQuery>
+    public partial class DashboardQuery : IEquatable<DashboardQuery>
     {
         /// <summary>
         /// Gets or Sets EditMode
         /// </summary>
-        [DataMember(Name="editMode", EmitDefaultValue=false)]
+        [DataMember(Name = "editMode", EmitDefaultValue = false)]
         public QueryEditMode? EditMode { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardQuery" /> class.
         /// </summary>
@@ -41,32 +42,33 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="editMode">editMode.</param>
         /// <param name="name">name.</param>
         /// <param name="builderConfig">builderConfig.</param>
-        public DashboardQuery(string text = default(string), QueryEditMode? editMode = default(QueryEditMode?), string name = default(string), BuilderConfig builderConfig = default(BuilderConfig))
+        public DashboardQuery(string text = default, QueryEditMode? editMode = default, string name = default,
+            BuilderConfig builderConfig = default)
         {
-            this.Text = text;
-            this.EditMode = editMode;
-            this.Name = name;
-            this.BuilderConfig = builderConfig;
+            Text = text;
+            EditMode = editMode;
+            Name = name;
+            BuilderConfig = builderConfig;
         }
 
         /// <summary>
         /// The text of the Flux query.
         /// </summary>
         /// <value>The text of the Flux query.</value>
-        [DataMember(Name="text", EmitDefaultValue=false)]
+        [DataMember(Name = "text", EmitDefaultValue = false)]
         public string Text { get; set; }
 
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets BuilderConfig
         /// </summary>
-        [DataMember(Name="builderConfig", EmitDefaultValue=false)]
+        [DataMember(Name = "builderConfig", EmitDefaultValue = false)]
         public BuilderConfig BuilderConfig { get; set; }
 
         /// <summary>
@@ -101,7 +103,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DashboardQuery);
+            return Equals(input as DashboardQuery);
         }
 
         /// <summary>
@@ -112,25 +114,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DashboardQuery input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Text == input.Text ||
-                    (this.Text != null && this.Text.Equals(input.Text))
-                ) && 
+                    Text == input.Text ||
+                    Text != null && Text.Equals(input.Text)
+                ) &&
                 (
-                    this.EditMode == input.EditMode ||
-                    this.EditMode.Equals(input.EditMode)
-                ) && 
+                    EditMode == input.EditMode ||
+                    EditMode.Equals(input.EditMode)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
-                (
-                    
-                    (this.BuilderConfig != null && this.BuilderConfig.Equals(input.BuilderConfig))
-                );
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) && BuilderConfig != null && BuilderConfig.Equals(input.BuilderConfig);
         }
 
         /// <summary>
@@ -141,19 +141,26 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Text != null)
-                    hashCode = hashCode * 59 + this.Text.GetHashCode();
-                hashCode = hashCode * 59 + this.EditMode.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.BuilderConfig != null)
-                    hashCode = hashCode * 59 + this.BuilderConfig.GetHashCode();
+                var hashCode = 41;
+
+                if (Text != null)
+                {
+                    hashCode = hashCode * 59 + Text.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + EditMode.GetHashCode();
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (BuilderConfig != null)
+                {
+                    hashCode = hashCode * 59 + BuilderConfig.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// PropertyKey
     /// </summary>
     [DataContract]
-    public partial class PropertyKey : Expression,  IEquatable<PropertyKey>
+    public partial class PropertyKey : Expression, IEquatable<PropertyKey>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyKey" /> class.
@@ -66,7 +66,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PropertyKey);
+            return Equals(input as PropertyKey);
         }
 
         /// <summary>
@@ -77,7 +77,9 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PropertyKey input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
             return base.Equals(input);
         }
@@ -90,12 +92,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
+                var hashCode = base.GetHashCode();
+
                 return hashCode;
             }
         }
-
     }
-
 }

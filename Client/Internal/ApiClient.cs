@@ -14,7 +14,7 @@ namespace InfluxDB.Client.Api.Client
     public partial class ApiClient
     {
         private readonly List<string> _noAuthRoute = new List<string>
-            {"/api/v2/signin", "/api/v2/signout", "/api/v2/setup"};
+            { "/api/v2/signin", "/api/v2/signout", "/api/v2/setup" };
 
         private readonly InfluxDBClientOptions _options;
         private readonly LoggingHandler _loggingHandler;
@@ -33,15 +33,16 @@ namespace InfluxDB.Client.Api.Client
             var version = AssemblyHelper.GetVersion(typeof(InfluxDBClient));
             RestClientOptions = new RestClientOptions(options.Url)
             {
-                Timeout = (int) options.Timeout.TotalMilliseconds,
+                Timeout = (int)options.Timeout.TotalMilliseconds,
                 UserAgent = $"influxdb-client-csharp/{version}",
                 Proxy = options.WebProxy,
                 FollowRedirects = options.AllowHttpRedirects,
-                AutomaticDecompression = DecompressionMethods.None,
+                AutomaticDecompression = DecompressionMethods.None
             };
             if (!options.VerifySsl)
             {
-                RestClientOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+                RestClientOptions.RemoteCertificateValidationCallback =
+                    (sender, certificate, chain, sslPolicyErrors) => true;
             }
 
             if (options.ClientCertificates != null)
@@ -65,12 +66,15 @@ namespace InfluxDB.Client.Api.Client
 
         partial void InterceptResponse(RestRequest request, RestResponse response)
         {
-            AfterIntercept((int) response.StatusCode, () => response.Headers, response.Content);
+            AfterIntercept((int)response.StatusCode, () => response.Headers, response.Content);
         }
-        
+
         internal void BeforeIntercept(RestRequest request)
         {
-            if (_signout || _noAuthRoute.Any(requestPath => requestPath.EndsWith(request.Resource))) return;
+            if (_signout || _noAuthRoute.Any(requestPath => requestPath.EndsWith(request.Resource)))
+            {
+                return;
+            }
 
             if (InfluxDBClientOptions.AuthenticationScheme.Token.Equals(_options.AuthScheme))
             {
@@ -80,7 +84,7 @@ namespace InfluxDB.Client.Api.Client
             {
                 InitToken();
             }
-            
+
             _loggingHandler.BeforeIntercept(request);
             _gzipHandler.BeforeIntercept(request);
         }
@@ -88,12 +92,15 @@ namespace InfluxDB.Client.Api.Client
         internal T AfterIntercept<T>(int statusCode, Func<IEnumerable<HeaderParameter>> headers, T body)
         {
             var uncompressed = _gzipHandler.AfterIntercept(statusCode, headers, body);
-            return (T) _loggingHandler.AfterIntercept(statusCode, headers, uncompressed);
+            return (T)_loggingHandler.AfterIntercept(statusCode, headers, uncompressed);
         }
 
         private void InitToken()
         {
-            if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout) return;
+            if (!InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme) || _signout)
+            {
+                return;
+            }
 
             if (!_initializedSessionTokens)
             {
@@ -101,8 +108,8 @@ namespace InfluxDB.Client.Api.Client
                 try
                 {
                     var header = "Basic " + Convert.ToBase64String(
-                                     Encoding.Default.GetBytes(
-                                         _options.Username + ":" + new string(_options.Password)));
+                        Encoding.Default.GetBytes(
+                            _options.Username + ":" + new string(_options.Password)));
 
                     var request = new RestRequest("/api/v2/signin", Method.Post)
                         .AddHeader("Authorization", header);

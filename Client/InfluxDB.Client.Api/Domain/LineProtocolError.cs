@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// LineProtocolError
     /// </summary>
     [DataContract]
-    public partial class LineProtocolError :  IEquatable<LineProtocolError>
+    public partial class LineProtocolError : IEquatable<LineProtocolError>
     {
         /// <summary>
         /// Code is the machine-readable error code.
@@ -39,47 +39,41 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Internalerror for value: internal error
             /// </summary>
-            [EnumMember(Value = "internal error")]
-            Internalerror = 1,
+            [EnumMember(Value = "internal error")] Internalerror = 1,
 
             /// <summary>
             /// Enum Notfound for value: not found
             /// </summary>
-            [EnumMember(Value = "not found")]
-            Notfound = 2,
+            [EnumMember(Value = "not found")] Notfound = 2,
 
             /// <summary>
             /// Enum Conflict for value: conflict
             /// </summary>
-            [EnumMember(Value = "conflict")]
-            Conflict = 3,
+            [EnumMember(Value = "conflict")] Conflict = 3,
 
             /// <summary>
             /// Enum Invalid for value: invalid
             /// </summary>
-            [EnumMember(Value = "invalid")]
-            Invalid = 4,
+            [EnumMember(Value = "invalid")] Invalid = 4,
 
             /// <summary>
             /// Enum Emptyvalue for value: empty value
             /// </summary>
-            [EnumMember(Value = "empty value")]
-            Emptyvalue = 5,
+            [EnumMember(Value = "empty value")] Emptyvalue = 5,
 
             /// <summary>
             /// Enum Unavailable for value: unavailable
             /// </summary>
-            [EnumMember(Value = "unavailable")]
-            Unavailable = 6
-
+            [EnumMember(Value = "unavailable")] Unavailable = 6
         }
 
         /// <summary>
         /// Code is the machine-readable error code.
         /// </summary>
         /// <value>Code is the machine-readable error code.</value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [DataMember(Name = "code", EmitDefaultValue = false)]
         public CodeEnum Code { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LineProtocolError" /> class.
         /// </summary>
@@ -93,28 +87,28 @@ namespace InfluxDB.Client.Api.Domain
         /// Human-readable message.
         /// </summary>
         /// <value>Human-readable message.</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [DataMember(Name = "message", EmitDefaultValue = false)]
         public string Message { get; private set; }
 
         /// <summary>
         /// Describes the logical code operation when the error occurred. Useful for debugging.
         /// </summary>
         /// <value>Describes the logical code operation when the error occurred. Useful for debugging.</value>
-        [DataMember(Name="op", EmitDefaultValue=false)]
+        [DataMember(Name = "op", EmitDefaultValue = false)]
         public string Op { get; private set; }
 
         /// <summary>
         /// Stack of errors that occurred during processing of the request. Useful for debugging.
         /// </summary>
         /// <value>Stack of errors that occurred during processing of the request. Useful for debugging.</value>
-        [DataMember(Name="err", EmitDefaultValue=false)]
+        [DataMember(Name = "err", EmitDefaultValue = false)]
         public string Err { get; private set; }
 
         /// <summary>
         /// First line in the request body that contains malformed data.
         /// </summary>
         /// <value>First line in the request body that contains malformed data.</value>
-        [DataMember(Name="line", EmitDefaultValue=false)]
+        [DataMember(Name = "line", EmitDefaultValue = false)]
         public int? Line { get; private set; }
 
         /// <summary>
@@ -150,7 +144,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LineProtocolError);
+            return Equals(input as LineProtocolError);
         }
 
         /// <summary>
@@ -161,28 +155,30 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(LineProtocolError input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Code == input.Code ||
-                    this.Code.Equals(input.Code)
-                ) && 
+                    Code == input.Code ||
+                    Code.Equals(input.Code)
+                ) &&
                 (
-                    this.Message == input.Message ||
-                    (this.Message != null && this.Message.Equals(input.Message))
-                ) && 
+                    Message == input.Message ||
+                    Message != null && Message.Equals(input.Message)
+                ) &&
                 (
-                    this.Op == input.Op ||
-                    (this.Op != null && this.Op.Equals(input.Op))
-                ) && 
+                    Op == input.Op ||
+                    Op != null && Op.Equals(input.Op)
+                ) &&
                 (
-                    this.Err == input.Err ||
-                    (this.Err != null && this.Err.Equals(input.Err))
-                ) && 
+                    Err == input.Err ||
+                    Err != null && Err.Equals(input.Err)
+                ) &&
                 (
-                    this.Line == input.Line ||
-                    (this.Line != null && this.Line.Equals(input.Line))
+                    Line == input.Line ||
+                    Line != null && Line.Equals(input.Line)
                 );
         }
 
@@ -194,21 +190,31 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Code.GetHashCode();
-                if (this.Message != null)
-                    hashCode = hashCode * 59 + this.Message.GetHashCode();
-                if (this.Op != null)
-                    hashCode = hashCode * 59 + this.Op.GetHashCode();
-                if (this.Err != null)
-                    hashCode = hashCode * 59 + this.Err.GetHashCode();
-                if (this.Line != null)
-                    hashCode = hashCode * 59 + this.Line.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Code.GetHashCode();
+                if (Message != null)
+                {
+                    hashCode = hashCode * 59 + Message.GetHashCode();
+                }
+
+                if (Op != null)
+                {
+                    hashCode = hashCode * 59 + Op.GetHashCode();
+                }
+
+                if (Err != null)
+                {
+                    hashCode = hashCode * 59 + Err.GetHashCode();
+                }
+
+                if (Line != null)
+                {
+                    hashCode = hashCode * 59 + Line.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

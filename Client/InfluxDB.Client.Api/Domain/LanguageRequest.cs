@@ -27,32 +27,36 @@ namespace InfluxDB.Client.Api.Domain
     /// Flux query to be analyzed.
     /// </summary>
     [DataContract]
-    public partial class LanguageRequest :  IEquatable<LanguageRequest>
+    public partial class LanguageRequest : IEquatable<LanguageRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LanguageRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected LanguageRequest() { }
+        protected LanguageRequest()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LanguageRequest" /> class.
         /// </summary>
         /// <param name="query">Flux query script to be analyzed (required).</param>
-        public LanguageRequest(string query = default(string))
+        public LanguageRequest(string query = default)
         {
             // to ensure "query" is required (not null)
             if (query == null)
             {
                 throw new InvalidDataException("query is a required property for LanguageRequest and cannot be null");
             }
-            this.Query = query;
+
+            Query = query;
         }
 
         /// <summary>
         /// Flux query script to be analyzed
         /// </summary>
         /// <value>Flux query script to be analyzed</value>
-        [DataMember(Name="query", EmitDefaultValue=false)]
+        [DataMember(Name = "query", EmitDefaultValue = false)]
         public string Query { get; set; }
 
         /// <summary>
@@ -84,7 +88,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LanguageRequest);
+            return Equals(input as LanguageRequest);
         }
 
         /// <summary>
@@ -95,13 +99,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(LanguageRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Query == input.Query ||
-                    (this.Query != null && this.Query.Equals(input.Query))
-                );
+            return
+                Query == input.Query ||
+                Query != null && Query.Equals(input.Query);
         }
 
         /// <summary>
@@ -112,14 +116,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Query != null)
-                    hashCode = hashCode * 59 + this.Query.GetHashCode();
+                var hashCode = 41;
+
+                if (Query != null)
+                {
+                    hashCode = hashCode * 59 + Query.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

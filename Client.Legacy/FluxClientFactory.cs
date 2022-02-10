@@ -1,8 +1,8 @@
 namespace InfluxDB.Client.Flux
 {
-/// <summary>
-/// The Factory that create a instance of a Flux client.
-/// </summary>
+    /// <summary>
+    /// The Factory that create a instance of a Flux client.
+    /// </summary>
     public class FluxClientFactory
     {
         /// <summary>

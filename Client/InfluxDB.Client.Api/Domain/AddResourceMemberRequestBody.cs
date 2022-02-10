@@ -27,39 +27,44 @@ namespace InfluxDB.Client.Api.Domain
     /// AddResourceMemberRequestBody
     /// </summary>
     [DataContract]
-    public partial class AddResourceMemberRequestBody :  IEquatable<AddResourceMemberRequestBody>
+    public partial class AddResourceMemberRequestBody : IEquatable<AddResourceMemberRequestBody>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AddResourceMemberRequestBody" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AddResourceMemberRequestBody() { }
+        protected AddResourceMemberRequestBody()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AddResourceMemberRequestBody" /> class.
         /// </summary>
         /// <param name="id">id (required).</param>
         /// <param name="name">name.</param>
-        public AddResourceMemberRequestBody(string id = default(string), string name = default(string))
+        public AddResourceMemberRequestBody(string id = default, string name = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
             {
-                throw new InvalidDataException("id is a required property for AddResourceMemberRequestBody and cannot be null");
+                throw new InvalidDataException(
+                    "id is a required property for AddResourceMemberRequestBody and cannot be null");
             }
-            this.Id = id;
-            this.Name = name;
+
+            Id = id;
+            Name = name;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
@@ -92,7 +97,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as AddResourceMemberRequestBody);
+            return Equals(input as AddResourceMemberRequestBody);
         }
 
         /// <summary>
@@ -103,16 +108,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(AddResourceMemberRequestBody input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
                 );
         }
 
@@ -124,16 +131,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

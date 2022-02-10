@@ -3,7 +3,7 @@ using System.Text;
 
 namespace InfluxDB.Client.Linq.Internal.Expressions
 {
-    internal class NamedField: IExpressionPart
+    internal class NamedField : IExpressionPart
     {
         private readonly MemberInfo _member;
         private readonly IMemberNameResolver _memberResolver;

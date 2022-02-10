@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// RangeThreshold
     /// </summary>
     [DataContract]
-    public partial class RangeThreshold : Threshold,  IEquatable<RangeThreshold>
+    public partial class RangeThreshold : Threshold, IEquatable<RangeThreshold>
     {
         /// <summary>
         /// Defines Type
@@ -38,21 +38,23 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Range for value: range
             /// </summary>
-            [EnumMember(Value = "range")]
-            Range = 1
-
+            [EnumMember(Value = "range")] Range = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RangeThreshold" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected RangeThreshold() { }
+        protected RangeThreshold()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RangeThreshold" /> class.
         /// </summary>
@@ -60,47 +62,52 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="min">min (required).</param>
         /// <param name="max">max (required).</param>
         /// <param name="within">within (required).</param>
-        public RangeThreshold(TypeEnum type = TypeEnum.Range, float? min = default(float?), float? max = default(float?), bool? within = default(bool?), CheckStatusLevel? level = default(CheckStatusLevel?), bool? allValues = default(bool?)) : base(level, allValues)
+        public RangeThreshold(TypeEnum type = TypeEnum.Range, float? min = default, float? max = default,
+            bool? within = default, CheckStatusLevel? level = default, bool? allValues = default) : base(level,
+            allValues)
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "min" is required (not null)
             if (min == null)
             {
                 throw new InvalidDataException("min is a required property for RangeThreshold and cannot be null");
             }
-            this.Min = min;
+
+            Min = min;
             // to ensure "max" is required (not null)
             if (max == null)
             {
                 throw new InvalidDataException("max is a required property for RangeThreshold and cannot be null");
             }
-            this.Max = max;
+
+            Max = max;
             // to ensure "within" is required (not null)
             if (within == null)
             {
                 throw new InvalidDataException("within is a required property for RangeThreshold and cannot be null");
             }
-            this.Within = within;
+
+            Within = within;
         }
 
 
         /// <summary>
         /// Gets or Sets Min
         /// </summary>
-        [DataMember(Name="min", EmitDefaultValue=false)]
+        [DataMember(Name = "min", EmitDefaultValue = false)]
         public float? Min { get; set; }
 
         /// <summary>
         /// Gets or Sets Max
         /// </summary>
-        [DataMember(Name="max", EmitDefaultValue=false)]
+        [DataMember(Name = "max", EmitDefaultValue = false)]
         public float? Max { get; set; }
 
         /// <summary>
         /// Gets or Sets Within
         /// </summary>
-        [DataMember(Name="within", EmitDefaultValue=false)]
+        [DataMember(Name = "within", EmitDefaultValue = false)]
         public bool? Within { get; set; }
 
         /// <summary>
@@ -136,7 +143,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as RangeThreshold);
+            return Equals(input as RangeThreshold);
         }
 
         /// <summary>
@@ -147,25 +154,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(RangeThreshold input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Min == input.Min ||
-                    (this.Min != null && this.Min.Equals(input.Min))
-                ) && base.Equals(input) && 
-                (
-                    this.Max == input.Max ||
-                    (this.Max != null && this.Max.Equals(input.Max))
-                ) && base.Equals(input) && 
-                (
-                    this.Within == input.Within ||
-                    (this.Within != null && this.Within.Equals(input.Within))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Min == input.Min ||
+                       Min != null && Min.Equals(input.Min)
+                   ) && base.Equals(input) &&
+                   (
+                       Max == input.Max ||
+                       Max != null && Max.Equals(input.Max)
+                   ) && base.Equals(input) &&
+                   (
+                       Within == input.Within ||
+                       Within != null && Within.Equals(input.Within)
+                   );
         }
 
         /// <summary>
@@ -176,19 +185,26 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Min != null)
-                    hashCode = hashCode * 59 + this.Min.GetHashCode();
-                if (this.Max != null)
-                    hashCode = hashCode * 59 + this.Max.GetHashCode();
-                if (this.Within != null)
-                    hashCode = hashCode * 59 + this.Within.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Min != null)
+                {
+                    hashCode = hashCode * 59 + Min.GetHashCode();
+                }
+
+                if (Max != null)
+                {
+                    hashCode = hashCode * 59 + Max.GetHashCode();
+                }
+
+                if (Within != null)
+                {
+                    hashCode = hashCode * 59 + Within.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

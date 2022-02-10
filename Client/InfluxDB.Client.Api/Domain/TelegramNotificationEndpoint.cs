@@ -27,46 +27,58 @@ namespace InfluxDB.Client.Api.Domain
     /// TelegramNotificationEndpoint
     /// </summary>
     [DataContract]
-    public partial class TelegramNotificationEndpoint : NotificationEndpoint,  IEquatable<TelegramNotificationEndpoint>
+    public partial class TelegramNotificationEndpoint : NotificationEndpoint, IEquatable<TelegramNotificationEndpoint>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegramNotificationEndpoint" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TelegramNotificationEndpoint() { }
+        protected TelegramNotificationEndpoint()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegramNotificationEndpoint" /> class.
         /// </summary>
         /// <param name="token">Specifies the Telegram bot token. See https://core.telegram.org/bots#creating-a-new-bot . (required).</param>
         /// <param name="channel">ID of the telegram channel, a chat_id in https://core.telegram.org/bots/api#sendmessage . (required).</param>
-        public TelegramNotificationEndpoint(string token = default(string), string channel = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = NotificationEndpointType.Telegram) : base(id, orgID, userID, description, name, status, labels, links, type)
+        public TelegramNotificationEndpoint(string token = default, string channel = default, string id = default,
+            string orgID = default, string userID = default, string description = default, string name = default,
+            StatusEnum? status = StatusEnum.Active, List<Label> labels = default,
+            NotificationEndpointBaseLinks links = default,
+            NotificationEndpointType type = NotificationEndpointType.Telegram) : base(id, orgID, userID, description,
+            name, status, labels, links, type)
         {
             // to ensure "token" is required (not null)
             if (token == null)
             {
-                throw new InvalidDataException("token is a required property for TelegramNotificationEndpoint and cannot be null");
+                throw new InvalidDataException(
+                    "token is a required property for TelegramNotificationEndpoint and cannot be null");
             }
-            this.Token = token;
+
+            Token = token;
             // to ensure "channel" is required (not null)
             if (channel == null)
             {
-                throw new InvalidDataException("channel is a required property for TelegramNotificationEndpoint and cannot be null");
+                throw new InvalidDataException(
+                    "channel is a required property for TelegramNotificationEndpoint and cannot be null");
             }
-            this.Channel = channel;
+
+            Channel = channel;
         }
 
         /// <summary>
         /// Specifies the Telegram bot token. See https://core.telegram.org/bots#creating-a-new-bot .
         /// </summary>
         /// <value>Specifies the Telegram bot token. See https://core.telegram.org/bots#creating-a-new-bot .</value>
-        [DataMember(Name="token", EmitDefaultValue=false)]
+        [DataMember(Name = "token", EmitDefaultValue = false)]
         public string Token { get; set; }
 
         /// <summary>
         /// ID of the telegram channel, a chat_id in https://core.telegram.org/bots/api#sendmessage .
         /// </summary>
         /// <value>ID of the telegram channel, a chat_id in https://core.telegram.org/bots/api#sendmessage .</value>
-        [DataMember(Name="channel", EmitDefaultValue=false)]
+        [DataMember(Name = "channel", EmitDefaultValue = false)]
         public string Channel { get; set; }
 
         /// <summary>
@@ -100,7 +112,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegramNotificationEndpoint);
+            return Equals(input as TelegramNotificationEndpoint);
         }
 
         /// <summary>
@@ -111,17 +123,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TelegramNotificationEndpoint input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Token == input.Token ||
-                    (this.Token != null && this.Token.Equals(input.Token))
-                ) && base.Equals(input) && 
-                (
-                    this.Channel == input.Channel ||
-                    (this.Channel != null && this.Channel.Equals(input.Channel))
-                );
+            return base.Equals(input) &&
+                   (
+                       Token == input.Token ||
+                       Token != null && Token.Equals(input.Token)
+                   ) && base.Equals(input) &&
+                   (
+                       Channel == input.Channel ||
+                       Channel != null && Channel.Equals(input.Channel)
+                   );
         }
 
         /// <summary>
@@ -132,16 +146,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Token != null)
-                    hashCode = hashCode * 59 + this.Token.GetHashCode();
-                if (this.Channel != null)
-                    hashCode = hashCode * 59 + this.Channel.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Token != null)
+                {
+                    hashCode = hashCode * 59 + Token.GetHashCode();
+                }
+
+                if (Channel != null)
+                {
+                    hashCode = hashCode * 59 + Channel.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,29 +27,30 @@ namespace InfluxDB.Client.Api.Domain
     /// StackAssociations
     /// </summary>
     [DataContract]
-    public partial class StackAssociations :  IEquatable<StackAssociations>
+    public partial class StackAssociations : IEquatable<StackAssociations>
     {
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public TemplateKind? Kind { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StackAssociations" /> class.
         /// </summary>
         /// <param name="kind">kind.</param>
         /// <param name="metaName">metaName.</param>
-        public StackAssociations(TemplateKind? kind = default(TemplateKind?), string metaName = default(string))
+        public StackAssociations(TemplateKind? kind = default, string metaName = default)
         {
-            this.Kind = kind;
-            this.MetaName = metaName;
+            Kind = kind;
+            MetaName = metaName;
         }
 
 
         /// <summary>
         /// Gets or Sets MetaName
         /// </summary>
-        [DataMember(Name="metaName", EmitDefaultValue=false)]
+        [DataMember(Name = "metaName", EmitDefaultValue = false)]
         public string MetaName { get; set; }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as StackAssociations);
+            return Equals(input as StackAssociations);
         }
 
         /// <summary>
@@ -93,16 +94,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(StackAssociations input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Kind == input.Kind ||
-                    this.Kind.Equals(input.Kind)
-                ) && 
+                    Kind == input.Kind ||
+                    Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.MetaName == input.MetaName ||
-                    (this.MetaName != null && this.MetaName.Equals(input.MetaName))
+                    MetaName == input.MetaName ||
+                    MetaName != null && MetaName.Equals(input.MetaName)
                 );
         }
 
@@ -114,15 +117,16 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.MetaName != null)
-                    hashCode = hashCode * 59 + this.MetaName.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Kind.GetHashCode();
+                if (MetaName != null)
+                {
+                    hashCode = hashCode * 59 + MetaName.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -64,7 +64,7 @@ namespace Client.Linq.Test
                     RangeExpressionType.Equal,
                     "start_shifted = int(v: time(v: p1)) + 1\n\n",
                     "range(start: time(v: start_shifted))"
-                ),
+                )
             };
 
             foreach (var (startAssignment, startExpression, stopAssignment, stopExpression, shift, range) in ranges)
@@ -80,7 +80,8 @@ namespace Client.Linq.Test
                                "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
 
                 var settings = new QueryableOptimizerSettings();
-                Assert.AreEqual(expected, _aggregator.BuildFluxQuery(settings), $"Expected Range: {range}, Shift: {shift}");
+                Assert.AreEqual(expected, _aggregator.BuildFluxQuery(settings),
+                    $"Expected Range: {range}, Shift: {shift}");
             }
         }
     }

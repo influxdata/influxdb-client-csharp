@@ -18,10 +18,11 @@ namespace InfluxDB.Client.Linq.Internal
         private readonly QueryGenerationContext _context;
 
         internal InfluxDBQueryVisitor(
-            string bucket, 
+            string bucket,
             IMemberNameResolver memberResolver,
             QueryableOptimizerSettings queryableOptimizerSettings) :
-            this(new QueryGenerationContext(new QueryAggregator(), new VariableAggregator(), memberResolver, queryableOptimizerSettings))
+            this(new QueryGenerationContext(new QueryAggregator(), new VariableAggregator(), memberResolver,
+                queryableOptimizerSettings))
         {
             var bucketVariable = _context.Variables.AddNamedVariable(bucket);
             _context.QueryAggregator.AddBucket(bucketVariable);
@@ -57,7 +58,8 @@ namespace InfluxDB.Client.Linq.Internal
 
         internal File BuildFluxAST()
         {
-            return new File {Imports = new List<ImportDeclaration>(), Package = null, Body = _context.Variables.GetStatements()};
+            return new File
+                { Imports = new List<ImportDeclaration>(), Package = null, Body = _context.Variables.GetStatements() };
         }
 
         internal string BuildFluxQuery()
@@ -74,10 +76,9 @@ namespace InfluxDB.Client.Linq.Internal
             var rangeFilter = new List<IExpressionPart>();
             var tagFilter = new List<IExpressionPart>();
             var fieldFilter = new List<IExpressionPart>();
-            
+
             // Map LINQ filter expression to right place: range, tag filtering, field filtering
             foreach (var expression in expressions)
-            {
                 switch (expression)
                 {
                     // Range
@@ -105,24 +106,23 @@ namespace InfluxDB.Client.Linq.Internal
                         fieldFilter.Add(expression);
                         break;
                 }
-            }
-            
+
             QueryExpressionTreeVisitor.NormalizeExpressions(rangeFilter);
             QueryExpressionTreeVisitor.NormalizeExpressions(tagFilter);
             QueryExpressionTreeVisitor.NormalizeTagsAssignments(tagFilter, _context);
             QueryExpressionTreeVisitor.NormalizeExpressions(fieldFilter);
-            
+
             Debug.WriteLine("--- normalized LINQ expressions: ---");
             Debug.WriteLine($"range: {ConcatExpression(rangeFilter)}");
             Debug.WriteLine($"tag: {ConcatExpression(tagFilter)}");
             Debug.WriteLine($"field: {ConcatExpression(fieldFilter)}");
-            
+
             // filter by time
             AddFilterByRange(rangeFilter);
 
             // filter by tags
             _context.QueryAggregator.AddFilterByTags(ConcatExpression(tagFilter));
-            
+
             // filter by fields
             _context.QueryAggregator.AddFilterByFields(ConcatExpression(fieldFilter));
         }
@@ -152,8 +152,10 @@ namespace InfluxDB.Client.Linq.Internal
                     break;
 
                 case ContainsResultOperator containsResultOperator:
-                    var setVariable = GetFluxExpression(queryModel.MainFromClause.FromExpression, queryModel.MainFromClause);
-                    var columnExpression = GetExpressions(containsResultOperator.Item, queryModel.MainFromClause).First();
+                    var setVariable = GetFluxExpression(queryModel.MainFromClause.FromExpression,
+                        queryModel.MainFromClause);
+                    var columnExpression =
+                        GetExpressions(containsResultOperator.Item, queryModel.MainFromClause).First();
                     var columnVariable = ConcatExpression(new[] { columnExpression });
                     var filter = $"contains(value: {columnVariable}, set: {setVariable})";
                     if (columnExpression is TagColumnName || columnExpression is MeasurementColumnName)
@@ -164,6 +166,7 @@ namespace InfluxDB.Client.Linq.Internal
                     {
                         _context.QueryAggregator.AddFilterByFields(filter);
                     }
+
                     break;
 
                 default:
@@ -203,7 +206,7 @@ namespace InfluxDB.Client.Linq.Internal
                 return builder;
             }).ToString();
         }
-        
+
         private void AddFilterByRange(List<IExpressionPart> rangeFilter)
         {
             var rangeBinaryIndexes = Enumerable.Range(0, rangeFilter.Count)
@@ -231,7 +234,7 @@ namespace InfluxDB.Client.Linq.Internal
                 var assignment = assignmentBuilder.ToString();
                 if (assignment.Length > 0)
                 {
-                    var binaryOperator = (BinaryOperator) rangeFilter[rangeBinaryIndex];
+                    var binaryOperator = (BinaryOperator)rangeFilter[rangeBinaryIndex];
                     switch (binaryOperator.Expression.NodeType)
                     {
                         case ExpressionType.Equal:

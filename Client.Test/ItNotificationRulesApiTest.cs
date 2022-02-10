@@ -42,7 +42,7 @@ namespace InfluxDB.Client.Test
                     _orgId);
 
             var tagRules = new List<TagRule>
-                {new TagRule(key: "tag_key", value: "tag_value", _operator: TagRule.OperatorEnum.Equal)};
+                { new TagRule("tag_key", "tag_value", TagRule.OperatorEnum.Equal) };
 
             var name = GenerateName("slack-rule");
             var rule = await _notificationRulesApi.CreateSlackRuleAsync(
@@ -94,7 +94,7 @@ namespace InfluxDB.Client.Test
                     "secret-key", _orgId);
 
             var tagRules = new List<TagRule>
-                {new TagRule(key: "tag_key", value: "tag_value", _operator: TagRule.OperatorEnum.Notequal)};
+                { new TagRule("tag_key", "tag_value", TagRule.OperatorEnum.Notequal) };
 
             var name = GenerateName("pagerduty-rule");
             var rule = await _notificationRulesApi.CreatePagerDutyRuleAsync(
@@ -145,7 +145,7 @@ namespace InfluxDB.Client.Test
                     HTTPNotificationEndpoint.MethodEnum.POST, _orgId);
 
             var tagRules = new List<TagRule>
-                {new TagRule(key: "tag_key", value: "tag_value", _operator: TagRule.OperatorEnum.Equal)};
+                { new TagRule("tag_key", "tag_value", TagRule.OperatorEnum.Equal) };
 
             var name = GenerateName("http-rule");
             var rule = await _notificationRulesApi.CreateHttpRuleAsync(name,
@@ -192,7 +192,7 @@ namespace InfluxDB.Client.Test
                     HTTPNotificationEndpoint.MethodEnum.POST, _orgId);
 
             var tagRules = new List<TagRule>
-                {new TagRule(key: "tag_key", value: "tag_value", _operator: TagRule.OperatorEnum.Equal)};
+                { new TagRule("tag_key", "tag_value", TagRule.OperatorEnum.Equal) };
 
 
             var rule = await _notificationRulesApi.CreateHttpRuleAsync(GenerateName("http-rule"),
@@ -202,10 +202,10 @@ namespace InfluxDB.Client.Test
 
             var updatedName = GenerateName("updated name");
             rule.Name = updatedName;
-            rule.Description = ("updated description");
-            rule.Status = (TaskStatusType.Inactive);
+            rule.Description = "updated description";
+            rule.Status = TaskStatusType.Inactive;
 
-            rule = (HTTPNotificationRule) await _notificationRulesApi.UpdateNotificationRuleAsync(rule);
+            rule = (HTTPNotificationRule)await _notificationRulesApi.UpdateNotificationRuleAsync(rule);
 
             Assert.AreEqual(updatedName, rule.Name);
             Assert.AreEqual("updated description", rule.Description);
@@ -215,8 +215,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public void UpdateRuleNotExists()
         {
-            var update = new NotificationRuleUpdate(name: "not exists name", description: "not exists update",
-                status: NotificationRuleUpdate.StatusEnum.Active);
+            var update = new NotificationRuleUpdate("not exists name", "not exists update",
+                NotificationRuleUpdate.StatusEnum.Active);
 
             var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _notificationRulesApi
                 .UpdateNotificationRuleAsync("020f755c3c082000", update));
@@ -232,7 +232,7 @@ namespace InfluxDB.Client.Test
                     _orgId);
 
             var tagRules = new List<TagRule>
-                {new TagRule(key: "tag_key", value: "tag_value", _operator: TagRule.OperatorEnum.Equal)};
+                { new TagRule("tag_key", "tag_value", TagRule.OperatorEnum.Equal) };
 
             var name = GenerateName("slack-rule");
             var created = await _notificationRulesApi.CreateSlackRuleAsync(
@@ -265,7 +265,7 @@ namespace InfluxDB.Client.Test
                     "secret-key", _orgId);
 
             var tagRules = new List<TagRule>
-                {new TagRule(key: "tag_key", value: "tag_value", _operator: TagRule.OperatorEnum.Notequal)};
+                { new TagRule("tag_key", "tag_value", TagRule.OperatorEnum.Notequal) };
 
             var name = GenerateName("pagerduty-rule");
             var rule = await _notificationRulesApi.CreatePagerDutyRuleAsync(
@@ -273,8 +273,8 @@ namespace InfluxDB.Client.Test
                 "10s",
                 "my-template", RuleStatusLevel.CRIT, tagRules, endpoint, _orgId);
 
-            PagerDutyNotificationRule found =
-                (PagerDutyNotificationRule) await _notificationRulesApi.FindNotificationRuleByIdAsync(rule.Id);
+            var found =
+                (PagerDutyNotificationRule)await _notificationRulesApi.FindNotificationRuleByIdAsync(rule.Id);
 
             Assert.AreEqual(rule.Id, found.Id);
         }
@@ -298,7 +298,7 @@ namespace InfluxDB.Client.Test
                     "secret-key", _orgId);
 
             var tagRules = new List<TagRule>
-                {new TagRule(key: "tag_key", value: "tag_value", _operator: TagRule.OperatorEnum.Notequal)};
+                { new TagRule("tag_key", "tag_value", TagRule.OperatorEnum.Notequal) };
 
             var name = GenerateName("pagerduty-rule");
             await _notificationRulesApi.CreatePagerDutyRuleAsync(
@@ -318,16 +318,16 @@ namespace InfluxDB.Client.Test
                     HTTPNotificationEndpoint.MethodEnum.POST, _orgId);
 
             var tagRules = new List<TagRule>
-                {new TagRule(key: "tag_key", value: "tag_value", _operator: TagRule.OperatorEnum.Notequal)};
+                { new TagRule("tag_key", "tag_value", TagRule.OperatorEnum.Notequal) };
 
             foreach (var unused in Enumerable.Range(0,
-                20 - (await _notificationRulesApi.FindNotificationRulesAsync(_orgId, new FindOptions()))
-                ._NotificationRules.Count))
+                         20 - (await _notificationRulesApi.FindNotificationRulesAsync(_orgId, new FindOptions()))
+                         ._NotificationRules.Count))
                 await _notificationRulesApi.CreateHttpRuleAsync(GenerateName("rule"),
                     "10s",
                     RuleStatusLevel.CRIT, tagRules, endpoint, _orgId);
 
-            var findOptions = new FindOptions {Limit = 5};
+            var findOptions = new FindOptions { Limit = 5 };
 
             var rules = await _notificationRulesApi.FindNotificationRulesAsync(_orgId, findOptions);
             Assert.AreEqual(5, rules._NotificationRules.Count);
@@ -357,7 +357,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(0, rules._NotificationRules.Count);
             Assert.IsNull(rules.Links.Next);
         }
-        
+
         [Test]
         public async Task Labels()
         {
@@ -368,7 +368,7 @@ namespace InfluxDB.Client.Test
                     "secret-key", _orgId);
 
             var tagRules = new List<TagRule>
-                {new TagRule(key: "tag_key", value: "tag_value", _operator: TagRule.OperatorEnum.Notequal)};
+                { new TagRule("tag_key", "tag_value", TagRule.OperatorEnum.Notequal) };
 
             var name = GenerateName("pagerduty-rule");
             var rule = await _notificationRulesApi.CreatePagerDutyRuleAsync(
@@ -376,7 +376,7 @@ namespace InfluxDB.Client.Test
                 "10s",
                 "my-template", RuleStatusLevel.CRIT, tagRules, endpoint, _orgId);
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
 
             var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _orgId);
 

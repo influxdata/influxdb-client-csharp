@@ -29,13 +29,13 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(health);
             Assert.AreEqual(HealthCheck.StatusEnum.Fail, health.Status);
-            Assert.IsTrue(health.Message.Contains("Connection refused") || 
-                          health.Message.Contains("Cannot assign requested address"), 
+            Assert.IsTrue(health.Message.Contains("Connection refused") ||
+                          health.Message.Contains("Cannot assign requested address"),
                 $"The health message: {health.Message}");
 
             clientNotRunning.Dispose();
         }
-        
+
         [Test]
         public async Task Ping()
         {
@@ -51,7 +51,7 @@ namespace InfluxDB.Client.Test
 
             clientNotRunning.Dispose();
         }
-        
+
         [Test]
         public async Task Version()
         {
@@ -134,7 +134,8 @@ namespace InfluxDB.Client.Test
         {
             var onboarding = new OnboardingRequest("admin", "11111111", "Testing", "test");
 
-            var ex = Assert.ThrowsAsync<UnprocessableEntityException>(async () => await Client.OnboardingAsync(onboarding));
+            var ex = Assert.ThrowsAsync<UnprocessableEntityException>(async () =>
+                await Client.OnboardingAsync(onboarding));
 
             Assert.AreEqual("onboarding has already been completed", ex.Message);
             Assert.AreEqual(422, ex.Status);
@@ -175,14 +176,14 @@ namespace InfluxDB.Client.Test
         public async Task UseUsernamePassword()
         {
             Client.Dispose();
-            
+
             Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-user", "my-password".ToCharArray());
 
             var measurement = $"mem_{DateTimeOffset.Now.ToUnixTimeSeconds()}";
             await Client
                 .GetWriteApiAsync()
                 .WriteRecordAsync("my-bucket", "my-org", WritePrecision.Ns, $"{measurement},tag=a value=10i");
-            
+
             var query = $@"from(bucket: ""my-bucket"")
                 |> range(start: 0)
                 |> filter(fn: (r) => r[""_measurement""] == ""{measurement}"")";
@@ -192,10 +193,11 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(10, tables[0].Records[0].GetValue());
 
             // delete data
-            await Client.GetDeleteApi().Delete(DateTime.UtcNow.AddHours(-1), DateTime.UtcNow, "","my-bucket", "my-org");
-            
+            await Client.GetDeleteApi()
+                .Delete(DateTime.UtcNow.AddHours(-1), DateTime.UtcNow, "", "my-bucket", "my-org");
+
             Client.Dispose();
-            
+
             // test already disposed
             var ioe = Assert.ThrowsAsync<ObjectDisposedException>(async () =>
                 await Client.GetQueryApi().QueryAsync(query, "my-org"));

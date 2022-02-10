@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// UsersLinks
     /// </summary>
     [DataContract]
-    public partial class UsersLinks :  IEquatable<UsersLinks>
+    public partial class UsersLinks : IEquatable<UsersLinks>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersLinks" /> class.
         /// </summary>
         /// <param name="self">self.</param>
-        public UsersLinks(string self = default(string))
+        public UsersLinks(string self = default)
         {
-            this.Self = self;
+            Self = self;
         }
 
         /// <summary>
         /// Gets or Sets Self
         /// </summary>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [DataMember(Name = "self", EmitDefaultValue = false)]
         public string Self { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as UsersLinks);
+            return Equals(input as UsersLinks);
         }
 
         /// <summary>
@@ -84,13 +84,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(UsersLinks input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Self == input.Self ||
-                    (this.Self != null && this.Self.Equals(input.Self))
-                );
+            return
+                Self == input.Self ||
+                Self != null && Self.Equals(input.Self);
         }
 
         /// <summary>
@@ -101,14 +101,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Self != null)
-                    hashCode = hashCode * 59 + this.Self.GetHashCode();
+                var hashCode = 41;
+
+                if (Self != null)
+                {
+                    hashCode = hashCode * 59 + Self.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

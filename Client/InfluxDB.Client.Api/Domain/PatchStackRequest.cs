@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// PatchStackRequest
     /// </summary>
     [DataContract]
-    public partial class PatchStackRequest :  IEquatable<PatchStackRequest>
+    public partial class PatchStackRequest : IEquatable<PatchStackRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PatchStackRequest" /> class.
@@ -36,36 +36,38 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="description">description.</param>
         /// <param name="templateURLs">templateURLs.</param>
         /// <param name="additionalResources">additionalResources.</param>
-        public PatchStackRequest(string name = default(string), string description = default(string), List<string> templateURLs = default(List<string>), List<PatchStackRequestAdditionalResources> additionalResources = default(List<PatchStackRequestAdditionalResources>))
+        public PatchStackRequest(string name = default, string description = default,
+            List<string> templateURLs = default,
+            List<PatchStackRequestAdditionalResources> additionalResources = default)
         {
-            this.Name = name;
-            this.Description = description;
-            this.TemplateURLs = templateURLs;
-            this.AdditionalResources = additionalResources;
+            Name = name;
+            Description = description;
+            TemplateURLs = templateURLs;
+            AdditionalResources = additionalResources;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets TemplateURLs
         /// </summary>
-        [DataMember(Name="templateURLs", EmitDefaultValue=false)]
+        [DataMember(Name = "templateURLs", EmitDefaultValue = false)]
         public List<string> TemplateURLs { get; set; }
 
         /// <summary>
         /// Gets or Sets AdditionalResources
         /// </summary>
-        [DataMember(Name="additionalResources", EmitDefaultValue=false)]
+        [DataMember(Name = "additionalResources", EmitDefaultValue = false)]
         public List<PatchStackRequestAdditionalResources> AdditionalResources { get; set; }
 
         /// <summary>
@@ -100,7 +102,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PatchStackRequest);
+            return Equals(input as PatchStackRequest);
         }
 
         /// <summary>
@@ -111,26 +113,28 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PatchStackRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.TemplateURLs == input.TemplateURLs ||
-                    this.TemplateURLs != null &&
-                    this.TemplateURLs.SequenceEqual(input.TemplateURLs)
-                ) && 
+                    TemplateURLs == input.TemplateURLs ||
+                    TemplateURLs != null &&
+                    TemplateURLs.SequenceEqual(input.TemplateURLs)
+                ) &&
                 (
-                    this.AdditionalResources == input.AdditionalResources ||
-                    this.AdditionalResources != null &&
-                    this.AdditionalResources.SequenceEqual(input.AdditionalResources)
+                    AdditionalResources == input.AdditionalResources ||
+                    AdditionalResources != null &&
+                    AdditionalResources.SequenceEqual(input.AdditionalResources)
                 );
         }
 
@@ -142,20 +146,30 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.TemplateURLs != null)
-                    hashCode = hashCode * 59 + this.TemplateURLs.GetHashCode();
-                if (this.AdditionalResources != null)
-                    hashCode = hashCode * 59 + this.AdditionalResources.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (TemplateURLs != null)
+                {
+                    hashCode = hashCode * 59 + TemplateURLs.GetHashCode();
+                }
+
+                if (AdditionalResources != null)
+                {
+                    hashCode = hashCode * 59 + AdditionalResources.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

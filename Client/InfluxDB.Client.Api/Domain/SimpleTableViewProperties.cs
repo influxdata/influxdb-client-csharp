@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// SimpleTableViewProperties
     /// </summary>
     [DataContract]
-    public partial class SimpleTableViewProperties : ViewProperties,  IEquatable<SimpleTableViewProperties>
+    public partial class SimpleTableViewProperties : ViewProperties, IEquatable<SimpleTableViewProperties>
     {
         /// <summary>
         /// Defines Type
@@ -38,16 +38,15 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum SimpleTable for value: simple-table
             /// </summary>
-            [EnumMember(Value = "simple-table")]
-            SimpleTable = 1
-
+            [EnumMember(Value = "simple-table")] SimpleTable = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Defines Shape
         /// </summary>
@@ -57,21 +56,23 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum ChronografV2 for value: chronograf-v2
             /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
+            [EnumMember(Value = "chronograf-v2")] ChronografV2 = 1
         }
 
         /// <summary>
         /// Gets or Sets Shape
         /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
+        [DataMember(Name = "shape", EmitDefaultValue = false)]
         public ShapeEnum Shape { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleTableViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SimpleTableViewProperties() { }
+        protected SimpleTableViewProperties()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleTableViewProperties" /> class.
         /// </summary>
@@ -81,63 +82,73 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="shape">shape (required) (default to ShapeEnum.ChronografV2).</param>
         /// <param name="note">note (required).</param>
         /// <param name="showNoteWhenEmpty">If true, will display note when empty (required).</param>
-        public SimpleTableViewProperties(TypeEnum type = TypeEnum.SimpleTable, bool? showAll = default(bool?), List<DashboardQuery> queries = default(List<DashboardQuery>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?)) : base()
+        public SimpleTableViewProperties(TypeEnum type = TypeEnum.SimpleTable, bool? showAll = default,
+            List<DashboardQuery> queries = default, ShapeEnum shape = ShapeEnum.ChronografV2, string note = default,
+            bool? showNoteWhenEmpty = default) : base()
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "showAll" is required (not null)
             if (showAll == null)
             {
-                throw new InvalidDataException("showAll is a required property for SimpleTableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "showAll is a required property for SimpleTableViewProperties and cannot be null");
             }
-            this.ShowAll = showAll;
+
+            ShowAll = showAll;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
-                throw new InvalidDataException("queries is a required property for SimpleTableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "queries is a required property for SimpleTableViewProperties and cannot be null");
             }
-            this.Queries = queries;
+
+            Queries = queries;
             // to ensure "shape" is required (not null)
-            this.Shape = shape;
+            Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
-                throw new InvalidDataException("note is a required property for SimpleTableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "note is a required property for SimpleTableViewProperties and cannot be null");
             }
-            this.Note = note;
+
+            Note = note;
             // to ensure "showNoteWhenEmpty" is required (not null)
             if (showNoteWhenEmpty == null)
             {
-                throw new InvalidDataException("showNoteWhenEmpty is a required property for SimpleTableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "showNoteWhenEmpty is a required property for SimpleTableViewProperties and cannot be null");
             }
-            this.ShowNoteWhenEmpty = showNoteWhenEmpty;
+
+            ShowNoteWhenEmpty = showNoteWhenEmpty;
         }
 
 
         /// <summary>
         /// Gets or Sets ShowAll
         /// </summary>
-        [DataMember(Name="showAll", EmitDefaultValue=false)]
+        [DataMember(Name = "showAll", EmitDefaultValue = false)]
         public bool? ShowAll { get; set; }
 
         /// <summary>
         /// Gets or Sets Queries
         /// </summary>
-        [DataMember(Name="queries", EmitDefaultValue=false)]
+        [DataMember(Name = "queries", EmitDefaultValue = false)]
         public List<DashboardQuery> Queries { get; set; }
 
 
         /// <summary>
         /// Gets or Sets Note
         /// </summary>
-        [DataMember(Name="note", EmitDefaultValue=false)]
+        [DataMember(Name = "note", EmitDefaultValue = false)]
         public string Note { get; set; }
 
         /// <summary>
         /// If true, will display note when empty
         /// </summary>
         /// <value>If true, will display note when empty</value>
-        [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
+        [DataMember(Name = "showNoteWhenEmpty", EmitDefaultValue = false)]
         public bool? ShowNoteWhenEmpty { get; set; }
 
         /// <summary>
@@ -175,7 +186,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SimpleTableViewProperties);
+            return Equals(input as SimpleTableViewProperties);
         }
 
         /// <summary>
@@ -186,34 +197,36 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(SimpleTableViewProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.ShowAll == input.ShowAll ||
-                    (this.ShowAll != null && this.ShowAll.Equals(input.ShowAll))
-                ) && base.Equals(input) && 
-                (
-                    this.Queries == input.Queries ||
-                    this.Queries != null &&
-                    this.Queries.SequenceEqual(input.Queries)
-                ) && base.Equals(input) && 
-                (
-                    this.Shape == input.Shape ||
-                    this.Shape.Equals(input.Shape)
-                ) && base.Equals(input) && 
-                (
-                    this.Note == input.Note ||
-                    (this.Note != null && this.Note.Equals(input.Note))
-                ) && base.Equals(input) && 
-                (
-                    this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
-                    (this.ShowNoteWhenEmpty != null && this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       ShowAll == input.ShowAll ||
+                       ShowAll != null && ShowAll.Equals(input.ShowAll)
+                   ) && base.Equals(input) &&
+                   (
+                       Queries == input.Queries ||
+                       Queries != null &&
+                       Queries.SequenceEqual(input.Queries)
+                   ) && base.Equals(input) &&
+                   (
+                       Shape == input.Shape ||
+                       Shape.Equals(input.Shape)
+                   ) && base.Equals(input) &&
+                   (
+                       Note == input.Note ||
+                       Note != null && Note.Equals(input.Note)
+                   ) && base.Equals(input) &&
+                   (
+                       ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
+                       ShowNoteWhenEmpty != null && ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty)
+                   );
         }
 
         /// <summary>
@@ -224,22 +237,32 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.ShowAll != null)
-                    hashCode = hashCode * 59 + this.ShowAll.GetHashCode();
-                if (this.Queries != null)
-                    hashCode = hashCode * 59 + this.Queries.GetHashCode();
-                hashCode = hashCode * 59 + this.Shape.GetHashCode();
-                if (this.Note != null)
-                    hashCode = hashCode * 59 + this.Note.GetHashCode();
-                if (this.ShowNoteWhenEmpty != null)
-                    hashCode = hashCode * 59 + this.ShowNoteWhenEmpty.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (ShowAll != null)
+                {
+                    hashCode = hashCode * 59 + ShowAll.GetHashCode();
+                }
+
+                if (Queries != null)
+                {
+                    hashCode = hashCode * 59 + Queries.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Shape.GetHashCode();
+                if (Note != null)
+                {
+                    hashCode = hashCode * 59 + Note.GetHashCode();
+                }
+
+                if (ShowNoteWhenEmpty != null)
+                {
+                    hashCode = hashCode * 59 + ShowNoteWhenEmpty.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

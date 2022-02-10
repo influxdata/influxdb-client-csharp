@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// ListStacksResponse
     /// </summary>
     [DataContract]
-    public partial class ListStacksResponse :  IEquatable<ListStacksResponse>
+    public partial class ListStacksResponse : IEquatable<ListStacksResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ListStacksResponse" /> class.
         /// </summary>
         /// <param name="stacks">stacks.</param>
-        public ListStacksResponse(List<Stack> stacks = default(List<Stack>))
+        public ListStacksResponse(List<Stack> stacks = default)
         {
-            this.Stacks = stacks;
+            Stacks = stacks;
         }
 
         /// <summary>
         /// Gets or Sets Stacks
         /// </summary>
-        [DataMember(Name="stacks", EmitDefaultValue=false)]
+        [DataMember(Name = "stacks", EmitDefaultValue = false)]
         public List<Stack> Stacks { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ListStacksResponse);
+            return Equals(input as ListStacksResponse);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ListStacksResponse input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Stacks == input.Stacks ||
-                    this.Stacks != null &&
-                    this.Stacks.SequenceEqual(input.Stacks)
-                );
+            return
+                Stacks == input.Stacks ||
+                Stacks != null &&
+                Stacks.SequenceEqual(input.Stacks);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Stacks != null)
-                    hashCode = hashCode * 59 + this.Stacks.GetHashCode();
+                var hashCode = 41;
+
+                if (Stacks != null)
+                {
+                    hashCode = hashCode * 59 + Stacks.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryLabel
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryLabel :  IEquatable<TemplateSummaryLabel>
+    public partial class TemplateSummaryLabel : IEquatable<TemplateSummaryLabel>
     {
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public TemplateKind? Kind { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryLabel" /> class.
         /// </summary>
@@ -44,53 +45,55 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="name">name.</param>
         /// <param name="properties">properties.</param>
         /// <param name="envReferences">envReferences.</param>
-        public TemplateSummaryLabel(string id = default(string), string orgID = default(string), TemplateKind? kind = default(TemplateKind?), string templateMetaName = default(string), string name = default(string), TemplateSummaryLabelProperties properties = default(TemplateSummaryLabelProperties), List<Object> envReferences = default(List<Object>))
+        public TemplateSummaryLabel(string id = default, string orgID = default, TemplateKind? kind = default,
+            string templateMetaName = default, string name = default,
+            TemplateSummaryLabelProperties properties = default, List<object> envReferences = default)
         {
-            this.Id = id;
-            this.OrgID = orgID;
-            this.Kind = kind;
-            this.TemplateMetaName = templateMetaName;
-            this.Name = name;
-            this.Properties = properties;
-            this.EnvReferences = envReferences;
+            Id = id;
+            OrgID = orgID;
+            Kind = kind;
+            TemplateMetaName = templateMetaName;
+            Name = name;
+            Properties = properties;
+            EnvReferences = envReferences;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
 
         /// <summary>
         /// Gets or Sets TemplateMetaName
         /// </summary>
-        [DataMember(Name="templateMetaName", EmitDefaultValue=false)]
+        [DataMember(Name = "templateMetaName", EmitDefaultValue = false)]
         public string TemplateMetaName { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Properties
         /// </summary>
-        [DataMember(Name="properties", EmitDefaultValue=false)]
+        [DataMember(Name = "properties", EmitDefaultValue = false)]
         public TemplateSummaryLabelProperties Properties { get; set; }
 
         /// <summary>
         /// Gets or Sets EnvReferences
         /// </summary>
-        [DataMember(Name="envReferences", EmitDefaultValue=false)]
-        public List<Object> EnvReferences { get; set; }
+        [DataMember(Name = "envReferences", EmitDefaultValue = false)]
+        public List<object> EnvReferences { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -127,7 +130,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryLabel);
+            return Equals(input as TemplateSummaryLabel);
         }
 
         /// <summary>
@@ -138,37 +141,34 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryLabel input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.Kind == input.Kind ||
-                    this.Kind.Equals(input.Kind)
-                ) && 
+                    Kind == input.Kind ||
+                    Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
-                ) && 
+                    TemplateMetaName == input.TemplateMetaName ||
+                    TemplateMetaName != null && TemplateMetaName.Equals(input.TemplateMetaName)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
-                (
-                    
-                    (this.Properties != null && this.Properties.Equals(input.Properties))
-                ) && 
-                (
-                    this.EnvReferences == input.EnvReferences ||
-                    this.EnvReferences != null &&
-                    this.EnvReferences.SequenceEqual(input.EnvReferences)
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) && Properties != null && Properties.Equals(input.Properties) && (
+                    EnvReferences == input.EnvReferences ||
+                    EnvReferences != null &&
+                    EnvReferences.SequenceEqual(input.EnvReferences)
                 );
         }
 
@@ -180,25 +180,41 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.TemplateMetaName != null)
-                    hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Properties != null)
-                    hashCode = hashCode * 59 + this.Properties.GetHashCode();
-                if (this.EnvReferences != null)
-                    hashCode = hashCode * 59 + this.EnvReferences.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Kind.GetHashCode();
+                if (TemplateMetaName != null)
+                {
+                    hashCode = hashCode * 59 + TemplateMetaName.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Properties != null)
+                {
+                    hashCode = hashCode * 59 + Properties.GetHashCode();
+                }
+
+                if (EnvReferences != null)
+                {
+                    hashCode = hashCode * 59 + EnvReferences.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

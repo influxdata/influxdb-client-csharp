@@ -27,30 +27,30 @@ namespace InfluxDB.Client.Api.Domain
     /// Represents integer numbers
     /// </summary>
     [DataContract]
-    public partial class UnsignedIntegerLiteral : Expression,  IEquatable<UnsignedIntegerLiteral>
+    public partial class UnsignedIntegerLiteral : Expression, IEquatable<UnsignedIntegerLiteral>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UnsignedIntegerLiteral" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
         /// <param name="value">value.</param>
-        public UnsignedIntegerLiteral(string type = default(string), string value = default(string)) : base()
+        public UnsignedIntegerLiteral(string type = default, string value = default) : base()
         {
-            this.Type = type;
-            this.Value = value;
+            Type = type;
+            Value = value;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [DataMember(Name = "value", EmitDefaultValue = false)]
         public string Value { get; set; }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as UnsignedIntegerLiteral);
+            return Equals(input as UnsignedIntegerLiteral);
         }
 
         /// <summary>
@@ -95,17 +95,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(UnsignedIntegerLiteral input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
-                    this.Value == input.Value ||
-                    (this.Value != null && this.Value.Equals(input.Value))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type != null && Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Value == input.Value ||
+                       Value != null && Value.Equals(input.Value)
+                   );
         }
 
         /// <summary>
@@ -116,16 +118,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (Value != null)
+                {
+                    hashCode = hashCode * 59 + Value.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

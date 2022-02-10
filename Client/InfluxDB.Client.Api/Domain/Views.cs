@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// Views
     /// </summary>
     [DataContract]
-    public partial class Views :  IEquatable<Views>
+    public partial class Views : IEquatable<Views>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Views" /> class.
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="views">views.</param>
-        public Views(ViewLinks links = default(ViewLinks), List<View> views = default(List<View>))
+        public Views(ViewLinks links = default, List<View> views = default)
         {
-            this.Links = links;
-            this._Views = views;
+            Links = links;
+            _Views = views;
         }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public ViewLinks Links { get; set; }
 
         /// <summary>
         /// Gets or Sets _Views
         /// </summary>
-        [DataMember(Name="views", EmitDefaultValue=false)]
+        [DataMember(Name = "views", EmitDefaultValue = false)]
         public List<View> _Views { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Views);
+            return Equals(input as Views);
         }
 
         /// <summary>
@@ -93,17 +93,16 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Views input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
+                Links != null && Links.Equals(input.Links) &&
                 (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                ) && 
-                (
-                    this._Views == input._Views ||
-                    this._Views != null &&
-                    this._Views.SequenceEqual(input._Views)
+                    _Views == input._Views ||
+                    _Views != null &&
+                    _Views.SequenceEqual(input._Views)
                 );
         }
 
@@ -115,16 +114,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this._Views != null)
-                    hashCode = hashCode * 59 + this._Views.GetHashCode();
+                var hashCode = 41;
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
+                if (_Views != null)
+                {
+                    hashCode = hashCode * 59 + _Views.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

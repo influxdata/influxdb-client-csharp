@@ -26,18 +26,16 @@ namespace Client.Legacy.Test
             fluxRecord.Values["region"] = "carolina";
 
             var poco = _parser.ToPoco<PocoDifferentNameProperty>(fluxRecord);
-            
+
             Assert.AreEqual("aws.north.1", poco.Host);
             Assert.AreEqual("carolina", poco.DifferentName);
         }
-        
+
         private class PocoDifferentNameProperty
         {
-            [Column("host")] 
-            public string Host { get; set; }
+            [Column("host")] public string Host { get; set; }
 
-            [Column("region")]
-            public string DifferentName { get; set; }
+            [Column("region")] public string DifferentName { get; set; }
         }
 
         [Test]
@@ -79,7 +77,7 @@ namespace Client.Legacy.Test
             fluxRecord.Values["tag"] = "production";
             fluxRecord.Values["min"] = 10.5;
             fluxRecord.Values["max"] = 20.0;
-            fluxRecord.Values["avg"] = (Double)18;
+            fluxRecord.Values["avg"] = (double)18;
             fluxRecord.Values["_time"] = Instant.FromDateTimeUtc(now);
 
             var poco = _parser.ToPoco<PointWithoutTimestampName>(fluxRecord);
@@ -96,7 +94,7 @@ namespace Client.Legacy.Test
             [Column("tag", IsTag = true)] public string Tag { get; set; }
             [Column("min")] public double Minimum { get; set; }
             [Column("max")] public double Maximum { get; set; }
-            [Column("avg")] public Double Average { get; set; }
+            [Column("avg")] public double Average { get; set; }
             [Column(IsTimestamp = true)] public DateTime Timestamp { get; set; }
         }
 
@@ -118,7 +116,7 @@ namespace Client.Legacy.Test
             Assert.AreEqual(expectedValue, poco.Value);
             Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Timestamp));
         }
-        
+
         [TestCase(null)]
         [TestCase("e11351a6-62ec-468b-8b64-e1414aca2c7d")]
         public void NullableParseableProperty(string guid)
@@ -138,7 +136,7 @@ namespace Client.Legacy.Test
             Assert.AreEqual(expectedValue, poco.Value);
             Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Timestamp));
         }
-        
+
         [Test]
         public void NullableTimestamp()
         {
@@ -165,40 +163,31 @@ namespace Client.Legacy.Test
         [Measurement("poco")]
         private class ParseablePoco
         {
-            [Column("tag", IsTag = true)]
-            public string Tag { get; set; }
+            [Column("tag", IsTag = true)] public string Tag { get; set; }
 
-            [Column("value")]
-            public Guid Value { get; set; }
+            [Column("value")] public Guid Value { get; set; }
 
-            [Column(IsTimestamp = true)]
-            public DateTime Timestamp { get; set; }
+            [Column(IsTimestamp = true)] public DateTime Timestamp { get; set; }
         }
 
         [Measurement("poco")]
         private class NullableParseablePoco
         {
-            [Column("tag", IsTag = true)]
-            public string Tag { get; set; }
+            [Column("tag", IsTag = true)] public string Tag { get; set; }
 
-            [Column("value")]
-            public Guid? Value { get; set; }
+            [Column("value")] public Guid? Value { get; set; }
 
-            [Column(IsTimestamp = true)]
-            public DateTime Timestamp { get; set; }
+            [Column(IsTimestamp = true)] public DateTime Timestamp { get; set; }
         }
 
         [Measurement("poco")]
         private class NullableTimestampPoco
         {
-            [Column("tag", IsTag = true)]
-            public string Tag { get; set; }
+            [Column("tag", IsTag = true)] public string Tag { get; set; }
 
-            [Column("value")]
-            public double Value { get; set; }
+            [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)]
-            public DateTime? Time { get; set; }
+            [Column(IsTimestamp = true)] public DateTime? Time { get; set; }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Routes
     /// </summary>
     [DataContract]
-    public partial class Routes :  IEquatable<Routes>
+    public partial class Routes : IEquatable<Routes>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Routes" /> class.
@@ -50,134 +50,138 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="telegrafs">telegrafs.</param>
         /// <param name="users">users.</param>
         /// <param name="write">write.</param>
-        public Routes(string authorizations = default(string), string buckets = default(string), string dashboards = default(string), RoutesExternal external = default(RoutesExternal), string variables = default(string), string me = default(string), string flags = default(string), string orgs = default(string), RoutesQuery query = default(RoutesQuery), string setup = default(string), string signin = default(string), string signout = default(string), string sources = default(string), RoutesSystem system = default(RoutesSystem), string tasks = default(string), string telegrafs = default(string), string users = default(string), string write = default(string))
+        public Routes(string authorizations = default, string buckets = default, string dashboards = default,
+            RoutesExternal external = default, string variables = default, string me = default, string flags = default,
+            string orgs = default, RoutesQuery query = default, string setup = default, string signin = default,
+            string signout = default, string sources = default, RoutesSystem system = default, string tasks = default,
+            string telegrafs = default, string users = default, string write = default)
         {
-            this.Authorizations = authorizations;
-            this.Buckets = buckets;
-            this.Dashboards = dashboards;
-            this.External = external;
-            this.Variables = variables;
-            this.Me = me;
-            this.Flags = flags;
-            this.Orgs = orgs;
-            this.Query = query;
-            this.Setup = setup;
-            this.Signin = signin;
-            this.Signout = signout;
-            this.Sources = sources;
-            this.System = system;
-            this.Tasks = tasks;
-            this.Telegrafs = telegrafs;
-            this.Users = users;
-            this.Write = write;
+            Authorizations = authorizations;
+            Buckets = buckets;
+            Dashboards = dashboards;
+            External = external;
+            Variables = variables;
+            Me = me;
+            Flags = flags;
+            Orgs = orgs;
+            Query = query;
+            Setup = setup;
+            Signin = signin;
+            Signout = signout;
+            Sources = sources;
+            System = system;
+            Tasks = tasks;
+            Telegrafs = telegrafs;
+            Users = users;
+            Write = write;
         }
 
         /// <summary>
         /// Gets or Sets Authorizations
         /// </summary>
-        [DataMember(Name="authorizations", EmitDefaultValue=false)]
+        [DataMember(Name = "authorizations", EmitDefaultValue = false)]
         public string Authorizations { get; set; }
 
         /// <summary>
         /// Gets or Sets Buckets
         /// </summary>
-        [DataMember(Name="buckets", EmitDefaultValue=false)]
+        [DataMember(Name = "buckets", EmitDefaultValue = false)]
         public string Buckets { get; set; }
 
         /// <summary>
         /// Gets or Sets Dashboards
         /// </summary>
-        [DataMember(Name="dashboards", EmitDefaultValue=false)]
+        [DataMember(Name = "dashboards", EmitDefaultValue = false)]
         public string Dashboards { get; set; }
 
         /// <summary>
         /// Gets or Sets External
         /// </summary>
-        [DataMember(Name="external", EmitDefaultValue=false)]
+        [DataMember(Name = "external", EmitDefaultValue = false)]
         public RoutesExternal External { get; set; }
 
         /// <summary>
         /// Gets or Sets Variables
         /// </summary>
-        [DataMember(Name="variables", EmitDefaultValue=false)]
+        [DataMember(Name = "variables", EmitDefaultValue = false)]
         public string Variables { get; set; }
 
         /// <summary>
         /// Gets or Sets Me
         /// </summary>
-        [DataMember(Name="me", EmitDefaultValue=false)]
+        [DataMember(Name = "me", EmitDefaultValue = false)]
         public string Me { get; set; }
 
         /// <summary>
         /// Gets or Sets Flags
         /// </summary>
-        [DataMember(Name="flags", EmitDefaultValue=false)]
+        [DataMember(Name = "flags", EmitDefaultValue = false)]
         public string Flags { get; set; }
 
         /// <summary>
         /// Gets or Sets Orgs
         /// </summary>
-        [DataMember(Name="orgs", EmitDefaultValue=false)]
+        [DataMember(Name = "orgs", EmitDefaultValue = false)]
         public string Orgs { get; set; }
 
         /// <summary>
         /// Gets or Sets Query
         /// </summary>
-        [DataMember(Name="query", EmitDefaultValue=false)]
+        [DataMember(Name = "query", EmitDefaultValue = false)]
         public RoutesQuery Query { get; set; }
 
         /// <summary>
         /// Gets or Sets Setup
         /// </summary>
-        [DataMember(Name="setup", EmitDefaultValue=false)]
+        [DataMember(Name = "setup", EmitDefaultValue = false)]
         public string Setup { get; set; }
 
         /// <summary>
         /// Gets or Sets Signin
         /// </summary>
-        [DataMember(Name="signin", EmitDefaultValue=false)]
+        [DataMember(Name = "signin", EmitDefaultValue = false)]
         public string Signin { get; set; }
 
         /// <summary>
         /// Gets or Sets Signout
         /// </summary>
-        [DataMember(Name="signout", EmitDefaultValue=false)]
+        [DataMember(Name = "signout", EmitDefaultValue = false)]
         public string Signout { get; set; }
 
         /// <summary>
         /// Gets or Sets Sources
         /// </summary>
-        [DataMember(Name="sources", EmitDefaultValue=false)]
+        [DataMember(Name = "sources", EmitDefaultValue = false)]
         public string Sources { get; set; }
 
         /// <summary>
         /// Gets or Sets System
         /// </summary>
-        [DataMember(Name="system", EmitDefaultValue=false)]
+        [DataMember(Name = "system", EmitDefaultValue = false)]
         public RoutesSystem System { get; set; }
 
         /// <summary>
         /// Gets or Sets Tasks
         /// </summary>
-        [DataMember(Name="tasks", EmitDefaultValue=false)]
+        [DataMember(Name = "tasks", EmitDefaultValue = false)]
         public string Tasks { get; set; }
 
         /// <summary>
         /// Gets or Sets Telegrafs
         /// </summary>
-        [DataMember(Name="telegrafs", EmitDefaultValue=false)]
+        [DataMember(Name = "telegrafs", EmitDefaultValue = false)]
         public string Telegrafs { get; set; }
 
         /// <summary>
         /// Gets or Sets Users
         /// </summary>
-        [DataMember(Name="users", EmitDefaultValue=false)]
+        [DataMember(Name = "users", EmitDefaultValue = false)]
         public string Users { get; set; }
 
         /// <summary>
         /// Gets or Sets Write
         /// </summary>
-        [DataMember(Name="write", EmitDefaultValue=false)]
+        [DataMember(Name = "write", EmitDefaultValue = false)]
         public string Write { get; set; }
 
         /// <summary>
@@ -226,7 +230,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Routes);
+            return Equals(input as Routes);
         }
 
         /// <summary>
@@ -237,80 +241,58 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Routes input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Authorizations == input.Authorizations ||
-                    (this.Authorizations != null && this.Authorizations.Equals(input.Authorizations))
-                ) && 
+                    Authorizations == input.Authorizations ||
+                    Authorizations != null && Authorizations.Equals(input.Authorizations)
+                ) &&
                 (
-                    this.Buckets == input.Buckets ||
-                    (this.Buckets != null && this.Buckets.Equals(input.Buckets))
-                ) && 
+                    Buckets == input.Buckets ||
+                    Buckets != null && Buckets.Equals(input.Buckets)
+                ) &&
                 (
-                    this.Dashboards == input.Dashboards ||
-                    (this.Dashboards != null && this.Dashboards.Equals(input.Dashboards))
-                ) && 
-                (
-                    
-                    (this.External != null && this.External.Equals(input.External))
-                ) && 
-                (
-                    this.Variables == input.Variables ||
-                    (this.Variables != null && this.Variables.Equals(input.Variables))
-                ) && 
-                (
-                    this.Me == input.Me ||
-                    (this.Me != null && this.Me.Equals(input.Me))
-                ) && 
-                (
-                    this.Flags == input.Flags ||
-                    (this.Flags != null && this.Flags.Equals(input.Flags))
-                ) && 
-                (
-                    this.Orgs == input.Orgs ||
-                    (this.Orgs != null && this.Orgs.Equals(input.Orgs))
-                ) && 
-                (
-                    
-                    (this.Query != null && this.Query.Equals(input.Query))
-                ) && 
-                (
-                    this.Setup == input.Setup ||
-                    (this.Setup != null && this.Setup.Equals(input.Setup))
-                ) && 
-                (
-                    this.Signin == input.Signin ||
-                    (this.Signin != null && this.Signin.Equals(input.Signin))
-                ) && 
-                (
-                    this.Signout == input.Signout ||
-                    (this.Signout != null && this.Signout.Equals(input.Signout))
-                ) && 
-                (
-                    this.Sources == input.Sources ||
-                    (this.Sources != null && this.Sources.Equals(input.Sources))
-                ) && 
-                (
-                    
-                    (this.System != null && this.System.Equals(input.System))
-                ) && 
-                (
-                    this.Tasks == input.Tasks ||
-                    (this.Tasks != null && this.Tasks.Equals(input.Tasks))
-                ) && 
-                (
-                    this.Telegrafs == input.Telegrafs ||
-                    (this.Telegrafs != null && this.Telegrafs.Equals(input.Telegrafs))
-                ) && 
-                (
-                    this.Users == input.Users ||
-                    (this.Users != null && this.Users.Equals(input.Users))
-                ) && 
-                (
-                    this.Write == input.Write ||
-                    (this.Write != null && this.Write.Equals(input.Write))
+                    Dashboards == input.Dashboards ||
+                    Dashboards != null && Dashboards.Equals(input.Dashboards)
+                ) && External != null && External.Equals(input.External) && (
+                    Variables == input.Variables ||
+                    Variables != null && Variables.Equals(input.Variables)
+                ) && (
+                    Me == input.Me ||
+                    Me != null && Me.Equals(input.Me)
+                ) && (
+                    Flags == input.Flags ||
+                    Flags != null && Flags.Equals(input.Flags)
+                ) && (
+                    Orgs == input.Orgs ||
+                    Orgs != null && Orgs.Equals(input.Orgs)
+                ) && Query != null && Query.Equals(input.Query) && (
+                    Setup == input.Setup ||
+                    Setup != null && Setup.Equals(input.Setup)
+                ) && (
+                    Signin == input.Signin ||
+                    Signin != null && Signin.Equals(input.Signin)
+                ) && (
+                    Signout == input.Signout ||
+                    Signout != null && Signout.Equals(input.Signout)
+                ) && (
+                    Sources == input.Sources ||
+                    Sources != null && Sources.Equals(input.Sources)
+                ) && System != null && System.Equals(input.System) && (
+                    Tasks == input.Tasks ||
+                    Tasks != null && Tasks.Equals(input.Tasks)
+                ) && (
+                    Telegrafs == input.Telegrafs ||
+                    Telegrafs != null && Telegrafs.Equals(input.Telegrafs)
+                ) && (
+                    Users == input.Users ||
+                    Users != null && Users.Equals(input.Users)
+                ) && (
+                    Write == input.Write ||
+                    Write != null && Write.Equals(input.Write)
                 );
         }
 
@@ -322,48 +304,100 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Authorizations != null)
-                    hashCode = hashCode * 59 + this.Authorizations.GetHashCode();
-                if (this.Buckets != null)
-                    hashCode = hashCode * 59 + this.Buckets.GetHashCode();
-                if (this.Dashboards != null)
-                    hashCode = hashCode * 59 + this.Dashboards.GetHashCode();
-                if (this.External != null)
-                    hashCode = hashCode * 59 + this.External.GetHashCode();
-                if (this.Variables != null)
-                    hashCode = hashCode * 59 + this.Variables.GetHashCode();
-                if (this.Me != null)
-                    hashCode = hashCode * 59 + this.Me.GetHashCode();
-                if (this.Flags != null)
-                    hashCode = hashCode * 59 + this.Flags.GetHashCode();
-                if (this.Orgs != null)
-                    hashCode = hashCode * 59 + this.Orgs.GetHashCode();
-                if (this.Query != null)
-                    hashCode = hashCode * 59 + this.Query.GetHashCode();
-                if (this.Setup != null)
-                    hashCode = hashCode * 59 + this.Setup.GetHashCode();
-                if (this.Signin != null)
-                    hashCode = hashCode * 59 + this.Signin.GetHashCode();
-                if (this.Signout != null)
-                    hashCode = hashCode * 59 + this.Signout.GetHashCode();
-                if (this.Sources != null)
-                    hashCode = hashCode * 59 + this.Sources.GetHashCode();
-                if (this.System != null)
-                    hashCode = hashCode * 59 + this.System.GetHashCode();
-                if (this.Tasks != null)
-                    hashCode = hashCode * 59 + this.Tasks.GetHashCode();
-                if (this.Telegrafs != null)
-                    hashCode = hashCode * 59 + this.Telegrafs.GetHashCode();
-                if (this.Users != null)
-                    hashCode = hashCode * 59 + this.Users.GetHashCode();
-                if (this.Write != null)
-                    hashCode = hashCode * 59 + this.Write.GetHashCode();
+                var hashCode = 41;
+
+                if (Authorizations != null)
+                {
+                    hashCode = hashCode * 59 + Authorizations.GetHashCode();
+                }
+
+                if (Buckets != null)
+                {
+                    hashCode = hashCode * 59 + Buckets.GetHashCode();
+                }
+
+                if (Dashboards != null)
+                {
+                    hashCode = hashCode * 59 + Dashboards.GetHashCode();
+                }
+
+                if (External != null)
+                {
+                    hashCode = hashCode * 59 + External.GetHashCode();
+                }
+
+                if (Variables != null)
+                {
+                    hashCode = hashCode * 59 + Variables.GetHashCode();
+                }
+
+                if (Me != null)
+                {
+                    hashCode = hashCode * 59 + Me.GetHashCode();
+                }
+
+                if (Flags != null)
+                {
+                    hashCode = hashCode * 59 + Flags.GetHashCode();
+                }
+
+                if (Orgs != null)
+                {
+                    hashCode = hashCode * 59 + Orgs.GetHashCode();
+                }
+
+                if (Query != null)
+                {
+                    hashCode = hashCode * 59 + Query.GetHashCode();
+                }
+
+                if (Setup != null)
+                {
+                    hashCode = hashCode * 59 + Setup.GetHashCode();
+                }
+
+                if (Signin != null)
+                {
+                    hashCode = hashCode * 59 + Signin.GetHashCode();
+                }
+
+                if (Signout != null)
+                {
+                    hashCode = hashCode * 59 + Signout.GetHashCode();
+                }
+
+                if (Sources != null)
+                {
+                    hashCode = hashCode * 59 + Sources.GetHashCode();
+                }
+
+                if (System != null)
+                {
+                    hashCode = hashCode * 59 + System.GetHashCode();
+                }
+
+                if (Tasks != null)
+                {
+                    hashCode = hashCode * 59 + Tasks.GetHashCode();
+                }
+
+                if (Telegrafs != null)
+                {
+                    hashCode = hashCode * 59 + Telegrafs.GetHashCode();
+                }
+
+                if (Users != null)
+                {
+                    hashCode = hashCode * 59 + Users.GetHashCode();
+                }
+
+                if (Write != null)
+                {
+                    hashCode = hashCode * 59 + Write.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

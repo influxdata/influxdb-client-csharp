@@ -27,29 +27,31 @@ namespace InfluxDB.Client.Api.Domain
     /// CellWithViewProperties
     /// </summary>
     [DataContract]
-    public partial class CellWithViewProperties : Cell,  IEquatable<CellWithViewProperties>
+    public partial class CellWithViewProperties : Cell, IEquatable<CellWithViewProperties>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CellWithViewProperties" /> class.
         /// </summary>
         /// <param name="name">name.</param>
         /// <param name="properties">properties.</param>
-        public CellWithViewProperties(string name = default(string), ViewProperties properties = default(ViewProperties), string id = default(string), CellLinks links = default(CellLinks), int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?), string viewID = default(string)) : base(id, links, x, y, w, h, viewID)
+        public CellWithViewProperties(string name = default, ViewProperties properties = default, string id = default,
+            CellLinks links = default, int? x = default, int? y = default, int? w = default, int? h = default,
+            string viewID = default) : base(id, links, x, y, w, h, viewID)
         {
-            this.Name = name;
-            this.Properties = properties;
+            Name = name;
+            Properties = properties;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Properties
         /// </summary>
-        [DataMember(Name="properties", EmitDefaultValue=false)]
+        [DataMember(Name = "properties", EmitDefaultValue = false)]
         public ViewProperties Properties { get; set; }
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as CellWithViewProperties);
+            return Equals(input as CellWithViewProperties);
         }
 
         /// <summary>
@@ -94,17 +96,15 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(CellWithViewProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Properties != null && this.Properties.Equals(input.Properties))
-                );
+            return base.Equals(input) &&
+                   (
+                       Name == input.Name ||
+                       Name != null && Name.Equals(input.Name)
+                   ) && base.Equals(input) && Properties != null && Properties.Equals(input.Properties);
         }
 
         /// <summary>
@@ -115,16 +115,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Properties != null)
-                    hashCode = hashCode * 59 + this.Properties.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Properties != null)
+                {
+                    hashCode = hashCode * 59 + Properties.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

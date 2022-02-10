@@ -29,7 +29,7 @@ namespace InfluxDB.Client.Test
                 .AuthenticateToken("token")
                 .Org("my-org")
                 .Build();
-            
+
             _influxDbClient = InfluxDBClientFactory.Create(options);
             _queryApiSync = _influxDbClient.GetQueryApiSync();
         }
@@ -69,7 +69,7 @@ namespace InfluxDB.Client.Test
 
             [Column("_value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public Object Timestamp { get; set; }
+            [Column(IsTimestamp = true)] public object Timestamp { get; set; }
         }
     }
 }

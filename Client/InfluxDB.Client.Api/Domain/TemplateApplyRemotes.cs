@@ -27,39 +27,44 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateApplyRemotes
     /// </summary>
     [DataContract]
-    public partial class TemplateApplyRemotes :  IEquatable<TemplateApplyRemotes>
+    public partial class TemplateApplyRemotes : IEquatable<TemplateApplyRemotes>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateApplyRemotes" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TemplateApplyRemotes() { }
+        protected TemplateApplyRemotes()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateApplyRemotes" /> class.
         /// </summary>
         /// <param name="url">url (required).</param>
         /// <param name="contentType">contentType.</param>
-        public TemplateApplyRemotes(string url = default(string), string contentType = default(string))
+        public TemplateApplyRemotes(string url = default, string contentType = default)
         {
             // to ensure "url" is required (not null)
             if (url == null)
             {
-                throw new InvalidDataException("url is a required property for TemplateApplyRemotes and cannot be null");
+                throw new InvalidDataException(
+                    "url is a required property for TemplateApplyRemotes and cannot be null");
             }
-            this.Url = url;
-            this.ContentType = contentType;
+
+            Url = url;
+            ContentType = contentType;
         }
 
         /// <summary>
         /// Gets or Sets Url
         /// </summary>
-        [DataMember(Name="url", EmitDefaultValue=false)]
+        [DataMember(Name = "url", EmitDefaultValue = false)]
         public string Url { get; set; }
 
         /// <summary>
         /// Gets or Sets ContentType
         /// </summary>
-        [DataMember(Name="contentType", EmitDefaultValue=false)]
+        [DataMember(Name = "contentType", EmitDefaultValue = false)]
         public string ContentType { get; set; }
 
         /// <summary>
@@ -92,7 +97,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateApplyRemotes);
+            return Equals(input as TemplateApplyRemotes);
         }
 
         /// <summary>
@@ -103,16 +108,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateApplyRemotes input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Url == input.Url ||
-                    (this.Url != null && this.Url.Equals(input.Url))
-                ) && 
+                    Url == input.Url ||
+                    Url != null && Url.Equals(input.Url)
+                ) &&
                 (
-                    this.ContentType == input.ContentType ||
-                    (this.ContentType != null && this.ContentType.Equals(input.ContentType))
+                    ContentType == input.ContentType ||
+                    ContentType != null && ContentType.Equals(input.ContentType)
                 );
         }
 
@@ -124,16 +131,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Url != null)
-                    hashCode = hashCode * 59 + this.Url.GetHashCode();
-                if (this.ContentType != null)
-                    hashCode = hashCode * 59 + this.ContentType.GetHashCode();
+                var hashCode = 41;
+
+                if (Url != null)
+                {
+                    hashCode = hashCode * 59 + Url.GetHashCode();
+                }
+
+                if (ContentType != null)
+                {
+                    hashCode = hashCode * 59 + ContentType.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,29 +27,30 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateExportByIDOrgIDs
     /// </summary>
     [DataContract]
-    public partial class TemplateExportByIDOrgIDs :  IEquatable<TemplateExportByIDOrgIDs>
+    public partial class TemplateExportByIDOrgIDs : IEquatable<TemplateExportByIDOrgIDs>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateExportByIDOrgIDs" /> class.
         /// </summary>
         /// <param name="orgID">orgID.</param>
         /// <param name="resourceFilters">resourceFilters.</param>
-        public TemplateExportByIDOrgIDs(string orgID = default(string), TemplateExportByIDResourceFilters resourceFilters = default(TemplateExportByIDResourceFilters))
+        public TemplateExportByIDOrgIDs(string orgID = default,
+            TemplateExportByIDResourceFilters resourceFilters = default)
         {
-            this.OrgID = orgID;
-            this.ResourceFilters = resourceFilters;
+            OrgID = orgID;
+            ResourceFilters = resourceFilters;
         }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets ResourceFilters
         /// </summary>
-        [DataMember(Name="resourceFilters", EmitDefaultValue=false)]
+        [DataMember(Name = "resourceFilters", EmitDefaultValue = false)]
         public TemplateExportByIDResourceFilters ResourceFilters { get; set; }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateExportByIDOrgIDs);
+            return Equals(input as TemplateExportByIDOrgIDs);
         }
 
         /// <summary>
@@ -93,17 +94,15 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateExportByIDOrgIDs input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
-                (
-                    
-                    (this.ResourceFilters != null && this.ResourceFilters.Equals(input.ResourceFilters))
-                );
+            return
+            (
+                OrgID == input.OrgID ||
+                OrgID != null && OrgID.Equals(input.OrgID)
+            ) && ResourceFilters != null && ResourceFilters.Equals(input.ResourceFilters);
         }
 
         /// <summary>
@@ -114,16 +113,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.ResourceFilters != null)
-                    hashCode = hashCode * 59 + this.ResourceFilters.GetHashCode();
+                var hashCode = 41;
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (ResourceFilters != null)
+                {
+                    hashCode = hashCode * 59 + ResourceFilters.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

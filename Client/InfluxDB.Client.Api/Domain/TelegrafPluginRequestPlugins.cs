@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TelegrafPluginRequestPlugins
     /// </summary>
     [DataContract]
-    public partial class TelegrafPluginRequestPlugins :  IEquatable<TelegrafPluginRequestPlugins>
+    public partial class TelegrafPluginRequestPlugins : IEquatable<TelegrafPluginRequestPlugins>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegrafPluginRequestPlugins" /> class.
@@ -37,44 +37,45 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="alias">alias.</param>
         /// <param name="description">description.</param>
         /// <param name="config">config.</param>
-        public TelegrafPluginRequestPlugins(string type = default(string), string name = default(string), string alias = default(string), string description = default(string), Dictionary<string, Object> config = default(Dictionary<string, Object>))
+        public TelegrafPluginRequestPlugins(string type = default, string name = default, string alias = default,
+            string description = default, Dictionary<string, object> config = default)
         {
-            this.Type = type;
-            this.Name = name;
-            this.Alias = alias;
-            this.Description = description;
-            this.Config = config;
+            Type = type;
+            Name = name;
+            Alias = alias;
+            Description = description;
+            Config = config;
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Alias
         /// </summary>
-        [DataMember(Name="alias", EmitDefaultValue=false)]
+        [DataMember(Name = "alias", EmitDefaultValue = false)]
         public string Alias { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Config
         /// </summary>
-        [DataMember(Name="config", EmitDefaultValue=false)]
-        public Dictionary<string, Object> Config { get; set; }
+        [DataMember(Name = "config", EmitDefaultValue = false)]
+        public Dictionary<string, object> Config { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -109,7 +110,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegrafPluginRequestPlugins);
+            return Equals(input as TelegrafPluginRequestPlugins);
         }
 
         /// <summary>
@@ -120,29 +121,31 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TelegrafPluginRequestPlugins input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && 
+                    Type == input.Type ||
+                    Type != null && Type.Equals(input.Type)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Alias == input.Alias ||
-                    (this.Alias != null && this.Alias.Equals(input.Alias))
-                ) && 
+                    Alias == input.Alias ||
+                    Alias != null && Alias.Equals(input.Alias)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.Config == input.Config ||
-                    this.Config != null &&
-                    this.Config.SequenceEqual(input.Config)
+                    Config == input.Config ||
+                    Config != null &&
+                    Config.SequenceEqual(input.Config)
                 );
         }
 
@@ -154,22 +157,35 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Alias != null)
-                    hashCode = hashCode * 59 + this.Alias.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Config != null)
-                    hashCode = hashCode * 59 + this.Config.GetHashCode();
+                var hashCode = 41;
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Alias != null)
+                {
+                    hashCode = hashCode * 59 + Alias.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (Config != null)
+                {
+                    hashCode = hashCode * 59 + Config.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

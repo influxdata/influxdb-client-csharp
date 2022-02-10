@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Cell
     /// </summary>
     [DataContract]
-    public partial class Cell :  IEquatable<Cell>
+    public partial class Cell : IEquatable<Cell>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Cell" /> class.
@@ -39,58 +39,59 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="w">w.</param>
         /// <param name="h">h.</param>
         /// <param name="viewID">The reference to a view from the views API..</param>
-        public Cell(string id = default(string), CellLinks links = default(CellLinks), int? x = default(int?), int? y = default(int?), int? w = default(int?), int? h = default(int?), string viewID = default(string))
+        public Cell(string id = default, CellLinks links = default, int? x = default, int? y = default,
+            int? w = default, int? h = default, string viewID = default)
         {
-            this.Id = id;
-            this.Links = links;
-            this.X = x;
-            this.Y = y;
-            this.W = w;
-            this.H = h;
-            this.ViewID = viewID;
+            Id = id;
+            Links = links;
+            X = x;
+            Y = y;
+            W = w;
+            H = h;
+            ViewID = viewID;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public CellLinks Links { get; set; }
 
         /// <summary>
         /// Gets or Sets X
         /// </summary>
-        [DataMember(Name="x", EmitDefaultValue=false)]
+        [DataMember(Name = "x", EmitDefaultValue = false)]
         public int? X { get; set; }
 
         /// <summary>
         /// Gets or Sets Y
         /// </summary>
-        [DataMember(Name="y", EmitDefaultValue=false)]
+        [DataMember(Name = "y", EmitDefaultValue = false)]
         public int? Y { get; set; }
 
         /// <summary>
         /// Gets or Sets W
         /// </summary>
-        [DataMember(Name="w", EmitDefaultValue=false)]
+        [DataMember(Name = "w", EmitDefaultValue = false)]
         public int? W { get; set; }
 
         /// <summary>
         /// Gets or Sets H
         /// </summary>
-        [DataMember(Name="h", EmitDefaultValue=false)]
+        [DataMember(Name = "h", EmitDefaultValue = false)]
         public int? H { get; set; }
 
         /// <summary>
         /// The reference to a view from the views API.
         /// </summary>
         /// <value>The reference to a view from the views API.</value>
-        [DataMember(Name="viewID", EmitDefaultValue=false)]
+        [DataMember(Name = "viewID", EmitDefaultValue = false)]
         public string ViewID { get; set; }
 
         /// <summary>
@@ -128,7 +129,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Cell);
+            return Equals(input as Cell);
         }
 
         /// <summary>
@@ -139,37 +140,30 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Cell input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                ) && 
-                (
-                    this.X == input.X ||
-                    (this.X != null && this.X.Equals(input.X))
-                ) && 
-                (
-                    this.Y == input.Y ||
-                    (this.Y != null && this.Y.Equals(input.Y))
-                ) && 
-                (
-                    this.W == input.W ||
-                    (this.W != null && this.W.Equals(input.W))
-                ) && 
-                (
-                    this.H == input.H ||
-                    (this.H != null && this.H.Equals(input.H))
-                ) && 
-                (
-                    this.ViewID == input.ViewID ||
-                    (this.ViewID != null && this.ViewID.Equals(input.ViewID))
-                );
+            return
+            (
+                Id == input.Id ||
+                Id != null && Id.Equals(input.Id)
+            ) && Links != null && Links.Equals(input.Links) && (
+                X == input.X ||
+                X != null && X.Equals(input.X)
+            ) && (
+                Y == input.Y ||
+                Y != null && Y.Equals(input.Y)
+            ) && (
+                W == input.W ||
+                W != null && W.Equals(input.W)
+            ) && (
+                H == input.H ||
+                H != null && H.Equals(input.H)
+            ) && (
+                ViewID == input.ViewID ||
+                ViewID != null && ViewID.Equals(input.ViewID)
+            );
         }
 
         /// <summary>
@@ -180,26 +174,45 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this.X != null)
-                    hashCode = hashCode * 59 + this.X.GetHashCode();
-                if (this.Y != null)
-                    hashCode = hashCode * 59 + this.Y.GetHashCode();
-                if (this.W != null)
-                    hashCode = hashCode * 59 + this.W.GetHashCode();
-                if (this.H != null)
-                    hashCode = hashCode * 59 + this.H.GetHashCode();
-                if (this.ViewID != null)
-                    hashCode = hashCode * 59 + this.ViewID.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
+                if (X != null)
+                {
+                    hashCode = hashCode * 59 + X.GetHashCode();
+                }
+
+                if (Y != null)
+                {
+                    hashCode = hashCode * 59 + Y.GetHashCode();
+                }
+
+                if (W != null)
+                {
+                    hashCode = hashCode * 59 + W.GetHashCode();
+                }
+
+                if (H != null)
+                {
+                    hashCode = hashCode * 59 + H.GetHashCode();
+                }
+
+                if (ViewID != null)
+                {
+                    hashCode = hashCode * 59 + ViewID.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

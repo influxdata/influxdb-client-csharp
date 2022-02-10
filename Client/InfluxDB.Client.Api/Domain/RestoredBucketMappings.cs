@@ -27,58 +27,68 @@ namespace InfluxDB.Client.Api.Domain
     /// RestoredBucketMappings
     /// </summary>
     [DataContract]
-    public partial class RestoredBucketMappings :  IEquatable<RestoredBucketMappings>
+    public partial class RestoredBucketMappings : IEquatable<RestoredBucketMappings>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RestoredBucketMappings" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected RestoredBucketMappings() { }
+        protected RestoredBucketMappings()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RestoredBucketMappings" /> class.
         /// </summary>
         /// <param name="id">New ID of the restored bucket (required).</param>
         /// <param name="name">name (required).</param>
         /// <param name="shardMappings">shardMappings (required).</param>
-        public RestoredBucketMappings(string id = default(string), string name = default(string), List<BucketShardMapping> shardMappings = default(List<BucketShardMapping>))
+        public RestoredBucketMappings(string id = default, string name = default,
+            List<BucketShardMapping> shardMappings = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
             {
-                throw new InvalidDataException("id is a required property for RestoredBucketMappings and cannot be null");
+                throw new InvalidDataException(
+                    "id is a required property for RestoredBucketMappings and cannot be null");
             }
-            this.Id = id;
+
+            Id = id;
             // to ensure "name" is required (not null)
             if (name == null)
             {
-                throw new InvalidDataException("name is a required property for RestoredBucketMappings and cannot be null");
+                throw new InvalidDataException(
+                    "name is a required property for RestoredBucketMappings and cannot be null");
             }
-            this.Name = name;
+
+            Name = name;
             // to ensure "shardMappings" is required (not null)
             if (shardMappings == null)
             {
-                throw new InvalidDataException("shardMappings is a required property for RestoredBucketMappings and cannot be null");
+                throw new InvalidDataException(
+                    "shardMappings is a required property for RestoredBucketMappings and cannot be null");
             }
-            this.ShardMappings = shardMappings;
+
+            ShardMappings = shardMappings;
         }
 
         /// <summary>
         /// New ID of the restored bucket
         /// </summary>
         /// <value>New ID of the restored bucket</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets ShardMappings
         /// </summary>
-        [DataMember(Name="shardMappings", EmitDefaultValue=false)]
+        [DataMember(Name = "shardMappings", EmitDefaultValue = false)]
         public List<BucketShardMapping> ShardMappings { get; set; }
 
         /// <summary>
@@ -112,7 +122,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as RestoredBucketMappings);
+            return Equals(input as RestoredBucketMappings);
         }
 
         /// <summary>
@@ -123,21 +133,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(RestoredBucketMappings input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.ShardMappings == input.ShardMappings ||
-                    this.ShardMappings != null &&
-                    this.ShardMappings.SequenceEqual(input.ShardMappings)
+                    ShardMappings == input.ShardMappings ||
+                    ShardMappings != null &&
+                    ShardMappings.SequenceEqual(input.ShardMappings)
                 );
         }
 
@@ -149,18 +161,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.ShardMappings != null)
-                    hashCode = hashCode * 59 + this.ShardMappings.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (ShardMappings != null)
+                {
+                    hashCode = hashCode * 59 + ShardMappings.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

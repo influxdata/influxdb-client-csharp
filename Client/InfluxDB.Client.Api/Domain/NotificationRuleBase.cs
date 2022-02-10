@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// NotificationRuleBase
     /// </summary>
     [DataContract]
-    public partial class NotificationRuleBase :  IEquatable<NotificationRuleBase>
+    public partial class NotificationRuleBase : IEquatable<NotificationRuleBase>
     {
         /// <summary>
         /// Defines LastRunStatus
@@ -38,38 +38,39 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Failed for value: failed
             /// </summary>
-            [EnumMember(Value = "failed")]
-            Failed = 1,
+            [EnumMember(Value = "failed")] Failed = 1,
 
             /// <summary>
             /// Enum Success for value: success
             /// </summary>
-            [EnumMember(Value = "success")]
-            Success = 2,
+            [EnumMember(Value = "success")] Success = 2,
 
             /// <summary>
             /// Enum Canceled for value: canceled
             /// </summary>
-            [EnumMember(Value = "canceled")]
-            Canceled = 3
-
+            [EnumMember(Value = "canceled")] Canceled = 3
         }
 
         /// <summary>
         /// Gets or Sets LastRunStatus
         /// </summary>
-        [DataMember(Name="lastRunStatus", EmitDefaultValue=false)]
+        [DataMember(Name = "lastRunStatus", EmitDefaultValue = false)]
         public LastRunStatusEnum? LastRunStatus { get; set; }
+
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public TaskStatusType Status { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationRuleBase" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected NotificationRuleBase() { }
+        protected NotificationRuleBase()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationRuleBase" /> class.
         /// </summary>
@@ -89,104 +90,116 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="statusRules">List of status rules the notification rule attempts to match. (required).</param>
         /// <param name="labels">labels.</param>
         /// <param name="links">links.</param>
-        public NotificationRuleBase(string endpointID = default(string), string orgID = default(string), string taskID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks))
+        public NotificationRuleBase(string endpointID = default, string orgID = default, string taskID = default,
+            TaskStatusType status = default, string name = default, string sleepUntil = default, string every = default,
+            string offset = default, string runbookLink = default, int? limitEvery = default, int? limit = default,
+            List<TagRule> tagRules = default, string description = default, List<StatusRule> statusRules = default,
+            List<Label> labels = default, NotificationRuleBaseLinks links = default)
         {
             // to ensure "endpointID" is required (not null)
             if (endpointID == null)
             {
-                throw new InvalidDataException("endpointID is a required property for NotificationRuleBase and cannot be null");
+                throw new InvalidDataException(
+                    "endpointID is a required property for NotificationRuleBase and cannot be null");
             }
-            this.EndpointID = endpointID;
+
+            EndpointID = endpointID;
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
-                throw new InvalidDataException("orgID is a required property for NotificationRuleBase and cannot be null");
+                throw new InvalidDataException(
+                    "orgID is a required property for NotificationRuleBase and cannot be null");
             }
-            this.OrgID = orgID;
+
+            OrgID = orgID;
             // to ensure "status" is required (not null)
-            this.Status = status;
+            Status = status;
             // to ensure "name" is required (not null)
             if (name == null)
             {
-                throw new InvalidDataException("name is a required property for NotificationRuleBase and cannot be null");
+                throw new InvalidDataException(
+                    "name is a required property for NotificationRuleBase and cannot be null");
             }
-            this.Name = name;
+
+            Name = name;
             // to ensure "statusRules" is required (not null)
             if (statusRules == null)
             {
-                throw new InvalidDataException("statusRules is a required property for NotificationRuleBase and cannot be null");
+                throw new InvalidDataException(
+                    "statusRules is a required property for NotificationRuleBase and cannot be null");
             }
-            this.StatusRules = statusRules;
-            this.TaskID = taskID;
-            this.SleepUntil = sleepUntil;
-            this.Every = every;
-            this.Offset = offset;
-            this.RunbookLink = runbookLink;
-            this.LimitEvery = limitEvery;
-            this.Limit = limit;
-            this.TagRules = tagRules;
-            this.Description = description;
-            this.Labels = labels;
-            this.Links = links;
+
+            StatusRules = statusRules;
+            TaskID = taskID;
+            SleepUntil = sleepUntil;
+            Every = every;
+            Offset = offset;
+            RunbookLink = runbookLink;
+            LimitEvery = limitEvery;
+            Limit = limit;
+            TagRules = tagRules;
+            Description = description;
+            Labels = labels;
+            Links = links;
         }
 
         /// <summary>
         /// Timestamp (in RFC3339 date/time format](https://datatracker.ietf.org/doc/html/rfc3339)) of the latest scheduled and completed run.
         /// </summary>
         /// <value>Timestamp (in RFC3339 date/time format](https://datatracker.ietf.org/doc/html/rfc3339)) of the latest scheduled and completed run.</value>
-        [DataMember(Name="latestCompleted", EmitDefaultValue=false)]
+        [DataMember(Name = "latestCompleted", EmitDefaultValue = false)]
         public DateTime? LatestCompleted { get; private set; }
 
 
         /// <summary>
         /// Gets or Sets LastRunError
         /// </summary>
-        [DataMember(Name="lastRunError", EmitDefaultValue=false)]
+        [DataMember(Name = "lastRunError", EmitDefaultValue = false)]
         public string LastRunError { get; private set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// Gets or Sets EndpointID
         /// </summary>
-        [DataMember(Name="endpointID", EmitDefaultValue=false)]
+        [DataMember(Name = "endpointID", EmitDefaultValue = false)]
         public string EndpointID { get; set; }
 
         /// <summary>
         /// The ID of the organization that owns this notification rule.
         /// </summary>
         /// <value>The ID of the organization that owns this notification rule.</value>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// The ID of the task associated with this notification rule.
         /// </summary>
         /// <value>The ID of the task associated with this notification rule.</value>
-        [DataMember(Name="taskID", EmitDefaultValue=false)]
+        [DataMember(Name = "taskID", EmitDefaultValue = false)]
         public string TaskID { get; set; }
 
         /// <summary>
         /// The ID of creator used to create this notification rule.
         /// </summary>
         /// <value>The ID of creator used to create this notification rule.</value>
-        [DataMember(Name="ownerID", EmitDefaultValue=false)]
+        [DataMember(Name = "ownerID", EmitDefaultValue = false)]
         public string OwnerID { get; private set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public DateTime? CreatedAt { get; private set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public DateTime? UpdatedAt { get; private set; }
 
 
@@ -194,80 +207,80 @@ namespace InfluxDB.Client.Api.Domain
         /// Human-readable name describing the notification rule.
         /// </summary>
         /// <value>Human-readable name describing the notification rule.</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets SleepUntil
         /// </summary>
-        [DataMember(Name="sleepUntil", EmitDefaultValue=false)]
+        [DataMember(Name = "sleepUntil", EmitDefaultValue = false)]
         public string SleepUntil { get; set; }
 
         /// <summary>
         /// The notification repetition interval.
         /// </summary>
         /// <value>The notification repetition interval.</value>
-        [DataMember(Name="every", EmitDefaultValue=false)]
+        [DataMember(Name = "every", EmitDefaultValue = false)]
         public string Every { get; set; }
 
         /// <summary>
         /// Duration to delay after the schedule, before executing check.
         /// </summary>
         /// <value>Duration to delay after the schedule, before executing check.</value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
         public string Offset { get; set; }
 
         /// <summary>
         /// Gets or Sets RunbookLink
         /// </summary>
-        [DataMember(Name="runbookLink", EmitDefaultValue=false)]
+        [DataMember(Name = "runbookLink", EmitDefaultValue = false)]
         public string RunbookLink { get; set; }
 
         /// <summary>
         /// Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limit cannot be empty.
         /// </summary>
         /// <value>Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limit cannot be empty.</value>
-        [DataMember(Name="limitEvery", EmitDefaultValue=false)]
+        [DataMember(Name = "limitEvery", EmitDefaultValue = false)]
         public int? LimitEvery { get; set; }
 
         /// <summary>
         /// Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limitEvery cannot be empty.
         /// </summary>
         /// <value>Don&#39;t notify me more than &lt;limit&gt; times every &lt;limitEvery&gt; seconds. If set, limitEvery cannot be empty.</value>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
+        [DataMember(Name = "limit", EmitDefaultValue = false)]
         public int? Limit { get; set; }
 
         /// <summary>
         /// List of tag rules the notification rule attempts to match.
         /// </summary>
         /// <value>List of tag rules the notification rule attempts to match.</value>
-        [DataMember(Name="tagRules", EmitDefaultValue=false)]
+        [DataMember(Name = "tagRules", EmitDefaultValue = false)]
         public List<TagRule> TagRules { get; set; }
 
         /// <summary>
         /// An optional description of the notification rule.
         /// </summary>
         /// <value>An optional description of the notification rule.</value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// List of status rules the notification rule attempts to match.
         /// </summary>
         /// <value>List of status rules the notification rule attempts to match.</value>
-        [DataMember(Name="statusRules", EmitDefaultValue=false)]
+        [DataMember(Name = "statusRules", EmitDefaultValue = false)]
         public List<StatusRule> StatusRules { get; set; }
 
         /// <summary>
         /// Gets or Sets Labels
         /// </summary>
-        [DataMember(Name="labels", EmitDefaultValue=false)]
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
         public List<Label> Labels { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public NotificationRuleBaseLinks Links { get; set; }
 
         /// <summary>
@@ -321,7 +334,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as NotificationRuleBase);
+            return Equals(input as NotificationRuleBase);
         }
 
         /// <summary>
@@ -332,104 +345,102 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(NotificationRuleBase input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.LatestCompleted == input.LatestCompleted ||
-                    (this.LatestCompleted != null && this.LatestCompleted.Equals(input.LatestCompleted))
-                ) && 
+                    LatestCompleted == input.LatestCompleted ||
+                    LatestCompleted != null && LatestCompleted.Equals(input.LatestCompleted)
+                ) &&
                 (
-                    this.LastRunStatus == input.LastRunStatus ||
-                    this.LastRunStatus.Equals(input.LastRunStatus)
-                ) && 
+                    LastRunStatus == input.LastRunStatus ||
+                    LastRunStatus.Equals(input.LastRunStatus)
+                ) &&
                 (
-                    this.LastRunError == input.LastRunError ||
-                    (this.LastRunError != null && this.LastRunError.Equals(input.LastRunError))
-                ) && 
+                    LastRunError == input.LastRunError ||
+                    LastRunError != null && LastRunError.Equals(input.LastRunError)
+                ) &&
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.EndpointID == input.EndpointID ||
-                    (this.EndpointID != null && this.EndpointID.Equals(input.EndpointID))
-                ) && 
+                    EndpointID == input.EndpointID ||
+                    EndpointID != null && EndpointID.Equals(input.EndpointID)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.TaskID == input.TaskID ||
-                    (this.TaskID != null && this.TaskID.Equals(input.TaskID))
-                ) && 
+                    TaskID == input.TaskID ||
+                    TaskID != null && TaskID.Equals(input.TaskID)
+                ) &&
                 (
-                    this.OwnerID == input.OwnerID ||
-                    (this.OwnerID != null && this.OwnerID.Equals(input.OwnerID))
-                ) && 
+                    OwnerID == input.OwnerID ||
+                    OwnerID != null && OwnerID.Equals(input.OwnerID)
+                ) &&
                 (
-                    this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
+                    CreatedAt == input.CreatedAt ||
+                    CreatedAt != null && CreatedAt.Equals(input.CreatedAt)
+                ) &&
                 (
-                    this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
-                ) && 
+                    UpdatedAt == input.UpdatedAt ||
+                    UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)
+                ) &&
                 (
-                    this.Status == input.Status ||
-                    this.Status.Equals(input.Status)
-                ) && 
+                    Status == input.Status ||
+                    Status.Equals(input.Status)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.SleepUntil == input.SleepUntil ||
-                    (this.SleepUntil != null && this.SleepUntil.Equals(input.SleepUntil))
-                ) && 
+                    SleepUntil == input.SleepUntil ||
+                    SleepUntil != null && SleepUntil.Equals(input.SleepUntil)
+                ) &&
                 (
-                    this.Every == input.Every ||
-                    (this.Every != null && this.Every.Equals(input.Every))
-                ) && 
+                    Every == input.Every ||
+                    Every != null && Every.Equals(input.Every)
+                ) &&
                 (
-                    this.Offset == input.Offset ||
-                    (this.Offset != null && this.Offset.Equals(input.Offset))
-                ) && 
+                    Offset == input.Offset ||
+                    Offset != null && Offset.Equals(input.Offset)
+                ) &&
                 (
-                    this.RunbookLink == input.RunbookLink ||
-                    (this.RunbookLink != null && this.RunbookLink.Equals(input.RunbookLink))
-                ) && 
+                    RunbookLink == input.RunbookLink ||
+                    RunbookLink != null && RunbookLink.Equals(input.RunbookLink)
+                ) &&
                 (
-                    this.LimitEvery == input.LimitEvery ||
-                    (this.LimitEvery != null && this.LimitEvery.Equals(input.LimitEvery))
-                ) && 
+                    LimitEvery == input.LimitEvery ||
+                    LimitEvery != null && LimitEvery.Equals(input.LimitEvery)
+                ) &&
                 (
-                    this.Limit == input.Limit ||
-                    (this.Limit != null && this.Limit.Equals(input.Limit))
-                ) && 
+                    Limit == input.Limit ||
+                    Limit != null && Limit.Equals(input.Limit)
+                ) &&
                 (
-                    this.TagRules == input.TagRules ||
-                    this.TagRules != null &&
-                    this.TagRules.SequenceEqual(input.TagRules)
-                ) && 
+                    TagRules == input.TagRules ||
+                    TagRules != null &&
+                    TagRules.SequenceEqual(input.TagRules)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.StatusRules == input.StatusRules ||
-                    this.StatusRules != null &&
-                    this.StatusRules.SequenceEqual(input.StatusRules)
-                ) && 
+                    StatusRules == input.StatusRules ||
+                    StatusRules != null &&
+                    StatusRules.SequenceEqual(input.StatusRules)
+                ) &&
                 (
-                    this.Labels == input.Labels ||
-                    this.Labels != null &&
-                    this.Labels.SequenceEqual(input.Labels)
-                ) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+                    Labels == input.Labels ||
+                    Labels != null &&
+                    Labels.SequenceEqual(input.Labels)
+                ) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -440,56 +451,117 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.LatestCompleted != null)
-                    hashCode = hashCode * 59 + this.LatestCompleted.GetHashCode();
-                hashCode = hashCode * 59 + this.LastRunStatus.GetHashCode();
-                if (this.LastRunError != null)
-                    hashCode = hashCode * 59 + this.LastRunError.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.EndpointID != null)
-                    hashCode = hashCode * 59 + this.EndpointID.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.TaskID != null)
-                    hashCode = hashCode * 59 + this.TaskID.GetHashCode();
-                if (this.OwnerID != null)
-                    hashCode = hashCode * 59 + this.OwnerID.GetHashCode();
-                if (this.CreatedAt != null)
-                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
-                if (this.UpdatedAt != null)
-                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
-                hashCode = hashCode * 59 + this.Status.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.SleepUntil != null)
-                    hashCode = hashCode * 59 + this.SleepUntil.GetHashCode();
-                if (this.Every != null)
-                    hashCode = hashCode * 59 + this.Every.GetHashCode();
-                if (this.Offset != null)
-                    hashCode = hashCode * 59 + this.Offset.GetHashCode();
-                if (this.RunbookLink != null)
-                    hashCode = hashCode * 59 + this.RunbookLink.GetHashCode();
-                if (this.LimitEvery != null)
-                    hashCode = hashCode * 59 + this.LimitEvery.GetHashCode();
-                if (this.Limit != null)
-                    hashCode = hashCode * 59 + this.Limit.GetHashCode();
-                if (this.TagRules != null)
-                    hashCode = hashCode * 59 + this.TagRules.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.StatusRules != null)
-                    hashCode = hashCode * 59 + this.StatusRules.GetHashCode();
-                if (this.Labels != null)
-                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = 41;
+
+                if (LatestCompleted != null)
+                {
+                    hashCode = hashCode * 59 + LatestCompleted.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + LastRunStatus.GetHashCode();
+                if (LastRunError != null)
+                {
+                    hashCode = hashCode * 59 + LastRunError.GetHashCode();
+                }
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (EndpointID != null)
+                {
+                    hashCode = hashCode * 59 + EndpointID.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (TaskID != null)
+                {
+                    hashCode = hashCode * 59 + TaskID.GetHashCode();
+                }
+
+                if (OwnerID != null)
+                {
+                    hashCode = hashCode * 59 + OwnerID.GetHashCode();
+                }
+
+                if (CreatedAt != null)
+                {
+                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+                }
+
+                if (UpdatedAt != null)
+                {
+                    hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Status.GetHashCode();
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (SleepUntil != null)
+                {
+                    hashCode = hashCode * 59 + SleepUntil.GetHashCode();
+                }
+
+                if (Every != null)
+                {
+                    hashCode = hashCode * 59 + Every.GetHashCode();
+                }
+
+                if (Offset != null)
+                {
+                    hashCode = hashCode * 59 + Offset.GetHashCode();
+                }
+
+                if (RunbookLink != null)
+                {
+                    hashCode = hashCode * 59 + RunbookLink.GetHashCode();
+                }
+
+                if (LimitEvery != null)
+                {
+                    hashCode = hashCode * 59 + LimitEvery.GetHashCode();
+                }
+
+                if (Limit != null)
+                {
+                    hashCode = hashCode * 59 + Limit.GetHashCode();
+                }
+
+                if (TagRules != null)
+                {
+                    hashCode = hashCode * 59 + TagRules.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (StatusRules != null)
+                {
+                    hashCode = hashCode * 59 + StatusRules.GetHashCode();
+                }
+
+                if (Labels != null)
+                {
+                    hashCode = hashCode * 59 + Labels.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

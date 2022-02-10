@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// HistogramViewProperties
     /// </summary>
     [DataContract]
-    public partial class HistogramViewProperties : ViewProperties,  IEquatable<HistogramViewProperties>
+    public partial class HistogramViewProperties : ViewProperties, IEquatable<HistogramViewProperties>
     {
         /// <summary>
         /// Defines Type
@@ -38,16 +38,15 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Histogram for value: histogram
             /// </summary>
-            [EnumMember(Value = "histogram")]
-            Histogram = 1
-
+            [EnumMember(Value = "histogram")] Histogram = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Defines Shape
         /// </summary>
@@ -57,16 +56,15 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum ChronografV2 for value: chronograf-v2
             /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
+            [EnumMember(Value = "chronograf-v2")] ChronografV2 = 1
         }
 
         /// <summary>
         /// Gets or Sets Shape
         /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
+        [DataMember(Name = "shape", EmitDefaultValue = false)]
         public ShapeEnum Shape { get; set; }
+
         /// <summary>
         /// Defines Position
         /// </summary>
@@ -76,27 +74,28 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Overlaid for value: overlaid
             /// </summary>
-            [EnumMember(Value = "overlaid")]
-            Overlaid = 1,
+            [EnumMember(Value = "overlaid")] Overlaid = 1,
 
             /// <summary>
             /// Enum Stacked for value: stacked
             /// </summary>
-            [EnumMember(Value = "stacked")]
-            Stacked = 2
-
+            [EnumMember(Value = "stacked")] Stacked = 2
         }
 
         /// <summary>
         /// Gets or Sets Position
         /// </summary>
-        [DataMember(Name="position", EmitDefaultValue=false)]
+        [DataMember(Name = "position", EmitDefaultValue = false)]
         public PositionEnum Position { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HistogramViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected HistogramViewProperties() { }
+        protected HistogramViewProperties()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HistogramViewProperties" /> class.
         /// </summary>
@@ -116,155 +115,178 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="legendHide">legendHide.</param>
         /// <param name="legendOpacity">legendOpacity.</param>
         /// <param name="legendOrientationThreshold">legendOrientationThreshold.</param>
-        public HistogramViewProperties(TypeEnum type = TypeEnum.Histogram, List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?), string xColumn = default(string), List<string> fillColumns = default(List<string>), List<float?> xDomain = default(List<float?>), string xAxisLabel = default(string), PositionEnum position = default(PositionEnum), int? binCount = default(int?), bool? legendColorizeRows = default(bool?), bool? legendHide = default(bool?), float? legendOpacity = default(float?), int? legendOrientationThreshold = default(int?)) : base()
+        public HistogramViewProperties(TypeEnum type = TypeEnum.Histogram, List<DashboardQuery> queries = default,
+            List<DashboardColor> colors = default, ShapeEnum shape = ShapeEnum.ChronografV2, string note = default,
+            bool? showNoteWhenEmpty = default, string xColumn = default, List<string> fillColumns = default,
+            List<float?> xDomain = default, string xAxisLabel = default, PositionEnum position = default,
+            int? binCount = default, bool? legendColorizeRows = default, bool? legendHide = default,
+            float? legendOpacity = default, int? legendOrientationThreshold = default) : base()
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
-                throw new InvalidDataException("queries is a required property for HistogramViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "queries is a required property for HistogramViewProperties and cannot be null");
             }
-            this.Queries = queries;
+
+            Queries = queries;
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
-                throw new InvalidDataException("colors is a required property for HistogramViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "colors is a required property for HistogramViewProperties and cannot be null");
             }
-            this.Colors = colors;
+
+            Colors = colors;
             // to ensure "shape" is required (not null)
-            this.Shape = shape;
+            Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
-                throw new InvalidDataException("note is a required property for HistogramViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "note is a required property for HistogramViewProperties and cannot be null");
             }
-            this.Note = note;
+
+            Note = note;
             // to ensure "showNoteWhenEmpty" is required (not null)
             if (showNoteWhenEmpty == null)
             {
-                throw new InvalidDataException("showNoteWhenEmpty is a required property for HistogramViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "showNoteWhenEmpty is a required property for HistogramViewProperties and cannot be null");
             }
-            this.ShowNoteWhenEmpty = showNoteWhenEmpty;
+
+            ShowNoteWhenEmpty = showNoteWhenEmpty;
             // to ensure "xColumn" is required (not null)
             if (xColumn == null)
             {
-                throw new InvalidDataException("xColumn is a required property for HistogramViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "xColumn is a required property for HistogramViewProperties and cannot be null");
             }
-            this.XColumn = xColumn;
+
+            XColumn = xColumn;
             // to ensure "fillColumns" is required (not null)
             if (fillColumns == null)
             {
-                throw new InvalidDataException("fillColumns is a required property for HistogramViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "fillColumns is a required property for HistogramViewProperties and cannot be null");
             }
-            this.FillColumns = fillColumns;
+
+            FillColumns = fillColumns;
             // to ensure "xDomain" is required (not null)
             if (xDomain == null)
             {
-                throw new InvalidDataException("xDomain is a required property for HistogramViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "xDomain is a required property for HistogramViewProperties and cannot be null");
             }
-            this.XDomain = xDomain;
+
+            XDomain = xDomain;
             // to ensure "xAxisLabel" is required (not null)
             if (xAxisLabel == null)
             {
-                throw new InvalidDataException("xAxisLabel is a required property for HistogramViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "xAxisLabel is a required property for HistogramViewProperties and cannot be null");
             }
-            this.XAxisLabel = xAxisLabel;
+
+            XAxisLabel = xAxisLabel;
             // to ensure "position" is required (not null)
-            this.Position = position;
+            Position = position;
             // to ensure "binCount" is required (not null)
             if (binCount == null)
             {
-                throw new InvalidDataException("binCount is a required property for HistogramViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "binCount is a required property for HistogramViewProperties and cannot be null");
             }
-            this.BinCount = binCount;
-            this.LegendColorizeRows = legendColorizeRows;
-            this.LegendHide = legendHide;
-            this.LegendOpacity = legendOpacity;
-            this.LegendOrientationThreshold = legendOrientationThreshold;
+
+            BinCount = binCount;
+            LegendColorizeRows = legendColorizeRows;
+            LegendHide = legendHide;
+            LegendOpacity = legendOpacity;
+            LegendOrientationThreshold = legendOrientationThreshold;
         }
 
 
         /// <summary>
         /// Gets or Sets Queries
         /// </summary>
-        [DataMember(Name="queries", EmitDefaultValue=false)]
+        [DataMember(Name = "queries", EmitDefaultValue = false)]
         public List<DashboardQuery> Queries { get; set; }
 
         /// <summary>
         /// Colors define color encoding of data into a visualization
         /// </summary>
         /// <value>Colors define color encoding of data into a visualization</value>
-        [DataMember(Name="colors", EmitDefaultValue=false)]
+        [DataMember(Name = "colors", EmitDefaultValue = false)]
         public List<DashboardColor> Colors { get; set; }
 
 
         /// <summary>
         /// Gets or Sets Note
         /// </summary>
-        [DataMember(Name="note", EmitDefaultValue=false)]
+        [DataMember(Name = "note", EmitDefaultValue = false)]
         public string Note { get; set; }
 
         /// <summary>
         /// If true, will display note when empty
         /// </summary>
         /// <value>If true, will display note when empty</value>
-        [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
+        [DataMember(Name = "showNoteWhenEmpty", EmitDefaultValue = false)]
         public bool? ShowNoteWhenEmpty { get; set; }
 
         /// <summary>
         /// Gets or Sets XColumn
         /// </summary>
-        [DataMember(Name="xColumn", EmitDefaultValue=false)]
+        [DataMember(Name = "xColumn", EmitDefaultValue = false)]
         public string XColumn { get; set; }
 
         /// <summary>
         /// Gets or Sets FillColumns
         /// </summary>
-        [DataMember(Name="fillColumns", EmitDefaultValue=false)]
+        [DataMember(Name = "fillColumns", EmitDefaultValue = false)]
         public List<string> FillColumns { get; set; }
 
         /// <summary>
         /// Gets or Sets XDomain
         /// </summary>
-        [DataMember(Name="xDomain", EmitDefaultValue=false)]
+        [DataMember(Name = "xDomain", EmitDefaultValue = false)]
         public List<float?> XDomain { get; set; }
 
         /// <summary>
         /// Gets or Sets XAxisLabel
         /// </summary>
-        [DataMember(Name="xAxisLabel", EmitDefaultValue=false)]
+        [DataMember(Name = "xAxisLabel", EmitDefaultValue = false)]
         public string XAxisLabel { get; set; }
 
 
         /// <summary>
         /// Gets or Sets BinCount
         /// </summary>
-        [DataMember(Name="binCount", EmitDefaultValue=false)]
+        [DataMember(Name = "binCount", EmitDefaultValue = false)]
         public int? BinCount { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendColorizeRows
         /// </summary>
-        [DataMember(Name="legendColorizeRows", EmitDefaultValue=false)]
+        [DataMember(Name = "legendColorizeRows", EmitDefaultValue = false)]
         public bool? LegendColorizeRows { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendHide
         /// </summary>
-        [DataMember(Name="legendHide", EmitDefaultValue=false)]
+        [DataMember(Name = "legendHide", EmitDefaultValue = false)]
         public bool? LegendHide { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendOpacity
         /// </summary>
-        [DataMember(Name="legendOpacity", EmitDefaultValue=false)]
+        [DataMember(Name = "legendOpacity", EmitDefaultValue = false)]
         public float? LegendOpacity { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendOrientationThreshold
         /// </summary>
-        [DataMember(Name="legendOrientationThreshold", EmitDefaultValue=false)]
+        [DataMember(Name = "legendOrientationThreshold", EmitDefaultValue = false)]
         public int? LegendOrientationThreshold { get; set; }
 
         /// <summary>
@@ -312,7 +334,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as HistogramViewProperties);
+            return Equals(input as HistogramViewProperties);
         }
 
         /// <summary>
@@ -323,77 +345,80 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(HistogramViewProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Queries == input.Queries ||
-                    this.Queries != null &&
-                    this.Queries.SequenceEqual(input.Queries)
-                ) && base.Equals(input) && 
-                (
-                    this.Colors == input.Colors ||
-                    this.Colors != null &&
-                    this.Colors.SequenceEqual(input.Colors)
-                ) && base.Equals(input) && 
-                (
-                    this.Shape == input.Shape ||
-                    this.Shape.Equals(input.Shape)
-                ) && base.Equals(input) && 
-                (
-                    this.Note == input.Note ||
-                    (this.Note != null && this.Note.Equals(input.Note))
-                ) && base.Equals(input) && 
-                (
-                    this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
-                    (this.ShowNoteWhenEmpty != null && this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
-                ) && base.Equals(input) && 
-                (
-                    this.XColumn == input.XColumn ||
-                    (this.XColumn != null && this.XColumn.Equals(input.XColumn))
-                ) && base.Equals(input) && 
-                (
-                    this.FillColumns == input.FillColumns ||
-                    this.FillColumns != null &&
-                    this.FillColumns.SequenceEqual(input.FillColumns)
-                ) && base.Equals(input) && 
-                (
-                    this.XDomain == input.XDomain ||
-                    this.XDomain != null &&
-                    this.XDomain.SequenceEqual(input.XDomain)
-                ) && base.Equals(input) && 
-                (
-                    this.XAxisLabel == input.XAxisLabel ||
-                    (this.XAxisLabel != null && this.XAxisLabel.Equals(input.XAxisLabel))
-                ) && base.Equals(input) && 
-                (
-                    this.Position == input.Position ||
-                    this.Position.Equals(input.Position)
-                ) && base.Equals(input) && 
-                (
-                    this.BinCount == input.BinCount ||
-                    (this.BinCount != null && this.BinCount.Equals(input.BinCount))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendColorizeRows == input.LegendColorizeRows ||
-                    (this.LegendColorizeRows != null && this.LegendColorizeRows.Equals(input.LegendColorizeRows))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendHide == input.LegendHide ||
-                    (this.LegendHide != null && this.LegendHide.Equals(input.LegendHide))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendOpacity == input.LegendOpacity ||
-                    (this.LegendOpacity != null && this.LegendOpacity.Equals(input.LegendOpacity))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendOrientationThreshold == input.LegendOrientationThreshold ||
-                    (this.LegendOrientationThreshold != null && this.LegendOrientationThreshold.Equals(input.LegendOrientationThreshold))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Queries == input.Queries ||
+                       Queries != null &&
+                       Queries.SequenceEqual(input.Queries)
+                   ) && base.Equals(input) &&
+                   (
+                       Colors == input.Colors ||
+                       Colors != null &&
+                       Colors.SequenceEqual(input.Colors)
+                   ) && base.Equals(input) &&
+                   (
+                       Shape == input.Shape ||
+                       Shape.Equals(input.Shape)
+                   ) && base.Equals(input) &&
+                   (
+                       Note == input.Note ||
+                       Note != null && Note.Equals(input.Note)
+                   ) && base.Equals(input) &&
+                   (
+                       ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
+                       ShowNoteWhenEmpty != null && ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty)
+                   ) && base.Equals(input) &&
+                   (
+                       XColumn == input.XColumn ||
+                       XColumn != null && XColumn.Equals(input.XColumn)
+                   ) && base.Equals(input) &&
+                   (
+                       FillColumns == input.FillColumns ||
+                       FillColumns != null &&
+                       FillColumns.SequenceEqual(input.FillColumns)
+                   ) && base.Equals(input) &&
+                   (
+                       XDomain == input.XDomain ||
+                       XDomain != null &&
+                       XDomain.SequenceEqual(input.XDomain)
+                   ) && base.Equals(input) &&
+                   (
+                       XAxisLabel == input.XAxisLabel ||
+                       XAxisLabel != null && XAxisLabel.Equals(input.XAxisLabel)
+                   ) && base.Equals(input) &&
+                   (
+                       Position == input.Position ||
+                       Position.Equals(input.Position)
+                   ) && base.Equals(input) &&
+                   (
+                       BinCount == input.BinCount ||
+                       BinCount != null && BinCount.Equals(input.BinCount)
+                   ) && base.Equals(input) &&
+                   (
+                       LegendColorizeRows == input.LegendColorizeRows ||
+                       LegendColorizeRows != null && LegendColorizeRows.Equals(input.LegendColorizeRows)
+                   ) && base.Equals(input) &&
+                   (
+                       LegendHide == input.LegendHide ||
+                       LegendHide != null && LegendHide.Equals(input.LegendHide)
+                   ) && base.Equals(input) &&
+                   (
+                       LegendOpacity == input.LegendOpacity ||
+                       LegendOpacity != null && LegendOpacity.Equals(input.LegendOpacity)
+                   ) && base.Equals(input) &&
+                   (
+                       LegendOrientationThreshold == input.LegendOrientationThreshold ||
+                       LegendOrientationThreshold != null &&
+                       LegendOrientationThreshold.Equals(input.LegendOrientationThreshold)
+                   );
         }
 
         /// <summary>
@@ -404,41 +429,78 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Queries != null)
-                    hashCode = hashCode * 59 + this.Queries.GetHashCode();
-                if (this.Colors != null)
-                    hashCode = hashCode * 59 + this.Colors.GetHashCode();
-                hashCode = hashCode * 59 + this.Shape.GetHashCode();
-                if (this.Note != null)
-                    hashCode = hashCode * 59 + this.Note.GetHashCode();
-                if (this.ShowNoteWhenEmpty != null)
-                    hashCode = hashCode * 59 + this.ShowNoteWhenEmpty.GetHashCode();
-                if (this.XColumn != null)
-                    hashCode = hashCode * 59 + this.XColumn.GetHashCode();
-                if (this.FillColumns != null)
-                    hashCode = hashCode * 59 + this.FillColumns.GetHashCode();
-                if (this.XDomain != null)
-                    hashCode = hashCode * 59 + this.XDomain.GetHashCode();
-                if (this.XAxisLabel != null)
-                    hashCode = hashCode * 59 + this.XAxisLabel.GetHashCode();
-                hashCode = hashCode * 59 + this.Position.GetHashCode();
-                if (this.BinCount != null)
-                    hashCode = hashCode * 59 + this.BinCount.GetHashCode();
-                if (this.LegendColorizeRows != null)
-                    hashCode = hashCode * 59 + this.LegendColorizeRows.GetHashCode();
-                if (this.LegendHide != null)
-                    hashCode = hashCode * 59 + this.LegendHide.GetHashCode();
-                if (this.LegendOpacity != null)
-                    hashCode = hashCode * 59 + this.LegendOpacity.GetHashCode();
-                if (this.LegendOrientationThreshold != null)
-                    hashCode = hashCode * 59 + this.LegendOrientationThreshold.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Queries != null)
+                {
+                    hashCode = hashCode * 59 + Queries.GetHashCode();
+                }
+
+                if (Colors != null)
+                {
+                    hashCode = hashCode * 59 + Colors.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Shape.GetHashCode();
+                if (Note != null)
+                {
+                    hashCode = hashCode * 59 + Note.GetHashCode();
+                }
+
+                if (ShowNoteWhenEmpty != null)
+                {
+                    hashCode = hashCode * 59 + ShowNoteWhenEmpty.GetHashCode();
+                }
+
+                if (XColumn != null)
+                {
+                    hashCode = hashCode * 59 + XColumn.GetHashCode();
+                }
+
+                if (FillColumns != null)
+                {
+                    hashCode = hashCode * 59 + FillColumns.GetHashCode();
+                }
+
+                if (XDomain != null)
+                {
+                    hashCode = hashCode * 59 + XDomain.GetHashCode();
+                }
+
+                if (XAxisLabel != null)
+                {
+                    hashCode = hashCode * 59 + XAxisLabel.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Position.GetHashCode();
+                if (BinCount != null)
+                {
+                    hashCode = hashCode * 59 + BinCount.GetHashCode();
+                }
+
+                if (LegendColorizeRows != null)
+                {
+                    hashCode = hashCode * 59 + LegendColorizeRows.GetHashCode();
+                }
+
+                if (LegendHide != null)
+                {
+                    hashCode = hashCode * 59 + LegendHide.GetHashCode();
+                }
+
+                if (LegendOpacity != null)
+                {
+                    hashCode = hashCode * 59 + LegendOpacity.GetHashCode();
+                }
+
+                if (LegendOrientationThreshold != null)
+                {
+                    hashCode = hashCode * 59 + LegendOrientationThreshold.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

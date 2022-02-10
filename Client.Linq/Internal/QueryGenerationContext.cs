@@ -8,9 +8,9 @@ namespace InfluxDB.Client.Linq.Internal
         internal readonly QueryableOptimizerSettings QueryableOptimizerSettings;
 
         internal QueryGenerationContext(
-            QueryAggregator queryAggregator, 
+            QueryAggregator queryAggregator,
             VariableAggregator variableAggregator,
-            IMemberNameResolver memberResolver, 
+            IMemberNameResolver memberResolver,
             QueryableOptimizerSettings queryableOptimizerSettings)
         {
             QueryAggregator = queryAggregator;

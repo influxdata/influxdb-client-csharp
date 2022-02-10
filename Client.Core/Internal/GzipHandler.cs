@@ -47,33 +47,35 @@ namespace InfluxDB.Client.Core.Internal
                 //
                 request.AddOrUpdateParameter("Content-Encoding", "gzip", ParameterType.HttpHeader);
                 request.AddOrUpdateParameter("Accept-Encoding", "identity", ParameterType.HttpHeader);
-                
+
                 var body = request.Parameters.FirstOrDefault(parameter =>
                     parameter.Type.Equals(ParameterType.RequestBody));
 
                 if (body != null)
                 {
                     byte[] bytes;
-                    
+
                     if (body.Value is byte[])
                     {
-                        bytes = (byte[]) body.Value;
+                        bytes = (byte[])body.Value;
                     }
                     else
                     {
                         bytes = Encoding.UTF8.GetBytes(body.Value.ToString());
                     }
-                    
+
                     using (var msi = new MemoryStream(bytes))
-                    using (var mso = new MemoryStream()) {
-                        using (var gs = new GZipStream(mso, CompressionMode.Compress)) {
+                    using (var mso = new MemoryStream())
+                    {
+                        using (var gs = new GZipStream(mso, CompressionMode.Compress))
+                        {
                             msi.CopyTo(gs);
                         }
 
                         request.Parameters.RemoveParameter(body);
                         var bodyParameter = new BodyParameter(
-                            "application/x-gzip", 
-                            mso.ToArray(), 
+                            "application/x-gzip",
+                            mso.ToArray(),
                             "application/x-gzip",
                             DataFormat.Binary);
                         request.Parameters.AddParameter(bodyParameter);

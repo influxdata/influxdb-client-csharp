@@ -27,47 +27,37 @@ namespace InfluxDB.Client.Api.Domain
     /// The state to record if check matches a criteria.
     /// </summary>
     /// <value>The state to record if check matches a criteria.</value>
-    
     [JsonConverter(typeof(StringEnumConverter))]
-    
     public enum RuleStatusLevel
     {
         /// <summary>
         /// Enum UNKNOWN for value: UNKNOWN
         /// </summary>
-        [EnumMember(Value = "UNKNOWN")]
-        UNKNOWN = 1,
+        [EnumMember(Value = "UNKNOWN")] UNKNOWN = 1,
 
         /// <summary>
         /// Enum OK for value: OK
         /// </summary>
-        [EnumMember(Value = "OK")]
-        OK = 2,
+        [EnumMember(Value = "OK")] OK = 2,
 
         /// <summary>
         /// Enum INFO for value: INFO
         /// </summary>
-        [EnumMember(Value = "INFO")]
-        INFO = 3,
+        [EnumMember(Value = "INFO")] INFO = 3,
 
         /// <summary>
         /// Enum CRIT for value: CRIT
         /// </summary>
-        [EnumMember(Value = "CRIT")]
-        CRIT = 4,
+        [EnumMember(Value = "CRIT")] CRIT = 4,
 
         /// <summary>
         /// Enum WARN for value: WARN
         /// </summary>
-        [EnumMember(Value = "WARN")]
-        WARN = 5,
+        [EnumMember(Value = "WARN")] WARN = 5,
 
         /// <summary>
         /// Enum ANY for value: ANY
         /// </summary>
-        [EnumMember(Value = "ANY")]
-        ANY = 6
-
+        [EnumMember(Value = "ANY")] ANY = 6
     }
-
 }

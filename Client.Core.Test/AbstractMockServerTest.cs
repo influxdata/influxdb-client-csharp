@@ -17,7 +17,7 @@ namespace InfluxDB.Client.Core.Test
             {
                 return;
             }
-            
+
             MockServer = WireMockServer.Start(new WireMockServerSettings
             {
                 UseSSL = false
@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Core.Test
         {
             MockServer.Reset();
         }
-        
+
         [OneTimeTearDown]
         public void ShutdownServer()
         {

@@ -25,6 +25,7 @@ namespace InfluxDB.Client.Api.Service
     public interface IDBRPsService : IApiAccessor
     {
         #region Synchronous Operations
+
         /// <summary>
         /// Delete a database retention policy
         /// </summary>
@@ -37,7 +38,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns></returns>
-        void DeleteDBRPID (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
+        void DeleteDBRPID(string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
 
         /// <summary>
         /// Delete a database retention policy
@@ -51,7 +52,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteDBRPIDWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
+        ApiResponse<object> DeleteDBRPIDWithHttpInfo(string dbrpID, string zapTraceSpan = null, string orgID = null,
+            string org = null);
+
         /// <summary>
         /// List database retention policy mappings
         /// </summary>
@@ -68,7 +71,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>DBRPs</returns>
-        DBRPs GetDBRPs (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null);
+        DBRPs GetDBRPs(string zapTraceSpan = null, string orgID = null, string org = null, string id = null,
+            string bucketID = null, bool? _default = null, string db = null, string rp = null);
 
         /// <summary>
         /// List database retention policy mappings
@@ -86,7 +90,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        ApiResponse<DBRPs> GetDBRPsWithHttpInfo (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null);
+        ApiResponse<DBRPs> GetDBRPsWithHttpInfo(string zapTraceSpan = null, string orgID = null, string org = null,
+            string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null);
+
         /// <summary>
         /// Retrieve a database retention policy mapping
         /// </summary>
@@ -99,7 +105,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>DBRPGet</returns>
-        DBRPGet GetDBRPsID (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
+        DBRPGet GetDBRPsID(string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
 
         /// <summary>
         /// Retrieve a database retention policy mapping
@@ -113,7 +119,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        ApiResponse<DBRPGet> GetDBRPsIDWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null);
+        ApiResponse<DBRPGet> GetDBRPsIDWithHttpInfo(string dbrpID, string zapTraceSpan = null, string orgID = null,
+            string org = null);
+
         /// <summary>
         /// Update a database retention policy mapping
         /// </summary>
@@ -127,7 +135,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>DBRPGet</returns>
-        DBRPGet PatchDBRPID (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null);
+        DBRPGet PatchDBRPID(string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null,
+            string org = null);
 
         /// <summary>
         /// Update a database retention policy mapping
@@ -142,7 +151,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        ApiResponse<DBRPGet> PatchDBRPIDWithHttpInfo (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null);
+        ApiResponse<DBRPGet> PatchDBRPIDWithHttpInfo(string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null,
+            string orgID = null, string org = null);
+
         /// <summary>
         /// Add a database retention policy mapping
         /// </summary>
@@ -153,7 +164,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>DBRP</returns>
-        DBRP PostDBRP (DBRPCreate dBRPCreate, string zapTraceSpan = null);
+        DBRP PostDBRP(DBRPCreate dBRPCreate, string zapTraceSpan = null);
 
         /// <summary>
         /// Add a database retention policy mapping
@@ -165,9 +176,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of DBRP</returns>
-        ApiResponse<DBRP> PostDBRPWithHttpInfo (DBRPCreate dBRPCreate, string zapTraceSpan = null);
+        ApiResponse<DBRP> PostDBRPWithHttpInfo(DBRPCreate dBRPCreate, string zapTraceSpan = null);
+
         #endregion Synchronous Operations
+
         #region Asynchronous Operations
+
         /// <summary>
         /// Delete a database retention policy
         /// </summary>
@@ -181,7 +195,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteDBRPIDAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task DeleteDBRPIDAsync(string dbrpID, string zapTraceSpan = null, string orgID = null,
+            string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a database retention policy
@@ -196,7 +211,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<object>> DeleteDBRPIDAsyncWithHttpInfo(string dbrpID,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// List database retention policy mappings
         /// </summary>
@@ -214,7 +232,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPs</returns>
-        System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync(string zapTraceSpan = null, string orgID = null,
+            string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null,
+            string rp = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List database retention policy mappings
@@ -233,7 +253,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPs)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo(string zapTraceSpan = null,
+            string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null,
+            string db = null, string rp = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Retrieve a database retention policy mapping
         /// </summary>
@@ -247,7 +270,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPGet</returns>
-        System.Threading.Tasks.Task<DBRPGet> GetDBRPsIDAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<DBRPGet> GetDBRPsIDAsync(string dbrpID, string zapTraceSpan = null,
+            string orgID = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a database retention policy mapping
@@ -262,7 +286,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPGet)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRPGet>> GetDBRPsIDAsyncWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<DBRPGet>> GetDBRPsIDAsyncWithHttpInfo(string dbrpID,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Update a database retention policy mapping
         /// </summary>
@@ -277,7 +304,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPGet</returns>
-        System.Threading.Tasks.Task<DBRPGet> PatchDBRPIDAsync (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<DBRPGet> PatchDBRPIDAsync(string dbrpID, DBRPUpdate dBRPUpdate,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a database retention policy mapping
@@ -293,7 +322,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPGet)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRPGet>> PatchDBRPIDAsyncWithHttpInfo (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<DBRPGet>> PatchDBRPIDAsyncWithHttpInfo(string dbrpID,
+            DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Add a database retention policy mapping
         /// </summary>
@@ -305,7 +337,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<DBRP> PostDBRPAsync(DBRPCreate dBRPCreate, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add a database retention policy mapping
@@ -318,7 +351,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo(DBRPCreate dBRPCreate,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         #endregion Asynchronous Operations
     }
 
@@ -327,17 +362,17 @@ namespace InfluxDB.Client.Api.Service
     /// </summary>
     public partial class DBRPsService : IDBRPsService
     {
-        private InfluxDB.Client.Api.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DBRPsService"/> class.
         /// </summary>
         /// <returns></returns>
-        public DBRPsService(String basePath)
+        public DBRPsService(string basePath)
         {
-            this.Configuration = new InfluxDB.Client.Api.Client.Configuration { BasePath = basePath };
+            Configuration = new Configuration { BasePath = basePath };
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -346,31 +381,36 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public DBRPsService(InfluxDB.Client.Api.Client.Configuration configuration = null)
+        public DBRPsService(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = InfluxDB.Client.Api.Client.Configuration.Default;
+            {
+                Configuration = Configuration.Default;
+            }
             else
-                this.Configuration = configuration;
+            {
+                Configuration = configuration;
+            }
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(String basePath)
+        [Obsolete(
+            "SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(string basePath)
         {
             // do nothing
         }
@@ -379,12 +419,12 @@ namespace InfluxDB.Client.Api.Service
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public InfluxDB.Client.Api.Client.Configuration Configuration {get; set;}
+        public Configuration Configuration { get; set; }
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public InfluxDB.Client.Api.Client.ExceptionFactory ExceptionFactory
+        public ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -392,9 +432,10 @@ namespace InfluxDB.Client.Api.Service
                 {
                     throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
                 }
+
                 return _exceptionFactory;
             }
-            set { _exceptionFactory = value; }
+            set => _exceptionFactory = value;
         }
 
         /// <summary>
@@ -402,9 +443,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <returns>Dictionary of HTTP header</returns>
         [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public IDictionary<String, String> DefaultHeader()
+        public IDictionary<string, string> DefaultHeader()
         {
-            return new ReadOnlyDictionary<string, string>(this.Configuration.DefaultHeader);
+            return new ReadOnlyDictionary<string, string>(Configuration.DefaultHeader);
         }
 
         /// <summary>
@@ -416,7 +457,7 @@ namespace InfluxDB.Client.Api.Service
         [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
         public void AddDefaultHeader(string key, string value)
         {
-            this.Configuration.AddDefaultHeader(key, value);
+            Configuration.AddDefaultHeader(key, value);
         }
 
         /// <summary>
@@ -428,9 +469,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns></returns>
-        public void DeleteDBRPID (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
+        public void DeleteDBRPID(string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-             DeleteDBRPIDWithHttpInfo(dbrpID, zapTraceSpan, orgID, org);
+            DeleteDBRPIDWithHttpInfo(dbrpID, zapTraceSpan, orgID, org);
         }
 
         /// <summary>
@@ -442,54 +483,84 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteDBRPIDWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
+        public ApiResponse<object> DeleteDBRPIDWithHttpInfo(string dbrpID, string zapTraceSpan = null,
+            string orgID = null, string org = null)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
@@ -504,51 +575,82 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteDBRPIDWithIRestResponseAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteDBRPIDWithIRestResponseAsync(string dbrpID,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -563,56 +665,86 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestResponse DeleteDBRPIDWithIRestResponse (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
+        public RestResponse DeleteDBRPIDWithIRestResponse(string dbrpID, string zapTraceSpan = null,
+            string orgID = null, string org = null)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Delete a database retention policy 
         /// </summary>
@@ -622,42 +754,69 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DeleteDBRPIDWithRestRequest (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
+        public RestRequest DeleteDBRPIDWithRestRequest(string dbrpID, string zapTraceSpan = null, string orgID = null,
+            string org = null)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -671,10 +830,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteDBRPIDAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task DeleteDBRPIDAsync(string dbrpID, string zapTraceSpan = null,
+            string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-             return DeleteDBRPIDAsyncWithHttpInfo(dbrpID, zapTraceSpan, orgID, org, cancellationToken);
-
+            return DeleteDBRPIDAsyncWithHttpInfo(dbrpID, zapTraceSpan, orgID, org, cancellationToken);
         }
 
         /// <summary>
@@ -687,24 +846,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteDBRPIDAsyncWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> DeleteDBRPIDAsyncWithHttpInfo(string dbrpID,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await DeleteDBRPIDAsyncWithIRestResponse(dbrpID, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await DeleteDBRPIDAsyncWithIRestResponse(dbrpID, zapTraceSpan, orgID, org, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
-            
+
         /// <summary>
         /// Delete a database retention policy 
         /// </summary>
@@ -715,49 +881,80 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteDBRPIDAsyncWithIRestResponse (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteDBRPIDAsyncWithIRestResponse(string dbrpID,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->DeleteDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -776,10 +973,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>DBRPs</returns>
-        public DBRPs GetDBRPs (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public DBRPs GetDBRPs(string zapTraceSpan = null, string orgID = null, string org = null, string id = null,
+            string bucketID = null, bool? _default = null, string db = null, string rp = null)
         {
-             ApiResponse<DBRPs> localVarResponse = GetDBRPsWithHttpInfo(zapTraceSpan, orgID, org, id, bucketID, _default, db, rp);
-             return localVarResponse.Data;
+            var localVarResponse = GetDBRPsWithHttpInfo(zapTraceSpan, orgID, org, id, bucketID, _default, db, rp);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -795,57 +993,105 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        public ApiResponse< DBRPs > GetDBRPsWithHttpInfo (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public ApiResponse<DBRPs> GetDBRPsWithHttpInfo(string zapTraceSpan = null, string orgID = null,
+            string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null,
+            string rp = null)
         {
-
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
-            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
-            if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
-            if (db != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
-            if (rp != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (id != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
+            }
+
+            if (bucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            }
+
+            if (_default != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
+            }
+
+            if (db != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
+            }
+
+            if (rp != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPs", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPs", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<DBRPs>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRPs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPs)));
+                (DBRPs)Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPs)));
         }
 
         /// <summary>
@@ -862,52 +1108,101 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetDBRPsWithIRestResponseAsync (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetDBRPsWithIRestResponseAsync(
+            string zapTraceSpan = null, string orgID = null, string org = null, string id = null,
+            string bucketID = null, bool? _default = null, string db = null, string rp = null,
+            CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
-            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
-            if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
-            if (db != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
-            if (rp != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (id != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
+            }
+
+            if (bucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            }
+
+            if (_default != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
+            }
+
+            if (db != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
+            }
+
+            if (rp != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPs", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPs", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -926,57 +1221,105 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        public RestResponse GetDBRPsWithIRestResponse (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public RestResponse GetDBRPsWithIRestResponse(string zapTraceSpan = null, string orgID = null,
+            string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null,
+            string rp = null)
         {
-
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
-            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
-            if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
-            if (db != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
-            if (rp != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (id != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
+            }
+
+            if (bucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            }
+
+            if (_default != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
+            }
+
+            if (db != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
+            }
+
+            if (rp != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPs", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPs", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// List database retention policy mappings 
         /// </summary>
@@ -990,43 +1333,87 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="db">Specifies the database to filter on (optional)</param>
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <returns>ApiResponse of DBRPs</returns>
-        public RestRequest GetDBRPsWithRestRequest (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
+        public RestRequest GetDBRPsWithRestRequest(string zapTraceSpan = null, string orgID = null, string org = null,
+            string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null)
         {
-
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
-            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
-            if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
-            if (db != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
-            if (rp != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (id != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
+            }
+
+            if (bucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            }
+
+            if (_default != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
+            }
+
+            if (db != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
+            }
+
+            if (rp != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1044,11 +1431,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPs</returns>
-        public async System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<DBRPs> GetDBRPsAsync(string zapTraceSpan = null, string orgID = null,
+            string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null,
+            string rp = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRPs> localVarResponse = await GetDBRPsAsyncWithHttpInfo(zapTraceSpan, orgID, org, id, bucketID, _default, db, rp, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetDBRPsAsyncWithHttpInfo(zapTraceSpan, orgID, org, id, bucketID, _default, db, rp,
+                    cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1065,24 +1455,32 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPs)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRPs>> GetDBRPsAsyncWithHttpInfo(
+            string zapTraceSpan = null, string orgID = null, string org = null, string id = null,
+            string bucketID = null, bool? _default = null, string db = null, string rp = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetDBRPsAsyncWithIRestResponse(zapTraceSpan, orgID, org, id, bucketID, _default, db, rp, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetDBRPsAsyncWithIRestResponse(zapTraceSpan, orgID, org, id, bucketID, _default, db, rp,
+                    cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPs", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPs", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<DBRPs>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRPs) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPs)));
+                (DBRPs)Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPs)));
         }
-            
+
         /// <summary>
         /// List database retention policy mappings 
         /// </summary>
@@ -1097,50 +1495,99 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="rp">Specifies the retention policy to filter on (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (DBRPs)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetDBRPsAsyncWithIRestResponse (string zapTraceSpan = null, string orgID = null, string org = null, string id = null, string bucketID = null, bool? _default = null, string db = null, string rp = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetDBRPsAsyncWithIRestResponse(
+            string zapTraceSpan = null, string orgID = null, string org = null, string id = null,
+            string bucketID = null, bool? _default = null, string db = null, string rp = null,
+            CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (id != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
-            if (bucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
-            if (_default != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
-            if (db != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
-            if (rp != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (id != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "id", id)); // query parameter
+            }
+
+            if (bucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucketID", bucketID)); // query parameter
+            }
+
+            if (_default != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "default", _default)); // query parameter
+            }
+
+            if (db != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "db", db)); // query parameter
+            }
+
+            if (rp != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "rp", rp)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPs", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPs", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1155,10 +1602,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>DBRPGet</returns>
-        public DBRPGet GetDBRPsID (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
+        public DBRPGet GetDBRPsID(string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
         {
-             ApiResponse<DBRPGet> localVarResponse = GetDBRPsIDWithHttpInfo(dbrpID, zapTraceSpan, orgID, org);
-             return localVarResponse.Data;
+            var localVarResponse = GetDBRPsIDWithHttpInfo(dbrpID, zapTraceSpan, orgID, org);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1170,56 +1617,86 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        public ApiResponse< DBRPGet > GetDBRPsIDWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
+        public ApiResponse<DBRPGet> GetDBRPsIDWithHttpInfo(string dbrpID, string zapTraceSpan = null,
+            string orgID = null, string org = null)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<DBRPGet>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRPGet) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
+                (DBRPGet)Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
         }
 
         /// <summary>
@@ -1232,51 +1709,82 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetDBRPsIDWithIRestResponseAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetDBRPsIDWithIRestResponseAsync(string dbrpID,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1291,56 +1799,86 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        public RestResponse GetDBRPsIDWithIRestResponse (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
+        public RestResponse GetDBRPsIDWithIRestResponse(string dbrpID, string zapTraceSpan = null, string orgID = null,
+            string org = null)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Retrieve a database retention policy mapping 
         /// </summary>
@@ -1350,42 +1888,69 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        public RestRequest GetDBRPsIDWithRestRequest (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null)
+        public RestRequest GetDBRPsIDWithRestRequest(string dbrpID, string zapTraceSpan = null, string orgID = null,
+            string org = null)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1399,11 +1964,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPGet</returns>
-        public async System.Threading.Tasks.Task<DBRPGet> GetDBRPsIDAsync (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<DBRPGet> GetDBRPsIDAsync(string dbrpID, string zapTraceSpan = null,
+            string orgID = null, string org = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRPGet> localVarResponse = await GetDBRPsIDAsyncWithHttpInfo(dbrpID, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetDBRPsIDAsyncWithHttpInfo(dbrpID, zapTraceSpan, orgID, org, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1416,24 +1983,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPGet)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRPGet>> GetDBRPsIDAsyncWithHttpInfo (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRPGet>> GetDBRPsIDAsyncWithHttpInfo(string dbrpID,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetDBRPsIDAsyncWithIRestResponse(dbrpID, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetDBRPsIDAsyncWithIRestResponse(dbrpID, zapTraceSpan, orgID, org, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<DBRPGet>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRPGet) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
+                (DBRPGet)Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
         }
-            
+
         /// <summary>
         /// Retrieve a database retention policy mapping 
         /// </summary>
@@ -1444,49 +2018,80 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (DBRPGet)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetDBRPsIDAsyncWithIRestResponse (string dbrpID, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetDBRPsIDAsyncWithIRestResponse(string dbrpID,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->GetDBRPsID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetDBRPsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetDBRPsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1502,10 +2107,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>DBRPGet</returns>
-        public DBRPGet PatchDBRPID (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null)
+        public DBRPGet PatchDBRPID(string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null,
+            string orgID = null, string org = null)
         {
-             ApiResponse<DBRPGet> localVarResponse = PatchDBRPIDWithHttpInfo(dbrpID, dBRPUpdate, zapTraceSpan, orgID, org);
-             return localVarResponse.Data;
+            var localVarResponse = PatchDBRPIDWithHttpInfo(dbrpID, dBRPUpdate, zapTraceSpan, orgID, org);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1518,36 +2124,64 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        public ApiResponse< DBRPGet > PatchDBRPIDWithHttpInfo (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null)
+        public ApiResponse<DBRPGet> PatchDBRPIDWithHttpInfo(string dbrpID, DBRPUpdate dBRPUpdate,
+            string zapTraceSpan = null, string orgID = null, string org = null)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            }
+
             // verify the required parameter 'dBRPUpdate' is set
             if (dBRPUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
             }
             else
             {
@@ -1555,31 +2189,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<DBRPGet>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRPGet) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
+                (DBRPGet)Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
         }
 
         /// <summary>
@@ -1593,36 +2234,65 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PatchDBRPIDWithIRestResponseAsync (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PatchDBRPIDWithIRestResponseAsync(string dbrpID,
+            DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            }
+
             // verify the required parameter 'dBRPUpdate' is set
             if (dBRPUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
             }
             else
             {
@@ -1630,26 +2300,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1665,36 +2342,64 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        public RestResponse PatchDBRPIDWithIRestResponse (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null)
+        public RestResponse PatchDBRPIDWithIRestResponse(string dbrpID, DBRPUpdate dBRPUpdate,
+            string zapTraceSpan = null, string orgID = null, string org = null)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            }
+
             // verify the required parameter 'dBRPUpdate' is set
             if (dBRPUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
             }
             else
             {
@@ -1702,31 +2407,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Update a database retention policy mapping 
         /// </summary>
@@ -1737,36 +2449,64 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the organization ID of the mapping (optional)</param>
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <returns>ApiResponse of DBRPGet</returns>
-        public RestRequest PatchDBRPIDWithRestRequest (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null)
+        public RestRequest PatchDBRPIDWithRestRequest(string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null,
+            string orgID = null, string org = null)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            }
+
             // verify the required parameter 'dBRPUpdate' is set
             if (dBRPUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
             }
             else
             {
@@ -1774,17 +2514,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1799,11 +2543,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRPGet</returns>
-        public async System.Threading.Tasks.Task<DBRPGet> PatchDBRPIDAsync (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<DBRPGet> PatchDBRPIDAsync(string dbrpID, DBRPUpdate dBRPUpdate,
+            string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRPGet> localVarResponse = await PatchDBRPIDAsyncWithHttpInfo(dbrpID, dBRPUpdate, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await PatchDBRPIDAsyncWithHttpInfo(dbrpID, dBRPUpdate, zapTraceSpan, orgID, org, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1817,24 +2564,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRPGet)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRPGet>> PatchDBRPIDAsyncWithHttpInfo (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRPGet>> PatchDBRPIDAsyncWithHttpInfo(string dbrpID,
+            DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PatchDBRPIDAsyncWithIRestResponse(dbrpID, dBRPUpdate, zapTraceSpan, orgID, org, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PatchDBRPIDAsyncWithIRestResponse(dbrpID, dBRPUpdate, zapTraceSpan, orgID, org, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<DBRPGet>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRPGet) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
+                (DBRPGet)Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRPGet)));
         }
-            
+
         /// <summary>
         /// Update a database retention policy mapping 
         /// </summary>
@@ -1846,36 +2600,65 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the organization name of the mapping (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (DBRPGet)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PatchDBRPIDAsyncWithIRestResponse (string dbrpID, DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PatchDBRPIDAsyncWithIRestResponse(string dbrpID,
+            DBRPUpdate dBRPUpdate, string zapTraceSpan = null, string orgID = null, string org = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dbrpID' is set
             if (dbrpID == null)
-                throw new ApiException(400, "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dbrpID' when calling DBRPsService->PatchDBRPID");
+            }
+
             // verify the required parameter 'dBRPUpdate' is set
             if (dBRPUpdate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPUpdate' when calling DBRPsService->PatchDBRPID");
+            }
 
             var localVarPath = "/api/v2/dbrps/{dbrpID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (dbrpID != null) localVarPathParams.Add("dbrpID", this.Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (dbrpID != null)
+            {
+                localVarPathParams.Add("dbrpID", Configuration.ApiClient.ParameterToString(dbrpID)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPUpdate != null && dBRPUpdate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPUpdate); // http body (model) parameter
             }
             else
             {
@@ -1883,24 +2666,31 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchDBRPID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchDBRPID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1913,10 +2703,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>DBRP</returns>
-        public DBRP PostDBRP (DBRPCreate dBRPCreate, string zapTraceSpan = null)
+        public DBRP PostDBRP(DBRPCreate dBRPCreate, string zapTraceSpan = null)
         {
-             ApiResponse<DBRP> localVarResponse = PostDBRPWithHttpInfo(dBRPCreate, zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse = PostDBRPWithHttpInfo(dBRPCreate, zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1926,30 +2716,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public ApiResponse< DBRP > PostDBRPWithHttpInfo (DBRPCreate dBRPCreate, string zapTraceSpan = null)
+        public ApiResponse<DBRP> PostDBRPWithHttpInfo(DBRPCreate dBRPCreate, string zapTraceSpan = null)
         {
             // verify the required parameter 'dBRPCreate' is set
             if (dBRPCreate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            }
 
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
@@ -1957,31 +2756,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostDBRP", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostDBRP", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<DBRP>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRP) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRP)));
+                (DBRP)Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRP)));
         }
 
         /// <summary>
@@ -1992,30 +2798,40 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostDBRPWithIRestResponseAsync (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostDBRPWithIRestResponseAsync(DBRPCreate dBRPCreate,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dBRPCreate' is set
             if (dBRPCreate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            }
 
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
@@ -2023,26 +2839,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostDBRP", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostDBRP", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2055,30 +2878,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public RestResponse PostDBRPWithIRestResponse (DBRPCreate dBRPCreate, string zapTraceSpan = null)
+        public RestResponse PostDBRPWithIRestResponse(DBRPCreate dBRPCreate, string zapTraceSpan = null)
         {
             // verify the required parameter 'dBRPCreate' is set
             if (dBRPCreate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            }
 
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
@@ -2086,31 +2918,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostDBRP", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostDBRP", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Add a database retention policy mapping 
         /// </summary>
@@ -2118,30 +2957,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="dBRPCreate">The database retention policy mapping to add</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of DBRP</returns>
-        public RestRequest PostDBRPWithRestRequest (DBRPCreate dBRPCreate, string zapTraceSpan = null)
+        public RestRequest PostDBRPWithRestRequest(DBRPCreate dBRPCreate, string zapTraceSpan = null)
         {
             // verify the required parameter 'dBRPCreate' is set
             if (dBRPCreate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            }
 
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
@@ -2149,17 +2997,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2171,11 +3023,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of DBRP</returns>
-        public async System.Threading.Tasks.Task<DBRP> PostDBRPAsync (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<DBRP> PostDBRPAsync(DBRPCreate dBRPCreate, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<DBRP> localVarResponse = await PostDBRPAsyncWithHttpInfo(dBRPCreate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse = await PostDBRPAsyncWithHttpInfo(dBRPCreate, zapTraceSpan, cancellationToken)
+                .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2186,24 +3039,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<DBRP>> PostDBRPAsyncWithHttpInfo(DBRPCreate dBRPCreate,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostDBRPAsyncWithIRestResponse(dBRPCreate, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await PostDBRPAsyncWithIRestResponse(dBRPCreate, zapTraceSpan, cancellationToken)
+                .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostDBRP", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostDBRP", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<DBRP>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (DBRP) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRP)));
+                (DBRP)Configuration.ApiClient.Deserialize(localVarResponse, typeof(DBRP)));
         }
-            
+
         /// <summary>
         /// Add a database retention policy mapping 
         /// </summary>
@@ -2212,30 +3070,40 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (DBRP)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostDBRPAsyncWithIRestResponse (DBRPCreate dBRPCreate, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostDBRPAsyncWithIRestResponse(DBRPCreate dBRPCreate,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'dBRPCreate' is set
             if (dBRPCreate == null)
-                throw new ApiException(400, "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'dBRPCreate' when calling DBRPsService->PostDBRP");
+            }
 
             var localVarPath = "/api/v2/dbrps";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (dBRPCreate != null && dBRPCreate.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(dBRPCreate); // http body (model) parameter
             }
             else
             {
@@ -2243,28 +3111,34 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostDBRP", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostDBRP", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-
     }
 }

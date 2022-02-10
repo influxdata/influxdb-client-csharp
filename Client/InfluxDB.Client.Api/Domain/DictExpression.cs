@@ -27,31 +27,31 @@ namespace InfluxDB.Client.Api.Domain
     /// Used to create and directly specify the elements of a dictionary
     /// </summary>
     [DataContract]
-    public partial class DictExpression : Expression,  IEquatable<DictExpression>
+    public partial class DictExpression : Expression, IEquatable<DictExpression>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DictExpression" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
         /// <param name="elements">Elements of the dictionary.</param>
-        public DictExpression(string type = default(string), List<DictItem> elements = default(List<DictItem>)) : base()
+        public DictExpression(string type = default, List<DictItem> elements = default) : base()
         {
-            this.Type = type;
-            this.Elements = elements;
+            Type = type;
+            Elements = elements;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Elements of the dictionary
         /// </summary>
         /// <value>Elements of the dictionary</value>
-        [DataMember(Name="elements", EmitDefaultValue=false)]
+        [DataMember(Name = "elements", EmitDefaultValue = false)]
         public List<DictItem> Elements { get; set; }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DictExpression);
+            return Equals(input as DictExpression);
         }
 
         /// <summary>
@@ -96,18 +96,20 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DictExpression input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
-                    this.Elements == input.Elements ||
-                    this.Elements != null &&
-                    this.Elements.SequenceEqual(input.Elements)
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type != null && Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Elements == input.Elements ||
+                       Elements != null &&
+                       Elements.SequenceEqual(input.Elements)
+                   );
         }
 
         /// <summary>
@@ -118,16 +120,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Elements != null)
-                    hashCode = hashCode * 59 + this.Elements.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (Elements != null)
+                {
+                    hashCode = hashCode * 59 + Elements.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

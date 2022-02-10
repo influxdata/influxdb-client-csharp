@@ -57,11 +57,13 @@ namespace InfluxDB.Client.Api.Client
                     string.Format("Error calling {0}: {1}", methodName, response.Content),
                     response.Content);
             }
+
             if (status == 0)
             {
                 return new ApiException(status,
                     string.Format("Error calling {0}: {1}", methodName, response.ErrorMessage), response.ErrorMessage);
             }
+
             return null;
         };
 
@@ -71,7 +73,7 @@ namespace InfluxDB.Client.Api.Client
         /// <value>Configuration.</value>
         public static Configuration Default
         {
-            get { return _globalConfiguration; }
+            get => _globalConfiguration;
             set
             {
                 lock (GlobalConfigSync)
@@ -131,30 +133,32 @@ namespace InfluxDB.Client.Api.Client
             string basePath = "http://localhost/api/v2") : this()
         {
             if (string.IsNullOrWhiteSpace(basePath))
+            {
                 throw new ArgumentException("The provided basePath is invalid.", "basePath");
+            }
+
             if (defaultHeader == null)
+            {
                 throw new ArgumentNullException("defaultHeader");
+            }
+
             if (apiKey == null)
+            {
                 throw new ArgumentNullException("apiKey");
+            }
+
             if (apiKeyPrefix == null)
+            {
                 throw new ArgumentNullException("apiKeyPrefix");
+            }
 
             BasePath = basePath;
 
-            foreach (var keyValuePair in defaultHeader)
-            {
-                DefaultHeader.Add(keyValuePair);
-            }
+            foreach (var keyValuePair in defaultHeader) DefaultHeader.Add(keyValuePair);
 
-            foreach (var keyValuePair in apiKey)
-            {
-                ApiKey.Add(keyValuePair);
-            }
+            foreach (var keyValuePair in apiKey) ApiKey.Add(keyValuePair);
 
-            foreach (var keyValuePair in apiKeyPrefix)
-            {
-                ApiKeyPrefix.Add(keyValuePair);
-            }
+            foreach (var keyValuePair in apiKeyPrefix) ApiKeyPrefix.Add(keyValuePair);
         }
 
         /// <summary>
@@ -186,9 +190,8 @@ namespace InfluxDB.Client.Api.Client
             int timeout = 100000,
             string userAgent = "OpenAPI-Generator/1.0.0/csharp"
             // ReSharper restore UnusedParameter.Local
-            )
+        )
         {
-
         }
 
         /// <summary>
@@ -199,7 +202,6 @@ namespace InfluxDB.Client.Api.Client
         // ReSharper disable once UnusedParameter.Local
         public Configuration(ApiClient apiClient)
         {
-
         }
 
         #endregion Constructors
@@ -208,6 +210,7 @@ namespace InfluxDB.Client.Api.Client
         #region Properties
 
         private ApiClient _apiClient = null;
+
         /// <summary>
         /// Gets an instance of an ApiClient for this configuration
         /// </summary>
@@ -215,22 +218,30 @@ namespace InfluxDB.Client.Api.Client
         {
             get
             {
-                if (_apiClient == null) _apiClient = CreateApiClient();
+                if (_apiClient == null)
+                {
+                    _apiClient = CreateApiClient();
+                }
+
                 return _apiClient;
             }
             set => _apiClient = value;
         }
 
-        private String _basePath = null;
+        private string _basePath = null;
+
         /// <summary>
         /// Gets or sets the base path for API access.
         /// </summary>
-        public virtual string BasePath {
-            get { return _basePath; }
-            set {
+        public virtual string BasePath
+        {
+            get => _basePath;
+            set
+            {
                 _basePath = value;
                 // pass-through to ApiClient if it's set.
-                if(_apiClient != null) {
+                if (_apiClient != null)
+                {
                     _apiClient.RestClientOptions.BaseUrl = new Uri(_basePath);
                 }
             }
@@ -267,12 +278,16 @@ namespace InfluxDB.Client.Api.Client
         public string GetApiKeyWithPrefix(string apiKeyIdentifier)
         {
             var apiKeyValue = "";
-            ApiKey.TryGetValue (apiKeyIdentifier, out apiKeyValue);
+            ApiKey.TryGetValue(apiKeyIdentifier, out apiKeyValue);
             var apiKeyPrefix = "";
-            if (ApiKeyPrefix.TryGetValue (apiKeyIdentifier, out apiKeyPrefix))
+            if (ApiKeyPrefix.TryGetValue(apiKeyIdentifier, out apiKeyPrefix))
+            {
                 return apiKeyPrefix + " " + apiKeyValue;
+            }
             else
+            {
                 return apiKeyValue;
+            }
         }
 
         /// <summary>
@@ -287,7 +302,7 @@ namespace InfluxDB.Client.Api.Client
         /// <value>Folder path.</value>
         public virtual string TempFolderPath
         {
-            get { return _tempFolderPath; }
+            get => _tempFolderPath;
 
             set
             {
@@ -325,7 +340,7 @@ namespace InfluxDB.Client.Api.Client
         /// <value>The DateTimeFormat string</value>
         public virtual string DateTimeFormat
         {
-            get { return _dateTimeFormat; }
+            get => _dateTimeFormat;
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -347,13 +362,14 @@ namespace InfluxDB.Client.Api.Client
         /// <value>The prefix of the API key.</value>
         public virtual IDictionary<string, string> ApiKeyPrefix
         {
-            get { return _apiKeyPrefix; }
+            get => _apiKeyPrefix;
             set
             {
                 if (value == null)
                 {
                     throw new InvalidOperationException("ApiKeyPrefix collection may not be null.");
                 }
+
                 _apiKeyPrefix = value;
             }
         }
@@ -364,13 +380,14 @@ namespace InfluxDB.Client.Api.Client
         /// <value>The API key.</value>
         public virtual IDictionary<string, string> ApiKey
         {
-            get { return _apiKey; }
+            get => _apiKey;
             set
             {
                 if (value == null)
                 {
                     throw new InvalidOperationException("ApiKey collection may not be null.");
                 }
+
                 _apiKey = value;
             }
         }
@@ -403,11 +420,11 @@ namespace InfluxDB.Client.Api.Client
         /// <summary>
         /// Returns a string with essential information for debugging.
         /// </summary>
-        public static String ToDebugReport()
+        public static string ToDebugReport()
         {
-            String report = "C# SDK (InfluxDB.Client.Api) Debug Report:\n";
-            report += "    OS: " + System.Environment.OSVersion + "\n";
-            report += "    .NET Framework Version: " + System.Environment.Version  + "\n";
+            var report = "C# SDK (InfluxDB.Client.Api) Debug Report:\n";
+            report += "    OS: " + Environment.OSVersion + "\n";
+            report += "    .NET Framework Version: " + Environment.Version + "\n";
             report += "    Version of the API: 2.0.0\n";
             report += "    SDK Package Version: 1.0.0\n";
 

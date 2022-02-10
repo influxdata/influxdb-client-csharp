@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Axis used in a visualization.
     /// </summary>
     [DataContract]
-    public partial class Axis :  IEquatable<Axis>
+    public partial class Axis : IEquatable<Axis>
     {
         /// <summary>
         /// Radix for formatting axis values.
@@ -39,34 +39,32 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Empty for value: 
             /// </summary>
-            [EnumMember(Value = "")]
-            Empty = 1,
+            [EnumMember(Value = "")] Empty = 1,
 
             /// <summary>
             /// Enum _2 for value: 2
             /// </summary>
-            [EnumMember(Value = "2")]
-            _2 = 2,
+            [EnumMember(Value = "2")] _2 = 2,
 
             /// <summary>
             /// Enum _10 for value: 10
             /// </summary>
-            [EnumMember(Value = "10")]
-            _10 = 3
-
+            [EnumMember(Value = "10")] _10 = 3
         }
 
         /// <summary>
         /// Radix for formatting axis values.
         /// </summary>
         /// <value>Radix for formatting axis values.</value>
-        [DataMember(Name="base", EmitDefaultValue=false)]
+        [DataMember(Name = "base", EmitDefaultValue = false)]
         public BaseEnum? Base { get; set; }
+
         /// <summary>
         /// Gets or Sets Scale
         /// </summary>
-        [DataMember(Name="scale", EmitDefaultValue=false)]
+        [DataMember(Name = "scale", EmitDefaultValue = false)]
         public AxisScale? Scale { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Axis" /> class.
         /// </summary>
@@ -76,44 +74,44 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="suffix">Label suffix for formatting axis values..</param>
         /// <param name="_base">Radix for formatting axis values..</param>
         /// <param name="scale">scale.</param>
-        public Axis(List<string> bounds = default(List<string>), string label = default(string), string prefix = default(string), string suffix = default(string), BaseEnum? _base = default(BaseEnum?), AxisScale? scale = default(AxisScale?))
+        public Axis(List<string> bounds = default, string label = default, string prefix = default,
+            string suffix = default, BaseEnum? _base = default, AxisScale? scale = default)
         {
-            this.Bounds = bounds;
-            this.Label = label;
-            this.Prefix = prefix;
-            this.Suffix = suffix;
-            this.Base = _base;
-            this.Scale = scale;
+            Bounds = bounds;
+            Label = label;
+            Prefix = prefix;
+            Suffix = suffix;
+            Base = _base;
+            Scale = scale;
         }
 
         /// <summary>
         /// The extents of the axis in the form [lower, upper]. Clients determine whether bounds are inclusive or exclusive of their limits.
         /// </summary>
         /// <value>The extents of the axis in the form [lower, upper]. Clients determine whether bounds are inclusive or exclusive of their limits.</value>
-        [DataMember(Name="bounds", EmitDefaultValue=false)]
+        [DataMember(Name = "bounds", EmitDefaultValue = false)]
         public List<string> Bounds { get; set; }
 
         /// <summary>
         /// Description of the axis.
         /// </summary>
         /// <value>Description of the axis.</value>
-        [DataMember(Name="label", EmitDefaultValue=false)]
+        [DataMember(Name = "label", EmitDefaultValue = false)]
         public string Label { get; set; }
 
         /// <summary>
         /// Label prefix for formatting axis values.
         /// </summary>
         /// <value>Label prefix for formatting axis values.</value>
-        [DataMember(Name="prefix", EmitDefaultValue=false)]
+        [DataMember(Name = "prefix", EmitDefaultValue = false)]
         public string Prefix { get; set; }
 
         /// <summary>
         /// Label suffix for formatting axis values.
         /// </summary>
         /// <value>Label suffix for formatting axis values.</value>
-        [DataMember(Name="suffix", EmitDefaultValue=false)]
+        [DataMember(Name = "suffix", EmitDefaultValue = false)]
         public string Suffix { get; set; }
-
 
 
         /// <summary>
@@ -150,7 +148,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Axis);
+            return Equals(input as Axis);
         }
 
         /// <summary>
@@ -161,33 +159,35 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Axis input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Bounds == input.Bounds ||
-                    this.Bounds != null &&
-                    this.Bounds.SequenceEqual(input.Bounds)
-                ) && 
+                    Bounds == input.Bounds ||
+                    Bounds != null &&
+                    Bounds.SequenceEqual(input.Bounds)
+                ) &&
                 (
-                    this.Label == input.Label ||
-                    (this.Label != null && this.Label.Equals(input.Label))
-                ) && 
+                    Label == input.Label ||
+                    Label != null && Label.Equals(input.Label)
+                ) &&
                 (
-                    this.Prefix == input.Prefix ||
-                    (this.Prefix != null && this.Prefix.Equals(input.Prefix))
-                ) && 
+                    Prefix == input.Prefix ||
+                    Prefix != null && Prefix.Equals(input.Prefix)
+                ) &&
                 (
-                    this.Suffix == input.Suffix ||
-                    (this.Suffix != null && this.Suffix.Equals(input.Suffix))
-                ) && 
+                    Suffix == input.Suffix ||
+                    Suffix != null && Suffix.Equals(input.Suffix)
+                ) &&
                 (
-                    this.Base == input.Base ||
-                    this.Base.Equals(input.Base)
-                ) && 
+                    Base == input.Base ||
+                    Base.Equals(input.Base)
+                ) &&
                 (
-                    this.Scale == input.Scale ||
-                    this.Scale.Equals(input.Scale)
+                    Scale == input.Scale ||
+                    Scale.Equals(input.Scale)
                 );
         }
 
@@ -199,22 +199,32 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Bounds != null)
-                    hashCode = hashCode * 59 + this.Bounds.GetHashCode();
-                if (this.Label != null)
-                    hashCode = hashCode * 59 + this.Label.GetHashCode();
-                if (this.Prefix != null)
-                    hashCode = hashCode * 59 + this.Prefix.GetHashCode();
-                if (this.Suffix != null)
-                    hashCode = hashCode * 59 + this.Suffix.GetHashCode();
-                hashCode = hashCode * 59 + this.Base.GetHashCode();
-                hashCode = hashCode * 59 + this.Scale.GetHashCode();
+                var hashCode = 41;
+
+                if (Bounds != null)
+                {
+                    hashCode = hashCode * 59 + Bounds.GetHashCode();
+                }
+
+                if (Label != null)
+                {
+                    hashCode = hashCode * 59 + Label.GetHashCode();
+                }
+
+                if (Prefix != null)
+                {
+                    hashCode = hashCode * 59 + Prefix.GetHashCode();
+                }
+
+                if (Suffix != null)
+                {
+                    hashCode = hashCode * 59 + Suffix.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Base.GetHashCode();
+                hashCode = hashCode * 59 + Scale.GetHashCode();
                 return hashCode;
             }
         }
-
     }
-
 }

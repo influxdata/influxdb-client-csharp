@@ -25,6 +25,7 @@ namespace InfluxDB.Client.Api.Service
     public interface IWriteService : IApiAccessor
     {
         #region Synchronous Operations
+
         /// <summary>
         /// Write data
         /// </summary>
@@ -43,7 +44,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The parameter value specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <returns></returns>
-        void PostWrite (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null);
+        void PostWrite(string org, string bucket, byte[] body, string zapTraceSpan = null,
+            string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null,
+            string orgID = null, WritePrecision? precision = null);
 
         /// <summary>
         /// Write data
@@ -63,9 +66,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The parameter value specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PostWriteWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null);
+        ApiResponse<object> PostWriteWithHttpInfo(string org, string bucket, byte[] body, string zapTraceSpan = null,
+            string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null,
+            string orgID = null, WritePrecision? precision = null);
+
         #endregion Synchronous Operations
+
         #region Asynchronous Operations
+
         /// <summary>
         /// Write data
         /// </summary>
@@ -85,7 +93,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task PostWriteAsync(string org, string bucket, byte[] body, string zapTraceSpan = null,
+            string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null,
+            string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Write data
@@ -106,7 +116,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<object>> PostWriteAsyncWithHttpInfo(string org, string bucket,
+            byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null,
+            int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null,
+            CancellationToken cancellationToken = default);
+
         #endregion Asynchronous Operations
     }
 
@@ -115,17 +129,17 @@ namespace InfluxDB.Client.Api.Service
     /// </summary>
     public partial class WriteService : IWriteService
     {
-        private InfluxDB.Client.Api.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WriteService"/> class.
         /// </summary>
         /// <returns></returns>
-        public WriteService(String basePath)
+        public WriteService(string basePath)
         {
-            this.Configuration = new InfluxDB.Client.Api.Client.Configuration { BasePath = basePath };
+            Configuration = new Configuration { BasePath = basePath };
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -134,31 +148,36 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public WriteService(InfluxDB.Client.Api.Client.Configuration configuration = null)
+        public WriteService(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = InfluxDB.Client.Api.Client.Configuration.Default;
+            {
+                Configuration = Configuration.Default;
+            }
             else
-                this.Configuration = configuration;
+            {
+                Configuration = configuration;
+            }
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(String basePath)
+        [Obsolete(
+            "SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(string basePath)
         {
             // do nothing
         }
@@ -167,12 +186,12 @@ namespace InfluxDB.Client.Api.Service
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public InfluxDB.Client.Api.Client.Configuration Configuration {get; set;}
+        public Configuration Configuration { get; set; }
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public InfluxDB.Client.Api.Client.ExceptionFactory ExceptionFactory
+        public ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -180,9 +199,10 @@ namespace InfluxDB.Client.Api.Service
                 {
                     throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
                 }
+
                 return _exceptionFactory;
             }
-            set { _exceptionFactory = value; }
+            set => _exceptionFactory = value;
         }
 
         /// <summary>
@@ -190,9 +210,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <returns>Dictionary of HTTP header</returns>
         [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public IDictionary<String, String> DefaultHeader()
+        public IDictionary<string, string> DefaultHeader()
         {
-            return new ReadOnlyDictionary<string, string>(this.Configuration.DefaultHeader);
+            return new ReadOnlyDictionary<string, string>(Configuration.DefaultHeader);
         }
 
         /// <summary>
@@ -204,7 +224,7 @@ namespace InfluxDB.Client.Api.Service
         [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
         public void AddDefaultHeader(string key, string value)
         {
-            this.Configuration.AddDefaultHeader(key, value);
+            Configuration.AddDefaultHeader(key, value);
         }
 
         /// <summary>
@@ -222,9 +242,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The parameter value specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <returns></returns>
-        public void PostWrite (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
+        public void PostWrite(string org, string bucket, byte[] body, string zapTraceSpan = null,
+            string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null,
+            string orgID = null, WritePrecision? precision = null)
         {
-             PostWriteWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision);
+            PostWriteWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept,
+                orgID, precision);
         }
 
         /// <summary>
@@ -242,44 +265,100 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The parameter value specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> PostWriteWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
+        public ApiResponse<object> PostWriteWithHttpInfo(string org, string bucket, byte[] body,
+            string zapTraceSpan = null, string contentEncoding = null, string contentType = null,
+            int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'org' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'bucket' is set
             if (bucket == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'body' is set
             if (body == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'body' when calling WriteService->PostWrite");
+            }
 
             var localVarPath = "/api/v2/write";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "text/plain"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
-            if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentEncoding != null) localVarHeaderParams.Add("Content-Encoding", this.Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
-            if (contentLength != null) localVarHeaderParams.Add("Content-Length", this.Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
-            if (accept != null) localVarHeaderParams.Add("Accept", this.Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (bucket != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            }
+
+            if (precision != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentEncoding != null)
+            {
+                localVarHeaderParams.Add("Content-Encoding",
+                    Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
+            if (contentLength != null)
+            {
+                localVarHeaderParams.Add("Content-Length",
+                    Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
+            }
+
+            if (accept != null)
+            {
+                localVarHeaderParams.Add("Accept",
+                    Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            }
+
             if (body != null && body.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(body); // http body (model) parameter
             }
             else
             {
@@ -287,30 +366,37 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
-                "text/html",
+                "text/html"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostWrite", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostWrite", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
@@ -331,44 +417,101 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostWriteWithIRestResponseAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostWriteWithIRestResponseAsync(string org,
+            string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null,
+            string contentType = null, int? contentLength = null, string accept = null, string orgID = null,
+            WritePrecision? precision = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'org' is set
             if (org == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'org' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'bucket' is set
             if (bucket == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'body' is set
             if (body == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'body' when calling WriteService->PostWrite");
+            }
 
             var localVarPath = "/api/v2/write";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "text/plain"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
-            if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentEncoding != null) localVarHeaderParams.Add("Content-Encoding", this.Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
-            if (contentLength != null) localVarHeaderParams.Add("Content-Length", this.Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
-            if (accept != null) localVarHeaderParams.Add("Accept", this.Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (bucket != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            }
+
+            if (precision != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentEncoding != null)
+            {
+                localVarHeaderParams.Add("Content-Encoding",
+                    Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
+            if (contentLength != null)
+            {
+                localVarHeaderParams.Add("Content-Length",
+                    Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
+            }
+
+            if (accept != null)
+            {
+                localVarHeaderParams.Add("Accept",
+                    Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            }
+
             if (body != null && body.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(body); // http body (model) parameter
             }
             else
             {
@@ -376,27 +519,34 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
-                "text/html",
+                "text/html"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostWrite", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostWrite", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -417,44 +567,100 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The parameter value specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestResponse PostWriteWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
+        public RestResponse PostWriteWithIRestResponse(string org, string bucket, byte[] body,
+            string zapTraceSpan = null, string contentEncoding = null, string contentType = null,
+            int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'org' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'bucket' is set
             if (bucket == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'body' is set
             if (body == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'body' when calling WriteService->PostWrite");
+            }
 
             var localVarPath = "/api/v2/write";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "text/plain"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
-            if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentEncoding != null) localVarHeaderParams.Add("Content-Encoding", this.Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
-            if (contentLength != null) localVarHeaderParams.Add("Content-Length", this.Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
-            if (accept != null) localVarHeaderParams.Add("Accept", this.Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (bucket != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            }
+
+            if (precision != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentEncoding != null)
+            {
+                localVarHeaderParams.Add("Content-Encoding",
+                    Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
+            if (contentLength != null)
+            {
+                localVarHeaderParams.Add("Content-Length",
+                    Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
+            }
+
+            if (accept != null)
+            {
+                localVarHeaderParams.Add("Accept",
+                    Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            }
+
             if (body != null && body.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(body); // http body (model) parameter
             }
             else
             {
@@ -462,32 +668,39 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
-                "text/html",
+                "text/html"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostWrite", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostWrite", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Write data Writes data to a bucket.  To write data into InfluxDB, you need the following:  - **organization name or ID** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.1/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **bucket** – _See [View buckets](https://docs.influxdata.com/influxdb/v2.1/organizations/buckets/view-buckets/) for  instructions on viewing your bucket ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.1/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.1/reference/urls/)_. - data in [line protocol](https://docs.influxdata.com/influxdb/v2.1/reference/syntax/line-protocol) format.  InfluxDB Cloud enforces rate and size limits different from InfluxDB OSS. For details, see Responses.  For more information and examples, see the following: - [Write data with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.1/write-data/developer-tools/api). - [Optimize writes to InfluxDB](https://docs.influxdata.com/influxdb/v2.1/write-data/best-practices/optimize-writes/).
         /// </summary>
@@ -503,44 +716,100 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The parameter value specifies the ID of the destination organization for writes. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest PostWriteWithRestRequest (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null)
+        public RestRequest PostWriteWithRestRequest(string org, string bucket, byte[] body, string zapTraceSpan = null,
+            string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null,
+            string orgID = null, WritePrecision? precision = null)
         {
             // verify the required parameter 'org' is set
             if (org == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'org' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'bucket' is set
             if (bucket == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'body' is set
             if (body == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'body' when calling WriteService->PostWrite");
+            }
 
             var localVarPath = "/api/v2/write";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "text/plain"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
-            if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentEncoding != null) localVarHeaderParams.Add("Content-Encoding", this.Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
-            if (contentLength != null) localVarHeaderParams.Add("Content-Length", this.Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
-            if (accept != null) localVarHeaderParams.Add("Accept", this.Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (bucket != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            }
+
+            if (precision != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentEncoding != null)
+            {
+                localVarHeaderParams.Add("Content-Encoding",
+                    Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
+            if (contentLength != null)
+            {
+                localVarHeaderParams.Add("Content-Length",
+                    Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
+            }
+
+            if (accept != null)
+            {
+                localVarHeaderParams.Add("Accept",
+                    Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            }
+
             if (body != null && body.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(body); // http body (model) parameter
             }
             else
             {
@@ -548,18 +817,22 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
-                "text/html",
+                "text/html"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -579,10 +852,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task PostWriteAsync (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task PostWriteAsync(string org, string bucket, byte[] body,
+            string zapTraceSpan = null, string contentEncoding = null, string contentType = null,
+            int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null,
+            CancellationToken cancellationToken = default)
         {
-             return PostWriteAsyncWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision, cancellationToken);
-
+            return PostWriteAsyncWithHttpInfo(org, bucket, body, zapTraceSpan, contentEncoding, contentType,
+                contentLength, accept, orgID, precision, cancellationToken);
         }
 
         /// <summary>
@@ -601,24 +877,32 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostWriteAsyncWithHttpInfo (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> PostWriteAsyncWithHttpInfo(string org,
+            string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null,
+            string contentType = null, int? contentLength = null, string accept = null, string orgID = null,
+            WritePrecision? precision = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostWriteAsyncWithIRestResponse(org, bucket, body, zapTraceSpan, contentEncoding, contentType, contentLength, accept, orgID, precision, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await PostWriteAsyncWithIRestResponse(org, bucket, body, zapTraceSpan,
+                    contentEncoding, contentType, contentLength, accept, orgID, precision, cancellationToken)
+                .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostWrite", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostWrite", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
-            
+
         /// <summary>
         /// Write data Writes data to a bucket.  To write data into InfluxDB, you need the following:  - **organization name or ID** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.1/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **bucket** – _See [View buckets](https://docs.influxdata.com/influxdb/v2.1/organizations/buckets/view-buckets/) for  instructions on viewing your bucket ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.1/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.1/reference/urls/)_. - data in [line protocol](https://docs.influxdata.com/influxdb/v2.1/reference/syntax/line-protocol) format.  InfluxDB Cloud enforces rate and size limits different from InfluxDB OSS. For details, see Responses.  For more information and examples, see the following: - [Write data with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.1/write-data/developer-tools/api). - [Optimize writes to InfluxDB](https://docs.influxdata.com/influxdb/v2.1/write-data/best-practices/optimize-writes/).
         /// </summary>
@@ -635,44 +919,101 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="precision">The precision for the unix timestamps within the body line-protocol. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostWriteAsyncWithIRestResponse (string org, string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null, string contentType = null, int? contentLength = null, string accept = null, string orgID = null, WritePrecision? precision = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostWriteAsyncWithIRestResponse(string org,
+            string bucket, byte[] body, string zapTraceSpan = null, string contentEncoding = null,
+            string contentType = null, int? contentLength = null, string accept = null, string orgID = null,
+            WritePrecision? precision = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'org' is set
             if (org == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'org' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'bucket' is set
             if (bucket == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'bucket' when calling WriteService->PostWrite");
+            }
+
             // verify the required parameter 'body' is set
             if (body == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'body' when calling WriteService->PostWrite");
+            }
 
             var localVarPath = "/api/v2/write";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "text/plain"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (bucket != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
-            if (precision != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentEncoding != null) localVarHeaderParams.Add("Content-Encoding", this.Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
-            if (contentLength != null) localVarHeaderParams.Add("Content-Length", this.Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
-            if (accept != null) localVarHeaderParams.Add("Accept", this.Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (bucket != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "bucket", bucket)); // query parameter
+            }
+
+            if (precision != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "precision", precision)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentEncoding != null)
+            {
+                localVarHeaderParams.Add("Content-Encoding",
+                    Configuration.ApiClient.ParameterToString(contentEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
+            if (contentLength != null)
+            {
+                localVarHeaderParams.Add("Content-Length",
+                    Configuration.ApiClient.ParameterToString(contentLength)); // header parameter
+            }
+
+            if (accept != null)
+            {
+                localVarHeaderParams.Add("Accept",
+                    Configuration.ApiClient.ParameterToString(accept)); // header parameter
+            }
+
             if (body != null && body.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(body); // http body (model) parameter
             }
             else
             {
@@ -680,29 +1021,35 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
-                "text/html",
+                "text/html"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostWrite", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostWrite", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-
     }
 }

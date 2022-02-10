@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// PagerDutyNotificationRuleBase
     /// </summary>
     [DataContract]
-    public partial class PagerDutyNotificationRuleBase : NotificationRule,  IEquatable<PagerDutyNotificationRuleBase>
+    public partial class PagerDutyNotificationRuleBase : NotificationRule, IEquatable<PagerDutyNotificationRuleBase>
     {
         /// <summary>
         /// Defines Type
@@ -38,43 +38,54 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Pagerduty for value: pagerduty
             /// </summary>
-            [EnumMember(Value = "pagerduty")]
-            Pagerduty = 1
-
+            [EnumMember(Value = "pagerduty")] Pagerduty = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PagerDutyNotificationRuleBase" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PagerDutyNotificationRuleBase() { }
+        protected PagerDutyNotificationRuleBase()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PagerDutyNotificationRuleBase" /> class.
         /// </summary>
         /// <param name="type">type (required) (default to TypeEnum.Pagerduty).</param>
         /// <param name="messageTemplate">messageTemplate (required).</param>
-        public PagerDutyNotificationRuleBase(TypeEnum type = TypeEnum.Pagerduty, string messageTemplate = default(string), string endpointID = default(string), string orgID = default(string), string taskID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks)) : base(endpointID, orgID, taskID, status, name, sleepUntil, every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels, links)
+        public PagerDutyNotificationRuleBase(TypeEnum type = TypeEnum.Pagerduty, string messageTemplate = default,
+            string endpointID = default, string orgID = default, string taskID = default,
+            TaskStatusType status = default, string name = default, string sleepUntil = default, string every = default,
+            string offset = default, string runbookLink = default, int? limitEvery = default, int? limit = default,
+            List<TagRule> tagRules = default, string description = default, List<StatusRule> statusRules = default,
+            List<Label> labels = default, NotificationRuleBaseLinks links = default) : base(endpointID, orgID, taskID,
+            status, name, sleepUntil, every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules,
+            labels, links)
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "messageTemplate" is required (not null)
             if (messageTemplate == null)
             {
-                throw new InvalidDataException("messageTemplate is a required property for PagerDutyNotificationRuleBase and cannot be null");
+                throw new InvalidDataException(
+                    "messageTemplate is a required property for PagerDutyNotificationRuleBase and cannot be null");
             }
-            this.MessageTemplate = messageTemplate;
+
+            MessageTemplate = messageTemplate;
         }
 
 
         /// <summary>
         /// Gets or Sets MessageTemplate
         /// </summary>
-        [DataMember(Name="messageTemplate", EmitDefaultValue=false)]
+        [DataMember(Name = "messageTemplate", EmitDefaultValue = false)]
         public string MessageTemplate { get; set; }
 
         /// <summary>
@@ -108,7 +119,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PagerDutyNotificationRuleBase);
+            return Equals(input as PagerDutyNotificationRuleBase);
         }
 
         /// <summary>
@@ -119,17 +130,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PagerDutyNotificationRuleBase input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.MessageTemplate == input.MessageTemplate ||
-                    (this.MessageTemplate != null && this.MessageTemplate.Equals(input.MessageTemplate))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       MessageTemplate == input.MessageTemplate ||
+                       MessageTemplate != null && MessageTemplate.Equals(input.MessageTemplate)
+                   );
         }
 
         /// <summary>
@@ -140,15 +153,16 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.MessageTemplate != null)
-                    hashCode = hashCode * 59 + this.MessageTemplate.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (MessageTemplate != null)
+                {
+                    hashCode = hashCode * 59 + MessageTemplate.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

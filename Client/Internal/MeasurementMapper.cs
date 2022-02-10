@@ -22,11 +22,12 @@ namespace InfluxDB.Client.Internal
     {
         internal PropertyInfo Property;
         internal Column Column;
-    } 
-    
+    }
+
     internal class MeasurementMapper
     {
-        private IDictionary<string, PropertyInfoColumn[]> CACHE = new ConcurrentDictionary<string, PropertyInfoColumn[]>();
+        private IDictionary<string, PropertyInfoColumn[]> CACHE =
+            new ConcurrentDictionary<string, PropertyInfoColumn[]>();
 
         internal PointData ToPoint<TM>(TM measurement, WritePrecision precision)
         {
@@ -36,7 +37,7 @@ namespace InfluxDB.Client.Internal
             var measurementType = measurement.GetType();
             CacheMeasurementClass(measurementType);
 
-            var measurementAttribute = (Measurement) measurementType.GetCustomAttribute(typeof(Measurement));
+            var measurementAttribute = (Measurement)measurementType.GetCustomAttribute(typeof(Measurement));
             var measurementColumn = CACHE[measurementType.Name].SingleOrDefault(p => p.Column.IsMeasurement);
 
             if (((measurementAttribute == null) ^ (measurementColumn == null)) == false)
@@ -45,7 +46,7 @@ namespace InfluxDB.Client.Internal
                     $"Unable to determine Measurement for {measurement}. Does it have a {typeof(Measurement)} or IsMeasurement {typeof(Column)} attribute?");
             }
 
-            string measurementName =
+            var measurementName =
                 measurementAttribute == null
                     ? (string)measurementColumn.Property.GetValue(measurement)
                     : measurementAttribute.Name;
@@ -65,7 +66,9 @@ namespace InfluxDB.Client.Internal
                     continue;
                 }
 
-                var name = !string.IsNullOrEmpty(propertyInfo.Column.Name) ? propertyInfo.Column.Name : propertyInfo.Property.Name;
+                var name = !string.IsNullOrEmpty(propertyInfo.Column.Name)
+                    ? propertyInfo.Column.Name
+                    : propertyInfo.Property.Name;
                 if (propertyInfo.Column.IsTag)
                 {
                     point = point.Tag(name, value.ToString());
@@ -165,7 +168,8 @@ namespace InfluxDB.Client.Internal
             }
 
             CACHE[measurementType.Name] = measurementType.GetProperties()
-                .Select(property => new PropertyInfoColumn {Column = (Column) property.GetCustomAttribute(typeof(Column)), Property = property})
+                .Select(property => new PropertyInfoColumn
+                    { Column = (Column)property.GetCustomAttribute(typeof(Column)), Property = property })
                 .Where(propertyInfo => propertyInfo.Column != null)
                 .ToArray();
         }

@@ -99,7 +99,7 @@ namespace InfluxDB.Client.Test
                 .Field("level", 3);
 
             var point = builder.ToPointData();
-            
+
             Assert.AreEqual("h2o,location=europe2 level=3i", point.ToLineProtocol());
         }
 
@@ -138,7 +138,7 @@ namespace InfluxDB.Client.Test
                 .Timestamp(123L, WritePrecision.S);
 
             var point = builder.ToPointData();
-            
+
             Assert.AreEqual("h2o,location=europe level=2i 123", point.ToLineProtocol());
         }
 
@@ -160,7 +160,8 @@ namespace InfluxDB.Client.Test
             Assert.IsFalse(PointData.Builder.Measurement("h2o").HasFields());
             Assert.IsFalse(PointData.Builder.Measurement("h2o").Tag("location", "europe").HasFields());
             Assert.IsTrue(PointData.Builder.Measurement("h2o").Field("level", "2").HasFields());
-            Assert.IsTrue(PointData.Builder.Measurement("h2o").Tag("location", "europe").Field("level", "2").HasFields());
+            Assert.IsTrue(
+                PointData.Builder.Measurement("h2o").Tag("location", "europe").Field("level", "2").HasFields());
         }
     }
 }

@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// FluxSuggestions
     /// </summary>
     [DataContract]
-    public partial class FluxSuggestions :  IEquatable<FluxSuggestions>
+    public partial class FluxSuggestions : IEquatable<FluxSuggestions>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FluxSuggestions" /> class.
         /// </summary>
         /// <param name="funcs">funcs.</param>
-        public FluxSuggestions(List<FluxSuggestion> funcs = default(List<FluxSuggestion>))
+        public FluxSuggestions(List<FluxSuggestion> funcs = default)
         {
-            this.Funcs = funcs;
+            Funcs = funcs;
         }
 
         /// <summary>
         /// Gets or Sets Funcs
         /// </summary>
-        [DataMember(Name="funcs", EmitDefaultValue=false)]
+        [DataMember(Name = "funcs", EmitDefaultValue = false)]
         public List<FluxSuggestion> Funcs { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as FluxSuggestions);
+            return Equals(input as FluxSuggestions);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(FluxSuggestions input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Funcs == input.Funcs ||
-                    this.Funcs != null &&
-                    this.Funcs.SequenceEqual(input.Funcs)
-                );
+            return
+                Funcs == input.Funcs ||
+                Funcs != null &&
+                Funcs.SequenceEqual(input.Funcs);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Funcs != null)
-                    hashCode = hashCode * 59 + this.Funcs.GetHashCode();
+                var hashCode = 41;
+
+                if (Funcs != null)
+                {
+                    hashCode = hashCode * 59 + Funcs.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

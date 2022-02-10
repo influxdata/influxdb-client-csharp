@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateApply
     /// </summary>
     [DataContract]
-    public partial class TemplateApply :  IEquatable<TemplateApply>
+    public partial class TemplateApply : IEquatable<TemplateApply>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateApply" /> class.
@@ -41,72 +41,75 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="secrets">secrets.</param>
         /// <param name="remotes">remotes.</param>
         /// <param name="actions">actions.</param>
-        public TemplateApply(bool? dryRun = default(bool?), string orgID = default(string), string stackID = default(string), TemplateApplyTemplate template = default(TemplateApplyTemplate), List<TemplateApplyTemplate> templates = default(List<TemplateApplyTemplate>), Dictionary<string, Object> envRefs = default(Dictionary<string, Object>), Dictionary<string, string> secrets = default(Dictionary<string, string>), List<TemplateApplyRemotes> remotes = default(List<TemplateApplyRemotes>), List<Object> actions = default(List<Object>))
+        public TemplateApply(bool? dryRun = default, string orgID = default, string stackID = default,
+            TemplateApplyTemplate template = default, List<TemplateApplyTemplate> templates = default,
+            Dictionary<string, object> envRefs = default, Dictionary<string, string> secrets = default,
+            List<TemplateApplyRemotes> remotes = default, List<object> actions = default)
         {
-            this.DryRun = dryRun;
-            this.OrgID = orgID;
-            this.StackID = stackID;
-            this.Template = template;
-            this.Templates = templates;
-            this.EnvRefs = envRefs;
-            this.Secrets = secrets;
-            this.Remotes = remotes;
-            this.Actions = actions;
+            DryRun = dryRun;
+            OrgID = orgID;
+            StackID = stackID;
+            Template = template;
+            Templates = templates;
+            EnvRefs = envRefs;
+            Secrets = secrets;
+            Remotes = remotes;
+            Actions = actions;
         }
 
         /// <summary>
         /// Gets or Sets DryRun
         /// </summary>
-        [DataMember(Name="dryRun", EmitDefaultValue=false)]
+        [DataMember(Name = "dryRun", EmitDefaultValue = false)]
         public bool? DryRun { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets StackID
         /// </summary>
-        [DataMember(Name="stackID", EmitDefaultValue=false)]
+        [DataMember(Name = "stackID", EmitDefaultValue = false)]
         public string StackID { get; set; }
 
         /// <summary>
         /// Gets or Sets Template
         /// </summary>
-        [DataMember(Name="template", EmitDefaultValue=false)]
+        [DataMember(Name = "template", EmitDefaultValue = false)]
         public TemplateApplyTemplate Template { get; set; }
 
         /// <summary>
         /// Gets or Sets Templates
         /// </summary>
-        [DataMember(Name="templates", EmitDefaultValue=false)]
+        [DataMember(Name = "templates", EmitDefaultValue = false)]
         public List<TemplateApplyTemplate> Templates { get; set; }
 
         /// <summary>
         /// Gets or Sets EnvRefs
         /// </summary>
-        [DataMember(Name="envRefs", EmitDefaultValue=false)]
-        public Dictionary<string, Object> EnvRefs { get; set; }
+        [DataMember(Name = "envRefs", EmitDefaultValue = false)]
+        public Dictionary<string, object> EnvRefs { get; set; }
 
         /// <summary>
         /// Gets or Sets Secrets
         /// </summary>
-        [DataMember(Name="secrets", EmitDefaultValue=false)]
+        [DataMember(Name = "secrets", EmitDefaultValue = false)]
         public Dictionary<string, string> Secrets { get; set; }
 
         /// <summary>
         /// Gets or Sets Remotes
         /// </summary>
-        [DataMember(Name="remotes", EmitDefaultValue=false)]
+        [DataMember(Name = "remotes", EmitDefaultValue = false)]
         public List<TemplateApplyRemotes> Remotes { get; set; }
 
         /// <summary>
         /// Gets or Sets Actions
         /// </summary>
-        [DataMember(Name="actions", EmitDefaultValue=false)]
-        public List<Object> Actions { get; set; }
+        [DataMember(Name = "actions", EmitDefaultValue = false)]
+        public List<object> Actions { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -145,7 +148,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateApply);
+            return Equals(input as TemplateApply);
         }
 
         /// <summary>
@@ -156,49 +159,42 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateApply input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.DryRun == input.DryRun ||
-                    (this.DryRun != null && this.DryRun.Equals(input.DryRun))
-                ) && 
+                    DryRun == input.DryRun ||
+                    DryRun != null && DryRun.Equals(input.DryRun)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.StackID == input.StackID ||
-                    (this.StackID != null && this.StackID.Equals(input.StackID))
-                ) && 
-                (
-                    
-                    (this.Template != null && this.Template.Equals(input.Template))
-                ) && 
-                (
-                    this.Templates == input.Templates ||
-                    this.Templates != null &&
-                    this.Templates.SequenceEqual(input.Templates)
-                ) && 
-                (
-                    this.EnvRefs == input.EnvRefs ||
-                    this.EnvRefs != null &&
-                    this.EnvRefs.SequenceEqual(input.EnvRefs)
-                ) && 
-                (
-                    this.Secrets == input.Secrets ||
-                    this.Secrets != null &&
-                    this.Secrets.SequenceEqual(input.Secrets)
-                ) && 
-                (
-                    this.Remotes == input.Remotes ||
-                    this.Remotes != null &&
-                    this.Remotes.SequenceEqual(input.Remotes)
-                ) && 
-                (
-                    this.Actions == input.Actions ||
-                    this.Actions != null &&
-                    this.Actions.SequenceEqual(input.Actions)
+                    StackID == input.StackID ||
+                    StackID != null && StackID.Equals(input.StackID)
+                ) && Template != null && Template.Equals(input.Template) && (
+                    Templates == input.Templates ||
+                    Templates != null &&
+                    Templates.SequenceEqual(input.Templates)
+                ) && (
+                    EnvRefs == input.EnvRefs ||
+                    EnvRefs != null &&
+                    EnvRefs.SequenceEqual(input.EnvRefs)
+                ) && (
+                    Secrets == input.Secrets ||
+                    Secrets != null &&
+                    Secrets.SequenceEqual(input.Secrets)
+                ) && (
+                    Remotes == input.Remotes ||
+                    Remotes != null &&
+                    Remotes.SequenceEqual(input.Remotes)
+                ) && (
+                    Actions == input.Actions ||
+                    Actions != null &&
+                    Actions.SequenceEqual(input.Actions)
                 );
         }
 
@@ -210,30 +206,55 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.DryRun != null)
-                    hashCode = hashCode * 59 + this.DryRun.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.StackID != null)
-                    hashCode = hashCode * 59 + this.StackID.GetHashCode();
-                if (this.Template != null)
-                    hashCode = hashCode * 59 + this.Template.GetHashCode();
-                if (this.Templates != null)
-                    hashCode = hashCode * 59 + this.Templates.GetHashCode();
-                if (this.EnvRefs != null)
-                    hashCode = hashCode * 59 + this.EnvRefs.GetHashCode();
-                if (this.Secrets != null)
-                    hashCode = hashCode * 59 + this.Secrets.GetHashCode();
-                if (this.Remotes != null)
-                    hashCode = hashCode * 59 + this.Remotes.GetHashCode();
-                if (this.Actions != null)
-                    hashCode = hashCode * 59 + this.Actions.GetHashCode();
+                var hashCode = 41;
+
+                if (DryRun != null)
+                {
+                    hashCode = hashCode * 59 + DryRun.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (StackID != null)
+                {
+                    hashCode = hashCode * 59 + StackID.GetHashCode();
+                }
+
+                if (Template != null)
+                {
+                    hashCode = hashCode * 59 + Template.GetHashCode();
+                }
+
+                if (Templates != null)
+                {
+                    hashCode = hashCode * 59 + Templates.GetHashCode();
+                }
+
+                if (EnvRefs != null)
+                {
+                    hashCode = hashCode * 59 + EnvRefs.GetHashCode();
+                }
+
+                if (Secrets != null)
+                {
+                    hashCode = hashCode * 59 + Secrets.GetHashCode();
+                }
+
+                if (Remotes != null)
+                {
+                    hashCode = hashCode * 59 + Remotes.GetHashCode();
+                }
+
+                if (Actions != null)
+                {
+                    hashCode = hashCode * 59 + Actions.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

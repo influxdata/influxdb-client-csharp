@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateApplyTemplate
     /// </summary>
     [DataContract]
-    public partial class TemplateApplyTemplate :  IEquatable<TemplateApplyTemplate>
+    public partial class TemplateApplyTemplate : IEquatable<TemplateApplyTemplate>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateApplyTemplate" /> class.
@@ -35,30 +35,31 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="contentType">contentType.</param>
         /// <param name="sources">sources.</param>
         /// <param name="contents">contents.</param>
-        public TemplateApplyTemplate(string contentType = default(string), List<string> sources = default(List<string>), List<Object> contents = default(List<Object>))
+        public TemplateApplyTemplate(string contentType = default, List<string> sources = default,
+            List<object> contents = default)
         {
-            this.ContentType = contentType;
-            this.Sources = sources;
-            this.Contents = contents;
+            ContentType = contentType;
+            Sources = sources;
+            Contents = contents;
         }
 
         /// <summary>
         /// Gets or Sets ContentType
         /// </summary>
-        [DataMember(Name="contentType", EmitDefaultValue=false)]
+        [DataMember(Name = "contentType", EmitDefaultValue = false)]
         public string ContentType { get; set; }
 
         /// <summary>
         /// Gets or Sets Sources
         /// </summary>
-        [DataMember(Name="sources", EmitDefaultValue=false)]
+        [DataMember(Name = "sources", EmitDefaultValue = false)]
         public List<string> Sources { get; set; }
 
         /// <summary>
         /// Gets or Sets Contents
         /// </summary>
-        [DataMember(Name="contents", EmitDefaultValue=false)]
-        public List<Object> Contents { get; set; }
+        [DataMember(Name = "contents", EmitDefaultValue = false)]
+        public List<object> Contents { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -91,7 +92,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateApplyTemplate);
+            return Equals(input as TemplateApplyTemplate);
         }
 
         /// <summary>
@@ -102,22 +103,24 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateApplyTemplate input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.ContentType == input.ContentType ||
-                    (this.ContentType != null && this.ContentType.Equals(input.ContentType))
-                ) && 
+                    ContentType == input.ContentType ||
+                    ContentType != null && ContentType.Equals(input.ContentType)
+                ) &&
                 (
-                    this.Sources == input.Sources ||
-                    this.Sources != null &&
-                    this.Sources.SequenceEqual(input.Sources)
-                ) && 
+                    Sources == input.Sources ||
+                    Sources != null &&
+                    Sources.SequenceEqual(input.Sources)
+                ) &&
                 (
-                    this.Contents == input.Contents ||
-                    this.Contents != null &&
-                    this.Contents.SequenceEqual(input.Contents)
+                    Contents == input.Contents ||
+                    Contents != null &&
+                    Contents.SequenceEqual(input.Contents)
                 );
         }
 
@@ -129,18 +132,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.ContentType != null)
-                    hashCode = hashCode * 59 + this.ContentType.GetHashCode();
-                if (this.Sources != null)
-                    hashCode = hashCode * 59 + this.Sources.GetHashCode();
-                if (this.Contents != null)
-                    hashCode = hashCode * 59 + this.Contents.GetHashCode();
+                var hashCode = 41;
+
+                if (ContentType != null)
+                {
+                    hashCode = hashCode * 59 + ContentType.GetHashCode();
+                }
+
+                if (Sources != null)
+                {
+                    hashCode = hashCode * 59 + Sources.GetHashCode();
+                }
+
+                if (Contents != null)
+                {
+                    hashCode = hashCode * 59 + Contents.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

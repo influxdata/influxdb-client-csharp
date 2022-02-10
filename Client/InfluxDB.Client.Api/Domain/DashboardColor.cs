@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Defines an encoding of data value into color space.
     /// </summary>
     [DataContract]
-    public partial class DashboardColor :  IEquatable<DashboardColor>
+    public partial class DashboardColor : IEquatable<DashboardColor>
     {
         /// <summary>
         /// Type is how the color is used.
@@ -39,52 +39,49 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Min for value: min
             /// </summary>
-            [EnumMember(Value = "min")]
-            Min = 1,
+            [EnumMember(Value = "min")] Min = 1,
 
             /// <summary>
             /// Enum Max for value: max
             /// </summary>
-            [EnumMember(Value = "max")]
-            Max = 2,
+            [EnumMember(Value = "max")] Max = 2,
 
             /// <summary>
             /// Enum Threshold for value: threshold
             /// </summary>
-            [EnumMember(Value = "threshold")]
-            Threshold = 3,
+            [EnumMember(Value = "threshold")] Threshold = 3,
 
             /// <summary>
             /// Enum Scale for value: scale
             /// </summary>
-            [EnumMember(Value = "scale")]
-            Scale = 4,
+            [EnumMember(Value = "scale")] Scale = 4,
 
             /// <summary>
             /// Enum Text for value: text
             /// </summary>
-            [EnumMember(Value = "text")]
-            Text = 5,
+            [EnumMember(Value = "text")] Text = 5,
 
             /// <summary>
             /// Enum Background for value: background
             /// </summary>
-            [EnumMember(Value = "background")]
-            Background = 6
-
+            [EnumMember(Value = "background")] Background = 6
         }
 
         /// <summary>
         /// Type is how the color is used.
         /// </summary>
         /// <value>Type is how the color is used.</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardColor" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DashboardColor() { }
+        protected DashboardColor()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardColor" /> class.
         /// </summary>
@@ -93,41 +90,46 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="hex">The hex number of the color (required).</param>
         /// <param name="name">The user-facing name of the hex color. (required).</param>
         /// <param name="value">The data value mapped to this color. (required).</param>
-        public DashboardColor(string id = default(string), TypeEnum type = default(TypeEnum), string hex = default(string), string name = default(string), float? value = default(float?))
+        public DashboardColor(string id = default, TypeEnum type = default, string hex = default, string name = default,
+            float? value = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
             {
                 throw new InvalidDataException("id is a required property for DashboardColor and cannot be null");
             }
-            this.Id = id;
+
+            Id = id;
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "hex" is required (not null)
             if (hex == null)
             {
                 throw new InvalidDataException("hex is a required property for DashboardColor and cannot be null");
             }
-            this.Hex = hex;
+
+            Hex = hex;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for DashboardColor and cannot be null");
             }
-            this.Name = name;
+
+            Name = name;
             // to ensure "value" is required (not null)
             if (value == null)
             {
                 throw new InvalidDataException("value is a required property for DashboardColor and cannot be null");
             }
-            this.Value = value;
+
+            Value = value;
         }
 
         /// <summary>
         /// The unique ID of the view color.
         /// </summary>
         /// <value>The unique ID of the view color.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
 
@@ -135,21 +137,21 @@ namespace InfluxDB.Client.Api.Domain
         /// The hex number of the color
         /// </summary>
         /// <value>The hex number of the color</value>
-        [DataMember(Name="hex", EmitDefaultValue=false)]
+        [DataMember(Name = "hex", EmitDefaultValue = false)]
         public string Hex { get; set; }
 
         /// <summary>
         /// The user-facing name of the hex color.
         /// </summary>
         /// <value>The user-facing name of the hex color.</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// The data value mapped to this color.
         /// </summary>
         /// <value>The data value mapped to this color.</value>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [DataMember(Name = "value", EmitDefaultValue = false)]
         public float? Value { get; set; }
 
         /// <summary>
@@ -185,7 +187,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DashboardColor);
+            return Equals(input as DashboardColor);
         }
 
         /// <summary>
@@ -196,28 +198,30 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DashboardColor input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
+                    Type == input.Type ||
+                    Type.Equals(input.Type)
+                ) &&
                 (
-                    this.Hex == input.Hex ||
-                    (this.Hex != null && this.Hex.Equals(input.Hex))
-                ) && 
+                    Hex == input.Hex ||
+                    Hex != null && Hex.Equals(input.Hex)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Value == input.Value ||
-                    (this.Value != null && this.Value.Equals(input.Value))
+                    Value == input.Value ||
+                    Value != null && Value.Equals(input.Value)
                 );
         }
 
@@ -229,21 +233,31 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Hex != null)
-                    hashCode = hashCode * 59 + this.Hex.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Hex != null)
+                {
+                    hashCode = hashCode * 59 + Hex.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Value != null)
+                {
+                    hashCode = hashCode * 59 + Value.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// Variables
     /// </summary>
     [DataContract]
-    public partial class Variables :  IEquatable<Variables>
+    public partial class Variables : IEquatable<Variables>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Variables" /> class.
         /// </summary>
         /// <param name="variables">variables.</param>
-        public Variables(List<Variable> variables = default(List<Variable>))
+        public Variables(List<Variable> variables = default)
         {
-            this._Variables = variables;
+            _Variables = variables;
         }
 
         /// <summary>
         /// Gets or Sets _Variables
         /// </summary>
-        [DataMember(Name="variables", EmitDefaultValue=false)]
+        [DataMember(Name = "variables", EmitDefaultValue = false)]
         public List<Variable> _Variables { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Variables);
+            return Equals(input as Variables);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Variables input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this._Variables == input._Variables ||
-                    this._Variables != null &&
-                    this._Variables.SequenceEqual(input._Variables)
-                );
+            return
+                _Variables == input._Variables ||
+                _Variables != null &&
+                _Variables.SequenceEqual(input._Variables);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this._Variables != null)
-                    hashCode = hashCode * 59 + this._Variables.GetHashCode();
+                var hashCode = 41;
+
+                if (_Variables != null)
+                {
+                    hashCode = hashCode * 59 + _Variables.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

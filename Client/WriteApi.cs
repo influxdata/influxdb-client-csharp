@@ -28,11 +28,15 @@ namespace InfluxDB.Client
         private readonly InfluxDBClientOptions _options;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
         private static readonly ObjectPoolProvider _objectPoolProvider = new DefaultObjectPoolProvider();
-        private static readonly ObjectPool<StringBuilder> _stringBuilderPool = _objectPoolProvider.CreateStringBuilderPool();
+
+        private static readonly ObjectPool<StringBuilder> _stringBuilderPool =
+            _objectPoolProvider.CreateStringBuilderPool();
+
         private readonly IDisposable _unsubscribeDisposeCommand;
 
 
         private bool _disposed;
+
         protected internal WriteApi(
             InfluxDBClientOptions options,
             WriteService service,
@@ -51,7 +55,7 @@ namespace InfluxDB.Client
             _mapper = mapper;
             _influxDbClient = influxDbClient;
 
-            _unsubscribeDisposeCommand= disposeCommand.Subscribe(_ => Dispose());
+            _unsubscribeDisposeCommand = disposeCommand.Subscribe(_ => Dispose());
 
             // backpreasure - is not implemented in C#
             // 
@@ -60,22 +64,21 @@ namespace InfluxDB.Client
             // https://github.com/dotnet/reactive/issues/19
 
 
-
-            IObservable<IObservable<BatchWriteRecord>> batches = _subject
+            var batches = _subject
                 //
                 // Batching
                 //
                 .Publish(connectedSource =>
                 {
                     var trigger = Observable.Merge(
-                            // triggered by time & count
-                            connectedSource.Window(TimeSpan.FromMilliseconds(
-                                                writeOptions.FlushInterval),
-                                                writeOptions.BatchSize,
-                                                writeOptions.WriteScheduler),
-                            // flush trigger
-                            _flush
-                        );
+                        // triggered by time & count
+                        connectedSource.Window(TimeSpan.FromMilliseconds(
+                                writeOptions.FlushInterval),
+                            writeOptions.BatchSize,
+                            writeOptions.WriteScheduler),
+                        // flush trigger
+                        _flush
+                    );
                     return connectedSource
                         .Window(trigger);
                 })
@@ -93,7 +96,10 @@ namespace InfluxDB.Client
                         {
                             var data = batchWrite.ToLineProtocol();
 
-                            if (string.IsNullOrEmpty(data)) return builder;
+                            if (string.IsNullOrEmpty(data))
+                            {
+                                return builder;
+                            }
 
                             if (builder.Length > 0)
                             {
@@ -110,7 +116,7 @@ namespace InfluxDB.Client
                         });
 
                     return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records))
-                                    .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
+                        .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
                 });
 
             if (writeOptions.JitterInterval > 0)
@@ -121,11 +127,14 @@ namespace InfluxDB.Client
                     //
                     .Select(source =>
                     {
-                        return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)), writeOptions.WriteScheduler));
+                        return source.Delay(_ =>
+                            Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
+                                writeOptions.WriteScheduler));
                     });
             }
+
             var query = batches
-                .Concat() 
+                .Concat()
                 //
                 // Map to Async request
                 //
@@ -143,7 +152,7 @@ namespace InfluxDB.Client
                                     "identity", "text/plain; charset=utf-8", null, "application/json", null, precision)
                                 .ToObservable())
                         .RetryWhen(f => f
-                            .Zip(Observable.Range(1, writeOptions.MaxRetries + 1), (exception, count) 
+                            .Zip(Observable.Range(1, writeOptions.MaxRetries + 1), (exception, count)
                                 => new RetryAttempt(exception, count, writeOptions))
                             .SelectMany(attempt =>
                             {
@@ -153,7 +162,7 @@ namespace InfluxDB.Client
 
                                     var retryable = new WriteRetriableErrorEvent(org, bucket, precision, lineProtocol,
                                         attempt.Error, retryInterval);
-                                    
+
                                     Publish(retryable);
 
                                     return Observable.Timer(TimeSpan.FromMilliseconds(retryInterval),
@@ -165,9 +174,13 @@ namespace InfluxDB.Client
                         .Select(result =>
                         {
                             // ReSharper disable once ConvertIfStatementToReturnStatement
-                            if (result.IsSuccessful) return Notification.CreateOnNext(result);
+                            if (result.IsSuccessful)
+                            {
+                                return Notification.CreateOnNext(result);
+                            }
 
-                            return Notification.CreateOnError<RestResponse>(HttpException.Create(result, result.Content));
+                            return Notification.CreateOnError<RestResponse>(
+                                HttpException.Create(result, result.Content));
                         })
                         .Catch<Notification<RestResponse>, Exception>(ex =>
                         {
@@ -221,9 +234,15 @@ namespace InfluxDB.Client
 
             Trace.WriteLine("Flushing batches before shutdown.");
 
-            if (!_subject.IsDisposed) _subject.OnCompleted();
+            if (!_subject.IsDisposed)
+            {
+                _subject.OnCompleted();
+            }
 
-            if (!_flush.IsDisposed) _flush.OnCompleted();
+            if (!_flush.IsDisposed)
+            {
+                _flush.OnCompleted();
+            }
 
             _subject.Dispose();
             _flush.Dispose();
@@ -345,7 +364,10 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
 
-            if (point == null) return;
+            if (point == null)
+            {
+                return;
+            }
 
             _subject.OnNext(new BatchWritePoint(new BatchWriteOptions(bucket, org, point.Precision), _options, point));
         }
@@ -424,7 +446,10 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            if (measurement == null) return;
+            if (measurement == null)
+            {
+                return;
+            }
 
             var options = new BatchWriteOptions(bucket, org, precision);
 
@@ -633,10 +658,22 @@ namespace InfluxDB.Client
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((BatchWriteOptions) obj);
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((BatchWriteOptions)obj);
         }
 
         public override int GetHashCode()
@@ -645,7 +682,7 @@ namespace InfluxDB.Client
             {
                 var hashCode = Bucket != null ? Bucket.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ (OrganizationId != null ? OrganizationId.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (int) Precision;
+                hashCode = (hashCode * 397) ^ (int)Precision;
                 return hashCode;
             }
         }

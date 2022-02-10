@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// uses binary operators to act on two operands in an expression
     /// </summary>
     [DataContract]
-    public partial class BinaryExpression : Expression,  IEquatable<BinaryExpression>
+    public partial class BinaryExpression : Expression, IEquatable<BinaryExpression>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryExpression" /> class.
@@ -36,38 +36,39 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="_operator">_operator.</param>
         /// <param name="left">left.</param>
         /// <param name="right">right.</param>
-        public BinaryExpression(string type = default(string), string _operator = default(string), Expression left = default(Expression), Expression right = default(Expression)) : base()
+        public BinaryExpression(string type = default, string _operator = default, Expression left = default,
+            Expression right = default) : base()
         {
-            this.Type = type;
-            this.Operator = _operator;
-            this.Left = left;
-            this.Right = right;
+            Type = type;
+            Operator = _operator;
+            Left = left;
+            Right = right;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Operator
         /// </summary>
-        [DataMember(Name="operator", EmitDefaultValue=false)]
+        [DataMember(Name = "operator", EmitDefaultValue = false)]
         public string Operator { get; set; }
 
         /// <summary>
         /// Gets or Sets Left
         /// </summary>
-        [DataMember(Name="left", EmitDefaultValue=false)]
+        [DataMember(Name = "left", EmitDefaultValue = false)]
         [JsonConverter(typeof(BinaryExpressionLeftAdapter))]
         public Expression Left { get; set; }
 
         /// <summary>
         /// Gets or Sets Right
         /// </summary>
-        [DataMember(Name="right", EmitDefaultValue=false)]
+        [DataMember(Name = "right", EmitDefaultValue = false)]
         [JsonConverter(typeof(BinaryExpressionRightAdapter))]
         public Expression Right { get; set; }
 
@@ -104,7 +105,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as BinaryExpression);
+            return Equals(input as BinaryExpression);
         }
 
         /// <summary>
@@ -115,25 +116,20 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(BinaryExpression input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
-                    this.Operator == input.Operator ||
-                    (this.Operator != null && this.Operator.Equals(input.Operator))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Left != null && this.Left.Equals(input.Left))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Right != null && this.Right.Equals(input.Right))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type != null && Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Operator == input.Operator ||
+                       Operator != null && Operator.Equals(input.Operator)
+                   ) && base.Equals(input) && Left != null && Left.Equals(input.Left) && base.Equals(input) &&
+                   Right != null && Right.Equals(input.Right);
         }
 
         /// <summary>
@@ -144,178 +140,190 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Operator != null)
-                    hashCode = hashCode * 59 + this.Operator.GetHashCode();
-                if (this.Left != null)
-                    hashCode = hashCode * 59 + this.Left.GetHashCode();
-                if (this.Right != null)
-                    hashCode = hashCode * 59 + this.Right.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (Operator != null)
+                {
+                    hashCode = hashCode * 59 + Operator.GetHashCode();
+                }
+
+                if (Left != null)
+                {
+                    hashCode = hashCode * 59 + Left.GetHashCode();
+                }
+
+                if (Right != null)
+                {
+                    hashCode = hashCode * 59 + Right.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
 
-    public class BinaryExpressionLeftAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+        public class BinaryExpressionLeftAdapter : JsonConverter
         {
-            {new []{ "ArrayExpression" }, typeof(ArrayExpression)},
-            {new []{ "DictExpression" }, typeof(DictExpression)},
-            {new []{ "FunctionExpression" }, typeof(FunctionExpression)},
-            {new []{ "BinaryExpression" }, typeof(BinaryExpression)},
-            {new []{ "CallExpression" }, typeof(CallExpression)},
-            {new []{ "ConditionalExpression" }, typeof(ConditionalExpression)},
-            {new []{ "LogicalExpression" }, typeof(LogicalExpression)},
-            {new []{ "MemberExpression" }, typeof(MemberExpression)},
-            {new []{ "IndexExpression" }, typeof(IndexExpression)},
-            {new []{ "ObjectExpression" }, typeof(ObjectExpression)},
-            {new []{ "ParenExpression" }, typeof(ParenExpression)},
-            {new []{ "PipeExpression" }, typeof(PipeExpression)},
-            {new []{ "UnaryExpression" }, typeof(UnaryExpression)},
-            {new []{ "BooleanLiteral" }, typeof(BooleanLiteral)},
-            {new []{ "DateTimeLiteral" }, typeof(DateTimeLiteral)},
-            {new []{ "DurationLiteral" }, typeof(DurationLiteral)},
-            {new []{ "FloatLiteral" }, typeof(FloatLiteral)},
-            {new []{ "IntegerLiteral" }, typeof(IntegerLiteral)},
-            {new []{ "PipeLiteral" }, typeof(PipeLiteral)},
-            {new []{ "RegexpLiteral" }, typeof(RegexpLiteral)},
-            {new []{ "StringLiteral" }, typeof(StringLiteral)},
-            {new []{ "UnsignedIntegerLiteral" }, typeof(UnsignedIntegerLiteral)},
-            {new []{ "Identifier" }, typeof(Identifier)},
-        };
+            private static readonly Dictionary<string[], Type> Types =
+                new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+                {
+                    { new[] { "ArrayExpression" }, typeof(ArrayExpression) },
+                    { new[] { "DictExpression" }, typeof(DictExpression) },
+                    { new[] { "FunctionExpression" }, typeof(FunctionExpression) },
+                    { new[] { "BinaryExpression" }, typeof(BinaryExpression) },
+                    { new[] { "CallExpression" }, typeof(CallExpression) },
+                    { new[] { "ConditionalExpression" }, typeof(ConditionalExpression) },
+                    { new[] { "LogicalExpression" }, typeof(LogicalExpression) },
+                    { new[] { "MemberExpression" }, typeof(MemberExpression) },
+                    { new[] { "IndexExpression" }, typeof(IndexExpression) },
+                    { new[] { "ObjectExpression" }, typeof(ObjectExpression) },
+                    { new[] { "ParenExpression" }, typeof(ParenExpression) },
+                    { new[] { "PipeExpression" }, typeof(PipeExpression) },
+                    { new[] { "UnaryExpression" }, typeof(UnaryExpression) },
+                    { new[] { "BooleanLiteral" }, typeof(BooleanLiteral) },
+                    { new[] { "DateTimeLiteral" }, typeof(DateTimeLiteral) },
+                    { new[] { "DurationLiteral" }, typeof(DurationLiteral) },
+                    { new[] { "FloatLiteral" }, typeof(FloatLiteral) },
+                    { new[] { "IntegerLiteral" }, typeof(IntegerLiteral) },
+                    { new[] { "PipeLiteral" }, typeof(PipeLiteral) },
+                    { new[] { "RegexpLiteral" }, typeof(RegexpLiteral) },
+                    { new[] { "StringLiteral" }, typeof(StringLiteral) },
+                    { new[] { "UnsignedIntegerLiteral" }, typeof(UnsignedIntegerLiteral) },
+                    { new[] { "Identifier" }, typeof(Identifier) }
+                };
 
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
+            public override bool CanConvert(Type objectType)
             {
-                case JsonToken.StartObject:
+                return false;
+            }
 
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                serializer.Serialize(writer, value);
+            }
 
-                    var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+                JsonSerializer serializer)
+            {
+                return Deserialize(reader, objectType, serializer);
+            }
 
-                    Types.TryGetValue(discriminator, out var type);
+            private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonToken.StartObject:
 
-                    return serializer.Deserialize(jObject.CreateReader(), type);
+                        var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
+                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
 
-                default:
-                    return serializer.Deserialize(reader, objectType);
+                        Types.TryGetValue(discriminator, out var type);
+
+                        return serializer.Deserialize(jObject.CreateReader(), type);
+
+                    case JsonToken.StartArray:
+                        return DeserializeArray(reader, objectType, serializer);
+
+                    default:
+                        return serializer.Deserialize(reader, objectType);
+                }
+            }
+
+            private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+            {
+                var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+                var list = (IList)Activator.CreateInstance(targetType);
+                while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+                    list.Add(Deserialize(reader, elementType, serializer));
+
+                return list;
             }
         }
 
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+        public class BinaryExpressionRightAdapter : JsonConverter
         {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+            private static readonly Dictionary<string[], Type> Types =
+                new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+                {
+                    { new[] { "ArrayExpression" }, typeof(ArrayExpression) },
+                    { new[] { "DictExpression" }, typeof(DictExpression) },
+                    { new[] { "FunctionExpression" }, typeof(FunctionExpression) },
+                    { new[] { "BinaryExpression" }, typeof(BinaryExpression) },
+                    { new[] { "CallExpression" }, typeof(CallExpression) },
+                    { new[] { "ConditionalExpression" }, typeof(ConditionalExpression) },
+                    { new[] { "LogicalExpression" }, typeof(LogicalExpression) },
+                    { new[] { "MemberExpression" }, typeof(MemberExpression) },
+                    { new[] { "IndexExpression" }, typeof(IndexExpression) },
+                    { new[] { "ObjectExpression" }, typeof(ObjectExpression) },
+                    { new[] { "ParenExpression" }, typeof(ParenExpression) },
+                    { new[] { "PipeExpression" }, typeof(PipeExpression) },
+                    { new[] { "UnaryExpression" }, typeof(UnaryExpression) },
+                    { new[] { "BooleanLiteral" }, typeof(BooleanLiteral) },
+                    { new[] { "DateTimeLiteral" }, typeof(DateTimeLiteral) },
+                    { new[] { "DurationLiteral" }, typeof(DurationLiteral) },
+                    { new[] { "FloatLiteral" }, typeof(FloatLiteral) },
+                    { new[] { "IntegerLiteral" }, typeof(IntegerLiteral) },
+                    { new[] { "PipeLiteral" }, typeof(PipeLiteral) },
+                    { new[] { "RegexpLiteral" }, typeof(RegexpLiteral) },
+                    { new[] { "StringLiteral" }, typeof(StringLiteral) },
+                    { new[] { "UnsignedIntegerLiteral" }, typeof(UnsignedIntegerLiteral) },
+                    { new[] { "Identifier" }, typeof(Identifier) }
+                };
 
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+            public override bool CanConvert(Type objectType)
             {
-                list.Add(Deserialize(reader, elementType, serializer));
+                return false;
             }
 
-            return list;
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                serializer.Serialize(writer, value);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+                JsonSerializer serializer)
+            {
+                return Deserialize(reader, objectType, serializer);
+            }
+
+            private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonToken.StartObject:
+
+                        var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+
+                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
+
+                        Types.TryGetValue(discriminator, out var type);
+
+                        return serializer.Deserialize(jObject.CreateReader(), type);
+
+                    case JsonToken.StartArray:
+                        return DeserializeArray(reader, objectType, serializer);
+
+                    default:
+                        return serializer.Deserialize(reader, objectType);
+                }
+            }
+
+            private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+            {
+                var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+                var list = (IList)Activator.CreateInstance(targetType);
+                while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+                    list.Add(Deserialize(reader, elementType, serializer));
+
+                return list;
+            }
         }
     }
-    public class BinaryExpressionRightAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
-        {
-            {new []{ "ArrayExpression" }, typeof(ArrayExpression)},
-            {new []{ "DictExpression" }, typeof(DictExpression)},
-            {new []{ "FunctionExpression" }, typeof(FunctionExpression)},
-            {new []{ "BinaryExpression" }, typeof(BinaryExpression)},
-            {new []{ "CallExpression" }, typeof(CallExpression)},
-            {new []{ "ConditionalExpression" }, typeof(ConditionalExpression)},
-            {new []{ "LogicalExpression" }, typeof(LogicalExpression)},
-            {new []{ "MemberExpression" }, typeof(MemberExpression)},
-            {new []{ "IndexExpression" }, typeof(IndexExpression)},
-            {new []{ "ObjectExpression" }, typeof(ObjectExpression)},
-            {new []{ "ParenExpression" }, typeof(ParenExpression)},
-            {new []{ "PipeExpression" }, typeof(PipeExpression)},
-            {new []{ "UnaryExpression" }, typeof(UnaryExpression)},
-            {new []{ "BooleanLiteral" }, typeof(BooleanLiteral)},
-            {new []{ "DateTimeLiteral" }, typeof(DateTimeLiteral)},
-            {new []{ "DurationLiteral" }, typeof(DurationLiteral)},
-            {new []{ "FloatLiteral" }, typeof(FloatLiteral)},
-            {new []{ "IntegerLiteral" }, typeof(IntegerLiteral)},
-            {new []{ "PipeLiteral" }, typeof(PipeLiteral)},
-            {new []{ "RegexpLiteral" }, typeof(RegexpLiteral)},
-            {new []{ "StringLiteral" }, typeof(StringLiteral)},
-            {new []{ "UnsignedIntegerLiteral" }, typeof(UnsignedIntegerLiteral)},
-            {new []{ "Identifier" }, typeof(Identifier)},
-        };
-
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
-            {
-                case JsonToken.StartObject:
-
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
-
-                    var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
-
-                    Types.TryGetValue(discriminator, out var type);
-
-                    return serializer.Deserialize(jObject.CreateReader(), type);
-
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
-
-                default:
-                    return serializer.Deserialize(reader, objectType);
-            }
-        }
-
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
-        {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
-
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-            {
-                list.Add(Deserialize(reader, elementType, serializer));
-            }
-
-            return list;
-        }
-    }
-    }
-
 }

@@ -33,7 +33,7 @@ namespace InfluxDB.Client.Core.Internal
             {
                 var query = ToHeaders(request.Parameters, ParameterType.QueryString);
                 LogHeaders(query, "-->", "Query");
-                
+
                 var headers = ToHeaders(request.Parameters);
                 LogHeaders(headers, "-->");
             }
@@ -46,7 +46,7 @@ namespace InfluxDB.Client.Core.Internal
                 if (body != null)
                 {
                     string stringBody;
-                    
+
                     if (body.Value is byte[] bytes)
                     {
                         stringBody = Encoding.UTF8.GetString(bytes);
@@ -55,7 +55,7 @@ namespace InfluxDB.Client.Core.Internal
                     {
                         stringBody = body.Value.ToString();
                     }
-                    
+
                     Trace.WriteLine($"--> Body: {stringBody}");
                 }
             }
@@ -110,7 +110,8 @@ namespace InfluxDB.Client.Core.Internal
             return freshBody;
         }
 
-        private static IEnumerable<HeaderParameter> ToHeaders(ParametersCollection parameters, ParameterType type = ParameterType.HttpHeader)
+        private static IEnumerable<HeaderParameter> ToHeaders(ParametersCollection parameters,
+            ParameterType type = ParameterType.HttpHeader)
         {
             return parameters
                 .Where(parameter => parameter.Type.Equals(type))
@@ -124,10 +125,8 @@ namespace InfluxDB.Client.Core.Internal
             {
                 return;
             }
-            foreach (var emp in headers)
-            {
-                Trace.WriteLine($"{direction} {type}: {emp.Name}={emp.Value}");
-            }
+
+            foreach (var emp in headers) Trace.WriteLine($"{direction} {type}: {emp.Name}={emp.Value}");
         }
     }
 }

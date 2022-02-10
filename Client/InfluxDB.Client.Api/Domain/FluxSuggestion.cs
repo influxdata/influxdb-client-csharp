@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// FluxSuggestion
     /// </summary>
     [DataContract]
-    public partial class FluxSuggestion :  IEquatable<FluxSuggestion>
+    public partial class FluxSuggestion : IEquatable<FluxSuggestion>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FluxSuggestion" /> class.
         /// </summary>
         /// <param name="name">name.</param>
         /// <param name="_params">_params.</param>
-        public FluxSuggestion(string name = default(string), Dictionary<string, string> _params = default(Dictionary<string, string>))
+        public FluxSuggestion(string name = default, Dictionary<string, string> _params = default)
         {
-            this.Name = name;
-            this.Params = _params;
+            Name = name;
+            Params = _params;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Params
         /// </summary>
-        [DataMember(Name="params", EmitDefaultValue=false)]
+        [DataMember(Name = "params", EmitDefaultValue = false)]
         public Dictionary<string, string> Params { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as FluxSuggestion);
+            return Equals(input as FluxSuggestion);
         }
 
         /// <summary>
@@ -93,17 +93,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(FluxSuggestion input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Params == input.Params ||
-                    this.Params != null &&
-                    this.Params.SequenceEqual(input.Params)
+                    Params == input.Params ||
+                    Params != null &&
+                    Params.SequenceEqual(input.Params)
                 );
         }
 
@@ -115,16 +117,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Params != null)
-                    hashCode = hashCode * 59 + this.Params.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Params != null)
+                {
+                    hashCode = hashCode * 59 + Params.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

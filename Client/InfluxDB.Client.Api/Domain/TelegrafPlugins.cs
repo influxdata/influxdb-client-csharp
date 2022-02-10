@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TelegrafPlugins
     /// </summary>
     [DataContract]
-    public partial class TelegrafPlugins :  IEquatable<TelegrafPlugins>
+    public partial class TelegrafPlugins : IEquatable<TelegrafPlugins>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegrafPlugins" /> class.
@@ -35,29 +35,29 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="version">version.</param>
         /// <param name="os">os.</param>
         /// <param name="plugins">plugins.</param>
-        public TelegrafPlugins(string version = default(string), string os = default(string), List<TelegrafPlugin> plugins = default(List<TelegrafPlugin>))
+        public TelegrafPlugins(string version = default, string os = default, List<TelegrafPlugin> plugins = default)
         {
-            this.Version = version;
-            this.Os = os;
-            this.Plugins = plugins;
+            Version = version;
+            Os = os;
+            Plugins = plugins;
         }
 
         /// <summary>
         /// Gets or Sets Version
         /// </summary>
-        [DataMember(Name="version", EmitDefaultValue=false)]
+        [DataMember(Name = "version", EmitDefaultValue = false)]
         public string Version { get; set; }
 
         /// <summary>
         /// Gets or Sets Os
         /// </summary>
-        [DataMember(Name="os", EmitDefaultValue=false)]
+        [DataMember(Name = "os", EmitDefaultValue = false)]
         public string Os { get; set; }
 
         /// <summary>
         /// Gets or Sets Plugins
         /// </summary>
-        [DataMember(Name="plugins", EmitDefaultValue=false)]
+        [DataMember(Name = "plugins", EmitDefaultValue = false)]
         public List<TelegrafPlugin> Plugins { get; set; }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegrafPlugins);
+            return Equals(input as TelegrafPlugins);
         }
 
         /// <summary>
@@ -102,21 +102,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TelegrafPlugins input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Version == input.Version ||
-                    (this.Version != null && this.Version.Equals(input.Version))
-                ) && 
+                    Version == input.Version ||
+                    Version != null && Version.Equals(input.Version)
+                ) &&
                 (
-                    this.Os == input.Os ||
-                    (this.Os != null && this.Os.Equals(input.Os))
-                ) && 
+                    Os == input.Os ||
+                    Os != null && Os.Equals(input.Os)
+                ) &&
                 (
-                    this.Plugins == input.Plugins ||
-                    this.Plugins != null &&
-                    this.Plugins.SequenceEqual(input.Plugins)
+                    Plugins == input.Plugins ||
+                    Plugins != null &&
+                    Plugins.SequenceEqual(input.Plugins)
                 );
         }
 
@@ -128,18 +130,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Version != null)
-                    hashCode = hashCode * 59 + this.Version.GetHashCode();
-                if (this.Os != null)
-                    hashCode = hashCode * 59 + this.Os.GetHashCode();
-                if (this.Plugins != null)
-                    hashCode = hashCode * 59 + this.Plugins.GetHashCode();
+                var hashCode = 41;
+
+                if (Version != null)
+                {
+                    hashCode = hashCode * 59 + Version.GetHashCode();
+                }
+
+                if (Os != null)
+                {
+                    hashCode = hashCode * 59 + Os.GetHashCode();
+                }
+
+                if (Plugins != null)
+                {
+                    hashCode = hashCode * 59 + Plugins.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

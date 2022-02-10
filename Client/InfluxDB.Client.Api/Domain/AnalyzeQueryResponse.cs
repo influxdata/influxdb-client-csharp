@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// AnalyzeQueryResponse
     /// </summary>
     [DataContract]
-    public partial class AnalyzeQueryResponse :  IEquatable<AnalyzeQueryResponse>
+    public partial class AnalyzeQueryResponse : IEquatable<AnalyzeQueryResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AnalyzeQueryResponse" /> class.
         /// </summary>
         /// <param name="errors">errors.</param>
-        public AnalyzeQueryResponse(List<AnalyzeQueryResponseErrors> errors = default(List<AnalyzeQueryResponseErrors>))
+        public AnalyzeQueryResponse(List<AnalyzeQueryResponseErrors> errors = default)
         {
-            this.Errors = errors;
+            Errors = errors;
         }
 
         /// <summary>
         /// Gets or Sets Errors
         /// </summary>
-        [DataMember(Name="errors", EmitDefaultValue=false)]
+        [DataMember(Name = "errors", EmitDefaultValue = false)]
         public List<AnalyzeQueryResponseErrors> Errors { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as AnalyzeQueryResponse);
+            return Equals(input as AnalyzeQueryResponse);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(AnalyzeQueryResponse input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Errors == input.Errors ||
-                    this.Errors != null &&
-                    this.Errors.SequenceEqual(input.Errors)
-                );
+            return
+                Errors == input.Errors ||
+                Errors != null &&
+                Errors.SequenceEqual(input.Errors);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Errors != null)
-                    hashCode = hashCode * 59 + this.Errors.GetHashCode();
+                var hashCode = 41;
+
+                if (Errors != null)
+                {
+                    hashCode = hashCode * 59 + Errors.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

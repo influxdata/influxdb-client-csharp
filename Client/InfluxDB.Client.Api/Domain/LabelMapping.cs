@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// LabelMapping
     /// </summary>
     [DataContract]
-    public partial class LabelMapping :  IEquatable<LabelMapping>
+    public partial class LabelMapping : IEquatable<LabelMapping>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelMapping" /> class.
         /// </summary>
         /// <param name="labelID">labelID.</param>
-        public LabelMapping(string labelID = default(string))
+        public LabelMapping(string labelID = default)
         {
-            this.LabelID = labelID;
+            LabelID = labelID;
         }
 
         /// <summary>
         /// Gets or Sets LabelID
         /// </summary>
-        [DataMember(Name="labelID", EmitDefaultValue=false)]
+        [DataMember(Name = "labelID", EmitDefaultValue = false)]
         public string LabelID { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LabelMapping);
+            return Equals(input as LabelMapping);
         }
 
         /// <summary>
@@ -84,13 +84,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(LabelMapping input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.LabelID == input.LabelID ||
-                    (this.LabelID != null && this.LabelID.Equals(input.LabelID))
-                );
+            return
+                LabelID == input.LabelID ||
+                LabelID != null && LabelID.Equals(input.LabelID);
         }
 
         /// <summary>
@@ -101,14 +101,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.LabelID != null)
-                    hashCode = hashCode * 59 + this.LabelID.GetHashCode();
+                var hashCode = 41;
+
+                if (LabelID != null)
+                {
+                    hashCode = hashCode * 59 + LabelID.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

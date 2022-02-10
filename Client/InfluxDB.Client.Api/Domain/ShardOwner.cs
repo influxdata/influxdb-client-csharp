@@ -27,32 +27,36 @@ namespace InfluxDB.Client.Api.Domain
     /// ShardOwner
     /// </summary>
     [DataContract]
-    public partial class ShardOwner :  IEquatable<ShardOwner>
+    public partial class ShardOwner : IEquatable<ShardOwner>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShardOwner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ShardOwner() { }
+        protected ShardOwner()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ShardOwner" /> class.
         /// </summary>
         /// <param name="nodeID">ID of the node that owns a shard. (required).</param>
-        public ShardOwner(long? nodeID = default(long?))
+        public ShardOwner(long? nodeID = default)
         {
             // to ensure "nodeID" is required (not null)
             if (nodeID == null)
             {
                 throw new InvalidDataException("nodeID is a required property for ShardOwner and cannot be null");
             }
-            this.NodeID = nodeID;
+
+            NodeID = nodeID;
         }
 
         /// <summary>
         /// ID of the node that owns a shard.
         /// </summary>
         /// <value>ID of the node that owns a shard.</value>
-        [DataMember(Name="nodeID", EmitDefaultValue=false)]
+        [DataMember(Name = "nodeID", EmitDefaultValue = false)]
         public long? NodeID { get; set; }
 
         /// <summary>
@@ -84,7 +88,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ShardOwner);
+            return Equals(input as ShardOwner);
         }
 
         /// <summary>
@@ -95,13 +99,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ShardOwner input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.NodeID == input.NodeID ||
-                    (this.NodeID != null && this.NodeID.Equals(input.NodeID))
-                );
+            return
+                NodeID == input.NodeID ||
+                NodeID != null && NodeID.Equals(input.NodeID);
         }
 
         /// <summary>
@@ -112,14 +116,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.NodeID != null)
-                    hashCode = hashCode * 59 + this.NodeID.GetHashCode();
+                var hashCode = 41;
+
+                if (NodeID != null)
+                {
+                    hashCode = hashCode * 59 + NodeID.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

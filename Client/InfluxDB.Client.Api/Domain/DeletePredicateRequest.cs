@@ -27,55 +27,62 @@ namespace InfluxDB.Client.Api.Domain
     /// The delete predicate request.
     /// </summary>
     [DataContract]
-    public partial class DeletePredicateRequest :  IEquatable<DeletePredicateRequest>
+    public partial class DeletePredicateRequest : IEquatable<DeletePredicateRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DeletePredicateRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DeletePredicateRequest() { }
+        protected DeletePredicateRequest()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DeletePredicateRequest" /> class.
         /// </summary>
         /// <param name="start">RFC3339Nano (required).</param>
         /// <param name="stop">RFC3339Nano (required).</param>
         /// <param name="predicate">InfluxQL-like delete statement.</param>
-        public DeletePredicateRequest(DateTime? start = default(DateTime?), DateTime? stop = default(DateTime?), string predicate = default(string))
+        public DeletePredicateRequest(DateTime? start = default, DateTime? stop = default, string predicate = default)
         {
             // to ensure "start" is required (not null)
             if (start == null)
             {
-                throw new InvalidDataException("start is a required property for DeletePredicateRequest and cannot be null");
+                throw new InvalidDataException(
+                    "start is a required property for DeletePredicateRequest and cannot be null");
             }
-            this.Start = start;
+
+            Start = start;
             // to ensure "stop" is required (not null)
             if (stop == null)
             {
-                throw new InvalidDataException("stop is a required property for DeletePredicateRequest and cannot be null");
+                throw new InvalidDataException(
+                    "stop is a required property for DeletePredicateRequest and cannot be null");
             }
-            this.Stop = stop;
-            this.Predicate = predicate;
+
+            Stop = stop;
+            Predicate = predicate;
         }
 
         /// <summary>
         /// RFC3339Nano
         /// </summary>
         /// <value>RFC3339Nano</value>
-        [DataMember(Name="start", EmitDefaultValue=false)]
+        [DataMember(Name = "start", EmitDefaultValue = false)]
         public DateTime? Start { get; set; }
 
         /// <summary>
         /// RFC3339Nano
         /// </summary>
         /// <value>RFC3339Nano</value>
-        [DataMember(Name="stop", EmitDefaultValue=false)]
+        [DataMember(Name = "stop", EmitDefaultValue = false)]
         public DateTime? Stop { get; set; }
 
         /// <summary>
         /// InfluxQL-like delete statement
         /// </summary>
         /// <value>InfluxQL-like delete statement</value>
-        [DataMember(Name="predicate", EmitDefaultValue=false)]
+        [DataMember(Name = "predicate", EmitDefaultValue = false)]
         public string Predicate { get; set; }
 
         /// <summary>
@@ -109,7 +116,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DeletePredicateRequest);
+            return Equals(input as DeletePredicateRequest);
         }
 
         /// <summary>
@@ -120,20 +127,22 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DeletePredicateRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Start == input.Start ||
-                    (this.Start != null && this.Start.Equals(input.Start))
-                ) && 
+                    Start == input.Start ||
+                    Start != null && Start.Equals(input.Start)
+                ) &&
                 (
-                    this.Stop == input.Stop ||
-                    (this.Stop != null && this.Stop.Equals(input.Stop))
-                ) && 
+                    Stop == input.Stop ||
+                    Stop != null && Stop.Equals(input.Stop)
+                ) &&
                 (
-                    this.Predicate == input.Predicate ||
-                    (this.Predicate != null && this.Predicate.Equals(input.Predicate))
+                    Predicate == input.Predicate ||
+                    Predicate != null && Predicate.Equals(input.Predicate)
                 );
         }
 
@@ -145,18 +154,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Start != null)
-                    hashCode = hashCode * 59 + this.Start.GetHashCode();
-                if (this.Stop != null)
-                    hashCode = hashCode * 59 + this.Stop.GetHashCode();
-                if (this.Predicate != null)
-                    hashCode = hashCode * 59 + this.Predicate.GetHashCode();
+                var hashCode = 41;
+
+                if (Start != null)
+                {
+                    hashCode = hashCode * 59 + Start.GetHashCode();
+                }
+
+                if (Stop != null)
+                {
+                    hashCode = hashCode * 59 + Stop.GetHashCode();
+                }
+
+                if (Predicate != null)
+                {
+                    hashCode = hashCode * 59 + Predicate.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

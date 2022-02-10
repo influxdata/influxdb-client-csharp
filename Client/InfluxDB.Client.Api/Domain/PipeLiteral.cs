@@ -27,22 +27,22 @@ namespace InfluxDB.Client.Api.Domain
     /// Represents a specialized literal value, indicating the left hand value of a pipe expression
     /// </summary>
     [DataContract]
-    public partial class PipeLiteral : Expression,  IEquatable<PipeLiteral>
+    public partial class PipeLiteral : Expression, IEquatable<PipeLiteral>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PipeLiteral" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
-        public PipeLiteral(string type = default(string)) : base()
+        public PipeLiteral(string type = default) : base()
         {
-            this.Type = type;
+            Type = type;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PipeLiteral);
+            return Equals(input as PipeLiteral);
         }
 
         /// <summary>
@@ -86,13 +86,15 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PipeLiteral input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type != null && Type.Equals(input.Type)
+                   );
         }
 
         /// <summary>
@@ -103,14 +105,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

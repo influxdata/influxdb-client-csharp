@@ -26,23 +26,17 @@ namespace InfluxDB.Client.Api.Domain
     /// <summary>
     /// Defines SchemaType
     /// </summary>
-    
     [JsonConverter(typeof(StringEnumConverter))]
-    
     public enum SchemaType
     {
         /// <summary>
         /// Enum Implicit for value: implicit
         /// </summary>
-        [EnumMember(Value = "implicit")]
-        Implicit = 1,
+        [EnumMember(Value = "implicit")] Implicit = 1,
 
         /// <summary>
         /// Enum Explicit for value: explicit
         /// </summary>
-        [EnumMember(Value = "explicit")]
-        Explicit = 2
-
+        [EnumMember(Value = "explicit")] Explicit = 2
     }
-
 }

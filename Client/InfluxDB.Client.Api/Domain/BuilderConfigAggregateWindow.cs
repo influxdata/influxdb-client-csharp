@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// BuilderConfigAggregateWindow
     /// </summary>
     [DataContract]
-    public partial class BuilderConfigAggregateWindow :  IEquatable<BuilderConfigAggregateWindow>
+    public partial class BuilderConfigAggregateWindow : IEquatable<BuilderConfigAggregateWindow>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BuilderConfigAggregateWindow" /> class.
         /// </summary>
         /// <param name="period">period.</param>
         /// <param name="fillValues">fillValues.</param>
-        public BuilderConfigAggregateWindow(string period = default(string), bool? fillValues = default(bool?))
+        public BuilderConfigAggregateWindow(string period = default, bool? fillValues = default)
         {
-            this.Period = period;
-            this.FillValues = fillValues;
+            Period = period;
+            FillValues = fillValues;
         }
 
         /// <summary>
         /// Gets or Sets Period
         /// </summary>
-        [DataMember(Name="period", EmitDefaultValue=false)]
+        [DataMember(Name = "period", EmitDefaultValue = false)]
         public string Period { get; set; }
 
         /// <summary>
         /// Gets or Sets FillValues
         /// </summary>
-        [DataMember(Name="fillValues", EmitDefaultValue=false)]
+        [DataMember(Name = "fillValues", EmitDefaultValue = false)]
         public bool? FillValues { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as BuilderConfigAggregateWindow);
+            return Equals(input as BuilderConfigAggregateWindow);
         }
 
         /// <summary>
@@ -93,16 +93,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(BuilderConfigAggregateWindow input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Period == input.Period ||
-                    (this.Period != null && this.Period.Equals(input.Period))
-                ) && 
+                    Period == input.Period ||
+                    Period != null && Period.Equals(input.Period)
+                ) &&
                 (
-                    this.FillValues == input.FillValues ||
-                    (this.FillValues != null && this.FillValues.Equals(input.FillValues))
+                    FillValues == input.FillValues ||
+                    FillValues != null && FillValues.Equals(input.FillValues)
                 );
         }
 
@@ -114,16 +116,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Period != null)
-                    hashCode = hashCode * 59 + this.Period.GetHashCode();
-                if (this.FillValues != null)
-                    hashCode = hashCode * 59 + this.FillValues.GetHashCode();
+                var hashCode = 41;
+
+                if (Period != null)
+                {
+                    hashCode = hashCode * 59 + Period.GetHashCode();
+                }
+
+                if (FillValues != null)
+                {
+                    hashCode = hashCode * 59 + FillValues.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -124,15 +124,12 @@ namespace InfluxDB.Client.Test
             };
 
             var batches = points
-                .Select((x, i) => new {Index = i, Value = x})
+                .Select((x, i) => new { Index = i, Value = x })
                 .GroupBy(x => x.Index / 5)
                 .Select(x => x.Select(v => v.Value).ToList())
                 .ToList();
 
-            foreach (var batch in batches)
-            {
-                await writeApi.WritePointsAsync("my-bucket", "my-org", batch);
-            }
+            foreach (var batch in batches) await writeApi.WritePointsAsync("my-bucket", "my-org", batch);
 
             Assert.AreEqual(3, MockServer.LogEntries.Count());
         }
@@ -146,7 +143,7 @@ namespace InfluxDB.Client.Test
 
             var writeApi = _influxDbClient.GetWriteApiAsync();
             var response = await writeApi.WriteRecordsAsyncWithIRestResponse(
-                new[] {"h2o,location=coyote_creek water_level=9 1"},
+                new[] { "h2o,location=coyote_creek water_level=9 1" },
                 "my-bucket",
                 "my-org",
                 WritePrecision.Ms);
@@ -215,7 +212,7 @@ namespace InfluxDB.Client.Test
 
         private string GetRequestBody(RestResponse restResponse)
         {
-            var bytes = (byte[]) restResponse.Request?.Parameters
+            var bytes = (byte[])restResponse.Request?.Parameters
                             .GetParameters(ParameterType.RequestBody)
                             .TryFind("text/plain")?.Value ??
                         throw new AssertionException("The body is required.");

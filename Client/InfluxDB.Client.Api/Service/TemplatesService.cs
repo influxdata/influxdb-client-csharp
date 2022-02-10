@@ -25,6 +25,7 @@ namespace InfluxDB.Client.Api.Service
     public interface ITemplatesService : IApiAccessor
     {
         #region Synchronous Operations
+
         /// <summary>
         /// Apply or dry-run a template
         /// </summary>
@@ -34,7 +35,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateApply"></param>
         /// <returns>TemplateSummary</returns>
-        TemplateSummary ApplyTemplate (TemplateApply templateApply);
+        TemplateSummary ApplyTemplate(TemplateApply templateApply);
 
         /// <summary>
         /// Apply or dry-run a template
@@ -45,7 +46,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateApply"></param>
         /// <returns>ApiResponse of TemplateSummary</returns>
-        ApiResponse<TemplateSummary> ApplyTemplateWithHttpInfo (TemplateApply templateApply);
+        ApiResponse<TemplateSummary> ApplyTemplateWithHttpInfo(TemplateApply templateApply);
+
         /// <summary>
         /// Create a new stack
         /// </summary>
@@ -55,7 +57,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postStackRequest"> (optional)</param>
         /// <returns>Stack</returns>
-        Stack CreateStack (PostStackRequest postStackRequest = null);
+        Stack CreateStack(PostStackRequest postStackRequest = null);
 
         /// <summary>
         /// Create a new stack
@@ -66,7 +68,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postStackRequest"> (optional)</param>
         /// <returns>ApiResponse of Stack</returns>
-        ApiResponse<Stack> CreateStackWithHttpInfo (PostStackRequest postStackRequest = null);
+        ApiResponse<Stack> CreateStackWithHttpInfo(PostStackRequest postStackRequest = null);
+
         /// <summary>
         /// Delete a stack and associated resources
         /// </summary>
@@ -77,7 +80,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="orgID">The identifier of the organization.</param>
         /// <returns></returns>
-        void DeleteStack (string stackId, string orgID);
+        void DeleteStack(string stackId, string orgID);
 
         /// <summary>
         /// Delete a stack and associated resources
@@ -89,7 +92,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="orgID">The identifier of the organization.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteStackWithHttpInfo (string stackId, string orgID);
+        ApiResponse<object> DeleteStackWithHttpInfo(string stackId, string orgID);
+
         /// <summary>
         /// Export a new template
         /// </summary>
@@ -99,7 +103,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <returns>List&lt;Object&gt;</returns>
-        List<Object> ExportTemplate (TemplateExportByID templateExportByID = null);
+        List<object> ExportTemplate(TemplateExportByID templateExportByID = null);
 
         /// <summary>
         /// Export a new template
@@ -110,7 +114,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <returns>ApiResponse of List&lt;Object&gt;</returns>
-        ApiResponse<List<Object>> ExportTemplateWithHttpInfo (TemplateExportByID templateExportByID = null);
+        ApiResponse<List<object>> ExportTemplateWithHttpInfo(TemplateExportByID templateExportByID = null);
+
         /// <summary>
         /// List installed templates
         /// </summary>
@@ -122,7 +127,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">A collection of names to filter the list by. (optional)</param>
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <returns>ListStacksResponse</returns>
-        ListStacksResponse ListStacks (string orgID, string name = null, string stackID = null);
+        ListStacksResponse ListStacks(string orgID, string name = null, string stackID = null);
 
         /// <summary>
         /// List installed templates
@@ -135,7 +140,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">A collection of names to filter the list by. (optional)</param>
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <returns>ApiResponse of ListStacksResponse</returns>
-        ApiResponse<ListStacksResponse> ListStacksWithHttpInfo (string orgID, string name = null, string stackID = null);
+        ApiResponse<ListStacksResponse> ListStacksWithHttpInfo(string orgID, string name = null, string stackID = null);
+
         /// <summary>
         /// Retrieve a stack
         /// </summary>
@@ -145,7 +151,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>Stack</returns>
-        Stack ReadStack (string stackId);
+        Stack ReadStack(string stackId);
 
         /// <summary>
         /// Retrieve a stack
@@ -156,7 +162,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>ApiResponse of Stack</returns>
-        ApiResponse<Stack> ReadStackWithHttpInfo (string stackId);
+        ApiResponse<Stack> ReadStackWithHttpInfo(string stackId);
+
         /// <summary>
         /// Uninstall a stack
         /// </summary>
@@ -166,7 +173,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>Stack</returns>
-        Stack UninstallStack (string stackId);
+        Stack UninstallStack(string stackId);
 
         /// <summary>
         /// Uninstall a stack
@@ -177,7 +184,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>ApiResponse of Stack</returns>
-        ApiResponse<Stack> UninstallStackWithHttpInfo (string stackId);
+        ApiResponse<Stack> UninstallStackWithHttpInfo(string stackId);
+
         /// <summary>
         /// Update a stack
         /// </summary>
@@ -188,7 +196,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="patchStackRequest"> (optional)</param>
         /// <returns>Stack</returns>
-        Stack UpdateStack (string stackId, PatchStackRequest patchStackRequest = null);
+        Stack UpdateStack(string stackId, PatchStackRequest patchStackRequest = null);
 
         /// <summary>
         /// Update a stack
@@ -200,9 +208,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="patchStackRequest"> (optional)</param>
         /// <returns>ApiResponse of Stack</returns>
-        ApiResponse<Stack> UpdateStackWithHttpInfo (string stackId, PatchStackRequest patchStackRequest = null);
+        ApiResponse<Stack> UpdateStackWithHttpInfo(string stackId, PatchStackRequest patchStackRequest = null);
+
         #endregion Synchronous Operations
+
         #region Asynchronous Operations
+
         /// <summary>
         /// Apply or dry-run a template
         /// </summary>
@@ -213,7 +224,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateApply"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of TemplateSummary</returns>
-        System.Threading.Tasks.Task<TemplateSummary> ApplyTemplateAsync (TemplateApply templateApply, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<TemplateSummary> ApplyTemplateAsync(TemplateApply templateApply,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Apply or dry-run a template
@@ -225,7 +237,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateApply"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (TemplateSummary)</returns>
-        System.Threading.Tasks.Task<ApiResponse<TemplateSummary>> ApplyTemplateAsyncWithHttpInfo (TemplateApply templateApply, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<TemplateSummary>> ApplyTemplateAsyncWithHttpInfo(
+            TemplateApply templateApply, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Create a new stack
         /// </summary>
@@ -236,7 +250,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="postStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Stack</returns>
-        System.Threading.Tasks.Task<Stack> CreateStackAsync (PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Stack> CreateStackAsync(PostStackRequest postStackRequest = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a new stack
@@ -248,7 +263,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="postStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Stack)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Stack>> CreateStackAsyncWithHttpInfo (PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Stack>> CreateStackAsyncWithHttpInfo(
+            PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Delete a stack and associated resources
         /// </summary>
@@ -260,7 +277,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The identifier of the organization.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteStackAsync (string stackId, string orgID, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task DeleteStackAsync(string stackId, string orgID,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a stack and associated resources
@@ -273,7 +291,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The identifier of the organization.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteStackAsyncWithHttpInfo (string stackId, string orgID, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<object>> DeleteStackAsyncWithHttpInfo(string stackId, string orgID,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Export a new template
         /// </summary>
@@ -284,7 +304,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of List&lt;Object&gt;</returns>
-        System.Threading.Tasks.Task<List<Object>> ExportTemplateAsync (TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<List<object>> ExportTemplateAsync(TemplateExportByID templateExportByID = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Export a new template
@@ -296,7 +317,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (List&lt;Object&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Object>>> ExportTemplateAsyncWithHttpInfo (TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<List<object>>> ExportTemplateAsyncWithHttpInfo(
+            TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// List installed templates
         /// </summary>
@@ -309,7 +332,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ListStacksResponse</returns>
-        System.Threading.Tasks.Task<ListStacksResponse> ListStacksAsync (string orgID, string name = null, string stackID = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ListStacksResponse> ListStacksAsync(string orgID, string name = null,
+            string stackID = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List installed templates
@@ -323,7 +347,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ListStacksResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ListStacksResponse>> ListStacksAsyncWithHttpInfo (string orgID, string name = null, string stackID = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<ListStacksResponse>> ListStacksAsyncWithHttpInfo(string orgID,
+            string name = null, string stackID = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Retrieve a stack
         /// </summary>
@@ -334,7 +360,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Stack</returns>
-        System.Threading.Tasks.Task<Stack> ReadStackAsync (string stackId, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Stack>
+            ReadStackAsync(string stackId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a stack
@@ -346,7 +373,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Stack)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Stack>> ReadStackAsyncWithHttpInfo (string stackId, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Stack>> ReadStackAsyncWithHttpInfo(string stackId,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Uninstall a stack
         /// </summary>
@@ -357,7 +386,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Stack</returns>
-        System.Threading.Tasks.Task<Stack> UninstallStackAsync (string stackId, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Stack> UninstallStackAsync(string stackId,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Uninstall a stack
@@ -369,7 +399,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Stack)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Stack>> UninstallStackAsyncWithHttpInfo (string stackId, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Stack>> UninstallStackAsyncWithHttpInfo(string stackId,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Update a stack
         /// </summary>
@@ -381,7 +413,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="patchStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Stack</returns>
-        System.Threading.Tasks.Task<Stack> UpdateStackAsync (string stackId, PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Stack> UpdateStackAsync(string stackId, PatchStackRequest patchStackRequest = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a stack
@@ -394,7 +427,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="patchStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Stack)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Stack>> UpdateStackAsyncWithHttpInfo (string stackId, PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Stack>> UpdateStackAsyncWithHttpInfo(string stackId,
+            PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default);
+
         #endregion Asynchronous Operations
     }
 
@@ -403,17 +438,17 @@ namespace InfluxDB.Client.Api.Service
     /// </summary>
     public partial class TemplatesService : ITemplatesService
     {
-        private InfluxDB.Client.Api.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplatesService"/> class.
         /// </summary>
         /// <returns></returns>
-        public TemplatesService(String basePath)
+        public TemplatesService(string basePath)
         {
-            this.Configuration = new InfluxDB.Client.Api.Client.Configuration { BasePath = basePath };
+            Configuration = new Configuration { BasePath = basePath };
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -422,31 +457,36 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public TemplatesService(InfluxDB.Client.Api.Client.Configuration configuration = null)
+        public TemplatesService(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = InfluxDB.Client.Api.Client.Configuration.Default;
+            {
+                Configuration = Configuration.Default;
+            }
             else
-                this.Configuration = configuration;
+            {
+                Configuration = configuration;
+            }
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(String basePath)
+        [Obsolete(
+            "SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(string basePath)
         {
             // do nothing
         }
@@ -455,12 +495,12 @@ namespace InfluxDB.Client.Api.Service
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public InfluxDB.Client.Api.Client.Configuration Configuration {get; set;}
+        public Configuration Configuration { get; set; }
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public InfluxDB.Client.Api.Client.ExceptionFactory ExceptionFactory
+        public ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -468,9 +508,10 @@ namespace InfluxDB.Client.Api.Service
                 {
                     throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
                 }
+
                 return _exceptionFactory;
             }
-            set { _exceptionFactory = value; }
+            set => _exceptionFactory = value;
         }
 
         /// <summary>
@@ -478,9 +519,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <returns>Dictionary of HTTP header</returns>
         [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public IDictionary<String, String> DefaultHeader()
+        public IDictionary<string, string> DefaultHeader()
         {
-            return new ReadOnlyDictionary<string, string>(this.Configuration.DefaultHeader);
+            return new ReadOnlyDictionary<string, string>(Configuration.DefaultHeader);
         }
 
         /// <summary>
@@ -492,7 +533,7 @@ namespace InfluxDB.Client.Api.Service
         [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
         public void AddDefaultHeader(string key, string value)
         {
-            this.Configuration.AddDefaultHeader(key, value);
+            Configuration.AddDefaultHeader(key, value);
         }
 
         /// <summary>
@@ -501,10 +542,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateApply"></param>
         /// <returns>TemplateSummary</returns>
-        public TemplateSummary ApplyTemplate (TemplateApply templateApply)
+        public TemplateSummary ApplyTemplate(TemplateApply templateApply)
         {
-             ApiResponse<TemplateSummary> localVarResponse = ApplyTemplateWithHttpInfo(templateApply);
-             return localVarResponse.Data;
+            var localVarResponse = ApplyTemplateWithHttpInfo(templateApply);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -513,31 +554,35 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateApply"></param>
         /// <returns>ApiResponse of TemplateSummary</returns>
-        public ApiResponse< TemplateSummary > ApplyTemplateWithHttpInfo (TemplateApply templateApply)
+        public ApiResponse<TemplateSummary> ApplyTemplateWithHttpInfo(TemplateApply templateApply)
         {
             // verify the required parameter 'templateApply' is set
             if (templateApply == null)
-                throw new ApiException(400, "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            }
 
             var localVarPath = "/api/v2/templates/apply";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "application/x-jsonnet", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
+                "application/x-jsonnet",
                 "text/yml"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateApply != null && templateApply.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
             }
             else
             {
@@ -545,31 +590,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApplyTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ApplyTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<TemplateSummary>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (TemplateSummary) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TemplateSummary)));
+                (TemplateSummary)Configuration.ApiClient.Deserialize(localVarResponse, typeof(TemplateSummary)));
         }
 
         /// <summary>
@@ -579,31 +631,36 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateApply"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of TemplateSummary</returns>
-        public async System.Threading.Tasks.Task<RestResponse> ApplyTemplateWithIRestResponseAsync (TemplateApply templateApply, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> ApplyTemplateWithIRestResponseAsync(
+            TemplateApply templateApply, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateApply' is set
             if (templateApply == null)
-                throw new ApiException(400, "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            }
 
             var localVarPath = "/api/v2/templates/apply";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "application/x-jsonnet", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
+                "application/x-jsonnet",
                 "text/yml"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateApply != null && templateApply.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
             }
             else
             {
@@ -611,26 +668,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApplyTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ApplyTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -642,31 +706,35 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateApply"></param>
         /// <returns>ApiResponse of TemplateSummary</returns>
-        public RestResponse ApplyTemplateWithIRestResponse (TemplateApply templateApply)
+        public RestResponse ApplyTemplateWithIRestResponse(TemplateApply templateApply)
         {
             // verify the required parameter 'templateApply' is set
             if (templateApply == null)
-                throw new ApiException(400, "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            }
 
             var localVarPath = "/api/v2/templates/apply";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "application/x-jsonnet", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
+                "application/x-jsonnet",
                 "text/yml"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateApply != null && templateApply.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
             }
             else
             {
@@ -674,62 +742,73 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApplyTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ApplyTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Apply or dry-run a template Applies or performs a dry-run of template in an organization.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateApply"></param>
         /// <returns>ApiResponse of TemplateSummary</returns>
-        public RestRequest ApplyTemplateWithRestRequest (TemplateApply templateApply)
+        public RestRequest ApplyTemplateWithRestRequest(TemplateApply templateApply)
         {
             // verify the required parameter 'templateApply' is set
             if (templateApply == null)
-                throw new ApiException(400, "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            }
 
             var localVarPath = "/api/v2/templates/apply";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "application/x-jsonnet", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
+                "application/x-jsonnet",
                 "text/yml"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateApply != null && templateApply.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
             }
             else
             {
@@ -737,17 +816,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -758,11 +841,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateApply"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of TemplateSummary</returns>
-        public async System.Threading.Tasks.Task<TemplateSummary> ApplyTemplateAsync (TemplateApply templateApply, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<TemplateSummary> ApplyTemplateAsync(TemplateApply templateApply,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<TemplateSummary> localVarResponse = await ApplyTemplateAsyncWithHttpInfo(templateApply, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await ApplyTemplateAsyncWithHttpInfo(templateApply, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -772,24 +856,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateApply"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (TemplateSummary)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<TemplateSummary>> ApplyTemplateAsyncWithHttpInfo (TemplateApply templateApply, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<TemplateSummary>> ApplyTemplateAsyncWithHttpInfo(
+            TemplateApply templateApply, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await ApplyTemplateAsyncWithIRestResponse(templateApply, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await ApplyTemplateAsyncWithIRestResponse(templateApply, cancellationToken)
+                .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApplyTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ApplyTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<TemplateSummary>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (TemplateSummary) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(TemplateSummary)));
+                (TemplateSummary)Configuration.ApiClient.Deserialize(localVarResponse, typeof(TemplateSummary)));
         }
-            
+
         /// <summary>
         /// Apply or dry-run a template Applies or performs a dry-run of template in an organization.
         /// </summary>
@@ -797,31 +886,36 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateApply"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (TemplateSummary)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> ApplyTemplateAsyncWithIRestResponse (TemplateApply templateApply, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> ApplyTemplateAsyncWithIRestResponse(
+            TemplateApply templateApply, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'templateApply' is set
             if (templateApply == null)
-                throw new ApiException(400, "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'templateApply' when calling TemplatesService->ApplyTemplate");
+            }
 
             var localVarPath = "/api/v2/templates/apply";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "application/x-jsonnet", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
+                "application/x-jsonnet",
                 "text/yml"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateApply != null && templateApply.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateApply); // http body (model) parameter
             }
             else
             {
@@ -829,24 +923,31 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApplyTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ApplyTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -858,10 +959,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postStackRequest"> (optional)</param>
         /// <returns>Stack</returns>
-        public Stack CreateStack (PostStackRequest postStackRequest = null)
+        public Stack CreateStack(PostStackRequest postStackRequest = null)
         {
-             ApiResponse<Stack> localVarResponse = CreateStackWithHttpInfo(postStackRequest);
-             return localVarResponse.Data;
+            var localVarResponse = CreateStackWithHttpInfo(postStackRequest);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -870,26 +971,26 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postStackRequest"> (optional)</param>
         /// <returns>ApiResponse of Stack</returns>
-        public ApiResponse< Stack > CreateStackWithHttpInfo (PostStackRequest postStackRequest = null)
+        public ApiResponse<Stack> CreateStackWithHttpInfo(PostStackRequest postStackRequest = null)
         {
-
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (postStackRequest != null && postStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
             }
             else
             {
@@ -897,31 +998,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("CreateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("CreateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Stack>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Stack) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
+                (Stack)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
         }
 
         /// <summary>
@@ -931,26 +1039,27 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="postStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Stack</returns>
-        public async System.Threading.Tasks.Task<RestResponse> CreateStackWithIRestResponseAsync (PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> CreateStackWithIRestResponseAsync(
+            PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (postStackRequest != null && postStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
             }
             else
             {
@@ -958,26 +1067,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("CreateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("CreateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -989,26 +1105,26 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postStackRequest"> (optional)</param>
         /// <returns>ApiResponse of Stack</returns>
-        public RestResponse CreateStackWithIRestResponse (PostStackRequest postStackRequest = null)
+        public RestResponse CreateStackWithIRestResponse(PostStackRequest postStackRequest = null)
         {
-
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (postStackRequest != null && postStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
             }
             else
             {
@@ -1016,57 +1132,64 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("CreateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("CreateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Create a new stack 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="postStackRequest"> (optional)</param>
         /// <returns>ApiResponse of Stack</returns>
-        public RestRequest CreateStackWithRestRequest (PostStackRequest postStackRequest = null)
+        public RestRequest CreateStackWithRestRequest(PostStackRequest postStackRequest = null)
         {
-
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (postStackRequest != null && postStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
             }
             else
             {
@@ -1074,17 +1197,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1095,11 +1222,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="postStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Stack</returns>
-        public async System.Threading.Tasks.Task<Stack> CreateStackAsync (PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Stack> CreateStackAsync(PostStackRequest postStackRequest = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<Stack> localVarResponse = await CreateStackAsyncWithHttpInfo(postStackRequest, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse = await CreateStackAsyncWithHttpInfo(postStackRequest, cancellationToken)
+                .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1109,24 +1237,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="postStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Stack)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Stack>> CreateStackAsyncWithHttpInfo (PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Stack>> CreateStackAsyncWithHttpInfo(
+            PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await CreateStackAsyncWithIRestResponse(postStackRequest, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await CreateStackAsyncWithIRestResponse(postStackRequest, cancellationToken)
+                .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("CreateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("CreateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Stack>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Stack) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
+                (Stack)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
         }
-            
+
         /// <summary>
         /// Create a new stack 
         /// </summary>
@@ -1134,26 +1267,27 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="postStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Stack)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> CreateStackAsyncWithIRestResponse (PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> CreateStackAsyncWithIRestResponse(
+            PostStackRequest postStackRequest = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (postStackRequest != null && postStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(postStackRequest); // http body (model) parameter
             }
             else
             {
@@ -1161,24 +1295,31 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("CreateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("CreateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1191,9 +1332,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="orgID">The identifier of the organization.</param>
         /// <returns></returns>
-        public void DeleteStack (string stackId, string orgID)
+        public void DeleteStack(string stackId, string orgID)
         {
-             DeleteStackWithHttpInfo(stackId, orgID);
+            DeleteStackWithHttpInfo(stackId, orgID);
         }
 
         /// <summary>
@@ -1203,55 +1344,79 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="orgID">The identifier of the organization.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteStackWithHttpInfo (string stackId, string orgID)
+        public ApiResponse<object> DeleteStackWithHttpInfo(string stackId, string orgID)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            }
+
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
@@ -1264,52 +1429,77 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The identifier of the organization.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteStackWithIRestResponseAsync (string stackId, string orgID, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteStackWithIRestResponseAsync(string stackId,
+            string orgID, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            }
+
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1322,57 +1512,81 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="orgID">The identifier of the organization.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestResponse DeleteStackWithIRestResponse (string stackId, string orgID)
+        public RestResponse DeleteStackWithIRestResponse(string stackId, string orgID)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            }
+
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Delete a stack and associated resources 
         /// </summary>
@@ -1380,43 +1594,64 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="orgID">The identifier of the organization.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DeleteStackWithRestRequest (string stackId, string orgID)
+        public RestRequest DeleteStackWithRestRequest(string stackId, string orgID)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            }
+
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1428,10 +1663,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The identifier of the organization.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteStackAsync (string stackId, string orgID, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task DeleteStackAsync(string stackId, string orgID,
+            CancellationToken cancellationToken = default)
         {
-             return DeleteStackAsyncWithHttpInfo(stackId, orgID, cancellationToken);
-
+            return DeleteStackAsyncWithHttpInfo(stackId, orgID, cancellationToken);
         }
 
         /// <summary>
@@ -1442,24 +1677,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The identifier of the organization.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteStackAsyncWithHttpInfo (string stackId, string orgID, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> DeleteStackAsyncWithHttpInfo(string stackId,
+            string orgID, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await DeleteStackAsyncWithIRestResponse(stackId, orgID, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await DeleteStackAsyncWithIRestResponse(stackId, orgID, cancellationToken)
+                .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
-            
+
         /// <summary>
         /// Delete a stack and associated resources 
         /// </summary>
@@ -1468,50 +1708,75 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">The identifier of the organization.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteStackAsyncWithIRestResponse (string stackId, string orgID, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteStackAsyncWithIRestResponse(string stackId,
+            string orgID, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->DeleteStack");
+            }
+
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->DeleteStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1523,10 +1788,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <returns>List&lt;Object&gt;</returns>
-        public List<Object> ExportTemplate (TemplateExportByID templateExportByID = null)
+        public List<object> ExportTemplate(TemplateExportByID templateExportByID = null)
         {
-             ApiResponse<List<Object>> localVarResponse = ExportTemplateWithHttpInfo(templateExportByID);
-             return localVarResponse.Data;
+            var localVarResponse = ExportTemplateWithHttpInfo(templateExportByID);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1535,26 +1800,26 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <returns>ApiResponse of List&lt;Object&gt;</returns>
-        public ApiResponse< List<Object> > ExportTemplateWithHttpInfo (TemplateExportByID templateExportByID = null)
+        public ApiResponse<List<object>> ExportTemplateWithHttpInfo(TemplateExportByID templateExportByID = null)
         {
-
             var localVarPath = "/api/v2/templates/export";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateExportByID != null && templateExportByID.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
             }
             else
             {
@@ -1562,32 +1827,39 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
                 "application/x-yaml"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ExportTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ExportTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<List<Object>>(localVarStatusCode,
+            return new ApiResponse<List<object>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<Object>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Object>)));
+                (List<object>)Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<object>)));
         }
 
         /// <summary>
@@ -1597,26 +1869,27 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of List&lt;Object&gt;</returns>
-        public async System.Threading.Tasks.Task<RestResponse> ExportTemplateWithIRestResponseAsync (TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> ExportTemplateWithIRestResponseAsync(
+            TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/templates/export";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateExportByID != null && templateExportByID.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
             }
             else
             {
@@ -1624,27 +1897,34 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
                 "application/x-yaml"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ExportTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ExportTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1656,26 +1936,26 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <returns>ApiResponse of List&lt;Object&gt;</returns>
-        public RestResponse ExportTemplateWithIRestResponse (TemplateExportByID templateExportByID = null)
+        public RestResponse ExportTemplateWithIRestResponse(TemplateExportByID templateExportByID = null)
         {
-
             var localVarPath = "/api/v2/templates/export";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateExportByID != null && templateExportByID.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
             }
             else
             {
@@ -1683,58 +1963,65 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
                 "application/x-yaml"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ExportTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ExportTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Export a new template 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <returns>ApiResponse of List&lt;Object&gt;</returns>
-        public RestRequest ExportTemplateWithRestRequest (TemplateExportByID templateExportByID = null)
+        public RestRequest ExportTemplateWithRestRequest(TemplateExportByID templateExportByID = null)
         {
-
             var localVarPath = "/api/v2/templates/export";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateExportByID != null && templateExportByID.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
             }
             else
             {
@@ -1742,18 +2029,22 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
                 "application/x-yaml"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1764,11 +2055,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of List&lt;Object&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Object>> ExportTemplateAsync (TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<List<object>> ExportTemplateAsync(
+            TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<List<Object>> localVarResponse = await ExportTemplateAsyncWithHttpInfo(templateExportByID, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse = await ExportTemplateAsyncWithHttpInfo(templateExportByID, cancellationToken)
+                .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1778,24 +2070,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (List&lt;Object&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<Object>>> ExportTemplateAsyncWithHttpInfo (TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<List<object>>> ExportTemplateAsyncWithHttpInfo(
+            TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await ExportTemplateAsyncWithIRestResponse(templateExportByID, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await ExportTemplateAsyncWithIRestResponse(templateExportByID, cancellationToken)
+                .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ExportTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ExportTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<List<Object>>(localVarStatusCode,
+            return new ApiResponse<List<object>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<Object>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Object>)));
+                (List<object>)Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<object>)));
         }
-            
+
         /// <summary>
         /// Export a new template 
         /// </summary>
@@ -1803,26 +2100,27 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="templateExportByID">Export resources as an InfluxDB template. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (List&lt;Object&gt;)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> ExportTemplateAsyncWithIRestResponse (TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> ExportTemplateAsyncWithIRestResponse(
+            TemplateExportByID templateExportByID = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/templates/export";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (templateExportByID != null && templateExportByID.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(templateExportByID); // http body (model) parameter
             }
             else
             {
@@ -1830,25 +2128,32 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json",
                 "application/x-yaml"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ExportTemplate", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ExportTemplate", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1862,10 +2167,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">A collection of names to filter the list by. (optional)</param>
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <returns>ListStacksResponse</returns>
-        public ListStacksResponse ListStacks (string orgID, string name = null, string stackID = null)
+        public ListStacksResponse ListStacks(string orgID, string name = null, string stackID = null)
         {
-             ApiResponse<ListStacksResponse> localVarResponse = ListStacksWithHttpInfo(orgID, name, stackID);
-             return localVarResponse.Data;
+            var localVarResponse = ListStacksWithHttpInfo(orgID, name, stackID);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1876,55 +2181,81 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">A collection of names to filter the list by. (optional)</param>
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <returns>ApiResponse of ListStacksResponse</returns>
-        public ApiResponse< ListStacksResponse > ListStacksWithHttpInfo (string orgID, string name = null, string stackID = null)
+        public ApiResponse<ListStacksResponse> ListStacksWithHttpInfo(string orgID, string name = null,
+            string stackID = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            }
 
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (stackID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (stackID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ListStacks", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ListStacks", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<ListStacksResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ListStacksResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ListStacksResponse)));
+                (ListStacksResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ListStacksResponse)));
         }
 
         /// <summary>
@@ -1936,50 +2267,76 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ListStacksResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> ListStacksWithIRestResponseAsync (string orgID, string name = null, string stackID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> ListStacksWithIRestResponseAsync(string orgID,
+            string name = null, string stackID = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            }
 
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (stackID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (stackID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ListStacks", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ListStacks", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1993,55 +2350,80 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">A collection of names to filter the list by. (optional)</param>
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <returns>ApiResponse of ListStacksResponse</returns>
-        public RestResponse ListStacksWithIRestResponse (string orgID, string name = null, string stackID = null)
+        public RestResponse ListStacksWithIRestResponse(string orgID, string name = null, string stackID = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            }
 
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (stackID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (stackID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ListStacks", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ListStacks", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// List installed templates 
         /// </summary>
@@ -2050,41 +2432,63 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">A collection of names to filter the list by. (optional)</param>
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <returns>ApiResponse of ListStacksResponse</returns>
-        public RestRequest ListStacksWithRestRequest (string orgID, string name = null, string stackID = null)
+        public RestRequest ListStacksWithRestRequest(string orgID, string name = null, string stackID = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            }
 
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (stackID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (stackID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2097,11 +2501,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ListStacksResponse</returns>
-        public async System.Threading.Tasks.Task<ListStacksResponse> ListStacksAsync (string orgID, string name = null, string stackID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ListStacksResponse> ListStacksAsync(string orgID, string name = null,
+            string stackID = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<ListStacksResponse> localVarResponse = await ListStacksAsyncWithHttpInfo(orgID, name, stackID, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse = await ListStacksAsyncWithHttpInfo(orgID, name, stackID, cancellationToken)
+                .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2113,24 +2518,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ListStacksResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ListStacksResponse>> ListStacksAsyncWithHttpInfo (string orgID, string name = null, string stackID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<ListStacksResponse>> ListStacksAsyncWithHttpInfo(
+            string orgID, string name = null, string stackID = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await ListStacksAsyncWithIRestResponse(orgID, name, stackID, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await ListStacksAsyncWithIRestResponse(orgID, name, stackID, cancellationToken)
+                .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ListStacks", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ListStacks", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<ListStacksResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ListStacksResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ListStacksResponse)));
+                (ListStacksResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ListStacksResponse)));
         }
-            
+
         /// <summary>
         /// List installed templates 
         /// </summary>
@@ -2140,48 +2550,74 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackID">A collection of stackIDs to filter the list by. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (ListStacksResponse)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> ListStacksAsyncWithIRestResponse (string orgID, string name = null, string stackID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> ListStacksAsyncWithIRestResponse(string orgID,
+            string name = null, string stackID = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling TemplatesService->ListStacks");
+            }
 
             var localVarPath = "/api/v2/stacks";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (stackID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (stackID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "stackID", stackID)); // query parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ListStacks", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ListStacks", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2193,10 +2629,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>Stack</returns>
-        public Stack ReadStack (string stackId)
+        public Stack ReadStack(string stackId)
         {
-             ApiResponse<Stack> localVarResponse = ReadStackWithHttpInfo(stackId);
-             return localVarResponse.Data;
+            var localVarResponse = ReadStackWithHttpInfo(stackId);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2205,53 +2641,68 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>ApiResponse of Stack</returns>
-        public ApiResponse< Stack > ReadStackWithHttpInfo (string stackId)
+        public ApiResponse<Stack> ReadStackWithHttpInfo(string stackId)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ReadStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ReadStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Stack>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Stack) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
+                (Stack)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
         }
 
         /// <summary>
@@ -2261,48 +2712,64 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Stack</returns>
-        public async System.Threading.Tasks.Task<RestResponse> ReadStackWithIRestResponseAsync (string stackId, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> ReadStackWithIRestResponseAsync(string stackId,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ReadStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ReadStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2314,92 +2781,119 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>ApiResponse of Stack</returns>
-        public RestResponse ReadStackWithIRestResponse (string stackId)
+        public RestResponse ReadStackWithIRestResponse(string stackId)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ReadStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ReadStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Retrieve a stack 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>ApiResponse of Stack</returns>
-        public RestRequest ReadStackWithRestRequest (string stackId)
+        public RestRequest ReadStackWithRestRequest(string stackId)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2410,11 +2904,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Stack</returns>
-        public async System.Threading.Tasks.Task<Stack> ReadStackAsync (string stackId, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Stack> ReadStackAsync(string stackId,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<Stack> localVarResponse = await ReadStackAsyncWithHttpInfo(stackId, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse = await ReadStackAsyncWithHttpInfo(stackId, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2424,24 +2918,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Stack)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Stack>> ReadStackAsyncWithHttpInfo (string stackId, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Stack>> ReadStackAsyncWithHttpInfo(string stackId,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await ReadStackAsyncWithIRestResponse(stackId, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await ReadStackAsyncWithIRestResponse(stackId, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ReadStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ReadStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Stack>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Stack) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
+                (Stack)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
         }
-            
+
         /// <summary>
         /// Retrieve a stack 
         /// </summary>
@@ -2449,46 +2948,62 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Stack)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> ReadStackAsyncWithIRestResponse (string stackId, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> ReadStackAsyncWithIRestResponse(string stackId,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->ReadStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ReadStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("ReadStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2500,10 +3015,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>Stack</returns>
-        public Stack UninstallStack (string stackId)
+        public Stack UninstallStack(string stackId)
         {
-             ApiResponse<Stack> localVarResponse = UninstallStackWithHttpInfo(stackId);
-             return localVarResponse.Data;
+            var localVarResponse = UninstallStackWithHttpInfo(stackId);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2512,53 +3027,68 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>ApiResponse of Stack</returns>
-        public ApiResponse< Stack > UninstallStackWithHttpInfo (string stackId)
+        public ApiResponse<Stack> UninstallStackWithHttpInfo(string stackId)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}/uninstall";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UninstallStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UninstallStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Stack>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Stack) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
+                (Stack)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
         }
 
         /// <summary>
@@ -2568,48 +3098,64 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Stack</returns>
-        public async System.Threading.Tasks.Task<RestResponse> UninstallStackWithIRestResponseAsync (string stackId, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> UninstallStackWithIRestResponseAsync(string stackId,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}/uninstall";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UninstallStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UninstallStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2621,92 +3167,119 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>ApiResponse of Stack</returns>
-        public RestResponse UninstallStackWithIRestResponse (string stackId)
+        public RestResponse UninstallStackWithIRestResponse(string stackId)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}/uninstall";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UninstallStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UninstallStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Uninstall a stack 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="stackId">The identifier of the stack.</param>
         /// <returns>ApiResponse of Stack</returns>
-        public RestRequest UninstallStackWithRestRequest (string stackId)
+        public RestRequest UninstallStackWithRestRequest(string stackId)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}/uninstall";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2717,11 +3290,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Stack</returns>
-        public async System.Threading.Tasks.Task<Stack> UninstallStackAsync (string stackId, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Stack> UninstallStackAsync(string stackId,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<Stack> localVarResponse = await UninstallStackAsyncWithHttpInfo(stackId, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await UninstallStackAsyncWithHttpInfo(stackId, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2731,24 +3305,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Stack)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Stack>> UninstallStackAsyncWithHttpInfo (string stackId, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Stack>> UninstallStackAsyncWithHttpInfo(string stackId,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await UninstallStackAsyncWithIRestResponse(stackId, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await UninstallStackAsyncWithIRestResponse(stackId, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UninstallStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UninstallStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Stack>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Stack) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
+                (Stack)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
         }
-            
+
         /// <summary>
         /// Uninstall a stack 
         /// </summary>
@@ -2756,46 +3335,62 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Stack)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> UninstallStackAsyncWithIRestResponse (string stackId, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> UninstallStackAsyncWithIRestResponse(string stackId,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UninstallStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}/uninstall";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UninstallStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UninstallStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2808,10 +3403,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="patchStackRequest"> (optional)</param>
         /// <returns>Stack</returns>
-        public Stack UpdateStack (string stackId, PatchStackRequest patchStackRequest = null)
+        public Stack UpdateStack(string stackId, PatchStackRequest patchStackRequest = null)
         {
-             ApiResponse<Stack> localVarResponse = UpdateStackWithHttpInfo(stackId, patchStackRequest);
-             return localVarResponse.Data;
+            var localVarResponse = UpdateStackWithHttpInfo(stackId, patchStackRequest);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2821,30 +3416,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="patchStackRequest"> (optional)</param>
         /// <returns>ApiResponse of Stack</returns>
-        public ApiResponse< Stack > UpdateStackWithHttpInfo (string stackId, PatchStackRequest patchStackRequest = null)
+        public ApiResponse<Stack> UpdateStackWithHttpInfo(string stackId, PatchStackRequest patchStackRequest = null)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
             if (patchStackRequest != null && patchStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
             }
             else
             {
@@ -2852,31 +3456,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UpdateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UpdateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Stack>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Stack) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
+                (Stack)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
         }
 
         /// <summary>
@@ -2887,30 +3498,40 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="patchStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Stack</returns>
-        public async System.Threading.Tasks.Task<RestResponse> UpdateStackWithIRestResponseAsync (string stackId, PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> UpdateStackWithIRestResponseAsync(string stackId,
+            PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
             if (patchStackRequest != null && patchStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
             }
             else
             {
@@ -2918,26 +3539,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UpdateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UpdateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2950,30 +3578,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="patchStackRequest"> (optional)</param>
         /// <returns>ApiResponse of Stack</returns>
-        public RestResponse UpdateStackWithIRestResponse (string stackId, PatchStackRequest patchStackRequest = null)
+        public RestResponse UpdateStackWithIRestResponse(string stackId, PatchStackRequest patchStackRequest = null)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
             if (patchStackRequest != null && patchStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
             }
             else
             {
@@ -2981,31 +3618,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UpdateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UpdateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Update a stack 
         /// </summary>
@@ -3013,30 +3657,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="stackId">The identifier of the stack.</param>
         /// <param name="patchStackRequest"> (optional)</param>
         /// <returns>ApiResponse of Stack</returns>
-        public RestRequest UpdateStackWithRestRequest (string stackId, PatchStackRequest patchStackRequest = null)
+        public RestRequest UpdateStackWithRestRequest(string stackId, PatchStackRequest patchStackRequest = null)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
             if (patchStackRequest != null && patchStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
             }
             else
             {
@@ -3044,17 +3697,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -3066,11 +3723,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="patchStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Stack</returns>
-        public async System.Threading.Tasks.Task<Stack> UpdateStackAsync (string stackId, PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Stack> UpdateStackAsync(string stackId,
+            PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Stack> localVarResponse = await UpdateStackAsyncWithHttpInfo(stackId, patchStackRequest, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse = await UpdateStackAsyncWithHttpInfo(stackId, patchStackRequest, cancellationToken)
+                .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -3081,24 +3739,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="patchStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Stack)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Stack>> UpdateStackAsyncWithHttpInfo (string stackId, PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Stack>> UpdateStackAsyncWithHttpInfo(string stackId,
+            PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await UpdateStackAsyncWithIRestResponse(stackId, patchStackRequest, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await UpdateStackAsyncWithIRestResponse(stackId, patchStackRequest, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UpdateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UpdateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Stack>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Stack) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
+                (Stack)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Stack)));
         }
-            
+
         /// <summary>
         /// Update a stack 
         /// </summary>
@@ -3107,30 +3771,40 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="patchStackRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Stack)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> UpdateStackAsyncWithIRestResponse (string stackId, PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> UpdateStackAsyncWithIRestResponse(string stackId,
+            PatchStackRequest patchStackRequest = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'stackId' is set
             if (stackId == null)
-                throw new ApiException(400, "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'stackId' when calling TemplatesService->UpdateStack");
+            }
 
             var localVarPath = "/api/v2/stacks/{stack_id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (stackId != null) localVarPathParams.Add("stack_id", this.Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            if (stackId != null)
+            {
+                localVarPathParams.Add("stack_id",
+                    Configuration.ApiClient.ParameterToString(stackId)); // path parameter
+            }
+
             if (patchStackRequest != null && patchStackRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(patchStackRequest); // http body (model) parameter
             }
             else
             {
@@ -3138,28 +3812,34 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UpdateStack", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("UpdateStack", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-
     }
 }

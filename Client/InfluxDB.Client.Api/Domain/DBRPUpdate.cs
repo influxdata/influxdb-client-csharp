@@ -27,30 +27,30 @@ namespace InfluxDB.Client.Api.Domain
     /// DBRPUpdate
     /// </summary>
     [DataContract]
-    public partial class DBRPUpdate :  IEquatable<DBRPUpdate>
+    public partial class DBRPUpdate : IEquatable<DBRPUpdate>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DBRPUpdate" /> class.
         /// </summary>
         /// <param name="retentionPolicy">InfluxDB v1 retention policy.</param>
         /// <param name="_default">_default.</param>
-        public DBRPUpdate(string retentionPolicy = default(string), bool? _default = default(bool?))
+        public DBRPUpdate(string retentionPolicy = default, bool? _default = default)
         {
-            this.RetentionPolicy = retentionPolicy;
-            this.Default = _default;
+            RetentionPolicy = retentionPolicy;
+            Default = _default;
         }
 
         /// <summary>
         /// InfluxDB v1 retention policy
         /// </summary>
         /// <value>InfluxDB v1 retention policy</value>
-        [DataMember(Name="retention_policy", EmitDefaultValue=false)]
+        [DataMember(Name = "retention_policy", EmitDefaultValue = false)]
         public string RetentionPolicy { get; set; }
 
         /// <summary>
         /// Gets or Sets Default
         /// </summary>
-        [DataMember(Name="default", EmitDefaultValue=false)]
+        [DataMember(Name = "default", EmitDefaultValue = false)]
         public bool? Default { get; set; }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DBRPUpdate);
+            return Equals(input as DBRPUpdate);
         }
 
         /// <summary>
@@ -94,16 +94,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DBRPUpdate input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.RetentionPolicy == input.RetentionPolicy ||
-                    (this.RetentionPolicy != null && this.RetentionPolicy.Equals(input.RetentionPolicy))
-                ) && 
+                    RetentionPolicy == input.RetentionPolicy ||
+                    RetentionPolicy != null && RetentionPolicy.Equals(input.RetentionPolicy)
+                ) &&
                 (
-                    this.Default == input.Default ||
-                    (this.Default != null && this.Default.Equals(input.Default))
+                    Default == input.Default ||
+                    Default != null && Default.Equals(input.Default)
                 );
         }
 
@@ -115,16 +117,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.RetentionPolicy != null)
-                    hashCode = hashCode * 59 + this.RetentionPolicy.GetHashCode();
-                if (this.Default != null)
-                    hashCode = hashCode * 59 + this.Default.GetHashCode();
+                var hashCode = 41;
+
+                if (RetentionPolicy != null)
+                {
+                    hashCode = hashCode * 59 + RetentionPolicy.GetHashCode();
+                }
+
+                if (Default != null)
+                {
+                    hashCode = hashCode * 59 + Default.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

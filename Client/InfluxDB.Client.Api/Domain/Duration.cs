@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// A pair consisting of length of time and the unit of time measured. It is the atomic unit from which all duration literals are composed.
     /// </summary>
     [DataContract]
-    public partial class Duration :  IEquatable<Duration>
+    public partial class Duration : IEquatable<Duration>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Duration" /> class.
@@ -35,30 +35,30 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="type">Type of AST node.</param>
         /// <param name="magnitude">magnitude.</param>
         /// <param name="unit">unit.</param>
-        public Duration(string type = default(string), long? magnitude = default(long?), string unit = default(string))
+        public Duration(string type = default, long? magnitude = default, string unit = default)
         {
-            this.Type = type;
-            this.Magnitude = magnitude;
-            this.Unit = unit;
+            Type = type;
+            Magnitude = magnitude;
+            Unit = unit;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Magnitude
         /// </summary>
-        [DataMember(Name="magnitude", EmitDefaultValue=false)]
+        [DataMember(Name = "magnitude", EmitDefaultValue = false)]
         public long? Magnitude { get; set; }
 
         /// <summary>
         /// Gets or Sets Unit
         /// </summary>
-        [DataMember(Name="unit", EmitDefaultValue=false)]
+        [DataMember(Name = "unit", EmitDefaultValue = false)]
         public string Unit { get; set; }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Duration);
+            return Equals(input as Duration);
         }
 
         /// <summary>
@@ -103,20 +103,22 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Duration input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && 
+                    Type == input.Type ||
+                    Type != null && Type.Equals(input.Type)
+                ) &&
                 (
-                    this.Magnitude == input.Magnitude ||
-                    (this.Magnitude != null && this.Magnitude.Equals(input.Magnitude))
-                ) && 
+                    Magnitude == input.Magnitude ||
+                    Magnitude != null && Magnitude.Equals(input.Magnitude)
+                ) &&
                 (
-                    this.Unit == input.Unit ||
-                    (this.Unit != null && this.Unit.Equals(input.Unit))
+                    Unit == input.Unit ||
+                    Unit != null && Unit.Equals(input.Unit)
                 );
         }
 
@@ -128,18 +130,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Magnitude != null)
-                    hashCode = hashCode * 59 + this.Magnitude.GetHashCode();
-                if (this.Unit != null)
-                    hashCode = hashCode * 59 + this.Unit.GetHashCode();
+                var hashCode = 41;
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (Magnitude != null)
+                {
+                    hashCode = hashCode * 59 + Magnitude.GetHashCode();
+                }
+
+                if (Unit != null)
+                {
+                    hashCode = hashCode * 59 + Unit.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// Dashboards
     /// </summary>
     [DataContract]
-    public partial class Dashboards :  IEquatable<Dashboards>
+    public partial class Dashboards : IEquatable<Dashboards>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Dashboards" /> class.
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="dashboards">dashboards.</param>
-        public Dashboards(Links links = default(Links), List<Dashboard> dashboards = default(List<Dashboard>))
+        public Dashboards(Links links = default, List<Dashboard> dashboards = default)
         {
-            this.Links = links;
-            this._Dashboards = dashboards;
+            Links = links;
+            _Dashboards = dashboards;
         }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public Links Links { get; set; }
 
         /// <summary>
         /// Gets or Sets _Dashboards
         /// </summary>
-        [DataMember(Name="dashboards", EmitDefaultValue=false)]
+        [DataMember(Name = "dashboards", EmitDefaultValue = false)]
         public List<Dashboard> _Dashboards { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Dashboards);
+            return Equals(input as Dashboards);
         }
 
         /// <summary>
@@ -93,17 +93,16 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Dashboards input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
+                Links != null && Links.Equals(input.Links) &&
                 (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                ) && 
-                (
-                    this._Dashboards == input._Dashboards ||
-                    this._Dashboards != null &&
-                    this._Dashboards.SequenceEqual(input._Dashboards)
+                    _Dashboards == input._Dashboards ||
+                    _Dashboards != null &&
+                    _Dashboards.SequenceEqual(input._Dashboards)
                 );
         }
 
@@ -115,16 +114,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this._Dashboards != null)
-                    hashCode = hashCode * 59 + this._Dashboards.GetHashCode();
+                var hashCode = 41;
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
+                if (_Dashboards != null)
+                {
+                    hashCode = hashCode * 59 + _Dashboards.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -31,12 +31,13 @@ namespace InfluxDB.Client.Test
                 await _tasksApi.DeleteTaskAsync(task);
 
             var organizationsApi = Client.GetOrganizationsApi();
-            foreach (var org in (await organizationsApi.FindOrganizationsAsync()).Where(org => org.Name.EndsWith("-IT")))
+            foreach (var org in (await organizationsApi.FindOrganizationsAsync()).Where(org =>
+                         org.Name.EndsWith("-IT")))
                 await organizationsApi.DeleteOrganizationAsync(org);
         }
 
         private const string TaskFlux = "from(bucket: \"my-bucket\")\n\t|> range(start: 0)\n\t|> last()";
-        
+
         private TasksApi _tasksApi;
         private UsersApi _usersApi;
 
@@ -81,7 +82,8 @@ namespace InfluxDB.Client.Test
             var runs = await _tasksApi.GetRunsAsync(task, null, null, null);
             Assert.IsNotEmpty(runs);
 
-            var message = Assert.ThrowsAsync<NotFoundException>(async () => await _tasksApi.CancelRunAsync(runs.First()))
+            var message = Assert
+                .ThrowsAsync<NotFoundException>(async () => await _tasksApi.CancelRunAsync(runs.First()))
                 .Message;
 
             Assert.AreEqual("failed to cancel run: run not found", message);
@@ -101,7 +103,7 @@ namespace InfluxDB.Client.Test
         {
             var source = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
 
             var label = await Client.GetLabelsApi()
                 .CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
@@ -124,7 +126,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public void CloneTaskNotFound()
         {
-            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _tasksApi.CloneTaskAsync("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
+                await _tasksApi.CloneTaskAsync("020f755c3c082000"));
 
             Assert.AreEqual("failed to find task: task not found", ioe.Message);
         }
@@ -136,7 +139,7 @@ namespace InfluxDB.Client.Test
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h\n}}\n\n{TaskFlux}";
 
-            var task = new TaskType(orgID:_organization.Id, org:_organization.Name,
+            var task = new TaskType(orgID: _organization.Id, org: _organization.Name,
                 name: taskName, description: "testing task", status: TaskStatusType.Active, flux: flux);
 
             task = await _tasksApi.CreateTaskAsync(task);
@@ -195,7 +198,7 @@ namespace InfluxDB.Client.Test
 
             var flux = $"option task = {{\nname: \"{taskName}\",\nevery: 1h,\noffset: 30m\n}}\n\n{TaskFlux}";
 
-            var task = new TaskType(orgID:_organization.Id, org:_organization.Name,
+            var task = new TaskType(orgID: _organization.Id, org: _organization.Name,
                 name: taskName, status: TaskStatusType.Active, flux: flux);
 
             task = await _tasksApi.CreateTaskAsync(task);
@@ -207,7 +210,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task DeleteTask()
         {
-            var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *",
+                _organization);
 
             var foundTask = await _tasksApi.FindTaskByIdAsync(task.Id);
             Assert.IsNotNull(foundTask);
@@ -243,7 +247,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindTaskByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _tasksApi.FindTaskByIdAsync("020f755c3d082000"));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
+                await _tasksApi.FindTaskByIdAsync("020f755c3d082000"));
 
             Assert.AreEqual("failed to find task: task not found", ioe.Message);
         }
@@ -265,8 +270,10 @@ namespace InfluxDB.Client.Test
         [Ignore("https://github.com/influxdata/influxdb/issues/13577")]
         public async Task FindTasksAfterSpecifiedId()
         {
-            var task1 = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
-            var task2 = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task1 = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *",
+                _organization);
+            var task2 = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *",
+                _organization);
 
             var tasks = await _tasksApi.FindTasksAsync(task1.Id);
 
@@ -331,7 +338,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public void GetLogsNotExist()
         {
-            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _tasksApi.GetLogsAsync("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(
+                async () => await _tasksApi.GetLogsAsync("020f755c3c082000"));
 
             Assert.NotNull(ioe, "ioe.InnerException != null");
             Assert.AreEqual("failed to find task logs: task not found", ioe.Message);
@@ -373,7 +381,8 @@ namespace InfluxDB.Client.Test
         {
             var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _tasksApi.GetRunLogsAsync(task.Id, "020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
+                await _tasksApi.GetRunLogsAsync(task.Id, "020f755c3c082000"));
 
             Assert.NotNull(ioe, "ioe.InnerException != null");
             Assert.AreEqual("failed to find task logs: run not found", ioe.Message);
@@ -386,7 +395,7 @@ namespace InfluxDB.Client.Test
 
             var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
 
             var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
 
@@ -419,7 +428,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task Member()
         {
-            var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+            var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *",
+                _organization);
 
             var members = await _tasksApi.GetMembersAsync(task);
             Assert.AreEqual(0, members.Count);
@@ -447,7 +457,8 @@ namespace InfluxDB.Client.Test
         [Ignore("TODO https://github.com/influxdata/influxdb/issues/19234")]
         public async Task Owner()
         {
-            var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization.Id);
+            var task = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *",
+                _organization.Id);
 
             var owners = await _tasksApi.GetOwnersAsync(task);
             Assert.AreEqual(1, owners.Count);
@@ -602,7 +613,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("3m", updatedTask.Every);
             Assert.IsNull(updatedTask.Cron);
             Assert.AreEqual(0, CultureInfo.CurrentCulture.CompareInfo.Compare(
-                updatedTask.Flux, flux, CompareOptions.IgnoreSymbols),
+                    updatedTask.Flux, flux, CompareOptions.IgnoreSymbols),
                 $"Queries are not same: '{updatedTask.Flux}', '{flux}'.");
 
             Assert.IsNotNull(updatedTask.UpdatedAt);

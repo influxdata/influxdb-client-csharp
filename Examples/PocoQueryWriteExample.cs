@@ -22,10 +22,11 @@ namespace Examples
             [Column("temperature")] public double Temperature { get; set; }
 
             [Column(IsTimestamp = true)] public DateTime Time { get; set; }
-            
+
             public override string ToString()
             {
-                return $"{Time:MM/dd/yyyy hh:mm:ss.fff tt} {Device}-{Type} humidity: {Humidity}, pressure: {Pressure}, temperature: {Temperature}";
+                return
+                    $"{Time:MM/dd/yyyy hh:mm:ss.fff tt} {Device}-{Type} humidity: {Humidity}, pressure: {Pressure}, temperature: {Temperature}";
             }
         }
 
@@ -40,7 +41,7 @@ namespace Examples
             const string organization = "my-org";
             var options = new InfluxDBClientOptions.Builder()
                 .Url(host)
-                .AuthenticateToken( token.ToCharArray())
+                .AuthenticateToken(token.ToCharArray())
                 .Org(organization)
                 .Bucket(bucket)
                 .Build();
@@ -59,7 +60,7 @@ namespace Examples
                 Temperature = 15.22,
                 Time = time.Subtract(TimeSpan.FromHours(1))
             };
-            
+
             var sensorTime2 = new Sensor
             {
                 Type = "bme280",
@@ -75,7 +76,7 @@ namespace Examples
             //
             await client.GetWriteApiAsync()
                 .WriteMeasurementsAsync(WritePrecision.S, sensorTime1, sensorTime2);
-            
+
             //
             // Query Data to Domain object
             //
@@ -86,7 +87,7 @@ namespace Examples
             var list = await client.GetQueryApi().QueryAsync<Sensor>(query);
             //or as an alternative:
             // var list = await client.GetQueryApi().QueryAsync(query, typeof(Sensor));
-            
+
             //
             // Print result
             //

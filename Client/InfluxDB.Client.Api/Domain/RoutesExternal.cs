@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// RoutesExternal
     /// </summary>
     [DataContract]
-    public partial class RoutesExternal :  IEquatable<RoutesExternal>
+    public partial class RoutesExternal : IEquatable<RoutesExternal>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoutesExternal" /> class.
         /// </summary>
         /// <param name="statusFeed">statusFeed.</param>
-        public RoutesExternal(string statusFeed = default(string))
+        public RoutesExternal(string statusFeed = default)
         {
-            this.StatusFeed = statusFeed;
+            StatusFeed = statusFeed;
         }
 
         /// <summary>
         /// Gets or Sets StatusFeed
         /// </summary>
-        [DataMember(Name="statusFeed", EmitDefaultValue=false)]
+        [DataMember(Name = "statusFeed", EmitDefaultValue = false)]
         public string StatusFeed { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as RoutesExternal);
+            return Equals(input as RoutesExternal);
         }
 
         /// <summary>
@@ -84,13 +84,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(RoutesExternal input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.StatusFeed == input.StatusFeed ||
-                    (this.StatusFeed != null && this.StatusFeed.Equals(input.StatusFeed))
-                );
+            return
+                StatusFeed == input.StatusFeed ||
+                StatusFeed != null && StatusFeed.Equals(input.StatusFeed);
         }
 
         /// <summary>
@@ -101,14 +101,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.StatusFeed != null)
-                    hashCode = hashCode * 59 + this.StatusFeed.GetHashCode();
+                var hashCode = 41;
+
+                if (StatusFeed != null)
+                {
+                    hashCode = hashCode * 59 + StatusFeed.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

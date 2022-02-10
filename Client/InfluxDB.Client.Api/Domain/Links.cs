@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Links
     /// </summary>
     [DataContract]
-    public partial class Links :  IEquatable<Links>
+    public partial class Links : IEquatable<Links>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Links" /> class.
@@ -41,21 +41,21 @@ namespace InfluxDB.Client.Api.Domain
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="next", EmitDefaultValue=false)]
+        [DataMember(Name = "next", EmitDefaultValue = false)]
         public string Next { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [DataMember(Name = "self", EmitDefaultValue = false)]
         public string Self { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="prev", EmitDefaultValue=false)]
+        [DataMember(Name = "prev", EmitDefaultValue = false)]
         public string Prev { get; private set; }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Links);
+            return Equals(input as Links);
         }
 
         /// <summary>
@@ -100,20 +100,22 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Links input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Next == input.Next ||
-                    (this.Next != null && this.Next.Equals(input.Next))
-                ) && 
+                    Next == input.Next ||
+                    Next != null && Next.Equals(input.Next)
+                ) &&
                 (
-                    this.Self == input.Self ||
-                    (this.Self != null && this.Self.Equals(input.Self))
-                ) && 
+                    Self == input.Self ||
+                    Self != null && Self.Equals(input.Self)
+                ) &&
                 (
-                    this.Prev == input.Prev ||
-                    (this.Prev != null && this.Prev.Equals(input.Prev))
+                    Prev == input.Prev ||
+                    Prev != null && Prev.Equals(input.Prev)
                 );
         }
 
@@ -125,18 +127,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Next != null)
-                    hashCode = hashCode * 59 + this.Next.GetHashCode();
-                if (this.Self != null)
-                    hashCode = hashCode * 59 + this.Self.GetHashCode();
-                if (this.Prev != null)
-                    hashCode = hashCode * 59 + this.Prev.GetHashCode();
+                var hashCode = 41;
+
+                if (Next != null)
+                {
+                    hashCode = hashCode * 59 + Next.GetHashCode();
+                }
+
+                if (Self != null)
+                {
+                    hashCode = hashCode * 59 + Self.GetHashCode();
+                }
+
+                if (Prev != null)
+                {
+                    hashCode = hashCode * 59 + Prev.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

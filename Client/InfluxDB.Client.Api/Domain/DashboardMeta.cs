@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// DashboardMeta
     /// </summary>
     [DataContract]
-    public partial class DashboardMeta :  IEquatable<DashboardMeta>
+    public partial class DashboardMeta : IEquatable<DashboardMeta>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardMeta" /> class.
         /// </summary>
         /// <param name="createdAt">createdAt.</param>
         /// <param name="updatedAt">updatedAt.</param>
-        public DashboardMeta(DateTime? createdAt = default(DateTime?), DateTime? updatedAt = default(DateTime?))
+        public DashboardMeta(DateTime? createdAt = default, DateTime? updatedAt = default)
         {
-            this.CreatedAt = createdAt;
-            this.UpdatedAt = updatedAt;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public DateTime? CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DashboardMeta);
+            return Equals(input as DashboardMeta);
         }
 
         /// <summary>
@@ -93,16 +93,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DashboardMeta input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
+                    CreatedAt == input.CreatedAt ||
+                    CreatedAt != null && CreatedAt.Equals(input.CreatedAt)
+                ) &&
                 (
-                    this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
+                    UpdatedAt == input.UpdatedAt ||
+                    UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)
                 );
         }
 
@@ -114,16 +116,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.CreatedAt != null)
-                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
-                if (this.UpdatedAt != null)
-                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
+                var hashCode = 41;
+
+                if (CreatedAt != null)
+                {
+                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+                }
+
+                if (UpdatedAt != null)
+                {
+                    hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

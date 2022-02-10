@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// SlackNotificationRuleBase
     /// </summary>
     [DataContract]
-    public partial class SlackNotificationRuleBase : NotificationRule,  IEquatable<SlackNotificationRuleBase>
+    public partial class SlackNotificationRuleBase : NotificationRule, IEquatable<SlackNotificationRuleBase>
     {
         /// <summary>
         /// Defines Type
@@ -38,51 +38,62 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Slack for value: slack
             /// </summary>
-            [EnumMember(Value = "slack")]
-            Slack = 1
-
+            [EnumMember(Value = "slack")] Slack = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackNotificationRuleBase" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SlackNotificationRuleBase() { }
+        protected SlackNotificationRuleBase()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackNotificationRuleBase" /> class.
         /// </summary>
         /// <param name="type">type (required) (default to TypeEnum.Slack).</param>
         /// <param name="channel">channel.</param>
         /// <param name="messageTemplate">messageTemplate (required).</param>
-        public SlackNotificationRuleBase(TypeEnum type = TypeEnum.Slack, string channel = default(string), string messageTemplate = default(string), string endpointID = default(string), string orgID = default(string), string taskID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks)) : base(endpointID, orgID, taskID, status, name, sleepUntil, every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels, links)
+        public SlackNotificationRuleBase(TypeEnum type = TypeEnum.Slack, string channel = default,
+            string messageTemplate = default, string endpointID = default, string orgID = default,
+            string taskID = default, TaskStatusType status = default, string name = default,
+            string sleepUntil = default, string every = default, string offset = default, string runbookLink = default,
+            int? limitEvery = default, int? limit = default, List<TagRule> tagRules = default,
+            string description = default, List<StatusRule> statusRules = default, List<Label> labels = default,
+            NotificationRuleBaseLinks links = default) : base(endpointID, orgID, taskID, status, name, sleepUntil,
+            every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels, links)
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "messageTemplate" is required (not null)
             if (messageTemplate == null)
             {
-                throw new InvalidDataException("messageTemplate is a required property for SlackNotificationRuleBase and cannot be null");
+                throw new InvalidDataException(
+                    "messageTemplate is a required property for SlackNotificationRuleBase and cannot be null");
             }
-            this.MessageTemplate = messageTemplate;
-            this.Channel = channel;
+
+            MessageTemplate = messageTemplate;
+            Channel = channel;
         }
 
 
         /// <summary>
         /// Gets or Sets Channel
         /// </summary>
-        [DataMember(Name="channel", EmitDefaultValue=false)]
+        [DataMember(Name = "channel", EmitDefaultValue = false)]
         public string Channel { get; set; }
 
         /// <summary>
         /// Gets or Sets MessageTemplate
         /// </summary>
-        [DataMember(Name="messageTemplate", EmitDefaultValue=false)]
+        [DataMember(Name = "messageTemplate", EmitDefaultValue = false)]
         public string MessageTemplate { get; set; }
 
         /// <summary>
@@ -117,7 +128,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SlackNotificationRuleBase);
+            return Equals(input as SlackNotificationRuleBase);
         }
 
         /// <summary>
@@ -128,21 +139,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(SlackNotificationRuleBase input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Channel == input.Channel ||
-                    (this.Channel != null && this.Channel.Equals(input.Channel))
-                ) && base.Equals(input) && 
-                (
-                    this.MessageTemplate == input.MessageTemplate ||
-                    (this.MessageTemplate != null && this.MessageTemplate.Equals(input.MessageTemplate))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Channel == input.Channel ||
+                       Channel != null && Channel.Equals(input.Channel)
+                   ) && base.Equals(input) &&
+                   (
+                       MessageTemplate == input.MessageTemplate ||
+                       MessageTemplate != null && MessageTemplate.Equals(input.MessageTemplate)
+                   );
         }
 
         /// <summary>
@@ -153,17 +166,21 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Channel != null)
-                    hashCode = hashCode * 59 + this.Channel.GetHashCode();
-                if (this.MessageTemplate != null)
-                    hashCode = hashCode * 59 + this.MessageTemplate.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Channel != null)
+                {
+                    hashCode = hashCode * 59 + Channel.GetHashCode();
+                }
+
+                if (MessageTemplate != null)
+                {
+                    hashCode = hashCode * 59 + MessageTemplate.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

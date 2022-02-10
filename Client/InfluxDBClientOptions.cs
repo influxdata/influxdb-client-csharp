@@ -34,14 +34,14 @@ namespace InfluxDB.Client
         public string Bucket { get; }
 
         public TimeSpan Timeout { get; }
-        
+
         public IWebProxy WebProxy { get; }
         public bool AllowHttpRedirects { get; }
 
         public PointSettings PointSettings { get; }
 
         public bool VerifySsl { get; }
-        
+
         public X509CertificateCollection ClientCertificates { get; }
 
         private InfluxDBClientOptions(Builder builder)
@@ -59,7 +59,7 @@ namespace InfluxDB.Client
             Bucket = builder.BucketString;
 
             Timeout = builder.Timeout;
-            
+
             WebProxy = builder.WebProxy;
             AllowHttpRedirects = builder.AllowHttpRedirects;
 
@@ -78,7 +78,7 @@ namespace InfluxDB.Client
             /// Anonymous.
             /// </summary>
             Anonymous,
-            
+
             /// <summary>
             /// Basic auth.
             /// </summary>
@@ -194,7 +194,7 @@ namespace InfluxDB.Client
 
                 return this;
             }
-            
+
             /// <summary>
             /// Setup authorization by <see cref="AuthenticationScheme.Token"/>.
             /// </summary>
@@ -264,10 +264,10 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(webProxy, nameof(webProxy));
 
                 WebProxy = webProxy;
-                
+
                 return this;
             }
-            
+
             /// <summary>
             /// Configure automatically following HTTP 3xx redirects.
             /// </summary>
@@ -278,7 +278,7 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(allowHttpRedirects, nameof(allowHttpRedirects));
 
                 AllowHttpRedirects = allowHttpRedirects;
-                
+
                 return this;
             }
 
@@ -317,14 +317,14 @@ namespace InfluxDB.Client
             /// <returns><see cref="Builder"/></returns>
             internal Builder LoadConfig(string sectionName = "influx2")
             {
-                var config = (Influx2) ConfigurationManager.GetSection(sectionName);
+                var config = (Influx2)ConfigurationManager.GetSection(sectionName);
                 if (config == null)
                 {
                     const string message = "The configuration doesn't contains a 'influx2' section. " +
                                            "The minimal configuration should contains an url of InfluxDB. " +
                                            "For more details see: " +
                                            "https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/README.md#client-configuration-file";
-                    
+
                     throw new ConfigurationErrorsException(message);
                 }
 
@@ -340,10 +340,7 @@ namespace InfluxDB.Client
                 var tags = config.Tags;
                 if (tags != null)
                 {
-                    foreach (Influx2.TagElement o in tags)
-                    {
-                        AddDefaultTag(o.Name, o.Value);
-                    }
+                    foreach (Influx2.TagElement o in tags) AddDefaultTag(o.Name, o.Value);
                 }
 
                 return Configure(url, org, bucket, token, logLevel, timeout, allowHttpRedirects, verifySsl);

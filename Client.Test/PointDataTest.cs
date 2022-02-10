@@ -20,29 +20,31 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual("h2o,location=europe level=2i", point.ToLineProtocol());
         }
-        
-        [Test]
-        public void TagEscapingKeyAndValue() {
 
+        [Test]
+        public void TagEscapingKeyAndValue()
+        {
             var point = PointData.Measurement("h\n2\ro\t_data")
                 .Tag("new\nline", "new\nline")
                 .Tag("carriage\rreturn", "carriage\rreturn")
                 .Tag("t\tab", "t\tab")
                 .Field("level", 2);
 
-            Assert.AreEqual("h\\n2\\ro\\t_data,carriage\\rreturn=carriage\\rreturn,new\\nline=new\\nline,t\\tab=t\\tab level=2i", point.ToLineProtocol());
+            Assert.AreEqual(
+                "h\\n2\\ro\\t_data,carriage\\rreturn=carriage\\rreturn,new\\nline=new\\nline,t\\tab=t\\tab level=2i",
+                point.ToLineProtocol());
         }
-        
-        [Test]
-        public void EqualSignEscaping() {
 
+        [Test]
+        public void EqualSignEscaping()
+        {
             var point = PointData.Measurement("h=2o")
                 .Tag("l=ocation", "e=urope")
                 .Field("l=evel", 2);
 
             Assert.AreEqual("h=2o,l\\=ocation=e\\=urope l\\=evel=2i", point.ToLineProtocol());
         }
-        
+
         [Test]
         public void Immutability()
         {
@@ -134,14 +136,14 @@ namespace InfluxDB.Client.Test
                 .Field("double", 250.69D)
                 .Field("float", 35.0F)
                 .Field("integer", 7)
-                .Field("short", (short) 8)
-                .Field("byte", (byte) 9)
-                .Field("ulong", (ulong) 10)
-                .Field("uint", (uint) 11)
-                .Field("sbyte", (sbyte) 12)
-                .Field("ushort", (ushort) 13)
+                .Field("short", (short)8)
+                .Field("byte", (byte)9)
+                .Field("ulong", (ulong)10)
+                .Field("uint", (uint)11)
+                .Field("sbyte", (sbyte)12)
+                .Field("ushort", (ushort)13)
                 .Field("point", 13.3)
-                .Field("decimal", (decimal) 25.6)
+                .Field("decimal", (decimal)25.6)
                 .Field("boolean", false)
                 .Field("string", "string value");
 
@@ -331,7 +333,7 @@ namespace InfluxDB.Client.Test
 
             var defaults = new PointSettings().AddDefaultTag("expensive", "true");
 
-            string actual = point.ToLineProtocol(defaults);
+            var actual = point.ToLineProtocol(defaults);
             Assert.AreEqual("h2o,expensive=true,location=europe level=2i", actual);
         }
 
@@ -358,7 +360,7 @@ namespace InfluxDB.Client.Test
 
             var defaults = new PointSettings().AddDefaultTag("expensive", "true");
 
-            string lineProtocol = point.ToLineProtocol(defaults);
+            var lineProtocol = point.ToLineProtocol(defaults);
             Assert.AreEqual("h2o,expensive=false,location=europe level=2i", lineProtocol);
         }
 
@@ -416,7 +418,5 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual("", point.ToLineProtocol());
         }
-        
-        
     }
 }

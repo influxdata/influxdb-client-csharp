@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Stack
     /// </summary>
     [DataContract]
-    public partial class Stack :  IEquatable<Stack>
+    public partial class Stack : IEquatable<Stack>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Stack" /> class.
@@ -35,35 +35,35 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="id">id.</param>
         /// <param name="orgID">orgID.</param>
         /// <param name="events">events.</param>
-        public Stack(string id = default(string), string orgID = default(string), List<StackEvents> events = default(List<StackEvents>))
+        public Stack(string id = default, string orgID = default, List<StackEvents> events = default)
         {
-            this.Id = id;
-            this.OrgID = orgID;
-            this.Events = events;
+            Id = id;
+            OrgID = orgID;
+            Events = events;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public DateTime? CreatedAt { get; private set; }
 
         /// <summary>
         /// Gets or Sets Events
         /// </summary>
-        [DataMember(Name="events", EmitDefaultValue=false)]
+        [DataMember(Name = "events", EmitDefaultValue = false)]
         public List<StackEvents> Events { get; set; }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Stack);
+            return Equals(input as Stack);
         }
 
         /// <summary>
@@ -109,25 +109,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Stack input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
+                    CreatedAt == input.CreatedAt ||
+                    CreatedAt != null && CreatedAt.Equals(input.CreatedAt)
+                ) &&
                 (
-                    this.Events == input.Events ||
-                    this.Events != null &&
-                    this.Events.SequenceEqual(input.Events)
+                    Events == input.Events ||
+                    Events != null &&
+                    Events.SequenceEqual(input.Events)
                 );
         }
 
@@ -139,20 +141,30 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.CreatedAt != null)
-                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
-                if (this.Events != null)
-                    hashCode = hashCode * 59 + this.Events.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (CreatedAt != null)
+                {
+                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+                }
+
+                if (Events != null)
+                {
+                    hashCode = hashCode * 59 + Events.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

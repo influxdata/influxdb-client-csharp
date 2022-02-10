@@ -21,7 +21,6 @@ namespace InfluxDB.Client.Linq.Internal
         internal QueryResultsSettings(QueryModel queryModel)
         {
             foreach (var resultOperator in queryModel.ResultOperators)
-            {
                 //
                 // Count
                 //
@@ -29,11 +28,10 @@ namespace InfluxDB.Client.Linq.Internal
                 {
                     ScalarAggregated = true;
                     AggregateFunction = objects => objects
-                        .Select(it => (long) Convert.ChangeType(it, typeof(long)))
+                        .Select(it => (long)Convert.ChangeType(it, typeof(long)))
                         .Sum();
                     return;
                 }
-            }
 
             //
             // Default behaviour

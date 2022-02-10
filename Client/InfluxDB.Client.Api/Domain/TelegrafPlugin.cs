@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TelegrafPlugin
     /// </summary>
     [DataContract]
-    public partial class TelegrafPlugin :  IEquatable<TelegrafPlugin>
+    public partial class TelegrafPlugin : IEquatable<TelegrafPlugin>
     {
         /// <summary>
         /// Defines Type
@@ -38,22 +38,20 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Input for value: input
             /// </summary>
-            [EnumMember(Value = "input")]
-            Input = 1,
+            [EnumMember(Value = "input")] Input = 1,
 
             /// <summary>
             /// Enum Output for value: output
             /// </summary>
-            [EnumMember(Value = "output")]
-            Output = 2
-
+            [EnumMember(Value = "output")] Output = 2
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegrafPlugin" /> class.
         /// </summary>
@@ -61,32 +59,33 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="name">name.</param>
         /// <param name="description">description.</param>
         /// <param name="config">config.</param>
-        public TelegrafPlugin(TypeEnum? type = default(TypeEnum?), string name = default(string), string description = default(string), Dictionary<string, Object> config = default(Dictionary<string, Object>))
+        public TelegrafPlugin(TypeEnum? type = default, string name = default, string description = default,
+            Dictionary<string, object> config = default)
         {
-            this.Type = type;
-            this.Name = name;
-            this.Description = description;
-            this.Config = config;
+            Type = type;
+            Name = name;
+            Description = description;
+            Config = config;
         }
 
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Config
         /// </summary>
-        [DataMember(Name="config", EmitDefaultValue=false)]
-        public Dictionary<string, Object> Config { get; set; }
+        [DataMember(Name = "config", EmitDefaultValue = false)]
+        public Dictionary<string, object> Config { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -120,7 +119,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegrafPlugin);
+            return Equals(input as TelegrafPlugin);
         }
 
         /// <summary>
@@ -131,25 +130,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TelegrafPlugin input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
+                    Type == input.Type ||
+                    Type.Equals(input.Type)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.Config == input.Config ||
-                    this.Config != null &&
-                    this.Config.SequenceEqual(input.Config)
+                    Config == input.Config ||
+                    Config != null &&
+                    Config.SequenceEqual(input.Config)
                 );
         }
 
@@ -161,19 +162,26 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Config != null)
-                    hashCode = hashCode * 59 + this.Config.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (Config != null)
+                {
+                    hashCode = hashCode * 59 + Config.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

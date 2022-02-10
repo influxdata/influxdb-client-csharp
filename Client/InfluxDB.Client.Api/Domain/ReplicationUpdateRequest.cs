@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// ReplicationUpdateRequest
     /// </summary>
     [DataContract]
-    public partial class ReplicationUpdateRequest :  IEquatable<ReplicationUpdateRequest>
+    public partial class ReplicationUpdateRequest : IEquatable<ReplicationUpdateRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplicationUpdateRequest" /> class.
@@ -38,50 +38,51 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="remoteBucketID">remoteBucketID.</param>
         /// <param name="maxQueueSizeBytes">maxQueueSizeBytes.</param>
         /// <param name="dropNonRetryableData">dropNonRetryableData.</param>
-        public ReplicationUpdateRequest(string name = default(string), string description = default(string), string remoteID = default(string), string remoteBucketID = default(string), long? maxQueueSizeBytes = default(long?), bool? dropNonRetryableData = default(bool?))
+        public ReplicationUpdateRequest(string name = default, string description = default, string remoteID = default,
+            string remoteBucketID = default, long? maxQueueSizeBytes = default, bool? dropNonRetryableData = default)
         {
-            this.Name = name;
-            this.Description = description;
-            this.RemoteID = remoteID;
-            this.RemoteBucketID = remoteBucketID;
-            this.MaxQueueSizeBytes = maxQueueSizeBytes;
-            this.DropNonRetryableData = dropNonRetryableData;
+            Name = name;
+            Description = description;
+            RemoteID = remoteID;
+            RemoteBucketID = remoteBucketID;
+            MaxQueueSizeBytes = maxQueueSizeBytes;
+            DropNonRetryableData = dropNonRetryableData;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets RemoteID
         /// </summary>
-        [DataMember(Name="remoteID", EmitDefaultValue=false)]
+        [DataMember(Name = "remoteID", EmitDefaultValue = false)]
         public string RemoteID { get; set; }
 
         /// <summary>
         /// Gets or Sets RemoteBucketID
         /// </summary>
-        [DataMember(Name="remoteBucketID", EmitDefaultValue=false)]
+        [DataMember(Name = "remoteBucketID", EmitDefaultValue = false)]
         public string RemoteBucketID { get; set; }
 
         /// <summary>
         /// Gets or Sets MaxQueueSizeBytes
         /// </summary>
-        [DataMember(Name="maxQueueSizeBytes", EmitDefaultValue=false)]
+        [DataMember(Name = "maxQueueSizeBytes", EmitDefaultValue = false)]
         public long? MaxQueueSizeBytes { get; set; }
 
         /// <summary>
         /// Gets or Sets DropNonRetryableData
         /// </summary>
-        [DataMember(Name="dropNonRetryableData", EmitDefaultValue=false)]
+        [DataMember(Name = "dropNonRetryableData", EmitDefaultValue = false)]
         public bool? DropNonRetryableData { get; set; }
 
         /// <summary>
@@ -118,7 +119,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ReplicationUpdateRequest);
+            return Equals(input as ReplicationUpdateRequest);
         }
 
         /// <summary>
@@ -129,32 +130,34 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ReplicationUpdateRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.RemoteID == input.RemoteID ||
-                    (this.RemoteID != null && this.RemoteID.Equals(input.RemoteID))
-                ) && 
+                    RemoteID == input.RemoteID ||
+                    RemoteID != null && RemoteID.Equals(input.RemoteID)
+                ) &&
                 (
-                    this.RemoteBucketID == input.RemoteBucketID ||
-                    (this.RemoteBucketID != null && this.RemoteBucketID.Equals(input.RemoteBucketID))
-                ) && 
+                    RemoteBucketID == input.RemoteBucketID ||
+                    RemoteBucketID != null && RemoteBucketID.Equals(input.RemoteBucketID)
+                ) &&
                 (
-                    this.MaxQueueSizeBytes == input.MaxQueueSizeBytes ||
-                    (this.MaxQueueSizeBytes != null && this.MaxQueueSizeBytes.Equals(input.MaxQueueSizeBytes))
-                ) && 
+                    MaxQueueSizeBytes == input.MaxQueueSizeBytes ||
+                    MaxQueueSizeBytes != null && MaxQueueSizeBytes.Equals(input.MaxQueueSizeBytes)
+                ) &&
                 (
-                    this.DropNonRetryableData == input.DropNonRetryableData ||
-                    (this.DropNonRetryableData != null && this.DropNonRetryableData.Equals(input.DropNonRetryableData))
+                    DropNonRetryableData == input.DropNonRetryableData ||
+                    DropNonRetryableData != null && DropNonRetryableData.Equals(input.DropNonRetryableData)
                 );
         }
 
@@ -166,24 +169,40 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.RemoteID != null)
-                    hashCode = hashCode * 59 + this.RemoteID.GetHashCode();
-                if (this.RemoteBucketID != null)
-                    hashCode = hashCode * 59 + this.RemoteBucketID.GetHashCode();
-                if (this.MaxQueueSizeBytes != null)
-                    hashCode = hashCode * 59 + this.MaxQueueSizeBytes.GetHashCode();
-                if (this.DropNonRetryableData != null)
-                    hashCode = hashCode * 59 + this.DropNonRetryableData.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (RemoteID != null)
+                {
+                    hashCode = hashCode * 59 + RemoteID.GetHashCode();
+                }
+
+                if (RemoteBucketID != null)
+                {
+                    hashCode = hashCode * 59 + RemoteBucketID.GetHashCode();
+                }
+
+                if (MaxQueueSizeBytes != null)
+                {
+                    hashCode = hashCode * 59 + MaxQueueSizeBytes.GetHashCode();
+                }
+
+                if (DropNonRetryableData != null)
+                {
+                    hashCode = hashCode * 59 + DropNonRetryableData.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

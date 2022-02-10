@@ -32,17 +32,23 @@ namespace InfluxDB.Client.Api.Domain
     [JsonSubtypes.KnownSubType(typeof(DeadmanCheck), "deadman")]
     [JsonSubtypes.KnownSubType(typeof(CustomCheck), "custom")]
     [JsonSubtypes.KnownSubType(typeof(ThresholdCheck), "threshold")]
-    public partial class Check : CheckDiscriminator,  IEquatable<Check>
+    public partial class Check : CheckDiscriminator, IEquatable<Check>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Check" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Check() { }
+        protected Check()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Check" /> class.
         /// </summary>
-        public Check(string name = default(string), string orgID = default(string), string taskID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string description = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks)) : base(name, orgID, taskID, query, status, description, labels, links)
+        public Check(string name = default, string orgID = default, string taskID = default,
+            DashboardQuery query = default, TaskStatusType? status = default, string description = default,
+            List<Label> labels = default, CheckBaseLinks links = default) : base(name, orgID, taskID, query, status,
+            description, labels, links)
         {
         }
 
@@ -75,7 +81,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Check);
+            return Equals(input as Check);
         }
 
         /// <summary>
@@ -86,7 +92,9 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Check input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
             return base.Equals(input);
         }
@@ -99,12 +107,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
+                var hashCode = base.GetHashCode();
+
                 return hashCode;
             }
         }
-
     }
-
 }

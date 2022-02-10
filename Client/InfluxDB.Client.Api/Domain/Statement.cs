@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Statement
     /// </summary>
     [DataContract]
-    public partial class Statement :  IEquatable<Statement>
+    public partial class Statement : IEquatable<Statement>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Statement" /> class.
@@ -65,7 +65,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Statement);
+            return Equals(input as Statement);
         }
 
         /// <summary>
@@ -76,7 +76,9 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Statement input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
             return false;
         }
@@ -89,12 +91,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
+                var hashCode = 41;
+
                 return hashCode;
             }
         }
-
     }
-
 }

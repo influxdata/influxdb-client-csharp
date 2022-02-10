@@ -27,31 +27,36 @@ namespace InfluxDB.Client.Api.Domain
     /// PasswordResetBody
     /// </summary>
     [DataContract]
-    public partial class PasswordResetBody :  IEquatable<PasswordResetBody>
+    public partial class PasswordResetBody : IEquatable<PasswordResetBody>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PasswordResetBody" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PasswordResetBody() { }
+        protected PasswordResetBody()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PasswordResetBody" /> class.
         /// </summary>
         /// <param name="password">password (required).</param>
-        public PasswordResetBody(string password = default(string))
+        public PasswordResetBody(string password = default)
         {
             // to ensure "password" is required (not null)
             if (password == null)
             {
-                throw new InvalidDataException("password is a required property for PasswordResetBody and cannot be null");
+                throw new InvalidDataException(
+                    "password is a required property for PasswordResetBody and cannot be null");
             }
-            this.Password = password;
+
+            Password = password;
         }
 
         /// <summary>
         /// Gets or Sets Password
         /// </summary>
-        [DataMember(Name="password", EmitDefaultValue=false)]
+        [DataMember(Name = "password", EmitDefaultValue = false)]
         public string Password { get; set; }
 
         /// <summary>
@@ -83,7 +88,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PasswordResetBody);
+            return Equals(input as PasswordResetBody);
         }
 
         /// <summary>
@@ -94,13 +99,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PasswordResetBody input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Password == input.Password ||
-                    (this.Password != null && this.Password.Equals(input.Password))
-                );
+            return
+                Password == input.Password ||
+                Password != null && Password.Equals(input.Password);
         }
 
         /// <summary>
@@ -111,14 +116,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Password != null)
-                    hashCode = hashCode * 59 + this.Password.GetHashCode();
+                var hashCode = 41;
+
+                if (Password != null)
+                {
+                    hashCode = hashCode * 59 + Password.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

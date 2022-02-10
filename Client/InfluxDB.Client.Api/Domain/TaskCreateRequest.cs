@@ -27,18 +27,22 @@ namespace InfluxDB.Client.Api.Domain
     /// TaskCreateRequest
     /// </summary>
     [DataContract]
-    public partial class TaskCreateRequest :  IEquatable<TaskCreateRequest>
+    public partial class TaskCreateRequest : IEquatable<TaskCreateRequest>
     {
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public TaskStatusType? Status { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskCreateRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TaskCreateRequest() { }
+        protected TaskCreateRequest()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskCreateRequest" /> class.
         /// </summary>
@@ -47,32 +51,34 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="status">status.</param>
         /// <param name="flux">The Flux script to run for this task. (required).</param>
         /// <param name="description">An optional description of the task..</param>
-        public TaskCreateRequest(string orgID = default(string), string org = default(string), TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string description = default(string))
+        public TaskCreateRequest(string orgID = default, string org = default, TaskStatusType? status = default,
+            string flux = default, string description = default)
         {
             // to ensure "flux" is required (not null)
             if (flux == null)
             {
                 throw new InvalidDataException("flux is a required property for TaskCreateRequest and cannot be null");
             }
-            this.Flux = flux;
-            this.OrgID = orgID;
-            this.Org = org;
-            this.Status = status;
-            this.Description = description;
+
+            Flux = flux;
+            OrgID = orgID;
+            Org = org;
+            Status = status;
+            Description = description;
         }
 
         /// <summary>
         /// The ID of the organization that owns this Task.
         /// </summary>
         /// <value>The ID of the organization that owns this Task.</value>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// The name of the organization that owns this Task.
         /// </summary>
         /// <value>The name of the organization that owns this Task.</value>
-        [DataMember(Name="org", EmitDefaultValue=false)]
+        [DataMember(Name = "org", EmitDefaultValue = false)]
         public string Org { get; set; }
 
 
@@ -80,14 +86,14 @@ namespace InfluxDB.Client.Api.Domain
         /// The Flux script to run for this task.
         /// </summary>
         /// <value>The Flux script to run for this task.</value>
-        [DataMember(Name="flux", EmitDefaultValue=false)]
+        [DataMember(Name = "flux", EmitDefaultValue = false)]
         public string Flux { get; set; }
 
         /// <summary>
         /// An optional description of the task.
         /// </summary>
         /// <value>An optional description of the task.</value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
@@ -123,7 +129,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TaskCreateRequest);
+            return Equals(input as TaskCreateRequest);
         }
 
         /// <summary>
@@ -134,28 +140,30 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TaskCreateRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.Org == input.Org ||
-                    (this.Org != null && this.Org.Equals(input.Org))
-                ) && 
+                    Org == input.Org ||
+                    Org != null && Org.Equals(input.Org)
+                ) &&
                 (
-                    this.Status == input.Status ||
-                    this.Status.Equals(input.Status)
-                ) && 
+                    Status == input.Status ||
+                    Status.Equals(input.Status)
+                ) &&
                 (
-                    this.Flux == input.Flux ||
-                    (this.Flux != null && this.Flux.Equals(input.Flux))
-                ) && 
+                    Flux == input.Flux ||
+                    Flux != null && Flux.Equals(input.Flux)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
                 );
         }
 
@@ -167,21 +175,31 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.Org != null)
-                    hashCode = hashCode * 59 + this.Org.GetHashCode();
-                hashCode = hashCode * 59 + this.Status.GetHashCode();
-                if (this.Flux != null)
-                    hashCode = hashCode * 59 + this.Flux.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
+                var hashCode = 41;
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (Org != null)
+                {
+                    hashCode = hashCode * 59 + Org.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Status.GetHashCode();
+                if (Flux != null)
+                {
+                    hashCode = hashCode * 59 + Flux.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -81,10 +81,7 @@ namespace InfluxDB.Client
 
             // append agent configuration
             config.Append("[agent]").Append("\n");
-            foreach (var pair in agentConfiguration)
-            {
-                AppendConfiguration(config, pair.Key, pair.Value);
-            }
+            foreach (var pair in agentConfiguration) AppendConfiguration(config, pair.Key, pair.Value);
 
             config.Append("\n");
 
@@ -104,10 +101,7 @@ namespace InfluxDB.Client
                     .Append("]]")
                     .Append("\n");
 
-                foreach (var pair in plugin.Config)
-                {
-                    AppendConfiguration(config, pair.Key, pair.Value);
-                }
+                foreach (var pair in plugin.Config) AppendConfiguration(config, pair.Key, pair.Value);
 
                 config.Append("\n");
             }
@@ -212,7 +206,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var request = new TelegrafPluginRequest(telegraf.Name, telegraf.Description, default, telegraf.Metadata, telegraf.Config,
+            var request = new TelegrafPluginRequest(telegraf.Name, telegraf.Description, default, telegraf.Metadata,
+                telegraf.Config,
                 telegraf.OrgID);
 
             return UpdateTelegrafAsync(telegraf.Id, request);
@@ -283,15 +278,13 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(telegraf, nameof(telegraf));
 
-            var cloned = new TelegrafPluginRequest(clonedName, telegraf.Description, default, telegraf.Metadata, telegraf.Config,
+            var cloned = new TelegrafPluginRequest(clonedName, telegraf.Description, default, telegraf.Metadata,
+                telegraf.Config,
                 telegraf.OrgID);
 
             var created = await CreateTelegrafAsync(cloned).ConfigureAwait(false);
             var labels = await GetLabelsAsync(telegraf).ConfigureAwait(false);
-            foreach (var label in labels)
-            {
-                await AddLabelAsync(label, created).ConfigureAwait(false);
-            }
+            foreach (var label in labels) await AddLabelAsync(label, created).ConfigureAwait(false);
 
             return created;
         }
@@ -305,9 +298,10 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
 
-            var response = await _service.GetTelegrafsIDWithIRestResponseAsync(telegrafId, null, "application/json").ConfigureAwait(false);
-            
-            return (Telegraf) _service.Configuration.ApiClient.Deserialize(response, typeof(Telegraf));
+            var response = await _service.GetTelegrafsIDWithIRestResponseAsync(telegrafId, null, "application/json")
+                .ConfigureAwait(false);
+
+            return (Telegraf)_service.Configuration.ApiClient.Deserialize(response, typeof(Telegraf));
         }
 
         /// <summary>
@@ -578,7 +572,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(telegrafId, nameof(telegrafId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            var response = await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId)).ConfigureAwait(false);
+            var response = await _service.PostTelegrafsIDLabelsAsync(telegrafId, new LabelMapping(labelId))
+                .ConfigureAwait(false);
             return response.Label;
         }
 
@@ -612,7 +607,10 @@ namespace InfluxDB.Client
 
         private void AppendConfiguration(StringBuilder config, string key, object value)
         {
-            if (value == null) return;
+            if (value == null)
+            {
+                return;
+            }
 
             config.Append("  ").Append(key).Append(" = ");
             if (value is IEnumerable<object> enumerable)

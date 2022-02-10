@@ -27,22 +27,22 @@ namespace InfluxDB.Client.Api.Domain
     /// IsOnboarding
     /// </summary>
     [DataContract]
-    public partial class IsOnboarding :  IEquatable<IsOnboarding>
+    public partial class IsOnboarding : IEquatable<IsOnboarding>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IsOnboarding" /> class.
         /// </summary>
         /// <param name="allowed">True means that the influxdb instance has NOT had initial setup; false means that the database has been setup..</param>
-        public IsOnboarding(bool? allowed = default(bool?))
+        public IsOnboarding(bool? allowed = default)
         {
-            this.Allowed = allowed;
+            Allowed = allowed;
         }
 
         /// <summary>
         /// True means that the influxdb instance has NOT had initial setup; false means that the database has been setup.
         /// </summary>
         /// <value>True means that the influxdb instance has NOT had initial setup; false means that the database has been setup.</value>
-        [DataMember(Name="allowed", EmitDefaultValue=false)]
+        [DataMember(Name = "allowed", EmitDefaultValue = false)]
         public bool? Allowed { get; set; }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as IsOnboarding);
+            return Equals(input as IsOnboarding);
         }
 
         /// <summary>
@@ -85,13 +85,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(IsOnboarding input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Allowed == input.Allowed ||
-                    (this.Allowed != null && this.Allowed.Equals(input.Allowed))
-                );
+            return
+                Allowed == input.Allowed ||
+                Allowed != null && Allowed.Equals(input.Allowed);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Allowed != null)
-                    hashCode = hashCode * 59 + this.Allowed.GetHashCode();
+                var hashCode = 41;
+
+                if (Allowed != null)
+                {
+                    hashCode = hashCode * 59 + Allowed.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

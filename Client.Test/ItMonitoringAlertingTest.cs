@@ -48,11 +48,11 @@ namespace InfluxDB.Client.Test
             var checksApi = _client.GetChecksApi();
             var notificationEndpointsApi = _client.GetNotificationEndpointsApi();
             var notificationRulesApi = _client.GetNotificationRulesApi();
-            
+
             var checks = await checksApi.FindChecksAsync(org.Id, new FindOptions());
             foreach (var delete in checks._Checks.Where(ne => ne.Name.EndsWith("-IT")))
                 await checksApi.DeleteCheckAsync(delete);
-            
+
             var rules = await notificationRulesApi.FindNotificationRulesAsync(org.Id, new FindOptions());
             foreach (var delete in rules._NotificationRules.Where(ne => ne.Name.EndsWith("-IT")))
                 await notificationRulesApi.DeleteNotificationRuleAsync(delete);
@@ -79,7 +79,8 @@ namespace InfluxDB.Client.Test
 
             var message = "The Stock price for XYZ is on: ${ r._level } level!";
 
-            await checksApi.CreateThresholdCheckAsync(AbstractItClientTest.GenerateName("XYZ Stock value"), query, "5s", message, threshold, org.Id);
+            await checksApi.CreateThresholdCheckAsync(AbstractItClientTest.GenerateName("XYZ Stock value"), query, "5s",
+                message, threshold, org.Id);
 
 
             //
@@ -118,18 +119,15 @@ namespace InfluxDB.Client.Test
 
 
             var start = DateTime.UtcNow;
-            while (!MockServer.LogEntries.Any() && (DateTime.UtcNow - start).TotalSeconds < 30)
-            {
-                Thread.Sleep(100);
-            }
-            
-            var requestEntry = MockServer.LogEntries.Last();
-            Assert.AreEqual($"{MockServerUrl}/",requestEntry.RequestMessage.Url);
+            while (!MockServer.LogEntries.Any() && (DateTime.UtcNow - start).TotalSeconds < 30) Thread.Sleep(100);
 
-            var json = (JObject) requestEntry.RequestMessage.BodyAsJson;
+            var requestEntry = MockServer.LogEntries.Last();
+            Assert.AreEqual($"{MockServerUrl}/", requestEntry.RequestMessage.Url);
+
+            var json = (JObject)requestEntry.RequestMessage.BodyAsJson;
             Assert.IsNotNull(json.GetValue("attachments"));
 
-            var attachments = (JArray) json.GetValue("attachments");
+            var attachments = (JArray)json.GetValue("attachments");
             Assert.AreEqual(1, attachments.Count);
 
             Assert.AreEqual("The Stock price for XYZ is on: crit level!", attachments[0]["text"].ToString());

@@ -25,6 +25,7 @@ namespace InfluxDB.Client.Api.Service
     public interface ILegacyAuthorizationsService : IApiAccessor
     {
         #region Synchronous Operations
+
         /// <summary>
         /// Delete a legacy authorization
         /// </summary>
@@ -35,7 +36,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void DeleteLegacyAuthorizationsID (string authID, string zapTraceSpan = null);
+        void DeleteLegacyAuthorizationsID(string authID, string zapTraceSpan = null);
 
         /// <summary>
         /// Delete a legacy authorization
@@ -47,7 +48,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteLegacyAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null);
+        ApiResponse<object> DeleteLegacyAuthorizationsIDWithHttpInfo(string authID, string zapTraceSpan = null);
+
         /// <summary>
         /// List all legacy authorizations
         /// </summary>
@@ -63,7 +65,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="token">Only show legacy authorizations with a specified token (auth name). (optional)</param>
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <returns>Authorizations</returns>
-        Authorizations GetLegacyAuthorizations (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null);
+        Authorizations GetLegacyAuthorizations(string zapTraceSpan = null, string userID = null, string user = null,
+            string orgID = null, string org = null, string token = null, string authID = null);
 
         /// <summary>
         /// List all legacy authorizations
@@ -80,7 +83,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="token">Only show legacy authorizations with a specified token (auth name). (optional)</param>
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        ApiResponse<Authorizations> GetLegacyAuthorizationsWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null);
+        ApiResponse<Authorizations> GetLegacyAuthorizationsWithHttpInfo(string zapTraceSpan = null,
+            string userID = null, string user = null, string orgID = null, string org = null, string token = null,
+            string authID = null);
+
         /// <summary>
         /// Retrieve a legacy authorization
         /// </summary>
@@ -91,7 +97,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
-        Authorization GetLegacyAuthorizationsID (string authID, string zapTraceSpan = null);
+        Authorization GetLegacyAuthorizationsID(string authID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve a legacy authorization
@@ -103,7 +109,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        ApiResponse<Authorization> GetLegacyAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null);
+        ApiResponse<Authorization> GetLegacyAuthorizationsIDWithHttpInfo(string authID, string zapTraceSpan = null);
+
         /// <summary>
         /// Update a legacy authorization to be active or inactive
         /// </summary>
@@ -115,7 +122,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorizationUpdateRequest">Legacy authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
-        Authorization PatchLegacyAuthorizationsID (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
+        Authorization PatchLegacyAuthorizationsID(string authID, AuthorizationUpdateRequest authorizationUpdateRequest,
+            string zapTraceSpan = null);
 
         /// <summary>
         /// Update a legacy authorization to be active or inactive
@@ -128,7 +136,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorizationUpdateRequest">Legacy authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        ApiResponse<Authorization> PatchLegacyAuthorizationsIDWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
+        ApiResponse<Authorization> PatchLegacyAuthorizationsIDWithHttpInfo(string authID,
+            AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null);
+
         /// <summary>
         /// Create a legacy authorization
         /// </summary>
@@ -139,7 +149,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="legacyAuthorizationPostRequest">Legacy authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
-        Authorization PostLegacyAuthorizations (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null);
+        Authorization PostLegacyAuthorizations(LegacyAuthorizationPostRequest legacyAuthorizationPostRequest,
+            string zapTraceSpan = null);
 
         /// <summary>
         /// Create a legacy authorization
@@ -151,7 +162,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="legacyAuthorizationPostRequest">Legacy authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        ApiResponse<Authorization> PostLegacyAuthorizationsWithHttpInfo (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null);
+        ApiResponse<Authorization> PostLegacyAuthorizationsWithHttpInfo(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null);
+
         /// <summary>
         /// Set a legacy authorization password
         /// </summary>
@@ -163,7 +176,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void PostLegacyAuthorizationsIDPassword (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        void PostLegacyAuthorizationsIDPassword(string authID, PasswordResetBody passwordResetBody,
+            string zapTraceSpan = null);
 
         /// <summary>
         /// Set a legacy authorization password
@@ -176,9 +190,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PostLegacyAuthorizationsIDPasswordWithHttpInfo (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+        ApiResponse<object> PostLegacyAuthorizationsIDPasswordWithHttpInfo(string authID,
+            PasswordResetBody passwordResetBody, string zapTraceSpan = null);
+
         #endregion Synchronous Operations
+
         #region Asynchronous Operations
+
         /// <summary>
         /// Delete a legacy authorization
         /// </summary>
@@ -190,7 +208,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteLegacyAuthorizationsIDAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task DeleteLegacyAuthorizationsIDAsync(string authID, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a legacy authorization
@@ -203,7 +222,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLegacyAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<object>> DeleteLegacyAuthorizationsIDAsyncWithHttpInfo(string authID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// List all legacy authorizations
         /// </summary>
@@ -220,7 +241,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorizations</returns>
-        System.Threading.Tasks.Task<Authorizations> GetLegacyAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Authorizations> GetLegacyAuthorizationsAsync(string zapTraceSpan = null,
+            string userID = null, string user = null, string orgID = null, string org = null, string token = null,
+            string authID = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all legacy authorizations
@@ -238,7 +261,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetLegacyAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetLegacyAuthorizationsAsyncWithHttpInfo(
+            string zapTraceSpan = null, string userID = null, string user = null, string orgID = null,
+            string org = null, string token = null, string authID = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Retrieve a legacy authorization
         /// </summary>
@@ -250,7 +277,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        System.Threading.Tasks.Task<Authorization> GetLegacyAuthorizationsIDAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Authorization> GetLegacyAuthorizationsIDAsync(string authID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a legacy authorization
@@ -263,7 +291,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorization>> GetLegacyAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Authorization>> GetLegacyAuthorizationsIDAsyncWithHttpInfo(
+            string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Update a legacy authorization to be active or inactive
         /// </summary>
@@ -276,7 +306,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        System.Threading.Tasks.Task<Authorization> PatchLegacyAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Authorization> PatchLegacyAuthorizationsIDAsync(string authID,
+            AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a legacy authorization to be active or inactive
@@ -290,7 +322,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchLegacyAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchLegacyAuthorizationsIDAsyncWithHttpInfo(
+            string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Create a legacy authorization
         /// </summary>
@@ -302,7 +337,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        System.Threading.Tasks.Task<Authorization> PostLegacyAuthorizationsAsync (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Authorization> PostLegacyAuthorizationsAsync(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a legacy authorization
@@ -315,7 +352,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Authorization>> PostLegacyAuthorizationsAsyncWithHttpInfo (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Authorization>> PostLegacyAuthorizationsAsyncWithHttpInfo(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Set a legacy authorization password
         /// </summary>
@@ -328,7 +368,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PostLegacyAuthorizationsIDPasswordAsync (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task PostLegacyAuthorizationsIDPasswordAsync(string authID,
+            PasswordResetBody passwordResetBody, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Set a legacy authorization password
@@ -342,7 +384,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PostLegacyAuthorizationsIDPasswordAsyncWithHttpInfo (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<object>> PostLegacyAuthorizationsIDPasswordAsyncWithHttpInfo(
+            string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
+
         #endregion Asynchronous Operations
     }
 
@@ -351,17 +396,17 @@ namespace InfluxDB.Client.Api.Service
     /// </summary>
     public partial class LegacyAuthorizationsService : ILegacyAuthorizationsService
     {
-        private InfluxDB.Client.Api.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LegacyAuthorizationsService"/> class.
         /// </summary>
         /// <returns></returns>
-        public LegacyAuthorizationsService(String basePath)
+        public LegacyAuthorizationsService(string basePath)
         {
-            this.Configuration = new InfluxDB.Client.Api.Client.Configuration { BasePath = basePath };
+            Configuration = new Configuration { BasePath = basePath };
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -370,31 +415,36 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public LegacyAuthorizationsService(InfluxDB.Client.Api.Client.Configuration configuration = null)
+        public LegacyAuthorizationsService(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = InfluxDB.Client.Api.Client.Configuration.Default;
+            {
+                Configuration = Configuration.Default;
+            }
             else
-                this.Configuration = configuration;
+            {
+                Configuration = configuration;
+            }
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(String basePath)
+        [Obsolete(
+            "SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(string basePath)
         {
             // do nothing
         }
@@ -403,12 +453,12 @@ namespace InfluxDB.Client.Api.Service
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public InfluxDB.Client.Api.Client.Configuration Configuration {get; set;}
+        public Configuration Configuration { get; set; }
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public InfluxDB.Client.Api.Client.ExceptionFactory ExceptionFactory
+        public ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -416,9 +466,10 @@ namespace InfluxDB.Client.Api.Service
                 {
                     throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
                 }
+
                 return _exceptionFactory;
             }
-            set { _exceptionFactory = value; }
+            set => _exceptionFactory = value;
         }
 
         /// <summary>
@@ -426,9 +477,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <returns>Dictionary of HTTP header</returns>
         [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public IDictionary<String, String> DefaultHeader()
+        public IDictionary<string, string> DefaultHeader()
         {
-            return new ReadOnlyDictionary<string, string>(this.Configuration.DefaultHeader);
+            return new ReadOnlyDictionary<string, string>(Configuration.DefaultHeader);
         }
 
         /// <summary>
@@ -440,7 +491,7 @@ namespace InfluxDB.Client.Api.Service
         [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
         public void AddDefaultHeader(string key, string value)
         {
-            this.Configuration.AddDefaultHeader(key, value);
+            Configuration.AddDefaultHeader(key, value);
         }
 
         /// <summary>
@@ -450,9 +501,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void DeleteLegacyAuthorizationsID (string authID, string zapTraceSpan = null)
+        public void DeleteLegacyAuthorizationsID(string authID, string zapTraceSpan = null)
         {
-             DeleteLegacyAuthorizationsIDWithHttpInfo(authID, zapTraceSpan);
+            DeleteLegacyAuthorizationsIDWithHttpInfo(authID, zapTraceSpan);
         }
 
         /// <summary>
@@ -462,52 +513,71 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteLegacyAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null)
+        public ApiResponse<object> DeleteLegacyAuthorizationsIDWithHttpInfo(string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
@@ -520,49 +590,69 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteLegacyAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteLegacyAuthorizationsIDWithIRestResponseAsync(
+            string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -575,54 +665,73 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestResponse DeleteLegacyAuthorizationsIDWithIRestResponse (string authID, string zapTraceSpan = null)
+        public RestResponse DeleteLegacyAuthorizationsIDWithIRestResponse(string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Delete a legacy authorization 
         /// </summary>
@@ -630,40 +739,56 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to delete.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DeleteLegacyAuthorizationsIDWithRestRequest (string authID, string zapTraceSpan = null)
+        public RestRequest DeleteLegacyAuthorizationsIDWithRestRequest(string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -675,10 +800,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteLegacyAuthorizationsIDAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task DeleteLegacyAuthorizationsIDAsync(string authID, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             return DeleteLegacyAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan, cancellationToken);
-
+            return DeleteLegacyAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan, cancellationToken);
         }
 
         /// <summary>
@@ -689,24 +814,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteLegacyAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> DeleteLegacyAuthorizationsIDAsyncWithHttpInfo(
+            string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await DeleteLegacyAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await DeleteLegacyAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
-            
+
         /// <summary>
         /// Delete a legacy authorization 
         /// </summary>
@@ -715,47 +846,67 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteLegacyAuthorizationsIDAsyncWithIRestResponse (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteLegacyAuthorizationsIDAsyncWithIRestResponse(
+            string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->DeleteLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -773,10 +924,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="token">Only show legacy authorizations with a specified token (auth name). (optional)</param>
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <returns>Authorizations</returns>
-        public Authorizations GetLegacyAuthorizations (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null)
+        public Authorizations GetLegacyAuthorizations(string zapTraceSpan = null, string userID = null,
+            string user = null, string orgID = null, string org = null, string token = null, string authID = null)
         {
-             ApiResponse<Authorizations> localVarResponse = GetLegacyAuthorizationsWithHttpInfo(zapTraceSpan, userID, user, orgID, org, token, authID);
-             return localVarResponse.Data;
+            var localVarResponse =
+                GetLegacyAuthorizationsWithHttpInfo(zapTraceSpan, userID, user, orgID, org, token, authID);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -791,56 +944,99 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="token">Only show legacy authorizations with a specified token (auth name). (optional)</param>
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public ApiResponse< Authorizations > GetLegacyAuthorizationsWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null)
+        public ApiResponse<Authorizations> GetLegacyAuthorizationsWithHttpInfo(string zapTraceSpan = null,
+            string userID = null, string user = null, string orgID = null, string org = null, string token = null,
+            string authID = null)
         {
-
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (userID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
-            if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
-            if (authID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (userID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
+            }
+
+            if (user != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (token != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
+            }
+
+            if (authID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Authorizations>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorizations) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorizations)));
+                (Authorizations)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorizations)));
         }
 
         /// <summary>
@@ -856,51 +1052,94 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetLegacyAuthorizationsWithIRestResponseAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetLegacyAuthorizationsWithIRestResponseAsync(
+            string zapTraceSpan = null, string userID = null, string user = null, string orgID = null,
+            string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (userID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
-            if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
-            if (authID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (userID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
+            }
+
+            if (user != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (token != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
+            }
+
+            if (authID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -918,56 +1157,98 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="token">Only show legacy authorizations with a specified token (auth name). (optional)</param>
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public RestResponse GetLegacyAuthorizationsWithIRestResponse (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null)
+        public RestResponse GetLegacyAuthorizationsWithIRestResponse(string zapTraceSpan = null, string userID = null,
+            string user = null, string orgID = null, string org = null, string token = null, string authID = null)
         {
-
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (userID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
-            if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
-            if (authID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (userID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
+            }
+
+            if (user != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (token != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
+            }
+
+            if (authID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// List all legacy authorizations 
         /// </summary>
@@ -980,42 +1261,81 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="token">Only show legacy authorizations with a specified token (auth name). (optional)</param>
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <returns>ApiResponse of Authorizations</returns>
-        public RestRequest GetLegacyAuthorizationsWithRestRequest (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null)
+        public RestRequest GetLegacyAuthorizationsWithRestRequest(string zapTraceSpan = null, string userID = null,
+            string user = null, string orgID = null, string org = null, string token = null, string authID = null)
         {
-
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (userID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
-            if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
-            if (authID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (userID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
+            }
+
+            if (user != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (token != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
+            }
+
+            if (authID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1032,11 +1352,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorizations</returns>
-        public async System.Threading.Tasks.Task<Authorizations> GetLegacyAuthorizationsAsync (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Authorizations> GetLegacyAuthorizationsAsync(
+            string zapTraceSpan = null, string userID = null, string user = null, string orgID = null,
+            string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Authorizations> localVarResponse = await GetLegacyAuthorizationsAsyncWithHttpInfo(zapTraceSpan, userID, user, orgID, org, token, authID, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetLegacyAuthorizationsAsyncWithHttpInfo(zapTraceSpan, userID, user, orgID, org, token, authID,
+                    cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1052,24 +1375,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorizations)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetLegacyAuthorizationsAsyncWithHttpInfo (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorizations>> GetLegacyAuthorizationsAsyncWithHttpInfo(
+            string zapTraceSpan = null, string userID = null, string user = null, string orgID = null,
+            string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetLegacyAuthorizationsAsyncWithIRestResponse(zapTraceSpan, userID, user, orgID, org, token, authID, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetLegacyAuthorizationsAsyncWithIRestResponse(zapTraceSpan, userID, user, orgID, org, token,
+                    authID, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Authorizations>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorizations) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorizations)));
+                (Authorizations)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorizations)));
         }
-            
+
         /// <summary>
         /// List all legacy authorizations 
         /// </summary>
@@ -1083,49 +1413,92 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">Only show legacy authorizations with a specified auth ID. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Authorizations)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetLegacyAuthorizationsAsyncWithIRestResponse (string zapTraceSpan = null, string userID = null, string user = null, string orgID = null, string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetLegacyAuthorizationsAsyncWithIRestResponse(
+            string zapTraceSpan = null, string userID = null, string user = null, string orgID = null,
+            string org = null, string token = null, string authID = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (userID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
-            if (user != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
-            if (authID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (userID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "userID", userID)); // query parameter
+            }
+
+            if (user != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "user", user)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (token != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
+            }
+
+            if (authID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "authID", authID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1138,10 +1511,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
-        public Authorization GetLegacyAuthorizationsID (string authID, string zapTraceSpan = null)
+        public Authorization GetLegacyAuthorizationsID(string authID, string zapTraceSpan = null)
         {
-             ApiResponse<Authorization> localVarResponse = GetLegacyAuthorizationsIDWithHttpInfo(authID, zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse = GetLegacyAuthorizationsIDWithHttpInfo(authID, zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1151,54 +1524,74 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public ApiResponse< Authorization > GetLegacyAuthorizationsIDWithHttpInfo (string authID, string zapTraceSpan = null)
+        public ApiResponse<Authorization> GetLegacyAuthorizationsIDWithHttpInfo(string authID,
+            string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Authorization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+                (Authorization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
         }
 
         /// <summary>
@@ -1209,49 +1602,69 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetLegacyAuthorizationsIDWithIRestResponseAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetLegacyAuthorizationsIDWithIRestResponseAsync(
+            string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1264,54 +1677,73 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public RestResponse GetLegacyAuthorizationsIDWithIRestResponse (string authID, string zapTraceSpan = null)
+        public RestResponse GetLegacyAuthorizationsIDWithIRestResponse(string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Retrieve a legacy authorization 
         /// </summary>
@@ -1319,40 +1751,56 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authID">The ID of the legacy authorization to get.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public RestRequest GetLegacyAuthorizationsIDWithRestRequest (string authID, string zapTraceSpan = null)
+        public RestRequest GetLegacyAuthorizationsIDWithRestRequest(string authID, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1364,11 +1812,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        public async System.Threading.Tasks.Task<Authorization> GetLegacyAuthorizationsIDAsync (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Authorization> GetLegacyAuthorizationsIDAsync(string authID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Authorization> localVarResponse = await GetLegacyAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetLegacyAuthorizationsIDAsyncWithHttpInfo(authID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1379,24 +1829,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> GetLegacyAuthorizationsIDAsyncWithHttpInfo (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> GetLegacyAuthorizationsIDAsyncWithHttpInfo(
+            string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetLegacyAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetLegacyAuthorizationsIDAsyncWithIRestResponse(authID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Authorization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+                (Authorization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
         }
-            
+
         /// <summary>
         /// Retrieve a legacy authorization 
         /// </summary>
@@ -1405,47 +1861,67 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetLegacyAuthorizationsIDAsyncWithIRestResponse (string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetLegacyAuthorizationsIDAsyncWithIRestResponse(
+            string authID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->GetLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1459,10 +1935,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorizationUpdateRequest">Legacy authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
-        public Authorization PatchLegacyAuthorizationsID (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        public Authorization PatchLegacyAuthorizationsID(string authID,
+            AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
         {
-             ApiResponse<Authorization> localVarResponse = PatchLegacyAuthorizationsIDWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse =
+                PatchLegacyAuthorizationsIDWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1473,34 +1951,53 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorizationUpdateRequest">Legacy authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public ApiResponse< Authorization > PatchLegacyAuthorizationsIDWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        public ApiResponse<Authorization> PatchLegacyAuthorizationsIDWithHttpInfo(string authID,
+            AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
+
             // verify the required parameter 'authorizationUpdateRequest' is set
             if (authorizationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1508,31 +2005,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Authorization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+                (Authorization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
         }
 
         /// <summary>
@@ -1544,34 +2048,54 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PatchLegacyAuthorizationsIDWithIRestResponseAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PatchLegacyAuthorizationsIDWithIRestResponseAsync(
+            string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
+
             // verify the required parameter 'authorizationUpdateRequest' is set
             if (authorizationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1579,26 +2103,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1612,34 +2143,53 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorizationUpdateRequest">Legacy authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public RestResponse PatchLegacyAuthorizationsIDWithIRestResponse (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        public RestResponse PatchLegacyAuthorizationsIDWithIRestResponse(string authID,
+            AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
+
             // verify the required parameter 'authorizationUpdateRequest' is set
             if (authorizationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1647,31 +2197,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Update a legacy authorization to be active or inactive 
         /// </summary>
@@ -1680,34 +2237,53 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="authorizationUpdateRequest">Legacy authorization to update</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public RestRequest PatchLegacyAuthorizationsIDWithRestRequest (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
+        public RestRequest PatchLegacyAuthorizationsIDWithRestRequest(string authID,
+            AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
+
             // verify the required parameter 'authorizationUpdateRequest' is set
             if (authorizationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1715,17 +2291,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1738,11 +2318,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        public async System.Threading.Tasks.Task<Authorization> PatchLegacyAuthorizationsIDAsync (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Authorization> PatchLegacyAuthorizationsIDAsync(string authID,
+            AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<Authorization> localVarResponse = await PatchLegacyAuthorizationsIDAsyncWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await PatchLegacyAuthorizationsIDAsyncWithHttpInfo(authID, authorizationUpdateRequest, zapTraceSpan,
+                    cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1754,24 +2337,32 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PatchLegacyAuthorizationsIDAsyncWithHttpInfo (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorization>>
+            PatchLegacyAuthorizationsIDAsyncWithHttpInfo(string authID,
+                AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null,
+                CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PatchLegacyAuthorizationsIDAsyncWithIRestResponse(authID, authorizationUpdateRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PatchLegacyAuthorizationsIDAsyncWithIRestResponse(authID, authorizationUpdateRequest,
+                    zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Authorization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+                (Authorization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
         }
-            
+
         /// <summary>
         /// Update a legacy authorization to be active or inactive 
         /// </summary>
@@ -1781,34 +2372,54 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PatchLegacyAuthorizationsIDAsyncWithIRestResponse (string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PatchLegacyAuthorizationsIDAsyncWithIRestResponse(
+            string authID, AuthorizationUpdateRequest authorizationUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
+
             // verify the required parameter 'authorizationUpdateRequest' is set
             if (authorizationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authorizationUpdateRequest' when calling LegacyAuthorizationsService->PatchLegacyAuthorizationsID");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (authorizationUpdateRequest != null && authorizationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(authorizationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1816,24 +2427,31 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchLegacyAuthorizationsID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1846,10 +2464,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="legacyAuthorizationPostRequest">Legacy authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Authorization</returns>
-        public Authorization PostLegacyAuthorizations (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null)
+        public Authorization PostLegacyAuthorizations(LegacyAuthorizationPostRequest legacyAuthorizationPostRequest,
+            string zapTraceSpan = null)
         {
-             ApiResponse<Authorization> localVarResponse = PostLegacyAuthorizationsWithHttpInfo(legacyAuthorizationPostRequest, zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse = PostLegacyAuthorizationsWithHttpInfo(legacyAuthorizationPostRequest, zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1859,30 +2478,41 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="legacyAuthorizationPostRequest">Legacy authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public ApiResponse< Authorization > PostLegacyAuthorizationsWithHttpInfo (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null)
+        public ApiResponse<Authorization> PostLegacyAuthorizationsWithHttpInfo(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'legacyAuthorizationPostRequest' is set
             if (legacyAuthorizationPostRequest == null)
-                throw new ApiException(400, "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            }
 
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (legacyAuthorizationPostRequest != null && legacyAuthorizationPostRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
             }
             else
             {
@@ -1890,31 +2520,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Authorization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+                (Authorization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
         }
 
         /// <summary>
@@ -1925,30 +2562,42 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostLegacyAuthorizationsWithIRestResponseAsync (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostLegacyAuthorizationsWithIRestResponseAsync(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'legacyAuthorizationPostRequest' is set
             if (legacyAuthorizationPostRequest == null)
-                throw new ApiException(400, "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            }
 
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (legacyAuthorizationPostRequest != null && legacyAuthorizationPostRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
             }
             else
             {
@@ -1956,26 +2605,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1988,30 +2644,41 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="legacyAuthorizationPostRequest">Legacy authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public RestResponse PostLegacyAuthorizationsWithIRestResponse (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null)
+        public RestResponse PostLegacyAuthorizationsWithIRestResponse(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'legacyAuthorizationPostRequest' is set
             if (legacyAuthorizationPostRequest == null)
-                throw new ApiException(400, "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            }
 
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (legacyAuthorizationPostRequest != null && legacyAuthorizationPostRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
             }
             else
             {
@@ -2019,31 +2686,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Create a legacy authorization 
         /// </summary>
@@ -2051,30 +2725,41 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="legacyAuthorizationPostRequest">Legacy authorization to create</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Authorization</returns>
-        public RestRequest PostLegacyAuthorizationsWithRestRequest (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null)
+        public RestRequest PostLegacyAuthorizationsWithRestRequest(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'legacyAuthorizationPostRequest' is set
             if (legacyAuthorizationPostRequest == null)
-                throw new ApiException(400, "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            }
 
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (legacyAuthorizationPostRequest != null && legacyAuthorizationPostRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
             }
             else
             {
@@ -2082,17 +2767,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2104,11 +2793,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Authorization</returns>
-        public async System.Threading.Tasks.Task<Authorization> PostLegacyAuthorizationsAsync (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Authorization> PostLegacyAuthorizationsAsync(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<Authorization> localVarResponse = await PostLegacyAuthorizationsAsyncWithHttpInfo(legacyAuthorizationPostRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await PostLegacyAuthorizationsAsyncWithHttpInfo(legacyAuthorizationPostRequest, zapTraceSpan,
+                    cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2119,24 +2811,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PostLegacyAuthorizationsAsyncWithHttpInfo (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Authorization>> PostLegacyAuthorizationsAsyncWithHttpInfo(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostLegacyAuthorizationsAsyncWithIRestResponse(legacyAuthorizationPostRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PostLegacyAuthorizationsAsyncWithIRestResponse(legacyAuthorizationPostRequest, zapTraceSpan,
+                    cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Authorization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Authorization) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
+                (Authorization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Authorization)));
         }
-            
+
         /// <summary>
         /// Create a legacy authorization 
         /// </summary>
@@ -2145,30 +2844,42 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Authorization)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostLegacyAuthorizationsAsyncWithIRestResponse (LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostLegacyAuthorizationsAsyncWithIRestResponse(
+            LegacyAuthorizationPostRequest legacyAuthorizationPostRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'legacyAuthorizationPostRequest' is set
             if (legacyAuthorizationPostRequest == null)
-                throw new ApiException(400, "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'legacyAuthorizationPostRequest' when calling LegacyAuthorizationsService->PostLegacyAuthorizations");
+            }
 
             var localVarPath = "/private/legacy/authorizations";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (legacyAuthorizationPostRequest != null && legacyAuthorizationPostRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(legacyAuthorizationPostRequest); // http body (model) parameter
             }
             else
             {
@@ -2176,24 +2887,31 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizations", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2207,9 +2925,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void PostLegacyAuthorizationsIDPassword (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public void PostLegacyAuthorizationsIDPassword(string authID, PasswordResetBody passwordResetBody,
+            string zapTraceSpan = null)
         {
-             PostLegacyAuthorizationsIDPasswordWithHttpInfo(authID, passwordResetBody, zapTraceSpan);
+            PostLegacyAuthorizationsIDPasswordWithHttpInfo(authID, passwordResetBody, zapTraceSpan);
         }
 
         /// <summary>
@@ -2220,34 +2939,52 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> PostLegacyAuthorizationsIDPasswordWithHttpInfo (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public ApiResponse<object> PostLegacyAuthorizationsIDPasswordWithHttpInfo(string authID,
+            PasswordResetBody passwordResetBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
+
             // verify the required parameter 'passwordResetBody' is set
             if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
             }
             else
             {
@@ -2255,29 +2992,36 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
@@ -2291,34 +3035,53 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostLegacyAuthorizationsIDPasswordWithIRestResponseAsync (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostLegacyAuthorizationsIDPasswordWithIRestResponseAsync(
+            string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
+
             // verify the required parameter 'passwordResetBody' is set
             if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
             }
             else
             {
@@ -2326,26 +3089,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2359,34 +3129,52 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestResponse PostLegacyAuthorizationsIDPasswordWithIRestResponse (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public RestResponse PostLegacyAuthorizationsIDPasswordWithIRestResponse(string authID,
+            PasswordResetBody passwordResetBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
+
             // verify the required parameter 'passwordResetBody' is set
             if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
             }
             else
             {
@@ -2394,31 +3182,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Set a legacy authorization password 
         /// </summary>
@@ -2427,34 +3222,52 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="passwordResetBody">New password</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest PostLegacyAuthorizationsIDPasswordWithRestRequest (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null)
+        public RestRequest PostLegacyAuthorizationsIDPasswordWithRestRequest(string authID,
+            PasswordResetBody passwordResetBody, string zapTraceSpan = null)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
+
             // verify the required parameter 'passwordResetBody' is set
             if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
             }
             else
             {
@@ -2462,17 +3275,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2485,10 +3302,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task PostLegacyAuthorizationsIDPasswordAsync (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task PostLegacyAuthorizationsIDPasswordAsync(string authID,
+            PasswordResetBody passwordResetBody, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             return PostLegacyAuthorizationsIDPasswordAsyncWithHttpInfo(authID, passwordResetBody, zapTraceSpan, cancellationToken);
-
+            return PostLegacyAuthorizationsIDPasswordAsyncWithHttpInfo(authID, passwordResetBody, zapTraceSpan,
+                cancellationToken);
         }
 
         /// <summary>
@@ -2500,24 +3319,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostLegacyAuthorizationsIDPasswordAsyncWithHttpInfo (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<object>>
+            PostLegacyAuthorizationsIDPasswordAsyncWithHttpInfo(string authID, PasswordResetBody passwordResetBody,
+                string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostLegacyAuthorizationsIDPasswordAsyncWithIRestResponse(authID, passwordResetBody, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PostLegacyAuthorizationsIDPasswordAsyncWithIRestResponse(authID, passwordResetBody, zapTraceSpan,
+                    cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
-            
+
         /// <summary>
         /// Set a legacy authorization password 
         /// </summary>
@@ -2527,34 +3353,53 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostLegacyAuthorizationsIDPasswordAsyncWithIRestResponse (string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostLegacyAuthorizationsIDPasswordAsyncWithIRestResponse(
+            string authID, PasswordResetBody passwordResetBody, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'authID' is set
             if (authID == null)
-                throw new ApiException(400, "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'authID' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
+
             // verify the required parameter 'passwordResetBody' is set
             if (passwordResetBody == null)
-                throw new ApiException(400, "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'passwordResetBody' when calling LegacyAuthorizationsService->PostLegacyAuthorizationsIDPassword");
+            }
 
             var localVarPath = "/private/legacy/authorizations/{authID}/password";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (authID != null) localVarPathParams.Add("authID", this.Configuration.ApiClient.ParameterToString(authID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (authID != null)
+            {
+                localVarPathParams.Add("authID", Configuration.ApiClient.ParameterToString(authID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (passwordResetBody != null && passwordResetBody.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(passwordResetBody); // http body (model) parameter
             }
             else
             {
@@ -2562,28 +3407,34 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostLegacyAuthorizationsIDPassword", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-
     }
 }

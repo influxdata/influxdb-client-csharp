@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// TelegrafRequestMetadata
     /// </summary>
     [DataContract]
-    public partial class TelegrafRequestMetadata :  IEquatable<TelegrafRequestMetadata>
+    public partial class TelegrafRequestMetadata : IEquatable<TelegrafRequestMetadata>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegrafRequestMetadata" /> class.
         /// </summary>
         /// <param name="buckets">buckets.</param>
-        public TelegrafRequestMetadata(List<string> buckets = default(List<string>))
+        public TelegrafRequestMetadata(List<string> buckets = default)
         {
-            this.Buckets = buckets;
+            Buckets = buckets;
         }
 
         /// <summary>
         /// Gets or Sets Buckets
         /// </summary>
-        [DataMember(Name="buckets", EmitDefaultValue=false)]
+        [DataMember(Name = "buckets", EmitDefaultValue = false)]
         public List<string> Buckets { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegrafRequestMetadata);
+            return Equals(input as TelegrafRequestMetadata);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TelegrafRequestMetadata input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Buckets == input.Buckets ||
-                    this.Buckets != null &&
-                    this.Buckets.SequenceEqual(input.Buckets)
-                );
+            return
+                Buckets == input.Buckets ||
+                Buckets != null &&
+                Buckets.SequenceEqual(input.Buckets);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Buckets != null)
-                    hashCode = hashCode * 59 + this.Buckets.GetHashCode();
+                var hashCode = 41;
+
+                if (Buckets != null)
+                {
+                    hashCode = hashCode * 59 + Buckets.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

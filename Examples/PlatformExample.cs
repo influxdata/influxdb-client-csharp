@@ -20,7 +20,7 @@ namespace Examples
             [Column("value")] public double Value { get; set; }
 
             [Column(IsTimestamp = true)] public DateTime Time { get; set; }
-            
+
             public override string ToString()
             {
                 return $"{Time:MM/dd/yyyy hh:mm:ss.fff tt} {Location} value: {Value}";
@@ -31,36 +31,37 @@ namespace Examples
         {
             var influxDB = InfluxDBClientFactory.Create("http://localhost:9999",
                 "my-user", "my-password".ToCharArray());
-            
+
             var organizationClient = influxDB.GetOrganizationsApi();
-            
+
             var medicalGMBH = await organizationClient
-                            .CreateOrganizationAsync("Medical Corp " + 
-                                                DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
-                                                                CultureInfo.InvariantCulture));
+                .CreateOrganizationAsync("Medical Corp " +
+                                         DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
+                                             CultureInfo.InvariantCulture));
 
 
             //
             // Create New Bucket with retention 1h
             //
-            var temperatureBucket = await influxDB.GetBucketsApi().CreateBucketAsync("temperature-sensors", medicalGMBH.Id);
+            var temperatureBucket =
+                await influxDB.GetBucketsApi().CreateBucketAsync("temperature-sensors", medicalGMBH.Id);
 
             //
             // Add Permissions to read and write to the Bucket
             //
             var resource = new PermissionResource
-                {Type = PermissionResource.TypeEnum.Buckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id};
+                { Type = PermissionResource.TypeEnum.Buckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id };
 
             var readBucket = new Permission(Permission.ActionEnum.Read, resource);
             var writeBucket = new Permission(Permission.ActionEnum.Write, resource);
 
             var authorization = await influxDB.GetAuthorizationsApi()
-                .CreateAuthorizationAsync(medicalGMBH, new List<Permission> {readBucket, writeBucket});
+                .CreateAuthorizationAsync(medicalGMBH, new List<Permission> { readBucket, writeBucket });
 
             Console.WriteLine($"The token to write to temperature-sensors bucket is: {authorization.Token}");
-            
+
             influxDB.Dispose();
-            
+
             //
             // Create new client with specified authorization token
             //
@@ -74,7 +75,7 @@ namespace Examples
                 .JitterInterval(1000)
                 .RetryInterval(5000)
                 .Build();
-            
+
             //
             // Write data
             //
@@ -83,7 +84,7 @@ namespace Examples
                 //
                 // Write by POCO
                 //
-                var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
+                var temperature = new Temperature { Location = "south", Value = 62D, Time = DateTime.UtcNow };
                 writeClient.WriteMeasurement("temperature-sensors", medicalGMBH.Id, WritePrecision.Ns, temperature);
 
                 //
@@ -100,15 +101,16 @@ namespace Examples
                 //
                 var record = "temperature,location=north value=60.0";
                 writeClient.WriteRecord("temperature-sensors", medicalGMBH.Id, WritePrecision.Ns, record);
-                
+
                 writeClient.Flush();
                 Thread.Sleep(2000);
             }
-            
+
             //
             // Read data
             //
-            var fluxTables = await influxDB.GetQueryApi().QueryAsync("from(bucket:\"temperature-sensors\") |> range(start: 0)", medicalGMBH.Id);
+            var fluxTables = await influxDB.GetQueryApi()
+                .QueryAsync("from(bucket:\"temperature-sensors\") |> range(start: 0)", medicalGMBH.Id);
             fluxTables.ForEach(fluxTable =>
             {
                 var fluxRecords = fluxTable.Records;
@@ -117,11 +119,12 @@ namespace Examples
                     Console.WriteLine($"{fluxRecord.GetTime()}: {fluxRecord.GetValue()}");
                 });
             });
-            
+
             //
             // Delete data
             //
-            await influxDB.GetDeleteApi().Delete(DateTime.UtcNow.AddMinutes(-1), DateTime.Now, "", temperatureBucket, medicalGMBH);
+            await influxDB.GetDeleteApi().Delete(DateTime.UtcNow.AddMinutes(-1), DateTime.Now, "", temperatureBucket,
+                medicalGMBH);
 
             influxDB.Dispose();
         }

@@ -27,17 +27,28 @@ namespace InfluxDB.Client.Api.Domain
     /// PagerDutyNotificationRule
     /// </summary>
     [DataContract]
-    public partial class PagerDutyNotificationRule : PagerDutyNotificationRuleBase,  IEquatable<PagerDutyNotificationRule>
+    public partial class PagerDutyNotificationRule : PagerDutyNotificationRuleBase,
+        IEquatable<PagerDutyNotificationRule>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PagerDutyNotificationRule" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PagerDutyNotificationRule() { }
+        protected PagerDutyNotificationRule()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PagerDutyNotificationRule" /> class.
         /// </summary>
-        public PagerDutyNotificationRule(string endpointID = default(string), string orgID = default(string), string taskID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks), TypeEnum type = TypeEnum.Pagerduty, string messageTemplate = default(string)) : base(type, messageTemplate, endpointID, orgID, taskID, status, name, sleepUntil, every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels, links)
+        public PagerDutyNotificationRule(string endpointID = default, string orgID = default, string taskID = default,
+            TaskStatusType status = default, string name = default, string sleepUntil = default, string every = default,
+            string offset = default, string runbookLink = default, int? limitEvery = default, int? limit = default,
+            List<TagRule> tagRules = default, string description = default, List<StatusRule> statusRules = default,
+            List<Label> labels = default, NotificationRuleBaseLinks links = default, TypeEnum type = TypeEnum.Pagerduty,
+            string messageTemplate = default) : base(type, messageTemplate, endpointID, orgID, taskID, status, name,
+            sleepUntil, every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels,
+            links)
         {
         }
 
@@ -70,7 +81,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PagerDutyNotificationRule);
+            return Equals(input as PagerDutyNotificationRule);
         }
 
         /// <summary>
@@ -81,7 +92,9 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PagerDutyNotificationRule input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
             return base.Equals(input);
         }
@@ -94,12 +107,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
+                var hashCode = base.GetHashCode();
+
                 return hashCode;
             }
         }
-
     }
-
 }

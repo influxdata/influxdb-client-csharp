@@ -21,8 +21,8 @@ namespace InfluxDB.Client.Core.Flux.Internal
         private const string AnnotationDatatype = "#datatype";
         private const string AnnotationGroup = "#group";
         private const string AnnotationDefault = "#default";
-        private static readonly string[] Annotations = {AnnotationDatatype, AnnotationGroup, AnnotationDefault}; 
-        
+        private static readonly string[] Annotations = { AnnotationDatatype, AnnotationGroup, AnnotationDefault };
+
         private enum ParsingState
         {
             Normal,
@@ -89,12 +89,14 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 }
 
                 foreach (var (table, record) in ParseNextFluxResponse(state))
-                {
                     if (record == null)
+                    {
                         consumer.Accept(state.tableIndex, table);
+                    }
                     else
+                    {
                         consumer.Accept(state.tableIndex - 1, record);
-                }
+                    }
             }
         }
 
@@ -103,7 +105,8 @@ namespace InfluxDB.Client.Core.Flux.Internal
         /// </summary>
         /// <param name="reader">CSV Data source reader</param>
         /// <param name="cancellationToken">cancellation token</param>
-        public async IAsyncEnumerable<(FluxTable, FluxRecord)> ParseFluxResponseAsync(TextReader reader, [EnumeratorCancellation] CancellationToken cancellationToken)
+        public async IAsyncEnumerable<(FluxTable, FluxRecord)> ParseFluxResponseAsync(TextReader reader,
+            [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNotNull(reader, nameof(reader));
 
@@ -111,10 +114,8 @@ namespace InfluxDB.Client.Core.Flux.Internal
             var state = new ParseFluxResponseState { csv = csv };
 
             while (await csv.ReadAsync().ConfigureAwait(false) && !cancellationToken.IsCancellationRequested)
-            {
                 foreach (var response in ParseNextFluxResponse(state))
-                    yield return response;   
-            }
+                    yield return response;
         }
 
         private class ParseFluxResponseState
@@ -149,7 +150,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
                 var reference = 0;
 
-                if (referenceValue != null && !String.IsNullOrEmpty(referenceValue))
+                if (referenceValue != null && !string.IsNullOrEmpty(referenceValue))
                 {
                     reference = Convert.ToInt32(referenceValue);
                 }
@@ -211,6 +212,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 {
                     throw new FluxCsvParserException("Unable to parse CSV response.", e);
                 }
+
                 if (state.tableId == -1)
                 {
                     state.tableId = currentId;
@@ -248,7 +250,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             return record;
         }
 
-        private Object ToValue(string strValue, FluxColumn column)
+        private object ToValue(string strValue, FluxColumn column)
         {
             Arguments.CheckNotNull(column, "column");
 

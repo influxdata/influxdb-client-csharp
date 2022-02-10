@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Error
     /// </summary>
     [DataContract]
-    public partial class Error :  IEquatable<Error>
+    public partial class Error : IEquatable<Error>
     {
         /// <summary>
         /// code is the machine-readable error code.
@@ -39,26 +39,22 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Internalerror for value: internal error
             /// </summary>
-            [EnumMember(Value = "internal error")]
-            Internalerror = 1,
+            [EnumMember(Value = "internal error")] Internalerror = 1,
 
             /// <summary>
             /// Enum Notfound for value: not found
             /// </summary>
-            [EnumMember(Value = "not found")]
-            Notfound = 2,
+            [EnumMember(Value = "not found")] Notfound = 2,
 
             /// <summary>
             /// Enum Conflict for value: conflict
             /// </summary>
-            [EnumMember(Value = "conflict")]
-            Conflict = 3,
+            [EnumMember(Value = "conflict")] Conflict = 3,
 
             /// <summary>
             /// Enum Invalid for value: invalid
             /// </summary>
-            [EnumMember(Value = "invalid")]
-            Invalid = 4,
+            [EnumMember(Value = "invalid")] Invalid = 4,
 
             /// <summary>
             /// Enum Unprocessableentity for value: unprocessable entity
@@ -69,20 +65,17 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Emptyvalue for value: empty value
             /// </summary>
-            [EnumMember(Value = "empty value")]
-            Emptyvalue = 6,
+            [EnumMember(Value = "empty value")] Emptyvalue = 6,
 
             /// <summary>
             /// Enum Unavailable for value: unavailable
             /// </summary>
-            [EnumMember(Value = "unavailable")]
-            Unavailable = 7,
+            [EnumMember(Value = "unavailable")] Unavailable = 7,
 
             /// <summary>
             /// Enum Forbidden for value: forbidden
             /// </summary>
-            [EnumMember(Value = "forbidden")]
-            Forbidden = 8,
+            [EnumMember(Value = "forbidden")] Forbidden = 8,
 
             /// <summary>
             /// Enum Toomanyrequests for value: too many requests
@@ -93,8 +86,7 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Unauthorized for value: unauthorized
             /// </summary>
-            [EnumMember(Value = "unauthorized")]
-            Unauthorized = 10,
+            [EnumMember(Value = "unauthorized")] Unauthorized = 10,
 
             /// <summary>
             /// Enum Methodnotallowed for value: method not allowed
@@ -113,15 +105,15 @@ namespace InfluxDB.Client.Api.Domain
             /// </summary>
             [EnumMember(Value = "unsupported media type")]
             Unsupportedmediatype = 13
-
         }
 
         /// <summary>
         /// code is the machine-readable error code.
         /// </summary>
         /// <value>code is the machine-readable error code.</value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [DataMember(Name = "code", EmitDefaultValue = false)]
         public CodeEnum Code { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Error" /> class.
         /// </summary>
@@ -135,21 +127,21 @@ namespace InfluxDB.Client.Api.Domain
         /// Human-readable message.
         /// </summary>
         /// <value>Human-readable message.</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [DataMember(Name = "message", EmitDefaultValue = false)]
         public string Message { get; private set; }
 
         /// <summary>
         /// Describes the logical code operation when the error occurred. Useful for debugging.
         /// </summary>
         /// <value>Describes the logical code operation when the error occurred. Useful for debugging.</value>
-        [DataMember(Name="op", EmitDefaultValue=false)]
+        [DataMember(Name = "op", EmitDefaultValue = false)]
         public string Op { get; private set; }
 
         /// <summary>
         /// Stack of errors that occurred during processing of the request. Useful for debugging.
         /// </summary>
         /// <value>Stack of errors that occurred during processing of the request. Useful for debugging.</value>
-        [DataMember(Name="err", EmitDefaultValue=false)]
+        [DataMember(Name = "err", EmitDefaultValue = false)]
         public string Err { get; private set; }
 
         /// <summary>
@@ -184,7 +176,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Error);
+            return Equals(input as Error);
         }
 
         /// <summary>
@@ -195,24 +187,26 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Error input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Code == input.Code ||
-                    this.Code.Equals(input.Code)
-                ) && 
+                    Code == input.Code ||
+                    Code.Equals(input.Code)
+                ) &&
                 (
-                    this.Message == input.Message ||
-                    (this.Message != null && this.Message.Equals(input.Message))
-                ) && 
+                    Message == input.Message ||
+                    Message != null && Message.Equals(input.Message)
+                ) &&
                 (
-                    this.Op == input.Op ||
-                    (this.Op != null && this.Op.Equals(input.Op))
-                ) && 
+                    Op == input.Op ||
+                    Op != null && Op.Equals(input.Op)
+                ) &&
                 (
-                    this.Err == input.Err ||
-                    (this.Err != null && this.Err.Equals(input.Err))
+                    Err == input.Err ||
+                    Err != null && Err.Equals(input.Err)
                 );
         }
 
@@ -224,19 +218,26 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Code.GetHashCode();
-                if (this.Message != null)
-                    hashCode = hashCode * 59 + this.Message.GetHashCode();
-                if (this.Op != null)
-                    hashCode = hashCode * 59 + this.Op.GetHashCode();
-                if (this.Err != null)
-                    hashCode = hashCode * 59 + this.Err.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Code.GetHashCode();
+                if (Message != null)
+                {
+                    hashCode = hashCode * 59 + Message.GetHashCode();
+                }
+
+                if (Op != null)
+                {
+                    hashCode = hashCode * 59 + Op.GetHashCode();
+                }
+
+                if (Err != null)
+                {
+                    hashCode = hashCode * 59 + Err.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,41 +27,47 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateExportByIDResources
     /// </summary>
     [DataContract]
-    public partial class TemplateExportByIDResources :  IEquatable<TemplateExportByIDResources>
+    public partial class TemplateExportByIDResources : IEquatable<TemplateExportByIDResources>
     {
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public TemplateKind Kind { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateExportByIDResources" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TemplateExportByIDResources() { }
+        protected TemplateExportByIDResources()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateExportByIDResources" /> class.
         /// </summary>
         /// <param name="id">id (required).</param>
         /// <param name="kind">kind (required).</param>
         /// <param name="name">if defined with id, name is used for resource exported by id. if defined independently, resources strictly matching name are exported.</param>
-        public TemplateExportByIDResources(string id = default(string), TemplateKind kind = default(TemplateKind), string name = default(string))
+        public TemplateExportByIDResources(string id = default, TemplateKind kind = default, string name = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
             {
-                throw new InvalidDataException("id is a required property for TemplateExportByIDResources and cannot be null");
+                throw new InvalidDataException(
+                    "id is a required property for TemplateExportByIDResources and cannot be null");
             }
-            this.Id = id;
+
+            Id = id;
             // to ensure "kind" is required (not null)
-            this.Kind = kind;
-            this.Name = name;
+            Kind = kind;
+            Name = name;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
 
@@ -69,7 +75,7 @@ namespace InfluxDB.Client.Api.Domain
         /// if defined with id, name is used for resource exported by id. if defined independently, resources strictly matching name are exported
         /// </summary>
         /// <value>if defined with id, name is used for resource exported by id. if defined independently, resources strictly matching name are exported</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
@@ -103,7 +109,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateExportByIDResources);
+            return Equals(input as TemplateExportByIDResources);
         }
 
         /// <summary>
@@ -114,20 +120,22 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateExportByIDResources input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Kind == input.Kind ||
-                    this.Kind.Equals(input.Kind)
-                ) && 
+                    Kind == input.Kind ||
+                    Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
                 );
         }
 
@@ -139,17 +147,21 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Kind.GetHashCode();
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

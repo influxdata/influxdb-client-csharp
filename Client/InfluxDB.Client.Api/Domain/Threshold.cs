@@ -32,17 +32,20 @@ namespace InfluxDB.Client.Api.Domain
     [JsonSubtypes.KnownSubType(typeof(GreaterThreshold), "greater")]
     [JsonSubtypes.KnownSubType(typeof(LesserThreshold), "lesser")]
     [JsonSubtypes.KnownSubType(typeof(RangeThreshold), "range")]
-    public partial class Threshold : ThresholdBase,  IEquatable<Threshold>
+    public partial class Threshold : ThresholdBase, IEquatable<Threshold>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Threshold" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Threshold() { }
+        protected Threshold()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Threshold" /> class.
         /// </summary>
-        public Threshold(CheckStatusLevel? level = default(CheckStatusLevel?), bool? allValues = default(bool?)) : base(level, allValues)
+        public Threshold(CheckStatusLevel? level = default, bool? allValues = default) : base(level, allValues)
         {
         }
 
@@ -75,7 +78,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Threshold);
+            return Equals(input as Threshold);
         }
 
         /// <summary>
@@ -86,7 +89,9 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Threshold input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
             return base.Equals(input);
         }
@@ -99,12 +104,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
+                var hashCode = base.GetHashCode();
+
                 return hashCode;
             }
         }
-
     }
-
 }

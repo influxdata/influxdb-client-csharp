@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// StackResources
     /// </summary>
     [DataContract]
-    public partial class StackResources :  IEquatable<StackResources>
+    public partial class StackResources : IEquatable<StackResources>
     {
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public TemplateKind? Kind { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StackResources" /> class.
         /// </summary>
@@ -43,45 +44,47 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="templateMetaName">templateMetaName.</param>
         /// <param name="associations">associations.</param>
         /// <param name="links">links.</param>
-        public StackResources(string apiVersion = default(string), string resourceID = default(string), TemplateKind? kind = default(TemplateKind?), string templateMetaName = default(string), List<StackAssociations> associations = default(List<StackAssociations>), StackLinks links = default(StackLinks))
+        public StackResources(string apiVersion = default, string resourceID = default, TemplateKind? kind = default,
+            string templateMetaName = default, List<StackAssociations> associations = default,
+            StackLinks links = default)
         {
-            this.ApiVersion = apiVersion;
-            this.ResourceID = resourceID;
-            this.Kind = kind;
-            this.TemplateMetaName = templateMetaName;
-            this.Associations = associations;
-            this.Links = links;
+            ApiVersion = apiVersion;
+            ResourceID = resourceID;
+            Kind = kind;
+            TemplateMetaName = templateMetaName;
+            Associations = associations;
+            Links = links;
         }
 
         /// <summary>
         /// Gets or Sets ApiVersion
         /// </summary>
-        [DataMember(Name="apiVersion", EmitDefaultValue=false)]
+        [DataMember(Name = "apiVersion", EmitDefaultValue = false)]
         public string ApiVersion { get; set; }
 
         /// <summary>
         /// Gets or Sets ResourceID
         /// </summary>
-        [DataMember(Name="resourceID", EmitDefaultValue=false)]
+        [DataMember(Name = "resourceID", EmitDefaultValue = false)]
         public string ResourceID { get; set; }
 
 
         /// <summary>
         /// Gets or Sets TemplateMetaName
         /// </summary>
-        [DataMember(Name="templateMetaName", EmitDefaultValue=false)]
+        [DataMember(Name = "templateMetaName", EmitDefaultValue = false)]
         public string TemplateMetaName { get; set; }
 
         /// <summary>
         /// Gets or Sets Associations
         /// </summary>
-        [DataMember(Name="associations", EmitDefaultValue=false)]
+        [DataMember(Name = "associations", EmitDefaultValue = false)]
         public List<StackAssociations> Associations { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public StackLinks Links { get; set; }
 
         /// <summary>
@@ -118,7 +121,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as StackResources);
+            return Equals(input as StackResources);
         }
 
         /// <summary>
@@ -129,34 +132,32 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(StackResources input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.ApiVersion == input.ApiVersion ||
-                    (this.ApiVersion != null && this.ApiVersion.Equals(input.ApiVersion))
-                ) && 
+                    ApiVersion == input.ApiVersion ||
+                    ApiVersion != null && ApiVersion.Equals(input.ApiVersion)
+                ) &&
                 (
-                    this.ResourceID == input.ResourceID ||
-                    (this.ResourceID != null && this.ResourceID.Equals(input.ResourceID))
-                ) && 
+                    ResourceID == input.ResourceID ||
+                    ResourceID != null && ResourceID.Equals(input.ResourceID)
+                ) &&
                 (
-                    this.Kind == input.Kind ||
-                    this.Kind.Equals(input.Kind)
-                ) && 
+                    Kind == input.Kind ||
+                    Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
-                ) && 
+                    TemplateMetaName == input.TemplateMetaName ||
+                    TemplateMetaName != null && TemplateMetaName.Equals(input.TemplateMetaName)
+                ) &&
                 (
-                    this.Associations == input.Associations ||
-                    this.Associations != null &&
-                    this.Associations.SequenceEqual(input.Associations)
-                ) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+                    Associations == input.Associations ||
+                    Associations != null &&
+                    Associations.SequenceEqual(input.Associations)
+                ) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -167,23 +168,36 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.ApiVersion != null)
-                    hashCode = hashCode * 59 + this.ApiVersion.GetHashCode();
-                if (this.ResourceID != null)
-                    hashCode = hashCode * 59 + this.ResourceID.GetHashCode();
-                hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.TemplateMetaName != null)
-                    hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
-                if (this.Associations != null)
-                    hashCode = hashCode * 59 + this.Associations.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = 41;
+
+                if (ApiVersion != null)
+                {
+                    hashCode = hashCode * 59 + ApiVersion.GetHashCode();
+                }
+
+                if (ResourceID != null)
+                {
+                    hashCode = hashCode * 59 + ResourceID.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Kind.GetHashCode();
+                if (TemplateMetaName != null)
+                {
+                    hashCode = hashCode * 59 + TemplateMetaName.GetHashCode();
+                }
+
+                if (Associations != null)
+                {
+                    hashCode = hashCode * 59 + Associations.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

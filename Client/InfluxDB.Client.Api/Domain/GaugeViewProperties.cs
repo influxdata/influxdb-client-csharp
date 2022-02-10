@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// GaugeViewProperties
     /// </summary>
     [DataContract]
-    public partial class GaugeViewProperties : ViewProperties,  IEquatable<GaugeViewProperties>
+    public partial class GaugeViewProperties : ViewProperties, IEquatable<GaugeViewProperties>
     {
         /// <summary>
         /// Defines Type
@@ -38,16 +38,15 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Gauge for value: gauge
             /// </summary>
-            [EnumMember(Value = "gauge")]
-            Gauge = 1
-
+            [EnumMember(Value = "gauge")] Gauge = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Defines Shape
         /// </summary>
@@ -57,21 +56,23 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum ChronografV2 for value: chronograf-v2
             /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
+            [EnumMember(Value = "chronograf-v2")] ChronografV2 = 1
         }
 
         /// <summary>
         /// Gets or Sets Shape
         /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
+        [DataMember(Name = "shape", EmitDefaultValue = false)]
         public ShapeEnum Shape { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GaugeViewProperties() { }
+        protected GaugeViewProperties()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeViewProperties" /> class.
         /// </summary>
@@ -86,124 +87,145 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="suffix">suffix (required).</param>
         /// <param name="tickSuffix">tickSuffix (required).</param>
         /// <param name="decimalPlaces">decimalPlaces (required).</param>
-        public GaugeViewProperties(TypeEnum type = TypeEnum.Gauge, List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?), string prefix = default(string), string tickPrefix = default(string), string suffix = default(string), string tickSuffix = default(string), DecimalPlaces decimalPlaces = default(DecimalPlaces)) : base()
+        public GaugeViewProperties(TypeEnum type = TypeEnum.Gauge, List<DashboardQuery> queries = default,
+            List<DashboardColor> colors = default, ShapeEnum shape = ShapeEnum.ChronografV2, string note = default,
+            bool? showNoteWhenEmpty = default, string prefix = default, string tickPrefix = default,
+            string suffix = default, string tickSuffix = default, DecimalPlaces decimalPlaces = default) : base()
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
-                throw new InvalidDataException("queries is a required property for GaugeViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "queries is a required property for GaugeViewProperties and cannot be null");
             }
-            this.Queries = queries;
+
+            Queries = queries;
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
-                throw new InvalidDataException("colors is a required property for GaugeViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "colors is a required property for GaugeViewProperties and cannot be null");
             }
-            this.Colors = colors;
+
+            Colors = colors;
             // to ensure "shape" is required (not null)
-            this.Shape = shape;
+            Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
-                throw new InvalidDataException("note is a required property for GaugeViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "note is a required property for GaugeViewProperties and cannot be null");
             }
-            this.Note = note;
+
+            Note = note;
             // to ensure "showNoteWhenEmpty" is required (not null)
             if (showNoteWhenEmpty == null)
             {
-                throw new InvalidDataException("showNoteWhenEmpty is a required property for GaugeViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "showNoteWhenEmpty is a required property for GaugeViewProperties and cannot be null");
             }
-            this.ShowNoteWhenEmpty = showNoteWhenEmpty;
+
+            ShowNoteWhenEmpty = showNoteWhenEmpty;
             // to ensure "prefix" is required (not null)
             if (prefix == null)
             {
-                throw new InvalidDataException("prefix is a required property for GaugeViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "prefix is a required property for GaugeViewProperties and cannot be null");
             }
-            this.Prefix = prefix;
+
+            Prefix = prefix;
             // to ensure "tickPrefix" is required (not null)
             if (tickPrefix == null)
             {
-                throw new InvalidDataException("tickPrefix is a required property for GaugeViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "tickPrefix is a required property for GaugeViewProperties and cannot be null");
             }
-            this.TickPrefix = tickPrefix;
+
+            TickPrefix = tickPrefix;
             // to ensure "suffix" is required (not null)
             if (suffix == null)
             {
-                throw new InvalidDataException("suffix is a required property for GaugeViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "suffix is a required property for GaugeViewProperties and cannot be null");
             }
-            this.Suffix = suffix;
+
+            Suffix = suffix;
             // to ensure "tickSuffix" is required (not null)
             if (tickSuffix == null)
             {
-                throw new InvalidDataException("tickSuffix is a required property for GaugeViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "tickSuffix is a required property for GaugeViewProperties and cannot be null");
             }
-            this.TickSuffix = tickSuffix;
+
+            TickSuffix = tickSuffix;
             // to ensure "decimalPlaces" is required (not null)
             if (decimalPlaces == null)
             {
-                throw new InvalidDataException("decimalPlaces is a required property for GaugeViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "decimalPlaces is a required property for GaugeViewProperties and cannot be null");
             }
-            this.DecimalPlaces = decimalPlaces;
+
+            DecimalPlaces = decimalPlaces;
         }
 
 
         /// <summary>
         /// Gets or Sets Queries
         /// </summary>
-        [DataMember(Name="queries", EmitDefaultValue=false)]
+        [DataMember(Name = "queries", EmitDefaultValue = false)]
         public List<DashboardQuery> Queries { get; set; }
 
         /// <summary>
         /// Colors define color encoding of data into a visualization
         /// </summary>
         /// <value>Colors define color encoding of data into a visualization</value>
-        [DataMember(Name="colors", EmitDefaultValue=false)]
+        [DataMember(Name = "colors", EmitDefaultValue = false)]
         public List<DashboardColor> Colors { get; set; }
 
 
         /// <summary>
         /// Gets or Sets Note
         /// </summary>
-        [DataMember(Name="note", EmitDefaultValue=false)]
+        [DataMember(Name = "note", EmitDefaultValue = false)]
         public string Note { get; set; }
 
         /// <summary>
         /// If true, will display note when empty
         /// </summary>
         /// <value>If true, will display note when empty</value>
-        [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
+        [DataMember(Name = "showNoteWhenEmpty", EmitDefaultValue = false)]
         public bool? ShowNoteWhenEmpty { get; set; }
 
         /// <summary>
         /// Gets or Sets Prefix
         /// </summary>
-        [DataMember(Name="prefix", EmitDefaultValue=false)]
+        [DataMember(Name = "prefix", EmitDefaultValue = false)]
         public string Prefix { get; set; }
 
         /// <summary>
         /// Gets or Sets TickPrefix
         /// </summary>
-        [DataMember(Name="tickPrefix", EmitDefaultValue=false)]
+        [DataMember(Name = "tickPrefix", EmitDefaultValue = false)]
         public string TickPrefix { get; set; }
 
         /// <summary>
         /// Gets or Sets Suffix
         /// </summary>
-        [DataMember(Name="suffix", EmitDefaultValue=false)]
+        [DataMember(Name = "suffix", EmitDefaultValue = false)]
         public string Suffix { get; set; }
 
         /// <summary>
         /// Gets or Sets TickSuffix
         /// </summary>
-        [DataMember(Name="tickSuffix", EmitDefaultValue=false)]
+        [DataMember(Name = "tickSuffix", EmitDefaultValue = false)]
         public string TickSuffix { get; set; }
 
         /// <summary>
         /// Gets or Sets DecimalPlaces
         /// </summary>
-        [DataMember(Name="decimalPlaces", EmitDefaultValue=false)]
+        [DataMember(Name = "decimalPlaces", EmitDefaultValue = false)]
         public DecimalPlaces DecimalPlaces { get; set; }
 
         /// <summary>
@@ -246,7 +268,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as GaugeViewProperties);
+            return Equals(input as GaugeViewProperties);
         }
 
         /// <summary>
@@ -257,55 +279,53 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(GaugeViewProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Queries == input.Queries ||
-                    this.Queries != null &&
-                    this.Queries.SequenceEqual(input.Queries)
-                ) && base.Equals(input) && 
-                (
-                    this.Colors == input.Colors ||
-                    this.Colors != null &&
-                    this.Colors.SequenceEqual(input.Colors)
-                ) && base.Equals(input) && 
-                (
-                    this.Shape == input.Shape ||
-                    this.Shape.Equals(input.Shape)
-                ) && base.Equals(input) && 
-                (
-                    this.Note == input.Note ||
-                    (this.Note != null && this.Note.Equals(input.Note))
-                ) && base.Equals(input) && 
-                (
-                    this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
-                    (this.ShowNoteWhenEmpty != null && this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
-                ) && base.Equals(input) && 
-                (
-                    this.Prefix == input.Prefix ||
-                    (this.Prefix != null && this.Prefix.Equals(input.Prefix))
-                ) && base.Equals(input) && 
-                (
-                    this.TickPrefix == input.TickPrefix ||
-                    (this.TickPrefix != null && this.TickPrefix.Equals(input.TickPrefix))
-                ) && base.Equals(input) && 
-                (
-                    this.Suffix == input.Suffix ||
-                    (this.Suffix != null && this.Suffix.Equals(input.Suffix))
-                ) && base.Equals(input) && 
-                (
-                    this.TickSuffix == input.TickSuffix ||
-                    (this.TickSuffix != null && this.TickSuffix.Equals(input.TickSuffix))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.DecimalPlaces != null && this.DecimalPlaces.Equals(input.DecimalPlaces))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Queries == input.Queries ||
+                       Queries != null &&
+                       Queries.SequenceEqual(input.Queries)
+                   ) && base.Equals(input) &&
+                   (
+                       Colors == input.Colors ||
+                       Colors != null &&
+                       Colors.SequenceEqual(input.Colors)
+                   ) && base.Equals(input) &&
+                   (
+                       Shape == input.Shape ||
+                       Shape.Equals(input.Shape)
+                   ) && base.Equals(input) &&
+                   (
+                       Note == input.Note ||
+                       Note != null && Note.Equals(input.Note)
+                   ) && base.Equals(input) &&
+                   (
+                       ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
+                       ShowNoteWhenEmpty != null && ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty)
+                   ) && base.Equals(input) &&
+                   (
+                       Prefix == input.Prefix ||
+                       Prefix != null && Prefix.Equals(input.Prefix)
+                   ) && base.Equals(input) &&
+                   (
+                       TickPrefix == input.TickPrefix ||
+                       TickPrefix != null && TickPrefix.Equals(input.TickPrefix)
+                   ) && base.Equals(input) &&
+                   (
+                       Suffix == input.Suffix ||
+                       Suffix != null && Suffix.Equals(input.Suffix)
+                   ) && base.Equals(input) &&
+                   (
+                       TickSuffix == input.TickSuffix ||
+                       TickSuffix != null && TickSuffix.Equals(input.TickSuffix)
+                   ) && base.Equals(input) && DecimalPlaces != null && DecimalPlaces.Equals(input.DecimalPlaces);
         }
 
         /// <summary>
@@ -316,32 +336,57 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Queries != null)
-                    hashCode = hashCode * 59 + this.Queries.GetHashCode();
-                if (this.Colors != null)
-                    hashCode = hashCode * 59 + this.Colors.GetHashCode();
-                hashCode = hashCode * 59 + this.Shape.GetHashCode();
-                if (this.Note != null)
-                    hashCode = hashCode * 59 + this.Note.GetHashCode();
-                if (this.ShowNoteWhenEmpty != null)
-                    hashCode = hashCode * 59 + this.ShowNoteWhenEmpty.GetHashCode();
-                if (this.Prefix != null)
-                    hashCode = hashCode * 59 + this.Prefix.GetHashCode();
-                if (this.TickPrefix != null)
-                    hashCode = hashCode * 59 + this.TickPrefix.GetHashCode();
-                if (this.Suffix != null)
-                    hashCode = hashCode * 59 + this.Suffix.GetHashCode();
-                if (this.TickSuffix != null)
-                    hashCode = hashCode * 59 + this.TickSuffix.GetHashCode();
-                if (this.DecimalPlaces != null)
-                    hashCode = hashCode * 59 + this.DecimalPlaces.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Queries != null)
+                {
+                    hashCode = hashCode * 59 + Queries.GetHashCode();
+                }
+
+                if (Colors != null)
+                {
+                    hashCode = hashCode * 59 + Colors.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Shape.GetHashCode();
+                if (Note != null)
+                {
+                    hashCode = hashCode * 59 + Note.GetHashCode();
+                }
+
+                if (ShowNoteWhenEmpty != null)
+                {
+                    hashCode = hashCode * 59 + ShowNoteWhenEmpty.GetHashCode();
+                }
+
+                if (Prefix != null)
+                {
+                    hashCode = hashCode * 59 + Prefix.GetHashCode();
+                }
+
+                if (TickPrefix != null)
+                {
+                    hashCode = hashCode * 59 + TickPrefix.GetHashCode();
+                }
+
+                if (Suffix != null)
+                {
+                    hashCode = hashCode * 59 + Suffix.GetHashCode();
+                }
+
+                if (TickSuffix != null)
+                {
+                    hashCode = hashCode * 59 + TickSuffix.GetHashCode();
+                }
+
+                if (DecimalPlaces != null)
+                {
+                    hashCode = hashCode * 59 + DecimalPlaces.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

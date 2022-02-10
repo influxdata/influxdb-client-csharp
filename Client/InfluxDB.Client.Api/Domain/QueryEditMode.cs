@@ -26,23 +26,17 @@ namespace InfluxDB.Client.Api.Domain
     /// <summary>
     /// Defines QueryEditMode
     /// </summary>
-    
     [JsonConverter(typeof(StringEnumConverter))]
-    
     public enum QueryEditMode
     {
         /// <summary>
         /// Enum Builder for value: builder
         /// </summary>
-        [EnumMember(Value = "builder")]
-        Builder = 1,
+        [EnumMember(Value = "builder")] Builder = 1,
 
         /// <summary>
         /// Enum Advanced for value: advanced
         /// </summary>
-        [EnumMember(Value = "advanced")]
-        Advanced = 2
-
+        [EnumMember(Value = "advanced")] Advanced = 2
     }
-
 }

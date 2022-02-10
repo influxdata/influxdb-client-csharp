@@ -17,12 +17,12 @@ namespace Examples
             /// <summary>
             /// Type of sensor.
             /// </summary>
-            public String Type { get; set; }
-            
+            public string Type { get; set; }
+
             /// <summary>
             /// Version of sensor.
             /// </summary>
-            public String Version { get; set; }
+            public string Version { get; set; }
 
             /// <summary>
             /// Measured value.
@@ -46,7 +46,9 @@ namespace Examples
             /// Convert to DomainObject.
             /// </summary>
             public T ConvertToEntity<T>(FluxRecord fluxRecord)
-                => (T)ConvertToEntity(fluxRecord, typeof(T));
+            {
+                return (T)ConvertToEntity(fluxRecord, typeof(T));
+            }
 
             public object ConvertToEntity(FluxRecord fluxRecord, Type type)
             {
@@ -60,7 +62,7 @@ namespace Examples
                     Type = Convert.ToString(fluxRecord.GetValueByKey("type")),
                     Version = Convert.ToString(fluxRecord.GetValueByKey("version")),
                     Value = Convert.ToDouble(fluxRecord.GetValueByKey("data")),
-                    Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
+                    Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc()
                 };
                 return Convert.ChangeType(customEntity, type);
             }
@@ -155,7 +157,7 @@ namespace Examples
                         "|> range(start: 0) " +
                         "|> filter(fn: (r) => r[\"_measurement\"] == \"sensor\")" +
                         "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
-           
+
             var sensors = queryApi.QuerySync<Sensor>(query);
             //
             // Print result

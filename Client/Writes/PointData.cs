@@ -12,8 +12,6 @@ using NodaTime;
 
 namespace InfluxDB.Client.Writes
 {
-
-
     /// <summary>
     /// Point defines the values that will be written to the database.
     /// <a href="http://bit.ly/influxdata-point">See Go Implementation</a>.
@@ -23,8 +21,12 @@ namespace InfluxDB.Client.Writes
         private static readonly DateTime EpochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         private readonly string _measurementName;
-        private readonly ImmutableSortedDictionary<string, string> _tags = ImmutableSortedDictionary<string, string>.Empty;
-        private readonly ImmutableSortedDictionary<string, object> _fields = ImmutableSortedDictionary<string, object>.Empty;
+
+        private readonly ImmutableSortedDictionary<string, string> _tags = ImmutableSortedDictionary<string, string>
+            .Empty;
+
+        private readonly ImmutableSortedDictionary<string, object> _fields =
+            ImmutableSortedDictionary<string, object>.Empty;
 
         public readonly WritePrecision Precision;
         private readonly BigInteger? _time;
@@ -48,10 +50,10 @@ namespace InfluxDB.Client.Writes
         }
 
         private PointData(string measurementName,
-                            WritePrecision precision,
-                            BigInteger? time,
-                            ImmutableSortedDictionary<string, string> tags,
-                            ImmutableSortedDictionary<string, object> fields)
+            WritePrecision precision,
+            BigInteger? time,
+            ImmutableSortedDictionary<string, string> tags,
+            ImmutableSortedDictionary<string, object> fields)
         {
             _measurementName = measurementName;
             Precision = precision;
@@ -74,7 +76,8 @@ namespace InfluxDB.Client.Writes
             {
                 if (tags.ContainsKey(name))
                 {
-                    Trace.TraceWarning($"Empty tags will cause deletion of, tag [{name}], measurement [{_measurementName}]");
+                    Trace.TraceWarning(
+                        $"Empty tags will cause deletion of, tag [{name}], measurement [{_measurementName}]");
                 }
                 else
                 {
@@ -82,18 +85,22 @@ namespace InfluxDB.Client.Writes
                     return this;
                 }
             }
+
             if (tags.ContainsKey(name))
             {
                 tags = tags.Remove(name);
             }
+
             if (!isEmptyValue)
+            {
                 tags = tags.Add(name, value);
+            }
 
             return new PointData(_measurementName,
-                                Precision,
-                                _time,
-                                tags,
-                                _fields);
+                Precision,
+                _time,
+                tags,
+                _fields);
         }
 
         /// <summary>
@@ -204,10 +211,10 @@ namespace InfluxDB.Client.Writes
         public PointData Timestamp(long timestamp, WritePrecision timeUnit)
         {
             return new PointData(_measurementName,
-                                timeUnit,
-                                timestamp,
-                                _tags,
-                                _fields);
+                timeUnit,
+                timestamp,
+                _tags,
+                _fields);
         }
 
         /// <summary>
@@ -220,10 +227,10 @@ namespace InfluxDB.Client.Writes
         {
             var time = TimeSpanToBigInteger(timestamp, timeUnit);
             return new PointData(_measurementName,
-                                timeUnit,
-                                time,
-                                _tags,
-                                _fields);
+                timeUnit,
+                time,
+                _tags,
+                _fields);
         }
 
         /// <summary>
@@ -265,10 +272,10 @@ namespace InfluxDB.Client.Writes
         {
             var time = InstantToBigInteger(timestamp, timeUnit);
             return new PointData(_measurementName,
-                                timeUnit,
-                                time,
-                                _tags,
-                                _fields);
+                timeUnit,
+                time,
+                _tags,
+                _fields);
         }
 
         /// <summary>
@@ -311,13 +318,14 @@ namespace InfluxDB.Client.Writes
             {
                 fields = fields.Remove(name);
             }
+
             fields = fields.Add(name, value);
 
             return new PointData(_measurementName,
-                                Precision,
-                                _time,
-                                _tags,
-                                fields);
+                Precision,
+                _time,
+                _tags,
+                fields);
         }
 
         private static BigInteger TimeSpanToBigInteger(TimeSpan timestamp, WritePrecision timeUnit)
@@ -338,7 +346,8 @@ namespace InfluxDB.Client.Writes
                     time = (BigInteger)timestamp.TotalSeconds;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit, "WritePrecision value is not supported");
+                    throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit,
+                        "WritePrecision value is not supported");
             }
 
             return time;
@@ -362,7 +371,8 @@ namespace InfluxDB.Client.Writes
                     time = (timestamp - NodaConstants.UnixEpoch).ToBigIntegerNanoseconds();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit, "WritePrecision value is not supported");
+                    throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit,
+                        "WritePrecision value is not supported");
             }
 
             return time;
@@ -400,8 +410,11 @@ namespace InfluxDB.Client.Writes
                     {
                         var name = item.Key;
                         if (!builder.ContainsKey(name)) // existing tags overrides
+                        {
                             builder.Add(name, item.Value);
+                        }
                     }
+
                     entries = builder;
                 }
             }
@@ -449,16 +462,16 @@ namespace InfluxDB.Client.Writes
 
                 if (value is double || value is float)
                 {
-                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
                 }
                 else if (value is uint || value is ulong || value is ushort)
                 {
-                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
                     sb.Append('u');
                 }
                 else if (value is byte || value is int || value is long || value is sbyte || value is short)
                 {
-                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
                     sb.Append('i');
                 }
                 else if (value is bool b)
@@ -537,6 +550,7 @@ namespace InfluxDB.Client.Writes
                         {
                             sb.Append("\\");
                         }
+
                         break;
                 }
 
@@ -575,8 +589,8 @@ namespace InfluxDB.Client.Writes
         private bool IsNotDefined(object value)
         {
             return value == null
-                   || (value is double d && (double.IsInfinity(d) || double.IsNaN(d)))
-                   || (value is float f && (float.IsInfinity(f) || float.IsNaN(f)));
+                   || value is double d && (double.IsInfinity(d) || double.IsNaN(d))
+                   || value is float f && (float.IsInfinity(f) || float.IsNaN(f));
         }
 
         /// <summary>
@@ -601,31 +615,34 @@ namespace InfluxDB.Client.Writes
         public bool Equals(PointData other)
         {
             if (other == null)
+            {
                 return false;
+            }
+
             var otherTags = other._tags;
 
             var result = _tags.Count == otherTags.Count &&
-                           _tags.All(pair => 
-                                {
-                                    var key = pair.Key;
-                                    var value = pair.Value;
-                                    return otherTags.ContainsKey(key) &&
-                                        otherTags[key] == value;
-                                });
+                         _tags.All(pair =>
+                         {
+                             var key = pair.Key;
+                             var value = pair.Value;
+                             return otherTags.ContainsKey(key) &&
+                                    otherTags[key] == value;
+                         });
             var otherFields = other._fields;
             result = result && _fields.Count == otherFields.Count &&
-                           _fields.All(pair =>
-                                {
-                                    var key = pair.Key;
-                                    var value = pair.Value;
-                                    return otherFields.ContainsKey(key) &&
-                                                object.Equals(otherFields[key], value);
-                                });
+                     _fields.All(pair =>
+                     {
+                         var key = pair.Key;
+                         var value = pair.Value;
+                         return otherFields.ContainsKey(key) &&
+                                Equals(otherFields[key], value);
+                     });
 
             result = result &&
-                   _measurementName == other._measurementName &&
-                   Precision == other.Precision &&
-                   EqualityComparer<BigInteger?>.Default.Equals(_time, other._time);
+                     _measurementName == other._measurementName &&
+                     Precision == other.Precision &&
+                     EqualityComparer<BigInteger?>.Default.Equals(_time, other._time);
 
             return result;
         }
@@ -648,6 +665,7 @@ namespace InfluxDB.Client.Writes
                 hashCode = hashCode * -1521134295 + pair.Key?.GetHashCode() ?? 0;
                 hashCode = hashCode * -1521134295 + pair.Value?.GetHashCode() ?? 0;
             }
+
             foreach (var pair in _fields)
             {
                 hashCode = hashCode * -1521134295 + pair.Key?.GetHashCode() ?? 0;

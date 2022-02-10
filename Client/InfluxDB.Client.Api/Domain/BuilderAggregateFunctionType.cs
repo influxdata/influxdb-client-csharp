@@ -26,23 +26,17 @@ namespace InfluxDB.Client.Api.Domain
     /// <summary>
     /// Defines BuilderAggregateFunctionType
     /// </summary>
-    
     [JsonConverter(typeof(StringEnumConverter))]
-    
     public enum BuilderAggregateFunctionType
     {
         /// <summary>
         /// Enum Filter for value: filter
         /// </summary>
-        [EnumMember(Value = "filter")]
-        Filter = 1,
+        [EnumMember(Value = "filter")] Filter = 1,
 
         /// <summary>
         /// Enum Group for value: group
         /// </summary>
-        [EnumMember(Value = "group")]
-        Group = 2
-
+        [EnumMember(Value = "group")] Group = 2
     }
-
 }

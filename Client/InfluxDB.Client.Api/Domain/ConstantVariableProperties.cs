@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// ConstantVariableProperties
     /// </summary>
     [DataContract]
-    public partial class ConstantVariableProperties : VariableProperties,  IEquatable<ConstantVariableProperties>
+    public partial class ConstantVariableProperties : VariableProperties, IEquatable<ConstantVariableProperties>
     {
         /// <summary>
         /// Defines Type
@@ -38,32 +38,31 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Constant for value: constant
             /// </summary>
-            [EnumMember(Value = "constant")]
-            Constant = 1
-
+            [EnumMember(Value = "constant")] Constant = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstantVariableProperties" /> class.
         /// </summary>
         /// <param name="type">type.</param>
         /// <param name="values">values.</param>
-        public ConstantVariableProperties(TypeEnum? type = default(TypeEnum?), List<string> values = default(List<string>)) : base()
+        public ConstantVariableProperties(TypeEnum? type = default, List<string> values = default) : base()
         {
-            this.Type = type;
-            this.Values = values;
+            Type = type;
+            Values = values;
         }
 
 
         /// <summary>
         /// Gets or Sets Values
         /// </summary>
-        [DataMember(Name="values", EmitDefaultValue=false)]
+        [DataMember(Name = "values", EmitDefaultValue = false)]
         public List<string> Values { get; set; }
 
         /// <summary>
@@ -97,7 +96,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ConstantVariableProperties);
+            return Equals(input as ConstantVariableProperties);
         }
 
         /// <summary>
@@ -108,18 +107,20 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ConstantVariableProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Values == input.Values ||
-                    this.Values != null &&
-                    this.Values.SequenceEqual(input.Values)
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Values == input.Values ||
+                       Values != null &&
+                       Values.SequenceEqual(input.Values)
+                   );
         }
 
         /// <summary>
@@ -130,15 +131,16 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Values != null)
-                    hashCode = hashCode * 59 + this.Values.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Values != null)
+                {
+                    hashCode = hashCode * 59 + Values.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

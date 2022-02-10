@@ -33,17 +33,24 @@ namespace InfluxDB.Client.Api.Domain
     [JsonSubtypes.KnownSubType(typeof(PagerDutyNotificationEndpoint), "pagerduty")]
     [JsonSubtypes.KnownSubType(typeof(HTTPNotificationEndpoint), "http")]
     [JsonSubtypes.KnownSubType(typeof(TelegramNotificationEndpoint), "telegram")]
-    public partial class NotificationEndpoint : NotificationEndpointDiscriminator,  IEquatable<NotificationEndpoint>
+    public partial class NotificationEndpoint : NotificationEndpointDiscriminator, IEquatable<NotificationEndpoint>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationEndpoint" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected NotificationEndpoint() { }
+        protected NotificationEndpoint()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationEndpoint" /> class.
         /// </summary>
-        public NotificationEndpoint(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, links, type)
+        public NotificationEndpoint(string id = default, string orgID = default, string userID = default,
+            string description = default, string name = default, StatusEnum? status = StatusEnum.Active,
+            List<Label> labels = default, NotificationEndpointBaseLinks links = default,
+            NotificationEndpointType type = default) : base(id, orgID, userID, description, name, status, labels, links,
+            type)
         {
         }
 
@@ -76,7 +83,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as NotificationEndpoint);
+            return Equals(input as NotificationEndpoint);
         }
 
         /// <summary>
@@ -87,7 +94,9 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(NotificationEndpoint input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
             return base.Equals(input);
         }
@@ -100,12 +109,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
+                var hashCode = base.GetHashCode();
+
                 return hashCode;
             }
         }
-
     }
-
 }

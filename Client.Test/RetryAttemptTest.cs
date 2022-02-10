@@ -25,9 +25,10 @@ namespace InfluxDB.Client.Test
             retry = new RetryAttempt(new WebException("", WebExceptionStatus.Timeout), 1, _default);
             Assert.IsTrue(retry.IsRetry());
 
-            retry = new RetryAttempt(new HttpException("", 0, new WebException("", WebExceptionStatus.Timeout)), 1, _default);
+            retry = new RetryAttempt(new HttpException("", 0, new WebException("", WebExceptionStatus.Timeout)), 1,
+                _default);
             Assert.IsTrue(retry.IsRetry());
-            
+
             retry = new RetryAttempt(new WebException("", WebExceptionStatus.ProtocolError), 1, _default);
             Assert.IsFalse(retry.IsRetry());
         }
@@ -78,8 +79,8 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(10_000, retry.GetRetryInterval());
 
             retry = new RetryAttempt(new HttpException("", 429), 1, _default);
-            Assert.GreaterOrEqual( retry.GetRetryInterval(), 5_000);
-            Assert.LessOrEqual( retry.GetRetryInterval(), 10_000);
+            Assert.GreaterOrEqual(retry.GetRetryInterval(), 5_000);
+            Assert.LessOrEqual(retry.GetRetryInterval(), 10_000);
         }
 
         [Test]
@@ -105,7 +106,7 @@ namespace InfluxDB.Client.Test
             Assert.IsTrue(retry.IsRetry());
 
             retry = new RetryAttempt(new HttpException("", 429), 3, options);
-            retryInterval = retry.GetRetryInterval();           
+            retryInterval = retry.GetRetryInterval();
             Assert.GreaterOrEqual(retryInterval, 125_000);
             Assert.LessOrEqual(retryInterval, 625_000);
             Assert.IsTrue(retry.IsRetry());
@@ -169,7 +170,7 @@ namespace InfluxDB.Client.Test
 
         private HttpException CreateException(int retryAfter = 10)
         {
-            var headers = new List<HeaderParameter> {new HeaderParameter("Retry-After", retryAfter.ToString())};
+            var headers = new List<HeaderParameter> { new HeaderParameter("Retry-After", retryAfter.ToString()) };
             var exception = HttpException.Create("", headers, "", HttpStatusCode.TooManyRequests);
             return exception;
         }

@@ -2,7 +2,7 @@ using System.Text;
 
 namespace InfluxDB.Client.Linq.Internal.Expressions
 {
-    internal abstract class AbstractExpressionPart: IExpressionPart
+    internal abstract class AbstractExpressionPart : IExpressionPart
     {
         private readonly string _expression;
 

@@ -27,30 +27,30 @@ namespace InfluxDB.Client.Api.Domain
     /// Declares a builtin identifier and its type
     /// </summary>
     [DataContract]
-    public partial class BuiltinStatement : Statement,  IEquatable<BuiltinStatement>
+    public partial class BuiltinStatement : Statement, IEquatable<BuiltinStatement>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BuiltinStatement" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
         /// <param name="id">id.</param>
-        public BuiltinStatement(string type = default(string), Identifier id = default(Identifier)) : base()
+        public BuiltinStatement(string type = default, Identifier id = default) : base()
         {
-            this.Type = type;
-            this.Id = id;
+            Type = type;
+            Id = id;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public Identifier Id { get; set; }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as BuiltinStatement);
+            return Equals(input as BuiltinStatement);
         }
 
         /// <summary>
@@ -95,17 +95,15 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(BuiltinStatement input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Id != null && this.Id.Equals(input.Id))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type != null && Type.Equals(input.Type)
+                   ) && base.Equals(input) && Id != null && Id.Equals(input.Id);
         }
 
         /// <summary>
@@ -116,16 +114,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

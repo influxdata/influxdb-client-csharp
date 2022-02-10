@@ -29,12 +29,12 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(bucket, nameof(bucket));
 
-            var postBucket = new PostBucketRequest(orgID: bucket.OrgID, name: bucket.Name, description: bucket.Description,
-                rp: bucket.Rp, retentionRules: bucket.RetentionRules);
+            var postBucket = new PostBucketRequest(bucket.OrgID, bucket.Name, bucket.Description,
+                bucket.Rp, bucket.RetentionRules);
 
             return _service.PostBucketsAsync(postBucket);
         }
-        
+
         /// <summary>
         /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
         /// </summary>
@@ -88,7 +88,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return CreateBucketAsync(name, default(BucketRetentionRules), orgId);
+            return CreateBucketAsync(name, default, orgId);
         }
 
         /// <summary>
@@ -104,7 +104,10 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             var bucket = new Bucket(null, name, null, orgId, null, null, new List<BucketRetentionRules>());
-            if (bucketRetentionRules != null) bucket.RetentionRules.Add(bucketRetentionRules);
+            if (bucketRetentionRules != null)
+            {
+                bucket.RetentionRules.Add(bucketRetentionRules);
+            }
 
             return CreateBucketAsync(bucket);
         }
@@ -123,7 +126,7 @@ namespace InfluxDB.Client
                 Enum.TryParse(rules.Type.ToString(), true, out PatchRetentionRule.TypeEnum type);
                 return new PatchRetentionRule(type, rules.EverySeconds, rules.ShardGroupDurationSeconds);
             }).ToList();
-            
+
             var request = new PatchBucketRequest(bucket.Name, bucket.Description, retentionRules);
             return _service.PatchBucketsIDAsync(bucket.Id, request);
         }
@@ -183,11 +186,8 @@ namespace InfluxDB.Client
             var created = await CreateBucketAsync(cloned).ConfigureAwait(false);
 
             var labels = await GetLabelsAsync(bucket).ConfigureAwait(false);
-            foreach (var label in labels)
-            {
-                await AddLabelAsync(label, created).ConfigureAwait(false);
-            }
-            
+            foreach (var label in labels) await AddLabelAsync(label, created).ConfigureAwait(false);
+
             return created;
         }
 
@@ -214,7 +214,7 @@ namespace InfluxDB.Client
 
             var buckets = await _service
                 .GetBucketsAsync(null, null, null, null, null, null, bucketName).ConfigureAwait(false);
-            
+
             return buckets._Buckets.FirstOrDefault();
         }
 
@@ -267,7 +267,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
-            return GetBucketsAsync(offset: findOptions.Offset, limit: findOptions.Limit, after: findOptions.After);
+            return GetBucketsAsync(findOptions.Offset, findOptions.Limit, findOptions.After);
         }
 
         /// <summary>

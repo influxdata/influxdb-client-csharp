@@ -10,9 +10,9 @@ namespace InfluxDB.Client.Core.Test
         public void SetUp()
         {
         }
-        
+
         [Test]
-        public void Literals() 
+        public void Literals()
         {
             Arguments.CheckDuration("1s", "duration");
             Arguments.CheckDuration("10d", "duration");
@@ -23,14 +23,14 @@ namespace InfluxDB.Client.Core.Test
             Arguments.CheckDuration("inf", "duration");
             Arguments.CheckDuration("-inf", "duration");
         }
-        
+
         [Test]
-        public void LiteralNull() 
+        public void LiteralNull()
         {
             try
             {
                 Arguments.CheckDuration(null, "duration");
-                
+
                 Assert.Fail();
             }
             catch (ArgumentException e)
@@ -38,14 +38,14 @@ namespace InfluxDB.Client.Core.Test
                 Assert.That(e.Message.Equals("Expecting a duration string for duration. But got: "));
             }
         }
-        
+
         [Test]
-        public void LiteralEmpty() 
+        public void LiteralEmpty()
         {
             try
             {
                 Arguments.CheckDuration("", "duration");
-                
+
                 Assert.Fail();
             }
             catch (ArgumentException e)
@@ -53,14 +53,14 @@ namespace InfluxDB.Client.Core.Test
                 Assert.That(e.Message.Equals("Expecting a duration string for duration. But got: "));
             }
         }
-        
+
         [Test]
-        public void LiteralNotDuration() 
+        public void LiteralNotDuration()
         {
             try
             {
                 Arguments.CheckDuration("x", "duration");
-                
+
                 Assert.Fail();
             }
             catch (ArgumentException e)

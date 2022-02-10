@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TableViewPropertiesTableOptions
     /// </summary>
     [DataContract]
-    public partial class TableViewPropertiesTableOptions :  IEquatable<TableViewPropertiesTableOptions>
+    public partial class TableViewPropertiesTableOptions : IEquatable<TableViewPropertiesTableOptions>
     {
         /// <summary>
         /// Wrapping describes the text wrapping style to be used in table views
@@ -39,29 +39,26 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Truncate for value: truncate
             /// </summary>
-            [EnumMember(Value = "truncate")]
-            Truncate = 1,
+            [EnumMember(Value = "truncate")] Truncate = 1,
 
             /// <summary>
             /// Enum Wrap for value: wrap
             /// </summary>
-            [EnumMember(Value = "wrap")]
-            Wrap = 2,
+            [EnumMember(Value = "wrap")] Wrap = 2,
 
             /// <summary>
             /// Enum SingleLine for value: single-line
             /// </summary>
-            [EnumMember(Value = "single-line")]
-            SingleLine = 3
-
+            [EnumMember(Value = "single-line")] SingleLine = 3
         }
 
         /// <summary>
         /// Wrapping describes the text wrapping style to be used in table views
         /// </summary>
         /// <value>Wrapping describes the text wrapping style to be used in table views</value>
-        [DataMember(Name="wrapping", EmitDefaultValue=false)]
+        [DataMember(Name = "wrapping", EmitDefaultValue = false)]
         public WrappingEnum? Wrapping { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TableViewPropertiesTableOptions" /> class.
         /// </summary>
@@ -69,25 +66,26 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="sortBy">sortBy.</param>
         /// <param name="wrapping">Wrapping describes the text wrapping style to be used in table views.</param>
         /// <param name="fixFirstColumn">fixFirstColumn indicates whether the first column of the table should be locked.</param>
-        public TableViewPropertiesTableOptions(bool? verticalTimeAxis = default(bool?), RenamableField sortBy = default(RenamableField), WrappingEnum? wrapping = default(WrappingEnum?), bool? fixFirstColumn = default(bool?))
+        public TableViewPropertiesTableOptions(bool? verticalTimeAxis = default, RenamableField sortBy = default,
+            WrappingEnum? wrapping = default, bool? fixFirstColumn = default)
         {
-            this.VerticalTimeAxis = verticalTimeAxis;
-            this.SortBy = sortBy;
-            this.Wrapping = wrapping;
-            this.FixFirstColumn = fixFirstColumn;
+            VerticalTimeAxis = verticalTimeAxis;
+            SortBy = sortBy;
+            Wrapping = wrapping;
+            FixFirstColumn = fixFirstColumn;
         }
 
         /// <summary>
         /// verticalTimeAxis describes the orientation of the table by indicating whether the time axis will be displayed vertically
         /// </summary>
         /// <value>verticalTimeAxis describes the orientation of the table by indicating whether the time axis will be displayed vertically</value>
-        [DataMember(Name="verticalTimeAxis", EmitDefaultValue=false)]
+        [DataMember(Name = "verticalTimeAxis", EmitDefaultValue = false)]
         public bool? VerticalTimeAxis { get; set; }
 
         /// <summary>
         /// Gets or Sets SortBy
         /// </summary>
-        [DataMember(Name="sortBy", EmitDefaultValue=false)]
+        [DataMember(Name = "sortBy", EmitDefaultValue = false)]
         public RenamableField SortBy { get; set; }
 
 
@@ -95,7 +93,7 @@ namespace InfluxDB.Client.Api.Domain
         /// fixFirstColumn indicates whether the first column of the table should be locked
         /// </summary>
         /// <value>fixFirstColumn indicates whether the first column of the table should be locked</value>
-        [DataMember(Name="fixFirstColumn", EmitDefaultValue=false)]
+        [DataMember(Name = "fixFirstColumn", EmitDefaultValue = false)]
         public bool? FixFirstColumn { get; set; }
 
         /// <summary>
@@ -130,7 +128,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TableViewPropertiesTableOptions);
+            return Equals(input as TableViewPropertiesTableOptions);
         }
 
         /// <summary>
@@ -141,25 +139,21 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TableViewPropertiesTableOptions input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.VerticalTimeAxis == input.VerticalTimeAxis ||
-                    (this.VerticalTimeAxis != null && this.VerticalTimeAxis.Equals(input.VerticalTimeAxis))
-                ) && 
-                (
-                    
-                    (this.SortBy != null && this.SortBy.Equals(input.SortBy))
-                ) && 
-                (
-                    this.Wrapping == input.Wrapping ||
-                    this.Wrapping.Equals(input.Wrapping)
-                ) && 
-                (
-                    this.FixFirstColumn == input.FixFirstColumn ||
-                    (this.FixFirstColumn != null && this.FixFirstColumn.Equals(input.FixFirstColumn))
-                );
+            return
+            (
+                VerticalTimeAxis == input.VerticalTimeAxis ||
+                VerticalTimeAxis != null && VerticalTimeAxis.Equals(input.VerticalTimeAxis)
+            ) && SortBy != null && SortBy.Equals(input.SortBy) && (
+                Wrapping == input.Wrapping ||
+                Wrapping.Equals(input.Wrapping)
+            ) && (
+                FixFirstColumn == input.FixFirstColumn ||
+                FixFirstColumn != null && FixFirstColumn.Equals(input.FixFirstColumn)
+            );
         }
 
         /// <summary>
@@ -170,19 +164,26 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.VerticalTimeAxis != null)
-                    hashCode = hashCode * 59 + this.VerticalTimeAxis.GetHashCode();
-                if (this.SortBy != null)
-                    hashCode = hashCode * 59 + this.SortBy.GetHashCode();
-                hashCode = hashCode * 59 + this.Wrapping.GetHashCode();
-                if (this.FixFirstColumn != null)
-                    hashCode = hashCode * 59 + this.FixFirstColumn.GetHashCode();
+                var hashCode = 41;
+
+                if (VerticalTimeAxis != null)
+                {
+                    hashCode = hashCode * 59 + VerticalTimeAxis.GetHashCode();
+                }
+
+                if (SortBy != null)
+                {
+                    hashCode = hashCode * 59 + SortBy.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Wrapping.GetHashCode();
+                if (FixFirstColumn != null)
+                {
+                    hashCode = hashCode * 59 + FixFirstColumn.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -13,7 +13,7 @@ namespace InfluxDB.Client.Test
         public new async Task SetUp()
         {
             _usersApi = Client.GetUsersApi();
-            
+
             foreach (var user in (await _usersApi.FindUsersAsync()).Where(user => user.Name.EndsWith("-IT")))
                 await _usersApi.DeleteUserAsync(user);
         }
@@ -49,7 +49,8 @@ namespace InfluxDB.Client.Test
             // delete user
             await _usersApi.DeleteUserAsync(createdUser);
 
-            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _usersApi.FindUserByIdAsync(createdUser.Id));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
+                await _usersApi.FindUserByIdAsync(createdUser.Id));
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.Message);
         }
@@ -71,7 +72,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindUserByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _usersApi.FindUserByIdAsync("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
+                await _usersApi.FindUserByIdAsync("020f755c3c082000"));
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.Message);

@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryDiffNotificationEndpoints
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryDiffNotificationEndpoints :  IEquatable<TemplateSummaryDiffNotificationEndpoints>
+    public partial class TemplateSummaryDiffNotificationEndpoints : IEquatable<TemplateSummaryDiffNotificationEndpoints>
     {
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public TemplateKind? Kind { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryDiffNotificationEndpoints" /> class.
         /// </summary>
@@ -43,46 +44,48 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="templateMetaName">templateMetaName.</param>
         /// <param name="_new">_new.</param>
         /// <param name="old">old.</param>
-        public TemplateSummaryDiffNotificationEndpoints(TemplateKind? kind = default(TemplateKind?), string stateStatus = default(string), string id = default(string), string templateMetaName = default(string), NotificationEndpointDiscriminator _new = default(NotificationEndpointDiscriminator), NotificationEndpointDiscriminator old = default(NotificationEndpointDiscriminator))
+        public TemplateSummaryDiffNotificationEndpoints(TemplateKind? kind = default, string stateStatus = default,
+            string id = default, string templateMetaName = default, NotificationEndpointDiscriminator _new = default,
+            NotificationEndpointDiscriminator old = default)
         {
-            this.Kind = kind;
-            this.StateStatus = stateStatus;
-            this.Id = id;
-            this.TemplateMetaName = templateMetaName;
-            this.New = _new;
-            this.Old = old;
+            Kind = kind;
+            StateStatus = stateStatus;
+            Id = id;
+            TemplateMetaName = templateMetaName;
+            New = _new;
+            Old = old;
         }
 
 
         /// <summary>
         /// Gets or Sets StateStatus
         /// </summary>
-        [DataMember(Name="stateStatus", EmitDefaultValue=false)]
+        [DataMember(Name = "stateStatus", EmitDefaultValue = false)]
         public string StateStatus { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets TemplateMetaName
         /// </summary>
-        [DataMember(Name="templateMetaName", EmitDefaultValue=false)]
+        [DataMember(Name = "templateMetaName", EmitDefaultValue = false)]
         public string TemplateMetaName { get; set; }
 
         /// <summary>
         /// Gets or Sets New
         /// </summary>
-        [DataMember(Name="new", EmitDefaultValue=false)]
+        [DataMember(Name = "new", EmitDefaultValue = false)]
         [JsonConverter(typeof(TemplateSummary_diff_notificationEndpointsNewAdapter))]
         public NotificationEndpointDiscriminator New { get; set; }
 
         /// <summary>
         /// Gets or Sets Old
         /// </summary>
-        [DataMember(Name="old", EmitDefaultValue=false)]
+        [DataMember(Name = "old", EmitDefaultValue = false)]
         [JsonConverter(typeof(TemplateSummary_diff_notificationEndpointsOldAdapter))]
         public NotificationEndpointDiscriminator Old { get; set; }
 
@@ -120,7 +123,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryDiffNotificationEndpoints);
+            return Equals(input as TemplateSummaryDiffNotificationEndpoints);
         }
 
         /// <summary>
@@ -131,33 +134,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryDiffNotificationEndpoints input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Kind == input.Kind ||
-                    this.Kind.Equals(input.Kind)
-                ) && 
+                    Kind == input.Kind ||
+                    Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.StateStatus == input.StateStatus ||
-                    (this.StateStatus != null && this.StateStatus.Equals(input.StateStatus))
-                ) && 
+                    StateStatus == input.StateStatus ||
+                    StateStatus != null && StateStatus.Equals(input.StateStatus)
+                ) &&
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
-                ) && 
-                (
-                    
-                    (this.New != null && this.New.Equals(input.New))
-                ) && 
-                (
-                    
-                    (this.Old != null && this.Old.Equals(input.Old))
-                );
+                    TemplateMetaName == input.TemplateMetaName ||
+                    TemplateMetaName != null && TemplateMetaName.Equals(input.TemplateMetaName)
+                ) && New != null && New.Equals(input.New) && Old != null && Old.Equals(input.Old);
         }
 
         /// <summary>
@@ -168,143 +165,158 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.StateStatus != null)
-                    hashCode = hashCode * 59 + this.StateStatus.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.TemplateMetaName != null)
-                    hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
-                if (this.New != null)
-                    hashCode = hashCode * 59 + this.New.GetHashCode();
-                if (this.Old != null)
-                    hashCode = hashCode * 59 + this.Old.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Kind.GetHashCode();
+                if (StateStatus != null)
+                {
+                    hashCode = hashCode * 59 + StateStatus.GetHashCode();
+                }
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (TemplateMetaName != null)
+                {
+                    hashCode = hashCode * 59 + TemplateMetaName.GetHashCode();
+                }
+
+                if (New != null)
+                {
+                    hashCode = hashCode * 59 + New.GetHashCode();
+                }
+
+                if (Old != null)
+                {
+                    hashCode = hashCode * 59 + Old.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
 
-    public class TemplateSummary_diff_notificationEndpointsOldAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+        public class TemplateSummary_diff_notificationEndpointsOldAdapter : JsonConverter
         {
-            {new []{ "slack" }, typeof(SlackNotificationEndpoint)},
-            {new []{ "pagerduty" }, typeof(PagerDutyNotificationEndpoint)},
-            {new []{ "http" }, typeof(HTTPNotificationEndpoint)},
-            {new []{ "telegram" }, typeof(TelegramNotificationEndpoint)},
-        };
+            private static readonly Dictionary<string[], Type> Types =
+                new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+                {
+                    { new[] { "slack" }, typeof(SlackNotificationEndpoint) },
+                    { new[] { "pagerduty" }, typeof(PagerDutyNotificationEndpoint) },
+                    { new[] { "http" }, typeof(HTTPNotificationEndpoint) },
+                    { new[] { "telegram" }, typeof(TelegramNotificationEndpoint) }
+                };
 
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
+            public override bool CanConvert(Type objectType)
             {
-                case JsonToken.StartObject:
+                return false;
+            }
 
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                serializer.Serialize(writer, value);
+            }
 
-                    var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+                JsonSerializer serializer)
+            {
+                return Deserialize(reader, objectType, serializer);
+            }
 
-                    Types.TryGetValue(discriminator, out var type);
+            private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonToken.StartObject:
 
-                    return serializer.Deserialize(jObject.CreateReader(), type);
+                        var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
+                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
 
-                default:
-                    return serializer.Deserialize(reader, objectType);
+                        Types.TryGetValue(discriminator, out var type);
+
+                        return serializer.Deserialize(jObject.CreateReader(), type);
+
+                    case JsonToken.StartArray:
+                        return DeserializeArray(reader, objectType, serializer);
+
+                    default:
+                        return serializer.Deserialize(reader, objectType);
+                }
+            }
+
+            private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+            {
+                var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+                var list = (IList)Activator.CreateInstance(targetType);
+                while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+                    list.Add(Deserialize(reader, elementType, serializer));
+
+                return list;
             }
         }
 
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+        public class TemplateSummary_diff_notificationEndpointsNewAdapter : JsonConverter
         {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+            private static readonly Dictionary<string[], Type> Types =
+                new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+                {
+                    { new[] { "slack" }, typeof(SlackNotificationEndpoint) },
+                    { new[] { "pagerduty" }, typeof(PagerDutyNotificationEndpoint) },
+                    { new[] { "http" }, typeof(HTTPNotificationEndpoint) },
+                    { new[] { "telegram" }, typeof(TelegramNotificationEndpoint) }
+                };
 
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+            public override bool CanConvert(Type objectType)
             {
-                list.Add(Deserialize(reader, elementType, serializer));
+                return false;
             }
 
-            return list;
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                serializer.Serialize(writer, value);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+                JsonSerializer serializer)
+            {
+                return Deserialize(reader, objectType, serializer);
+            }
+
+            private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonToken.StartObject:
+
+                        var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+
+                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
+
+                        Types.TryGetValue(discriminator, out var type);
+
+                        return serializer.Deserialize(jObject.CreateReader(), type);
+
+                    case JsonToken.StartArray:
+                        return DeserializeArray(reader, objectType, serializer);
+
+                    default:
+                        return serializer.Deserialize(reader, objectType);
+                }
+            }
+
+            private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+            {
+                var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+                var list = (IList)Activator.CreateInstance(targetType);
+                while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+                    list.Add(Deserialize(reader, elementType, serializer));
+
+                return list;
+            }
         }
     }
-    public class TemplateSummary_diff_notificationEndpointsNewAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
-        {
-            {new []{ "slack" }, typeof(SlackNotificationEndpoint)},
-            {new []{ "pagerduty" }, typeof(PagerDutyNotificationEndpoint)},
-            {new []{ "http" }, typeof(HTTPNotificationEndpoint)},
-            {new []{ "telegram" }, typeof(TelegramNotificationEndpoint)},
-        };
-
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
-            {
-                case JsonToken.StartObject:
-
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
-
-                    var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
-
-                    Types.TryGetValue(discriminator, out var type);
-
-                    return serializer.Deserialize(jObject.CreateReader(), type);
-
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
-
-                default:
-                    return serializer.Deserialize(reader, objectType);
-            }
-        }
-
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
-        {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
-
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-            {
-                list.Add(Deserialize(reader, elementType, serializer));
-            }
-
-            return list;
-        }
-    }
-    }
-
 }

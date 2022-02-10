@@ -27,13 +27,16 @@ namespace InfluxDB.Client.Api.Domain
     /// Variable
     /// </summary>
     [DataContract]
-    public partial class Variable :  IEquatable<Variable>
+    public partial class Variable : IEquatable<Variable>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Variable" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Variable() { }
+        protected Variable()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Variable" /> class.
         /// </summary>
@@ -46,93 +49,98 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="arguments">arguments (required).</param>
         /// <param name="createdAt">createdAt.</param>
         /// <param name="updatedAt">updatedAt.</param>
-        public Variable(VariableLinks links = default(VariableLinks), string orgID = default(string), string name = default(string), string description = default(string), List<string> selected = default(List<string>), List<Label> labels = default(List<Label>), VariableProperties arguments = default(VariableProperties), DateTime? createdAt = default(DateTime?), DateTime? updatedAt = default(DateTime?))
+        public Variable(VariableLinks links = default, string orgID = default, string name = default,
+            string description = default, List<string> selected = default, List<Label> labels = default,
+            VariableProperties arguments = default, DateTime? createdAt = default, DateTime? updatedAt = default)
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
                 throw new InvalidDataException("orgID is a required property for Variable and cannot be null");
             }
-            this.OrgID = orgID;
+
+            OrgID = orgID;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for Variable and cannot be null");
             }
-            this.Name = name;
+
+            Name = name;
             // to ensure "arguments" is required (not null)
             if (arguments == null)
             {
                 throw new InvalidDataException("arguments is a required property for Variable and cannot be null");
             }
-            this.Arguments = arguments;
-            this.Links = links;
-            this.Description = description;
-            this.Selected = selected;
-            this.Labels = labels;
-            this.CreatedAt = createdAt;
-            this.UpdatedAt = updatedAt;
+
+            Arguments = arguments;
+            Links = links;
+            Description = description;
+            Selected = selected;
+            Labels = labels;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public VariableLinks Links { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Selected
         /// </summary>
-        [DataMember(Name="selected", EmitDefaultValue=false)]
+        [DataMember(Name = "selected", EmitDefaultValue = false)]
         public List<string> Selected { get; set; }
 
         /// <summary>
         /// Gets or Sets Labels
         /// </summary>
-        [DataMember(Name="labels", EmitDefaultValue=false)]
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
         public List<Label> Labels { get; set; }
 
         /// <summary>
         /// Gets or Sets Arguments
         /// </summary>
-        [DataMember(Name="arguments", EmitDefaultValue=false)]
+        [DataMember(Name = "arguments", EmitDefaultValue = false)]
         [JsonConverter(typeof(VariableArgumentsAdapter))]
         public VariableProperties Arguments { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public DateTime? CreatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public DateTime? UpdatedAt { get; set; }
 
         /// <summary>
@@ -173,7 +181,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Variable);
+            return Equals(input as Variable);
         }
 
         /// <summary>
@@ -184,50 +192,43 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Variable input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
+                Links != null && Links.Equals(input.Links) &&
                 (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Selected == input.Selected ||
+                    Selected != null &&
+                    Selected.SequenceEqual(input.Selected)
+                ) &&
                 (
-                    this.Selected == input.Selected ||
-                    this.Selected != null &&
-                    this.Selected.SequenceEqual(input.Selected)
-                ) && 
-                (
-                    this.Labels == input.Labels ||
-                    this.Labels != null &&
-                    this.Labels.SequenceEqual(input.Labels)
-                ) && 
-                (
-                    
-                    (this.Arguments != null && this.Arguments.Equals(input.Arguments))
-                ) && 
-                (
-                    this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
-                (
-                    this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
+                    Labels == input.Labels ||
+                    Labels != null &&
+                    Labels.SequenceEqual(input.Labels)
+                ) && Arguments != null && Arguments.Equals(input.Arguments) && (
+                    CreatedAt == input.CreatedAt ||
+                    CreatedAt != null && CreatedAt.Equals(input.CreatedAt)
+                ) && (
+                    UpdatedAt == input.UpdatedAt ||
+                    UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)
                 );
         }
 
@@ -239,91 +240,120 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Selected != null)
-                    hashCode = hashCode * 59 + this.Selected.GetHashCode();
-                if (this.Labels != null)
-                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
-                if (this.Arguments != null)
-                    hashCode = hashCode * 59 + this.Arguments.GetHashCode();
-                if (this.CreatedAt != null)
-                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
-                if (this.UpdatedAt != null)
-                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
+                var hashCode = 41;
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (Selected != null)
+                {
+                    hashCode = hashCode * 59 + Selected.GetHashCode();
+                }
+
+                if (Labels != null)
+                {
+                    hashCode = hashCode * 59 + Labels.GetHashCode();
+                }
+
+                if (Arguments != null)
+                {
+                    hashCode = hashCode * 59 + Arguments.GetHashCode();
+                }
+
+                if (CreatedAt != null)
+                {
+                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+                }
+
+                if (UpdatedAt != null)
+                {
+                    hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
 
-    public class VariableArgumentsAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+        public class VariableArgumentsAdapter : JsonConverter
         {
-            {new []{ "query" }, typeof(QueryVariableProperties)},
-            {new []{ "constant" }, typeof(ConstantVariableProperties)},
-            {new []{ "map" }, typeof(MapVariableProperties)},
-        };
+            private static readonly Dictionary<string[], Type> Types =
+                new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+                {
+                    { new[] { "query" }, typeof(QueryVariableProperties) },
+                    { new[] { "constant" }, typeof(ConstantVariableProperties) },
+                    { new[] { "map" }, typeof(MapVariableProperties) }
+                };
 
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
+            public override bool CanConvert(Type objectType)
             {
-                case JsonToken.StartObject:
-
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
-
-                    var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
-
-                    Types.TryGetValue(discriminator, out var type);
-
-                    return serializer.Deserialize(jObject.CreateReader(), type);
-
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
-
-                default:
-                    return serializer.Deserialize(reader, objectType);
-            }
-        }
-
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
-        {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
-
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-            {
-                list.Add(Deserialize(reader, elementType, serializer));
+                return false;
             }
 
-            return list;
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                serializer.Serialize(writer, value);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+                JsonSerializer serializer)
+            {
+                return Deserialize(reader, objectType, serializer);
+            }
+
+            private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonToken.StartObject:
+
+                        var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+
+                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
+
+                        Types.TryGetValue(discriminator, out var type);
+
+                        return serializer.Deserialize(jObject.CreateReader(), type);
+
+                    case JsonToken.StartArray:
+                        return DeserializeArray(reader, objectType, serializer);
+
+                    default:
+                        return serializer.Deserialize(reader, objectType);
+                }
+            }
+
+            private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+            {
+                var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+                var list = (IList)Activator.CreateInstance(targetType);
+                while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+                    list.Add(Deserialize(reader, elementType, serializer));
+
+                return list;
+            }
         }
     }
-    }
-
 }

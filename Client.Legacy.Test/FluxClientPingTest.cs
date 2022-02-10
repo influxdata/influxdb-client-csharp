@@ -39,33 +39,35 @@ namespace Client.Legacy.Test
         [Test]
         public async Task WithAuthentication()
         {
-            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user", "my-password".ToCharArray()));
-            
+            FluxClient =
+                FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user",
+                    "my-password".ToCharArray()));
+
             MockServer.Given(Request.Create()
                     .WithPath("/ping")
                     .WithParam("u", new ExactMatcher("my-user"))
                     .WithParam("p", new ExactMatcher("my-password"))
                     .UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(204));
-                
+
             Assert.IsTrue(await FluxClient.PingAsync());
         }
-        
+
         [Test]
         public async Task WithBasicAuthentication()
         {
-            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user", 
-                            "my-password".ToCharArray(), FluxConnectionOptions.AuthenticationType.BasicAuthentication));
-            
+            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user",
+                "my-password".ToCharArray(), FluxConnectionOptions.AuthenticationType.BasicAuthentication));
+
             var auth = System.Text.Encoding.UTF8.GetBytes("my-user:my-password");
-            
+
             MockServer.Given(Request.Create()
-                                            .WithPath("/ping")
-                                            .WithHeader("Authorization",
-                                                            new ExactMatcher("Basic " + Convert.ToBase64String(auth)))
-                                            .UsingGet())
-                            .RespondWith(Response.Create().WithStatusCode(204));
-                
+                    .WithPath("/ping")
+                    .WithHeader("Authorization",
+                        new ExactMatcher("Basic " + Convert.ToBase64String(auth)))
+                    .UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(204));
+
             Assert.IsTrue(await FluxClient.PingAsync());
         }
     }

@@ -27,7 +27,8 @@ namespace InfluxDB.Client.Api.Domain
     /// LegacyAuthorizationPostRequest
     /// </summary>
     [DataContract]
-    public partial class LegacyAuthorizationPostRequest : AuthorizationUpdateRequest,  IEquatable<LegacyAuthorizationPostRequest>
+    public partial class LegacyAuthorizationPostRequest : AuthorizationUpdateRequest,
+        IEquatable<LegacyAuthorizationPostRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LegacyAuthorizationPostRequest" /> class.
@@ -36,40 +37,42 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="userID">ID of user that authorization is scoped to..</param>
         /// <param name="token">Token (name) of the authorization.</param>
         /// <param name="permissions">List of permissions for an auth.  An auth must have at least one Permission..</param>
-        public LegacyAuthorizationPostRequest(string orgID = default(string), string userID = default(string), string token = default(string), List<Permission> permissions = default(List<Permission>), StatusEnum? status = StatusEnum.Active, string description = default(string)) : base(status, description)
+        public LegacyAuthorizationPostRequest(string orgID = default, string userID = default, string token = default,
+            List<Permission> permissions = default, StatusEnum? status = StatusEnum.Active,
+            string description = default) : base(status, description)
         {
-            this.OrgID = orgID;
-            this.UserID = userID;
-            this.Token = token;
-            this.Permissions = permissions;
+            OrgID = orgID;
+            UserID = userID;
+            Token = token;
+            Permissions = permissions;
         }
 
         /// <summary>
         /// ID of org that authorization is scoped to.
         /// </summary>
         /// <value>ID of org that authorization is scoped to.</value>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// ID of user that authorization is scoped to.
         /// </summary>
         /// <value>ID of user that authorization is scoped to.</value>
-        [DataMember(Name="userID", EmitDefaultValue=false)]
+        [DataMember(Name = "userID", EmitDefaultValue = false)]
         public string UserID { get; set; }
 
         /// <summary>
         /// Token (name) of the authorization
         /// </summary>
         /// <value>Token (name) of the authorization</value>
-        [DataMember(Name="token", EmitDefaultValue=false)]
+        [DataMember(Name = "token", EmitDefaultValue = false)]
         public string Token { get; set; }
 
         /// <summary>
         /// List of permissions for an auth.  An auth must have at least one Permission.
         /// </summary>
         /// <value>List of permissions for an auth.  An auth must have at least one Permission.</value>
-        [DataMember(Name="permissions", EmitDefaultValue=false)]
+        [DataMember(Name = "permissions", EmitDefaultValue = false)]
         public List<Permission> Permissions { get; set; }
 
         /// <summary>
@@ -105,7 +108,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LegacyAuthorizationPostRequest);
+            return Equals(input as LegacyAuthorizationPostRequest);
         }
 
         /// <summary>
@@ -116,26 +119,28 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(LegacyAuthorizationPostRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && base.Equals(input) && 
-                (
-                    this.UserID == input.UserID ||
-                    (this.UserID != null && this.UserID.Equals(input.UserID))
-                ) && base.Equals(input) && 
-                (
-                    this.Token == input.Token ||
-                    (this.Token != null && this.Token.Equals(input.Token))
-                ) && base.Equals(input) && 
-                (
-                    this.Permissions == input.Permissions ||
-                    this.Permissions != null &&
-                    this.Permissions.SequenceEqual(input.Permissions)
-                );
+            return base.Equals(input) &&
+                   (
+                       OrgID == input.OrgID ||
+                       OrgID != null && OrgID.Equals(input.OrgID)
+                   ) && base.Equals(input) &&
+                   (
+                       UserID == input.UserID ||
+                       UserID != null && UserID.Equals(input.UserID)
+                   ) && base.Equals(input) &&
+                   (
+                       Token == input.Token ||
+                       Token != null && Token.Equals(input.Token)
+                   ) && base.Equals(input) &&
+                   (
+                       Permissions == input.Permissions ||
+                       Permissions != null &&
+                       Permissions.SequenceEqual(input.Permissions)
+                   );
         }
 
         /// <summary>
@@ -146,20 +151,30 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.UserID != null)
-                    hashCode = hashCode * 59 + this.UserID.GetHashCode();
-                if (this.Token != null)
-                    hashCode = hashCode * 59 + this.Token.GetHashCode();
-                if (this.Permissions != null)
-                    hashCode = hashCode * 59 + this.Permissions.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (UserID != null)
+                {
+                    hashCode = hashCode * 59 + UserID.GetHashCode();
+                }
+
+                if (Token != null)
+                {
+                    hashCode = hashCode * 59 + Token.GetHashCode();
+                }
+
+                if (Permissions != null)
+                {
+                    hashCode = hashCode * 59 + Permissions.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

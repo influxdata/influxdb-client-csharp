@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TableViewProperties
     /// </summary>
     [DataContract]
-    public partial class TableViewProperties : ViewProperties,  IEquatable<TableViewProperties>
+    public partial class TableViewProperties : ViewProperties, IEquatable<TableViewProperties>
     {
         /// <summary>
         /// Defines Type
@@ -38,16 +38,15 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Table for value: table
             /// </summary>
-            [EnumMember(Value = "table")]
-            Table = 1
-
+            [EnumMember(Value = "table")] Table = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Defines Shape
         /// </summary>
@@ -57,21 +56,23 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum ChronografV2 for value: chronograf-v2
             /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
+            [EnumMember(Value = "chronograf-v2")] ChronografV2 = 1
         }
 
         /// <summary>
         /// Gets or Sets Shape
         /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
+        [DataMember(Name = "shape", EmitDefaultValue = false)]
         public ShapeEnum Shape { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TableViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TableViewProperties() { }
+        protected TableViewProperties()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TableViewProperties" /> class.
         /// </summary>
@@ -85,114 +86,134 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="fieldOptions">fieldOptions represent the fields retrieved by the query with customization options (required).</param>
         /// <param name="timeFormat">timeFormat describes the display format for time values according to moment.js date formatting (required).</param>
         /// <param name="decimalPlaces">decimalPlaces (required).</param>
-        public TableViewProperties(TypeEnum type = TypeEnum.Table, List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?), TableViewPropertiesTableOptions tableOptions = default(TableViewPropertiesTableOptions), List<RenamableField> fieldOptions = default(List<RenamableField>), string timeFormat = default(string), DecimalPlaces decimalPlaces = default(DecimalPlaces)) : base()
+        public TableViewProperties(TypeEnum type = TypeEnum.Table, List<DashboardQuery> queries = default,
+            List<DashboardColor> colors = default, ShapeEnum shape = ShapeEnum.ChronografV2, string note = default,
+            bool? showNoteWhenEmpty = default, TableViewPropertiesTableOptions tableOptions = default,
+            List<RenamableField> fieldOptions = default, string timeFormat = default,
+            DecimalPlaces decimalPlaces = default) : base()
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
-                throw new InvalidDataException("queries is a required property for TableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "queries is a required property for TableViewProperties and cannot be null");
             }
-            this.Queries = queries;
+
+            Queries = queries;
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
-                throw new InvalidDataException("colors is a required property for TableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "colors is a required property for TableViewProperties and cannot be null");
             }
-            this.Colors = colors;
+
+            Colors = colors;
             // to ensure "shape" is required (not null)
-            this.Shape = shape;
+            Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
-                throw new InvalidDataException("note is a required property for TableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "note is a required property for TableViewProperties and cannot be null");
             }
-            this.Note = note;
+
+            Note = note;
             // to ensure "showNoteWhenEmpty" is required (not null)
             if (showNoteWhenEmpty == null)
             {
-                throw new InvalidDataException("showNoteWhenEmpty is a required property for TableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "showNoteWhenEmpty is a required property for TableViewProperties and cannot be null");
             }
-            this.ShowNoteWhenEmpty = showNoteWhenEmpty;
+
+            ShowNoteWhenEmpty = showNoteWhenEmpty;
             // to ensure "tableOptions" is required (not null)
             if (tableOptions == null)
             {
-                throw new InvalidDataException("tableOptions is a required property for TableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "tableOptions is a required property for TableViewProperties and cannot be null");
             }
-            this.TableOptions = tableOptions;
+
+            TableOptions = tableOptions;
             // to ensure "fieldOptions" is required (not null)
             if (fieldOptions == null)
             {
-                throw new InvalidDataException("fieldOptions is a required property for TableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "fieldOptions is a required property for TableViewProperties and cannot be null");
             }
-            this.FieldOptions = fieldOptions;
+
+            FieldOptions = fieldOptions;
             // to ensure "timeFormat" is required (not null)
             if (timeFormat == null)
             {
-                throw new InvalidDataException("timeFormat is a required property for TableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "timeFormat is a required property for TableViewProperties and cannot be null");
             }
-            this.TimeFormat = timeFormat;
+
+            TimeFormat = timeFormat;
             // to ensure "decimalPlaces" is required (not null)
             if (decimalPlaces == null)
             {
-                throw new InvalidDataException("decimalPlaces is a required property for TableViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "decimalPlaces is a required property for TableViewProperties and cannot be null");
             }
-            this.DecimalPlaces = decimalPlaces;
+
+            DecimalPlaces = decimalPlaces;
         }
 
 
         /// <summary>
         /// Gets or Sets Queries
         /// </summary>
-        [DataMember(Name="queries", EmitDefaultValue=false)]
+        [DataMember(Name = "queries", EmitDefaultValue = false)]
         public List<DashboardQuery> Queries { get; set; }
 
         /// <summary>
         /// Colors define color encoding of data into a visualization
         /// </summary>
         /// <value>Colors define color encoding of data into a visualization</value>
-        [DataMember(Name="colors", EmitDefaultValue=false)]
+        [DataMember(Name = "colors", EmitDefaultValue = false)]
         public List<DashboardColor> Colors { get; set; }
 
 
         /// <summary>
         /// Gets or Sets Note
         /// </summary>
-        [DataMember(Name="note", EmitDefaultValue=false)]
+        [DataMember(Name = "note", EmitDefaultValue = false)]
         public string Note { get; set; }
 
         /// <summary>
         /// If true, will display note when empty
         /// </summary>
         /// <value>If true, will display note when empty</value>
-        [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
+        [DataMember(Name = "showNoteWhenEmpty", EmitDefaultValue = false)]
         public bool? ShowNoteWhenEmpty { get; set; }
 
         /// <summary>
         /// Gets or Sets TableOptions
         /// </summary>
-        [DataMember(Name="tableOptions", EmitDefaultValue=false)]
+        [DataMember(Name = "tableOptions", EmitDefaultValue = false)]
         public TableViewPropertiesTableOptions TableOptions { get; set; }
 
         /// <summary>
         /// fieldOptions represent the fields retrieved by the query with customization options
         /// </summary>
         /// <value>fieldOptions represent the fields retrieved by the query with customization options</value>
-        [DataMember(Name="fieldOptions", EmitDefaultValue=false)]
+        [DataMember(Name = "fieldOptions", EmitDefaultValue = false)]
         public List<RenamableField> FieldOptions { get; set; }
 
         /// <summary>
         /// timeFormat describes the display format for time values according to moment.js date formatting
         /// </summary>
         /// <value>timeFormat describes the display format for time values according to moment.js date formatting</value>
-        [DataMember(Name="timeFormat", EmitDefaultValue=false)]
+        [DataMember(Name = "timeFormat", EmitDefaultValue = false)]
         public string TimeFormat { get; set; }
 
         /// <summary>
         /// Gets or Sets DecimalPlaces
         /// </summary>
-        [DataMember(Name="decimalPlaces", EmitDefaultValue=false)]
+        [DataMember(Name = "decimalPlaces", EmitDefaultValue = false)]
         public DecimalPlaces DecimalPlaces { get; set; }
 
         /// <summary>
@@ -234,7 +255,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TableViewProperties);
+            return Equals(input as TableViewProperties);
         }
 
         /// <summary>
@@ -245,52 +266,45 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TableViewProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Queries == input.Queries ||
-                    this.Queries != null &&
-                    this.Queries.SequenceEqual(input.Queries)
-                ) && base.Equals(input) && 
-                (
-                    this.Colors == input.Colors ||
-                    this.Colors != null &&
-                    this.Colors.SequenceEqual(input.Colors)
-                ) && base.Equals(input) && 
-                (
-                    this.Shape == input.Shape ||
-                    this.Shape.Equals(input.Shape)
-                ) && base.Equals(input) && 
-                (
-                    this.Note == input.Note ||
-                    (this.Note != null && this.Note.Equals(input.Note))
-                ) && base.Equals(input) && 
-                (
-                    this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
-                    (this.ShowNoteWhenEmpty != null && this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.TableOptions != null && this.TableOptions.Equals(input.TableOptions))
-                ) && base.Equals(input) && 
-                (
-                    this.FieldOptions == input.FieldOptions ||
-                    this.FieldOptions != null &&
-                    this.FieldOptions.SequenceEqual(input.FieldOptions)
-                ) && base.Equals(input) && 
-                (
-                    this.TimeFormat == input.TimeFormat ||
-                    (this.TimeFormat != null && this.TimeFormat.Equals(input.TimeFormat))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.DecimalPlaces != null && this.DecimalPlaces.Equals(input.DecimalPlaces))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Queries == input.Queries ||
+                       Queries != null &&
+                       Queries.SequenceEqual(input.Queries)
+                   ) && base.Equals(input) &&
+                   (
+                       Colors == input.Colors ||
+                       Colors != null &&
+                       Colors.SequenceEqual(input.Colors)
+                   ) && base.Equals(input) &&
+                   (
+                       Shape == input.Shape ||
+                       Shape.Equals(input.Shape)
+                   ) && base.Equals(input) &&
+                   (
+                       Note == input.Note ||
+                       Note != null && Note.Equals(input.Note)
+                   ) && base.Equals(input) &&
+                   (
+                       ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
+                       ShowNoteWhenEmpty != null && ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty)
+                   ) && base.Equals(input) && TableOptions != null && TableOptions.Equals(input.TableOptions) &&
+                   base.Equals(input) && (
+                       FieldOptions == input.FieldOptions ||
+                       FieldOptions != null &&
+                       FieldOptions.SequenceEqual(input.FieldOptions)
+                   ) && base.Equals(input) && (
+                       TimeFormat == input.TimeFormat ||
+                       TimeFormat != null && TimeFormat.Equals(input.TimeFormat)
+                   ) && base.Equals(input) && DecimalPlaces != null && DecimalPlaces.Equals(input.DecimalPlaces);
         }
 
         /// <summary>
@@ -301,30 +315,52 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Queries != null)
-                    hashCode = hashCode * 59 + this.Queries.GetHashCode();
-                if (this.Colors != null)
-                    hashCode = hashCode * 59 + this.Colors.GetHashCode();
-                hashCode = hashCode * 59 + this.Shape.GetHashCode();
-                if (this.Note != null)
-                    hashCode = hashCode * 59 + this.Note.GetHashCode();
-                if (this.ShowNoteWhenEmpty != null)
-                    hashCode = hashCode * 59 + this.ShowNoteWhenEmpty.GetHashCode();
-                if (this.TableOptions != null)
-                    hashCode = hashCode * 59 + this.TableOptions.GetHashCode();
-                if (this.FieldOptions != null)
-                    hashCode = hashCode * 59 + this.FieldOptions.GetHashCode();
-                if (this.TimeFormat != null)
-                    hashCode = hashCode * 59 + this.TimeFormat.GetHashCode();
-                if (this.DecimalPlaces != null)
-                    hashCode = hashCode * 59 + this.DecimalPlaces.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Queries != null)
+                {
+                    hashCode = hashCode * 59 + Queries.GetHashCode();
+                }
+
+                if (Colors != null)
+                {
+                    hashCode = hashCode * 59 + Colors.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Shape.GetHashCode();
+                if (Note != null)
+                {
+                    hashCode = hashCode * 59 + Note.GetHashCode();
+                }
+
+                if (ShowNoteWhenEmpty != null)
+                {
+                    hashCode = hashCode * 59 + ShowNoteWhenEmpty.GetHashCode();
+                }
+
+                if (TableOptions != null)
+                {
+                    hashCode = hashCode * 59 + TableOptions.GetHashCode();
+                }
+
+                if (FieldOptions != null)
+                {
+                    hashCode = hashCode * 59 + FieldOptions.GetHashCode();
+                }
+
+                if (TimeFormat != null)
+                {
+                    hashCode = hashCode * 59 + TimeFormat.GetHashCode();
+                }
+
+                if (DecimalPlaces != null)
+                {
+                    hashCode = hashCode * 59 + DecimalPlaces.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

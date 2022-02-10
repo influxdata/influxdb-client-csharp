@@ -27,29 +27,30 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateExportByIDResourceFilters
     /// </summary>
     [DataContract]
-    public partial class TemplateExportByIDResourceFilters :  IEquatable<TemplateExportByIDResourceFilters>
+    public partial class TemplateExportByIDResourceFilters : IEquatable<TemplateExportByIDResourceFilters>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateExportByIDResourceFilters" /> class.
         /// </summary>
         /// <param name="byLabel">byLabel.</param>
         /// <param name="byResourceKind">byResourceKind.</param>
-        public TemplateExportByIDResourceFilters(List<string> byLabel = default(List<string>), List<TemplateKind> byResourceKind = default(List<TemplateKind>))
+        public TemplateExportByIDResourceFilters(List<string> byLabel = default,
+            List<TemplateKind> byResourceKind = default)
         {
-            this.ByLabel = byLabel;
-            this.ByResourceKind = byResourceKind;
+            ByLabel = byLabel;
+            ByResourceKind = byResourceKind;
         }
 
         /// <summary>
         /// Gets or Sets ByLabel
         /// </summary>
-        [DataMember(Name="byLabel", EmitDefaultValue=false)]
+        [DataMember(Name = "byLabel", EmitDefaultValue = false)]
         public List<string> ByLabel { get; set; }
 
         /// <summary>
         /// Gets or Sets ByResourceKind
         /// </summary>
-        [DataMember(Name="byResourceKind", EmitDefaultValue=false)]
+        [DataMember(Name = "byResourceKind", EmitDefaultValue = false)]
         public List<TemplateKind> ByResourceKind { get; set; }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateExportByIDResourceFilters);
+            return Equals(input as TemplateExportByIDResourceFilters);
         }
 
         /// <summary>
@@ -93,18 +94,20 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateExportByIDResourceFilters input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.ByLabel == input.ByLabel ||
-                    this.ByLabel != null &&
-                    this.ByLabel.SequenceEqual(input.ByLabel)
-                ) && 
+                    ByLabel == input.ByLabel ||
+                    ByLabel != null &&
+                    ByLabel.SequenceEqual(input.ByLabel)
+                ) &&
                 (
-                    this.ByResourceKind == input.ByResourceKind ||
-                    this.ByResourceKind != null &&
-                    this.ByResourceKind.SequenceEqual(input.ByResourceKind)
+                    ByResourceKind == input.ByResourceKind ||
+                    ByResourceKind != null &&
+                    ByResourceKind.SequenceEqual(input.ByResourceKind)
                 );
         }
 
@@ -116,16 +119,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.ByLabel != null)
-                    hashCode = hashCode * 59 + this.ByLabel.GetHashCode();
-                if (this.ByResourceKind != null)
-                    hashCode = hashCode * 59 + this.ByResourceKind.GetHashCode();
+                var hashCode = 41;
+
+                if (ByLabel != null)
+                {
+                    hashCode = hashCode * 59 + ByLabel.GetHashCode();
+                }
+
+                if (ByResourceKind != null)
+                {
+                    hashCode = hashCode * 59 + ByResourceKind.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

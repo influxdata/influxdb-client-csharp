@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummarySummaryBuckets
     /// </summary>
     [DataContract]
-    public partial class TemplateSummarySummaryBuckets :  IEquatable<TemplateSummarySummaryBuckets>
+    public partial class TemplateSummarySummaryBuckets : IEquatable<TemplateSummarySummaryBuckets>
     {
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public TemplateKind? Kind { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummarySummaryBuckets" /> class.
         /// </summary>
@@ -46,67 +47,70 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="retentionPeriod">retentionPeriod.</param>
         /// <param name="labelAssociations">labelAssociations.</param>
         /// <param name="envReferences">envReferences.</param>
-        public TemplateSummarySummaryBuckets(string id = default(string), string orgID = default(string), TemplateKind? kind = default(TemplateKind?), string templateMetaName = default(string), string name = default(string), string description = default(string), int? retentionPeriod = default(int?), List<TemplateSummaryLabel> labelAssociations = default(List<TemplateSummaryLabel>), List<Object> envReferences = default(List<Object>))
+        public TemplateSummarySummaryBuckets(string id = default, string orgID = default, TemplateKind? kind = default,
+            string templateMetaName = default, string name = default, string description = default,
+            int? retentionPeriod = default, List<TemplateSummaryLabel> labelAssociations = default,
+            List<object> envReferences = default)
         {
-            this.Id = id;
-            this.OrgID = orgID;
-            this.Kind = kind;
-            this.TemplateMetaName = templateMetaName;
-            this.Name = name;
-            this.Description = description;
-            this.RetentionPeriod = retentionPeriod;
-            this.LabelAssociations = labelAssociations;
-            this.EnvReferences = envReferences;
+            Id = id;
+            OrgID = orgID;
+            Kind = kind;
+            TemplateMetaName = templateMetaName;
+            Name = name;
+            Description = description;
+            RetentionPeriod = retentionPeriod;
+            LabelAssociations = labelAssociations;
+            EnvReferences = envReferences;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
 
         /// <summary>
         /// Gets or Sets TemplateMetaName
         /// </summary>
-        [DataMember(Name="templateMetaName", EmitDefaultValue=false)]
+        [DataMember(Name = "templateMetaName", EmitDefaultValue = false)]
         public string TemplateMetaName { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets RetentionPeriod
         /// </summary>
-        [DataMember(Name="retentionPeriod", EmitDefaultValue=false)]
+        [DataMember(Name = "retentionPeriod", EmitDefaultValue = false)]
         public int? RetentionPeriod { get; set; }
 
         /// <summary>
         /// Gets or Sets LabelAssociations
         /// </summary>
-        [DataMember(Name="labelAssociations", EmitDefaultValue=false)]
+        [DataMember(Name = "labelAssociations", EmitDefaultValue = false)]
         public List<TemplateSummaryLabel> LabelAssociations { get; set; }
 
         /// <summary>
         /// Gets or Sets EnvReferences
         /// </summary>
-        [DataMember(Name="envReferences", EmitDefaultValue=false)]
-        public List<Object> EnvReferences { get; set; }
+        [DataMember(Name = "envReferences", EmitDefaultValue = false)]
+        public List<object> EnvReferences { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -145,7 +149,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummarySummaryBuckets);
+            return Equals(input as TemplateSummarySummaryBuckets);
         }
 
         /// <summary>
@@ -156,46 +160,48 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummarySummaryBuckets input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.Kind == input.Kind ||
-                    this.Kind.Equals(input.Kind)
-                ) && 
+                    Kind == input.Kind ||
+                    Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
-                ) && 
+                    TemplateMetaName == input.TemplateMetaName ||
+                    TemplateMetaName != null && TemplateMetaName.Equals(input.TemplateMetaName)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.RetentionPeriod == input.RetentionPeriod ||
-                    (this.RetentionPeriod != null && this.RetentionPeriod.Equals(input.RetentionPeriod))
-                ) && 
+                    RetentionPeriod == input.RetentionPeriod ||
+                    RetentionPeriod != null && RetentionPeriod.Equals(input.RetentionPeriod)
+                ) &&
                 (
-                    this.LabelAssociations == input.LabelAssociations ||
-                    this.LabelAssociations != null &&
-                    this.LabelAssociations.SequenceEqual(input.LabelAssociations)
-                ) && 
+                    LabelAssociations == input.LabelAssociations ||
+                    LabelAssociations != null &&
+                    LabelAssociations.SequenceEqual(input.LabelAssociations)
+                ) &&
                 (
-                    this.EnvReferences == input.EnvReferences ||
-                    this.EnvReferences != null &&
-                    this.EnvReferences.SequenceEqual(input.EnvReferences)
+                    EnvReferences == input.EnvReferences ||
+                    EnvReferences != null &&
+                    EnvReferences.SequenceEqual(input.EnvReferences)
                 );
         }
 
@@ -207,29 +213,51 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.TemplateMetaName != null)
-                    hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.RetentionPeriod != null)
-                    hashCode = hashCode * 59 + this.RetentionPeriod.GetHashCode();
-                if (this.LabelAssociations != null)
-                    hashCode = hashCode * 59 + this.LabelAssociations.GetHashCode();
-                if (this.EnvReferences != null)
-                    hashCode = hashCode * 59 + this.EnvReferences.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Kind.GetHashCode();
+                if (TemplateMetaName != null)
+                {
+                    hashCode = hashCode * 59 + TemplateMetaName.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (RetentionPeriod != null)
+                {
+                    hashCode = hashCode * 59 + RetentionPeriod.GetHashCode();
+                }
+
+                if (LabelAssociations != null)
+                {
+                    hashCode = hashCode * 59 + LabelAssociations.GetHashCode();
+                }
+
+                if (EnvReferences != null)
+                {
+                    hashCode = hashCode * 59 + EnvReferences.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

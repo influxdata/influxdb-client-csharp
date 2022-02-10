@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// PostUser
     /// </summary>
     [DataContract]
-    public partial class PostUser :  IEquatable<PostUser>
+    public partial class PostUser : IEquatable<PostUser>
     {
         /// <summary>
         /// If inactive the user is inactive.
@@ -39,70 +39,72 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Active for value: active
             /// </summary>
-            [EnumMember(Value = "active")]
-            Active = 1,
+            [EnumMember(Value = "active")] Active = 1,
 
             /// <summary>
             /// Enum Inactive for value: inactive
             /// </summary>
-            [EnumMember(Value = "inactive")]
-            Inactive = 2
-
+            [EnumMember(Value = "inactive")] Inactive = 2
         }
 
         /// <summary>
         /// If inactive the user is inactive.
         /// </summary>
         /// <value>If inactive the user is inactive.</value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public StatusEnum? Status { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PostUser" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PostUser() { }
+        protected PostUser()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PostUser" /> class.
         /// </summary>
         /// <param name="oauthID">oauthID.</param>
         /// <param name="name">name (required).</param>
         /// <param name="status">If inactive the user is inactive. (default to StatusEnum.Active).</param>
-        public PostUser(string oauthID = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active)
+        public PostUser(string oauthID = default, string name = default, StatusEnum? status = StatusEnum.Active)
         {
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for PostUser and cannot be null");
             }
-            this.Name = name;
-            this.OauthID = oauthID;
+
+            Name = name;
+            OauthID = oauthID;
             // use default value if no "status" provided
             if (status == null)
             {
-                this.Status = StatusEnum.Active;
+                Status = StatusEnum.Active;
             }
             else
             {
-                this.Status = status;
+                Status = status;
             }
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// Gets or Sets OauthID
         /// </summary>
-        [DataMember(Name="oauthID", EmitDefaultValue=false)]
+        [DataMember(Name = "oauthID", EmitDefaultValue = false)]
         public string OauthID { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
 
@@ -138,7 +140,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PostUser);
+            return Equals(input as PostUser);
         }
 
         /// <summary>
@@ -149,24 +151,26 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PostUser input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.OauthID == input.OauthID ||
-                    (this.OauthID != null && this.OauthID.Equals(input.OauthID))
-                ) && 
+                    OauthID == input.OauthID ||
+                    OauthID != null && OauthID.Equals(input.OauthID)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Status == input.Status ||
-                    this.Status.Equals(input.Status)
+                    Status == input.Status ||
+                    Status.Equals(input.Status)
                 );
         }
 
@@ -178,19 +182,26 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.OauthID != null)
-                    hashCode = hashCode * 59 + this.OauthID.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                hashCode = hashCode * 59 + this.Status.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (OauthID != null)
+                {
+                    hashCode = hashCode * 59 + OauthID.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Status.GetHashCode();
                 return hashCode;
             }
         }
-
     }
-
 }

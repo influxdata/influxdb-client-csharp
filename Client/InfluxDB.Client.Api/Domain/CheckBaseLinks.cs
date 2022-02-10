@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// CheckBaseLinks
     /// </summary>
     [DataContract]
-    public partial class CheckBaseLinks :  IEquatable<CheckBaseLinks>
+    public partial class CheckBaseLinks : IEquatable<CheckBaseLinks>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckBaseLinks" /> class.
@@ -41,35 +41,35 @@ namespace InfluxDB.Client.Api.Domain
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [DataMember(Name = "self", EmitDefaultValue = false)]
         public string Self { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="labels", EmitDefaultValue=false)]
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
         public string Labels { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="members", EmitDefaultValue=false)]
+        [DataMember(Name = "members", EmitDefaultValue = false)]
         public string Members { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="owners", EmitDefaultValue=false)]
+        [DataMember(Name = "owners", EmitDefaultValue = false)]
         public string Owners { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="query", EmitDefaultValue=false)]
+        [DataMember(Name = "query", EmitDefaultValue = false)]
         public string Query { get; private set; }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as CheckBaseLinks);
+            return Equals(input as CheckBaseLinks);
         }
 
         /// <summary>
@@ -116,28 +116,30 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(CheckBaseLinks input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Self == input.Self ||
-                    (this.Self != null && this.Self.Equals(input.Self))
-                ) && 
+                    Self == input.Self ||
+                    Self != null && Self.Equals(input.Self)
+                ) &&
                 (
-                    this.Labels == input.Labels ||
-                    (this.Labels != null && this.Labels.Equals(input.Labels))
-                ) && 
+                    Labels == input.Labels ||
+                    Labels != null && Labels.Equals(input.Labels)
+                ) &&
                 (
-                    this.Members == input.Members ||
-                    (this.Members != null && this.Members.Equals(input.Members))
-                ) && 
+                    Members == input.Members ||
+                    Members != null && Members.Equals(input.Members)
+                ) &&
                 (
-                    this.Owners == input.Owners ||
-                    (this.Owners != null && this.Owners.Equals(input.Owners))
-                ) && 
+                    Owners == input.Owners ||
+                    Owners != null && Owners.Equals(input.Owners)
+                ) &&
                 (
-                    this.Query == input.Query ||
-                    (this.Query != null && this.Query.Equals(input.Query))
+                    Query == input.Query ||
+                    Query != null && Query.Equals(input.Query)
                 );
         }
 
@@ -149,22 +151,35 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Self != null)
-                    hashCode = hashCode * 59 + this.Self.GetHashCode();
-                if (this.Labels != null)
-                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
-                if (this.Members != null)
-                    hashCode = hashCode * 59 + this.Members.GetHashCode();
-                if (this.Owners != null)
-                    hashCode = hashCode * 59 + this.Owners.GetHashCode();
-                if (this.Query != null)
-                    hashCode = hashCode * 59 + this.Query.GetHashCode();
+                var hashCode = 41;
+
+                if (Self != null)
+                {
+                    hashCode = hashCode * 59 + Self.GetHashCode();
+                }
+
+                if (Labels != null)
+                {
+                    hashCode = hashCode * 59 + Labels.GetHashCode();
+                }
+
+                if (Members != null)
+                {
+                    hashCode = hashCode * 59 + Members.GetHashCode();
+                }
+
+                if (Owners != null)
+                {
+                    hashCode = hashCode * 59 + Owners.GetHashCode();
+                }
+
+                if (Query != null)
+                {
+                    hashCode = hashCode * 59 + Query.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

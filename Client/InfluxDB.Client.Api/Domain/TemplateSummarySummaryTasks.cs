@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummarySummaryTasks
     /// </summary>
     [DataContract]
-    public partial class TemplateSummarySummaryTasks :  IEquatable<TemplateSummarySummaryTasks>
+    public partial class TemplateSummarySummaryTasks : IEquatable<TemplateSummarySummaryTasks>
     {
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public TemplateKind? Kind { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummarySummaryTasks" /> class.
         /// </summary>
@@ -48,81 +49,84 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="query">query.</param>
         /// <param name="status">status.</param>
         /// <param name="envReferences">envReferences.</param>
-        public TemplateSummarySummaryTasks(TemplateKind? kind = default(TemplateKind?), string templateMetaName = default(string), string id = default(string), string name = default(string), string cron = default(string), string description = default(string), string every = default(string), string offset = default(string), string query = default(string), string status = default(string), List<Object> envReferences = default(List<Object>))
+        public TemplateSummarySummaryTasks(TemplateKind? kind = default, string templateMetaName = default,
+            string id = default, string name = default, string cron = default, string description = default,
+            string every = default, string offset = default, string query = default, string status = default,
+            List<object> envReferences = default)
         {
-            this.Kind = kind;
-            this.TemplateMetaName = templateMetaName;
-            this.Id = id;
-            this.Name = name;
-            this.Cron = cron;
-            this.Description = description;
-            this.Every = every;
-            this.Offset = offset;
-            this.Query = query;
-            this.Status = status;
-            this.EnvReferences = envReferences;
+            Kind = kind;
+            TemplateMetaName = templateMetaName;
+            Id = id;
+            Name = name;
+            Cron = cron;
+            Description = description;
+            Every = every;
+            Offset = offset;
+            Query = query;
+            Status = status;
+            EnvReferences = envReferences;
         }
 
 
         /// <summary>
         /// Gets or Sets TemplateMetaName
         /// </summary>
-        [DataMember(Name="templateMetaName", EmitDefaultValue=false)]
+        [DataMember(Name = "templateMetaName", EmitDefaultValue = false)]
         public string TemplateMetaName { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Cron
         /// </summary>
-        [DataMember(Name="cron", EmitDefaultValue=false)]
+        [DataMember(Name = "cron", EmitDefaultValue = false)]
         public string Cron { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Every
         /// </summary>
-        [DataMember(Name="every", EmitDefaultValue=false)]
+        [DataMember(Name = "every", EmitDefaultValue = false)]
         public string Every { get; set; }
 
         /// <summary>
         /// Gets or Sets Offset
         /// </summary>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
         public string Offset { get; set; }
 
         /// <summary>
         /// Gets or Sets Query
         /// </summary>
-        [DataMember(Name="query", EmitDefaultValue=false)]
+        [DataMember(Name = "query", EmitDefaultValue = false)]
         public string Query { get; set; }
 
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets EnvReferences
         /// </summary>
-        [DataMember(Name="envReferences", EmitDefaultValue=false)]
-        public List<Object> EnvReferences { get; set; }
+        [DataMember(Name = "envReferences", EmitDefaultValue = false)]
+        public List<object> EnvReferences { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -163,7 +167,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummarySummaryTasks);
+            return Equals(input as TemplateSummarySummaryTasks);
         }
 
         /// <summary>
@@ -174,53 +178,55 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummarySummaryTasks input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Kind == input.Kind ||
-                    this.Kind.Equals(input.Kind)
-                ) && 
+                    Kind == input.Kind ||
+                    Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
-                ) && 
+                    TemplateMetaName == input.TemplateMetaName ||
+                    TemplateMetaName != null && TemplateMetaName.Equals(input.TemplateMetaName)
+                ) &&
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Cron == input.Cron ||
-                    (this.Cron != null && this.Cron.Equals(input.Cron))
-                ) && 
+                    Cron == input.Cron ||
+                    Cron != null && Cron.Equals(input.Cron)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.Every == input.Every ||
-                    (this.Every != null && this.Every.Equals(input.Every))
-                ) && 
+                    Every == input.Every ||
+                    Every != null && Every.Equals(input.Every)
+                ) &&
                 (
-                    this.Offset == input.Offset ||
-                    (this.Offset != null && this.Offset.Equals(input.Offset))
-                ) && 
+                    Offset == input.Offset ||
+                    Offset != null && Offset.Equals(input.Offset)
+                ) &&
                 (
-                    this.Query == input.Query ||
-                    (this.Query != null && this.Query.Equals(input.Query))
-                ) && 
+                    Query == input.Query ||
+                    Query != null && Query.Equals(input.Query)
+                ) &&
                 (
-                    this.Status == input.Status ||
-                    (this.Status != null && this.Status.Equals(input.Status))
-                ) && 
+                    Status == input.Status ||
+                    Status != null && Status.Equals(input.Status)
+                ) &&
                 (
-                    this.EnvReferences == input.EnvReferences ||
-                    this.EnvReferences != null &&
-                    this.EnvReferences.SequenceEqual(input.EnvReferences)
+                    EnvReferences == input.EnvReferences ||
+                    EnvReferences != null &&
+                    EnvReferences.SequenceEqual(input.EnvReferences)
                 );
         }
 
@@ -232,33 +238,61 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.TemplateMetaName != null)
-                    hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Cron != null)
-                    hashCode = hashCode * 59 + this.Cron.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Every != null)
-                    hashCode = hashCode * 59 + this.Every.GetHashCode();
-                if (this.Offset != null)
-                    hashCode = hashCode * 59 + this.Offset.GetHashCode();
-                if (this.Query != null)
-                    hashCode = hashCode * 59 + this.Query.GetHashCode();
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
-                if (this.EnvReferences != null)
-                    hashCode = hashCode * 59 + this.EnvReferences.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Kind.GetHashCode();
+                if (TemplateMetaName != null)
+                {
+                    hashCode = hashCode * 59 + TemplateMetaName.GetHashCode();
+                }
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Cron != null)
+                {
+                    hashCode = hashCode * 59 + Cron.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (Every != null)
+                {
+                    hashCode = hashCode * 59 + Every.GetHashCode();
+                }
+
+                if (Offset != null)
+                {
+                    hashCode = hashCode * 59 + Offset.GetHashCode();
+                }
+
+                if (Query != null)
+                {
+                    hashCode = hashCode * 59 + Query.GetHashCode();
+                }
+
+                if (Status != null)
+                {
+                    hashCode = hashCode * 59 + Status.GetHashCode();
+                }
+
+                if (EnvReferences != null)
+                {
+                    hashCode = hashCode * 59 + EnvReferences.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

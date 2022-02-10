@@ -11,7 +11,7 @@ namespace Examples
         {
             const string database = "telegraf";
             const string retentionPolicy = "autogen";
-            
+
             var client = InfluxDBClientFactory.CreateV1("http://localhost:8086",
                 "username",
                 "password".ToCharArray(),
@@ -28,7 +28,7 @@ namespace Examples
 
                 writeApi.WritePoint(point);
             }
-            
+
             Console.WriteLine("*** Query Points ***");
 
             var query = $"from(bucket: \"{database}/{retentionPolicy}\") |> range(start: -1h)";
@@ -36,9 +36,10 @@ namespace Examples
             var fluxRecords = fluxTables[0].Records;
             fluxRecords.ForEach(record =>
             {
-                Console.WriteLine($"{record.GetTime()} {record.GetMeasurement()}: {record.GetField()} {record.GetValue()}");
+                Console.WriteLine(
+                    $"{record.GetTime()} {record.GetMeasurement()}: {record.GetField()} {record.GetValue()}");
             });
-            
+
             client.Dispose();
         }
     }

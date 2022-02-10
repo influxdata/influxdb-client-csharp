@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryDiffVariablesNewOld
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryDiffVariablesNewOld :  IEquatable<TemplateSummaryDiffVariablesNewOld>
+    public partial class TemplateSummaryDiffVariablesNewOld : IEquatable<TemplateSummaryDiffVariablesNewOld>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryDiffVariablesNewOld" /> class.
@@ -35,29 +35,30 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="name">name.</param>
         /// <param name="description">description.</param>
         /// <param name="args">args.</param>
-        public TemplateSummaryDiffVariablesNewOld(string name = default(string), string description = default(string), VariableProperties args = default(VariableProperties))
+        public TemplateSummaryDiffVariablesNewOld(string name = default, string description = default,
+            VariableProperties args = default)
         {
-            this.Name = name;
-            this.Description = description;
-            this.Args = args;
+            Name = name;
+            Description = description;
+            Args = args;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Args
         /// </summary>
-        [DataMember(Name="args", EmitDefaultValue=false)]
+        [DataMember(Name = "args", EmitDefaultValue = false)]
         [JsonConverter(typeof(TemplateSummary_Diff_variables_new_oldArgsAdapter))]
         public VariableProperties Args { get; set; }
 
@@ -92,7 +93,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryDiffVariablesNewOld);
+            return Equals(input as TemplateSummaryDiffVariablesNewOld);
         }
 
         /// <summary>
@@ -103,21 +104,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryDiffVariablesNewOld input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
-                (
-                    
-                    (this.Args != null && this.Args.Equals(input.Args))
-                );
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) && Args != null && Args.Equals(input.Args);
         }
 
         /// <summary>
@@ -128,77 +127,85 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Args != null)
-                    hashCode = hashCode * 59 + this.Args.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (Args != null)
+                {
+                    hashCode = hashCode * 59 + Args.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
 
-    public class TemplateSummary_Diff_variables_new_oldArgsAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+        public class TemplateSummary_Diff_variables_new_oldArgsAdapter : JsonConverter
         {
-            {new []{ "query" }, typeof(QueryVariableProperties)},
-            {new []{ "constant" }, typeof(ConstantVariableProperties)},
-            {new []{ "map" }, typeof(MapVariableProperties)},
-        };
+            private static readonly Dictionary<string[], Type> Types =
+                new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+                {
+                    { new[] { "query" }, typeof(QueryVariableProperties) },
+                    { new[] { "constant" }, typeof(ConstantVariableProperties) },
+                    { new[] { "map" }, typeof(MapVariableProperties) }
+                };
 
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
+            public override bool CanConvert(Type objectType)
             {
-                case JsonToken.StartObject:
-
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
-
-                    var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
-
-                    Types.TryGetValue(discriminator, out var type);
-
-                    return serializer.Deserialize(jObject.CreateReader(), type);
-
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
-
-                default:
-                    return serializer.Deserialize(reader, objectType);
-            }
-        }
-
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
-        {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
-
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-            {
-                list.Add(Deserialize(reader, elementType, serializer));
+                return false;
             }
 
-            return list;
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                serializer.Serialize(writer, value);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+                JsonSerializer serializer)
+            {
+                return Deserialize(reader, objectType, serializer);
+            }
+
+            private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonToken.StartObject:
+
+                        var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+
+                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
+
+                        Types.TryGetValue(discriminator, out var type);
+
+                        return serializer.Deserialize(jObject.CreateReader(), type);
+
+                    case JsonToken.StartArray:
+                        return DeserializeArray(reader, objectType, serializer);
+
+                    default:
+                        return serializer.Deserialize(reader, objectType);
+                }
+            }
+
+            private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+            {
+                var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+                var list = (IList)Activator.CreateInstance(targetType);
+                while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+                    list.Add(Deserialize(reader, elementType, serializer));
+
+                return list;
+            }
         }
     }
-    }
-
 }

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TelegramNotificationRuleBase
     /// </summary>
     [DataContract]
-    public partial class TelegramNotificationRuleBase : NotificationRule,  IEquatable<TelegramNotificationRuleBase>
+    public partial class TelegramNotificationRuleBase : NotificationRule, IEquatable<TelegramNotificationRuleBase>
     {
         /// <summary>
         /// The discriminator between other types of notification rules is \&quot;telegram\&quot;.
@@ -39,17 +39,16 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Telegram for value: telegram
             /// </summary>
-            [EnumMember(Value = "telegram")]
-            Telegram = 1
-
+            [EnumMember(Value = "telegram")] Telegram = 1
         }
 
         /// <summary>
         /// The discriminator between other types of notification rules is \&quot;telegram\&quot;.
         /// </summary>
         /// <value>The discriminator between other types of notification rules is \&quot;telegram\&quot;.</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Parse mode of the message text per https://core.telegram.org/bots/api#formatting-options . Defaults to \&quot;MarkdownV2\&quot; .
         /// </summary>
@@ -60,34 +59,34 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum MarkdownV2 for value: MarkdownV2
             /// </summary>
-            [EnumMember(Value = "MarkdownV2")]
-            MarkdownV2 = 1,
+            [EnumMember(Value = "MarkdownV2")] MarkdownV2 = 1,
 
             /// <summary>
             /// Enum HTML for value: HTML
             /// </summary>
-            [EnumMember(Value = "HTML")]
-            HTML = 2,
+            [EnumMember(Value = "HTML")] HTML = 2,
 
             /// <summary>
             /// Enum Markdown for value: Markdown
             /// </summary>
-            [EnumMember(Value = "Markdown")]
-            Markdown = 3
-
+            [EnumMember(Value = "Markdown")] Markdown = 3
         }
 
         /// <summary>
         /// Parse mode of the message text per https://core.telegram.org/bots/api#formatting-options . Defaults to \&quot;MarkdownV2\&quot; .
         /// </summary>
         /// <value>Parse mode of the message text per https://core.telegram.org/bots/api#formatting-options . Defaults to \&quot;MarkdownV2\&quot; .</value>
-        [DataMember(Name="parseMode", EmitDefaultValue=false)]
+        [DataMember(Name = "parseMode", EmitDefaultValue = false)]
         public ParseModeEnum? ParseMode { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegramNotificationRuleBase" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TelegramNotificationRuleBase() { }
+        protected TelegramNotificationRuleBase()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegramNotificationRuleBase" /> class.
         /// </summary>
@@ -95,18 +94,27 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="messageTemplate">The message template as a flux interpolated string. (required).</param>
         /// <param name="parseMode">Parse mode of the message text per https://core.telegram.org/bots/api#formatting-options . Defaults to \&quot;MarkdownV2\&quot; ..</param>
         /// <param name="disableWebPagePreview">Disables preview of web links in the sent messages when \&quot;true\&quot;. Defaults to \&quot;false\&quot; ..</param>
-        public TelegramNotificationRuleBase(TypeEnum type = TypeEnum.Telegram, string messageTemplate = default(string), ParseModeEnum? parseMode = default(ParseModeEnum?), bool? disableWebPagePreview = default(bool?), string endpointID = default(string), string orgID = default(string), string taskID = default(string), TaskStatusType status = default(TaskStatusType), string name = default(string), string sleepUntil = default(string), string every = default(string), string offset = default(string), string runbookLink = default(string), int? limitEvery = default(int?), int? limit = default(int?), List<TagRule> tagRules = default(List<TagRule>), string description = default(string), List<StatusRule> statusRules = default(List<StatusRule>), List<Label> labels = default(List<Label>), NotificationRuleBaseLinks links = default(NotificationRuleBaseLinks)) : base(endpointID, orgID, taskID, status, name, sleepUntil, every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels, links)
+        public TelegramNotificationRuleBase(TypeEnum type = TypeEnum.Telegram, string messageTemplate = default,
+            ParseModeEnum? parseMode = default, bool? disableWebPagePreview = default, string endpointID = default,
+            string orgID = default, string taskID = default, TaskStatusType status = default, string name = default,
+            string sleepUntil = default, string every = default, string offset = default, string runbookLink = default,
+            int? limitEvery = default, int? limit = default, List<TagRule> tagRules = default,
+            string description = default, List<StatusRule> statusRules = default, List<Label> labels = default,
+            NotificationRuleBaseLinks links = default) : base(endpointID, orgID, taskID, status, name, sleepUntil,
+            every, offset, runbookLink, limitEvery, limit, tagRules, description, statusRules, labels, links)
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "messageTemplate" is required (not null)
             if (messageTemplate == null)
             {
-                throw new InvalidDataException("messageTemplate is a required property for TelegramNotificationRuleBase and cannot be null");
+                throw new InvalidDataException(
+                    "messageTemplate is a required property for TelegramNotificationRuleBase and cannot be null");
             }
-            this.MessageTemplate = messageTemplate;
-            this.ParseMode = parseMode;
-            this.DisableWebPagePreview = disableWebPagePreview;
+
+            MessageTemplate = messageTemplate;
+            ParseMode = parseMode;
+            DisableWebPagePreview = disableWebPagePreview;
         }
 
 
@@ -114,7 +122,7 @@ namespace InfluxDB.Client.Api.Domain
         /// The message template as a flux interpolated string.
         /// </summary>
         /// <value>The message template as a flux interpolated string.</value>
-        [DataMember(Name="messageTemplate", EmitDefaultValue=false)]
+        [DataMember(Name = "messageTemplate", EmitDefaultValue = false)]
         public string MessageTemplate { get; set; }
 
 
@@ -122,7 +130,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Disables preview of web links in the sent messages when \&quot;true\&quot;. Defaults to \&quot;false\&quot; .
         /// </summary>
         /// <value>Disables preview of web links in the sent messages when \&quot;true\&quot;. Defaults to \&quot;false\&quot; .</value>
-        [DataMember(Name="disableWebPagePreview", EmitDefaultValue=false)]
+        [DataMember(Name = "disableWebPagePreview", EmitDefaultValue = false)]
         public bool? DisableWebPagePreview { get; set; }
 
         /// <summary>
@@ -158,7 +166,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegramNotificationRuleBase);
+            return Equals(input as TelegramNotificationRuleBase);
         }
 
         /// <summary>
@@ -169,25 +177,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TelegramNotificationRuleBase input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.MessageTemplate == input.MessageTemplate ||
-                    (this.MessageTemplate != null && this.MessageTemplate.Equals(input.MessageTemplate))
-                ) && base.Equals(input) && 
-                (
-                    this.ParseMode == input.ParseMode ||
-                    this.ParseMode.Equals(input.ParseMode)
-                ) && base.Equals(input) && 
-                (
-                    this.DisableWebPagePreview == input.DisableWebPagePreview ||
-                    (this.DisableWebPagePreview != null && this.DisableWebPagePreview.Equals(input.DisableWebPagePreview))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       MessageTemplate == input.MessageTemplate ||
+                       MessageTemplate != null && MessageTemplate.Equals(input.MessageTemplate)
+                   ) && base.Equals(input) &&
+                   (
+                       ParseMode == input.ParseMode ||
+                       ParseMode.Equals(input.ParseMode)
+                   ) && base.Equals(input) &&
+                   (
+                       DisableWebPagePreview == input.DisableWebPagePreview ||
+                       DisableWebPagePreview != null && DisableWebPagePreview.Equals(input.DisableWebPagePreview)
+                   );
         }
 
         /// <summary>
@@ -198,18 +208,22 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.MessageTemplate != null)
-                    hashCode = hashCode * 59 + this.MessageTemplate.GetHashCode();
-                hashCode = hashCode * 59 + this.ParseMode.GetHashCode();
-                if (this.DisableWebPagePreview != null)
-                    hashCode = hashCode * 59 + this.DisableWebPagePreview.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (MessageTemplate != null)
+                {
+                    hashCode = hashCode * 59 + MessageTemplate.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + ParseMode.GetHashCode();
+                if (DisableWebPagePreview != null)
+                {
+                    hashCode = hashCode * 59 + DisableWebPagePreview.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

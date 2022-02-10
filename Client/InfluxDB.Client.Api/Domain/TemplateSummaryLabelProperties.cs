@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryLabelProperties
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryLabelProperties :  IEquatable<TemplateSummaryLabelProperties>
+    public partial class TemplateSummaryLabelProperties : IEquatable<TemplateSummaryLabelProperties>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryLabelProperties" /> class.
         /// </summary>
         /// <param name="color">color.</param>
         /// <param name="description">description.</param>
-        public TemplateSummaryLabelProperties(string color = default(string), string description = default(string))
+        public TemplateSummaryLabelProperties(string color = default, string description = default)
         {
-            this.Color = color;
-            this.Description = description;
+            Color = color;
+            Description = description;
         }
 
         /// <summary>
         /// Gets or Sets Color
         /// </summary>
-        [DataMember(Name="color", EmitDefaultValue=false)]
+        [DataMember(Name = "color", EmitDefaultValue = false)]
         public string Color { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryLabelProperties);
+            return Equals(input as TemplateSummaryLabelProperties);
         }
 
         /// <summary>
@@ -93,16 +93,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryLabelProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Color == input.Color ||
-                    (this.Color != null && this.Color.Equals(input.Color))
-                ) && 
+                    Color == input.Color ||
+                    Color != null && Color.Equals(input.Color)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
                 );
         }
 
@@ -114,16 +116,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Color != null)
-                    hashCode = hashCode * 59 + this.Color.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
+                var hashCode = 41;
+
+                if (Color != null)
+                {
+                    hashCode = hashCode * 59 + Color.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

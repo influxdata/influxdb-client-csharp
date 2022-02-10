@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// StackEvents
     /// </summary>
     [DataContract]
-    public partial class StackEvents :  IEquatable<StackEvents>
+    public partial class StackEvents : IEquatable<StackEvents>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StackEvents" /> class.
@@ -38,56 +38,57 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="sources">sources.</param>
         /// <param name="resources">resources.</param>
         /// <param name="urls">urls.</param>
-        public StackEvents(string eventType = default(string), string name = default(string), string description = default(string), List<string> sources = default(List<string>), List<StackResources> resources = default(List<StackResources>), List<string> urls = default(List<string>))
+        public StackEvents(string eventType = default, string name = default, string description = default,
+            List<string> sources = default, List<StackResources> resources = default, List<string> urls = default)
         {
-            this.EventType = eventType;
-            this.Name = name;
-            this.Description = description;
-            this.Sources = sources;
-            this.Resources = resources;
-            this.Urls = urls;
+            EventType = eventType;
+            Name = name;
+            Description = description;
+            Sources = sources;
+            Resources = resources;
+            Urls = urls;
         }
 
         /// <summary>
         /// Gets or Sets EventType
         /// </summary>
-        [DataMember(Name="eventType", EmitDefaultValue=false)]
+        [DataMember(Name = "eventType", EmitDefaultValue = false)]
         public string EventType { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Sources
         /// </summary>
-        [DataMember(Name="sources", EmitDefaultValue=false)]
+        [DataMember(Name = "sources", EmitDefaultValue = false)]
         public List<string> Sources { get; set; }
 
         /// <summary>
         /// Gets or Sets Resources
         /// </summary>
-        [DataMember(Name="resources", EmitDefaultValue=false)]
+        [DataMember(Name = "resources", EmitDefaultValue = false)]
         public List<StackResources> Resources { get; set; }
 
         /// <summary>
         /// Gets or Sets Urls
         /// </summary>
-        [DataMember(Name="urls", EmitDefaultValue=false)]
+        [DataMember(Name = "urls", EmitDefaultValue = false)]
         public List<string> Urls { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public DateTime? UpdatedAt { get; private set; }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as StackEvents);
+            return Equals(input as StackEvents);
         }
 
         /// <summary>
@@ -136,39 +137,41 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(StackEvents input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.EventType == input.EventType ||
-                    (this.EventType != null && this.EventType.Equals(input.EventType))
-                ) && 
+                    EventType == input.EventType ||
+                    EventType != null && EventType.Equals(input.EventType)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.Sources == input.Sources ||
-                    this.Sources != null &&
-                    this.Sources.SequenceEqual(input.Sources)
-                ) && 
+                    Sources == input.Sources ||
+                    Sources != null &&
+                    Sources.SequenceEqual(input.Sources)
+                ) &&
                 (
-                    this.Resources == input.Resources ||
-                    this.Resources != null &&
-                    this.Resources.SequenceEqual(input.Resources)
-                ) && 
+                    Resources == input.Resources ||
+                    Resources != null &&
+                    Resources.SequenceEqual(input.Resources)
+                ) &&
                 (
-                    this.Urls == input.Urls ||
-                    this.Urls != null &&
-                    this.Urls.SequenceEqual(input.Urls)
-                ) && 
+                    Urls == input.Urls ||
+                    Urls != null &&
+                    Urls.SequenceEqual(input.Urls)
+                ) &&
                 (
-                    this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
+                    UpdatedAt == input.UpdatedAt ||
+                    UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)
                 );
         }
 
@@ -180,26 +183,45 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.EventType != null)
-                    hashCode = hashCode * 59 + this.EventType.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Sources != null)
-                    hashCode = hashCode * 59 + this.Sources.GetHashCode();
-                if (this.Resources != null)
-                    hashCode = hashCode * 59 + this.Resources.GetHashCode();
-                if (this.Urls != null)
-                    hashCode = hashCode * 59 + this.Urls.GetHashCode();
-                if (this.UpdatedAt != null)
-                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
+                var hashCode = 41;
+
+                if (EventType != null)
+                {
+                    hashCode = hashCode * 59 + EventType.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (Sources != null)
+                {
+                    hashCode = hashCode * 59 + Sources.GetHashCode();
+                }
+
+                if (Resources != null)
+                {
+                    hashCode = hashCode * 59 + Resources.GetHashCode();
+                }
+
+                if (Urls != null)
+                {
+                    hashCode = hashCode * 59 + Urls.GetHashCode();
+                }
+
+                if (UpdatedAt != null)
+                {
+                    hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

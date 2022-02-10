@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Declares a package import
     /// </summary>
     [DataContract]
-    public partial class ImportDeclaration :  IEquatable<ImportDeclaration>
+    public partial class ImportDeclaration : IEquatable<ImportDeclaration>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ImportDeclaration" /> class.
@@ -35,30 +35,30 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="type">Type of AST node.</param>
         /// <param name="_as">_as.</param>
         /// <param name="path">path.</param>
-        public ImportDeclaration(string type = default(string), Identifier _as = default(Identifier), StringLiteral path = default(StringLiteral))
+        public ImportDeclaration(string type = default, Identifier _as = default, StringLiteral path = default)
         {
-            this.Type = type;
-            this.As = _as;
-            this.Path = path;
+            Type = type;
+            As = _as;
+            Path = path;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets As
         /// </summary>
-        [DataMember(Name="as", EmitDefaultValue=false)]
+        [DataMember(Name = "as", EmitDefaultValue = false)]
         public Identifier As { get; set; }
 
         /// <summary>
         /// Gets or Sets Path
         /// </summary>
-        [DataMember(Name="path", EmitDefaultValue=false)]
+        [DataMember(Name = "path", EmitDefaultValue = false)]
         public StringLiteral Path { get; set; }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ImportDeclaration);
+            return Equals(input as ImportDeclaration);
         }
 
         /// <summary>
@@ -103,21 +103,15 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ImportDeclaration input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && 
-                (
-                    
-                    (this.As != null && this.As.Equals(input.As))
-                ) && 
-                (
-                    
-                    (this.Path != null && this.Path.Equals(input.Path))
-                );
+            return
+            (
+                Type == input.Type ||
+                Type != null && Type.Equals(input.Type)
+            ) && As != null && As.Equals(input.As) && Path != null && Path.Equals(input.Path);
         }
 
         /// <summary>
@@ -128,18 +122,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.As != null)
-                    hashCode = hashCode * 59 + this.As.GetHashCode();
-                if (this.Path != null)
-                    hashCode = hashCode * 59 + this.Path.GetHashCode();
+                var hashCode = 41;
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (As != null)
+                {
+                    hashCode = hashCode * 59 + As.GetHashCode();
+                }
+
+                if (Path != null)
+                {
+                    hashCode = hashCode * 59 + Path.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

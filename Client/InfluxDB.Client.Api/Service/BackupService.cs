@@ -25,6 +25,7 @@ namespace InfluxDB.Client.Api.Service
     public interface IBackupService : IApiAccessor
     {
         #region Synchronous Operations
+
         /// <summary>
         /// Download snapshot of metadata stored in the server&#39;s embedded KV store. Should not be used in versions greater than 2.1.x, as it doesn&#39;t include metadata stored in embedded SQL.
         /// </summary>
@@ -34,7 +35,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>System.IO.Stream</returns>
-        System.IO.Stream GetBackupKV (string zapTraceSpan = null);
+        System.IO.Stream GetBackupKV(string zapTraceSpan = null);
 
         /// <summary>
         /// Download snapshot of metadata stored in the server&#39;s embedded KV store. Should not be used in versions greater than 2.1.x, as it doesn&#39;t include metadata stored in embedded SQL.
@@ -45,7 +46,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        ApiResponse<System.IO.Stream> GetBackupKVWithHttpInfo (string zapTraceSpan = null);
+        ApiResponse<System.IO.Stream> GetBackupKVWithHttpInfo(string zapTraceSpan = null);
+
         /// <summary>
         /// Download snapshot of all metadata in the server
         /// </summary>
@@ -56,7 +58,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <returns>MetadataBackup</returns>
-        MetadataBackup GetBackupMetadata (string zapTraceSpan = null, string acceptEncoding = null);
+        MetadataBackup GetBackupMetadata(string zapTraceSpan = null, string acceptEncoding = null);
 
         /// <summary>
         /// Download snapshot of all metadata in the server
@@ -68,7 +70,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <returns>ApiResponse of MetadataBackup</returns>
-        ApiResponse<MetadataBackup> GetBackupMetadataWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null);
+        ApiResponse<MetadataBackup> GetBackupMetadataWithHttpInfo(string zapTraceSpan = null,
+            string acceptEncoding = null);
+
         /// <summary>
         /// Download snapshot of all TSM data in a shard
         /// </summary>
@@ -81,7 +85,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <returns>System.IO.Stream</returns>
-        System.IO.Stream GetBackupShardId (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null);
+        System.IO.Stream GetBackupShardId(long? shardID, string zapTraceSpan = null, string acceptEncoding = null,
+            DateTime? since = null);
 
         /// <summary>
         /// Download snapshot of all TSM data in a shard
@@ -95,9 +100,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        ApiResponse<System.IO.Stream> GetBackupShardIdWithHttpInfo (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null);
+        ApiResponse<System.IO.Stream> GetBackupShardIdWithHttpInfo(long? shardID, string zapTraceSpan = null,
+            string acceptEncoding = null, DateTime? since = null);
+
         #endregion Synchronous Operations
+
         #region Asynchronous Operations
+
         /// <summary>
         /// Download snapshot of metadata stored in the server&#39;s embedded KV store. Should not be used in versions greater than 2.1.x, as it doesn&#39;t include metadata stored in embedded SQL.
         /// </summary>
@@ -108,7 +117,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of System.IO.Stream</returns>
-        System.Threading.Tasks.Task<System.IO.Stream> GetBackupKVAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<System.IO.Stream> GetBackupKVAsync(string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Download snapshot of metadata stored in the server&#39;s embedded KV store. Should not be used in versions greater than 2.1.x, as it doesn&#39;t include metadata stored in embedded SQL.
@@ -120,7 +130,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
-        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetBackupKVAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetBackupKVAsyncWithHttpInfo(
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Download snapshot of all metadata in the server
         /// </summary>
@@ -132,7 +144,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of MetadataBackup</returns>
-        System.Threading.Tasks.Task<MetadataBackup> GetBackupMetadataAsync (string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<MetadataBackup> GetBackupMetadataAsync(string zapTraceSpan = null,
+            string acceptEncoding = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Download snapshot of all metadata in the server
@@ -145,7 +158,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (MetadataBackup)</returns>
-        System.Threading.Tasks.Task<ApiResponse<MetadataBackup>> GetBackupMetadataAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<MetadataBackup>> GetBackupMetadataAsyncWithHttpInfo(
+            string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Download snapshot of all TSM data in a shard
         /// </summary>
@@ -159,7 +174,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of System.IO.Stream</returns>
-        System.Threading.Tasks.Task<System.IO.Stream> GetBackupShardIdAsync (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<System.IO.Stream> GetBackupShardIdAsync(long? shardID, string zapTraceSpan = null,
+            string acceptEncoding = null, DateTime? since = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Download snapshot of all TSM data in a shard
@@ -174,7 +190,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
-        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetBackupShardIdAsyncWithHttpInfo (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetBackupShardIdAsyncWithHttpInfo(long? shardID,
+            string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null,
+            CancellationToken cancellationToken = default);
+
         #endregion Asynchronous Operations
     }
 
@@ -183,17 +202,17 @@ namespace InfluxDB.Client.Api.Service
     /// </summary>
     public partial class BackupService : IBackupService
     {
-        private InfluxDB.Client.Api.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BackupService"/> class.
         /// </summary>
         /// <returns></returns>
-        public BackupService(String basePath)
+        public BackupService(string basePath)
         {
-            this.Configuration = new InfluxDB.Client.Api.Client.Configuration { BasePath = basePath };
+            Configuration = new Configuration { BasePath = basePath };
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -202,31 +221,36 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public BackupService(InfluxDB.Client.Api.Client.Configuration configuration = null)
+        public BackupService(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = InfluxDB.Client.Api.Client.Configuration.Default;
+            {
+                Configuration = Configuration.Default;
+            }
             else
-                this.Configuration = configuration;
+            {
+                Configuration = configuration;
+            }
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(String basePath)
+        [Obsolete(
+            "SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(string basePath)
         {
             // do nothing
         }
@@ -235,12 +259,12 @@ namespace InfluxDB.Client.Api.Service
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public InfluxDB.Client.Api.Client.Configuration Configuration {get; set;}
+        public Configuration Configuration { get; set; }
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public InfluxDB.Client.Api.Client.ExceptionFactory ExceptionFactory
+        public ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -248,9 +272,10 @@ namespace InfluxDB.Client.Api.Service
                 {
                     throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
                 }
+
                 return _exceptionFactory;
             }
-            set { _exceptionFactory = value; }
+            set => _exceptionFactory = value;
         }
 
         /// <summary>
@@ -258,9 +283,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <returns>Dictionary of HTTP header</returns>
         [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public IDictionary<String, String> DefaultHeader()
+        public IDictionary<string, string> DefaultHeader()
         {
-            return new ReadOnlyDictionary<string, string>(this.Configuration.DefaultHeader);
+            return new ReadOnlyDictionary<string, string>(Configuration.DefaultHeader);
         }
 
         /// <summary>
@@ -272,7 +297,7 @@ namespace InfluxDB.Client.Api.Service
         [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
         public void AddDefaultHeader(string key, string value)
         {
-            this.Configuration.AddDefaultHeader(key, value);
+            Configuration.AddDefaultHeader(key, value);
         }
 
         /// <summary>
@@ -281,10 +306,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>System.IO.Stream</returns>
-        public System.IO.Stream GetBackupKV (string zapTraceSpan = null)
+        public System.IO.Stream GetBackupKV(string zapTraceSpan = null)
         {
-             ApiResponse<System.IO.Stream> localVarResponse = GetBackupKVWithHttpInfo(zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse = GetBackupKVWithHttpInfo(zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -293,51 +318,62 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public ApiResponse< System.IO.Stream > GetBackupKVWithHttpInfo (string zapTraceSpan = null)
+        public ApiResponse<System.IO.Stream> GetBackupKVWithHttpInfo(string zapTraceSpan = null)
         {
-
             var localVarPath = "/api/v2/backup/kv";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupKV", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupKV", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (System.IO.Stream) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
+                (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 
         /// <summary>
@@ -347,46 +383,58 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetBackupKVWithIRestResponseAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetBackupKVWithIRestResponseAsync(
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/backup/kv";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupKV", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupKV", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -398,88 +446,107 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public RestResponse GetBackupKVWithIRestResponse (string zapTraceSpan = null)
+        public RestResponse GetBackupKVWithIRestResponse(string zapTraceSpan = null)
         {
-
             var localVarPath = "/api/v2/backup/kv";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupKV", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupKV", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Download snapshot of metadata stored in the server&#39;s embedded KV store. Should not be used in versions greater than 2.1.x, as it doesn&#39;t include metadata stored in embedded SQL. 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public RestRequest GetBackupKVWithRestRequest (string zapTraceSpan = null)
+        public RestRequest GetBackupKVWithRestRequest(string zapTraceSpan = null)
         {
-
             var localVarPath = "/api/v2/backup/kv";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -490,11 +557,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of System.IO.Stream</returns>
-        public async System.Threading.Tasks.Task<System.IO.Stream> GetBackupKVAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<System.IO.Stream> GetBackupKVAsync(string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<System.IO.Stream> localVarResponse = await GetBackupKVAsyncWithHttpInfo(zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetBackupKVAsyncWithHttpInfo(zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -504,24 +572,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetBackupKVAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetBackupKVAsyncWithHttpInfo(
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetBackupKVAsyncWithIRestResponse(zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await GetBackupKVAsyncWithIRestResponse(zapTraceSpan, cancellationToken)
+                .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupKV", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupKV", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (System.IO.Stream) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
+                (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
-            
+
         /// <summary>
         /// Download snapshot of metadata stored in the server&#39;s embedded KV store. Should not be used in versions greater than 2.1.x, as it doesn&#39;t include metadata stored in embedded SQL. 
         /// </summary>
@@ -529,44 +602,56 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (System.IO.Stream)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetBackupKVAsyncWithIRestResponse (string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetBackupKVAsyncWithIRestResponse(
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/backup/kv";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupKV", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupKV", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -579,10 +664,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <returns>MetadataBackup</returns>
-        public MetadataBackup GetBackupMetadata (string zapTraceSpan = null, string acceptEncoding = null)
+        public MetadataBackup GetBackupMetadata(string zapTraceSpan = null, string acceptEncoding = null)
         {
-             ApiResponse<MetadataBackup> localVarResponse = GetBackupMetadataWithHttpInfo(zapTraceSpan, acceptEncoding);
-             return localVarResponse.Data;
+            var localVarResponse = GetBackupMetadataWithHttpInfo(zapTraceSpan, acceptEncoding);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -592,52 +677,69 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <returns>ApiResponse of MetadataBackup</returns>
-        public ApiResponse< MetadataBackup > GetBackupMetadataWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null)
+        public ApiResponse<MetadataBackup> GetBackupMetadataWithHttpInfo(string zapTraceSpan = null,
+            string acceptEncoding = null)
         {
-
             var localVarPath = "/api/v2/backup/metadata";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "multipart/mixed",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<MetadataBackup>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (MetadataBackup) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(MetadataBackup)));
+                (MetadataBackup)Configuration.ApiClient.Deserialize(localVarResponse, typeof(MetadataBackup)));
         }
 
         /// <summary>
@@ -648,47 +750,64 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of MetadataBackup</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetBackupMetadataWithIRestResponseAsync (string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetBackupMetadataWithIRestResponseAsync(
+            string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/backup/metadata";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "multipart/mixed",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -701,52 +820,68 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <returns>ApiResponse of MetadataBackup</returns>
-        public RestResponse GetBackupMetadataWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null)
+        public RestResponse GetBackupMetadataWithIRestResponse(string zapTraceSpan = null, string acceptEncoding = null)
         {
-
             var localVarPath = "/api/v2/backup/metadata";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "multipart/mixed",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Download snapshot of all metadata in the server 
         /// </summary>
@@ -754,38 +889,51 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <returns>ApiResponse of MetadataBackup</returns>
-        public RestRequest GetBackupMetadataWithRestRequest (string zapTraceSpan = null, string acceptEncoding = null)
+        public RestRequest GetBackupMetadataWithRestRequest(string zapTraceSpan = null, string acceptEncoding = null)
         {
-
             var localVarPath = "/api/v2/backup/metadata";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "multipart/mixed",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -797,11 +945,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of MetadataBackup</returns>
-        public async System.Threading.Tasks.Task<MetadataBackup> GetBackupMetadataAsync (string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<MetadataBackup> GetBackupMetadataAsync(string zapTraceSpan = null,
+            string acceptEncoding = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<MetadataBackup> localVarResponse = await GetBackupMetadataAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetBackupMetadataAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -812,24 +962,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (MetadataBackup)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<MetadataBackup>> GetBackupMetadataAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<MetadataBackup>> GetBackupMetadataAsyncWithHttpInfo(
+            string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetBackupMetadataAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetBackupMetadataAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<MetadataBackup>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (MetadataBackup) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(MetadataBackup)));
+                (MetadataBackup)Configuration.ApiClient.Deserialize(localVarResponse, typeof(MetadataBackup)));
         }
-            
+
         /// <summary>
         /// Download snapshot of all metadata in the server 
         /// </summary>
@@ -838,45 +994,62 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (MetadataBackup)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetBackupMetadataAsyncWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetBackupMetadataAsyncWithIRestResponse(
+            string zapTraceSpan = null, string acceptEncoding = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/backup/metadata";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "multipart/mixed",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupMetadata", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -891,10 +1064,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <returns>System.IO.Stream</returns>
-        public System.IO.Stream GetBackupShardId (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null)
+        public System.IO.Stream GetBackupShardId(long? shardID, string zapTraceSpan = null,
+            string acceptEncoding = null, DateTime? since = null)
         {
-             ApiResponse<System.IO.Stream> localVarResponse = GetBackupShardIdWithHttpInfo(shardID, zapTraceSpan, acceptEncoding, since);
-             return localVarResponse.Data;
+            var localVarResponse = GetBackupShardIdWithHttpInfo(shardID, zapTraceSpan, acceptEncoding, since);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -906,57 +1080,87 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public ApiResponse< System.IO.Stream > GetBackupShardIdWithHttpInfo (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null)
+        public ApiResponse<System.IO.Stream> GetBackupShardIdWithHttpInfo(long? shardID, string zapTraceSpan = null,
+            string acceptEncoding = null, DateTime? since = null)
         {
             // verify the required parameter 'shardID' is set
             if (shardID == null)
-                throw new ApiException(400, "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            }
 
             var localVarPath = "/api/v2/backup/shards/{shardID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (shardID != null) localVarPathParams.Add("shardID", this.Configuration.ApiClient.ParameterToString(shardID)); // path parameter
-            if (since != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (shardID != null)
+            {
+                localVarPathParams.Add("shardID", Configuration.ApiClient.ParameterToString(shardID)); // path parameter
+            }
+
+            if (since != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupShardId", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupShardId", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (System.IO.Stream) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
+                (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 
         /// <summary>
@@ -969,52 +1173,83 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetBackupShardIdWithIRestResponseAsync (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetBackupShardIdWithIRestResponseAsync(long? shardID,
+            string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'shardID' is set
             if (shardID == null)
-                throw new ApiException(400, "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            }
 
             var localVarPath = "/api/v2/backup/shards/{shardID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (shardID != null) localVarPathParams.Add("shardID", this.Configuration.ApiClient.ParameterToString(shardID)); // path parameter
-            if (since != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (shardID != null)
+            {
+                localVarPathParams.Add("shardID", Configuration.ApiClient.ParameterToString(shardID)); // path parameter
+            }
+
+            if (since != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupShardId", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupShardId", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1029,57 +1264,87 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public RestResponse GetBackupShardIdWithIRestResponse (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null)
+        public RestResponse GetBackupShardIdWithIRestResponse(long? shardID, string zapTraceSpan = null,
+            string acceptEncoding = null, DateTime? since = null)
         {
             // verify the required parameter 'shardID' is set
             if (shardID == null)
-                throw new ApiException(400, "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            }
 
             var localVarPath = "/api/v2/backup/shards/{shardID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (shardID != null) localVarPathParams.Add("shardID", this.Configuration.ApiClient.ParameterToString(shardID)); // path parameter
-            if (since != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (shardID != null)
+            {
+                localVarPathParams.Add("shardID", Configuration.ApiClient.ParameterToString(shardID)); // path parameter
+            }
+
+            if (since != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupShardId", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupShardId", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Download snapshot of all TSM data in a shard 
         /// </summary>
@@ -1089,43 +1354,70 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="acceptEncoding">Indicates the content encoding (usually a compression algorithm) that the client can understand. (optional, default to identity)</param>
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <returns>ApiResponse of System.IO.Stream</returns>
-        public RestRequest GetBackupShardIdWithRestRequest (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null)
+        public RestRequest GetBackupShardIdWithRestRequest(long? shardID, string zapTraceSpan = null,
+            string acceptEncoding = null, DateTime? since = null)
         {
             // verify the required parameter 'shardID' is set
             if (shardID == null)
-                throw new ApiException(400, "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            }
 
             var localVarPath = "/api/v2/backup/shards/{shardID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (shardID != null) localVarPathParams.Add("shardID", this.Configuration.ApiClient.ParameterToString(shardID)); // path parameter
-            if (since != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (shardID != null)
+            {
+                localVarPathParams.Add("shardID", Configuration.ApiClient.ParameterToString(shardID)); // path parameter
+            }
+
+            if (since != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1139,11 +1431,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of System.IO.Stream</returns>
-        public async System.Threading.Tasks.Task<System.IO.Stream> GetBackupShardIdAsync (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<System.IO.Stream> GetBackupShardIdAsync(long? shardID,
+            string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<System.IO.Stream> localVarResponse = await GetBackupShardIdAsyncWithHttpInfo(shardID, zapTraceSpan, acceptEncoding, since, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetBackupShardIdAsyncWithHttpInfo(shardID, zapTraceSpan, acceptEncoding, since, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1156,24 +1451,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetBackupShardIdAsyncWithHttpInfo (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetBackupShardIdAsyncWithHttpInfo(
+            long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetBackupShardIdAsyncWithIRestResponse(shardID, zapTraceSpan, acceptEncoding, since, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetBackupShardIdAsyncWithIRestResponse(shardID, zapTraceSpan, acceptEncoding, since,
+                    cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupShardId", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupShardId", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (System.IO.Stream) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
+                (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
-            
+
         /// <summary>
         /// Download snapshot of all TSM data in a shard 
         /// </summary>
@@ -1184,54 +1486,84 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="since">Earliest time to include in the snapshot. RFC3339 format. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (System.IO.Stream)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetBackupShardIdAsyncWithIRestResponse (long? shardID, string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetBackupShardIdAsyncWithIRestResponse(long? shardID,
+            string zapTraceSpan = null, string acceptEncoding = null, DateTime? since = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'shardID' is set
             if (shardID == null)
-                throw new ApiException(400, "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'shardID' when calling BackupService->GetBackupShardId");
+            }
 
             var localVarPath = "/api/v2/backup/shards/{shardID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (shardID != null) localVarPathParams.Add("shardID", this.Configuration.ApiClient.ParameterToString(shardID)); // path parameter
-            if (since != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            if (shardID != null)
+            {
+                localVarPathParams.Add("shardID", Configuration.ApiClient.ParameterToString(shardID)); // path parameter
+            }
+
+            if (since != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "since", since)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/octet-stream",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetBackupShardId", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetBackupShardId", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-
     }
 }

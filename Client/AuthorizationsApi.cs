@@ -140,7 +140,8 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(authorization, nameof(authorization));
 
-            var cloned = new AuthorizationPostRequest(authorization.OrgID, authorization.UserID, authorization.Permissions,
+            var cloned = new AuthorizationPostRequest(authorization.OrgID, authorization.UserID,
+                authorization.Permissions,
                 authorization.Status, authorization.Description);
 
             return CreateAuthorizationAsync(cloned);

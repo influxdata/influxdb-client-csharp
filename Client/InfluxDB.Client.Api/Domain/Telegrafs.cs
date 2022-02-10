@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// Telegrafs
     /// </summary>
     [DataContract]
-    public partial class Telegrafs :  IEquatable<Telegrafs>
+    public partial class Telegrafs : IEquatable<Telegrafs>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Telegrafs" /> class.
         /// </summary>
         /// <param name="configurations">configurations.</param>
-        public Telegrafs(List<Telegraf> configurations = default(List<Telegraf>))
+        public Telegrafs(List<Telegraf> configurations = default)
         {
-            this.Configurations = configurations;
+            Configurations = configurations;
         }
 
         /// <summary>
         /// Gets or Sets Configurations
         /// </summary>
-        [DataMember(Name="configurations", EmitDefaultValue=false)]
+        [DataMember(Name = "configurations", EmitDefaultValue = false)]
         public List<Telegraf> Configurations { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Telegrafs);
+            return Equals(input as Telegrafs);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Telegrafs input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Configurations == input.Configurations ||
-                    this.Configurations != null &&
-                    this.Configurations.SequenceEqual(input.Configurations)
-                );
+            return
+                Configurations == input.Configurations ||
+                Configurations != null &&
+                Configurations.SequenceEqual(input.Configurations);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Configurations != null)
-                    hashCode = hashCode * 59 + this.Configurations.GetHashCode();
+                var hashCode = 41;
+
+                if (Configurations != null)
+                {
+                    hashCode = hashCode * 59 + Configurations.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

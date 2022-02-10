@@ -27,31 +27,31 @@ namespace InfluxDB.Client.Api.Domain
     /// A placeholder for statements for which no correct statement nodes can be created
     /// </summary>
     [DataContract]
-    public partial class BadStatement : Statement,  IEquatable<BadStatement>
+    public partial class BadStatement : Statement, IEquatable<BadStatement>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BadStatement" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
         /// <param name="text">Raw source text.</param>
-        public BadStatement(string type = default(string), string text = default(string)) : base()
+        public BadStatement(string type = default, string text = default) : base()
         {
-            this.Type = type;
-            this.Text = text;
+            Type = type;
+            Text = text;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Raw source text
         /// </summary>
         /// <value>Raw source text</value>
-        [DataMember(Name="text", EmitDefaultValue=false)]
+        [DataMember(Name = "text", EmitDefaultValue = false)]
         public string Text { get; set; }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as BadStatement);
+            return Equals(input as BadStatement);
         }
 
         /// <summary>
@@ -96,17 +96,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(BadStatement input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
-                    this.Text == input.Text ||
-                    (this.Text != null && this.Text.Equals(input.Text))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type != null && Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Text == input.Text ||
+                       Text != null && Text.Equals(input.Text)
+                   );
         }
 
         /// <summary>
@@ -117,16 +119,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Text != null)
-                    hashCode = hashCode * 59 + this.Text.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (Text != null)
+                {
+                    hashCode = hashCode * 59 + Text.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

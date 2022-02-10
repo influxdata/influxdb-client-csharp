@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryErrors
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryErrors :  IEquatable<TemplateSummaryErrors>
+    public partial class TemplateSummaryErrors : IEquatable<TemplateSummaryErrors>
     {
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public TemplateKind? Kind { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryErrors" /> class.
         /// </summary>
@@ -41,31 +42,32 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="reason">reason.</param>
         /// <param name="fields">fields.</param>
         /// <param name="indexes">indexes.</param>
-        public TemplateSummaryErrors(TemplateKind? kind = default(TemplateKind?), string reason = default(string), List<string> fields = default(List<string>), List<int?> indexes = default(List<int?>))
+        public TemplateSummaryErrors(TemplateKind? kind = default, string reason = default,
+            List<string> fields = default, List<int?> indexes = default)
         {
-            this.Kind = kind;
-            this.Reason = reason;
-            this.Fields = fields;
-            this.Indexes = indexes;
+            Kind = kind;
+            Reason = reason;
+            Fields = fields;
+            Indexes = indexes;
         }
 
 
         /// <summary>
         /// Gets or Sets Reason
         /// </summary>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [DataMember(Name = "reason", EmitDefaultValue = false)]
         public string Reason { get; set; }
 
         /// <summary>
         /// Gets or Sets Fields
         /// </summary>
-        [DataMember(Name="fields", EmitDefaultValue=false)]
+        [DataMember(Name = "fields", EmitDefaultValue = false)]
         public List<string> Fields { get; set; }
 
         /// <summary>
         /// Gets or Sets Indexes
         /// </summary>
-        [DataMember(Name="indexes", EmitDefaultValue=false)]
+        [DataMember(Name = "indexes", EmitDefaultValue = false)]
         public List<int?> Indexes { get; set; }
 
         /// <summary>
@@ -100,7 +102,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryErrors);
+            return Equals(input as TemplateSummaryErrors);
         }
 
         /// <summary>
@@ -111,26 +113,28 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryErrors input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Kind == input.Kind ||
-                    this.Kind.Equals(input.Kind)
-                ) && 
+                    Kind == input.Kind ||
+                    Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.Reason == input.Reason ||
-                    (this.Reason != null && this.Reason.Equals(input.Reason))
-                ) && 
+                    Reason == input.Reason ||
+                    Reason != null && Reason.Equals(input.Reason)
+                ) &&
                 (
-                    this.Fields == input.Fields ||
-                    this.Fields != null &&
-                    this.Fields.SequenceEqual(input.Fields)
-                ) && 
+                    Fields == input.Fields ||
+                    Fields != null &&
+                    Fields.SequenceEqual(input.Fields)
+                ) &&
                 (
-                    this.Indexes == input.Indexes ||
-                    this.Indexes != null &&
-                    this.Indexes.SequenceEqual(input.Indexes)
+                    Indexes == input.Indexes ||
+                    Indexes != null &&
+                    Indexes.SequenceEqual(input.Indexes)
                 );
         }
 
@@ -142,19 +146,26 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.Reason != null)
-                    hashCode = hashCode * 59 + this.Reason.GetHashCode();
-                if (this.Fields != null)
-                    hashCode = hashCode * 59 + this.Fields.GetHashCode();
-                if (this.Indexes != null)
-                    hashCode = hashCode * 59 + this.Indexes.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Kind.GetHashCode();
+                if (Reason != null)
+                {
+                    hashCode = hashCode * 59 + Reason.GetHashCode();
+                }
+
+                if (Fields != null)
+                {
+                    hashCode = hashCode * 59 + Fields.GetHashCode();
+                }
+
+                if (Indexes != null)
+                {
+                    hashCode = hashCode * 59 + Indexes.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

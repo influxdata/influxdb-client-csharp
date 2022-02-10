@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryDiffBucketsNewOld
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryDiffBucketsNewOld :  IEquatable<TemplateSummaryDiffBucketsNewOld>
+    public partial class TemplateSummaryDiffBucketsNewOld : IEquatable<TemplateSummaryDiffBucketsNewOld>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryDiffBucketsNewOld" /> class.
@@ -35,30 +35,31 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="name">name.</param>
         /// <param name="description">description.</param>
         /// <param name="retentionRules">Rules to expire or retain data.  No rules means data never expires..</param>
-        public TemplateSummaryDiffBucketsNewOld(string name = default(string), string description = default(string), List<BucketRetentionRules> retentionRules = default(List<BucketRetentionRules>))
+        public TemplateSummaryDiffBucketsNewOld(string name = default, string description = default,
+            List<BucketRetentionRules> retentionRules = default)
         {
-            this.Name = name;
-            this.Description = description;
-            this.RetentionRules = retentionRules;
+            Name = name;
+            Description = description;
+            RetentionRules = retentionRules;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Rules to expire or retain data.  No rules means data never expires.
         /// </summary>
         /// <value>Rules to expire or retain data.  No rules means data never expires.</value>
-        [DataMember(Name="retentionRules", EmitDefaultValue=false)]
+        [DataMember(Name = "retentionRules", EmitDefaultValue = false)]
         public List<BucketRetentionRules> RetentionRules { get; set; }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryDiffBucketsNewOld);
+            return Equals(input as TemplateSummaryDiffBucketsNewOld);
         }
 
         /// <summary>
@@ -103,21 +104,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryDiffBucketsNewOld input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.RetentionRules == input.RetentionRules ||
-                    this.RetentionRules != null &&
-                    this.RetentionRules.SequenceEqual(input.RetentionRules)
+                    RetentionRules == input.RetentionRules ||
+                    RetentionRules != null &&
+                    RetentionRules.SequenceEqual(input.RetentionRules)
                 );
         }
 
@@ -129,18 +132,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.RetentionRules != null)
-                    hashCode = hashCode * 59 + this.RetentionRules.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (RetentionRules != null)
+                {
+                    hashCode = hashCode * 59 + RetentionRules.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

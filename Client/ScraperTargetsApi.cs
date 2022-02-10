@@ -136,10 +136,7 @@ namespace InfluxDB.Client
 
             var created = await CreateScraperTargetAsync(cloned).ConfigureAwait(false);
             var labels = await GetLabelsAsync(scraperTargetResponse).ConfigureAwait(false);
-            foreach (var label in labels)
-            {
-                await AddLabelAsync(label, created).ConfigureAwait(false);
-            }
+            foreach (var label in labels) await AddLabelAsync(label, created).ConfigureAwait(false);
 
             return created;
         }

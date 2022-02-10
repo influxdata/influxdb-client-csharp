@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// DBRPs
     /// </summary>
     [DataContract]
-    public partial class DBRPs :  IEquatable<DBRPs>
+    public partial class DBRPs : IEquatable<DBRPs>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DBRPs" /> class.
         /// </summary>
         /// <param name="content">content.</param>
-        public DBRPs(List<DBRP> content = default(List<DBRP>))
+        public DBRPs(List<DBRP> content = default)
         {
-            this.Content = content;
+            Content = content;
         }
 
         /// <summary>
         /// Gets or Sets Content
         /// </summary>
-        [DataMember(Name="content", EmitDefaultValue=false)]
+        [DataMember(Name = "content", EmitDefaultValue = false)]
         public List<DBRP> Content { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DBRPs);
+            return Equals(input as DBRPs);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DBRPs input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Content == input.Content ||
-                    this.Content != null &&
-                    this.Content.SequenceEqual(input.Content)
-                );
+            return
+                Content == input.Content ||
+                Content != null &&
+                Content.SequenceEqual(input.Content);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Content != null)
-                    hashCode = hashCode * 59 + this.Content.GetHashCode();
+                var hashCode = 41;
+
+                if (Content != null)
+                {
+                    hashCode = hashCode * 59 + Content.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// ThresholdCheckTags
     /// </summary>
     [DataContract]
-    public partial class ThresholdCheckTags :  IEquatable<ThresholdCheckTags>
+    public partial class ThresholdCheckTags : IEquatable<ThresholdCheckTags>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ThresholdCheckTags" /> class.
         /// </summary>
         /// <param name="key">key.</param>
         /// <param name="value">value.</param>
-        public ThresholdCheckTags(string key = default(string), string value = default(string))
+        public ThresholdCheckTags(string key = default, string value = default)
         {
-            this.Key = key;
-            this.Value = value;
+            Key = key;
+            Value = value;
         }
 
         /// <summary>
         /// Gets or Sets Key
         /// </summary>
-        [DataMember(Name="key", EmitDefaultValue=false)]
+        [DataMember(Name = "key", EmitDefaultValue = false)]
         public string Key { get; set; }
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [DataMember(Name = "value", EmitDefaultValue = false)]
         public string Value { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ThresholdCheckTags);
+            return Equals(input as ThresholdCheckTags);
         }
 
         /// <summary>
@@ -93,16 +93,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ThresholdCheckTags input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Key == input.Key ||
-                    (this.Key != null && this.Key.Equals(input.Key))
-                ) && 
+                    Key == input.Key ||
+                    Key != null && Key.Equals(input.Key)
+                ) &&
                 (
-                    this.Value == input.Value ||
-                    (this.Value != null && this.Value.Equals(input.Value))
+                    Value == input.Value ||
+                    Value != null && Value.Equals(input.Value)
                 );
         }
 
@@ -114,16 +116,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Key != null)
-                    hashCode = hashCode * 59 + this.Key.GetHashCode();
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
+                var hashCode = 41;
+
+                if (Key != null)
+                {
+                    hashCode = hashCode * 59 + Key.GetHashCode();
+                }
+
+                if (Value != null)
+                {
+                    hashCode = hashCode * 59 + Value.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

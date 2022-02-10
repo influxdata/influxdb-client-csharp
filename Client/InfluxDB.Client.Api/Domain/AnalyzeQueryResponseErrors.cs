@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// AnalyzeQueryResponseErrors
     /// </summary>
     [DataContract]
-    public partial class AnalyzeQueryResponseErrors :  IEquatable<AnalyzeQueryResponseErrors>
+    public partial class AnalyzeQueryResponseErrors : IEquatable<AnalyzeQueryResponseErrors>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AnalyzeQueryResponseErrors" /> class.
@@ -36,36 +36,37 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="column">column.</param>
         /// <param name="character">character.</param>
         /// <param name="message">message.</param>
-        public AnalyzeQueryResponseErrors(int? line = default(int?), int? column = default(int?), int? character = default(int?), string message = default(string))
+        public AnalyzeQueryResponseErrors(int? line = default, int? column = default, int? character = default,
+            string message = default)
         {
-            this.Line = line;
-            this.Column = column;
-            this.Character = character;
-            this.Message = message;
+            Line = line;
+            Column = column;
+            Character = character;
+            Message = message;
         }
 
         /// <summary>
         /// Gets or Sets Line
         /// </summary>
-        [DataMember(Name="line", EmitDefaultValue=false)]
+        [DataMember(Name = "line", EmitDefaultValue = false)]
         public int? Line { get; set; }
 
         /// <summary>
         /// Gets or Sets Column
         /// </summary>
-        [DataMember(Name="column", EmitDefaultValue=false)]
+        [DataMember(Name = "column", EmitDefaultValue = false)]
         public int? Column { get; set; }
 
         /// <summary>
         /// Gets or Sets Character
         /// </summary>
-        [DataMember(Name="character", EmitDefaultValue=false)]
+        [DataMember(Name = "character", EmitDefaultValue = false)]
         public int? Character { get; set; }
 
         /// <summary>
         /// Gets or Sets Message
         /// </summary>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [DataMember(Name = "message", EmitDefaultValue = false)]
         public string Message { get; set; }
 
         /// <summary>
@@ -100,7 +101,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as AnalyzeQueryResponseErrors);
+            return Equals(input as AnalyzeQueryResponseErrors);
         }
 
         /// <summary>
@@ -111,24 +112,26 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(AnalyzeQueryResponseErrors input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Line == input.Line ||
-                    (this.Line != null && this.Line.Equals(input.Line))
-                ) && 
+                    Line == input.Line ||
+                    Line != null && Line.Equals(input.Line)
+                ) &&
                 (
-                    this.Column == input.Column ||
-                    (this.Column != null && this.Column.Equals(input.Column))
-                ) && 
+                    Column == input.Column ||
+                    Column != null && Column.Equals(input.Column)
+                ) &&
                 (
-                    this.Character == input.Character ||
-                    (this.Character != null && this.Character.Equals(input.Character))
-                ) && 
+                    Character == input.Character ||
+                    Character != null && Character.Equals(input.Character)
+                ) &&
                 (
-                    this.Message == input.Message ||
-                    (this.Message != null && this.Message.Equals(input.Message))
+                    Message == input.Message ||
+                    Message != null && Message.Equals(input.Message)
                 );
         }
 
@@ -140,20 +143,30 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Line != null)
-                    hashCode = hashCode * 59 + this.Line.GetHashCode();
-                if (this.Column != null)
-                    hashCode = hashCode * 59 + this.Column.GetHashCode();
-                if (this.Character != null)
-                    hashCode = hashCode * 59 + this.Character.GetHashCode();
-                if (this.Message != null)
-                    hashCode = hashCode * 59 + this.Message.GetHashCode();
+                var hashCode = 41;
+
+                if (Line != null)
+                {
+                    hashCode = hashCode * 59 + Line.GetHashCode();
+                }
+
+                if (Column != null)
+                {
+                    hashCode = hashCode * 59 + Column.GetHashCode();
+                }
+
+                if (Character != null)
+                {
+                    hashCode = hashCode * 59 + Character.GetHashCode();
+                }
+
+                if (Message != null)
+                {
+                    hashCode = hashCode * 59 + Message.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

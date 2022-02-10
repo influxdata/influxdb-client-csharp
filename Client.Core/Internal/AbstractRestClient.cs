@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Core.Internal
                 throw new InfluxException(e);
             }
         }
-        
+
         private string GetVersion(RestResponse responseHttp)
         {
             Arguments.CheckNotNull(responseHttp, "responseHttp");

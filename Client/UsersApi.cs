@@ -86,7 +86,8 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(oldPassword, nameof(oldPassword));
             Arguments.CheckNotNull(newPassword, nameof(newPassword));
 
-            return FindUserByIdAsync(userId).ContinueWith(t => UpdateUserPasswordAsync(t.Result, oldPassword, newPassword));
+            return FindUserByIdAsync(userId)
+                .ContinueWith(t => UpdateUserPasswordAsync(t.Result, oldPassword, newPassword));
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(userId, nameof(userId));
 
             var user = await FindUserByIdAsync(userId).ConfigureAwait(false);
-            
+
             return await CloneUserAsync(clonedName, user).ConfigureAwait(false);
         }
 
@@ -171,7 +172,7 @@ namespace InfluxDB.Client
                 Trace.WriteLine("User is not authenticated.");
                 return;
             }
-            
+
             var header = InfluxDBClient.AuthorizationHeader(me.Name, oldPassword);
 
             await _service.PutMePasswordAsync(new PasswordResetBody(newPassword), null, header).ConfigureAwait(false);
@@ -198,7 +199,8 @@ namespace InfluxDB.Client
         /// <param name="name"> (optional)</param>
         /// <param name="id"> (optional)</param>
         /// <returns>List all users</returns>
-        public async Task<List<User>> FindUsersAsync(int? offset = null, int? limit = null, string after = null, string name = null, string id = null)
+        public async Task<List<User>> FindUsersAsync(int? offset = null, int? limit = null, string after = null,
+            string name = null, string id = null)
         {
             var response = await _service.GetUsersAsync(offset: offset, limit: limit, after: after, name: name, id: id)
                 .ConfigureAwait(false);
@@ -217,7 +219,7 @@ namespace InfluxDB.Client
 
             return _service.PostUsersIDPasswordAsync(userId, new PasswordResetBody(newPassword), null, header);
         }
-        
+
         private PostUser ToPostUser(User user)
         {
             Enum.TryParse(user.Status.ToString(), true, out PostUser.StatusEnum status);

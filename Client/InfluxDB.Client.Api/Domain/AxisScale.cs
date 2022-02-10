@@ -27,23 +27,17 @@ namespace InfluxDB.Client.Api.Domain
     /// Scale is the axis formatting scale. Supported: \&quot;log\&quot;, \&quot;linear\&quot;
     /// </summary>
     /// <value>Scale is the axis formatting scale. Supported: \&quot;log\&quot;, \&quot;linear\&quot;</value>
-    
     [JsonConverter(typeof(StringEnumConverter))]
-    
     public enum AxisScale
     {
         /// <summary>
         /// Enum Log for value: log
         /// </summary>
-        [EnumMember(Value = "log")]
-        Log = 1,
+        [EnumMember(Value = "log")] Log = 1,
 
         /// <summary>
         /// Enum Linear for value: linear
         /// </summary>
-        [EnumMember(Value = "linear")]
-        Linear = 2
-
+        [EnumMember(Value = "linear")] Linear = 2
     }
-
 }

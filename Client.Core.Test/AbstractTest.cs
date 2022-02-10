@@ -20,7 +20,7 @@ namespace InfluxDB.Client.Core.Test
         public void SetUp()
         {
             CountdownEvent = new CountdownEvent(1);
-            
+
             if (!Trace.Listeners.Contains(ConsoleOutListener))
             {
                 Trace.Listeners.Add(ConsoleOutListener);
@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Core.Test
             WaitToCallback(CountdownEvent, seconds);
         }
 
-        protected void WaitToCallback(CountdownEvent countdownEvent, int seconds) 
+        protected void WaitToCallback(CountdownEvent countdownEvent, int seconds)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace InfluxDB.Client.Core.Test
                 Assert.Fail("Unexpected exception: " + e);
             }
         }
-        
+
         protected string GetInfluxDbUrl()
         {
             var influxDbIp = GetOrDefaultEnvironmentVariable("INFLUXDB_IP", "localhost");
@@ -56,7 +56,7 @@ namespace InfluxDB.Client.Core.Test
 
             return "http://" + influxDbIp + ":" + influxDbPort;
         }
-        
+
         protected string GetInfluxDb2Url()
         {
             var influxDbIp = GetInfluxDb2Ip();
@@ -85,19 +85,19 @@ namespace InfluxDB.Client.Core.Test
         protected async Task InfluxDbWrite(string lineProtocol, string databaseName)
         {
             var request = new HttpRequestMessage(new HttpMethod("POST"),
-                            "/write?db=" + databaseName);
-                            
+                "/write?db=" + databaseName);
+
             request.Headers.Add("accept", "application/json");
             request.Content = new StringContent(lineProtocol, Encoding.UTF8, "text/plain");
 
             await InfluxDbRequest(request);
         }
 
-        protected async Task InfluxDbQuery(string query, string databaseName) 
+        protected async Task InfluxDbQuery(string query, string databaseName)
         {
             var request = new HttpRequestMessage(new HttpMethod("GET"),
-                            "/query?db=" + databaseName + ";q=" + query);
-                            
+                "/query?db=" + databaseName + ";q=" + query);
+
             request.Headers.Add("accept", "application/json");
 
             await InfluxDbRequest(request);
@@ -108,14 +108,14 @@ namespace InfluxDB.Client.Core.Test
             Assert.IsNotNull(request);
 
             var httpClient = new HttpClient();
-            
+
             httpClient.BaseAddress = new Uri(GetInfluxDbUrl());
 
             try
             {
                 var response = await httpClient.SendAsync(request);
                 Assert.IsTrue(response.IsSuccessStatusCode, $"Failed to make HTTP request: {response.ReasonPhrase}");
-                
+
                 Thread.Sleep(DefaultInfluxDBSleep);
             }
             catch (Exception e)

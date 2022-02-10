@@ -45,7 +45,8 @@ namespace InfluxDB.Client
         ///     The <see cref="record" /> is considered as one batch unit.
         /// </param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public Task WriteRecordAsync(WritePrecision precision, string record, CancellationToken cancellationToken = default)
+        public Task WriteRecordAsync(WritePrecision precision, string record,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(precision, nameof(precision));
 
@@ -63,13 +64,14 @@ namespace InfluxDB.Client
         ///     The <see cref="record" /> is considered as one batch unit.
         /// </param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public Task WriteRecordAsync(string bucket, string org, WritePrecision precision, string record, CancellationToken cancellationToken = default)
+        public Task WriteRecordAsync(string bucket, string org, WritePrecision precision, string record,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            return WriteRecordsAsync(bucket, org, precision, new List<string> {record}, cancellationToken);
+            return WriteRecordsAsync(bucket, org, precision, new List<string> { record }, cancellationToken);
         }
 
         /// <summary>
@@ -78,7 +80,8 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public Task WriteRecordsAsync(WritePrecision precision, List<string> records, CancellationToken cancellationToken = default)
+        public Task WriteRecordsAsync(WritePrecision precision, List<string> records,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(precision, nameof(precision));
 
@@ -93,12 +96,13 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public Task WriteRecordsAsync(string bucket, string org, WritePrecision precision, List<string> records, CancellationToken cancellationToken = default)
+        public Task WriteRecordsAsync(string bucket, string org, WritePrecision precision, List<string> records,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
-            
+
             var list = new List<BatchWriteData>();
 
             foreach (var record in records)
@@ -128,7 +132,8 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public Task WriteRecordsAsync(WritePrecision precision, CancellationToken cancellationToken, params string[] records)
+        public Task WriteRecordsAsync(WritePrecision precision, CancellationToken cancellationToken,
+            params string[] records)
         {
             Arguments.CheckNotNull(precision, nameof(precision));
 
@@ -143,7 +148,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
         public Task WriteRecordsAsync(string bucket, string org, WritePrecision precision,
-                        params string[] records)
+            params string[] records)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
@@ -160,7 +165,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public Task WriteRecordsAsync(string bucket, string org, WritePrecision precision, 
+        public Task WriteRecordsAsync(string bucket, string org, WritePrecision precision,
             CancellationToken cancellationToken, params string[] records)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
@@ -209,14 +214,18 @@ namespace InfluxDB.Client
         /// <param name="org">specifies the destination organization for writes</param>
         /// <param name="point">specifies the Data point to write into bucket</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public Task WritePointAsync(string bucket, string org, PointData point, CancellationToken cancellationToken = default)
+        public Task WritePointAsync(string bucket, string org, PointData point,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
 
-            if (point == null) return Task.CompletedTask;
+            if (point == null)
+            {
+                return Task.CompletedTask;
+            }
 
-            return WritePointsAsync(bucket, org, new List<PointData> {point}, cancellationToken);
+            return WritePointsAsync(bucket, org, new List<PointData> { point }, cancellationToken);
         }
 
         /// <summary>
@@ -236,11 +245,12 @@ namespace InfluxDB.Client
         /// <param name="org">specifies the destination organization for writes</param>
         /// <param name="points">specifies the Data points to write into bucket</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public async Task WritePointsAsync(string bucket, string org, List<PointData> points, CancellationToken cancellationToken = default)
+        public async Task WritePointsAsync(string bucket, string org, List<PointData> points,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
-            
+
             foreach (var grouped in points.GroupBy(it => it.Precision))
             {
                 var options = new BatchWriteOptions(bucket, org, grouped.Key);
@@ -292,7 +302,8 @@ namespace InfluxDB.Client
         /// <param name="org">specifies the destination organization for writes</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <param name="points">specifies the Data points to write into bucket</param>
-        public Task WritePointsAsync(string bucket, string org, CancellationToken cancellationToken, params PointData[] points)
+        public Task WritePointsAsync(string bucket, string org, CancellationToken cancellationToken,
+            params PointData[] points)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
@@ -335,7 +346,8 @@ namespace InfluxDB.Client
         /// <param name="measurement">specifies the Measurement to write into bucket</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public Task WriteMeasurementAsync<TM>(WritePrecision precision, TM measurement, CancellationToken cancellationToken = default)
+        public Task WriteMeasurementAsync<TM>(WritePrecision precision, TM measurement,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(precision, nameof(precision));
 
@@ -351,15 +363,19 @@ namespace InfluxDB.Client
         /// <param name="measurement">specifies the Measurement to write into bucket</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public Task WriteMeasurementAsync<TM>(string bucket, string org, WritePrecision precision, TM measurement, CancellationToken cancellationToken = default)
+        public Task WriteMeasurementAsync<TM>(string bucket, string org, WritePrecision precision, TM measurement,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
 
-            if (measurement == null) return Task.CompletedTask;
+            if (measurement == null)
+            {
+                return Task.CompletedTask;
+            }
 
-            return WriteMeasurementsAsync(bucket, org, precision, new List<TM>() {measurement}, cancellationToken);
+            return WriteMeasurementsAsync(bucket, org, precision, new List<TM>() { measurement }, cancellationToken);
         }
 
         /// <summary>
@@ -369,7 +385,8 @@ namespace InfluxDB.Client
         /// <param name="measurements">specifies Measurements to write into bucket</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public Task WriteMeasurementsAsync<TM>(WritePrecision precision, List<TM> measurements, CancellationToken cancellationToken = default)
+        public Task WriteMeasurementsAsync<TM>(WritePrecision precision, List<TM> measurements,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(precision, nameof(precision));
 
@@ -391,7 +408,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
-            
+
             var list = new List<BatchWriteData>();
 
             var options = new BatchWriteOptions(bucket, org, precision);
@@ -424,7 +441,8 @@ namespace InfluxDB.Client
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <param name="measurements">specifies Measurements to write into bucket</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public Task WriteMeasurementsAsync<TM>(WritePrecision precision, CancellationToken cancellationToken, params TM[] measurements)
+        public Task WriteMeasurementsAsync<TM>(WritePrecision precision, CancellationToken cancellationToken,
+            params TM[] measurements)
         {
             Arguments.CheckNotNull(precision, nameof(precision));
 
@@ -440,7 +458,7 @@ namespace InfluxDB.Client
         /// <param name="measurements">specifies Measurements to write into bucket</param>
         /// <typeparam name="TM">measurement type</typeparam>
         public Task WriteMeasurementsAsync<TM>(string bucket, string org, WritePrecision precision,
-                        params TM[] measurements)
+            params TM[] measurements)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
@@ -467,7 +485,7 @@ namespace InfluxDB.Client
 
             return WriteMeasurementsAsync(bucket, org, precision, measurements.ToList(), cancellationToken);
         }
-        
+
         /// <summary>
         /// Write Measurements into specified bucket.
         /// </summary>
@@ -481,11 +499,11 @@ namespace InfluxDB.Client
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
         /// <returns>Write Task with IRestResponse</returns>
-        public Task<RestResponse> WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM> measurements, string bucket = null,
+        public Task<RestResponse> WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM> measurements,
+            string bucket = null,
             string org = null, WritePrecision precision = WritePrecision.Ns,
             CancellationToken cancellationToken = default)
         {
-            
             var options = new BatchWriteOptions(bucket, org, precision);
             var batch = measurements
                 .Select(it => new BatchWriteMeasurement<TM>(options, _options, it, _mapper));
@@ -494,7 +512,7 @@ namespace InfluxDB.Client
         }
 
 
-        private Task WriteData(string org, string bucket, WritePrecision precision, IEnumerable<BatchWriteData> data, 
+        private Task WriteData(string org, string bucket, WritePrecision precision, IEnumerable<BatchWriteData> data,
             CancellationToken cancellationToken)
         {
             var sb = ToLineProtocolBody(data);
@@ -509,16 +527,17 @@ namespace InfluxDB.Client
                 cancellationToken);
         }
 
-        private Task<RestResponse> WriteDataAsyncWithIRestResponse(IEnumerable<BatchWriteData> batch,string bucket = null, string org = null,
+        private Task<RestResponse> WriteDataAsyncWithIRestResponse(IEnumerable<BatchWriteData> batch,
+            string bucket = null, string org = null,
             WritePrecision precision = WritePrecision.Ns, CancellationToken cancellationToken = default)
         {
             var localBucket = bucket ?? _options.Bucket;
             var localOrg = org ?? _options.Org;
-            
+
             Arguments.CheckNonEmptyString(localBucket, nameof(bucket));
             Arguments.CheckNonEmptyString(localOrg, nameof(org));
             Arguments.CheckNotNull(precision, nameof(precision));
-            
+
             var sb = ToLineProtocolBody(batch);
 
             return _service.PostWriteAsyncWithIRestResponse(org, bucket, Encoding.UTF8.GetBytes(sb.ToString()), null,

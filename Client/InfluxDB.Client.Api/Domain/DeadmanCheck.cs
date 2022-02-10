@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// DeadmanCheck
     /// </summary>
     [DataContract]
-    public partial class DeadmanCheck : Check,  IEquatable<DeadmanCheck>
+    public partial class DeadmanCheck : Check, IEquatable<DeadmanCheck>
     {
         /// <summary>
         /// Defines Type
@@ -38,26 +38,29 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Deadman for value: deadman
             /// </summary>
-            [EnumMember(Value = "deadman")]
-            Deadman = 1
-
+            [EnumMember(Value = "deadman")] Deadman = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Gets or Sets Level
         /// </summary>
-        [DataMember(Name="level", EmitDefaultValue=false)]
+        [DataMember(Name = "level", EmitDefaultValue = false)]
         public CheckStatusLevel? Level { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DeadmanCheck" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DeadmanCheck() { }
+        protected DeadmanCheck()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DeadmanCheck" /> class.
         /// </summary>
@@ -70,18 +73,23 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="offset">Duration to delay after the schedule, before executing check..</param>
         /// <param name="tags">List of tags to write to each status..</param>
         /// <param name="statusMessageTemplate">The template used to generate and write a status message..</param>
-        public DeadmanCheck(TypeEnum type = TypeEnum.Deadman, string timeSince = default(string), string staleTime = default(string), bool? reportZero = default(bool?), CheckStatusLevel? level = default(CheckStatusLevel?), string every = default(string), string offset = default(string), List<ThresholdCheckTags> tags = default(List<ThresholdCheckTags>), string statusMessageTemplate = default(string), string name = default(string), string orgID = default(string), string taskID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string description = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks)) : base(name, orgID, taskID, query, status, description, labels, links)
+        public DeadmanCheck(TypeEnum type = TypeEnum.Deadman, string timeSince = default, string staleTime = default,
+            bool? reportZero = default, CheckStatusLevel? level = default, string every = default,
+            string offset = default, List<ThresholdCheckTags> tags = default, string statusMessageTemplate = default,
+            string name = default, string orgID = default, string taskID = default, DashboardQuery query = default,
+            TaskStatusType? status = default, string description = default, List<Label> labels = default,
+            CheckBaseLinks links = default) : base(name, orgID, taskID, query, status, description, labels, links)
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
-            this.TimeSince = timeSince;
-            this.StaleTime = staleTime;
-            this.ReportZero = reportZero;
-            this.Level = level;
-            this.Every = every;
-            this.Offset = offset;
-            this.Tags = tags;
-            this.StatusMessageTemplate = statusMessageTemplate;
+            Type = type;
+            TimeSince = timeSince;
+            StaleTime = staleTime;
+            ReportZero = reportZero;
+            Level = level;
+            Every = every;
+            Offset = offset;
+            Tags = tags;
+            StatusMessageTemplate = statusMessageTemplate;
         }
 
 
@@ -89,21 +97,21 @@ namespace InfluxDB.Client.Api.Domain
         /// String duration before deadman triggers.
         /// </summary>
         /// <value>String duration before deadman triggers.</value>
-        [DataMember(Name="timeSince", EmitDefaultValue=false)]
+        [DataMember(Name = "timeSince", EmitDefaultValue = false)]
         public string TimeSince { get; set; }
 
         /// <summary>
         /// String duration for time that a series is considered stale and should not trigger deadman.
         /// </summary>
         /// <value>String duration for time that a series is considered stale and should not trigger deadman.</value>
-        [DataMember(Name="staleTime", EmitDefaultValue=false)]
+        [DataMember(Name = "staleTime", EmitDefaultValue = false)]
         public string StaleTime { get; set; }
 
         /// <summary>
         /// If only zero values reported since time, trigger an alert
         /// </summary>
         /// <value>If only zero values reported since time, trigger an alert</value>
-        [DataMember(Name="reportZero", EmitDefaultValue=false)]
+        [DataMember(Name = "reportZero", EmitDefaultValue = false)]
         public bool? ReportZero { get; set; }
 
 
@@ -111,28 +119,28 @@ namespace InfluxDB.Client.Api.Domain
         /// Check repetition interval.
         /// </summary>
         /// <value>Check repetition interval.</value>
-        [DataMember(Name="every", EmitDefaultValue=false)]
+        [DataMember(Name = "every", EmitDefaultValue = false)]
         public string Every { get; set; }
 
         /// <summary>
         /// Duration to delay after the schedule, before executing check.
         /// </summary>
         /// <value>Duration to delay after the schedule, before executing check.</value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
         public string Offset { get; set; }
 
         /// <summary>
         /// List of tags to write to each status.
         /// </summary>
         /// <value>List of tags to write to each status.</value>
-        [DataMember(Name="tags", EmitDefaultValue=false)]
+        [DataMember(Name = "tags", EmitDefaultValue = false)]
         public List<ThresholdCheckTags> Tags { get; set; }
 
         /// <summary>
         /// The template used to generate and write a status message.
         /// </summary>
         /// <value>The template used to generate and write a status message.</value>
-        [DataMember(Name="statusMessageTemplate", EmitDefaultValue=false)]
+        [DataMember(Name = "statusMessageTemplate", EmitDefaultValue = false)]
         public string StatusMessageTemplate { get; set; }
 
         /// <summary>
@@ -173,7 +181,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DeadmanCheck);
+            return Equals(input as DeadmanCheck);
         }
 
         /// <summary>
@@ -184,46 +192,45 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DeadmanCheck input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.TimeSince == input.TimeSince ||
-                    (this.TimeSince != null && this.TimeSince.Equals(input.TimeSince))
-                ) && base.Equals(input) && 
-                (
-                    this.StaleTime == input.StaleTime ||
-                    (this.StaleTime != null && this.StaleTime.Equals(input.StaleTime))
-                ) && base.Equals(input) && 
-                (
-                    this.ReportZero == input.ReportZero ||
-                    (this.ReportZero != null && this.ReportZero.Equals(input.ReportZero))
-                ) && base.Equals(input) && 
-                (
-                    
-                    this.Level.Equals(input.Level)
-                ) && base.Equals(input) && 
-                (
-                    this.Every == input.Every ||
-                    (this.Every != null && this.Every.Equals(input.Every))
-                ) && base.Equals(input) && 
-                (
-                    this.Offset == input.Offset ||
-                    (this.Offset != null && this.Offset.Equals(input.Offset))
-                ) && base.Equals(input) && 
-                (
-                    this.Tags == input.Tags ||
-                    this.Tags != null &&
-                    this.Tags.SequenceEqual(input.Tags)
-                ) && base.Equals(input) && 
-                (
-                    this.StatusMessageTemplate == input.StatusMessageTemplate ||
-                    (this.StatusMessageTemplate != null && this.StatusMessageTemplate.Equals(input.StatusMessageTemplate))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       TimeSince == input.TimeSince ||
+                       TimeSince != null && TimeSince.Equals(input.TimeSince)
+                   ) && base.Equals(input) &&
+                   (
+                       StaleTime == input.StaleTime ||
+                       StaleTime != null && StaleTime.Equals(input.StaleTime)
+                   ) && base.Equals(input) &&
+                   (
+                       ReportZero == input.ReportZero ||
+                       ReportZero != null && ReportZero.Equals(input.ReportZero)
+                   ) && base.Equals(input) &&
+                   Level.Equals(input.Level) && base.Equals(input) &&
+                   (
+                       Every == input.Every ||
+                       Every != null && Every.Equals(input.Every)
+                   ) && base.Equals(input) &&
+                   (
+                       Offset == input.Offset ||
+                       Offset != null && Offset.Equals(input.Offset)
+                   ) && base.Equals(input) &&
+                   (
+                       Tags == input.Tags ||
+                       Tags != null &&
+                       Tags.SequenceEqual(input.Tags)
+                   ) && base.Equals(input) &&
+                   (
+                       StatusMessageTemplate == input.StatusMessageTemplate ||
+                       StatusMessageTemplate != null && StatusMessageTemplate.Equals(input.StatusMessageTemplate)
+                   );
         }
 
         /// <summary>
@@ -234,28 +241,47 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.TimeSince != null)
-                    hashCode = hashCode * 59 + this.TimeSince.GetHashCode();
-                if (this.StaleTime != null)
-                    hashCode = hashCode * 59 + this.StaleTime.GetHashCode();
-                if (this.ReportZero != null)
-                    hashCode = hashCode * 59 + this.ReportZero.GetHashCode();
-                hashCode = hashCode * 59 + this.Level.GetHashCode();
-                if (this.Every != null)
-                    hashCode = hashCode * 59 + this.Every.GetHashCode();
-                if (this.Offset != null)
-                    hashCode = hashCode * 59 + this.Offset.GetHashCode();
-                if (this.Tags != null)
-                    hashCode = hashCode * 59 + this.Tags.GetHashCode();
-                if (this.StatusMessageTemplate != null)
-                    hashCode = hashCode * 59 + this.StatusMessageTemplate.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (TimeSince != null)
+                {
+                    hashCode = hashCode * 59 + TimeSince.GetHashCode();
+                }
+
+                if (StaleTime != null)
+                {
+                    hashCode = hashCode * 59 + StaleTime.GetHashCode();
+                }
+
+                if (ReportZero != null)
+                {
+                    hashCode = hashCode * 59 + ReportZero.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Level.GetHashCode();
+                if (Every != null)
+                {
+                    hashCode = hashCode * 59 + Every.GetHashCode();
+                }
+
+                if (Offset != null)
+                {
+                    hashCode = hashCode * 59 + Offset.GetHashCode();
+                }
+
+                if (Tags != null)
+                {
+                    hashCode = hashCode * 59 + Tags.GetHashCode();
+                }
+
+                if (StatusMessageTemplate != null)
+                {
+                    hashCode = hashCode * 59 + StatusMessageTemplate.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

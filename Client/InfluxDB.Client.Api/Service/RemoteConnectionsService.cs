@@ -25,6 +25,7 @@ namespace InfluxDB.Client.Api.Service
     public interface IRemoteConnectionsService : IApiAccessor
     {
         #region Synchronous Operations
+
         /// <summary>
         /// Delete a remote connection
         /// </summary>
@@ -35,7 +36,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void DeleteRemoteConnectionByID (string remoteID, string zapTraceSpan = null);
+        void DeleteRemoteConnectionByID(string remoteID, string zapTraceSpan = null);
 
         /// <summary>
         /// Delete a remote connection
@@ -47,7 +48,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteRemoteConnectionByIDWithHttpInfo (string remoteID, string zapTraceSpan = null);
+        ApiResponse<object> DeleteRemoteConnectionByIDWithHttpInfo(string remoteID, string zapTraceSpan = null);
+
         /// <summary>
         /// Retrieve a remote connection
         /// </summary>
@@ -58,7 +60,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>RemoteConnection</returns>
-        RemoteConnection GetRemoteConnectionByID (string remoteID, string zapTraceSpan = null);
+        RemoteConnection GetRemoteConnectionByID(string remoteID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve a remote connection
@@ -70,7 +72,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        ApiResponse<RemoteConnection> GetRemoteConnectionByIDWithHttpInfo (string remoteID, string zapTraceSpan = null);
+        ApiResponse<RemoteConnection> GetRemoteConnectionByIDWithHttpInfo(string remoteID, string zapTraceSpan = null);
+
         /// <summary>
         /// List all remote connections
         /// </summary>
@@ -83,7 +86,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name"> (optional)</param>
         /// <param name="remoteURL"> (optional)</param>
         /// <returns>RemoteConnections</returns>
-        RemoteConnections GetRemoteConnections (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null);
+        RemoteConnections GetRemoteConnections(string orgID, string zapTraceSpan = null, string name = null,
+            string remoteURL = null);
 
         /// <summary>
         /// List all remote connections
@@ -97,7 +101,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name"> (optional)</param>
         /// <param name="remoteURL"> (optional)</param>
         /// <returns>ApiResponse of RemoteConnections</returns>
-        ApiResponse<RemoteConnections> GetRemoteConnectionsWithHttpInfo (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null);
+        ApiResponse<RemoteConnections> GetRemoteConnectionsWithHttpInfo(string orgID, string zapTraceSpan = null,
+            string name = null, string remoteURL = null);
+
         /// <summary>
         /// Update a remote connection
         /// </summary>
@@ -109,7 +115,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionUpdateRequest"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>RemoteConnection</returns>
-        RemoteConnection PatchRemoteConnectionByID (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null);
+        RemoteConnection PatchRemoteConnectionByID(string remoteID,
+            RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null);
 
         /// <summary>
         /// Update a remote connection
@@ -122,7 +129,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionUpdateRequest"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        ApiResponse<RemoteConnection> PatchRemoteConnectionByIDWithHttpInfo (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null);
+        ApiResponse<RemoteConnection> PatchRemoteConnectionByIDWithHttpInfo(string remoteID,
+            RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null);
+
         /// <summary>
         /// Register a new remote connection
         /// </summary>
@@ -132,7 +141,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <returns>RemoteConnection</returns>
-        RemoteConnection PostRemoteConnection (RemoteConnectionCreationRequest remoteConnectionCreationRequest);
+        RemoteConnection PostRemoteConnection(RemoteConnectionCreationRequest remoteConnectionCreationRequest);
 
         /// <summary>
         /// Register a new remote connection
@@ -143,9 +152,13 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        ApiResponse<RemoteConnection> PostRemoteConnectionWithHttpInfo (RemoteConnectionCreationRequest remoteConnectionCreationRequest);
+        ApiResponse<RemoteConnection> PostRemoteConnectionWithHttpInfo(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest);
+
         #endregion Synchronous Operations
+
         #region Asynchronous Operations
+
         /// <summary>
         /// Delete a remote connection
         /// </summary>
@@ -157,7 +170,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteRemoteConnectionByIDAsync (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task DeleteRemoteConnectionByIDAsync(string remoteID, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a remote connection
@@ -170,7 +184,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteRemoteConnectionByIDAsyncWithHttpInfo (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<object>> DeleteRemoteConnectionByIDAsyncWithHttpInfo(string remoteID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Retrieve a remote connection
         /// </summary>
@@ -182,7 +198,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RemoteConnection</returns>
-        System.Threading.Tasks.Task<RemoteConnection> GetRemoteConnectionByIDAsync (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<RemoteConnection> GetRemoteConnectionByIDAsync(string remoteID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a remote connection
@@ -195,7 +212,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (RemoteConnection)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> GetRemoteConnectionByIDAsyncWithHttpInfo (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> GetRemoteConnectionByIDAsyncWithHttpInfo(
+            string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// List all remote connections
         /// </summary>
@@ -209,7 +228,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteURL"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RemoteConnections</returns>
-        System.Threading.Tasks.Task<RemoteConnections> GetRemoteConnectionsAsync (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<RemoteConnections> GetRemoteConnectionsAsync(string orgID,
+            string zapTraceSpan = null, string name = null, string remoteURL = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all remote connections
@@ -224,7 +245,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteURL"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (RemoteConnections)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RemoteConnections>> GetRemoteConnectionsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<RemoteConnections>> GetRemoteConnectionsAsyncWithHttpInfo(string orgID,
+            string zapTraceSpan = null, string name = null, string remoteURL = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Update a remote connection
         /// </summary>
@@ -237,7 +261,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RemoteConnection</returns>
-        System.Threading.Tasks.Task<RemoteConnection> PatchRemoteConnectionByIDAsync (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<RemoteConnection> PatchRemoteConnectionByIDAsync(string remoteID,
+            RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a remote connection
@@ -251,7 +277,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (RemoteConnection)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> PatchRemoteConnectionByIDAsyncWithHttpInfo (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> PatchRemoteConnectionByIDAsyncWithHttpInfo(
+            string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Register a new remote connection
         /// </summary>
@@ -262,7 +291,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RemoteConnection</returns>
-        System.Threading.Tasks.Task<RemoteConnection> PostRemoteConnectionAsync (RemoteConnectionCreationRequest remoteConnectionCreationRequest, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<RemoteConnection> PostRemoteConnectionAsync(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Register a new remote connection
@@ -274,7 +305,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (RemoteConnection)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> PostRemoteConnectionAsyncWithHttpInfo (RemoteConnectionCreationRequest remoteConnectionCreationRequest, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> PostRemoteConnectionAsyncWithHttpInfo(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest,
+            CancellationToken cancellationToken = default);
+
         #endregion Asynchronous Operations
     }
 
@@ -283,17 +317,17 @@ namespace InfluxDB.Client.Api.Service
     /// </summary>
     public partial class RemoteConnectionsService : IRemoteConnectionsService
     {
-        private InfluxDB.Client.Api.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoteConnectionsService"/> class.
         /// </summary>
         /// <returns></returns>
-        public RemoteConnectionsService(String basePath)
+        public RemoteConnectionsService(string basePath)
         {
-            this.Configuration = new InfluxDB.Client.Api.Client.Configuration { BasePath = basePath };
+            Configuration = new Configuration { BasePath = basePath };
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -302,31 +336,36 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public RemoteConnectionsService(InfluxDB.Client.Api.Client.Configuration configuration = null)
+        public RemoteConnectionsService(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = InfluxDB.Client.Api.Client.Configuration.Default;
+            {
+                Configuration = Configuration.Default;
+            }
             else
-                this.Configuration = configuration;
+            {
+                Configuration = configuration;
+            }
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(String basePath)
+        [Obsolete(
+            "SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(string basePath)
         {
             // do nothing
         }
@@ -335,12 +374,12 @@ namespace InfluxDB.Client.Api.Service
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public InfluxDB.Client.Api.Client.Configuration Configuration {get; set;}
+        public Configuration Configuration { get; set; }
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public InfluxDB.Client.Api.Client.ExceptionFactory ExceptionFactory
+        public ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -348,9 +387,10 @@ namespace InfluxDB.Client.Api.Service
                 {
                     throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
                 }
+
                 return _exceptionFactory;
             }
-            set { _exceptionFactory = value; }
+            set => _exceptionFactory = value;
         }
 
         /// <summary>
@@ -358,9 +398,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <returns>Dictionary of HTTP header</returns>
         [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public IDictionary<String, String> DefaultHeader()
+        public IDictionary<string, string> DefaultHeader()
         {
-            return new ReadOnlyDictionary<string, string>(this.Configuration.DefaultHeader);
+            return new ReadOnlyDictionary<string, string>(Configuration.DefaultHeader);
         }
 
         /// <summary>
@@ -372,7 +412,7 @@ namespace InfluxDB.Client.Api.Service
         [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
         public void AddDefaultHeader(string key, string value)
         {
-            this.Configuration.AddDefaultHeader(key, value);
+            Configuration.AddDefaultHeader(key, value);
         }
 
         /// <summary>
@@ -382,9 +422,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void DeleteRemoteConnectionByID (string remoteID, string zapTraceSpan = null)
+        public void DeleteRemoteConnectionByID(string remoteID, string zapTraceSpan = null)
         {
-             DeleteRemoteConnectionByIDWithHttpInfo(remoteID, zapTraceSpan);
+            DeleteRemoteConnectionByIDWithHttpInfo(remoteID, zapTraceSpan);
         }
 
         /// <summary>
@@ -394,52 +434,72 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteRemoteConnectionByIDWithHttpInfo (string remoteID, string zapTraceSpan = null)
+        public ApiResponse<object> DeleteRemoteConnectionByIDWithHttpInfo(string remoteID, string zapTraceSpan = null)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
@@ -452,49 +512,70 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteRemoteConnectionByIDWithIRestResponseAsync (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteRemoteConnectionByIDWithIRestResponseAsync(
+            string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -507,54 +588,74 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestResponse DeleteRemoteConnectionByIDWithIRestResponse (string remoteID, string zapTraceSpan = null)
+        public RestResponse DeleteRemoteConnectionByIDWithIRestResponse(string remoteID, string zapTraceSpan = null)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Delete a remote connection 
         /// </summary>
@@ -562,40 +663,57 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DeleteRemoteConnectionByIDWithRestRequest (string remoteID, string zapTraceSpan = null)
+        public RestRequest DeleteRemoteConnectionByIDWithRestRequest(string remoteID, string zapTraceSpan = null)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -607,10 +725,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteRemoteConnectionByIDAsync (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task DeleteRemoteConnectionByIDAsync(string remoteID, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             return DeleteRemoteConnectionByIDAsyncWithHttpInfo(remoteID, zapTraceSpan, cancellationToken);
-
+            return DeleteRemoteConnectionByIDAsyncWithHttpInfo(remoteID, zapTraceSpan, cancellationToken);
         }
 
         /// <summary>
@@ -621,24 +739,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteRemoteConnectionByIDAsyncWithHttpInfo (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> DeleteRemoteConnectionByIDAsyncWithHttpInfo(
+            string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await DeleteRemoteConnectionByIDAsyncWithIRestResponse(remoteID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await DeleteRemoteConnectionByIDAsyncWithIRestResponse(remoteID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
-            
+
         /// <summary>
         /// Delete a remote connection 
         /// </summary>
@@ -647,47 +771,68 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteRemoteConnectionByIDAsyncWithIRestResponse (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteRemoteConnectionByIDAsyncWithIRestResponse(
+            string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->DeleteRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -700,10 +845,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>RemoteConnection</returns>
-        public RemoteConnection GetRemoteConnectionByID (string remoteID, string zapTraceSpan = null)
+        public RemoteConnection GetRemoteConnectionByID(string remoteID, string zapTraceSpan = null)
         {
-             ApiResponse<RemoteConnection> localVarResponse = GetRemoteConnectionByIDWithHttpInfo(remoteID, zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse = GetRemoteConnectionByIDWithHttpInfo(remoteID, zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -713,54 +858,75 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public ApiResponse< RemoteConnection > GetRemoteConnectionByIDWithHttpInfo (string remoteID, string zapTraceSpan = null)
+        public ApiResponse<RemoteConnection> GetRemoteConnectionByIDWithHttpInfo(string remoteID,
+            string zapTraceSpan = null)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (RemoteConnection) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
+                (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
 
         /// <summary>
@@ -771,49 +937,70 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetRemoteConnectionByIDWithIRestResponseAsync (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetRemoteConnectionByIDWithIRestResponseAsync(
+            string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -826,54 +1013,74 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public RestResponse GetRemoteConnectionByIDWithIRestResponse (string remoteID, string zapTraceSpan = null)
+        public RestResponse GetRemoteConnectionByIDWithIRestResponse(string remoteID, string zapTraceSpan = null)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Retrieve a remote connection 
         /// </summary>
@@ -881,40 +1088,57 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public RestRequest GetRemoteConnectionByIDWithRestRequest (string remoteID, string zapTraceSpan = null)
+        public RestRequest GetRemoteConnectionByIDWithRestRequest(string remoteID, string zapTraceSpan = null)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -926,11 +1150,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RemoteConnection</returns>
-        public async System.Threading.Tasks.Task<RemoteConnection> GetRemoteConnectionByIDAsync (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RemoteConnection> GetRemoteConnectionByIDAsync(string remoteID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<RemoteConnection> localVarResponse = await GetRemoteConnectionByIDAsyncWithHttpInfo(remoteID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetRemoteConnectionByIDAsyncWithHttpInfo(remoteID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -941,24 +1167,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (RemoteConnection)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> GetRemoteConnectionByIDAsyncWithHttpInfo (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<RemoteConnection>>
+            GetRemoteConnectionByIDAsyncWithHttpInfo(string remoteID, string zapTraceSpan = null,
+                CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetRemoteConnectionByIDAsyncWithIRestResponse(remoteID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetRemoteConnectionByIDAsyncWithIRestResponse(remoteID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (RemoteConnection) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
+                (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
-            
+
         /// <summary>
         /// Retrieve a remote connection 
         /// </summary>
@@ -967,47 +1200,68 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (RemoteConnection)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetRemoteConnectionByIDAsyncWithIRestResponse (string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetRemoteConnectionByIDAsyncWithIRestResponse(
+            string remoteID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->GetRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1022,10 +1276,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name"> (optional)</param>
         /// <param name="remoteURL"> (optional)</param>
         /// <returns>RemoteConnections</returns>
-        public RemoteConnections GetRemoteConnections (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null)
+        public RemoteConnections GetRemoteConnections(string orgID, string zapTraceSpan = null, string name = null,
+            string remoteURL = null)
         {
-             ApiResponse<RemoteConnections> localVarResponse = GetRemoteConnectionsWithHttpInfo(orgID, zapTraceSpan, name, remoteURL);
-             return localVarResponse.Data;
+            var localVarResponse = GetRemoteConnectionsWithHttpInfo(orgID, zapTraceSpan, name, remoteURL);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1037,56 +1292,87 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name"> (optional)</param>
         /// <param name="remoteURL"> (optional)</param>
         /// <returns>ApiResponse of RemoteConnections</returns>
-        public ApiResponse< RemoteConnections > GetRemoteConnectionsWithHttpInfo (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null)
+        public ApiResponse<RemoteConnections> GetRemoteConnectionsWithHttpInfo(string orgID, string zapTraceSpan = null,
+            string name = null, string remoteURL = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteURL != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteURL != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<RemoteConnections>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (RemoteConnections) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnections)));
+                (RemoteConnections)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnections)));
         }
 
         /// <summary>
@@ -1099,51 +1385,83 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteURL"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of RemoteConnections</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetRemoteConnectionsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetRemoteConnectionsWithIRestResponseAsync(string orgID,
+            string zapTraceSpan = null, string name = null, string remoteURL = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteURL != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteURL != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1158,56 +1476,87 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name"> (optional)</param>
         /// <param name="remoteURL"> (optional)</param>
         /// <returns>ApiResponse of RemoteConnections</returns>
-        public RestResponse GetRemoteConnectionsWithIRestResponse (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null)
+        public RestResponse GetRemoteConnectionsWithIRestResponse(string orgID, string zapTraceSpan = null,
+            string name = null, string remoteURL = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteURL != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteURL != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// List all remote connections 
         /// </summary>
@@ -1217,42 +1566,70 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name"> (optional)</param>
         /// <param name="remoteURL"> (optional)</param>
         /// <returns>ApiResponse of RemoteConnections</returns>
-        public RestRequest GetRemoteConnectionsWithRestRequest (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null)
+        public RestRequest GetRemoteConnectionsWithRestRequest(string orgID, string zapTraceSpan = null,
+            string name = null, string remoteURL = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteURL != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteURL != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1266,11 +1643,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteURL"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RemoteConnections</returns>
-        public async System.Threading.Tasks.Task<RemoteConnections> GetRemoteConnectionsAsync (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RemoteConnections> GetRemoteConnectionsAsync(string orgID,
+            string zapTraceSpan = null, string name = null, string remoteURL = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<RemoteConnections> localVarResponse = await GetRemoteConnectionsAsyncWithHttpInfo(orgID, zapTraceSpan, name, remoteURL, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetRemoteConnectionsAsyncWithHttpInfo(orgID, zapTraceSpan, name, remoteURL, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1283,24 +1663,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteURL"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (RemoteConnections)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RemoteConnections>> GetRemoteConnectionsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<RemoteConnections>> GetRemoteConnectionsAsyncWithHttpInfo(
+            string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetRemoteConnectionsAsyncWithIRestResponse(orgID, zapTraceSpan, name, remoteURL, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetRemoteConnectionsAsyncWithIRestResponse(orgID, zapTraceSpan, name, remoteURL,
+                    cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<RemoteConnections>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (RemoteConnections) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnections)));
+                (RemoteConnections)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnections)));
         }
-            
+
         /// <summary>
         /// List all remote connections 
         /// </summary>
@@ -1311,49 +1698,81 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteURL"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (RemoteConnections)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetRemoteConnectionsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, string name = null, string remoteURL = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetRemoteConnectionsAsyncWithIRestResponse(string orgID,
+            string zapTraceSpan = null, string name = null, string remoteURL = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling RemoteConnectionsService->GetRemoteConnections");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteURL != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteURL != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteURL", remoteURL)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetRemoteConnections", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1367,10 +1786,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionUpdateRequest"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>RemoteConnection</returns>
-        public RemoteConnection PatchRemoteConnectionByID (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null)
+        public RemoteConnection PatchRemoteConnectionByID(string remoteID,
+            RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null)
         {
-             ApiResponse<RemoteConnection> localVarResponse = PatchRemoteConnectionByIDWithHttpInfo(remoteID, remoteConnectionUpdateRequest, zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse =
+                PatchRemoteConnectionByIDWithHttpInfo(remoteID, remoteConnectionUpdateRequest, zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1381,34 +1802,54 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionUpdateRequest"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public ApiResponse< RemoteConnection > PatchRemoteConnectionByIDWithHttpInfo (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null)
+        public ApiResponse<RemoteConnection> PatchRemoteConnectionByIDWithHttpInfo(string remoteID,
+            RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
+
             // verify the required parameter 'remoteConnectionUpdateRequest' is set
             if (remoteConnectionUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (remoteConnectionUpdateRequest != null && remoteConnectionUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1416,31 +1857,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (RemoteConnection) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
+                (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
 
         /// <summary>
@@ -1452,34 +1900,55 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PatchRemoteConnectionByIDWithIRestResponseAsync (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PatchRemoteConnectionByIDWithIRestResponseAsync(
+            string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
+
             // verify the required parameter 'remoteConnectionUpdateRequest' is set
             if (remoteConnectionUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (remoteConnectionUpdateRequest != null && remoteConnectionUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1487,26 +1956,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1520,34 +1996,54 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionUpdateRequest"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public RestResponse PatchRemoteConnectionByIDWithIRestResponse (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null)
+        public RestResponse PatchRemoteConnectionByIDWithIRestResponse(string remoteID,
+            RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
+
             // verify the required parameter 'remoteConnectionUpdateRequest' is set
             if (remoteConnectionUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (remoteConnectionUpdateRequest != null && remoteConnectionUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1555,31 +2051,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Update a remote connection 
         /// </summary>
@@ -1588,34 +2091,54 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionUpdateRequest"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public RestRequest PatchRemoteConnectionByIDWithRestRequest (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null)
+        public RestRequest PatchRemoteConnectionByIDWithRestRequest(string remoteID,
+            RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
+
             // verify the required parameter 'remoteConnectionUpdateRequest' is set
             if (remoteConnectionUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (remoteConnectionUpdateRequest != null && remoteConnectionUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1623,17 +2146,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1646,11 +2173,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RemoteConnection</returns>
-        public async System.Threading.Tasks.Task<RemoteConnection> PatchRemoteConnectionByIDAsync (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RemoteConnection> PatchRemoteConnectionByIDAsync(string remoteID,
+            RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<RemoteConnection> localVarResponse = await PatchRemoteConnectionByIDAsyncWithHttpInfo(remoteID, remoteConnectionUpdateRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await PatchRemoteConnectionByIDAsyncWithHttpInfo(remoteID, remoteConnectionUpdateRequest, zapTraceSpan,
+                    cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1662,24 +2192,32 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (RemoteConnection)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> PatchRemoteConnectionByIDAsyncWithHttpInfo (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<RemoteConnection>>
+            PatchRemoteConnectionByIDAsyncWithHttpInfo(string remoteID,
+                RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null,
+                CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PatchRemoteConnectionByIDAsyncWithIRestResponse(remoteID, remoteConnectionUpdateRequest, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PatchRemoteConnectionByIDAsyncWithIRestResponse(remoteID, remoteConnectionUpdateRequest,
+                    zapTraceSpan, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (RemoteConnection) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
+                (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
-            
+
         /// <summary>
         /// Update a remote connection 
         /// </summary>
@@ -1689,34 +2227,55 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (RemoteConnection)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PatchRemoteConnectionByIDAsyncWithIRestResponse (string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PatchRemoteConnectionByIDAsyncWithIRestResponse(
+            string remoteID, RemoteConnectionUpdateRequest remoteConnectionUpdateRequest, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'remoteID' is set
             if (remoteID == null)
-                throw new ApiException(400, "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteID' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
+
             // verify the required parameter 'remoteConnectionUpdateRequest' is set
             if (remoteConnectionUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionUpdateRequest' when calling RemoteConnectionsService->PatchRemoteConnectionByID");
+            }
 
             var localVarPath = "/api/v2/remotes/{remoteID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (remoteID != null) localVarPathParams.Add("remoteID", this.Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (remoteID != null)
+            {
+                localVarPathParams.Add("remoteID",
+                    Configuration.ApiClient.ParameterToString(remoteID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (remoteConnectionUpdateRequest != null && remoteConnectionUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1724,24 +2283,31 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchRemoteConnectionByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1753,10 +2319,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <returns>RemoteConnection</returns>
-        public RemoteConnection PostRemoteConnection (RemoteConnectionCreationRequest remoteConnectionCreationRequest)
+        public RemoteConnection PostRemoteConnection(RemoteConnectionCreationRequest remoteConnectionCreationRequest)
         {
-             ApiResponse<RemoteConnection> localVarResponse = PostRemoteConnectionWithHttpInfo(remoteConnectionCreationRequest);
-             return localVarResponse.Data;
+            var localVarResponse = PostRemoteConnectionWithHttpInfo(remoteConnectionCreationRequest);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1765,29 +2331,35 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public ApiResponse< RemoteConnection > PostRemoteConnectionWithHttpInfo (RemoteConnectionCreationRequest remoteConnectionCreationRequest)
+        public ApiResponse<RemoteConnection> PostRemoteConnectionWithHttpInfo(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest)
         {
             // verify the required parameter 'remoteConnectionCreationRequest' is set
             if (remoteConnectionCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (remoteConnectionCreationRequest != null && remoteConnectionCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -1795,31 +2367,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (RemoteConnection) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
+                (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
 
         /// <summary>
@@ -1829,29 +2408,36 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostRemoteConnectionWithIRestResponseAsync (RemoteConnectionCreationRequest remoteConnectionCreationRequest, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostRemoteConnectionWithIRestResponseAsync(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'remoteConnectionCreationRequest' is set
             if (remoteConnectionCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (remoteConnectionCreationRequest != null && remoteConnectionCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -1859,26 +2445,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1890,29 +2483,35 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public RestResponse PostRemoteConnectionWithIRestResponse (RemoteConnectionCreationRequest remoteConnectionCreationRequest)
+        public RestResponse PostRemoteConnectionWithIRestResponse(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest)
         {
             // verify the required parameter 'remoteConnectionCreationRequest' is set
             if (remoteConnectionCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (remoteConnectionCreationRequest != null && remoteConnectionCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -1920,60 +2519,73 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Register a new remote connection 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <returns>ApiResponse of RemoteConnection</returns>
-        public RestRequest PostRemoteConnectionWithRestRequest (RemoteConnectionCreationRequest remoteConnectionCreationRequest)
+        public RestRequest PostRemoteConnectionWithRestRequest(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest)
         {
             // verify the required parameter 'remoteConnectionCreationRequest' is set
             if (remoteConnectionCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (remoteConnectionCreationRequest != null && remoteConnectionCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -1981,17 +2593,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2002,11 +2618,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RemoteConnection</returns>
-        public async System.Threading.Tasks.Task<RemoteConnection> PostRemoteConnectionAsync (RemoteConnectionCreationRequest remoteConnectionCreationRequest, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RemoteConnection> PostRemoteConnectionAsync(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<RemoteConnection> localVarResponse = await PostRemoteConnectionAsyncWithHttpInfo(remoteConnectionCreationRequest, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await PostRemoteConnectionAsyncWithHttpInfo(remoteConnectionCreationRequest, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2016,24 +2635,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (RemoteConnection)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> PostRemoteConnectionAsyncWithHttpInfo (RemoteConnectionCreationRequest remoteConnectionCreationRequest, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<RemoteConnection>> PostRemoteConnectionAsyncWithHttpInfo(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostRemoteConnectionAsyncWithIRestResponse(remoteConnectionCreationRequest, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PostRemoteConnectionAsyncWithIRestResponse(remoteConnectionCreationRequest, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (RemoteConnection) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
+                (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
-            
+
         /// <summary>
         /// Register a new remote connection 
         /// </summary>
@@ -2041,29 +2667,36 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteConnectionCreationRequest"></param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (RemoteConnection)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostRemoteConnectionAsyncWithIRestResponse (RemoteConnectionCreationRequest remoteConnectionCreationRequest, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostRemoteConnectionAsyncWithIRestResponse(
+            RemoteConnectionCreationRequest remoteConnectionCreationRequest,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'remoteConnectionCreationRequest' is set
             if (remoteConnectionCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'remoteConnectionCreationRequest' when calling RemoteConnectionsService->PostRemoteConnection");
+            }
 
             var localVarPath = "/api/v2/remotes";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             if (remoteConnectionCreationRequest != null && remoteConnectionCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(remoteConnectionCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -2071,28 +2704,34 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostRemoteConnection", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-
     }
 }

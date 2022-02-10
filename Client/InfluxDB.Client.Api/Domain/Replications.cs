@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// Replications
     /// </summary>
     [DataContract]
-    public partial class Replications :  IEquatable<Replications>
+    public partial class Replications : IEquatable<Replications>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Replications" /> class.
         /// </summary>
         /// <param name="replications">replications.</param>
-        public Replications(List<Replication> replications = default(List<Replication>))
+        public Replications(List<Replication> replications = default)
         {
-            this._Replications = replications;
+            _Replications = replications;
         }
 
         /// <summary>
         /// Gets or Sets _Replications
         /// </summary>
-        [DataMember(Name="replications", EmitDefaultValue=false)]
+        [DataMember(Name = "replications", EmitDefaultValue = false)]
         public List<Replication> _Replications { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Replications);
+            return Equals(input as Replications);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Replications input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this._Replications == input._Replications ||
-                    this._Replications != null &&
-                    this._Replications.SequenceEqual(input._Replications)
-                );
+            return
+                _Replications == input._Replications ||
+                _Replications != null &&
+                _Replications.SequenceEqual(input._Replications);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this._Replications != null)
-                    hashCode = hashCode * 59 + this._Replications.GetHashCode();
+                var hashCode = 41;
+
+                if (_Replications != null)
+                {
+                    hashCode = hashCode * 59 + _Replications.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

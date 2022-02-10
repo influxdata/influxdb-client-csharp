@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Field
     /// </summary>
     [DataContract]
-    public partial class Field :  IEquatable<Field>
+    public partial class Field : IEquatable<Field>
     {
         /// <summary>
         /// &#x60;type&#x60; describes the field type. &#x60;func&#x60; is a function. &#x60;field&#x60; is a field reference.
@@ -39,47 +39,41 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Func for value: func
             /// </summary>
-            [EnumMember(Value = "func")]
-            Func = 1,
+            [EnumMember(Value = "func")] Func = 1,
 
             /// <summary>
             /// Enum Field for value: field
             /// </summary>
-            [EnumMember(Value = "field")]
-            Field = 2,
+            [EnumMember(Value = "field")] Field = 2,
 
             /// <summary>
             /// Enum Integer for value: integer
             /// </summary>
-            [EnumMember(Value = "integer")]
-            Integer = 3,
+            [EnumMember(Value = "integer")] Integer = 3,
 
             /// <summary>
             /// Enum Number for value: number
             /// </summary>
-            [EnumMember(Value = "number")]
-            Number = 4,
+            [EnumMember(Value = "number")] Number = 4,
 
             /// <summary>
             /// Enum Regex for value: regex
             /// </summary>
-            [EnumMember(Value = "regex")]
-            Regex = 5,
+            [EnumMember(Value = "regex")] Regex = 5,
 
             /// <summary>
             /// Enum Wildcard for value: wildcard
             /// </summary>
-            [EnumMember(Value = "wildcard")]
-            Wildcard = 6
-
+            [EnumMember(Value = "wildcard")] Wildcard = 6
         }
 
         /// <summary>
         /// &#x60;type&#x60; describes the field type. &#x60;func&#x60; is a function. &#x60;field&#x60; is a field reference.
         /// </summary>
         /// <value>&#x60;type&#x60; describes the field type. &#x60;func&#x60; is a function. &#x60;field&#x60; is a field reference.</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Field" /> class.
         /// </summary>
@@ -87,19 +81,20 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="type">&#x60;type&#x60; describes the field type. &#x60;func&#x60; is a function. &#x60;field&#x60; is a field reference..</param>
         /// <param name="alias">Alias overrides the field name in the returned response.  Applies only if type is &#x60;func&#x60;.</param>
         /// <param name="args">Args are the arguments to the function.</param>
-        public Field(string value = default(string), TypeEnum? type = default(TypeEnum?), string alias = default(string), List<Field> args = default(List<Field>))
+        public Field(string value = default, TypeEnum? type = default, string alias = default,
+            List<Field> args = default)
         {
-            this.Value = value;
-            this.Type = type;
-            this.Alias = alias;
-            this.Args = args;
+            Value = value;
+            Type = type;
+            Alias = alias;
+            Args = args;
         }
 
         /// <summary>
         /// value is the value of the field.  Meaning of the value is implied by the &#x60;type&#x60; key
         /// </summary>
         /// <value>value is the value of the field.  Meaning of the value is implied by the &#x60;type&#x60; key</value>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [DataMember(Name = "value", EmitDefaultValue = false)]
         public string Value { get; set; }
 
 
@@ -107,14 +102,14 @@ namespace InfluxDB.Client.Api.Domain
         /// Alias overrides the field name in the returned response.  Applies only if type is &#x60;func&#x60;
         /// </summary>
         /// <value>Alias overrides the field name in the returned response.  Applies only if type is &#x60;func&#x60;</value>
-        [DataMember(Name="alias", EmitDefaultValue=false)]
+        [DataMember(Name = "alias", EmitDefaultValue = false)]
         public string Alias { get; set; }
 
         /// <summary>
         /// Args are the arguments to the function
         /// </summary>
         /// <value>Args are the arguments to the function</value>
-        [DataMember(Name="args", EmitDefaultValue=false)]
+        [DataMember(Name = "args", EmitDefaultValue = false)]
         public List<Field> Args { get; set; }
 
         /// <summary>
@@ -149,7 +144,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Field);
+            return Equals(input as Field);
         }
 
         /// <summary>
@@ -160,25 +155,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Field input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Value == input.Value ||
-                    (this.Value != null && this.Value.Equals(input.Value))
-                ) && 
+                    Value == input.Value ||
+                    Value != null && Value.Equals(input.Value)
+                ) &&
                 (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
+                    Type == input.Type ||
+                    Type.Equals(input.Type)
+                ) &&
                 (
-                    this.Alias == input.Alias ||
-                    (this.Alias != null && this.Alias.Equals(input.Alias))
-                ) && 
+                    Alias == input.Alias ||
+                    Alias != null && Alias.Equals(input.Alias)
+                ) &&
                 (
-                    this.Args == input.Args ||
-                    this.Args != null &&
-                    this.Args.SequenceEqual(input.Args)
+                    Args == input.Args ||
+                    Args != null &&
+                    Args.SequenceEqual(input.Args)
                 );
         }
 
@@ -190,19 +187,26 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Alias != null)
-                    hashCode = hashCode * 59 + this.Alias.GetHashCode();
-                if (this.Args != null)
-                    hashCode = hashCode * 59 + this.Args.GetHashCode();
+                var hashCode = 41;
+
+                if (Value != null)
+                {
+                    hashCode = hashCode * 59 + Value.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Alias != null)
+                {
+                    hashCode = hashCode * 59 + Alias.GetHashCode();
+                }
+
+                if (Args != null)
+                {
+                    hashCode = hashCode * 59 + Args.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

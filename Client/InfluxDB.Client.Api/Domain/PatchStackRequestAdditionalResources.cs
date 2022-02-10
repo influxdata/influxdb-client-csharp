@@ -27,52 +27,60 @@ namespace InfluxDB.Client.Api.Domain
     /// PatchStackRequestAdditionalResources
     /// </summary>
     [DataContract]
-    public partial class PatchStackRequestAdditionalResources :  IEquatable<PatchStackRequestAdditionalResources>
+    public partial class PatchStackRequestAdditionalResources : IEquatable<PatchStackRequestAdditionalResources>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PatchStackRequestAdditionalResources" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PatchStackRequestAdditionalResources() { }
+        protected PatchStackRequestAdditionalResources()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PatchStackRequestAdditionalResources" /> class.
         /// </summary>
         /// <param name="resourceID">resourceID (required).</param>
         /// <param name="kind">kind (required).</param>
         /// <param name="templateMetaName">templateMetaName.</param>
-        public PatchStackRequestAdditionalResources(string resourceID = default(string), string kind = default(string), string templateMetaName = default(string))
+        public PatchStackRequestAdditionalResources(string resourceID = default, string kind = default,
+            string templateMetaName = default)
         {
             // to ensure "resourceID" is required (not null)
             if (resourceID == null)
             {
-                throw new InvalidDataException("resourceID is a required property for PatchStackRequestAdditionalResources and cannot be null");
+                throw new InvalidDataException(
+                    "resourceID is a required property for PatchStackRequestAdditionalResources and cannot be null");
             }
-            this.ResourceID = resourceID;
+
+            ResourceID = resourceID;
             // to ensure "kind" is required (not null)
             if (kind == null)
             {
-                throw new InvalidDataException("kind is a required property for PatchStackRequestAdditionalResources and cannot be null");
+                throw new InvalidDataException(
+                    "kind is a required property for PatchStackRequestAdditionalResources and cannot be null");
             }
-            this.Kind = kind;
-            this.TemplateMetaName = templateMetaName;
+
+            Kind = kind;
+            TemplateMetaName = templateMetaName;
         }
 
         /// <summary>
         /// Gets or Sets ResourceID
         /// </summary>
-        [DataMember(Name="resourceID", EmitDefaultValue=false)]
+        [DataMember(Name = "resourceID", EmitDefaultValue = false)]
         public string ResourceID { get; set; }
 
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public string Kind { get; set; }
 
         /// <summary>
         /// Gets or Sets TemplateMetaName
         /// </summary>
-        [DataMember(Name="templateMetaName", EmitDefaultValue=false)]
+        [DataMember(Name = "templateMetaName", EmitDefaultValue = false)]
         public string TemplateMetaName { get; set; }
 
         /// <summary>
@@ -106,7 +114,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PatchStackRequestAdditionalResources);
+            return Equals(input as PatchStackRequestAdditionalResources);
         }
 
         /// <summary>
@@ -117,20 +125,22 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PatchStackRequestAdditionalResources input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.ResourceID == input.ResourceID ||
-                    (this.ResourceID != null && this.ResourceID.Equals(input.ResourceID))
-                ) && 
+                    ResourceID == input.ResourceID ||
+                    ResourceID != null && ResourceID.Equals(input.ResourceID)
+                ) &&
                 (
-                    this.Kind == input.Kind ||
-                    (this.Kind != null && this.Kind.Equals(input.Kind))
-                ) && 
+                    Kind == input.Kind ||
+                    Kind != null && Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
+                    TemplateMetaName == input.TemplateMetaName ||
+                    TemplateMetaName != null && TemplateMetaName.Equals(input.TemplateMetaName)
                 );
         }
 
@@ -142,18 +152,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.ResourceID != null)
-                    hashCode = hashCode * 59 + this.ResourceID.GetHashCode();
-                if (this.Kind != null)
-                    hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.TemplateMetaName != null)
-                    hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
+                var hashCode = 41;
+
+                if (ResourceID != null)
+                {
+                    hashCode = hashCode * 59 + ResourceID.GetHashCode();
+                }
+
+                if (Kind != null)
+                {
+                    hashCode = hashCode * 59 + Kind.GetHashCode();
+                }
+
+                if (TemplateMetaName != null)
+                {
+                    hashCode = hashCode * 59 + TemplateMetaName.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

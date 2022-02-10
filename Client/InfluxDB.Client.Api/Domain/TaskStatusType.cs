@@ -26,23 +26,17 @@ namespace InfluxDB.Client.Api.Domain
     /// <summary>
     /// Defines TaskStatusType
     /// </summary>
-    
     [JsonConverter(typeof(StringEnumConverter))]
-    
     public enum TaskStatusType
     {
         /// <summary>
         /// Enum Active for value: active
         /// </summary>
-        [EnumMember(Value = "active")]
-        Active = 1,
+        [EnumMember(Value = "active")] Active = 1,
 
         /// <summary>
         /// Enum Inactive for value: inactive
         /// </summary>
-        [EnumMember(Value = "inactive")]
-        Inactive = 2
-
+        [EnumMember(Value = "inactive")] Inactive = 2
     }
-
 }

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// ScraperTargetResponse
     /// </summary>
     [DataContract]
-    public partial class ScraperTargetResponse : ScraperTargetRequest,  IEquatable<ScraperTargetResponse>
+    public partial class ScraperTargetResponse : ScraperTargetRequest, IEquatable<ScraperTargetResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScraperTargetResponse" /> class.
@@ -35,37 +35,40 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="org">The name of the organization..</param>
         /// <param name="bucket">The bucket name..</param>
         /// <param name="links">links.</param>
-        public ScraperTargetResponse(string org = default(string), string bucket = default(string), ScraperTargetResponseLinks links = default(ScraperTargetResponseLinks), string name = default(string), TypeEnum? type = default(TypeEnum?), string url = default(string), string orgID = default(string), string bucketID = default(string), bool? allowInsecure = false) : base(name, type, url, orgID, bucketID, allowInsecure)
+        public ScraperTargetResponse(string org = default, string bucket = default,
+            ScraperTargetResponseLinks links = default, string name = default, TypeEnum? type = default,
+            string url = default, string orgID = default, string bucketID = default, bool? allowInsecure = false) :
+            base(name, type, url, orgID, bucketID, allowInsecure)
         {
-            this.Org = org;
-            this.Bucket = bucket;
-            this.Links = links;
+            Org = org;
+            Bucket = bucket;
+            Links = links;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// The name of the organization.
         /// </summary>
         /// <value>The name of the organization.</value>
-        [DataMember(Name="org", EmitDefaultValue=false)]
+        [DataMember(Name = "org", EmitDefaultValue = false)]
         public string Org { get; set; }
 
         /// <summary>
         /// The bucket name.
         /// </summary>
         /// <value>The bucket name.</value>
-        [DataMember(Name="bucket", EmitDefaultValue=false)]
+        [DataMember(Name = "bucket", EmitDefaultValue = false)]
         public string Bucket { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public ScraperTargetResponseLinks Links { get; set; }
 
         /// <summary>
@@ -101,7 +104,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ScraperTargetResponse);
+            return Equals(input as ScraperTargetResponse);
         }
 
         /// <summary>
@@ -112,25 +115,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ScraperTargetResponse input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && base.Equals(input) && 
-                (
-                    this.Org == input.Org ||
-                    (this.Org != null && this.Org.Equals(input.Org))
-                ) && base.Equals(input) && 
-                (
-                    this.Bucket == input.Bucket ||
-                    (this.Bucket != null && this.Bucket.Equals(input.Bucket))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+            return base.Equals(input) &&
+                   (
+                       Id == input.Id ||
+                       Id != null && Id.Equals(input.Id)
+                   ) && base.Equals(input) &&
+                   (
+                       Org == input.Org ||
+                       Org != null && Org.Equals(input.Org)
+                   ) && base.Equals(input) &&
+                   (
+                       Bucket == input.Bucket ||
+                       Bucket != null && Bucket.Equals(input.Bucket)
+                   ) && base.Equals(input) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -141,20 +142,30 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Org != null)
-                    hashCode = hashCode * 59 + this.Org.GetHashCode();
-                if (this.Bucket != null)
-                    hashCode = hashCode * 59 + this.Bucket.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Org != null)
+                {
+                    hashCode = hashCode * 59 + Org.GetHashCode();
+                }
+
+                if (Bucket != null)
+                {
+                    hashCode = hashCode * 59 + Bucket.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

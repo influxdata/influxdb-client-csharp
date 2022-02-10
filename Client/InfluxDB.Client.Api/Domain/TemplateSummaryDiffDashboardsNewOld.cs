@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryDiffDashboardsNewOld
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryDiffDashboardsNewOld :  IEquatable<TemplateSummaryDiffDashboardsNewOld>
+    public partial class TemplateSummaryDiffDashboardsNewOld : IEquatable<TemplateSummaryDiffDashboardsNewOld>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryDiffDashboardsNewOld" /> class.
@@ -35,29 +35,30 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="name">name.</param>
         /// <param name="description">description.</param>
         /// <param name="charts">charts.</param>
-        public TemplateSummaryDiffDashboardsNewOld(string name = default(string), string description = default(string), List<TemplateChart> charts = default(List<TemplateChart>))
+        public TemplateSummaryDiffDashboardsNewOld(string name = default, string description = default,
+            List<TemplateChart> charts = default)
         {
-            this.Name = name;
-            this.Description = description;
-            this.Charts = charts;
+            Name = name;
+            Description = description;
+            Charts = charts;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Charts
         /// </summary>
-        [DataMember(Name="charts", EmitDefaultValue=false)]
+        [DataMember(Name = "charts", EmitDefaultValue = false)]
         public List<TemplateChart> Charts { get; set; }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryDiffDashboardsNewOld);
+            return Equals(input as TemplateSummaryDiffDashboardsNewOld);
         }
 
         /// <summary>
@@ -102,21 +103,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryDiffDashboardsNewOld input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.Charts == input.Charts ||
-                    this.Charts != null &&
-                    this.Charts.SequenceEqual(input.Charts)
+                    Charts == input.Charts ||
+                    Charts != null &&
+                    Charts.SequenceEqual(input.Charts)
                 );
         }
 
@@ -128,18 +131,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Charts != null)
-                    hashCode = hashCode * 59 + this.Charts.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (Charts != null)
+                {
+                    hashCode = hashCode * 59 + Charts.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

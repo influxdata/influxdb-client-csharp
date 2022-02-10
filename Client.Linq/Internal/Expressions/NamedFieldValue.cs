@@ -2,7 +2,7 @@ using System.Text;
 
 namespace InfluxDB.Client.Linq.Internal.Expressions
 {
-    internal class NamedFieldValue: IExpressionPart
+    internal class NamedFieldValue : IExpressionPart
     {
         internal BinaryOperator Operator;
         internal bool Left;

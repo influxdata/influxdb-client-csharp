@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// HealthCheck
     /// </summary>
     [DataContract]
-    public partial class HealthCheck :  IEquatable<HealthCheck>
+    public partial class HealthCheck : IEquatable<HealthCheck>
     {
         /// <summary>
         /// Defines Status
@@ -38,27 +38,28 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Pass for value: pass
             /// </summary>
-            [EnumMember(Value = "pass")]
-            Pass = 1,
+            [EnumMember(Value = "pass")] Pass = 1,
 
             /// <summary>
             /// Enum Fail for value: fail
             /// </summary>
-            [EnumMember(Value = "fail")]
-            Fail = 2
-
+            [EnumMember(Value = "fail")] Fail = 2
         }
 
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public StatusEnum Status { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthCheck" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected HealthCheck() { }
+        protected HealthCheck()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthCheck" /> class.
         /// </summary>
@@ -68,51 +69,53 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="status">status (required).</param>
         /// <param name="version">version.</param>
         /// <param name="commit">commit.</param>
-        public HealthCheck(string name = default(string), string message = default(string), List<HealthCheck> checks = default(List<HealthCheck>), StatusEnum status = default(StatusEnum), string version = default(string), string commit = default(string))
+        public HealthCheck(string name = default, string message = default, List<HealthCheck> checks = default,
+            StatusEnum status = default, string version = default, string commit = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for HealthCheck and cannot be null");
             }
-            this.Name = name;
+
+            Name = name;
             // to ensure "status" is required (not null)
-            this.Status = status;
-            this.Message = message;
-            this.Checks = checks;
-            this.Version = version;
-            this.Commit = commit;
+            Status = status;
+            Message = message;
+            Checks = checks;
+            Version = version;
+            Commit = commit;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Message
         /// </summary>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [DataMember(Name = "message", EmitDefaultValue = false)]
         public string Message { get; set; }
 
         /// <summary>
         /// Gets or Sets Checks
         /// </summary>
-        [DataMember(Name="checks", EmitDefaultValue=false)]
+        [DataMember(Name = "checks", EmitDefaultValue = false)]
         public List<HealthCheck> Checks { get; set; }
 
 
         /// <summary>
         /// Gets or Sets Version
         /// </summary>
-        [DataMember(Name="version", EmitDefaultValue=false)]
+        [DataMember(Name = "version", EmitDefaultValue = false)]
         public string Version { get; set; }
 
         /// <summary>
         /// Gets or Sets Commit
         /// </summary>
-        [DataMember(Name="commit", EmitDefaultValue=false)]
+        [DataMember(Name = "commit", EmitDefaultValue = false)]
         public string Commit { get; set; }
 
         /// <summary>
@@ -149,7 +152,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as HealthCheck);
+            return Equals(input as HealthCheck);
         }
 
         /// <summary>
@@ -160,33 +163,35 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(HealthCheck input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Message == input.Message ||
-                    (this.Message != null && this.Message.Equals(input.Message))
-                ) && 
+                    Message == input.Message ||
+                    Message != null && Message.Equals(input.Message)
+                ) &&
                 (
-                    this.Checks == input.Checks ||
-                    this.Checks != null &&
-                    this.Checks.SequenceEqual(input.Checks)
-                ) && 
+                    Checks == input.Checks ||
+                    Checks != null &&
+                    Checks.SequenceEqual(input.Checks)
+                ) &&
                 (
-                    this.Status == input.Status ||
-                    this.Status.Equals(input.Status)
-                ) && 
+                    Status == input.Status ||
+                    Status.Equals(input.Status)
+                ) &&
                 (
-                    this.Version == input.Version ||
-                    (this.Version != null && this.Version.Equals(input.Version))
-                ) && 
+                    Version == input.Version ||
+                    Version != null && Version.Equals(input.Version)
+                ) &&
                 (
-                    this.Commit == input.Commit ||
-                    (this.Commit != null && this.Commit.Equals(input.Commit))
+                    Commit == input.Commit ||
+                    Commit != null && Commit.Equals(input.Commit)
                 );
         }
 
@@ -198,23 +203,36 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Message != null)
-                    hashCode = hashCode * 59 + this.Message.GetHashCode();
-                if (this.Checks != null)
-                    hashCode = hashCode * 59 + this.Checks.GetHashCode();
-                hashCode = hashCode * 59 + this.Status.GetHashCode();
-                if (this.Version != null)
-                    hashCode = hashCode * 59 + this.Version.GetHashCode();
-                if (this.Commit != null)
-                    hashCode = hashCode * 59 + this.Commit.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Message != null)
+                {
+                    hashCode = hashCode * 59 + Message.GetHashCode();
+                }
+
+                if (Checks != null)
+                {
+                    hashCode = hashCode * 59 + Checks.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Status.GetHashCode();
+                if (Version != null)
+                {
+                    hashCode = hashCode * 59 + Version.GetHashCode();
+                }
+
+                if (Commit != null)
+                {
+                    hashCode = hashCode * 59 + Commit.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

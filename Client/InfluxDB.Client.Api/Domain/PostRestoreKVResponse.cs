@@ -27,22 +27,22 @@ namespace InfluxDB.Client.Api.Domain
     /// PostRestoreKVResponse
     /// </summary>
     [DataContract]
-    public partial class PostRestoreKVResponse :  IEquatable<PostRestoreKVResponse>
+    public partial class PostRestoreKVResponse : IEquatable<PostRestoreKVResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PostRestoreKVResponse" /> class.
         /// </summary>
         /// <param name="token">token is the root token for the instance after restore (this is overwritten during the restore).</param>
-        public PostRestoreKVResponse(string token = default(string))
+        public PostRestoreKVResponse(string token = default)
         {
-            this.Token = token;
+            Token = token;
         }
 
         /// <summary>
         /// token is the root token for the instance after restore (this is overwritten during the restore)
         /// </summary>
         /// <value>token is the root token for the instance after restore (this is overwritten during the restore)</value>
-        [DataMember(Name="token", EmitDefaultValue=false)]
+        [DataMember(Name = "token", EmitDefaultValue = false)]
         public string Token { get; set; }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PostRestoreKVResponse);
+            return Equals(input as PostRestoreKVResponse);
         }
 
         /// <summary>
@@ -85,13 +85,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PostRestoreKVResponse input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Token == input.Token ||
-                    (this.Token != null && this.Token.Equals(input.Token))
-                );
+            return
+                Token == input.Token ||
+                Token != null && Token.Equals(input.Token);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Token != null)
-                    hashCode = hashCode * 59 + this.Token.GetHashCode();
+                var hashCode = 41;
+
+                if (Token != null)
+                {
+                    hashCode = hashCode * 59 + Token.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

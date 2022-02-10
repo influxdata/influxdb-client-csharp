@@ -27,44 +27,49 @@ namespace InfluxDB.Client.Api.Domain
     /// The viewport for a View&#39;s visualizations
     /// </summary>
     [DataContract]
-    public partial class Axes :  IEquatable<Axes>
+    public partial class Axes : IEquatable<Axes>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Axes" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Axes() { }
+        protected Axes()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Axes" /> class.
         /// </summary>
         /// <param name="x">x (required).</param>
         /// <param name="y">y (required).</param>
-        public Axes(Axis x = default(Axis), Axis y = default(Axis))
+        public Axes(Axis x = default, Axis y = default)
         {
             // to ensure "x" is required (not null)
             if (x == null)
             {
                 throw new InvalidDataException("x is a required property for Axes and cannot be null");
             }
-            this.X = x;
+
+            X = x;
             // to ensure "y" is required (not null)
             if (y == null)
             {
                 throw new InvalidDataException("y is a required property for Axes and cannot be null");
             }
-            this.Y = y;
+
+            Y = y;
         }
 
         /// <summary>
         /// Gets or Sets X
         /// </summary>
-        [DataMember(Name="x", EmitDefaultValue=false)]
+        [DataMember(Name = "x", EmitDefaultValue = false)]
         public Axis X { get; set; }
 
         /// <summary>
         /// Gets or Sets Y
         /// </summary>
-        [DataMember(Name="y", EmitDefaultValue=false)]
+        [DataMember(Name = "y", EmitDefaultValue = false)]
         public Axis Y { get; set; }
 
         /// <summary>
@@ -97,7 +102,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Axes);
+            return Equals(input as Axes);
         }
 
         /// <summary>
@@ -108,17 +113,12 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Axes input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    
-                    (this.X != null && this.X.Equals(input.X))
-                ) && 
-                (
-                    
-                    (this.Y != null && this.Y.Equals(input.Y))
-                );
+            return
+                X != null && X.Equals(input.X) && Y != null && Y.Equals(input.Y);
         }
 
         /// <summary>
@@ -129,16 +129,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.X != null)
-                    hashCode = hashCode * 59 + this.X.GetHashCode();
-                if (this.Y != null)
-                    hashCode = hashCode * 59 + this.Y.GetHashCode();
+                var hashCode = 41;
+
+                if (X != null)
+                {
+                    hashCode = hashCode * 59 + X.GetHashCode();
+                }
+
+                if (Y != null)
+                {
+                    hashCode = hashCode * 59 + Y.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

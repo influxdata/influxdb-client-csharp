@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Bucket
     /// </summary>
     [DataContract]
-    public partial class Bucket :  IEquatable<Bucket>
+    public partial class Bucket : IEquatable<Bucket>
     {
         /// <summary>
         /// Defines Type
@@ -38,32 +38,34 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum User for value: user
             /// </summary>
-            [EnumMember(Value = "user")]
-            User = 1,
+            [EnumMember(Value = "user")] User = 1,
 
             /// <summary>
             /// Enum System for value: system
             /// </summary>
-            [EnumMember(Value = "system")]
-            System = 2
-
+            [EnumMember(Value = "system")] System = 2
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
+
         /// <summary>
         /// Gets or Sets SchemaType
         /// </summary>
-        [DataMember(Name="schemaType", EmitDefaultValue=false)]
+        [DataMember(Name = "schemaType", EmitDefaultValue = false)]
         public SchemaType? SchemaType { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Bucket" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Bucket() { }
+        protected Bucket()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Bucket" /> class.
         /// </summary>
@@ -75,89 +77,93 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="schemaType">schemaType.</param>
         /// <param name="retentionRules">Rules to expire or retain data.  No rules means data never expires. (required).</param>
         /// <param name="labels">labels.</param>
-        public Bucket(BucketLinks links = default(BucketLinks), string name = default(string), string description = default(string), string orgID = default(string), string rp = default(string), SchemaType? schemaType = default(SchemaType?), List<BucketRetentionRules> retentionRules = default(List<BucketRetentionRules>), List<Label> labels = default(List<Label>))
+        public Bucket(BucketLinks links = default, string name = default, string description = default,
+            string orgID = default, string rp = default, SchemaType? schemaType = default,
+            List<BucketRetentionRules> retentionRules = default, List<Label> labels = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for Bucket and cannot be null");
             }
-            this.Name = name;
+
+            Name = name;
             // to ensure "retentionRules" is required (not null)
             if (retentionRules == null)
             {
                 throw new InvalidDataException("retentionRules is a required property for Bucket and cannot be null");
             }
-            this.RetentionRules = retentionRules;
-            this.Links = links;
-            this.Description = description;
-            this.OrgID = orgID;
-            this.Rp = rp;
-            this.SchemaType = schemaType;
-            this.Labels = labels;
+
+            RetentionRules = retentionRules;
+            Links = links;
+            Description = description;
+            OrgID = orgID;
+            Rp = rp;
+            SchemaType = schemaType;
+            Labels = labels;
         }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public BucketLinks Links { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets Rp
         /// </summary>
-        [DataMember(Name="rp", EmitDefaultValue=false)]
+        [DataMember(Name = "rp", EmitDefaultValue = false)]
         public string Rp { get; set; }
 
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public DateTime? CreatedAt { get; private set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public DateTime? UpdatedAt { get; private set; }
 
         /// <summary>
         /// Rules to expire or retain data.  No rules means data never expires.
         /// </summary>
         /// <value>Rules to expire or retain data.  No rules means data never expires.</value>
-        [DataMember(Name="retentionRules", EmitDefaultValue=false)]
+        [DataMember(Name = "retentionRules", EmitDefaultValue = false)]
         public List<BucketRetentionRules> RetentionRules { get; set; }
 
         /// <summary>
         /// Gets or Sets Labels
         /// </summary>
-        [DataMember(Name="labels", EmitDefaultValue=false)]
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
         public List<Label> Labels { get; set; }
 
         /// <summary>
@@ -200,7 +206,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Bucket);
+            return Equals(input as Bucket);
         }
 
         /// <summary>
@@ -211,58 +217,57 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Bucket input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
+                Links != null && Links.Equals(input.Links) &&
                 (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Type == input.Type ||
+                    Type.Equals(input.Type)
+                ) &&
                 (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    Rp == input.Rp ||
+                    Rp != null && Rp.Equals(input.Rp)
+                ) &&
                 (
-                    this.Rp == input.Rp ||
-                    (this.Rp != null && this.Rp.Equals(input.Rp))
-                ) && 
+                    SchemaType == input.SchemaType ||
+                    SchemaType.Equals(input.SchemaType)
+                ) &&
                 (
-                    this.SchemaType == input.SchemaType ||
-                    this.SchemaType.Equals(input.SchemaType)
-                ) && 
+                    CreatedAt == input.CreatedAt ||
+                    CreatedAt != null && CreatedAt.Equals(input.CreatedAt)
+                ) &&
                 (
-                    this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
+                    UpdatedAt == input.UpdatedAt ||
+                    UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)
+                ) &&
                 (
-                    this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
-                ) && 
+                    RetentionRules == input.RetentionRules ||
+                    RetentionRules != null &&
+                    RetentionRules.SequenceEqual(input.RetentionRules)
+                ) &&
                 (
-                    this.RetentionRules == input.RetentionRules ||
-                    this.RetentionRules != null &&
-                    this.RetentionRules.SequenceEqual(input.RetentionRules)
-                ) && 
-                (
-                    this.Labels == input.Labels ||
-                    this.Labels != null &&
-                    this.Labels.SequenceEqual(input.Labels)
+                    Labels == input.Labels ||
+                    Labels != null &&
+                    Labels.SequenceEqual(input.Labels)
                 );
         }
 
@@ -274,34 +279,62 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.Rp != null)
-                    hashCode = hashCode * 59 + this.Rp.GetHashCode();
-                hashCode = hashCode * 59 + this.SchemaType.GetHashCode();
-                if (this.CreatedAt != null)
-                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
-                if (this.UpdatedAt != null)
-                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
-                if (this.RetentionRules != null)
-                    hashCode = hashCode * 59 + this.RetentionRules.GetHashCode();
-                if (this.Labels != null)
-                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
+                var hashCode = 41;
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (Rp != null)
+                {
+                    hashCode = hashCode * 59 + Rp.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + SchemaType.GetHashCode();
+                if (CreatedAt != null)
+                {
+                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+                }
+
+                if (UpdatedAt != null)
+                {
+                    hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
+                }
+
+                if (RetentionRules != null)
+                {
+                    hashCode = hashCode * 59 + RetentionRules.GetHashCode();
+                }
+
+                if (Labels != null)
+                {
+                    hashCode = hashCode * 59 + Labels.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

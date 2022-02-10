@@ -11,25 +11,24 @@ namespace Examples
             using var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
 
             var fluxQuery = "from(bucket: \"telegraf\")\n"
-                               + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
-                               + " |> range(start: -1d)"
-                               + " |> sample(n: 5, pos: 1)";
+                            + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
+                            + " |> range(start: -1d)"
+                            + " |> sample(n: 5, pos: 1)";
 
             await fluxClient.QueryRawAsync(fluxQuery, line =>
-                            {
-                                // process the flux query result record
-                                Console.WriteLine(line);
-
-                            },
-                            (error) =>
-                            {
-                                // error handling while processing result
-                                Console.WriteLine(error.ToString());
-                            }, () =>
-                            {
-                                // on complete
-                                Console.WriteLine("Query completed");
-                            });
+                {
+                    // process the flux query result record
+                    Console.WriteLine(line);
+                },
+                (error) =>
+                {
+                    // error handling while processing result
+                    Console.WriteLine(error.ToString());
+                }, () =>
+                {
+                    // on complete
+                    Console.WriteLine("Query completed");
+                });
         }
     }
 }

@@ -27,13 +27,16 @@ namespace InfluxDB.Client.Api.Domain
     /// RemoteConnection
     /// </summary>
     [DataContract]
-    public partial class RemoteConnection :  IEquatable<RemoteConnection>
+    public partial class RemoteConnection : IEquatable<RemoteConnection>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoteConnection" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected RemoteConnection() { }
+        protected RemoteConnection()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoteConnection" /> class.
         /// </summary>
@@ -44,87 +47,98 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="remoteURL">remoteURL (required).</param>
         /// <param name="remoteOrgID">remoteOrgID (required).</param>
         /// <param name="allowInsecureTLS">allowInsecureTLS (required) (default to false).</param>
-        public RemoteConnection(string id = default(string), string name = default(string), string orgID = default(string), string description = default(string), string remoteURL = default(string), string remoteOrgID = default(string), bool? allowInsecureTLS = false)
+        public RemoteConnection(string id = default, string name = default, string orgID = default,
+            string description = default, string remoteURL = default, string remoteOrgID = default,
+            bool? allowInsecureTLS = false)
         {
             // to ensure "id" is required (not null)
             if (id == null)
             {
                 throw new InvalidDataException("id is a required property for RemoteConnection and cannot be null");
             }
-            this.Id = id;
+
+            Id = id;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for RemoteConnection and cannot be null");
             }
-            this.Name = name;
+
+            Name = name;
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
                 throw new InvalidDataException("orgID is a required property for RemoteConnection and cannot be null");
             }
-            this.OrgID = orgID;
+
+            OrgID = orgID;
             // to ensure "remoteURL" is required (not null)
             if (remoteURL == null)
             {
-                throw new InvalidDataException("remoteURL is a required property for RemoteConnection and cannot be null");
+                throw new InvalidDataException(
+                    "remoteURL is a required property for RemoteConnection and cannot be null");
             }
-            this.RemoteURL = remoteURL;
+
+            RemoteURL = remoteURL;
             // to ensure "remoteOrgID" is required (not null)
             if (remoteOrgID == null)
             {
-                throw new InvalidDataException("remoteOrgID is a required property for RemoteConnection and cannot be null");
+                throw new InvalidDataException(
+                    "remoteOrgID is a required property for RemoteConnection and cannot be null");
             }
-            this.RemoteOrgID = remoteOrgID;
+
+            RemoteOrgID = remoteOrgID;
             // to ensure "allowInsecureTLS" is required (not null)
             if (allowInsecureTLS == null)
             {
-                throw new InvalidDataException("allowInsecureTLS is a required property for RemoteConnection and cannot be null");
+                throw new InvalidDataException(
+                    "allowInsecureTLS is a required property for RemoteConnection and cannot be null");
             }
-            this.AllowInsecureTLS = allowInsecureTLS;
-            this.Description = description;
+
+            AllowInsecureTLS = allowInsecureTLS;
+            Description = description;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets RemoteURL
         /// </summary>
-        [DataMember(Name="remoteURL", EmitDefaultValue=false)]
+        [DataMember(Name = "remoteURL", EmitDefaultValue = false)]
         public string RemoteURL { get; set; }
 
         /// <summary>
         /// Gets or Sets RemoteOrgID
         /// </summary>
-        [DataMember(Name="remoteOrgID", EmitDefaultValue=false)]
+        [DataMember(Name = "remoteOrgID", EmitDefaultValue = false)]
         public string RemoteOrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets AllowInsecureTLS
         /// </summary>
-        [DataMember(Name="allowInsecureTLS", EmitDefaultValue=false)]
+        [DataMember(Name = "allowInsecureTLS", EmitDefaultValue = false)]
         public bool? AllowInsecureTLS { get; set; }
 
         /// <summary>
@@ -162,7 +176,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as RemoteConnection);
+            return Equals(input as RemoteConnection);
         }
 
         /// <summary>
@@ -173,36 +187,38 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(RemoteConnection input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.RemoteURL == input.RemoteURL ||
-                    (this.RemoteURL != null && this.RemoteURL.Equals(input.RemoteURL))
-                ) && 
+                    RemoteURL == input.RemoteURL ||
+                    RemoteURL != null && RemoteURL.Equals(input.RemoteURL)
+                ) &&
                 (
-                    this.RemoteOrgID == input.RemoteOrgID ||
-                    (this.RemoteOrgID != null && this.RemoteOrgID.Equals(input.RemoteOrgID))
-                ) && 
+                    RemoteOrgID == input.RemoteOrgID ||
+                    RemoteOrgID != null && RemoteOrgID.Equals(input.RemoteOrgID)
+                ) &&
                 (
-                    this.AllowInsecureTLS == input.AllowInsecureTLS ||
-                    (this.AllowInsecureTLS != null && this.AllowInsecureTLS.Equals(input.AllowInsecureTLS))
+                    AllowInsecureTLS == input.AllowInsecureTLS ||
+                    AllowInsecureTLS != null && AllowInsecureTLS.Equals(input.AllowInsecureTLS)
                 );
         }
 
@@ -214,26 +230,45 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.RemoteURL != null)
-                    hashCode = hashCode * 59 + this.RemoteURL.GetHashCode();
-                if (this.RemoteOrgID != null)
-                    hashCode = hashCode * 59 + this.RemoteOrgID.GetHashCode();
-                if (this.AllowInsecureTLS != null)
-                    hashCode = hashCode * 59 + this.AllowInsecureTLS.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (RemoteURL != null)
+                {
+                    hashCode = hashCode * 59 + RemoteURL.GetHashCode();
+                }
+
+                if (RemoteOrgID != null)
+                {
+                    hashCode = hashCode * 59 + RemoteOrgID.GetHashCode();
+                }
+
+                if (AllowInsecureTLS != null)
+                {
+                    hashCode = hashCode * 59 + AllowInsecureTLS.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

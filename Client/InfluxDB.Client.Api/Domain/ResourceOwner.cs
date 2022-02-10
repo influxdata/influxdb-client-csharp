@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// ResourceOwner
     /// </summary>
     [DataContract]
-    public partial class ResourceOwner : User,  IEquatable<ResourceOwner>
+    public partial class ResourceOwner : User, IEquatable<ResourceOwner>
     {
         /// <summary>
         /// Defines Role
@@ -38,35 +38,38 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Owner for value: owner
             /// </summary>
-            [EnumMember(Value = "owner")]
-            Owner = 1
-
+            [EnumMember(Value = "owner")] Owner = 1
         }
 
         /// <summary>
         /// Gets or Sets Role
         /// </summary>
-        [DataMember(Name="role", EmitDefaultValue=false)]
+        [DataMember(Name = "role", EmitDefaultValue = false)]
         public RoleEnum? Role { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ResourceOwner" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ResourceOwner() { }
+        protected ResourceOwner()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ResourceOwner" /> class.
         /// </summary>
         /// <param name="role">role (default to RoleEnum.Owner).</param>
-        public ResourceOwner(RoleEnum? role = RoleEnum.Owner, string oauthID = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, UserLinks links = default(UserLinks)) : base(oauthID, name, status, links)
+        public ResourceOwner(RoleEnum? role = RoleEnum.Owner, string oauthID = default, string name = default,
+            StatusEnum? status = StatusEnum.Active, UserLinks links = default) : base(oauthID, name, status, links)
         {
             // use default value if no "role" provided
             if (role == null)
             {
-                this.Role = RoleEnum.Owner;
+                Role = RoleEnum.Owner;
             }
             else
             {
-                this.Role = role;
+                Role = role;
             }
         }
 
@@ -101,7 +104,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ResourceOwner);
+            return Equals(input as ResourceOwner);
         }
 
         /// <summary>
@@ -112,13 +115,15 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ResourceOwner input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Role == input.Role ||
-                    this.Role.Equals(input.Role)
-                );
+            return base.Equals(input) &&
+                   (
+                       Role == input.Role ||
+                       Role.Equals(input.Role)
+                   );
         }
 
         /// <summary>
@@ -129,13 +134,11 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Role.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Role.GetHashCode();
                 return hashCode;
             }
         }
-
     }
-
 }

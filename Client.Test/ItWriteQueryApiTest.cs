@@ -21,7 +21,7 @@ namespace InfluxDB.Client.Test
         public new async Task SetUp()
         {
             _organization = await FindMyOrg();
-            
+
             //bug: https://github.com/influxdata/influxdb/issues/19518
             //var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
             _bucket = await Client.GetBucketsApi()
@@ -40,7 +40,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(loggedUser);
 
             var authorization = await Client.GetAuthorizationsApi()
-                .CreateAuthorizationAsync(await FindMyOrg(), new List<Permission> {readBucket, writeBucket});
+                .CreateAuthorizationAsync(await FindMyOrg(), new List<Permission> { readBucket, writeBucket });
 
             _token = authorization.Token;
 
@@ -216,7 +216,7 @@ namespace InfluxDB.Client.Test
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns,
-                new List<string> {record1, record2});
+                new List<string> { record1, record2 });
             _writeApi.Flush();
 
             listener.WaitToSuccess();
@@ -433,9 +433,9 @@ namespace InfluxDB.Client.Test
             _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
                 "h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789");
             _writeApi.Flush();
-            
+
             var error = listener.Get<WriteErrorEvent>();
-            
+
             Assert.IsNotNull(error);
             Assert.AreEqual(
                 "unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789': bad timestamp",
@@ -482,7 +482,7 @@ namespace InfluxDB.Client.Test
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
         }
-        
+
         [Test]
         public async Task SimpleWriteAndDisposing()
         {
@@ -492,12 +492,13 @@ namespace InfluxDB.Client.Test
 
                 using (var writeApi = client.GetWriteApi())
                 {
-                    writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns, "temperature,location=north value=60.0 1");
+                    writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns,
+                        "temperature,location=north value=60.0 1");
                 }
-            
+
                 client.Dispose();
             }
-            
+
             // Using both
             {
                 using (var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token))
@@ -509,7 +510,7 @@ namespace InfluxDB.Client.Test
                     }
                 }
             }
-            
+
             // Using without
             {
                 var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token);
@@ -520,11 +521,11 @@ namespace InfluxDB.Client.Test
 
                 client.Dispose();
             }
-            
+
             var tables = await _queryApi.QueryAsync(
                 $"from(bucket:\"{_bucket.Name}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
-            
+
             Assert.AreEqual(1, tables.Count);
             Assert.AreEqual(3, tables[0].Records.Count);
             Assert.AreEqual(60, tables[0].Records[0].GetValue());
@@ -579,7 +580,7 @@ namespace InfluxDB.Client.Test
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WriteRecords(bucketName, _organization.Name, WritePrecision.Ns,
-                new List<string> {record1, record2});
+                new List<string> { record1, record2 });
             _writeApi.Flush();
             listener.WaitToSuccess();
 
@@ -816,7 +817,7 @@ namespace InfluxDB.Client.Test
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
             _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns,
-                new List<string> {record1, record2});
+                new List<string> { record1, record2 });
             _writeApi.Flush();
             listener.WaitToSuccess();
 
@@ -869,7 +870,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(2, records[1].GetValue());
             Assert.AreEqual("level water_level", records[1].GetField());
         }
-        
+
         [Test]
         public async Task WriteTooManyData()
         {
@@ -877,14 +878,12 @@ namespace InfluxDB.Client.Test
 
             const int count = 500_000;
             const int batchSize = 50_000;
-            
+
             var measurements = new List<H20Measurement>();
 
             for (var i = 0; i < count; i++)
-            {
                 measurements.Add(new H20Measurement
-                    {Level = i, Time = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i)), Location = "Europe"});
-            }
+                    { Level = i, Time = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i)), Location = "Europe" });
 
             var successEvents = new List<WriteSuccessEvent>();
             _writeApi = Client.GetWriteApi(WriteOptions.CreateNew().BatchSize(batchSize).FlushInterval(10_000).Build());
@@ -915,12 +914,10 @@ namespace InfluxDB.Client.Test
             Trace.WriteLine("Flushing data...");
             Client.Dispose();
             Trace.WriteLine("Finished");
-            
+
             Assert.AreEqual(10, successEvents.Count);
             foreach (var successEvent in successEvents)
-            {
                 Assert.AreEqual(50_000, successEvent.LineProtocol.Split("\n").Length);
-            }
         }
     }
 }

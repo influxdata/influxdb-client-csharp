@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TelegrafRequest
     /// </summary>
     [DataContract]
-    public partial class TelegrafRequest :  IEquatable<TelegrafRequest>
+    public partial class TelegrafRequest : IEquatable<TelegrafRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TelegrafRequest" /> class.
@@ -37,43 +37,44 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="metadata">metadata.</param>
         /// <param name="config">config.</param>
         /// <param name="orgID">orgID.</param>
-        public TelegrafRequest(string name = default(string), string description = default(string), TelegrafRequestMetadata metadata = default(TelegrafRequestMetadata), string config = default(string), string orgID = default(string))
+        public TelegrafRequest(string name = default, string description = default,
+            TelegrafRequestMetadata metadata = default, string config = default, string orgID = default)
         {
-            this.Name = name;
-            this.Description = description;
-            this.Metadata = metadata;
-            this.Config = config;
-            this.OrgID = orgID;
+            Name = name;
+            Description = description;
+            Metadata = metadata;
+            Config = config;
+            OrgID = orgID;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Metadata
         /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
+        [DataMember(Name = "metadata", EmitDefaultValue = false)]
         public TelegrafRequestMetadata Metadata { get; set; }
 
         /// <summary>
         /// Gets or Sets Config
         /// </summary>
-        [DataMember(Name="config", EmitDefaultValue=false)]
+        [DataMember(Name = "config", EmitDefaultValue = false)]
         public string Config { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
@@ -109,7 +110,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TelegrafRequest);
+            return Equals(input as TelegrafRequest);
         }
 
         /// <summary>
@@ -120,28 +121,24 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TelegrafRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
-                (
-                    
-                    (this.Metadata != null && this.Metadata.Equals(input.Metadata))
-                ) && 
-                (
-                    this.Config == input.Config ||
-                    (this.Config != null && this.Config.Equals(input.Config))
-                ) && 
-                (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) && Metadata != null && Metadata.Equals(input.Metadata) && (
+                    Config == input.Config ||
+                    Config != null && Config.Equals(input.Config)
+                ) && (
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
                 );
         }
 
@@ -153,22 +150,35 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Metadata != null)
-                    hashCode = hashCode * 59 + this.Metadata.GetHashCode();
-                if (this.Config != null)
-                    hashCode = hashCode * 59 + this.Config.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (Metadata != null)
+                {
+                    hashCode = hashCode * 59 + Metadata.GetHashCode();
+                }
+
+                if (Config != null)
+                {
+                    hashCode = hashCode * 59 + Config.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

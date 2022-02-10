@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// RemoteConnections
     /// </summary>
     [DataContract]
-    public partial class RemoteConnections :  IEquatable<RemoteConnections>
+    public partial class RemoteConnections : IEquatable<RemoteConnections>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoteConnections" /> class.
         /// </summary>
         /// <param name="remotes">remotes.</param>
-        public RemoteConnections(List<RemoteConnection> remotes = default(List<RemoteConnection>))
+        public RemoteConnections(List<RemoteConnection> remotes = default)
         {
-            this.Remotes = remotes;
+            Remotes = remotes;
         }
 
         /// <summary>
         /// Gets or Sets Remotes
         /// </summary>
-        [DataMember(Name="remotes", EmitDefaultValue=false)]
+        [DataMember(Name = "remotes", EmitDefaultValue = false)]
         public List<RemoteConnection> Remotes { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as RemoteConnections);
+            return Equals(input as RemoteConnections);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(RemoteConnections input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Remotes == input.Remotes ||
-                    this.Remotes != null &&
-                    this.Remotes.SequenceEqual(input.Remotes)
-                );
+            return
+                Remotes == input.Remotes ||
+                Remotes != null &&
+                Remotes.SequenceEqual(input.Remotes);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Remotes != null)
-                    hashCode = hashCode * 59 + this.Remotes.GetHashCode();
+                var hashCode = 41;
+
+                if (Remotes != null)
+                {
+                    hashCode = hashCode * 59 + Remotes.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -28,7 +28,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
             return PropertyCache.GetOrAdd(type, _ => type.GetProperties());
         }
-        
+
         /// <summary>
         /// Get Mapping attribute for specified property.
         /// </summary>

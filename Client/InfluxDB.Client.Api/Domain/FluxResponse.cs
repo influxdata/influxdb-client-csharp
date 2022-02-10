@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// Rendered flux that backs the check or notification.
     /// </summary>
     [DataContract]
-    public partial class FluxResponse :  IEquatable<FluxResponse>
+    public partial class FluxResponse : IEquatable<FluxResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FluxResponse" /> class.
         /// </summary>
         /// <param name="flux">flux.</param>
-        public FluxResponse(string flux = default(string))
+        public FluxResponse(string flux = default)
         {
-            this.Flux = flux;
+            Flux = flux;
         }
 
         /// <summary>
         /// Gets or Sets Flux
         /// </summary>
-        [DataMember(Name="flux", EmitDefaultValue=false)]
+        [DataMember(Name = "flux", EmitDefaultValue = false)]
         public string Flux { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as FluxResponse);
+            return Equals(input as FluxResponse);
         }
 
         /// <summary>
@@ -84,13 +84,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(FluxResponse input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Flux == input.Flux ||
-                    (this.Flux != null && this.Flux.Equals(input.Flux))
-                );
+            return
+                Flux == input.Flux ||
+                Flux != null && Flux.Equals(input.Flux);
         }
 
         /// <summary>
@@ -101,14 +101,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Flux != null)
-                    hashCode = hashCode * 59 + this.Flux.GetHashCode();
+                var hashCode = 41;
+
+                if (Flux != null)
+                {
+                    hashCode = hashCode * 59 + Flux.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

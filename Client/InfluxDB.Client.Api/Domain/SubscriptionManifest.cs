@@ -27,57 +27,66 @@ namespace InfluxDB.Client.Api.Domain
     /// SubscriptionManifest
     /// </summary>
     [DataContract]
-    public partial class SubscriptionManifest :  IEquatable<SubscriptionManifest>
+    public partial class SubscriptionManifest : IEquatable<SubscriptionManifest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionManifest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SubscriptionManifest() { }
+        protected SubscriptionManifest()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionManifest" /> class.
         /// </summary>
         /// <param name="name">name (required).</param>
         /// <param name="mode">mode (required).</param>
         /// <param name="destinations">destinations (required).</param>
-        public SubscriptionManifest(string name = default(string), string mode = default(string), List<string> destinations = default(List<string>))
+        public SubscriptionManifest(string name = default, string mode = default, List<string> destinations = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
             {
-                throw new InvalidDataException("name is a required property for SubscriptionManifest and cannot be null");
+                throw new InvalidDataException(
+                    "name is a required property for SubscriptionManifest and cannot be null");
             }
-            this.Name = name;
+
+            Name = name;
             // to ensure "mode" is required (not null)
             if (mode == null)
             {
-                throw new InvalidDataException("mode is a required property for SubscriptionManifest and cannot be null");
+                throw new InvalidDataException(
+                    "mode is a required property for SubscriptionManifest and cannot be null");
             }
-            this.Mode = mode;
+
+            Mode = mode;
             // to ensure "destinations" is required (not null)
             if (destinations == null)
             {
-                throw new InvalidDataException("destinations is a required property for SubscriptionManifest and cannot be null");
+                throw new InvalidDataException(
+                    "destinations is a required property for SubscriptionManifest and cannot be null");
             }
-            this.Destinations = destinations;
+
+            Destinations = destinations;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Mode
         /// </summary>
-        [DataMember(Name="mode", EmitDefaultValue=false)]
+        [DataMember(Name = "mode", EmitDefaultValue = false)]
         public string Mode { get; set; }
 
         /// <summary>
         /// Gets or Sets Destinations
         /// </summary>
-        [DataMember(Name="destinations", EmitDefaultValue=false)]
+        [DataMember(Name = "destinations", EmitDefaultValue = false)]
         public List<string> Destinations { get; set; }
 
         /// <summary>
@@ -111,7 +120,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SubscriptionManifest);
+            return Equals(input as SubscriptionManifest);
         }
 
         /// <summary>
@@ -122,21 +131,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(SubscriptionManifest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Mode == input.Mode ||
-                    (this.Mode != null && this.Mode.Equals(input.Mode))
-                ) && 
+                    Mode == input.Mode ||
+                    Mode != null && Mode.Equals(input.Mode)
+                ) &&
                 (
-                    this.Destinations == input.Destinations ||
-                    this.Destinations != null &&
-                    this.Destinations.SequenceEqual(input.Destinations)
+                    Destinations == input.Destinations ||
+                    Destinations != null &&
+                    Destinations.SequenceEqual(input.Destinations)
                 );
         }
 
@@ -148,18 +159,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Mode != null)
-                    hashCode = hashCode * 59 + this.Mode.GetHashCode();
-                if (this.Destinations != null)
-                    hashCode = hashCode * 59 + this.Destinations.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Mode != null)
+                {
+                    hashCode = hashCode * 59 + Mode.GetHashCode();
+                }
+
+                if (Destinations != null)
+                {
+                    hashCode = hashCode * 59 + Destinations.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

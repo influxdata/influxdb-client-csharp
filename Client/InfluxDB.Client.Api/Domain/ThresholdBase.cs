@@ -27,22 +27,23 @@ namespace InfluxDB.Client.Api.Domain
     /// ThresholdBase
     /// </summary>
     [DataContract]
-    public partial class ThresholdBase :  IEquatable<ThresholdBase>
+    public partial class ThresholdBase : IEquatable<ThresholdBase>
     {
         /// <summary>
         /// Gets or Sets Level
         /// </summary>
-        [DataMember(Name="level", EmitDefaultValue=false)]
+        [DataMember(Name = "level", EmitDefaultValue = false)]
         public CheckStatusLevel? Level { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ThresholdBase" /> class.
         /// </summary>
         /// <param name="level">level.</param>
         /// <param name="allValues">If true, only alert if all values meet threshold..</param>
-        public ThresholdBase(CheckStatusLevel? level = default(CheckStatusLevel?), bool? allValues = default(bool?))
+        public ThresholdBase(CheckStatusLevel? level = default, bool? allValues = default)
         {
-            this.Level = level;
-            this.AllValues = allValues;
+            Level = level;
+            AllValues = allValues;
         }
 
 
@@ -50,7 +51,7 @@ namespace InfluxDB.Client.Api.Domain
         /// If true, only alert if all values meet threshold.
         /// </summary>
         /// <value>If true, only alert if all values meet threshold.</value>
-        [DataMember(Name="allValues", EmitDefaultValue=false)]
+        [DataMember(Name = "allValues", EmitDefaultValue = false)]
         public bool? AllValues { get; set; }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ThresholdBase);
+            return Equals(input as ThresholdBase);
         }
 
         /// <summary>
@@ -94,16 +95,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ThresholdBase input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Level == input.Level ||
-                    this.Level.Equals(input.Level)
-                ) && 
+                    Level == input.Level ||
+                    Level.Equals(input.Level)
+                ) &&
                 (
-                    this.AllValues == input.AllValues ||
-                    (this.AllValues != null && this.AllValues.Equals(input.AllValues))
+                    AllValues == input.AllValues ||
+                    AllValues != null && AllValues.Equals(input.AllValues)
                 );
         }
 
@@ -115,15 +118,16 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Level.GetHashCode();
-                if (this.AllValues != null)
-                    hashCode = hashCode * 59 + this.AllValues.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Level.GetHashCode();
+                if (AllValues != null)
+                {
+                    hashCode = hashCode * 59 + AllValues.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// GreaterThreshold
     /// </summary>
     [DataContract]
-    public partial class GreaterThreshold : Threshold,  IEquatable<GreaterThreshold>
+    public partial class GreaterThreshold : Threshold, IEquatable<GreaterThreshold>
     {
         /// <summary>
         /// Defines Type
@@ -38,43 +38,47 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Greater for value: greater
             /// </summary>
-            [EnumMember(Value = "greater")]
-            Greater = 1
-
+            [EnumMember(Value = "greater")] Greater = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GreaterThreshold" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GreaterThreshold() { }
+        protected GreaterThreshold()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GreaterThreshold" /> class.
         /// </summary>
         /// <param name="type">type (required) (default to TypeEnum.Greater).</param>
         /// <param name="value">value (required).</param>
-        public GreaterThreshold(TypeEnum type = TypeEnum.Greater, float? value = default(float?), CheckStatusLevel? level = default(CheckStatusLevel?), bool? allValues = default(bool?)) : base(level, allValues)
+        public GreaterThreshold(TypeEnum type = TypeEnum.Greater, float? value = default,
+            CheckStatusLevel? level = default, bool? allValues = default) : base(level, allValues)
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "value" is required (not null)
             if (value == null)
             {
                 throw new InvalidDataException("value is a required property for GreaterThreshold and cannot be null");
             }
-            this.Value = value;
+
+            Value = value;
         }
 
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [DataMember(Name = "value", EmitDefaultValue = false)]
         public float? Value { get; set; }
 
         /// <summary>
@@ -108,7 +112,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as GreaterThreshold);
+            return Equals(input as GreaterThreshold);
         }
 
         /// <summary>
@@ -119,17 +123,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(GreaterThreshold input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Value == input.Value ||
-                    (this.Value != null && this.Value.Equals(input.Value))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Value == input.Value ||
+                       Value != null && Value.Equals(input.Value)
+                   );
         }
 
         /// <summary>
@@ -140,15 +146,16 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Value != null)
+                {
+                    hashCode = hashCode * 59 + Value.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// LogEvent
     /// </summary>
     [DataContract]
-    public partial class LogEvent :  IEquatable<LogEvent>
+    public partial class LogEvent : IEquatable<LogEvent>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LogEvent" /> class.
@@ -41,21 +41,21 @@ namespace InfluxDB.Client.Api.Domain
         /// Time event occurred, RFC3339Nano.
         /// </summary>
         /// <value>Time event occurred, RFC3339Nano.</value>
-        [DataMember(Name="time", EmitDefaultValue=false)]
+        [DataMember(Name = "time", EmitDefaultValue = false)]
         public DateTime? Time { get; private set; }
 
         /// <summary>
         /// A description of the event that occurred.
         /// </summary>
         /// <value>A description of the event that occurred.</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [DataMember(Name = "message", EmitDefaultValue = false)]
         public string Message { get; private set; }
 
         /// <summary>
         /// the ID of the task that logged
         /// </summary>
         /// <value>the ID of the task that logged</value>
-        [DataMember(Name="runID", EmitDefaultValue=false)]
+        [DataMember(Name = "runID", EmitDefaultValue = false)]
         public string RunID { get; private set; }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LogEvent);
+            return Equals(input as LogEvent);
         }
 
         /// <summary>
@@ -100,20 +100,22 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(LogEvent input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Time == input.Time ||
-                    (this.Time != null && this.Time.Equals(input.Time))
-                ) && 
+                    Time == input.Time ||
+                    Time != null && Time.Equals(input.Time)
+                ) &&
                 (
-                    this.Message == input.Message ||
-                    (this.Message != null && this.Message.Equals(input.Message))
-                ) && 
+                    Message == input.Message ||
+                    Message != null && Message.Equals(input.Message)
+                ) &&
                 (
-                    this.RunID == input.RunID ||
-                    (this.RunID != null && this.RunID.Equals(input.RunID))
+                    RunID == input.RunID ||
+                    RunID != null && RunID.Equals(input.RunID)
                 );
         }
 
@@ -125,18 +127,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Time != null)
-                    hashCode = hashCode * 59 + this.Time.GetHashCode();
-                if (this.Message != null)
-                    hashCode = hashCode * 59 + this.Message.GetHashCode();
-                if (this.RunID != null)
-                    hashCode = hashCode * 59 + this.RunID.GetHashCode();
+                var hashCode = 41;
+
+                if (Time != null)
+                {
+                    hashCode = hashCode * 59 + Time.GetHashCode();
+                }
+
+                if (Message != null)
+                {
+                    hashCode = hashCode * 59 + Message.GetHashCode();
+                }
+
+                if (RunID != null)
+                {
+                    hashCode = hashCode * 59 + RunID.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

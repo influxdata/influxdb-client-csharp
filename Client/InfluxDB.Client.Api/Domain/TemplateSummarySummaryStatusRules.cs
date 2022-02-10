@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummarySummaryStatusRules
     /// </summary>
     [DataContract]
-    public partial class TemplateSummarySummaryStatusRules :  IEquatable<TemplateSummarySummaryStatusRules>
+    public partial class TemplateSummarySummaryStatusRules : IEquatable<TemplateSummarySummaryStatusRules>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummarySummaryStatusRules" /> class.
         /// </summary>
         /// <param name="currentLevel">currentLevel.</param>
         /// <param name="previousLevel">previousLevel.</param>
-        public TemplateSummarySummaryStatusRules(string currentLevel = default(string), string previousLevel = default(string))
+        public TemplateSummarySummaryStatusRules(string currentLevel = default, string previousLevel = default)
         {
-            this.CurrentLevel = currentLevel;
-            this.PreviousLevel = previousLevel;
+            CurrentLevel = currentLevel;
+            PreviousLevel = previousLevel;
         }
 
         /// <summary>
         /// Gets or Sets CurrentLevel
         /// </summary>
-        [DataMember(Name="currentLevel", EmitDefaultValue=false)]
+        [DataMember(Name = "currentLevel", EmitDefaultValue = false)]
         public string CurrentLevel { get; set; }
 
         /// <summary>
         /// Gets or Sets PreviousLevel
         /// </summary>
-        [DataMember(Name="previousLevel", EmitDefaultValue=false)]
+        [DataMember(Name = "previousLevel", EmitDefaultValue = false)]
         public string PreviousLevel { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummarySummaryStatusRules);
+            return Equals(input as TemplateSummarySummaryStatusRules);
         }
 
         /// <summary>
@@ -93,16 +93,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummarySummaryStatusRules input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.CurrentLevel == input.CurrentLevel ||
-                    (this.CurrentLevel != null && this.CurrentLevel.Equals(input.CurrentLevel))
-                ) && 
+                    CurrentLevel == input.CurrentLevel ||
+                    CurrentLevel != null && CurrentLevel.Equals(input.CurrentLevel)
+                ) &&
                 (
-                    this.PreviousLevel == input.PreviousLevel ||
-                    (this.PreviousLevel != null && this.PreviousLevel.Equals(input.PreviousLevel))
+                    PreviousLevel == input.PreviousLevel ||
+                    PreviousLevel != null && PreviousLevel.Equals(input.PreviousLevel)
                 );
         }
 
@@ -114,16 +116,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.CurrentLevel != null)
-                    hashCode = hashCode * 59 + this.CurrentLevel.GetHashCode();
-                if (this.PreviousLevel != null)
-                    hashCode = hashCode * 59 + this.PreviousLevel.GetHashCode();
+                var hashCode = 41;
+
+                if (CurrentLevel != null)
+                {
+                    hashCode = hashCode * 59 + CurrentLevel.GetHashCode();
+                }
+
+                if (PreviousLevel != null)
+                {
+                    hashCode = hashCode * 59 + PreviousLevel.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

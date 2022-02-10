@@ -27,35 +27,37 @@ namespace InfluxDB.Client.Api.Domain
     /// Telegraf
     /// </summary>
     [DataContract]
-    public partial class Telegraf : TelegrafRequest,  IEquatable<Telegraf>
+    public partial class Telegraf : TelegrafRequest, IEquatable<Telegraf>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Telegraf" /> class.
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="labels">labels.</param>
-        public Telegraf(TelegrafLinks links = default(TelegrafLinks), List<Label> labels = default(List<Label>), string name = default(string), string description = default(string), TelegrafRequestMetadata metadata = default(TelegrafRequestMetadata), string config = default(string), string orgID = default(string)) : base(name, description, metadata, config, orgID)
+        public Telegraf(TelegrafLinks links = default, List<Label> labels = default, string name = default,
+            string description = default, TelegrafRequestMetadata metadata = default, string config = default,
+            string orgID = default) : base(name, description, metadata, config, orgID)
         {
-            this.Links = links;
-            this.Labels = labels;
+            Links = links;
+            Labels = labels;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public TelegrafLinks Links { get; set; }
 
         /// <summary>
         /// Gets or Sets Labels
         /// </summary>
-        [DataMember(Name="labels", EmitDefaultValue=false)]
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
         public List<Label> Labels { get; set; }
 
         /// <summary>
@@ -90,7 +92,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Telegraf);
+            return Equals(input as Telegraf);
         }
 
         /// <summary>
@@ -101,22 +103,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Telegraf input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                ) && base.Equals(input) && 
-                (
-                    this.Labels == input.Labels ||
-                    this.Labels != null &&
-                    this.Labels.SequenceEqual(input.Labels)
-                );
+            return base.Equals(input) &&
+                   (
+                       Id == input.Id ||
+                       Id != null && Id.Equals(input.Id)
+                   ) && base.Equals(input) && Links != null && Links.Equals(input.Links) && base.Equals(input) && (
+                       Labels == input.Labels ||
+                       Labels != null &&
+                       Labels.SequenceEqual(input.Labels)
+                   );
         }
 
         /// <summary>
@@ -127,18 +126,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this.Labels != null)
-                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
+                if (Labels != null)
+                {
+                    hashCode = hashCode * 59 + Labels.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

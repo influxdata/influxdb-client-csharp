@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateExportByID
     /// </summary>
     [DataContract]
-    public partial class TemplateExportByID :  IEquatable<TemplateExportByID>
+    public partial class TemplateExportByID : IEquatable<TemplateExportByID>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateExportByID" /> class.
@@ -35,29 +35,30 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="stackID">stackID.</param>
         /// <param name="orgIDs">orgIDs.</param>
         /// <param name="resources">resources.</param>
-        public TemplateExportByID(string stackID = default(string), List<TemplateExportByIDOrgIDs> orgIDs = default(List<TemplateExportByIDOrgIDs>), List<TemplateExportByIDResources> resources = default(List<TemplateExportByIDResources>))
+        public TemplateExportByID(string stackID = default, List<TemplateExportByIDOrgIDs> orgIDs = default,
+            List<TemplateExportByIDResources> resources = default)
         {
-            this.StackID = stackID;
-            this.OrgIDs = orgIDs;
-            this.Resources = resources;
+            StackID = stackID;
+            OrgIDs = orgIDs;
+            Resources = resources;
         }
 
         /// <summary>
         /// Gets or Sets StackID
         /// </summary>
-        [DataMember(Name="stackID", EmitDefaultValue=false)]
+        [DataMember(Name = "stackID", EmitDefaultValue = false)]
         public string StackID { get; set; }
 
         /// <summary>
         /// Gets or Sets OrgIDs
         /// </summary>
-        [DataMember(Name="orgIDs", EmitDefaultValue=false)]
+        [DataMember(Name = "orgIDs", EmitDefaultValue = false)]
         public List<TemplateExportByIDOrgIDs> OrgIDs { get; set; }
 
         /// <summary>
         /// Gets or Sets Resources
         /// </summary>
-        [DataMember(Name="resources", EmitDefaultValue=false)]
+        [DataMember(Name = "resources", EmitDefaultValue = false)]
         public List<TemplateExportByIDResources> Resources { get; set; }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateExportByID);
+            return Equals(input as TemplateExportByID);
         }
 
         /// <summary>
@@ -102,22 +103,24 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateExportByID input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.StackID == input.StackID ||
-                    (this.StackID != null && this.StackID.Equals(input.StackID))
-                ) && 
+                    StackID == input.StackID ||
+                    StackID != null && StackID.Equals(input.StackID)
+                ) &&
                 (
-                    this.OrgIDs == input.OrgIDs ||
-                    this.OrgIDs != null &&
-                    this.OrgIDs.SequenceEqual(input.OrgIDs)
-                ) && 
+                    OrgIDs == input.OrgIDs ||
+                    OrgIDs != null &&
+                    OrgIDs.SequenceEqual(input.OrgIDs)
+                ) &&
                 (
-                    this.Resources == input.Resources ||
-                    this.Resources != null &&
-                    this.Resources.SequenceEqual(input.Resources)
+                    Resources == input.Resources ||
+                    Resources != null &&
+                    Resources.SequenceEqual(input.Resources)
                 );
         }
 
@@ -129,18 +132,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.StackID != null)
-                    hashCode = hashCode * 59 + this.StackID.GetHashCode();
-                if (this.OrgIDs != null)
-                    hashCode = hashCode * 59 + this.OrgIDs.GetHashCode();
-                if (this.Resources != null)
-                    hashCode = hashCode * 59 + this.Resources.GetHashCode();
+                var hashCode = 41;
+
+                if (StackID != null)
+                {
+                    hashCode = hashCode * 59 + StackID.GetHashCode();
+                }
+
+                if (OrgIDs != null)
+                {
+                    hashCode = hashCode * 59 + OrgIDs.GetHashCode();
+                }
+
+                if (Resources != null)
+                {
+                    hashCode = hashCode * 59 + Resources.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

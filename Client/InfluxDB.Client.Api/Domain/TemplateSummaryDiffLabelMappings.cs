@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryDiffLabelMappings
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryDiffLabelMappings :  IEquatable<TemplateSummaryDiffLabelMappings>
+    public partial class TemplateSummaryDiffLabelMappings : IEquatable<TemplateSummaryDiffLabelMappings>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryDiffLabelMappings" /> class.
@@ -40,64 +40,66 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="labelID">labelID.</param>
         /// <param name="labelTemplateMetaName">labelTemplateMetaName.</param>
         /// <param name="labelName">labelName.</param>
-        public TemplateSummaryDiffLabelMappings(string status = default(string), string resourceType = default(string), string resourceID = default(string), string resourceTemplateMetaName = default(string), string resourceName = default(string), string labelID = default(string), string labelTemplateMetaName = default(string), string labelName = default(string))
+        public TemplateSummaryDiffLabelMappings(string status = default, string resourceType = default,
+            string resourceID = default, string resourceTemplateMetaName = default, string resourceName = default,
+            string labelID = default, string labelTemplateMetaName = default, string labelName = default)
         {
-            this.Status = status;
-            this.ResourceType = resourceType;
-            this.ResourceID = resourceID;
-            this.ResourceTemplateMetaName = resourceTemplateMetaName;
-            this.ResourceName = resourceName;
-            this.LabelID = labelID;
-            this.LabelTemplateMetaName = labelTemplateMetaName;
-            this.LabelName = labelName;
+            Status = status;
+            ResourceType = resourceType;
+            ResourceID = resourceID;
+            ResourceTemplateMetaName = resourceTemplateMetaName;
+            ResourceName = resourceName;
+            LabelID = labelID;
+            LabelTemplateMetaName = labelTemplateMetaName;
+            LabelName = labelName;
         }
 
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets ResourceType
         /// </summary>
-        [DataMember(Name="resourceType", EmitDefaultValue=false)]
+        [DataMember(Name = "resourceType", EmitDefaultValue = false)]
         public string ResourceType { get; set; }
 
         /// <summary>
         /// Gets or Sets ResourceID
         /// </summary>
-        [DataMember(Name="resourceID", EmitDefaultValue=false)]
+        [DataMember(Name = "resourceID", EmitDefaultValue = false)]
         public string ResourceID { get; set; }
 
         /// <summary>
         /// Gets or Sets ResourceTemplateMetaName
         /// </summary>
-        [DataMember(Name="resourceTemplateMetaName", EmitDefaultValue=false)]
+        [DataMember(Name = "resourceTemplateMetaName", EmitDefaultValue = false)]
         public string ResourceTemplateMetaName { get; set; }
 
         /// <summary>
         /// Gets or Sets ResourceName
         /// </summary>
-        [DataMember(Name="resourceName", EmitDefaultValue=false)]
+        [DataMember(Name = "resourceName", EmitDefaultValue = false)]
         public string ResourceName { get; set; }
 
         /// <summary>
         /// Gets or Sets LabelID
         /// </summary>
-        [DataMember(Name="labelID", EmitDefaultValue=false)]
+        [DataMember(Name = "labelID", EmitDefaultValue = false)]
         public string LabelID { get; set; }
 
         /// <summary>
         /// Gets or Sets LabelTemplateMetaName
         /// </summary>
-        [DataMember(Name="labelTemplateMetaName", EmitDefaultValue=false)]
+        [DataMember(Name = "labelTemplateMetaName", EmitDefaultValue = false)]
         public string LabelTemplateMetaName { get; set; }
 
         /// <summary>
         /// Gets or Sets LabelName
         /// </summary>
-        [DataMember(Name="labelName", EmitDefaultValue=false)]
+        [DataMember(Name = "labelName", EmitDefaultValue = false)]
         public string LabelName { get; set; }
 
         /// <summary>
@@ -136,7 +138,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryDiffLabelMappings);
+            return Equals(input as TemplateSummaryDiffLabelMappings);
         }
 
         /// <summary>
@@ -147,40 +149,42 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryDiffLabelMappings input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Status == input.Status ||
-                    (this.Status != null && this.Status.Equals(input.Status))
-                ) && 
+                    Status == input.Status ||
+                    Status != null && Status.Equals(input.Status)
+                ) &&
                 (
-                    this.ResourceType == input.ResourceType ||
-                    (this.ResourceType != null && this.ResourceType.Equals(input.ResourceType))
-                ) && 
+                    ResourceType == input.ResourceType ||
+                    ResourceType != null && ResourceType.Equals(input.ResourceType)
+                ) &&
                 (
-                    this.ResourceID == input.ResourceID ||
-                    (this.ResourceID != null && this.ResourceID.Equals(input.ResourceID))
-                ) && 
+                    ResourceID == input.ResourceID ||
+                    ResourceID != null && ResourceID.Equals(input.ResourceID)
+                ) &&
                 (
-                    this.ResourceTemplateMetaName == input.ResourceTemplateMetaName ||
-                    (this.ResourceTemplateMetaName != null && this.ResourceTemplateMetaName.Equals(input.ResourceTemplateMetaName))
-                ) && 
+                    ResourceTemplateMetaName == input.ResourceTemplateMetaName ||
+                    ResourceTemplateMetaName != null && ResourceTemplateMetaName.Equals(input.ResourceTemplateMetaName)
+                ) &&
                 (
-                    this.ResourceName == input.ResourceName ||
-                    (this.ResourceName != null && this.ResourceName.Equals(input.ResourceName))
-                ) && 
+                    ResourceName == input.ResourceName ||
+                    ResourceName != null && ResourceName.Equals(input.ResourceName)
+                ) &&
                 (
-                    this.LabelID == input.LabelID ||
-                    (this.LabelID != null && this.LabelID.Equals(input.LabelID))
-                ) && 
+                    LabelID == input.LabelID ||
+                    LabelID != null && LabelID.Equals(input.LabelID)
+                ) &&
                 (
-                    this.LabelTemplateMetaName == input.LabelTemplateMetaName ||
-                    (this.LabelTemplateMetaName != null && this.LabelTemplateMetaName.Equals(input.LabelTemplateMetaName))
-                ) && 
+                    LabelTemplateMetaName == input.LabelTemplateMetaName ||
+                    LabelTemplateMetaName != null && LabelTemplateMetaName.Equals(input.LabelTemplateMetaName)
+                ) &&
                 (
-                    this.LabelName == input.LabelName ||
-                    (this.LabelName != null && this.LabelName.Equals(input.LabelName))
+                    LabelName == input.LabelName ||
+                    LabelName != null && LabelName.Equals(input.LabelName)
                 );
         }
 
@@ -192,28 +196,50 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
-                if (this.ResourceType != null)
-                    hashCode = hashCode * 59 + this.ResourceType.GetHashCode();
-                if (this.ResourceID != null)
-                    hashCode = hashCode * 59 + this.ResourceID.GetHashCode();
-                if (this.ResourceTemplateMetaName != null)
-                    hashCode = hashCode * 59 + this.ResourceTemplateMetaName.GetHashCode();
-                if (this.ResourceName != null)
-                    hashCode = hashCode * 59 + this.ResourceName.GetHashCode();
-                if (this.LabelID != null)
-                    hashCode = hashCode * 59 + this.LabelID.GetHashCode();
-                if (this.LabelTemplateMetaName != null)
-                    hashCode = hashCode * 59 + this.LabelTemplateMetaName.GetHashCode();
-                if (this.LabelName != null)
-                    hashCode = hashCode * 59 + this.LabelName.GetHashCode();
+                var hashCode = 41;
+
+                if (Status != null)
+                {
+                    hashCode = hashCode * 59 + Status.GetHashCode();
+                }
+
+                if (ResourceType != null)
+                {
+                    hashCode = hashCode * 59 + ResourceType.GetHashCode();
+                }
+
+                if (ResourceID != null)
+                {
+                    hashCode = hashCode * 59 + ResourceID.GetHashCode();
+                }
+
+                if (ResourceTemplateMetaName != null)
+                {
+                    hashCode = hashCode * 59 + ResourceTemplateMetaName.GetHashCode();
+                }
+
+                if (ResourceName != null)
+                {
+                    hashCode = hashCode * 59 + ResourceName.GetHashCode();
+                }
+
+                if (LabelID != null)
+                {
+                    hashCode = hashCode * 59 + LabelID.GetHashCode();
+                }
+
+                if (LabelTemplateMetaName != null)
+                {
+                    hashCode = hashCode * 59 + LabelTemplateMetaName.GetHashCode();
+                }
+
+                if (LabelName != null)
+                {
+                    hashCode = hashCode * 59 + LabelName.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

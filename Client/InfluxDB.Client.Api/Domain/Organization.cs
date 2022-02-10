@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Organization
     /// </summary>
     [DataContract]
-    public partial class Organization :  IEquatable<Organization>
+    public partial class Organization : IEquatable<Organization>
     {
         /// <summary>
         /// If inactive the organization is inactive.
@@ -39,28 +39,29 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Active for value: active
             /// </summary>
-            [EnumMember(Value = "active")]
-            Active = 1,
+            [EnumMember(Value = "active")] Active = 1,
 
             /// <summary>
             /// Enum Inactive for value: inactive
             /// </summary>
-            [EnumMember(Value = "inactive")]
-            Inactive = 2
-
+            [EnumMember(Value = "inactive")] Inactive = 2
         }
 
         /// <summary>
         /// If inactive the organization is inactive.
         /// </summary>
         /// <value>If inactive the organization is inactive.</value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public StatusEnum? Status { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Organization" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Organization() { }
+        protected Organization()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Organization" /> class.
         /// </summary>
@@ -68,61 +69,63 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="name">name (required).</param>
         /// <param name="description">description.</param>
         /// <param name="status">If inactive the organization is inactive. (default to StatusEnum.Active).</param>
-        public Organization(OrganizationLinks links = default(OrganizationLinks), string name = default(string), string description = default(string), StatusEnum? status = StatusEnum.Active)
+        public Organization(OrganizationLinks links = default, string name = default, string description = default,
+            StatusEnum? status = StatusEnum.Active)
         {
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for Organization and cannot be null");
             }
-            this.Name = name;
-            this.Links = links;
-            this.Description = description;
+
+            Name = name;
+            Links = links;
+            Description = description;
             // use default value if no "status" provided
             if (status == null)
             {
-                this.Status = StatusEnum.Active;
+                Status = StatusEnum.Active;
             }
             else
             {
-                this.Status = status;
+                Status = status;
             }
         }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public OrganizationLinks Links { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public DateTime? CreatedAt { get; private set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public DateTime? UpdatedAt { get; private set; }
 
 
@@ -161,7 +164,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Organization);
+            return Equals(input as Organization);
         }
 
         /// <summary>
@@ -172,36 +175,35 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Organization input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
+                Links != null && Links.Equals(input.Links) &&
                 (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    CreatedAt == input.CreatedAt ||
+                    CreatedAt != null && CreatedAt.Equals(input.CreatedAt)
+                ) &&
                 (
-                    this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
+                    UpdatedAt == input.UpdatedAt ||
+                    UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)
+                ) &&
                 (
-                    this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
-                ) && 
-                (
-                    this.Status == input.Status ||
-                    this.Status.Equals(input.Status)
+                    Status == input.Status ||
+                    Status.Equals(input.Status)
                 );
         }
 
@@ -213,25 +215,41 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.CreatedAt != null)
-                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
-                if (this.UpdatedAt != null)
-                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
-                hashCode = hashCode * 59 + this.Status.GetHashCode();
+                var hashCode = 41;
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (CreatedAt != null)
+                {
+                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+                }
+
+                if (UpdatedAt != null)
+                {
+                    hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Status.GetHashCode();
                 return hashCode;
             }
         }
-
     }
-
 }

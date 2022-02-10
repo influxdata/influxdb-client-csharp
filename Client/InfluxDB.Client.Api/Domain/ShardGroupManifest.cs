@@ -27,13 +27,16 @@ namespace InfluxDB.Client.Api.Domain
     /// ShardGroupManifest
     /// </summary>
     [DataContract]
-    public partial class ShardGroupManifest :  IEquatable<ShardGroupManifest>
+    public partial class ShardGroupManifest : IEquatable<ShardGroupManifest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShardGroupManifest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ShardGroupManifest() { }
+        protected ShardGroupManifest()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ShardGroupManifest" /> class.
         /// </summary>
@@ -43,70 +46,78 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="deletedAt">deletedAt.</param>
         /// <param name="truncatedAt">truncatedAt.</param>
         /// <param name="shards">shards (required).</param>
-        public ShardGroupManifest(long? id = default(long?), DateTime? startTime = default(DateTime?), DateTime? endTime = default(DateTime?), DateTime? deletedAt = default(DateTime?), DateTime? truncatedAt = default(DateTime?), List<ShardManifest> shards = default(List<ShardManifest>))
+        public ShardGroupManifest(long? id = default, DateTime? startTime = default, DateTime? endTime = default,
+            DateTime? deletedAt = default, DateTime? truncatedAt = default, List<ShardManifest> shards = default)
         {
             // to ensure "id" is required (not null)
             if (id == null)
             {
                 throw new InvalidDataException("id is a required property for ShardGroupManifest and cannot be null");
             }
-            this.Id = id;
+
+            Id = id;
             // to ensure "startTime" is required (not null)
             if (startTime == null)
             {
-                throw new InvalidDataException("startTime is a required property for ShardGroupManifest and cannot be null");
+                throw new InvalidDataException(
+                    "startTime is a required property for ShardGroupManifest and cannot be null");
             }
-            this.StartTime = startTime;
+
+            StartTime = startTime;
             // to ensure "endTime" is required (not null)
             if (endTime == null)
             {
-                throw new InvalidDataException("endTime is a required property for ShardGroupManifest and cannot be null");
+                throw new InvalidDataException(
+                    "endTime is a required property for ShardGroupManifest and cannot be null");
             }
-            this.EndTime = endTime;
+
+            EndTime = endTime;
             // to ensure "shards" is required (not null)
             if (shards == null)
             {
-                throw new InvalidDataException("shards is a required property for ShardGroupManifest and cannot be null");
+                throw new InvalidDataException(
+                    "shards is a required property for ShardGroupManifest and cannot be null");
             }
-            this.Shards = shards;
-            this.DeletedAt = deletedAt;
-            this.TruncatedAt = truncatedAt;
+
+            Shards = shards;
+            DeletedAt = deletedAt;
+            TruncatedAt = truncatedAt;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public long? Id { get; set; }
 
         /// <summary>
         /// Gets or Sets StartTime
         /// </summary>
-        [DataMember(Name="startTime", EmitDefaultValue=false)]
+        [DataMember(Name = "startTime", EmitDefaultValue = false)]
         public DateTime? StartTime { get; set; }
 
         /// <summary>
         /// Gets or Sets EndTime
         /// </summary>
-        [DataMember(Name="endTime", EmitDefaultValue=false)]
+        [DataMember(Name = "endTime", EmitDefaultValue = false)]
         public DateTime? EndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets DeletedAt
         /// </summary>
-        [DataMember(Name="deletedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
         public DateTime? DeletedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets TruncatedAt
         /// </summary>
-        [DataMember(Name="truncatedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "truncatedAt", EmitDefaultValue = false)]
         public DateTime? TruncatedAt { get; set; }
 
         /// <summary>
         /// Gets or Sets Shards
         /// </summary>
-        [DataMember(Name="shards", EmitDefaultValue=false)]
+        [DataMember(Name = "shards", EmitDefaultValue = false)]
         public List<ShardManifest> Shards { get; set; }
 
         /// <summary>
@@ -143,7 +154,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ShardGroupManifest);
+            return Equals(input as ShardGroupManifest);
         }
 
         /// <summary>
@@ -154,33 +165,35 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ShardGroupManifest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.StartTime == input.StartTime ||
-                    (this.StartTime != null && this.StartTime.Equals(input.StartTime))
-                ) && 
+                    StartTime == input.StartTime ||
+                    StartTime != null && StartTime.Equals(input.StartTime)
+                ) &&
                 (
-                    this.EndTime == input.EndTime ||
-                    (this.EndTime != null && this.EndTime.Equals(input.EndTime))
-                ) && 
+                    EndTime == input.EndTime ||
+                    EndTime != null && EndTime.Equals(input.EndTime)
+                ) &&
                 (
-                    this.DeletedAt == input.DeletedAt ||
-                    (this.DeletedAt != null && this.DeletedAt.Equals(input.DeletedAt))
-                ) && 
+                    DeletedAt == input.DeletedAt ||
+                    DeletedAt != null && DeletedAt.Equals(input.DeletedAt)
+                ) &&
                 (
-                    this.TruncatedAt == input.TruncatedAt ||
-                    (this.TruncatedAt != null && this.TruncatedAt.Equals(input.TruncatedAt))
-                ) && 
+                    TruncatedAt == input.TruncatedAt ||
+                    TruncatedAt != null && TruncatedAt.Equals(input.TruncatedAt)
+                ) &&
                 (
-                    this.Shards == input.Shards ||
-                    this.Shards != null &&
-                    this.Shards.SequenceEqual(input.Shards)
+                    Shards == input.Shards ||
+                    Shards != null &&
+                    Shards.SequenceEqual(input.Shards)
                 );
         }
 
@@ -192,24 +205,40 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.StartTime != null)
-                    hashCode = hashCode * 59 + this.StartTime.GetHashCode();
-                if (this.EndTime != null)
-                    hashCode = hashCode * 59 + this.EndTime.GetHashCode();
-                if (this.DeletedAt != null)
-                    hashCode = hashCode * 59 + this.DeletedAt.GetHashCode();
-                if (this.TruncatedAt != null)
-                    hashCode = hashCode * 59 + this.TruncatedAt.GetHashCode();
-                if (this.Shards != null)
-                    hashCode = hashCode * 59 + this.Shards.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (StartTime != null)
+                {
+                    hashCode = hashCode * 59 + StartTime.GetHashCode();
+                }
+
+                if (EndTime != null)
+                {
+                    hashCode = hashCode * 59 + EndTime.GetHashCode();
+                }
+
+                if (DeletedAt != null)
+                {
+                    hashCode = hashCode * 59 + DeletedAt.GetHashCode();
+                }
+
+                if (TruncatedAt != null)
+                {
+                    hashCode = hashCode * 59 + TruncatedAt.GetHashCode();
+                }
+
+                if (Shards != null)
+                {
+                    hashCode = hashCode * 59 + Shards.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

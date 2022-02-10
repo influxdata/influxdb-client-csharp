@@ -25,6 +25,7 @@ namespace InfluxDB.Client.Api.Service
     public interface IReplicationsService : IApiAccessor
     {
         #region Synchronous Operations
+
         /// <summary>
         /// Delete a replication
         /// </summary>
@@ -35,7 +36,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void DeleteReplicationByID (string replicationID, string zapTraceSpan = null);
+        void DeleteReplicationByID(string replicationID, string zapTraceSpan = null);
 
         /// <summary>
         /// Delete a replication
@@ -47,7 +48,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteReplicationByIDWithHttpInfo (string replicationID, string zapTraceSpan = null);
+        ApiResponse<object> DeleteReplicationByIDWithHttpInfo(string replicationID, string zapTraceSpan = null);
+
         /// <summary>
         /// Retrieve a replication
         /// </summary>
@@ -58,7 +60,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Replication</returns>
-        Replication GetReplicationByID (string replicationID, string zapTraceSpan = null);
+        Replication GetReplicationByID(string replicationID, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve a replication
@@ -70,7 +72,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Replication</returns>
-        ApiResponse<Replication> GetReplicationByIDWithHttpInfo (string replicationID, string zapTraceSpan = null);
+        ApiResponse<Replication> GetReplicationByIDWithHttpInfo(string replicationID, string zapTraceSpan = null);
+
         /// <summary>
         /// List all replications
         /// </summary>
@@ -84,7 +87,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"> (optional)</param>
         /// <param name="localBucketID"> (optional)</param>
         /// <returns>Replications</returns>
-        Replications GetReplications (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null);
+        Replications GetReplications(string orgID, string zapTraceSpan = null, string name = null,
+            string remoteID = null, string localBucketID = null);
 
         /// <summary>
         /// List all replications
@@ -99,7 +103,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"> (optional)</param>
         /// <param name="localBucketID"> (optional)</param>
         /// <returns>ApiResponse of Replications</returns>
-        ApiResponse<Replications> GetReplicationsWithHttpInfo (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null);
+        ApiResponse<Replications> GetReplicationsWithHttpInfo(string orgID, string zapTraceSpan = null,
+            string name = null, string remoteID = null, string localBucketID = null);
+
         /// <summary>
         /// Update a replication
         /// </summary>
@@ -112,7 +118,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>Replication</returns>
-        Replication PatchReplicationByID (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null);
+        Replication PatchReplicationByID(string replicationID, ReplicationUpdateRequest replicationUpdateRequest,
+            string zapTraceSpan = null, bool? validate = null);
 
         /// <summary>
         /// Update a replication
@@ -126,7 +133,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>ApiResponse of Replication</returns>
-        ApiResponse<Replication> PatchReplicationByIDWithHttpInfo (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null);
+        ApiResponse<Replication> PatchReplicationByIDWithHttpInfo(string replicationID,
+            ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null);
+
         /// <summary>
         /// Register a new replication
         /// </summary>
@@ -138,7 +147,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>Replication</returns>
-        Replication PostReplication (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null);
+        Replication PostReplication(ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null,
+            bool? validate = null);
 
         /// <summary>
         /// Register a new replication
@@ -151,7 +161,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>ApiResponse of Replication</returns>
-        ApiResponse<Replication> PostReplicationWithHttpInfo (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null);
+        ApiResponse<Replication> PostReplicationWithHttpInfo(ReplicationCreationRequest replicationCreationRequest,
+            string zapTraceSpan = null, bool? validate = null);
+
         /// <summary>
         /// Validate a replication
         /// </summary>
@@ -162,7 +174,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        void PostValidateReplicationByID (string replicationID, string zapTraceSpan = null);
+        void PostValidateReplicationByID(string replicationID, string zapTraceSpan = null);
 
         /// <summary>
         /// Validate a replication
@@ -174,9 +186,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PostValidateReplicationByIDWithHttpInfo (string replicationID, string zapTraceSpan = null);
+        ApiResponse<object> PostValidateReplicationByIDWithHttpInfo(string replicationID, string zapTraceSpan = null);
+
         #endregion Synchronous Operations
+
         #region Asynchronous Operations
+
         /// <summary>
         /// Delete a replication
         /// </summary>
@@ -188,7 +203,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteReplicationByIDAsync (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task DeleteReplicationByIDAsync(string replicationID, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a replication
@@ -201,7 +217,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteReplicationByIDAsyncWithHttpInfo (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<object>> DeleteReplicationByIDAsyncWithHttpInfo(string replicationID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Retrieve a replication
         /// </summary>
@@ -213,7 +231,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Replication</returns>
-        System.Threading.Tasks.Task<Replication> GetReplicationByIDAsync (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Replication> GetReplicationByIDAsync(string replicationID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve a replication
@@ -226,7 +245,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Replication)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Replication>> GetReplicationByIDAsyncWithHttpInfo (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Replication>> GetReplicationByIDAsyncWithHttpInfo(string replicationID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// List all replications
         /// </summary>
@@ -241,7 +262,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="localBucketID"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Replications</returns>
-        System.Threading.Tasks.Task<Replications> GetReplicationsAsync (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Replications> GetReplicationsAsync(string orgID, string zapTraceSpan = null,
+            string name = null, string remoteID = null, string localBucketID = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List all replications
@@ -257,7 +280,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="localBucketID"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Replications)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Replications>> GetReplicationsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Replications>> GetReplicationsAsyncWithHttpInfo(string orgID,
+            string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Update a replication
         /// </summary>
@@ -271,7 +297,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Replication</returns>
-        System.Threading.Tasks.Task<Replication> PatchReplicationByIDAsync (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Replication> PatchReplicationByIDAsync(string replicationID,
+            ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a replication
@@ -286,7 +314,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Replication)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Replication>> PatchReplicationByIDAsyncWithHttpInfo (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Replication>> PatchReplicationByIDAsyncWithHttpInfo(
+            string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null,
+            bool? validate = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Register a new replication
         /// </summary>
@@ -299,7 +330,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Replication</returns>
-        System.Threading.Tasks.Task<Replication> PostReplicationAsync (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Replication> PostReplicationAsync(
+            ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Register a new replication
@@ -313,7 +346,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Replication)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Replication>> PostReplicationAsyncWithHttpInfo (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Replication>> PostReplicationAsyncWithHttpInfo(
+            ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Validate a replication
         /// </summary>
@@ -325,7 +361,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PostValidateReplicationByIDAsync (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task PostValidateReplicationByIDAsync(string replicationID, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate a replication
@@ -338,7 +375,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PostValidateReplicationByIDAsyncWithHttpInfo (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<object>> PostValidateReplicationByIDAsyncWithHttpInfo(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         #endregion Asynchronous Operations
     }
 
@@ -347,17 +386,17 @@ namespace InfluxDB.Client.Api.Service
     /// </summary>
     public partial class ReplicationsService : IReplicationsService
     {
-        private InfluxDB.Client.Api.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplicationsService"/> class.
         /// </summary>
         /// <returns></returns>
-        public ReplicationsService(String basePath)
+        public ReplicationsService(string basePath)
         {
-            this.Configuration = new InfluxDB.Client.Api.Client.Configuration { BasePath = basePath };
+            Configuration = new Configuration { BasePath = basePath };
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -366,31 +405,36 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public ReplicationsService(InfluxDB.Client.Api.Client.Configuration configuration = null)
+        public ReplicationsService(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = InfluxDB.Client.Api.Client.Configuration.Default;
+            {
+                Configuration = Configuration.Default;
+            }
             else
-                this.Configuration = configuration;
+            {
+                Configuration = configuration;
+            }
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(String basePath)
+        [Obsolete(
+            "SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(string basePath)
         {
             // do nothing
         }
@@ -399,12 +443,12 @@ namespace InfluxDB.Client.Api.Service
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public InfluxDB.Client.Api.Client.Configuration Configuration {get; set;}
+        public Configuration Configuration { get; set; }
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public InfluxDB.Client.Api.Client.ExceptionFactory ExceptionFactory
+        public ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -412,9 +456,10 @@ namespace InfluxDB.Client.Api.Service
                 {
                     throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
                 }
+
                 return _exceptionFactory;
             }
-            set { _exceptionFactory = value; }
+            set => _exceptionFactory = value;
         }
 
         /// <summary>
@@ -422,9 +467,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <returns>Dictionary of HTTP header</returns>
         [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public IDictionary<String, String> DefaultHeader()
+        public IDictionary<string, string> DefaultHeader()
         {
-            return new ReadOnlyDictionary<string, string>(this.Configuration.DefaultHeader);
+            return new ReadOnlyDictionary<string, string>(Configuration.DefaultHeader);
         }
 
         /// <summary>
@@ -436,7 +481,7 @@ namespace InfluxDB.Client.Api.Service
         [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
         public void AddDefaultHeader(string key, string value)
         {
-            this.Configuration.AddDefaultHeader(key, value);
+            Configuration.AddDefaultHeader(key, value);
         }
 
         /// <summary>
@@ -446,9 +491,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void DeleteReplicationByID (string replicationID, string zapTraceSpan = null)
+        public void DeleteReplicationByID(string replicationID, string zapTraceSpan = null)
         {
-             DeleteReplicationByIDWithHttpInfo(replicationID, zapTraceSpan);
+            DeleteReplicationByIDWithHttpInfo(replicationID, zapTraceSpan);
         }
 
         /// <summary>
@@ -458,52 +503,72 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteReplicationByIDWithHttpInfo (string replicationID, string zapTraceSpan = null)
+        public ApiResponse<object> DeleteReplicationByIDWithHttpInfo(string replicationID, string zapTraceSpan = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
@@ -516,49 +581,70 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteReplicationByIDWithIRestResponseAsync (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteReplicationByIDWithIRestResponseAsync(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -571,54 +657,74 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestResponse DeleteReplicationByIDWithIRestResponse (string replicationID, string zapTraceSpan = null)
+        public RestResponse DeleteReplicationByIDWithIRestResponse(string replicationID, string zapTraceSpan = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Delete a replication 
         /// </summary>
@@ -626,40 +732,57 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest DeleteReplicationByIDWithRestRequest (string replicationID, string zapTraceSpan = null)
+        public RestRequest DeleteReplicationByIDWithRestRequest(string replicationID, string zapTraceSpan = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -671,10 +794,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task DeleteReplicationByIDAsync (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task DeleteReplicationByIDAsync(string replicationID, string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             return DeleteReplicationByIDAsyncWithHttpInfo(replicationID, zapTraceSpan, cancellationToken);
-
+            return DeleteReplicationByIDAsyncWithHttpInfo(replicationID, zapTraceSpan, cancellationToken);
         }
 
         /// <summary>
@@ -685,24 +808,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteReplicationByIDAsyncWithHttpInfo (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> DeleteReplicationByIDAsyncWithHttpInfo(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await DeleteReplicationByIDAsyncWithIRestResponse(replicationID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await DeleteReplicationByIDAsyncWithIRestResponse(replicationID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
-            
+
         /// <summary>
         /// Delete a replication 
         /// </summary>
@@ -711,47 +840,68 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> DeleteReplicationByIDAsyncWithIRestResponse (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> DeleteReplicationByIDAsyncWithIRestResponse(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->DeleteReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("DeleteReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -764,10 +914,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>Replication</returns>
-        public Replication GetReplicationByID (string replicationID, string zapTraceSpan = null)
+        public Replication GetReplicationByID(string replicationID, string zapTraceSpan = null)
         {
-             ApiResponse<Replication> localVarResponse = GetReplicationByIDWithHttpInfo(replicationID, zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse = GetReplicationByIDWithHttpInfo(replicationID, zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -777,54 +927,74 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Replication</returns>
-        public ApiResponse< Replication > GetReplicationByIDWithHttpInfo (string replicationID, string zapTraceSpan = null)
+        public ApiResponse<Replication> GetReplicationByIDWithHttpInfo(string replicationID, string zapTraceSpan = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Replication>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Replication) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
+                (Replication)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
         }
 
         /// <summary>
@@ -835,49 +1005,70 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Replication</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetReplicationByIDWithIRestResponseAsync (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetReplicationByIDWithIRestResponseAsync(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -890,54 +1081,74 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Replication</returns>
-        public RestResponse GetReplicationByIDWithIRestResponse (string replicationID, string zapTraceSpan = null)
+        public RestResponse GetReplicationByIDWithIRestResponse(string replicationID, string zapTraceSpan = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Retrieve a replication 
         /// </summary>
@@ -945,40 +1156,57 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Replication</returns>
-        public RestRequest GetReplicationByIDWithRestRequest (string replicationID, string zapTraceSpan = null)
+        public RestRequest GetReplicationByIDWithRestRequest(string replicationID, string zapTraceSpan = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -990,11 +1218,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Replication</returns>
-        public async System.Threading.Tasks.Task<Replication> GetReplicationByIDAsync (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Replication> GetReplicationByIDAsync(string replicationID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<Replication> localVarResponse = await GetReplicationByIDAsyncWithHttpInfo(replicationID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetReplicationByIDAsyncWithHttpInfo(replicationID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1005,24 +1235,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Replication)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Replication>> GetReplicationByIDAsyncWithHttpInfo (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Replication>> GetReplicationByIDAsyncWithHttpInfo(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetReplicationByIDAsyncWithIRestResponse(replicationID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetReplicationByIDAsyncWithIRestResponse(replicationID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Replication>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Replication) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
+                (Replication)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
         }
-            
+
         /// <summary>
         /// Retrieve a replication 
         /// </summary>
@@ -1031,47 +1267,68 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Replication)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetReplicationByIDAsyncWithIRestResponse (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetReplicationByIDAsyncWithIRestResponse(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->GetReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1087,10 +1344,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"> (optional)</param>
         /// <param name="localBucketID"> (optional)</param>
         /// <returns>Replications</returns>
-        public Replications GetReplications (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null)
+        public Replications GetReplications(string orgID, string zapTraceSpan = null, string name = null,
+            string remoteID = null, string localBucketID = null)
         {
-             ApiResponse<Replications> localVarResponse = GetReplicationsWithHttpInfo(orgID, zapTraceSpan, name, remoteID, localBucketID);
-             return localVarResponse.Data;
+            var localVarResponse = GetReplicationsWithHttpInfo(orgID, zapTraceSpan, name, remoteID, localBucketID);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1103,57 +1361,94 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"> (optional)</param>
         /// <param name="localBucketID"> (optional)</param>
         /// <returns>ApiResponse of Replications</returns>
-        public ApiResponse< Replications > GetReplicationsWithHttpInfo (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null)
+        public ApiResponse<Replications> GetReplicationsWithHttpInfo(string orgID, string zapTraceSpan = null,
+            string name = null, string remoteID = null, string localBucketID = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
-            if (localBucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID", localBucketID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
+            }
+
+            if (localBucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID",
+                        localBucketID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplications", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplications", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Replications>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Replications) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replications)));
+                (Replications)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replications)));
         }
 
         /// <summary>
@@ -1167,52 +1462,90 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="localBucketID"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Replications</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetReplicationsWithIRestResponseAsync (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetReplicationsWithIRestResponseAsync(string orgID,
+            string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
-            if (localBucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID", localBucketID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
+            }
+
+            if (localBucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID",
+                        localBucketID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplications", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplications", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1228,57 +1561,94 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"> (optional)</param>
         /// <param name="localBucketID"> (optional)</param>
         /// <returns>ApiResponse of Replications</returns>
-        public RestResponse GetReplicationsWithIRestResponse (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null)
+        public RestResponse GetReplicationsWithIRestResponse(string orgID, string zapTraceSpan = null,
+            string name = null, string remoteID = null, string localBucketID = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
-            if (localBucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID", localBucketID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
+            }
+
+            if (localBucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID",
+                        localBucketID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplications", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplications", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// List all replications 
         /// </summary>
@@ -1289,43 +1659,77 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="remoteID"> (optional)</param>
         /// <param name="localBucketID"> (optional)</param>
         /// <returns>ApiResponse of Replications</returns>
-        public RestRequest GetReplicationsWithRestRequest (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null)
+        public RestRequest GetReplicationsWithRestRequest(string orgID, string zapTraceSpan = null, string name = null,
+            string remoteID = null, string localBucketID = null)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
-            if (localBucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID", localBucketID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
+            }
+
+            if (localBucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID",
+                        localBucketID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1340,11 +1744,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="localBucketID"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Replications</returns>
-        public async System.Threading.Tasks.Task<Replications> GetReplicationsAsync (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Replications> GetReplicationsAsync(string orgID,
+            string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<Replications> localVarResponse = await GetReplicationsAsyncWithHttpInfo(orgID, zapTraceSpan, name, remoteID, localBucketID, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await GetReplicationsAsyncWithHttpInfo(orgID, zapTraceSpan, name, remoteID, localBucketID,
+                    cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1358,24 +1765,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="localBucketID"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Replications)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Replications>> GetReplicationsAsyncWithHttpInfo (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Replications>> GetReplicationsAsyncWithHttpInfo(
+            string orgID, string zapTraceSpan = null, string name = null, string remoteID = null,
+            string localBucketID = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetReplicationsAsyncWithIRestResponse(orgID, zapTraceSpan, name, remoteID, localBucketID, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetReplicationsAsyncWithIRestResponse(orgID, zapTraceSpan, name, remoteID, localBucketID,
+                    cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplications", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplications", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Replications>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Replications) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replications)));
+                (Replications)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replications)));
         }
-            
+
         /// <summary>
         /// List all replications 
         /// </summary>
@@ -1387,50 +1801,88 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="localBucketID"> (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Replications)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetReplicationsAsyncWithIRestResponse (string orgID, string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetReplicationsAsyncWithIRestResponse(string orgID,
+            string zapTraceSpan = null, string name = null, string remoteID = null, string localBucketID = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'orgID' is set
             if (orgID == null)
-                throw new ApiException(400, "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'orgID' when calling ReplicationsService->GetReplications");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (name != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
-            if (remoteID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
-            if (localBucketID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID", localBucketID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (name != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "name", name)); // query parameter
+            }
+
+            if (remoteID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "remoteID", remoteID)); // query parameter
+            }
+
+            if (localBucketID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "localBucketID",
+                        localBucketID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReplications", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetReplications", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1445,10 +1897,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>Replication</returns>
-        public Replication PatchReplicationByID (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null)
+        public Replication PatchReplicationByID(string replicationID, ReplicationUpdateRequest replicationUpdateRequest,
+            string zapTraceSpan = null, bool? validate = null)
         {
-             ApiResponse<Replication> localVarResponse = PatchReplicationByIDWithHttpInfo(replicationID, replicationUpdateRequest, zapTraceSpan, validate);
-             return localVarResponse.Data;
+            var localVarResponse =
+                PatchReplicationByIDWithHttpInfo(replicationID, replicationUpdateRequest, zapTraceSpan, validate);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1460,35 +1914,60 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>ApiResponse of Replication</returns>
-        public ApiResponse< Replication > PatchReplicationByIDWithHttpInfo (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null)
+        public ApiResponse<Replication> PatchReplicationByIDWithHttpInfo(string replicationID,
+            ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            }
+
             // verify the required parameter 'replicationUpdateRequest' is set
             if (replicationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationUpdateRequest != null && replicationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1496,31 +1975,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Replication>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Replication) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
+                (Replication)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
         }
 
         /// <summary>
@@ -1533,35 +2019,61 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Replication</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PatchReplicationByIDWithIRestResponseAsync (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PatchReplicationByIDWithIRestResponseAsync(
+            string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null,
+            bool? validate = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            }
+
             // verify the required parameter 'replicationUpdateRequest' is set
             if (replicationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationUpdateRequest != null && replicationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1569,26 +2081,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1603,35 +2122,60 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>ApiResponse of Replication</returns>
-        public RestResponse PatchReplicationByIDWithIRestResponse (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null)
+        public RestResponse PatchReplicationByIDWithIRestResponse(string replicationID,
+            ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            }
+
             // verify the required parameter 'replicationUpdateRequest' is set
             if (replicationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationUpdateRequest != null && replicationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1639,31 +2183,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Update a replication 
         /// </summary>
@@ -1673,35 +2224,60 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>ApiResponse of Replication</returns>
-        public RestRequest PatchReplicationByIDWithRestRequest (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null)
+        public RestRequest PatchReplicationByIDWithRestRequest(string replicationID,
+            ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            }
+
             // verify the required parameter 'replicationUpdateRequest' is set
             if (replicationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationUpdateRequest != null && replicationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1709,17 +2285,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1733,11 +2313,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Replication</returns>
-        public async System.Threading.Tasks.Task<Replication> PatchReplicationByIDAsync (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Replication> PatchReplicationByIDAsync(string replicationID,
+            ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<Replication> localVarResponse = await PatchReplicationByIDAsyncWithHttpInfo(replicationID, replicationUpdateRequest, zapTraceSpan, validate, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse = await PatchReplicationByIDAsyncWithHttpInfo(replicationID, replicationUpdateRequest,
+                zapTraceSpan, validate, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1750,24 +2332,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Replication)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Replication>> PatchReplicationByIDAsyncWithHttpInfo (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Replication>> PatchReplicationByIDAsyncWithHttpInfo(
+            string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null,
+            bool? validate = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PatchReplicationByIDAsyncWithIRestResponse(replicationID, replicationUpdateRequest, zapTraceSpan, validate, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await PatchReplicationByIDAsyncWithIRestResponse(replicationID,
+                replicationUpdateRequest, zapTraceSpan, validate, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Replication>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Replication) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
+                (Replication)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
         }
-            
+
         /// <summary>
         /// Update a replication 
         /// </summary>
@@ -1778,35 +2366,61 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the updated information, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Replication)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PatchReplicationByIDAsyncWithIRestResponse (string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PatchReplicationByIDAsyncWithIRestResponse(
+            string replicationID, ReplicationUpdateRequest replicationUpdateRequest, string zapTraceSpan = null,
+            bool? validate = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PatchReplicationByID");
+            }
+
             // verify the required parameter 'replicationUpdateRequest' is set
             if (replicationUpdateRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationUpdateRequest' when calling ReplicationsService->PatchReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationUpdateRequest != null && replicationUpdateRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationUpdateRequest); // http body (model) parameter
             }
             else
             {
@@ -1814,24 +2428,31 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PatchReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1845,10 +2466,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>Replication</returns>
-        public Replication PostReplication (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null)
+        public Replication PostReplication(ReplicationCreationRequest replicationCreationRequest,
+            string zapTraceSpan = null, bool? validate = null)
         {
-             ApiResponse<Replication> localVarResponse = PostReplicationWithHttpInfo(replicationCreationRequest, zapTraceSpan, validate);
-             return localVarResponse.Data;
+            var localVarResponse = PostReplicationWithHttpInfo(replicationCreationRequest, zapTraceSpan, validate);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1859,31 +2481,47 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>ApiResponse of Replication</returns>
-        public ApiResponse< Replication > PostReplicationWithHttpInfo (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null)
+        public ApiResponse<Replication> PostReplicationWithHttpInfo(
+            ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null)
         {
             // verify the required parameter 'replicationCreationRequest' is set
             if (replicationCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationCreationRequest != null && replicationCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -1891,31 +2529,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostReplication", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostReplication", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Replication>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Replication) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
+                (Replication)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
         }
 
         /// <summary>
@@ -1927,31 +2572,48 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Replication</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostReplicationWithIRestResponseAsync (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostReplicationWithIRestResponseAsync(
+            ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationCreationRequest' is set
             if (replicationCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationCreationRequest != null && replicationCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -1959,26 +2621,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostReplication", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostReplication", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1992,31 +2661,47 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>ApiResponse of Replication</returns>
-        public RestResponse PostReplicationWithIRestResponse (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null)
+        public RestResponse PostReplicationWithIRestResponse(ReplicationCreationRequest replicationCreationRequest,
+            string zapTraceSpan = null, bool? validate = null)
         {
             // verify the required parameter 'replicationCreationRequest' is set
             if (replicationCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationCreationRequest != null && replicationCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -2024,31 +2709,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostReplication", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostReplication", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Register a new replication 
         /// </summary>
@@ -2057,31 +2749,47 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <returns>ApiResponse of Replication</returns>
-        public RestRequest PostReplicationWithRestRequest (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null)
+        public RestRequest PostReplicationWithRestRequest(ReplicationCreationRequest replicationCreationRequest,
+            string zapTraceSpan = null, bool? validate = null)
         {
             // verify the required parameter 'replicationCreationRequest' is set
             if (replicationCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationCreationRequest != null && replicationCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -2089,17 +2797,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2112,11 +2824,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of Replication</returns>
-        public async System.Threading.Tasks.Task<Replication> PostReplicationAsync (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Replication> PostReplicationAsync(
+            ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<Replication> localVarResponse = await PostReplicationAsyncWithHttpInfo(replicationCreationRequest, zapTraceSpan, validate, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await PostReplicationAsyncWithHttpInfo(replicationCreationRequest, zapTraceSpan, validate,
+                    cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2128,24 +2843,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (Replication)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Replication>> PostReplicationAsyncWithHttpInfo (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<Replication>> PostReplicationAsyncWithHttpInfo(
+            ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostReplicationAsyncWithIRestResponse(replicationCreationRequest, zapTraceSpan, validate, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PostReplicationAsyncWithIRestResponse(replicationCreationRequest, zapTraceSpan, validate,
+                    cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostReplication", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostReplication", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<Replication>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Replication) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
+                (Replication)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Replication)));
         }
-            
+
         /// <summary>
         /// Register a new replication 
         /// </summary>
@@ -2155,31 +2877,48 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="validate">If true, validate the replication, but don&#39;t save it. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (Replication)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostReplicationAsyncWithIRestResponse (ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostReplicationAsyncWithIRestResponse(
+            ReplicationCreationRequest replicationCreationRequest, string zapTraceSpan = null, bool? validate = null,
+            CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationCreationRequest' is set
             if (replicationCreationRequest == null)
-                throw new ApiException(400, "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationCreationRequest' when calling ReplicationsService->PostReplication");
+            }
 
             var localVarPath = "/api/v2/replications";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (validate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (validate != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "validate", validate)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
             if (replicationCreationRequest != null && replicationCreationRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
+                localVarPostBody =
+                    Configuration.ApiClient.Serialize(replicationCreationRequest); // http body (model) parameter
             }
             else
             {
@@ -2187,24 +2926,31 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostReplication", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostReplication", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2217,9 +2963,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns></returns>
-        public void PostValidateReplicationByID (string replicationID, string zapTraceSpan = null)
+        public void PostValidateReplicationByID(string replicationID, string zapTraceSpan = null)
         {
-             PostValidateReplicationByIDWithHttpInfo(replicationID, zapTraceSpan);
+            PostValidateReplicationByIDWithHttpInfo(replicationID, zapTraceSpan);
         }
 
         /// <summary>
@@ -2229,52 +2975,73 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> PostValidateReplicationByIDWithHttpInfo (string replicationID, string zapTraceSpan = null)
+        public ApiResponse<object> PostValidateReplicationByIDWithHttpInfo(string replicationID,
+            string zapTraceSpan = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}/validate";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
@@ -2287,49 +3054,70 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostValidateReplicationByIDWithIRestResponseAsync (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostValidateReplicationByIDWithIRestResponseAsync(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}/validate";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -2342,54 +3130,75 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestResponse PostValidateReplicationByIDWithIRestResponse (string replicationID, string zapTraceSpan = null)
+        public RestResponse PostValidateReplicationByIDWithIRestResponse(string replicationID,
+            string zapTraceSpan = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}/validate";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Validate a replication 
         /// </summary>
@@ -2397,40 +3206,57 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="replicationID"></param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public RestRequest PostValidateReplicationByIDWithRestRequest (string replicationID, string zapTraceSpan = null)
+        public RestRequest PostValidateReplicationByIDWithRestRequest(string replicationID, string zapTraceSpan = null)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}/validate";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2442,10 +3268,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of void</returns>
-        public System.Threading.Tasks.Task PostValidateReplicationByIDAsync (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public System.Threading.Tasks.Task PostValidateReplicationByIDAsync(string replicationID,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             return PostValidateReplicationByIDAsyncWithHttpInfo(replicationID, zapTraceSpan, cancellationToken);
-
+            return PostValidateReplicationByIDAsyncWithHttpInfo(replicationID, zapTraceSpan, cancellationToken);
         }
 
         /// <summary>
@@ -2456,24 +3282,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostValidateReplicationByIDAsyncWithHttpInfo (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> PostValidateReplicationByIDAsyncWithHttpInfo(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostValidateReplicationByIDAsyncWithIRestResponse(replicationID, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PostValidateReplicationByIDAsyncWithIRestResponse(replicationID, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
-            return new ApiResponse<Object>(localVarStatusCode,
+            return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
         }
-            
+
         /// <summary>
         /// Validate a replication 
         /// </summary>
@@ -2482,51 +3314,71 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostValidateReplicationByIDAsyncWithIRestResponse (string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostValidateReplicationByIDAsyncWithIRestResponse(
+            string replicationID, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'replicationID' is set
             if (replicationID == null)
-                throw new ApiException(400, "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'replicationID' when calling ReplicationsService->PostValidateReplicationByID");
+            }
 
             var localVarPath = "/api/v2/replications/{replicationID}/validate";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (replicationID != null) localVarPathParams.Add("replicationID", this.Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (replicationID != null)
+            {
+                localVarPathParams.Add("replicationID",
+                    Configuration.ApiClient.ParameterToString(replicationID)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostValidateReplicationByID", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-
     }
 }

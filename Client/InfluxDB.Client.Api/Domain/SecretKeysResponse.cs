@@ -27,21 +27,22 @@ namespace InfluxDB.Client.Api.Domain
     /// SecretKeysResponse
     /// </summary>
     [DataContract]
-    public partial class SecretKeysResponse : SecretKeys,  IEquatable<SecretKeysResponse>
+    public partial class SecretKeysResponse : SecretKeys, IEquatable<SecretKeysResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SecretKeysResponse" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        public SecretKeysResponse(SecretKeysResponseLinks links = default(SecretKeysResponseLinks), List<string> secrets = default(List<string>)) : base(secrets)
+        public SecretKeysResponse(SecretKeysResponseLinks links = default, List<string> secrets = default) :
+            base(secrets)
         {
-            this.Links = links;
+            Links = links;
         }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public SecretKeysResponseLinks Links { get; set; }
 
         /// <summary>
@@ -74,7 +75,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SecretKeysResponse);
+            return Equals(input as SecretKeysResponse);
         }
 
         /// <summary>
@@ -85,13 +86,11 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(SecretKeysResponse input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+            return base.Equals(input) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -102,14 +101,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

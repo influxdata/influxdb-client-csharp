@@ -23,7 +23,7 @@ namespace Client.Legacy.Test
         {
             FluxClient = FluxClientFactory.Create(MockServerUrl);
         }
-        
+
         [TearDown]
         protected void After()
         {

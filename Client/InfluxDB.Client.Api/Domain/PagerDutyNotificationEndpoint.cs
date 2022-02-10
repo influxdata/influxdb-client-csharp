@@ -27,39 +27,49 @@ namespace InfluxDB.Client.Api.Domain
     /// PagerDutyNotificationEndpoint
     /// </summary>
     [DataContract]
-    public partial class PagerDutyNotificationEndpoint : NotificationEndpoint,  IEquatable<PagerDutyNotificationEndpoint>
+    public partial class PagerDutyNotificationEndpoint : NotificationEndpoint, IEquatable<PagerDutyNotificationEndpoint>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PagerDutyNotificationEndpoint" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PagerDutyNotificationEndpoint() { }
+        protected PagerDutyNotificationEndpoint()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PagerDutyNotificationEndpoint" /> class.
         /// </summary>
         /// <param name="clientURL">clientURL.</param>
         /// <param name="routingKey">routingKey (required).</param>
-        public PagerDutyNotificationEndpoint(string clientURL = default(string), string routingKey = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = NotificationEndpointType.Pagerduty) : base(id, orgID, userID, description, name, status, labels, links, type)
+        public PagerDutyNotificationEndpoint(string clientURL = default, string routingKey = default,
+            string id = default, string orgID = default, string userID = default, string description = default,
+            string name = default, StatusEnum? status = StatusEnum.Active, List<Label> labels = default,
+            NotificationEndpointBaseLinks links = default,
+            NotificationEndpointType type = NotificationEndpointType.Pagerduty) : base(id, orgID, userID, description,
+            name, status, labels, links, type)
         {
             // to ensure "routingKey" is required (not null)
             if (routingKey == null)
             {
-                throw new InvalidDataException("routingKey is a required property for PagerDutyNotificationEndpoint and cannot be null");
+                throw new InvalidDataException(
+                    "routingKey is a required property for PagerDutyNotificationEndpoint and cannot be null");
             }
-            this.RoutingKey = routingKey;
-            this.ClientURL = clientURL;
+
+            RoutingKey = routingKey;
+            ClientURL = clientURL;
         }
 
         /// <summary>
         /// Gets or Sets ClientURL
         /// </summary>
-        [DataMember(Name="clientURL", EmitDefaultValue=false)]
+        [DataMember(Name = "clientURL", EmitDefaultValue = false)]
         public string ClientURL { get; set; }
 
         /// <summary>
         /// Gets or Sets RoutingKey
         /// </summary>
-        [DataMember(Name="routingKey", EmitDefaultValue=false)]
+        [DataMember(Name = "routingKey", EmitDefaultValue = false)]
         public string RoutingKey { get; set; }
 
         /// <summary>
@@ -93,7 +103,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PagerDutyNotificationEndpoint);
+            return Equals(input as PagerDutyNotificationEndpoint);
         }
 
         /// <summary>
@@ -104,17 +114,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PagerDutyNotificationEndpoint input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.ClientURL == input.ClientURL ||
-                    (this.ClientURL != null && this.ClientURL.Equals(input.ClientURL))
-                ) && base.Equals(input) && 
-                (
-                    this.RoutingKey == input.RoutingKey ||
-                    (this.RoutingKey != null && this.RoutingKey.Equals(input.RoutingKey))
-                );
+            return base.Equals(input) &&
+                   (
+                       ClientURL == input.ClientURL ||
+                       ClientURL != null && ClientURL.Equals(input.ClientURL)
+                   ) && base.Equals(input) &&
+                   (
+                       RoutingKey == input.RoutingKey ||
+                       RoutingKey != null && RoutingKey.Equals(input.RoutingKey)
+                   );
         }
 
         /// <summary>
@@ -125,16 +137,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.ClientURL != null)
-                    hashCode = hashCode * 59 + this.ClientURL.GetHashCode();
-                if (this.RoutingKey != null)
-                    hashCode = hashCode * 59 + this.RoutingKey.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (ClientURL != null)
+                {
+                    hashCode = hashCode * 59 + ClientURL.GetHashCode();
+                }
+
+                if (RoutingKey != null)
+                {
+                    hashCode = hashCode * 59 + RoutingKey.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryDiff
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryDiff :  IEquatable<TemplateSummaryDiff>
+    public partial class TemplateSummaryDiff : IEquatable<TemplateSummaryDiff>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryDiff" /> class.
@@ -42,78 +42,86 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="tasks">tasks.</param>
         /// <param name="telegrafConfigs">telegrafConfigs.</param>
         /// <param name="variables">variables.</param>
-        public TemplateSummaryDiff(List<TemplateSummaryDiffBuckets> buckets = default(List<TemplateSummaryDiffBuckets>), List<TemplateSummaryDiffChecks> checks = default(List<TemplateSummaryDiffChecks>), List<TemplateSummaryDiffDashboards> dashboards = default(List<TemplateSummaryDiffDashboards>), List<TemplateSummaryDiffLabels> labels = default(List<TemplateSummaryDiffLabels>), List<TemplateSummaryDiffLabelMappings> labelMappings = default(List<TemplateSummaryDiffLabelMappings>), List<TemplateSummaryDiffNotificationEndpoints> notificationEndpoints = default(List<TemplateSummaryDiffNotificationEndpoints>), List<TemplateSummaryDiffNotificationRules> notificationRules = default(List<TemplateSummaryDiffNotificationRules>), List<TemplateSummaryDiffTasks> tasks = default(List<TemplateSummaryDiffTasks>), List<TemplateSummaryDiffTelegrafConfigs> telegrafConfigs = default(List<TemplateSummaryDiffTelegrafConfigs>), List<TemplateSummaryDiffVariables> variables = default(List<TemplateSummaryDiffVariables>))
+        public TemplateSummaryDiff(List<TemplateSummaryDiffBuckets> buckets = default,
+            List<TemplateSummaryDiffChecks> checks = default, List<TemplateSummaryDiffDashboards> dashboards = default,
+            List<TemplateSummaryDiffLabels> labels = default,
+            List<TemplateSummaryDiffLabelMappings> labelMappings = default,
+            List<TemplateSummaryDiffNotificationEndpoints> notificationEndpoints = default,
+            List<TemplateSummaryDiffNotificationRules> notificationRules = default,
+            List<TemplateSummaryDiffTasks> tasks = default,
+            List<TemplateSummaryDiffTelegrafConfigs> telegrafConfigs = default,
+            List<TemplateSummaryDiffVariables> variables = default)
         {
-            this.Buckets = buckets;
-            this.Checks = checks;
-            this.Dashboards = dashboards;
-            this.Labels = labels;
-            this.LabelMappings = labelMappings;
-            this.NotificationEndpoints = notificationEndpoints;
-            this.NotificationRules = notificationRules;
-            this.Tasks = tasks;
-            this.TelegrafConfigs = telegrafConfigs;
-            this.Variables = variables;
+            Buckets = buckets;
+            Checks = checks;
+            Dashboards = dashboards;
+            Labels = labels;
+            LabelMappings = labelMappings;
+            NotificationEndpoints = notificationEndpoints;
+            NotificationRules = notificationRules;
+            Tasks = tasks;
+            TelegrafConfigs = telegrafConfigs;
+            Variables = variables;
         }
 
         /// <summary>
         /// Gets or Sets Buckets
         /// </summary>
-        [DataMember(Name="buckets", EmitDefaultValue=false)]
+        [DataMember(Name = "buckets", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffBuckets> Buckets { get; set; }
 
         /// <summary>
         /// Gets or Sets Checks
         /// </summary>
-        [DataMember(Name="checks", EmitDefaultValue=false)]
+        [DataMember(Name = "checks", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffChecks> Checks { get; set; }
 
         /// <summary>
         /// Gets or Sets Dashboards
         /// </summary>
-        [DataMember(Name="dashboards", EmitDefaultValue=false)]
+        [DataMember(Name = "dashboards", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffDashboards> Dashboards { get; set; }
 
         /// <summary>
         /// Gets or Sets Labels
         /// </summary>
-        [DataMember(Name="labels", EmitDefaultValue=false)]
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffLabels> Labels { get; set; }
 
         /// <summary>
         /// Gets or Sets LabelMappings
         /// </summary>
-        [DataMember(Name="labelMappings", EmitDefaultValue=false)]
+        [DataMember(Name = "labelMappings", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffLabelMappings> LabelMappings { get; set; }
 
         /// <summary>
         /// Gets or Sets NotificationEndpoints
         /// </summary>
-        [DataMember(Name="notificationEndpoints", EmitDefaultValue=false)]
+        [DataMember(Name = "notificationEndpoints", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffNotificationEndpoints> NotificationEndpoints { get; set; }
 
         /// <summary>
         /// Gets or Sets NotificationRules
         /// </summary>
-        [DataMember(Name="notificationRules", EmitDefaultValue=false)]
+        [DataMember(Name = "notificationRules", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffNotificationRules> NotificationRules { get; set; }
 
         /// <summary>
         /// Gets or Sets Tasks
         /// </summary>
-        [DataMember(Name="tasks", EmitDefaultValue=false)]
+        [DataMember(Name = "tasks", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffTasks> Tasks { get; set; }
 
         /// <summary>
         /// Gets or Sets TelegrafConfigs
         /// </summary>
-        [DataMember(Name="telegrafConfigs", EmitDefaultValue=false)]
+        [DataMember(Name = "telegrafConfigs", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffTelegrafConfigs> TelegrafConfigs { get; set; }
 
         /// <summary>
         /// Gets or Sets Variables
         /// </summary>
-        [DataMember(Name="variables", EmitDefaultValue=false)]
+        [DataMember(Name = "variables", EmitDefaultValue = false)]
         public List<TemplateSummaryDiffVariables> Variables { get; set; }
 
         /// <summary>
@@ -154,7 +162,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryDiff);
+            return Equals(input as TemplateSummaryDiff);
         }
 
         /// <summary>
@@ -165,58 +173,60 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryDiff input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Buckets == input.Buckets ||
-                    this.Buckets != null &&
-                    this.Buckets.SequenceEqual(input.Buckets)
-                ) && 
+                    Buckets == input.Buckets ||
+                    Buckets != null &&
+                    Buckets.SequenceEqual(input.Buckets)
+                ) &&
                 (
-                    this.Checks == input.Checks ||
-                    this.Checks != null &&
-                    this.Checks.SequenceEqual(input.Checks)
-                ) && 
+                    Checks == input.Checks ||
+                    Checks != null &&
+                    Checks.SequenceEqual(input.Checks)
+                ) &&
                 (
-                    this.Dashboards == input.Dashboards ||
-                    this.Dashboards != null &&
-                    this.Dashboards.SequenceEqual(input.Dashboards)
-                ) && 
+                    Dashboards == input.Dashboards ||
+                    Dashboards != null &&
+                    Dashboards.SequenceEqual(input.Dashboards)
+                ) &&
                 (
-                    this.Labels == input.Labels ||
-                    this.Labels != null &&
-                    this.Labels.SequenceEqual(input.Labels)
-                ) && 
+                    Labels == input.Labels ||
+                    Labels != null &&
+                    Labels.SequenceEqual(input.Labels)
+                ) &&
                 (
-                    this.LabelMappings == input.LabelMappings ||
-                    this.LabelMappings != null &&
-                    this.LabelMappings.SequenceEqual(input.LabelMappings)
-                ) && 
+                    LabelMappings == input.LabelMappings ||
+                    LabelMappings != null &&
+                    LabelMappings.SequenceEqual(input.LabelMappings)
+                ) &&
                 (
-                    this.NotificationEndpoints == input.NotificationEndpoints ||
-                    this.NotificationEndpoints != null &&
-                    this.NotificationEndpoints.SequenceEqual(input.NotificationEndpoints)
-                ) && 
+                    NotificationEndpoints == input.NotificationEndpoints ||
+                    NotificationEndpoints != null &&
+                    NotificationEndpoints.SequenceEqual(input.NotificationEndpoints)
+                ) &&
                 (
-                    this.NotificationRules == input.NotificationRules ||
-                    this.NotificationRules != null &&
-                    this.NotificationRules.SequenceEqual(input.NotificationRules)
-                ) && 
+                    NotificationRules == input.NotificationRules ||
+                    NotificationRules != null &&
+                    NotificationRules.SequenceEqual(input.NotificationRules)
+                ) &&
                 (
-                    this.Tasks == input.Tasks ||
-                    this.Tasks != null &&
-                    this.Tasks.SequenceEqual(input.Tasks)
-                ) && 
+                    Tasks == input.Tasks ||
+                    Tasks != null &&
+                    Tasks.SequenceEqual(input.Tasks)
+                ) &&
                 (
-                    this.TelegrafConfigs == input.TelegrafConfigs ||
-                    this.TelegrafConfigs != null &&
-                    this.TelegrafConfigs.SequenceEqual(input.TelegrafConfigs)
-                ) && 
+                    TelegrafConfigs == input.TelegrafConfigs ||
+                    TelegrafConfigs != null &&
+                    TelegrafConfigs.SequenceEqual(input.TelegrafConfigs)
+                ) &&
                 (
-                    this.Variables == input.Variables ||
-                    this.Variables != null &&
-                    this.Variables.SequenceEqual(input.Variables)
+                    Variables == input.Variables ||
+                    Variables != null &&
+                    Variables.SequenceEqual(input.Variables)
                 );
         }
 
@@ -228,32 +238,60 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Buckets != null)
-                    hashCode = hashCode * 59 + this.Buckets.GetHashCode();
-                if (this.Checks != null)
-                    hashCode = hashCode * 59 + this.Checks.GetHashCode();
-                if (this.Dashboards != null)
-                    hashCode = hashCode * 59 + this.Dashboards.GetHashCode();
-                if (this.Labels != null)
-                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
-                if (this.LabelMappings != null)
-                    hashCode = hashCode * 59 + this.LabelMappings.GetHashCode();
-                if (this.NotificationEndpoints != null)
-                    hashCode = hashCode * 59 + this.NotificationEndpoints.GetHashCode();
-                if (this.NotificationRules != null)
-                    hashCode = hashCode * 59 + this.NotificationRules.GetHashCode();
-                if (this.Tasks != null)
-                    hashCode = hashCode * 59 + this.Tasks.GetHashCode();
-                if (this.TelegrafConfigs != null)
-                    hashCode = hashCode * 59 + this.TelegrafConfigs.GetHashCode();
-                if (this.Variables != null)
-                    hashCode = hashCode * 59 + this.Variables.GetHashCode();
+                var hashCode = 41;
+
+                if (Buckets != null)
+                {
+                    hashCode = hashCode * 59 + Buckets.GetHashCode();
+                }
+
+                if (Checks != null)
+                {
+                    hashCode = hashCode * 59 + Checks.GetHashCode();
+                }
+
+                if (Dashboards != null)
+                {
+                    hashCode = hashCode * 59 + Dashboards.GetHashCode();
+                }
+
+                if (Labels != null)
+                {
+                    hashCode = hashCode * 59 + Labels.GetHashCode();
+                }
+
+                if (LabelMappings != null)
+                {
+                    hashCode = hashCode * 59 + LabelMappings.GetHashCode();
+                }
+
+                if (NotificationEndpoints != null)
+                {
+                    hashCode = hashCode * 59 + NotificationEndpoints.GetHashCode();
+                }
+
+                if (NotificationRules != null)
+                {
+                    hashCode = hashCode * 59 + NotificationRules.GetHashCode();
+                }
+
+                if (Tasks != null)
+                {
+                    hashCode = hashCode * 59 + Tasks.GetHashCode();
+                }
+
+                if (TelegrafConfigs != null)
+                {
+                    hashCode = hashCode * 59 + TelegrafConfigs.GetHashCode();
+                }
+
+                if (Variables != null)
+                {
+                    hashCode = hashCode * 59 + Variables.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

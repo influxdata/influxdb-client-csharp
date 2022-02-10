@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummary
     /// </summary>
     [DataContract]
-    public partial class TemplateSummary :  IEquatable<TemplateSummary>
+    public partial class TemplateSummary : IEquatable<TemplateSummary>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummary" /> class.
@@ -37,43 +37,45 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="summary">summary.</param>
         /// <param name="diff">diff.</param>
         /// <param name="errors">errors.</param>
-        public TemplateSummary(List<string> sources = default(List<string>), string stackID = default(string), TemplateSummarySummary summary = default(TemplateSummarySummary), TemplateSummaryDiff diff = default(TemplateSummaryDiff), List<TemplateSummaryErrors> errors = default(List<TemplateSummaryErrors>))
+        public TemplateSummary(List<string> sources = default, string stackID = default,
+            TemplateSummarySummary summary = default, TemplateSummaryDiff diff = default,
+            List<TemplateSummaryErrors> errors = default)
         {
-            this.Sources = sources;
-            this.StackID = stackID;
-            this.Summary = summary;
-            this.Diff = diff;
-            this.Errors = errors;
+            Sources = sources;
+            StackID = stackID;
+            Summary = summary;
+            Diff = diff;
+            Errors = errors;
         }
 
         /// <summary>
         /// Gets or Sets Sources
         /// </summary>
-        [DataMember(Name="sources", EmitDefaultValue=false)]
+        [DataMember(Name = "sources", EmitDefaultValue = false)]
         public List<string> Sources { get; set; }
 
         /// <summary>
         /// Gets or Sets StackID
         /// </summary>
-        [DataMember(Name="stackID", EmitDefaultValue=false)]
+        [DataMember(Name = "stackID", EmitDefaultValue = false)]
         public string StackID { get; set; }
 
         /// <summary>
         /// Gets or Sets Summary
         /// </summary>
-        [DataMember(Name="summary", EmitDefaultValue=false)]
+        [DataMember(Name = "summary", EmitDefaultValue = false)]
         public TemplateSummarySummary Summary { get; set; }
 
         /// <summary>
         /// Gets or Sets Diff
         /// </summary>
-        [DataMember(Name="diff", EmitDefaultValue=false)]
+        [DataMember(Name = "diff", EmitDefaultValue = false)]
         public TemplateSummaryDiff Diff { get; set; }
 
         /// <summary>
         /// Gets or Sets Errors
         /// </summary>
-        [DataMember(Name="errors", EmitDefaultValue=false)]
+        [DataMember(Name = "errors", EmitDefaultValue = false)]
         public List<TemplateSummaryErrors> Errors { get; set; }
 
         /// <summary>
@@ -109,7 +111,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummary);
+            return Equals(input as TemplateSummary);
         }
 
         /// <summary>
@@ -120,30 +122,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummary input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Sources == input.Sources ||
-                    this.Sources != null &&
-                    this.Sources.SequenceEqual(input.Sources)
-                ) && 
+                    Sources == input.Sources ||
+                    Sources != null &&
+                    Sources.SequenceEqual(input.Sources)
+                ) &&
                 (
-                    this.StackID == input.StackID ||
-                    (this.StackID != null && this.StackID.Equals(input.StackID))
-                ) && 
-                (
-                    
-                    (this.Summary != null && this.Summary.Equals(input.Summary))
-                ) && 
-                (
-                    
-                    (this.Diff != null && this.Diff.Equals(input.Diff))
-                ) && 
-                (
-                    this.Errors == input.Errors ||
-                    this.Errors != null &&
-                    this.Errors.SequenceEqual(input.Errors)
+                    StackID == input.StackID ||
+                    StackID != null && StackID.Equals(input.StackID)
+                ) && Summary != null && Summary.Equals(input.Summary) && Diff != null && Diff.Equals(input.Diff) && (
+                    Errors == input.Errors ||
+                    Errors != null &&
+                    Errors.SequenceEqual(input.Errors)
                 );
         }
 
@@ -155,22 +150,35 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Sources != null)
-                    hashCode = hashCode * 59 + this.Sources.GetHashCode();
-                if (this.StackID != null)
-                    hashCode = hashCode * 59 + this.StackID.GetHashCode();
-                if (this.Summary != null)
-                    hashCode = hashCode * 59 + this.Summary.GetHashCode();
-                if (this.Diff != null)
-                    hashCode = hashCode * 59 + this.Diff.GetHashCode();
-                if (this.Errors != null)
-                    hashCode = hashCode * 59 + this.Errors.GetHashCode();
+                var hashCode = 41;
+
+                if (Sources != null)
+                {
+                    hashCode = hashCode * 59 + Sources.GetHashCode();
+                }
+
+                if (StackID != null)
+                {
+                    hashCode = hashCode * 59 + StackID.GetHashCode();
+                }
+
+                if (Summary != null)
+                {
+                    hashCode = hashCode * 59 + Summary.GetHashCode();
+                }
+
+                if (Diff != null)
+                {
+                    hashCode = hashCode * 59 + Diff.GetHashCode();
+                }
+
+                if (Errors != null)
+                {
+                    hashCode = hashCode * 59 + Errors.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

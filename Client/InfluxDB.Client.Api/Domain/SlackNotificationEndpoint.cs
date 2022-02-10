@@ -27,36 +27,44 @@ namespace InfluxDB.Client.Api.Domain
     /// SlackNotificationEndpoint
     /// </summary>
     [DataContract]
-    public partial class SlackNotificationEndpoint : NotificationEndpoint,  IEquatable<SlackNotificationEndpoint>
+    public partial class SlackNotificationEndpoint : NotificationEndpoint, IEquatable<SlackNotificationEndpoint>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackNotificationEndpoint" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SlackNotificationEndpoint() { }
+        protected SlackNotificationEndpoint()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SlackNotificationEndpoint" /> class.
         /// </summary>
         /// <param name="url">Specifies the URL of the Slack endpoint. Specify either &#x60;URL&#x60; or &#x60;Token&#x60;..</param>
         /// <param name="token">Specifies the API token string. Specify either &#x60;URL&#x60; or &#x60;Token&#x60;..</param>
-        public SlackNotificationEndpoint(string url = default(string), string token = default(string), string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = NotificationEndpointType.Slack) : base(id, orgID, userID, description, name, status, labels, links, type)
+        public SlackNotificationEndpoint(string url = default, string token = default, string id = default,
+            string orgID = default, string userID = default, string description = default, string name = default,
+            StatusEnum? status = StatusEnum.Active, List<Label> labels = default,
+            NotificationEndpointBaseLinks links = default,
+            NotificationEndpointType type = NotificationEndpointType.Slack) : base(id, orgID, userID, description, name,
+            status, labels, links, type)
         {
-            this.Url = url;
-            this.Token = token;
+            Url = url;
+            Token = token;
         }
 
         /// <summary>
         /// Specifies the URL of the Slack endpoint. Specify either &#x60;URL&#x60; or &#x60;Token&#x60;.
         /// </summary>
         /// <value>Specifies the URL of the Slack endpoint. Specify either &#x60;URL&#x60; or &#x60;Token&#x60;.</value>
-        [DataMember(Name="url", EmitDefaultValue=false)]
+        [DataMember(Name = "url", EmitDefaultValue = false)]
         public string Url { get; set; }
 
         /// <summary>
         /// Specifies the API token string. Specify either &#x60;URL&#x60; or &#x60;Token&#x60;.
         /// </summary>
         /// <value>Specifies the API token string. Specify either &#x60;URL&#x60; or &#x60;Token&#x60;.</value>
-        [DataMember(Name="token", EmitDefaultValue=false)]
+        [DataMember(Name = "token", EmitDefaultValue = false)]
         public string Token { get; set; }
 
         /// <summary>
@@ -90,7 +98,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SlackNotificationEndpoint);
+            return Equals(input as SlackNotificationEndpoint);
         }
 
         /// <summary>
@@ -101,17 +109,19 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(SlackNotificationEndpoint input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Url == input.Url ||
-                    (this.Url != null && this.Url.Equals(input.Url))
-                ) && base.Equals(input) && 
-                (
-                    this.Token == input.Token ||
-                    (this.Token != null && this.Token.Equals(input.Token))
-                );
+            return base.Equals(input) &&
+                   (
+                       Url == input.Url ||
+                       Url != null && Url.Equals(input.Url)
+                   ) && base.Equals(input) &&
+                   (
+                       Token == input.Token ||
+                       Token != null && Token.Equals(input.Token)
+                   );
         }
 
         /// <summary>
@@ -122,16 +132,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Url != null)
-                    hashCode = hashCode * 59 + this.Url.GetHashCode();
-                if (this.Token != null)
-                    hashCode = hashCode * 59 + this.Token.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Url != null)
+                {
+                    hashCode = hashCode * 59 + Url.GetHashCode();
+                }
+
+                if (Token != null)
+                {
+                    hashCode = hashCode * 59 + Token.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

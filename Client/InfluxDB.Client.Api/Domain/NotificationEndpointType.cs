@@ -26,35 +26,27 @@ namespace InfluxDB.Client.Api.Domain
     /// <summary>
     /// Defines NotificationEndpointType
     /// </summary>
-    
     [JsonConverter(typeof(StringEnumConverter))]
-    
     public enum NotificationEndpointType
     {
         /// <summary>
         /// Enum Slack for value: slack
         /// </summary>
-        [EnumMember(Value = "slack")]
-        Slack = 1,
+        [EnumMember(Value = "slack")] Slack = 1,
 
         /// <summary>
         /// Enum Pagerduty for value: pagerduty
         /// </summary>
-        [EnumMember(Value = "pagerduty")]
-        Pagerduty = 2,
+        [EnumMember(Value = "pagerduty")] Pagerduty = 2,
 
         /// <summary>
         /// Enum Http for value: http
         /// </summary>
-        [EnumMember(Value = "http")]
-        Http = 3,
+        [EnumMember(Value = "http")] Http = 3,
 
         /// <summary>
         /// Enum Telegram for value: telegram
         /// </summary>
-        [EnumMember(Value = "telegram")]
-        Telegram = 4
-
+        [EnumMember(Value = "telegram")] Telegram = 4
     }
-
 }

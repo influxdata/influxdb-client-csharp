@@ -15,12 +15,13 @@ namespace InfluxDB.Client
     /// <summary>
     /// The synchronous version of QueryApi.
     /// </summary>
-    public class QueryApiSync: AbstractQueryClient
+    public class QueryApiSync : AbstractQueryClient
     {
         private readonly InfluxDBClientOptions _options;
         private readonly QueryService _service;
 
-        protected internal QueryApiSync(InfluxDBClientOptions options, QueryService service, IFluxResultMapper mapper) : base(mapper)
+        protected internal QueryApiSync(InfluxDBClientOptions options, QueryService service, IFluxResultMapper mapper) :
+            base(mapper)
         {
             Arguments.CheckNotNull(options, nameof(options));
             Arguments.CheckNotNull(service, nameof(service));
@@ -29,7 +30,7 @@ namespace InfluxDB.Client
             _service = service;
             RestClient = service.Configuration.ApiClient.RestClient;
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to list of object with given type.
@@ -48,7 +49,7 @@ namespace InfluxDB.Client
 
             return QuerySync<T>(query, _options.Org);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to list of object with given type.
@@ -69,7 +70,7 @@ namespace InfluxDB.Client
 
             return QuerySync<T>(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org, cancellationToken);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to list of object with given type.
@@ -88,7 +89,7 @@ namespace InfluxDB.Client
 
             return QuerySync<T>(query, _options.Org, cancellationToken);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to list of object with given type.
@@ -111,16 +112,18 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerPoco<T>(poco => { measurements.Add(poco); }, Mapper);
 
-            RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter) =>
-                _service
+            RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter)
+            {
+                return _service
                     .PostQueryWithRestRequest(null, "application/json", null, org, null, query)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
+            }
 
             QuerySync(QueryFn, consumer, ErrorConsumer, EmptyAction, cancellationToken);
 
             return measurements;
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to <see cref="FluxTable"/>s.
@@ -138,7 +141,7 @@ namespace InfluxDB.Client
 
             return QuerySync(query, _options.Org, cancellationToken);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to <see cref="FluxTable"/>s.
@@ -158,7 +161,7 @@ namespace InfluxDB.Client
 
             return QuerySync(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org, cancellationToken);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to <see cref="FluxTable"/>s.
@@ -176,7 +179,7 @@ namespace InfluxDB.Client
 
             return QuerySync(query, _options.Org, cancellationToken);
         }
-        
+
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
         /// to <see cref="FluxTable"/>s.
@@ -196,10 +199,12 @@ namespace InfluxDB.Client
 
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();
 
-            RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter) =>
-                _service
+            RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter)
+            {
+                return _service
                     .PostQueryWithRestRequest(null, "application/json", null, org, null, query)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
+            }
 
             QuerySync(QueryFn, consumer, ErrorConsumer, EmptyAction, cancellationToken);
 

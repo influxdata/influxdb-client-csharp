@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// MarkdownViewProperties
     /// </summary>
     [DataContract]
-    public partial class MarkdownViewProperties : ViewProperties,  IEquatable<MarkdownViewProperties>
+    public partial class MarkdownViewProperties : ViewProperties, IEquatable<MarkdownViewProperties>
     {
         /// <summary>
         /// Defines Type
@@ -38,16 +38,15 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Markdown for value: markdown
             /// </summary>
-            [EnumMember(Value = "markdown")]
-            Markdown = 1
-
+            [EnumMember(Value = "markdown")] Markdown = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Defines Shape
         /// </summary>
@@ -57,47 +56,51 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum ChronografV2 for value: chronograf-v2
             /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
+            [EnumMember(Value = "chronograf-v2")] ChronografV2 = 1
         }
 
         /// <summary>
         /// Gets or Sets Shape
         /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
+        [DataMember(Name = "shape", EmitDefaultValue = false)]
         public ShapeEnum Shape { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MarkdownViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected MarkdownViewProperties() { }
+        protected MarkdownViewProperties()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MarkdownViewProperties" /> class.
         /// </summary>
         /// <param name="type">type (required) (default to TypeEnum.Markdown).</param>
         /// <param name="shape">shape (required) (default to ShapeEnum.ChronografV2).</param>
         /// <param name="note">note (required).</param>
-        public MarkdownViewProperties(TypeEnum type = TypeEnum.Markdown, ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string)) : base()
+        public MarkdownViewProperties(TypeEnum type = TypeEnum.Markdown, ShapeEnum shape = ShapeEnum.ChronografV2,
+            string note = default) : base()
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "shape" is required (not null)
-            this.Shape = shape;
+            Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
-                throw new InvalidDataException("note is a required property for MarkdownViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "note is a required property for MarkdownViewProperties and cannot be null");
             }
-            this.Note = note;
-        }
 
+            Note = note;
+        }
 
 
         /// <summary>
         /// Gets or Sets Note
         /// </summary>
-        [DataMember(Name="note", EmitDefaultValue=false)]
+        [DataMember(Name = "note", EmitDefaultValue = false)]
         public string Note { get; set; }
 
         /// <summary>
@@ -132,7 +135,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as MarkdownViewProperties);
+            return Equals(input as MarkdownViewProperties);
         }
 
         /// <summary>
@@ -143,21 +146,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(MarkdownViewProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Shape == input.Shape ||
-                    this.Shape.Equals(input.Shape)
-                ) && base.Equals(input) && 
-                (
-                    this.Note == input.Note ||
-                    (this.Note != null && this.Note.Equals(input.Note))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Shape == input.Shape ||
+                       Shape.Equals(input.Shape)
+                   ) && base.Equals(input) &&
+                   (
+                       Note == input.Note ||
+                       Note != null && Note.Equals(input.Note)
+                   );
         }
 
         /// <summary>
@@ -168,16 +173,17 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                hashCode = hashCode * 59 + this.Shape.GetHashCode();
-                if (this.Note != null)
-                    hashCode = hashCode * 59 + this.Note.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                hashCode = hashCode * 59 + Shape.GetHashCode();
+                if (Note != null)
+                {
+                    hashCode = hashCode * 59 + Note.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// Contains the AST for the supplied Flux query
     /// </summary>
     [DataContract]
-    public partial class ASTResponse :  IEquatable<ASTResponse>
+    public partial class ASTResponse : IEquatable<ASTResponse>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ASTResponse" /> class.
         /// </summary>
         /// <param name="ast">ast.</param>
-        public ASTResponse(Package ast = default(Package))
+        public ASTResponse(Package ast = default)
         {
-            this.Ast = ast;
+            Ast = ast;
         }
 
         /// <summary>
         /// Gets or Sets Ast
         /// </summary>
-        [DataMember(Name="ast", EmitDefaultValue=false)]
+        [DataMember(Name = "ast", EmitDefaultValue = false)]
         public Package Ast { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as ASTResponse);
+            return Equals(input as ASTResponse);
         }
 
         /// <summary>
@@ -84,13 +84,12 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(ASTResponse input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    
-                    (this.Ast != null && this.Ast.Equals(input.Ast))
-                );
+            return
+                Ast != null && Ast.Equals(input.Ast);
         }
 
         /// <summary>
@@ -101,14 +100,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Ast != null)
-                    hashCode = hashCode * 59 + this.Ast.GetHashCode();
+                var hashCode = 41;
+
+                if (Ast != null)
+                {
+                    hashCode = hashCode * 59 + Ast.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

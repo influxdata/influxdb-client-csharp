@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Run
     /// </summary>
     [DataContract]
-    public partial class Run :  IEquatable<Run>
+    public partial class Run : IEquatable<Run>
     {
         /// <summary>
         /// Defines Status
@@ -38,61 +38,56 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Scheduled for value: scheduled
             /// </summary>
-            [EnumMember(Value = "scheduled")]
-            Scheduled = 1,
+            [EnumMember(Value = "scheduled")] Scheduled = 1,
 
             /// <summary>
             /// Enum Started for value: started
             /// </summary>
-            [EnumMember(Value = "started")]
-            Started = 2,
+            [EnumMember(Value = "started")] Started = 2,
 
             /// <summary>
             /// Enum Failed for value: failed
             /// </summary>
-            [EnumMember(Value = "failed")]
-            Failed = 3,
+            [EnumMember(Value = "failed")] Failed = 3,
 
             /// <summary>
             /// Enum Success for value: success
             /// </summary>
-            [EnumMember(Value = "success")]
-            Success = 4,
+            [EnumMember(Value = "success")] Success = 4,
 
             /// <summary>
             /// Enum Canceled for value: canceled
             /// </summary>
-            [EnumMember(Value = "canceled")]
-            Canceled = 5
-
+            [EnumMember(Value = "canceled")] Canceled = 5
         }
 
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public StatusEnum? Status { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Run" /> class.
         /// </summary>
         /// <param name="scheduledFor">Time used for run&#39;s \&quot;now\&quot; option, RFC3339..</param>
         /// <param name="links">links.</param>
-        public Run(DateTime? scheduledFor = default(DateTime?), RunLinks links = default(RunLinks))
+        public Run(DateTime? scheduledFor = default, RunLinks links = default)
         {
-            this.ScheduledFor = scheduledFor;
-            this.Links = links;
+            ScheduledFor = scheduledFor;
+            Links = links;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// Gets or Sets TaskID
         /// </summary>
-        [DataMember(Name="taskID", EmitDefaultValue=false)]
+        [DataMember(Name = "taskID", EmitDefaultValue = false)]
         public string TaskID { get; private set; }
 
 
@@ -100,41 +95,41 @@ namespace InfluxDB.Client.Api.Domain
         /// Time used for run&#39;s \&quot;now\&quot; option, RFC3339.
         /// </summary>
         /// <value>Time used for run&#39;s \&quot;now\&quot; option, RFC3339.</value>
-        [DataMember(Name="scheduledFor", EmitDefaultValue=false)]
+        [DataMember(Name = "scheduledFor", EmitDefaultValue = false)]
         public DateTime? ScheduledFor { get; set; }
 
         /// <summary>
         /// An array of logs associated with the run.
         /// </summary>
         /// <value>An array of logs associated with the run.</value>
-        [DataMember(Name="log", EmitDefaultValue=false)]
+        [DataMember(Name = "log", EmitDefaultValue = false)]
         public List<LogEvent> Log { get; private set; }
 
         /// <summary>
         /// Time run started executing, RFC3339Nano.
         /// </summary>
         /// <value>Time run started executing, RFC3339Nano.</value>
-        [DataMember(Name="startedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "startedAt", EmitDefaultValue = false)]
         public DateTime? StartedAt { get; private set; }
 
         /// <summary>
         /// Time run finished executing, RFC3339Nano.
         /// </summary>
         /// <value>Time run finished executing, RFC3339Nano.</value>
-        [DataMember(Name="finishedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "finishedAt", EmitDefaultValue = false)]
         public DateTime? FinishedAt { get; private set; }
 
         /// <summary>
         /// Time run was manually requested, RFC3339Nano.
         /// </summary>
         /// <value>Time run was manually requested, RFC3339Nano.</value>
-        [DataMember(Name="requestedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "requestedAt", EmitDefaultValue = false)]
         public DateTime? RequestedAt { get; private set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public RunLinks Links { get; set; }
 
         /// <summary>
@@ -174,7 +169,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Run);
+            return Equals(input as Run);
         }
 
         /// <summary>
@@ -185,46 +180,44 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Run input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.TaskID == input.TaskID ||
-                    (this.TaskID != null && this.TaskID.Equals(input.TaskID))
-                ) && 
+                    TaskID == input.TaskID ||
+                    TaskID != null && TaskID.Equals(input.TaskID)
+                ) &&
                 (
-                    this.Status == input.Status ||
-                    this.Status.Equals(input.Status)
-                ) && 
+                    Status == input.Status ||
+                    Status.Equals(input.Status)
+                ) &&
                 (
-                    this.ScheduledFor == input.ScheduledFor ||
-                    (this.ScheduledFor != null && this.ScheduledFor.Equals(input.ScheduledFor))
-                ) && 
+                    ScheduledFor == input.ScheduledFor ||
+                    ScheduledFor != null && ScheduledFor.Equals(input.ScheduledFor)
+                ) &&
                 (
-                    this.Log == input.Log ||
-                    this.Log != null &&
-                    this.Log.SequenceEqual(input.Log)
-                ) && 
+                    Log == input.Log ||
+                    Log != null &&
+                    Log.SequenceEqual(input.Log)
+                ) &&
                 (
-                    this.StartedAt == input.StartedAt ||
-                    (this.StartedAt != null && this.StartedAt.Equals(input.StartedAt))
-                ) && 
+                    StartedAt == input.StartedAt ||
+                    StartedAt != null && StartedAt.Equals(input.StartedAt)
+                ) &&
                 (
-                    this.FinishedAt == input.FinishedAt ||
-                    (this.FinishedAt != null && this.FinishedAt.Equals(input.FinishedAt))
-                ) && 
+                    FinishedAt == input.FinishedAt ||
+                    FinishedAt != null && FinishedAt.Equals(input.FinishedAt)
+                ) &&
                 (
-                    this.RequestedAt == input.RequestedAt ||
-                    (this.RequestedAt != null && this.RequestedAt.Equals(input.RequestedAt))
-                ) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+                    RequestedAt == input.RequestedAt ||
+                    RequestedAt != null && RequestedAt.Equals(input.RequestedAt)
+                ) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -235,29 +228,51 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.TaskID != null)
-                    hashCode = hashCode * 59 + this.TaskID.GetHashCode();
-                hashCode = hashCode * 59 + this.Status.GetHashCode();
-                if (this.ScheduledFor != null)
-                    hashCode = hashCode * 59 + this.ScheduledFor.GetHashCode();
-                if (this.Log != null)
-                    hashCode = hashCode * 59 + this.Log.GetHashCode();
-                if (this.StartedAt != null)
-                    hashCode = hashCode * 59 + this.StartedAt.GetHashCode();
-                if (this.FinishedAt != null)
-                    hashCode = hashCode * 59 + this.FinishedAt.GetHashCode();
-                if (this.RequestedAt != null)
-                    hashCode = hashCode * 59 + this.RequestedAt.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (TaskID != null)
+                {
+                    hashCode = hashCode * 59 + TaskID.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Status.GetHashCode();
+                if (ScheduledFor != null)
+                {
+                    hashCode = hashCode * 59 + ScheduledFor.GetHashCode();
+                }
+
+                if (Log != null)
+                {
+                    hashCode = hashCode * 59 + Log.GetHashCode();
+                }
+
+                if (StartedAt != null)
+                {
+                    hashCode = hashCode * 59 + StartedAt.GetHashCode();
+                }
+
+                if (FinishedAt != null)
+                {
+                    hashCode = hashCode * 59 + FinishedAt.GetHashCode();
+                }
+
+                if (RequestedAt != null)
+                {
+                    hashCode = hashCode * 59 + RequestedAt.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

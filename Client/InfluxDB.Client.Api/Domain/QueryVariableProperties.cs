@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// QueryVariableProperties
     /// </summary>
     [DataContract]
-    public partial class QueryVariableProperties : VariableProperties,  IEquatable<QueryVariableProperties>
+    public partial class QueryVariableProperties : VariableProperties, IEquatable<QueryVariableProperties>
     {
         /// <summary>
         /// Defines Type
@@ -38,32 +38,32 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Query for value: query
             /// </summary>
-            [EnumMember(Value = "query")]
-            Query = 1
-
+            [EnumMember(Value = "query")] Query = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryVariableProperties" /> class.
         /// </summary>
         /// <param name="type">type.</param>
         /// <param name="values">values.</param>
-        public QueryVariableProperties(TypeEnum? type = default(TypeEnum?), QueryVariablePropertiesValues values = default(QueryVariablePropertiesValues)) : base()
+        public QueryVariableProperties(TypeEnum? type = default, QueryVariablePropertiesValues values = default) :
+            base()
         {
-            this.Type = type;
-            this.Values = values;
+            Type = type;
+            Values = values;
         }
 
 
         /// <summary>
         /// Gets or Sets Values
         /// </summary>
-        [DataMember(Name="values", EmitDefaultValue=false)]
+        [DataMember(Name = "values", EmitDefaultValue = false)]
         public QueryVariablePropertiesValues Values { get; set; }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as QueryVariableProperties);
+            return Equals(input as QueryVariableProperties);
         }
 
         /// <summary>
@@ -108,17 +108,15 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(QueryVariableProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Values != null && this.Values.Equals(input.Values))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) && Values != null && Values.Equals(input.Values);
         }
 
         /// <summary>
@@ -129,15 +127,16 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Values != null)
-                    hashCode = hashCode * 59 + this.Values.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Values != null)
+                {
+                    hashCode = hashCode * 59 + Values.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

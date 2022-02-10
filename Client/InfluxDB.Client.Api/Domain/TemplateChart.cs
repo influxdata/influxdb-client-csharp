@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateChart
     /// </summary>
     [DataContract]
-    public partial class TemplateChart :  IEquatable<TemplateChart>
+    public partial class TemplateChart : IEquatable<TemplateChart>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateChart" /> class.
@@ -37,43 +37,44 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="height">height.</param>
         /// <param name="width">width.</param>
         /// <param name="properties">properties.</param>
-        public TemplateChart(int? xPos = default(int?), int? yPos = default(int?), int? height = default(int?), int? width = default(int?), ViewProperties properties = default(ViewProperties))
+        public TemplateChart(int? xPos = default, int? yPos = default, int? height = default, int? width = default,
+            ViewProperties properties = default)
         {
-            this.XPos = xPos;
-            this.YPos = yPos;
-            this.Height = height;
-            this.Width = width;
-            this.Properties = properties;
+            XPos = xPos;
+            YPos = yPos;
+            Height = height;
+            Width = width;
+            Properties = properties;
         }
 
         /// <summary>
         /// Gets or Sets XPos
         /// </summary>
-        [DataMember(Name="xPos", EmitDefaultValue=false)]
+        [DataMember(Name = "xPos", EmitDefaultValue = false)]
         public int? XPos { get; set; }
 
         /// <summary>
         /// Gets or Sets YPos
         /// </summary>
-        [DataMember(Name="yPos", EmitDefaultValue=false)]
+        [DataMember(Name = "yPos", EmitDefaultValue = false)]
         public int? YPos { get; set; }
 
         /// <summary>
         /// Gets or Sets Height
         /// </summary>
-        [DataMember(Name="height", EmitDefaultValue=false)]
+        [DataMember(Name = "height", EmitDefaultValue = false)]
         public int? Height { get; set; }
 
         /// <summary>
         /// Gets or Sets Width
         /// </summary>
-        [DataMember(Name="width", EmitDefaultValue=false)]
+        [DataMember(Name = "width", EmitDefaultValue = false)]
         public int? Width { get; set; }
 
         /// <summary>
         /// Gets or Sets Properties
         /// </summary>
-        [DataMember(Name="properties", EmitDefaultValue=false)]
+        [DataMember(Name = "properties", EmitDefaultValue = false)]
         [JsonConverter(typeof(TemplateChartPropertiesAdapter))]
         public ViewProperties Properties { get; set; }
 
@@ -110,7 +111,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateChart);
+            return Equals(input as TemplateChart);
         }
 
         /// <summary>
@@ -121,29 +122,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateChart input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.XPos == input.XPos ||
-                    (this.XPos != null && this.XPos.Equals(input.XPos))
-                ) && 
+                    XPos == input.XPos ||
+                    XPos != null && XPos.Equals(input.XPos)
+                ) &&
                 (
-                    this.YPos == input.YPos ||
-                    (this.YPos != null && this.YPos.Equals(input.YPos))
-                ) && 
+                    YPos == input.YPos ||
+                    YPos != null && YPos.Equals(input.YPos)
+                ) &&
                 (
-                    this.Height == input.Height ||
-                    (this.Height != null && this.Height.Equals(input.Height))
-                ) && 
+                    Height == input.Height ||
+                    Height != null && Height.Equals(input.Height)
+                ) &&
                 (
-                    this.Width == input.Width ||
-                    (this.Width != null && this.Width.Equals(input.Width))
-                ) && 
-                (
-                    
-                    (this.Properties != null && this.Properties.Equals(input.Properties))
-                );
+                    Width == input.Width ||
+                    Width != null && Width.Equals(input.Width)
+                ) && Properties != null && Properties.Equals(input.Properties);
         }
 
         /// <summary>
@@ -154,91 +153,109 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.XPos != null)
-                    hashCode = hashCode * 59 + this.XPos.GetHashCode();
-                if (this.YPos != null)
-                    hashCode = hashCode * 59 + this.YPos.GetHashCode();
-                if (this.Height != null)
-                    hashCode = hashCode * 59 + this.Height.GetHashCode();
-                if (this.Width != null)
-                    hashCode = hashCode * 59 + this.Width.GetHashCode();
-                if (this.Properties != null)
-                    hashCode = hashCode * 59 + this.Properties.GetHashCode();
+                var hashCode = 41;
+
+                if (XPos != null)
+                {
+                    hashCode = hashCode * 59 + XPos.GetHashCode();
+                }
+
+                if (YPos != null)
+                {
+                    hashCode = hashCode * 59 + YPos.GetHashCode();
+                }
+
+                if (Height != null)
+                {
+                    hashCode = hashCode * 59 + Height.GetHashCode();
+                }
+
+                if (Width != null)
+                {
+                    hashCode = hashCode * 59 + Width.GetHashCode();
+                }
+
+                if (Properties != null)
+                {
+                    hashCode = hashCode * 59 + Properties.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
 
-    public class TemplateChartPropertiesAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+        public class TemplateChartPropertiesAdapter : JsonConverter
         {
-            {new []{ "LinePlusSingleStatProperties", "line-plus-single-stat", "chronograf-v2" }, typeof(LinePlusSingleStatProperties)},
-            {new []{ "XYViewProperties", "xy", "chronograf-v2" }, typeof(XYViewProperties)},
-            {new []{ "single-stat", "chronograf-v2" }, typeof(SingleStatViewProperties)},
-            {new []{ "histogram", "chronograf-v2" }, typeof(HistogramViewProperties)},
-            {new []{ "gauge", "chronograf-v2" }, typeof(GaugeViewProperties)},
-            {new []{ "table", "chronograf-v2" }, typeof(TableViewProperties)},
-            {new []{ "simple-table", "chronograf-v2" }, typeof(SimpleTableViewProperties)},
-            {new []{ "markdown", "chronograf-v2" }, typeof(MarkdownViewProperties)},
-            {new []{ "check", "chronograf-v2" }, typeof(CheckViewProperties)},
-            {new []{ "ScatterViewProperties", "scatter", "chronograf-v2" }, typeof(ScatterViewProperties)},
-            {new []{ "HeatmapViewProperties", "heatmap", "chronograf-v2" }, typeof(HeatmapViewProperties)},
-            {new []{ "MosaicViewProperties", "mosaic", "chronograf-v2" }, typeof(MosaicViewProperties)},
-            {new []{ "BandViewProperties", "band", "chronograf-v2" }, typeof(BandViewProperties)},
-        };
+            private static readonly Dictionary<string[], Type> Types =
+                new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+                {
+                    {
+                        new[] { "LinePlusSingleStatProperties", "line-plus-single-stat", "chronograf-v2" },
+                        typeof(LinePlusSingleStatProperties)
+                    },
+                    { new[] { "XYViewProperties", "xy", "chronograf-v2" }, typeof(XYViewProperties) },
+                    { new[] { "single-stat", "chronograf-v2" }, typeof(SingleStatViewProperties) },
+                    { new[] { "histogram", "chronograf-v2" }, typeof(HistogramViewProperties) },
+                    { new[] { "gauge", "chronograf-v2" }, typeof(GaugeViewProperties) },
+                    { new[] { "table", "chronograf-v2" }, typeof(TableViewProperties) },
+                    { new[] { "simple-table", "chronograf-v2" }, typeof(SimpleTableViewProperties) },
+                    { new[] { "markdown", "chronograf-v2" }, typeof(MarkdownViewProperties) },
+                    { new[] { "check", "chronograf-v2" }, typeof(CheckViewProperties) },
+                    { new[] { "ScatterViewProperties", "scatter", "chronograf-v2" }, typeof(ScatterViewProperties) },
+                    { new[] { "HeatmapViewProperties", "heatmap", "chronograf-v2" }, typeof(HeatmapViewProperties) },
+                    { new[] { "MosaicViewProperties", "mosaic", "chronograf-v2" }, typeof(MosaicViewProperties) },
+                    { new[] { "BandViewProperties", "band", "chronograf-v2" }, typeof(BandViewProperties) }
+                };
 
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
+            public override bool CanConvert(Type objectType)
             {
-                case JsonToken.StartObject:
-
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
-
-                    var discriminator = new []{ "timeFormat", "type", "shape" }.Select(key => jObject[key].ToString()).ToArray();
-
-                    Types.TryGetValue(discriminator, out var type);
-
-                    return serializer.Deserialize(jObject.CreateReader(), type);
-
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
-
-                default:
-                    return serializer.Deserialize(reader, objectType);
-            }
-        }
-
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
-        {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
-
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-            {
-                list.Add(Deserialize(reader, elementType, serializer));
+                return false;
             }
 
-            return list;
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                serializer.Serialize(writer, value);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+                JsonSerializer serializer)
+            {
+                return Deserialize(reader, objectType, serializer);
+            }
+
+            private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonToken.StartObject:
+
+                        var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+
+                        var discriminator = new[] { "timeFormat", "type", "shape" }
+                            .Select(key => jObject[key].ToString()).ToArray();
+
+                        Types.TryGetValue(discriminator, out var type);
+
+                        return serializer.Deserialize(jObject.CreateReader(), type);
+
+                    case JsonToken.StartArray:
+                        return DeserializeArray(reader, objectType, serializer);
+
+                    default:
+                        return serializer.Deserialize(reader, objectType);
+                }
+            }
+
+            private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+            {
+                var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+                var list = (IList)Activator.CreateInstance(targetType);
+                while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+                    list.Add(Deserialize(reader, elementType, serializer));
+
+                return list;
+            }
         }
     }
-    }
-
 }

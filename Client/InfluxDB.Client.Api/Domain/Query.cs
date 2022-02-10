@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Query influx using the Flux language
     /// </summary>
     [DataContract]
-    public partial class Query :  IEquatable<Query>
+    public partial class Query : IEquatable<Query>
     {
         /// <summary>
         /// The type of query. Must be \&quot;flux\&quot;.
@@ -39,22 +39,24 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Flux for value: flux
             /// </summary>
-            [EnumMember(Value = "flux")]
-            Flux = 1
-
+            [EnumMember(Value = "flux")] Flux = 1
         }
 
         /// <summary>
         /// The type of query. Must be \&quot;flux\&quot;.
         /// </summary>
         /// <value>The type of query. Must be \&quot;flux\&quot;.</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Query" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Query() { }
+        protected Query()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Query" /> class.
         /// </summary>
@@ -64,32 +66,34 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="_params">Enumeration of key/value pairs that respresent parameters to be injected into query (can only specify either this field or extern and not both).</param>
         /// <param name="dialect">dialect.</param>
         /// <param name="now">Specifies the time that should be reported as \&quot;now\&quot; in the query. Default is the server&#39;s now time..</param>
-        public Query(File _extern = default(File), string query = default(string), TypeEnum? type = default(TypeEnum?), Dictionary<string, Object> _params = default(Dictionary<string, Object>), Dialect dialect = default(Dialect), DateTime? now = default(DateTime?))
+        public Query(File _extern = default, string query = default, TypeEnum? type = default,
+            Dictionary<string, object> _params = default, Dialect dialect = default, DateTime? now = default)
         {
             // to ensure "query" is required (not null)
             if (query == null)
             {
                 throw new InvalidDataException("query is a required property for Query and cannot be null");
             }
-            this._Query = query;
-            this.Extern = _extern;
-            this.Type = type;
-            this.Params = _params;
-            this.Dialect = dialect;
-            this.Now = now;
+
+            _Query = query;
+            Extern = _extern;
+            Type = type;
+            Params = _params;
+            Dialect = dialect;
+            Now = now;
         }
 
         /// <summary>
         /// Gets or Sets Extern
         /// </summary>
-        [DataMember(Name="extern", EmitDefaultValue=false)]
+        [DataMember(Name = "extern", EmitDefaultValue = false)]
         public File Extern { get; set; }
 
         /// <summary>
         /// Query script to execute.
         /// </summary>
         /// <value>Query script to execute.</value>
-        [DataMember(Name="query", EmitDefaultValue=false)]
+        [DataMember(Name = "query", EmitDefaultValue = false)]
         public string _Query { get; set; }
 
 
@@ -97,20 +101,20 @@ namespace InfluxDB.Client.Api.Domain
         /// Enumeration of key/value pairs that respresent parameters to be injected into query (can only specify either this field or extern and not both)
         /// </summary>
         /// <value>Enumeration of key/value pairs that respresent parameters to be injected into query (can only specify either this field or extern and not both)</value>
-        [DataMember(Name="params", EmitDefaultValue=false)]
-        public Dictionary<string, Object> Params { get; set; }
+        [DataMember(Name = "params", EmitDefaultValue = false)]
+        public Dictionary<string, object> Params { get; set; }
 
         /// <summary>
         /// Gets or Sets Dialect
         /// </summary>
-        [DataMember(Name="dialect", EmitDefaultValue=false)]
+        [DataMember(Name = "dialect", EmitDefaultValue = false)]
         public Dialect Dialect { get; set; }
 
         /// <summary>
         /// Specifies the time that should be reported as \&quot;now\&quot; in the query. Default is the server&#39;s now time.
         /// </summary>
         /// <value>Specifies the time that should be reported as \&quot;now\&quot; in the query. Default is the server&#39;s now time.</value>
-        [DataMember(Name="now", EmitDefaultValue=false)]
+        [DataMember(Name = "now", EmitDefaultValue = false)]
         public DateTime? Now { get; set; }
 
         /// <summary>
@@ -147,7 +151,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Query);
+            return Equals(input as Query);
         }
 
         /// <summary>
@@ -158,33 +162,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Query input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
+                Extern != null && Extern.Equals(input.Extern) &&
                 (
-                    
-                    (this.Extern != null && this.Extern.Equals(input.Extern))
-                ) && 
+                    _Query == input._Query ||
+                    _Query != null && _Query.Equals(input._Query)
+                ) &&
                 (
-                    this._Query == input._Query ||
-                    (this._Query != null && this._Query.Equals(input._Query))
-                ) && 
+                    Type == input.Type ||
+                    Type.Equals(input.Type)
+                ) &&
                 (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.Params == input.Params ||
-                    this.Params != null &&
-                    this.Params.SequenceEqual(input.Params)
-                ) && 
-                (
-                    
-                    (this.Dialect != null && this.Dialect.Equals(input.Dialect))
-                ) && 
-                (
-                    this.Now == input.Now ||
-                    (this.Now != null && this.Now.Equals(input.Now))
+                    Params == input.Params ||
+                    Params != null &&
+                    Params.SequenceEqual(input.Params)
+                ) && Dialect != null && Dialect.Equals(input.Dialect) && (
+                    Now == input.Now ||
+                    Now != null && Now.Equals(input.Now)
                 );
         }
 
@@ -196,23 +194,36 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Extern != null)
-                    hashCode = hashCode * 59 + this.Extern.GetHashCode();
-                if (this._Query != null)
-                    hashCode = hashCode * 59 + this._Query.GetHashCode();
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Params != null)
-                    hashCode = hashCode * 59 + this.Params.GetHashCode();
-                if (this.Dialect != null)
-                    hashCode = hashCode * 59 + this.Dialect.GetHashCode();
-                if (this.Now != null)
-                    hashCode = hashCode * 59 + this.Now.GetHashCode();
+                var hashCode = 41;
+
+                if (Extern != null)
+                {
+                    hashCode = hashCode * 59 + Extern.GetHashCode();
+                }
+
+                if (_Query != null)
+                {
+                    hashCode = hashCode * 59 + _Query.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Params != null)
+                {
+                    hashCode = hashCode * 59 + Params.GetHashCode();
+                }
+
+                if (Dialect != null)
+                {
+                    hashCode = hashCode * 59 + Dialect.GetHashCode();
+                }
+
+                if (Now != null)
+                {
+                    hashCode = hashCode * 59 + Now.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

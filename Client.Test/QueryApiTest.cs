@@ -36,7 +36,7 @@ namespace InfluxDB.Client.Test
                 .AuthenticateToken("token")
                 .Org("my-org")
                 .Build();
-            
+
             _influxDbClient = InfluxDBClientFactory.Create(options);
             _influxDbClient.SetLogLevel(LogLevel.Body);
             _queryApi = _influxDbClient.GetQueryApi();
@@ -51,14 +51,12 @@ namespace InfluxDB.Client.Test
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            
+
             var tasks = new List<Task<List<FluxTable>>>();
             foreach (var _ in Enumerable.Range(0, 100))
-            {
                 tasks.Add(_queryApi.QueryAsync("from(bucket:\"my-bucket\") |> range(start: 0)", "my-org"));
-            }
             await Task.WhenAll(tasks);
-            
+
             var ts = stopWatch.Elapsed;
             Assert.LessOrEqual(ts.TotalSeconds, 10, $"Elapsed time: {ts}");
         }
@@ -69,9 +67,9 @@ namespace InfluxDB.Client.Test
             MockServer
                 .Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                 .RespondWith(CreateResponse(Data));
-            
+
             var measurements = await _queryApi.QueryAsync<SyncPoco>("from(...");
-            var measurementsTypeof = await _queryApi.QueryAsync("from(...",typeof(SyncPoco));
+            var measurementsTypeof = await _queryApi.QueryAsync("from(...", typeof(SyncPoco));
 
             Assert.AreEqual(2, measurements.Count);
             Assert.AreEqual(2, measurementsTypeof.Count);
@@ -95,16 +93,13 @@ namespace InfluxDB.Client.Test
             var measurements = _queryApi.QueryAsyncEnumerable<SyncPoco>(
                 new Query(null, "from(...)"),
                 "my-org", new CancellationToken());
-            
+
             var list = new List<SyncPoco>();
-            await foreach (var item in measurements.ConfigureAwait(false))
-            {
-                list.Add(item);
-            }
+            await foreach (var item in measurements.ConfigureAwait(false)) list.Add(item);
 
             Assert.AreEqual(2, list.Count);
         }
-        
+
         private class SyncPoco
         {
             [Column(IsMeasurement = true)] public string Measurement { get; set; }
@@ -113,7 +108,7 @@ namespace InfluxDB.Client.Test
 
             [Column("_value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public Object Timestamp { get; set; }
+            [Column(IsTimestamp = true)] public object Timestamp { get; set; }
         }
     }
 }

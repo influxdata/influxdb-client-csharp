@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Function expression
     /// </summary>
     [DataContract]
-    public partial class FunctionExpression : Expression,  IEquatable<FunctionExpression>
+    public partial class FunctionExpression : Expression, IEquatable<FunctionExpression>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FunctionExpression" /> class.
@@ -35,31 +35,31 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="type">Type of AST node.</param>
         /// <param name="_params">Function parameters.</param>
         /// <param name="body">body.</param>
-        public FunctionExpression(string type = default(string), List<Property> _params = default(List<Property>), Node body = default(Node)) : base()
+        public FunctionExpression(string type = default, List<Property> _params = default, Node body = default) : base()
         {
-            this.Type = type;
-            this.Params = _params;
-            this.Body = body;
+            Type = type;
+            Params = _params;
+            Body = body;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Function parameters
         /// </summary>
         /// <value>Function parameters</value>
-        [DataMember(Name="params", EmitDefaultValue=false)]
+        [DataMember(Name = "params", EmitDefaultValue = false)]
         public List<Property> Params { get; set; }
 
         /// <summary>
         /// Gets or Sets Body
         /// </summary>
-        [DataMember(Name="body", EmitDefaultValue=false)]
+        [DataMember(Name = "body", EmitDefaultValue = false)]
         [JsonConverter(typeof(FunctionExpressionBodyAdapter))]
         public Node Body { get; set; }
 
@@ -95,7 +95,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as FunctionExpression);
+            return Equals(input as FunctionExpression);
         }
 
         /// <summary>
@@ -106,22 +106,20 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(FunctionExpression input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
-                    this.Params == input.Params ||
-                    this.Params != null &&
-                    this.Params.SequenceEqual(input.Params)
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Body != null && this.Body.Equals(input.Body))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type != null && Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Params == input.Params ||
+                       Params != null &&
+                       Params.SequenceEqual(input.Params)
+                   ) && base.Equals(input) && Body != null && Body.Equals(input.Body);
         }
 
         /// <summary>
@@ -132,98 +130,106 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Params != null)
-                    hashCode = hashCode * 59 + this.Params.GetHashCode();
-                if (this.Body != null)
-                    hashCode = hashCode * 59 + this.Body.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (Params != null)
+                {
+                    hashCode = hashCode * 59 + Params.GetHashCode();
+                }
+
+                if (Body != null)
+                {
+                    hashCode = hashCode * 59 + Body.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
 
-    public class FunctionExpressionBodyAdapter : JsonConverter
-    {
-        private static readonly Dictionary<string[], Type> Types = new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+        public class FunctionExpressionBodyAdapter : JsonConverter
         {
-            {new []{ "ArrayExpression" }, typeof(ArrayExpression)},
-            {new []{ "DictExpression" }, typeof(DictExpression)},
-            {new []{ "FunctionExpression" }, typeof(FunctionExpression)},
-            {new []{ "BinaryExpression" }, typeof(BinaryExpression)},
-            {new []{ "CallExpression" }, typeof(CallExpression)},
-            {new []{ "ConditionalExpression" }, typeof(ConditionalExpression)},
-            {new []{ "LogicalExpression" }, typeof(LogicalExpression)},
-            {new []{ "MemberExpression" }, typeof(MemberExpression)},
-            {new []{ "IndexExpression" }, typeof(IndexExpression)},
-            {new []{ "ObjectExpression" }, typeof(ObjectExpression)},
-            {new []{ "ParenExpression" }, typeof(ParenExpression)},
-            {new []{ "PipeExpression" }, typeof(PipeExpression)},
-            {new []{ "UnaryExpression" }, typeof(UnaryExpression)},
-            {new []{ "BooleanLiteral" }, typeof(BooleanLiteral)},
-            {new []{ "DateTimeLiteral" }, typeof(DateTimeLiteral)},
-            {new []{ "DurationLiteral" }, typeof(DurationLiteral)},
-            {new []{ "FloatLiteral" }, typeof(FloatLiteral)},
-            {new []{ "IntegerLiteral" }, typeof(IntegerLiteral)},
-            {new []{ "PipeLiteral" }, typeof(PipeLiteral)},
-            {new []{ "RegexpLiteral" }, typeof(RegexpLiteral)},
-            {new []{ "StringLiteral" }, typeof(StringLiteral)},
-            {new []{ "UnsignedIntegerLiteral" }, typeof(UnsignedIntegerLiteral)},
-            {new []{ "Identifier" }, typeof(Identifier)},
-            {new []{ "Block" }, typeof(Block)},
-        };
+            private static readonly Dictionary<string[], Type> Types =
+                new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
+                {
+                    { new[] { "ArrayExpression" }, typeof(ArrayExpression) },
+                    { new[] { "DictExpression" }, typeof(DictExpression) },
+                    { new[] { "FunctionExpression" }, typeof(FunctionExpression) },
+                    { new[] { "BinaryExpression" }, typeof(BinaryExpression) },
+                    { new[] { "CallExpression" }, typeof(CallExpression) },
+                    { new[] { "ConditionalExpression" }, typeof(ConditionalExpression) },
+                    { new[] { "LogicalExpression" }, typeof(LogicalExpression) },
+                    { new[] { "MemberExpression" }, typeof(MemberExpression) },
+                    { new[] { "IndexExpression" }, typeof(IndexExpression) },
+                    { new[] { "ObjectExpression" }, typeof(ObjectExpression) },
+                    { new[] { "ParenExpression" }, typeof(ParenExpression) },
+                    { new[] { "PipeExpression" }, typeof(PipeExpression) },
+                    { new[] { "UnaryExpression" }, typeof(UnaryExpression) },
+                    { new[] { "BooleanLiteral" }, typeof(BooleanLiteral) },
+                    { new[] { "DateTimeLiteral" }, typeof(DateTimeLiteral) },
+                    { new[] { "DurationLiteral" }, typeof(DurationLiteral) },
+                    { new[] { "FloatLiteral" }, typeof(FloatLiteral) },
+                    { new[] { "IntegerLiteral" }, typeof(IntegerLiteral) },
+                    { new[] { "PipeLiteral" }, typeof(PipeLiteral) },
+                    { new[] { "RegexpLiteral" }, typeof(RegexpLiteral) },
+                    { new[] { "StringLiteral" }, typeof(StringLiteral) },
+                    { new[] { "UnsignedIntegerLiteral" }, typeof(UnsignedIntegerLiteral) },
+                    { new[] { "Identifier" }, typeof(Identifier) },
+                    { new[] { "Block" }, typeof(Block) }
+                };
 
-        public override bool CanConvert(Type objectType)
-        {
-            return false;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            serializer.Serialize(writer, value);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return Deserialize(reader, objectType, serializer);
-        }
-
-        private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            switch (reader.TokenType)
+            public override bool CanConvert(Type objectType)
             {
-                case JsonToken.StartObject:
-
-                    var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
-
-                    var discriminator = new []{ "type" }.Select(key => jObject[key].ToString()).ToArray();
-
-                    Types.TryGetValue(discriminator, out var type);
-
-                    return serializer.Deserialize(jObject.CreateReader(), type);
-
-                case JsonToken.StartArray:
-                    return DeserializeArray(reader, objectType, serializer);
-
-                default:
-                    return serializer.Deserialize(reader, objectType);
-            }
-        }
-
-        private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
-        {
-            var elementType = targetType.GenericTypeArguments.FirstOrDefault();
-
-            var list = (IList) Activator.CreateInstance(targetType);
-            while (reader.Read() && reader.TokenType != JsonToken.EndArray)
-            {
-                list.Add(Deserialize(reader, elementType, serializer));
+                return false;
             }
 
-            return list;
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                serializer.Serialize(writer, value);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+                JsonSerializer serializer)
+            {
+                return Deserialize(reader, objectType, serializer);
+            }
+
+            private object Deserialize(JsonReader reader, Type objectType, JsonSerializer serializer)
+            {
+                switch (reader.TokenType)
+                {
+                    case JsonToken.StartObject:
+
+                        var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
+
+                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
+
+                        Types.TryGetValue(discriminator, out var type);
+
+                        return serializer.Deserialize(jObject.CreateReader(), type);
+
+                    case JsonToken.StartArray:
+                        return DeserializeArray(reader, objectType, serializer);
+
+                    default:
+                        return serializer.Deserialize(reader, objectType);
+                }
+            }
+
+            private IList DeserializeArray(JsonReader reader, Type targetType, JsonSerializer serializer)
+            {
+                var elementType = targetType.GenericTypeArguments.FirstOrDefault();
+
+                var list = (IList)Activator.CreateInstance(targetType);
+                while (reader.Read() && reader.TokenType != JsonToken.EndArray)
+                    list.Add(Deserialize(reader, elementType, serializer));
+
+                return list;
+            }
         }
     }
-    }
-
 }

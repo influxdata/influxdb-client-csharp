@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Permission
     /// </summary>
     [DataContract]
-    public partial class Permission :  IEquatable<Permission>
+    public partial class Permission : IEquatable<Permission>
     {
         /// <summary>
         /// Defines Action
@@ -38,49 +38,51 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Read for value: read
             /// </summary>
-            [EnumMember(Value = "read")]
-            Read = 1,
+            [EnumMember(Value = "read")] Read = 1,
 
             /// <summary>
             /// Enum Write for value: write
             /// </summary>
-            [EnumMember(Value = "write")]
-            Write = 2
-
+            [EnumMember(Value = "write")] Write = 2
         }
 
         /// <summary>
         /// Gets or Sets Action
         /// </summary>
-        [DataMember(Name="action", EmitDefaultValue=false)]
+        [DataMember(Name = "action", EmitDefaultValue = false)]
         public ActionEnum Action { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Permission" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Permission() { }
+        protected Permission()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Permission" /> class.
         /// </summary>
         /// <param name="action">action (required).</param>
         /// <param name="resource">resource (required).</param>
-        public Permission(ActionEnum action = default(ActionEnum), PermissionResource resource = default(PermissionResource))
+        public Permission(ActionEnum action = default, PermissionResource resource = default)
         {
             // to ensure "action" is required (not null)
-            this.Action = action;
+            Action = action;
             // to ensure "resource" is required (not null)
             if (resource == null)
             {
                 throw new InvalidDataException("resource is a required property for Permission and cannot be null");
             }
-            this.Resource = resource;
+
+            Resource = resource;
         }
 
 
         /// <summary>
         /// Gets or Sets Resource
         /// </summary>
-        [DataMember(Name="resource", EmitDefaultValue=false)]
+        [DataMember(Name = "resource", EmitDefaultValue = false)]
         public PermissionResource Resource { get; set; }
 
         /// <summary>
@@ -113,7 +115,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Permission);
+            return Equals(input as Permission);
         }
 
         /// <summary>
@@ -124,17 +126,15 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Permission input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Action == input.Action ||
-                    this.Action.Equals(input.Action)
-                ) && 
-                (
-                    
-                    (this.Resource != null && this.Resource.Equals(input.Resource))
-                );
+            return
+            (
+                Action == input.Action ||
+                Action.Equals(input.Action)
+            ) && Resource != null && Resource.Equals(input.Resource);
         }
 
         /// <summary>
@@ -145,15 +145,16 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Action.GetHashCode();
-                if (this.Resource != null)
-                    hashCode = hashCode * 59 + this.Resource.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Action.GetHashCode();
+                if (Resource != null)
+                {
+                    hashCode = hashCode * 59 + Resource.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

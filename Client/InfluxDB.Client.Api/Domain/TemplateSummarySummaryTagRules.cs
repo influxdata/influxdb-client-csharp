@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummarySummaryTagRules
     /// </summary>
     [DataContract]
-    public partial class TemplateSummarySummaryTagRules :  IEquatable<TemplateSummarySummaryTagRules>
+    public partial class TemplateSummarySummaryTagRules : IEquatable<TemplateSummarySummaryTagRules>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummarySummaryTagRules" /> class.
@@ -35,29 +35,29 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="key">key.</param>
         /// <param name="value">value.</param>
         /// <param name="_operator">_operator.</param>
-        public TemplateSummarySummaryTagRules(string key = default(string), string value = default(string), string _operator = default(string))
+        public TemplateSummarySummaryTagRules(string key = default, string value = default, string _operator = default)
         {
-            this.Key = key;
-            this.Value = value;
-            this.Operator = _operator;
+            Key = key;
+            Value = value;
+            Operator = _operator;
         }
 
         /// <summary>
         /// Gets or Sets Key
         /// </summary>
-        [DataMember(Name="key", EmitDefaultValue=false)]
+        [DataMember(Name = "key", EmitDefaultValue = false)]
         public string Key { get; set; }
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [DataMember(Name = "value", EmitDefaultValue = false)]
         public string Value { get; set; }
 
         /// <summary>
         /// Gets or Sets Operator
         /// </summary>
-        [DataMember(Name="operator", EmitDefaultValue=false)]
+        [DataMember(Name = "operator", EmitDefaultValue = false)]
         public string Operator { get; set; }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummarySummaryTagRules);
+            return Equals(input as TemplateSummarySummaryTagRules);
         }
 
         /// <summary>
@@ -102,20 +102,22 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummarySummaryTagRules input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Key == input.Key ||
-                    (this.Key != null && this.Key.Equals(input.Key))
-                ) && 
+                    Key == input.Key ||
+                    Key != null && Key.Equals(input.Key)
+                ) &&
                 (
-                    this.Value == input.Value ||
-                    (this.Value != null && this.Value.Equals(input.Value))
-                ) && 
+                    Value == input.Value ||
+                    Value != null && Value.Equals(input.Value)
+                ) &&
                 (
-                    this.Operator == input.Operator ||
-                    (this.Operator != null && this.Operator.Equals(input.Operator))
+                    Operator == input.Operator ||
+                    Operator != null && Operator.Equals(input.Operator)
                 );
         }
 
@@ -127,18 +129,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Key != null)
-                    hashCode = hashCode * 59 + this.Key.GetHashCode();
-                if (this.Value != null)
-                    hashCode = hashCode * 59 + this.Value.GetHashCode();
-                if (this.Operator != null)
-                    hashCode = hashCode * 59 + this.Operator.GetHashCode();
+                var hashCode = 41;
+
+                if (Key != null)
+                {
+                    hashCode = hashCode * 59 + Key.GetHashCode();
+                }
+
+                if (Value != null)
+                {
+                    hashCode = hashCode * 59 + Value.GetHashCode();
+                }
+
+                if (Operator != null)
+                {
+                    hashCode = hashCode * 59 + Operator.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

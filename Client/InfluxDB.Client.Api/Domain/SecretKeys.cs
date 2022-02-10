@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// SecretKeys
     /// </summary>
     [DataContract]
-    public partial class SecretKeys :  IEquatable<SecretKeys>
+    public partial class SecretKeys : IEquatable<SecretKeys>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SecretKeys" /> class.
         /// </summary>
         /// <param name="secrets">secrets.</param>
-        public SecretKeys(List<string> secrets = default(List<string>))
+        public SecretKeys(List<string> secrets = default)
         {
-            this.Secrets = secrets;
+            Secrets = secrets;
         }
 
         /// <summary>
         /// Gets or Sets Secrets
         /// </summary>
-        [DataMember(Name="secrets", EmitDefaultValue=false)]
+        [DataMember(Name = "secrets", EmitDefaultValue = false)]
         public List<string> Secrets { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SecretKeys);
+            return Equals(input as SecretKeys);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(SecretKeys input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Secrets == input.Secrets ||
-                    this.Secrets != null &&
-                    this.Secrets.SequenceEqual(input.Secrets)
-                );
+            return
+                Secrets == input.Secrets ||
+                Secrets != null &&
+                Secrets.SequenceEqual(input.Secrets);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Secrets != null)
-                    hashCode = hashCode * 59 + this.Secrets.GetHashCode();
+                var hashCode = 41;
+
+                if (Secrets != null)
+                {
+                    hashCode = hashCode * 59 + Secrets.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

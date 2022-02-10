@@ -27,53 +27,60 @@ namespace InfluxDB.Client.Api.Domain
     /// LabelCreateRequest
     /// </summary>
     [DataContract]
-    public partial class LabelCreateRequest :  IEquatable<LabelCreateRequest>
+    public partial class LabelCreateRequest : IEquatable<LabelCreateRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelCreateRequest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected LabelCreateRequest() { }
+        protected LabelCreateRequest()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LabelCreateRequest" /> class.
         /// </summary>
         /// <param name="orgID">orgID (required).</param>
         /// <param name="name">name (required).</param>
         /// <param name="properties">Key/Value pairs associated with this label. Keys can be removed by sending an update with an empty value..</param>
-        public LabelCreateRequest(string orgID = default(string), string name = default(string), Dictionary<string, string> properties = default(Dictionary<string, string>))
+        public LabelCreateRequest(string orgID = default, string name = default,
+            Dictionary<string, string> properties = default)
         {
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
-                throw new InvalidDataException("orgID is a required property for LabelCreateRequest and cannot be null");
+                throw new InvalidDataException(
+                    "orgID is a required property for LabelCreateRequest and cannot be null");
             }
-            this.OrgID = orgID;
+
+            OrgID = orgID;
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for LabelCreateRequest and cannot be null");
             }
-            this.Name = name;
-            this.Properties = properties;
+
+            Name = name;
+            Properties = properties;
         }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Key/Value pairs associated with this label. Keys can be removed by sending an update with an empty value.
         /// </summary>
         /// <value>Key/Value pairs associated with this label. Keys can be removed by sending an update with an empty value.</value>
-        [DataMember(Name="properties", EmitDefaultValue=false)]
+        [DataMember(Name = "properties", EmitDefaultValue = false)]
         public Dictionary<string, string> Properties { get; set; }
 
         /// <summary>
@@ -107,7 +114,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LabelCreateRequest);
+            return Equals(input as LabelCreateRequest);
         }
 
         /// <summary>
@@ -118,21 +125,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(LabelCreateRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Properties == input.Properties ||
-                    this.Properties != null &&
-                    this.Properties.SequenceEqual(input.Properties)
+                    Properties == input.Properties ||
+                    Properties != null &&
+                    Properties.SequenceEqual(input.Properties)
                 );
         }
 
@@ -144,18 +153,25 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Properties != null)
-                    hashCode = hashCode * 59 + this.Properties.GetHashCode();
+                var hashCode = 41;
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Properties != null)
+                {
+                    hashCode = hashCode * 59 + Properties.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

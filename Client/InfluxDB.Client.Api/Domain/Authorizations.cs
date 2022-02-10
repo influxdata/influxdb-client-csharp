@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// Authorizations
     /// </summary>
     [DataContract]
-    public partial class Authorizations :  IEquatable<Authorizations>
+    public partial class Authorizations : IEquatable<Authorizations>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Authorizations" /> class.
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="authorizations">authorizations.</param>
-        public Authorizations(Links links = default(Links), List<Authorization> authorizations = default(List<Authorization>))
+        public Authorizations(Links links = default, List<Authorization> authorizations = default)
         {
-            this.Links = links;
-            this._Authorizations = authorizations;
+            Links = links;
+            _Authorizations = authorizations;
         }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public Links Links { get; set; }
 
         /// <summary>
         /// Gets or Sets _Authorizations
         /// </summary>
-        [DataMember(Name="authorizations", EmitDefaultValue=false)]
+        [DataMember(Name = "authorizations", EmitDefaultValue = false)]
         public List<Authorization> _Authorizations { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Authorizations);
+            return Equals(input as Authorizations);
         }
 
         /// <summary>
@@ -93,17 +93,16 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Authorizations input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
+                Links != null && Links.Equals(input.Links) &&
                 (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                ) && 
-                (
-                    this._Authorizations == input._Authorizations ||
-                    this._Authorizations != null &&
-                    this._Authorizations.SequenceEqual(input._Authorizations)
+                    _Authorizations == input._Authorizations ||
+                    _Authorizations != null &&
+                    _Authorizations.SequenceEqual(input._Authorizations)
                 );
         }
 
@@ -115,16 +114,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
-                if (this._Authorizations != null)
-                    hashCode = hashCode * 59 + this._Authorizations.GetHashCode();
+                var hashCode = 41;
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
+                if (_Authorizations != null)
+                {
+                    hashCode = hashCode * 59 + _Authorizations.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

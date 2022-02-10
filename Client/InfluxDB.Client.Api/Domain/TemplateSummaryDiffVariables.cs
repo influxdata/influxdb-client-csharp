@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryDiffVariables
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryDiffVariables :  IEquatable<TemplateSummaryDiffVariables>
+    public partial class TemplateSummaryDiffVariables : IEquatable<TemplateSummaryDiffVariables>
     {
         /// <summary>
         /// Gets or Sets Kind
         /// </summary>
-        [DataMember(Name="kind", EmitDefaultValue=false)]
+        [DataMember(Name = "kind", EmitDefaultValue = false)]
         public TemplateKind? Kind { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryDiffVariables" /> class.
         /// </summary>
@@ -43,45 +44,47 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="templateMetaName">templateMetaName.</param>
         /// <param name="_new">_new.</param>
         /// <param name="old">old.</param>
-        public TemplateSummaryDiffVariables(TemplateKind? kind = default(TemplateKind?), string stateStatus = default(string), string id = default(string), string templateMetaName = default(string), TemplateSummaryDiffVariablesNewOld _new = default(TemplateSummaryDiffVariablesNewOld), TemplateSummaryDiffVariablesNewOld old = default(TemplateSummaryDiffVariablesNewOld))
+        public TemplateSummaryDiffVariables(TemplateKind? kind = default, string stateStatus = default,
+            string id = default, string templateMetaName = default, TemplateSummaryDiffVariablesNewOld _new = default,
+            TemplateSummaryDiffVariablesNewOld old = default)
         {
-            this.Kind = kind;
-            this.StateStatus = stateStatus;
-            this.Id = id;
-            this.TemplateMetaName = templateMetaName;
-            this.New = _new;
-            this.Old = old;
+            Kind = kind;
+            StateStatus = stateStatus;
+            Id = id;
+            TemplateMetaName = templateMetaName;
+            New = _new;
+            Old = old;
         }
 
 
         /// <summary>
         /// Gets or Sets StateStatus
         /// </summary>
-        [DataMember(Name="stateStatus", EmitDefaultValue=false)]
+        [DataMember(Name = "stateStatus", EmitDefaultValue = false)]
         public string StateStatus { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets TemplateMetaName
         /// </summary>
-        [DataMember(Name="templateMetaName", EmitDefaultValue=false)]
+        [DataMember(Name = "templateMetaName", EmitDefaultValue = false)]
         public string TemplateMetaName { get; set; }
 
         /// <summary>
         /// Gets or Sets New
         /// </summary>
-        [DataMember(Name="new", EmitDefaultValue=false)]
+        [DataMember(Name = "new", EmitDefaultValue = false)]
         public TemplateSummaryDiffVariablesNewOld New { get; set; }
 
         /// <summary>
         /// Gets or Sets Old
         /// </summary>
-        [DataMember(Name="old", EmitDefaultValue=false)]
+        [DataMember(Name = "old", EmitDefaultValue = false)]
         public TemplateSummaryDiffVariablesNewOld Old { get; set; }
 
         /// <summary>
@@ -118,7 +121,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryDiffVariables);
+            return Equals(input as TemplateSummaryDiffVariables);
         }
 
         /// <summary>
@@ -129,33 +132,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryDiffVariables input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Kind == input.Kind ||
-                    this.Kind.Equals(input.Kind)
-                ) && 
+                    Kind == input.Kind ||
+                    Kind.Equals(input.Kind)
+                ) &&
                 (
-                    this.StateStatus == input.StateStatus ||
-                    (this.StateStatus != null && this.StateStatus.Equals(input.StateStatus))
-                ) && 
+                    StateStatus == input.StateStatus ||
+                    StateStatus != null && StateStatus.Equals(input.StateStatus)
+                ) &&
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.TemplateMetaName == input.TemplateMetaName ||
-                    (this.TemplateMetaName != null && this.TemplateMetaName.Equals(input.TemplateMetaName))
-                ) && 
-                (
-                    
-                    (this.New != null && this.New.Equals(input.New))
-                ) && 
-                (
-                    
-                    (this.Old != null && this.Old.Equals(input.Old))
-                );
+                    TemplateMetaName == input.TemplateMetaName ||
+                    TemplateMetaName != null && TemplateMetaName.Equals(input.TemplateMetaName)
+                ) && New != null && New.Equals(input.New) && Old != null && Old.Equals(input.Old);
         }
 
         /// <summary>
@@ -166,23 +163,36 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Kind.GetHashCode();
-                if (this.StateStatus != null)
-                    hashCode = hashCode * 59 + this.StateStatus.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.TemplateMetaName != null)
-                    hashCode = hashCode * 59 + this.TemplateMetaName.GetHashCode();
-                if (this.New != null)
-                    hashCode = hashCode * 59 + this.New.GetHashCode();
-                if (this.Old != null)
-                    hashCode = hashCode * 59 + this.Old.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Kind.GetHashCode();
+                if (StateStatus != null)
+                {
+                    hashCode = hashCode * 59 + StateStatus.GetHashCode();
+                }
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (TemplateMetaName != null)
+                {
+                    hashCode = hashCode * 59 + TemplateMetaName.GetHashCode();
+                }
+
+                if (New != null)
+                {
+                    hashCode = hashCode * 59 + New.GetHashCode();
+                }
+
+                if (Old != null)
+                {
+                    hashCode = hashCode * 59 + Old.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

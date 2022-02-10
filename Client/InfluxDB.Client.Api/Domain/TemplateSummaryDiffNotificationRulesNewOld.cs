@@ -27,7 +27,8 @@ namespace InfluxDB.Client.Api.Domain
     /// TemplateSummaryDiffNotificationRulesNewOld
     /// </summary>
     [DataContract]
-    public partial class TemplateSummaryDiffNotificationRulesNewOld :  IEquatable<TemplateSummaryDiffNotificationRulesNewOld>
+    public partial class
+        TemplateSummaryDiffNotificationRulesNewOld : IEquatable<TemplateSummaryDiffNotificationRulesNewOld>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateSummaryDiffNotificationRulesNewOld" /> class.
@@ -43,85 +44,89 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="status">status.</param>
         /// <param name="statusRules">statusRules.</param>
         /// <param name="tagRules">tagRules.</param>
-        public TemplateSummaryDiffNotificationRulesNewOld(string name = default(string), string description = default(string), string endpointName = default(string), string endpointID = default(string), string endpointType = default(string), string every = default(string), string offset = default(string), string messageTemplate = default(string), string status = default(string), List<TemplateSummarySummaryStatusRules> statusRules = default(List<TemplateSummarySummaryStatusRules>), List<TemplateSummarySummaryTagRules> tagRules = default(List<TemplateSummarySummaryTagRules>))
+        public TemplateSummaryDiffNotificationRulesNewOld(string name = default, string description = default,
+            string endpointName = default, string endpointID = default, string endpointType = default,
+            string every = default, string offset = default, string messageTemplate = default, string status = default,
+            List<TemplateSummarySummaryStatusRules> statusRules = default,
+            List<TemplateSummarySummaryTagRules> tagRules = default)
         {
-            this.Name = name;
-            this.Description = description;
-            this.EndpointName = endpointName;
-            this.EndpointID = endpointID;
-            this.EndpointType = endpointType;
-            this.Every = every;
-            this.Offset = offset;
-            this.MessageTemplate = messageTemplate;
-            this.Status = status;
-            this.StatusRules = statusRules;
-            this.TagRules = tagRules;
+            Name = name;
+            Description = description;
+            EndpointName = endpointName;
+            EndpointID = endpointID;
+            EndpointType = endpointType;
+            Every = every;
+            Offset = offset;
+            MessageTemplate = messageTemplate;
+            Status = status;
+            StatusRules = statusRules;
+            TagRules = tagRules;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets EndpointName
         /// </summary>
-        [DataMember(Name="endpointName", EmitDefaultValue=false)]
+        [DataMember(Name = "endpointName", EmitDefaultValue = false)]
         public string EndpointName { get; set; }
 
         /// <summary>
         /// Gets or Sets EndpointID
         /// </summary>
-        [DataMember(Name="endpointID", EmitDefaultValue=false)]
+        [DataMember(Name = "endpointID", EmitDefaultValue = false)]
         public string EndpointID { get; set; }
 
         /// <summary>
         /// Gets or Sets EndpointType
         /// </summary>
-        [DataMember(Name="endpointType", EmitDefaultValue=false)]
+        [DataMember(Name = "endpointType", EmitDefaultValue = false)]
         public string EndpointType { get; set; }
 
         /// <summary>
         /// Gets or Sets Every
         /// </summary>
-        [DataMember(Name="every", EmitDefaultValue=false)]
+        [DataMember(Name = "every", EmitDefaultValue = false)]
         public string Every { get; set; }
 
         /// <summary>
         /// Gets or Sets Offset
         /// </summary>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
         public string Offset { get; set; }
 
         /// <summary>
         /// Gets or Sets MessageTemplate
         /// </summary>
-        [DataMember(Name="messageTemplate", EmitDefaultValue=false)]
+        [DataMember(Name = "messageTemplate", EmitDefaultValue = false)]
         public string MessageTemplate { get; set; }
 
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets StatusRules
         /// </summary>
-        [DataMember(Name="statusRules", EmitDefaultValue=false)]
+        [DataMember(Name = "statusRules", EmitDefaultValue = false)]
         public List<TemplateSummarySummaryStatusRules> StatusRules { get; set; }
 
         /// <summary>
         /// Gets or Sets TagRules
         /// </summary>
-        [DataMember(Name="tagRules", EmitDefaultValue=false)]
+        [DataMember(Name = "tagRules", EmitDefaultValue = false)]
         public List<TemplateSummarySummaryTagRules> TagRules { get; set; }
 
         /// <summary>
@@ -163,7 +168,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TemplateSummaryDiffNotificationRulesNewOld);
+            return Equals(input as TemplateSummaryDiffNotificationRulesNewOld);
         }
 
         /// <summary>
@@ -174,54 +179,56 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TemplateSummaryDiffNotificationRulesNewOld input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.EndpointName == input.EndpointName ||
-                    (this.EndpointName != null && this.EndpointName.Equals(input.EndpointName))
-                ) && 
+                    EndpointName == input.EndpointName ||
+                    EndpointName != null && EndpointName.Equals(input.EndpointName)
+                ) &&
                 (
-                    this.EndpointID == input.EndpointID ||
-                    (this.EndpointID != null && this.EndpointID.Equals(input.EndpointID))
-                ) && 
+                    EndpointID == input.EndpointID ||
+                    EndpointID != null && EndpointID.Equals(input.EndpointID)
+                ) &&
                 (
-                    this.EndpointType == input.EndpointType ||
-                    (this.EndpointType != null && this.EndpointType.Equals(input.EndpointType))
-                ) && 
+                    EndpointType == input.EndpointType ||
+                    EndpointType != null && EndpointType.Equals(input.EndpointType)
+                ) &&
                 (
-                    this.Every == input.Every ||
-                    (this.Every != null && this.Every.Equals(input.Every))
-                ) && 
+                    Every == input.Every ||
+                    Every != null && Every.Equals(input.Every)
+                ) &&
                 (
-                    this.Offset == input.Offset ||
-                    (this.Offset != null && this.Offset.Equals(input.Offset))
-                ) && 
+                    Offset == input.Offset ||
+                    Offset != null && Offset.Equals(input.Offset)
+                ) &&
                 (
-                    this.MessageTemplate == input.MessageTemplate ||
-                    (this.MessageTemplate != null && this.MessageTemplate.Equals(input.MessageTemplate))
-                ) && 
+                    MessageTemplate == input.MessageTemplate ||
+                    MessageTemplate != null && MessageTemplate.Equals(input.MessageTemplate)
+                ) &&
                 (
-                    this.Status == input.Status ||
-                    (this.Status != null && this.Status.Equals(input.Status))
-                ) && 
+                    Status == input.Status ||
+                    Status != null && Status.Equals(input.Status)
+                ) &&
                 (
-                    this.StatusRules == input.StatusRules ||
-                    this.StatusRules != null &&
-                    this.StatusRules.SequenceEqual(input.StatusRules)
-                ) && 
+                    StatusRules == input.StatusRules ||
+                    StatusRules != null &&
+                    StatusRules.SequenceEqual(input.StatusRules)
+                ) &&
                 (
-                    this.TagRules == input.TagRules ||
-                    this.TagRules != null &&
-                    this.TagRules.SequenceEqual(input.TagRules)
+                    TagRules == input.TagRules ||
+                    TagRules != null &&
+                    TagRules.SequenceEqual(input.TagRules)
                 );
         }
 
@@ -233,34 +240,65 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.EndpointName != null)
-                    hashCode = hashCode * 59 + this.EndpointName.GetHashCode();
-                if (this.EndpointID != null)
-                    hashCode = hashCode * 59 + this.EndpointID.GetHashCode();
-                if (this.EndpointType != null)
-                    hashCode = hashCode * 59 + this.EndpointType.GetHashCode();
-                if (this.Every != null)
-                    hashCode = hashCode * 59 + this.Every.GetHashCode();
-                if (this.Offset != null)
-                    hashCode = hashCode * 59 + this.Offset.GetHashCode();
-                if (this.MessageTemplate != null)
-                    hashCode = hashCode * 59 + this.MessageTemplate.GetHashCode();
-                if (this.Status != null)
-                    hashCode = hashCode * 59 + this.Status.GetHashCode();
-                if (this.StatusRules != null)
-                    hashCode = hashCode * 59 + this.StatusRules.GetHashCode();
-                if (this.TagRules != null)
-                    hashCode = hashCode * 59 + this.TagRules.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (EndpointName != null)
+                {
+                    hashCode = hashCode * 59 + EndpointName.GetHashCode();
+                }
+
+                if (EndpointID != null)
+                {
+                    hashCode = hashCode * 59 + EndpointID.GetHashCode();
+                }
+
+                if (EndpointType != null)
+                {
+                    hashCode = hashCode * 59 + EndpointType.GetHashCode();
+                }
+
+                if (Every != null)
+                {
+                    hashCode = hashCode * 59 + Every.GetHashCode();
+                }
+
+                if (Offset != null)
+                {
+                    hashCode = hashCode * 59 + Offset.GetHashCode();
+                }
+
+                if (MessageTemplate != null)
+                {
+                    hashCode = hashCode * 59 + MessageTemplate.GetHashCode();
+                }
+
+                if (Status != null)
+                {
+                    hashCode = hashCode * 59 + Status.GetHashCode();
+                }
+
+                if (StatusRules != null)
+                {
+                    hashCode = hashCode * 59 + StatusRules.GetHashCode();
+                }
+
+                if (TagRules != null)
+                {
+                    hashCode = hashCode * 59 + TagRules.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

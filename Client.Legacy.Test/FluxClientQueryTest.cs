@@ -21,7 +21,7 @@ namespace Client.Legacy.Test
         public async Task Query()
         {
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateResponse());
+                .RespondWith(CreateResponse());
 
             var result = await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
 
@@ -32,7 +32,7 @@ namespace Client.Legacy.Test
         public async Task QueryToPoco()
         {
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateResponse());
+                .RespondWith(CreateResponse());
 
             var result = await FluxClient.QueryAsync<Free>("from(bucket:\"telegraf\")");
 
@@ -47,7 +47,7 @@ namespace Client.Legacy.Test
             Assert.AreEqual("B", result[1].Host);
             Assert.AreEqual("west", result[1].Region);
             Assert.AreEqual(20L, result[1].Mem);
-            
+
             // 3
             Assert.AreEqual("A", result[2].Host);
             Assert.AreEqual("west", result[2].Region);
@@ -63,8 +63,8 @@ namespace Client.Legacy.Test
         public async Task QueryError()
         {
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateErrorResponse("Flux query is not valid"));
-            
+                .RespondWith(CreateErrorResponse("Flux query is not valid"));
+
             try
             {
                 await FluxClient.QueryRawAsync("from(bucket:\"telegraf\")");
@@ -82,11 +82,12 @@ namespace Client.Legacy.Test
         {
             var response = Response.Create()
                 .WithStatusCode(403)
-                .WithBody("Flux query service disabled. Verify flux-enabled=true in the [http] section of the InfluxDB config.");
+                .WithBody(
+                    "Flux query service disabled. Verify flux-enabled=true in the [http] section of the InfluxDB config.");
 
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
                 .RespondWith(response);
-            
+
             try
             {
                 await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
@@ -105,14 +106,14 @@ namespace Client.Legacy.Test
         public async Task QueryErrorSuccessResponse()
         {
             var error = "#datatype,string,string\n"
-                            + "#group,true,true\n"
-                            + "#default,,\n"
-                            + ",error,reference\n"
-                            + ",failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time,897";
+                        + "#group,true,true\n"
+                        + "#default,,\n"
+                        + ",error,reference\n"
+                        + ",failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time,897";
 
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateResponse(error));
-            
+                .RespondWith(CreateResponse(error));
+
             try
             {
                 await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
@@ -121,7 +122,8 @@ namespace Client.Legacy.Test
             }
             catch (FluxQueryException e)
             {
-                Assert.That(e.Message.Equals("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
+                Assert.That(e.Message.Equals(
+                    "failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
                 Assert.AreEqual(e.Reference, 897);
             }
         }
@@ -130,14 +132,14 @@ namespace Client.Legacy.Test
         public async Task QueryErrorSuccessResponseWithoutReference()
         {
             var error = "#datatype,string,string\n"
-                            + "#group,true,true\n"
-                            + "#default,,\n"
-                            + ",error,reference\n"
-                            + ",failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time,";
+                        + "#group,true,true\n"
+                        + "#default,,\n"
+                        + ",error,reference\n"
+                        + ",failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time,";
 
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateResponse(error));
-            
+                .RespondWith(CreateResponse(error));
+
             try
             {
                 await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
@@ -146,7 +148,8 @@ namespace Client.Legacy.Test
             }
             catch (InfluxException e)
             {
-                Assert.That(e.Message.Equals("failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
+                Assert.That(e.Message.Equals(
+                    "failed to create physical plan: invalid time bounds from procedure from: bounds contain zero time"));
             }
         }
 
@@ -156,17 +159,17 @@ namespace Client.Legacy.Test
             CountdownEvent = new CountdownEvent(4);
 
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateResponse());
+                .RespondWith(CreateResponse());
 
             var records = new List<FluxRecord>();
 
             await FluxClient.QueryAsync("from(bucket:\"telegraf\")",
-                            result =>
-                            {
-                                records.Add(result);
+                result =>
+                {
+                    records.Add(result);
 
-                                CountdownEvent.Signal();
-                            });
+                    CountdownEvent.Signal();
+                });
 
             WaitToCallback();
 
@@ -179,18 +182,18 @@ namespace Client.Legacy.Test
             CountdownEvent = new CountdownEvent(5);
 
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateResponse());
+                .RespondWith(CreateResponse());
 
             var records = new List<FluxRecord>();
 
             await FluxClient.QueryAsync("from(bucket:\"telegraf\")",
-                            result =>
-                            {
-                                records.Add(result);
+                result =>
+                {
+                    records.Add(result);
 
-                                CountdownEvent.Signal();
-                            }, error => Assert.Fail("Unreachable"), 
-                            () => CountdownEvent.Signal());
+                    CountdownEvent.Signal();
+                }, error => Assert.Fail("Unreachable"),
+                () => CountdownEvent.Signal());
 
             WaitToCallback();
 
@@ -201,11 +204,11 @@ namespace Client.Legacy.Test
         public async Task QueryCallbackError()
         {
             MockServer.Given(Request.Create().WithPath("/api/v2/query").UsingPost())
-                            .RespondWith(CreateErrorResponse("Flux query is not valid"));
+                .RespondWith(CreateErrorResponse("Flux query is not valid"));
 
             await FluxClient.QueryAsync("from(bucket:\"telegraf\")",
-                            result => Assert.Fail("Unreachable"), 
-                            error => CountdownEvent.Signal());
+                result => Assert.Fail("Unreachable"),
+                error => CountdownEvent.Signal());
 
             WaitToCallback();
         }
@@ -218,7 +221,7 @@ namespace Client.Legacy.Test
 
             await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
 
-            var request= MockServer.LogEntries.Last();
+            var request = MockServer.LogEntries.Last();
             StringAssert.StartsWith("influxdb-client-csharp/4.", request.RequestMessage.Headers["User-Agent"].First());
             StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
         }
@@ -226,35 +229,37 @@ namespace Client.Legacy.Test
         [Test]
         public async Task WithAuthentication()
         {
-            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user", "my-password".ToCharArray()));
-            
+            FluxClient =
+                FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user",
+                    "my-password".ToCharArray()));
+
             MockServer.Given(Request.Create()
                     .WithPath("/api/v2/query")
                     .WithParam("u", new ExactMatcher("my-user"))
                     .WithParam("p", new ExactMatcher("my-password"))
                     .UsingPost())
                 .RespondWith(CreateResponse());
-                
+
             var result = await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
 
             AssertSuccessResult(result);
         }
-        
+
         [Test]
         public async Task WithBasicAuthentication()
         {
-            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user", 
-                            "my-password".ToCharArray(), FluxConnectionOptions.AuthenticationType.BasicAuthentication));
-            
+            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user",
+                "my-password".ToCharArray(), FluxConnectionOptions.AuthenticationType.BasicAuthentication));
+
             var auth = System.Text.Encoding.UTF8.GetBytes("my-user:my-password");
-            
+
             MockServer.Given(Request.Create()
-                                            .WithPath("/api/v2/query")
-                                            .WithHeader("Authorization",
-                                                            new ExactMatcher("Basic " + Convert.ToBase64String(auth)))
-                                            .UsingPost())
-                            .RespondWith(CreateResponse());
-                
+                    .WithPath("/api/v2/query")
+                    .WithHeader("Authorization",
+                        new ExactMatcher("Basic " + Convert.ToBase64String(auth)))
+                    .UsingPost())
+                .RespondWith(CreateResponse());
+
             var result = await FluxClient.QueryAsync("from(bucket:\"telegraf\")");
 
             AssertSuccessResult(result);
@@ -275,14 +280,11 @@ namespace Client.Legacy.Test
 
         private class Free
         {
-            [Column("host")] 
-            public string Host { get; set; }
+            [Column("host")] public string Host { get; set; }
 
-            [Column("region")]
-            public string Region { get; set; }
+            [Column("region")] public string Region { get; set; }
 
-            [Column("_value")]
-            public long Mem { get; set; }
+            [Column("_value")] public long Mem { get; set; }
         }
     }
 }

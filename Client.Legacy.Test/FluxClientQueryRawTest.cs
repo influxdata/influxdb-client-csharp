@@ -50,10 +50,10 @@ namespace Client.Legacy.Test
             var results = new List<string>();
 
             await FluxClient.QueryRawAsync("from(bucket:\"telegraf\")", result =>
-                {
-                    results.Add(result);
-                    CountdownEvent.Signal();
-                });
+            {
+                results.Add(result);
+                CountdownEvent.Signal();
+            });
 
             WaitToCallback();
 

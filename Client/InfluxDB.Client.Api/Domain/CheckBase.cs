@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// CheckBase
     /// </summary>
     [DataContract]
-    public partial class CheckBase :  IEquatable<CheckBase>
+    public partial class CheckBase : IEquatable<CheckBase>
     {
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public TaskStatusType? Status { get; set; }
+
         /// <summary>
         /// Defines LastRunStatus
         /// </summary>
@@ -43,33 +44,33 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Failed for value: failed
             /// </summary>
-            [EnumMember(Value = "failed")]
-            Failed = 1,
+            [EnumMember(Value = "failed")] Failed = 1,
 
             /// <summary>
             /// Enum Success for value: success
             /// </summary>
-            [EnumMember(Value = "success")]
-            Success = 2,
+            [EnumMember(Value = "success")] Success = 2,
 
             /// <summary>
             /// Enum Canceled for value: canceled
             /// </summary>
-            [EnumMember(Value = "canceled")]
-            Canceled = 3
-
+            [EnumMember(Value = "canceled")] Canceled = 3
         }
 
         /// <summary>
         /// Gets or Sets LastRunStatus
         /// </summary>
-        [DataMember(Name="lastRunStatus", EmitDefaultValue=false)]
+        [DataMember(Name = "lastRunStatus", EmitDefaultValue = false)]
         public LastRunStatusEnum? LastRunStatus { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckBase" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CheckBase() { }
+        protected CheckBase()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckBase" /> class.
         /// </summary>
@@ -81,82 +82,87 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="description">An optional description of the check..</param>
         /// <param name="labels">labels.</param>
         /// <param name="links">links.</param>
-        public CheckBase(string name = default(string), string orgID = default(string), string taskID = default(string), DashboardQuery query = default(DashboardQuery), TaskStatusType? status = default(TaskStatusType?), string description = default(string), List<Label> labels = default(List<Label>), CheckBaseLinks links = default(CheckBaseLinks))
+        public CheckBase(string name = default, string orgID = default, string taskID = default,
+            DashboardQuery query = default, TaskStatusType? status = default, string description = default,
+            List<Label> labels = default, CheckBaseLinks links = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
             {
                 throw new InvalidDataException("name is a required property for CheckBase and cannot be null");
             }
-            this.Name = name;
+
+            Name = name;
             // to ensure "orgID" is required (not null)
             if (orgID == null)
             {
                 throw new InvalidDataException("orgID is a required property for CheckBase and cannot be null");
             }
-            this.OrgID = orgID;
+
+            OrgID = orgID;
             // to ensure "query" is required (not null)
             if (query == null)
             {
                 throw new InvalidDataException("query is a required property for CheckBase and cannot be null");
             }
-            this.Query = query;
-            this.TaskID = taskID;
-            this.Status = status;
-            this.Description = description;
-            this.Labels = labels;
-            this.Links = links;
+
+            Query = query;
+            TaskID = taskID;
+            Status = status;
+            Description = description;
+            Labels = labels;
+            Links = links;
         }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// The ID of the organization that owns this check.
         /// </summary>
         /// <value>The ID of the organization that owns this check.</value>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// The ID of the task associated with this check.
         /// </summary>
         /// <value>The ID of the task associated with this check.</value>
-        [DataMember(Name="taskID", EmitDefaultValue=false)]
+        [DataMember(Name = "taskID", EmitDefaultValue = false)]
         public string TaskID { get; set; }
 
         /// <summary>
         /// The ID of creator used to create this check.
         /// </summary>
         /// <value>The ID of creator used to create this check.</value>
-        [DataMember(Name="ownerID", EmitDefaultValue=false)]
+        [DataMember(Name = "ownerID", EmitDefaultValue = false)]
         public string OwnerID { get; private set; }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public DateTime? CreatedAt { get; private set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public DateTime? UpdatedAt { get; private set; }
 
         /// <summary>
         /// Gets or Sets Query
         /// </summary>
-        [DataMember(Name="query", EmitDefaultValue=false)]
+        [DataMember(Name = "query", EmitDefaultValue = false)]
         public DashboardQuery Query { get; set; }
 
 
@@ -164,33 +170,33 @@ namespace InfluxDB.Client.Api.Domain
         /// An optional description of the check.
         /// </summary>
         /// <value>An optional description of the check.</value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Timestamp (in RFC3339 date/time format](https://datatracker.ietf.org/doc/html/rfc3339)) of the latest scheduled and completed run.
         /// </summary>
         /// <value>Timestamp (in RFC3339 date/time format](https://datatracker.ietf.org/doc/html/rfc3339)) of the latest scheduled and completed run.</value>
-        [DataMember(Name="latestCompleted", EmitDefaultValue=false)]
-        public Object LatestCompleted { get; private set; }
+        [DataMember(Name = "latestCompleted", EmitDefaultValue = false)]
+        public object LatestCompleted { get; private set; }
 
 
         /// <summary>
         /// Gets or Sets LastRunError
         /// </summary>
-        [DataMember(Name="lastRunError", EmitDefaultValue=false)]
+        [DataMember(Name = "lastRunError", EmitDefaultValue = false)]
         public string LastRunError { get; private set; }
 
         /// <summary>
         /// Gets or Sets Labels
         /// </summary>
-        [DataMember(Name="labels", EmitDefaultValue=false)]
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
         public List<Label> Labels { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public CheckBaseLinks Links { get; set; }
 
         /// <summary>
@@ -236,7 +242,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as CheckBase);
+            return Equals(input as CheckBase);
         }
 
         /// <summary>
@@ -247,70 +253,58 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(CheckBase input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && 
+                    Id == input.Id ||
+                    Id != null && Id.Equals(input.Id)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.TaskID == input.TaskID ||
-                    (this.TaskID != null && this.TaskID.Equals(input.TaskID))
-                ) && 
+                    TaskID == input.TaskID ||
+                    TaskID != null && TaskID.Equals(input.TaskID)
+                ) &&
                 (
-                    this.OwnerID == input.OwnerID ||
-                    (this.OwnerID != null && this.OwnerID.Equals(input.OwnerID))
-                ) && 
+                    OwnerID == input.OwnerID ||
+                    OwnerID != null && OwnerID.Equals(input.OwnerID)
+                ) &&
                 (
-                    this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
-                ) && 
+                    CreatedAt == input.CreatedAt ||
+                    CreatedAt != null && CreatedAt.Equals(input.CreatedAt)
+                ) &&
                 (
-                    this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
-                ) && 
-                (
-                    
-                    (this.Query != null && this.Query.Equals(input.Query))
-                ) && 
-                (
-                    this.Status == input.Status ||
-                    this.Status.Equals(input.Status)
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.LatestCompleted == input.LatestCompleted ||
-                    (this.LatestCompleted != null && this.LatestCompleted.Equals(input.LatestCompleted))
-                ) && 
-                (
-                    this.LastRunStatus == input.LastRunStatus ||
-                    this.LastRunStatus.Equals(input.LastRunStatus)
-                ) && 
-                (
-                    this.LastRunError == input.LastRunError ||
-                    (this.LastRunError != null && this.LastRunError.Equals(input.LastRunError))
-                ) && 
-                (
-                    this.Labels == input.Labels ||
-                    this.Labels != null &&
-                    this.Labels.SequenceEqual(input.Labels)
-                ) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+                    UpdatedAt == input.UpdatedAt ||
+                    UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)
+                ) && Query != null && Query.Equals(input.Query) && (
+                    Status == input.Status ||
+                    Status.Equals(input.Status)
+                ) && (
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) && (
+                    LatestCompleted == input.LatestCompleted ||
+                    LatestCompleted != null && LatestCompleted.Equals(input.LatestCompleted)
+                ) && (
+                    LastRunStatus == input.LastRunStatus ||
+                    LastRunStatus.Equals(input.LastRunStatus)
+                ) && (
+                    LastRunError == input.LastRunError ||
+                    LastRunError != null && LastRunError.Equals(input.LastRunError)
+                ) && (
+                    Labels == input.Labels ||
+                    Labels != null &&
+                    Labels.SequenceEqual(input.Labels)
+                ) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -321,40 +315,77 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.TaskID != null)
-                    hashCode = hashCode * 59 + this.TaskID.GetHashCode();
-                if (this.OwnerID != null)
-                    hashCode = hashCode * 59 + this.OwnerID.GetHashCode();
-                if (this.CreatedAt != null)
-                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
-                if (this.UpdatedAt != null)
-                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
-                if (this.Query != null)
-                    hashCode = hashCode * 59 + this.Query.GetHashCode();
-                hashCode = hashCode * 59 + this.Status.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.LatestCompleted != null)
-                    hashCode = hashCode * 59 + this.LatestCompleted.GetHashCode();
-                hashCode = hashCode * 59 + this.LastRunStatus.GetHashCode();
-                if (this.LastRunError != null)
-                    hashCode = hashCode * 59 + this.LastRunError.GetHashCode();
-                if (this.Labels != null)
-                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = 41;
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (TaskID != null)
+                {
+                    hashCode = hashCode * 59 + TaskID.GetHashCode();
+                }
+
+                if (OwnerID != null)
+                {
+                    hashCode = hashCode * 59 + OwnerID.GetHashCode();
+                }
+
+                if (CreatedAt != null)
+                {
+                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+                }
+
+                if (UpdatedAt != null)
+                {
+                    hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
+                }
+
+                if (Query != null)
+                {
+                    hashCode = hashCode * 59 + Query.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Status.GetHashCode();
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (LatestCompleted != null)
+                {
+                    hashCode = hashCode * 59 + LatestCompleted.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + LastRunStatus.GetHashCode();
+                if (LastRunError != null)
+                {
+                    hashCode = hashCode * 59 + LastRunError.GetHashCode();
+                }
+
+                if (Labels != null)
+                {
+                    hashCode = hashCode * 59 + Labels.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

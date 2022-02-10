@@ -26,46 +26,38 @@ namespace InfluxDB.Client.Api.Domain
     /// <summary>
     /// Defines TemplateKind
     /// </summary>
-    
     [JsonConverter(typeof(StringEnumConverter))]
-    
     public enum TemplateKind
     {
         /// <summary>
         /// Enum Bucket for value: Bucket
         /// </summary>
-        [EnumMember(Value = "Bucket")]
-        Bucket = 1,
+        [EnumMember(Value = "Bucket")] Bucket = 1,
 
         /// <summary>
         /// Enum Check for value: Check
         /// </summary>
-        [EnumMember(Value = "Check")]
-        Check = 2,
+        [EnumMember(Value = "Check")] Check = 2,
 
         /// <summary>
         /// Enum CheckDeadman for value: CheckDeadman
         /// </summary>
-        [EnumMember(Value = "CheckDeadman")]
-        CheckDeadman = 3,
+        [EnumMember(Value = "CheckDeadman")] CheckDeadman = 3,
 
         /// <summary>
         /// Enum CheckThreshold for value: CheckThreshold
         /// </summary>
-        [EnumMember(Value = "CheckThreshold")]
-        CheckThreshold = 4,
+        [EnumMember(Value = "CheckThreshold")] CheckThreshold = 4,
 
         /// <summary>
         /// Enum Dashboard for value: Dashboard
         /// </summary>
-        [EnumMember(Value = "Dashboard")]
-        Dashboard = 5,
+        [EnumMember(Value = "Dashboard")] Dashboard = 5,
 
         /// <summary>
         /// Enum Label for value: Label
         /// </summary>
-        [EnumMember(Value = "Label")]
-        Label = 6,
+        [EnumMember(Value = "Label")] Label = 6,
 
         /// <summary>
         /// Enum NotificationEndpoint for value: NotificationEndpoint
@@ -100,21 +92,16 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Enum Task for value: Task
         /// </summary>
-        [EnumMember(Value = "Task")]
-        Task = 12,
+        [EnumMember(Value = "Task")] Task = 12,
 
         /// <summary>
         /// Enum Telegraf for value: Telegraf
         /// </summary>
-        [EnumMember(Value = "Telegraf")]
-        Telegraf = 13,
+        [EnumMember(Value = "Telegraf")] Telegraf = 13,
 
         /// <summary>
         /// Enum Variable for value: Variable
         /// </summary>
-        [EnumMember(Value = "Variable")]
-        Variable = 14
-
+        [EnumMember(Value = "Variable")] Variable = 14
     }
-
 }

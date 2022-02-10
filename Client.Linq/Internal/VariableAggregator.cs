@@ -29,9 +29,7 @@ namespace InfluxDB.Client.Linq.Internal
         internal void VariableIsTag(string variableName)
         {
             foreach (var namedVariable in _variables.Where(it => it.Name.Equals(variableName)))
-            {
                 namedVariable.IsTag = true;
-            }
         }
 
         internal List<Statement> GetStatements()

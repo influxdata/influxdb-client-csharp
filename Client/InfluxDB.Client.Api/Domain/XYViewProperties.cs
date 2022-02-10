@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// XYViewProperties
     /// </summary>
     [DataContract]
-    public partial class XYViewProperties : ViewProperties,  IEquatable<XYViewProperties>
+    public partial class XYViewProperties : ViewProperties, IEquatable<XYViewProperties>
     {
         /// <summary>
         /// Defines Type
@@ -38,16 +38,15 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Xy for value: xy
             /// </summary>
-            [EnumMember(Value = "xy")]
-            Xy = 1
-
+            [EnumMember(Value = "xy")] Xy = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Defines Shape
         /// </summary>
@@ -57,16 +56,15 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum ChronografV2 for value: chronograf-v2
             /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
+            [EnumMember(Value = "chronograf-v2")] ChronografV2 = 1
         }
 
         /// <summary>
         /// Gets or Sets Shape
         /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
+        [DataMember(Name = "shape", EmitDefaultValue = false)]
         public ShapeEnum Shape { get; set; }
+
         /// <summary>
         /// Defines HoverDimension
         /// </summary>
@@ -76,34 +74,30 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Auto for value: auto
             /// </summary>
-            [EnumMember(Value = "auto")]
-            Auto = 1,
+            [EnumMember(Value = "auto")] Auto = 1,
 
             /// <summary>
             /// Enum X for value: x
             /// </summary>
-            [EnumMember(Value = "x")]
-            X = 2,
+            [EnumMember(Value = "x")] X = 2,
 
             /// <summary>
             /// Enum Y for value: y
             /// </summary>
-            [EnumMember(Value = "y")]
-            Y = 3,
+            [EnumMember(Value = "y")] Y = 3,
 
             /// <summary>
             /// Enum Xy for value: xy
             /// </summary>
-            [EnumMember(Value = "xy")]
-            Xy = 4
-
+            [EnumMember(Value = "xy")] Xy = 4
         }
 
         /// <summary>
         /// Gets or Sets HoverDimension
         /// </summary>
-        [DataMember(Name="hoverDimension", EmitDefaultValue=false)]
+        [DataMember(Name = "hoverDimension", EmitDefaultValue = false)]
         public HoverDimensionEnum? HoverDimension { get; set; }
+
         /// <summary>
         /// Defines Position
         /// </summary>
@@ -113,32 +107,34 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Overlaid for value: overlaid
             /// </summary>
-            [EnumMember(Value = "overlaid")]
-            Overlaid = 1,
+            [EnumMember(Value = "overlaid")] Overlaid = 1,
 
             /// <summary>
             /// Enum Stacked for value: stacked
             /// </summary>
-            [EnumMember(Value = "stacked")]
-            Stacked = 2
-
+            [EnumMember(Value = "stacked")] Stacked = 2
         }
 
         /// <summary>
         /// Gets or Sets Position
         /// </summary>
-        [DataMember(Name="position", EmitDefaultValue=false)]
+        [DataMember(Name = "position", EmitDefaultValue = false)]
         public PositionEnum Position { get; set; }
+
         /// <summary>
         /// Gets or Sets Geom
         /// </summary>
-        [DataMember(Name="geom", EmitDefaultValue=false)]
+        [DataMember(Name = "geom", EmitDefaultValue = false)]
         public XYGeom Geom { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="XYViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected XYViewProperties() { }
+        protected XYViewProperties()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="XYViewProperties" /> class.
         /// </summary>
@@ -170,211 +166,226 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="legendHide">legendHide.</param>
         /// <param name="legendOpacity">legendOpacity.</param>
         /// <param name="legendOrientationThreshold">legendOrientationThreshold.</param>
-        public XYViewProperties(string timeFormat = default(string), TypeEnum type = TypeEnum.Xy, List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), Dictionary<string, string> colorMapping = default(Dictionary<string, string>), ShapeEnum shape = ShapeEnum.ChronografV2, string note = default(string), bool? showNoteWhenEmpty = default(bool?), Axes axes = default(Axes), StaticLegend staticLegend = default(StaticLegend), string xColumn = default(string), List<string> generateXAxisTicks = default(List<string>), int? xTotalTicks = default(int?), float? xTickStart = default(float?), float? xTickStep = default(float?), string yColumn = default(string), List<string> generateYAxisTicks = default(List<string>), int? yTotalTicks = default(int?), float? yTickStart = default(float?), float? yTickStep = default(float?), bool? shadeBelow = default(bool?), HoverDimensionEnum? hoverDimension = default(HoverDimensionEnum?), PositionEnum position = default(PositionEnum), XYGeom geom = default(XYGeom), bool? legendColorizeRows = default(bool?), bool? legendHide = default(bool?), float? legendOpacity = default(float?), int? legendOrientationThreshold = default(int?)) : base()
+        public XYViewProperties(string timeFormat = default, TypeEnum type = TypeEnum.Xy,
+            List<DashboardQuery> queries = default, List<DashboardColor> colors = default,
+            Dictionary<string, string> colorMapping = default, ShapeEnum shape = ShapeEnum.ChronografV2,
+            string note = default, bool? showNoteWhenEmpty = default, Axes axes = default,
+            StaticLegend staticLegend = default, string xColumn = default, List<string> generateXAxisTicks = default,
+            int? xTotalTicks = default, float? xTickStart = default, float? xTickStep = default,
+            string yColumn = default, List<string> generateYAxisTicks = default, int? yTotalTicks = default,
+            float? yTickStart = default, float? yTickStep = default, bool? shadeBelow = default,
+            HoverDimensionEnum? hoverDimension = default, PositionEnum position = default, XYGeom geom = default,
+            bool? legendColorizeRows = default, bool? legendHide = default, float? legendOpacity = default,
+            int? legendOrientationThreshold = default) : base()
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
-                throw new InvalidDataException("queries is a required property for XYViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "queries is a required property for XYViewProperties and cannot be null");
             }
-            this.Queries = queries;
+
+            Queries = queries;
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
                 throw new InvalidDataException("colors is a required property for XYViewProperties and cannot be null");
             }
-            this.Colors = colors;
+
+            Colors = colors;
             // to ensure "shape" is required (not null)
-            this.Shape = shape;
+            Shape = shape;
             // to ensure "note" is required (not null)
             if (note == null)
             {
                 throw new InvalidDataException("note is a required property for XYViewProperties and cannot be null");
             }
-            this.Note = note;
+
+            Note = note;
             // to ensure "showNoteWhenEmpty" is required (not null)
             if (showNoteWhenEmpty == null)
             {
-                throw new InvalidDataException("showNoteWhenEmpty is a required property for XYViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "showNoteWhenEmpty is a required property for XYViewProperties and cannot be null");
             }
-            this.ShowNoteWhenEmpty = showNoteWhenEmpty;
+
+            ShowNoteWhenEmpty = showNoteWhenEmpty;
             // to ensure "axes" is required (not null)
             if (axes == null)
             {
                 throw new InvalidDataException("axes is a required property for XYViewProperties and cannot be null");
             }
-            this.Axes = axes;
+
+            Axes = axes;
             // to ensure "position" is required (not null)
-            this.Position = position;
+            Position = position;
             // to ensure "geom" is required (not null)
-            this.Geom = geom;
-            this.TimeFormat = timeFormat;
-            this.ColorMapping = colorMapping;
-            this.StaticLegend = staticLegend;
-            this.XColumn = xColumn;
-            this.GenerateXAxisTicks = generateXAxisTicks;
-            this.XTotalTicks = xTotalTicks;
-            this.XTickStart = xTickStart;
-            this.XTickStep = xTickStep;
-            this.YColumn = yColumn;
-            this.GenerateYAxisTicks = generateYAxisTicks;
-            this.YTotalTicks = yTotalTicks;
-            this.YTickStart = yTickStart;
-            this.YTickStep = yTickStep;
-            this.ShadeBelow = shadeBelow;
-            this.HoverDimension = hoverDimension;
-            this.LegendColorizeRows = legendColorizeRows;
-            this.LegendHide = legendHide;
-            this.LegendOpacity = legendOpacity;
-            this.LegendOrientationThreshold = legendOrientationThreshold;
+            Geom = geom;
+            TimeFormat = timeFormat;
+            ColorMapping = colorMapping;
+            StaticLegend = staticLegend;
+            XColumn = xColumn;
+            GenerateXAxisTicks = generateXAxisTicks;
+            XTotalTicks = xTotalTicks;
+            XTickStart = xTickStart;
+            XTickStep = xTickStep;
+            YColumn = yColumn;
+            GenerateYAxisTicks = generateYAxisTicks;
+            YTotalTicks = yTotalTicks;
+            YTickStart = yTickStart;
+            YTickStep = yTickStep;
+            ShadeBelow = shadeBelow;
+            HoverDimension = hoverDimension;
+            LegendColorizeRows = legendColorizeRows;
+            LegendHide = legendHide;
+            LegendOpacity = legendOpacity;
+            LegendOrientationThreshold = legendOrientationThreshold;
         }
 
         /// <summary>
         /// Gets or Sets TimeFormat
         /// </summary>
-        [DataMember(Name="timeFormat", EmitDefaultValue=false)]
+        [DataMember(Name = "timeFormat", EmitDefaultValue = false)]
         public string TimeFormat { get; set; }
 
 
         /// <summary>
         /// Gets or Sets Queries
         /// </summary>
-        [DataMember(Name="queries", EmitDefaultValue=false)]
+        [DataMember(Name = "queries", EmitDefaultValue = false)]
         public List<DashboardQuery> Queries { get; set; }
 
         /// <summary>
         /// Colors define color encoding of data into a visualization
         /// </summary>
         /// <value>Colors define color encoding of data into a visualization</value>
-        [DataMember(Name="colors", EmitDefaultValue=false)]
+        [DataMember(Name = "colors", EmitDefaultValue = false)]
         public List<DashboardColor> Colors { get; set; }
 
         /// <summary>
         /// A color mapping is an object that maps time series data to a UI color scheme to allow the UI to render graphs consistent colors across reloads.
         /// </summary>
         /// <value>A color mapping is an object that maps time series data to a UI color scheme to allow the UI to render graphs consistent colors across reloads.</value>
-        [DataMember(Name="colorMapping", EmitDefaultValue=false)]
+        [DataMember(Name = "colorMapping", EmitDefaultValue = false)]
         public Dictionary<string, string> ColorMapping { get; set; }
 
 
         /// <summary>
         /// Gets or Sets Note
         /// </summary>
-        [DataMember(Name="note", EmitDefaultValue=false)]
+        [DataMember(Name = "note", EmitDefaultValue = false)]
         public string Note { get; set; }
 
         /// <summary>
         /// If true, will display note when empty
         /// </summary>
         /// <value>If true, will display note when empty</value>
-        [DataMember(Name="showNoteWhenEmpty", EmitDefaultValue=false)]
+        [DataMember(Name = "showNoteWhenEmpty", EmitDefaultValue = false)]
         public bool? ShowNoteWhenEmpty { get; set; }
 
         /// <summary>
         /// Gets or Sets Axes
         /// </summary>
-        [DataMember(Name="axes", EmitDefaultValue=false)]
+        [DataMember(Name = "axes", EmitDefaultValue = false)]
         public Axes Axes { get; set; }
 
         /// <summary>
         /// Gets or Sets StaticLegend
         /// </summary>
-        [DataMember(Name="staticLegend", EmitDefaultValue=false)]
+        [DataMember(Name = "staticLegend", EmitDefaultValue = false)]
         public StaticLegend StaticLegend { get; set; }
 
         /// <summary>
         /// Gets or Sets XColumn
         /// </summary>
-        [DataMember(Name="xColumn", EmitDefaultValue=false)]
+        [DataMember(Name = "xColumn", EmitDefaultValue = false)]
         public string XColumn { get; set; }
 
         /// <summary>
         /// Gets or Sets GenerateXAxisTicks
         /// </summary>
-        [DataMember(Name="generateXAxisTicks", EmitDefaultValue=false)]
+        [DataMember(Name = "generateXAxisTicks", EmitDefaultValue = false)]
         public List<string> GenerateXAxisTicks { get; set; }
 
         /// <summary>
         /// Gets or Sets XTotalTicks
         /// </summary>
-        [DataMember(Name="xTotalTicks", EmitDefaultValue=false)]
+        [DataMember(Name = "xTotalTicks", EmitDefaultValue = false)]
         public int? XTotalTicks { get; set; }
 
         /// <summary>
         /// Gets or Sets XTickStart
         /// </summary>
-        [DataMember(Name="xTickStart", EmitDefaultValue=false)]
+        [DataMember(Name = "xTickStart", EmitDefaultValue = false)]
         public float? XTickStart { get; set; }
 
         /// <summary>
         /// Gets or Sets XTickStep
         /// </summary>
-        [DataMember(Name="xTickStep", EmitDefaultValue=false)]
+        [DataMember(Name = "xTickStep", EmitDefaultValue = false)]
         public float? XTickStep { get; set; }
 
         /// <summary>
         /// Gets or Sets YColumn
         /// </summary>
-        [DataMember(Name="yColumn", EmitDefaultValue=false)]
+        [DataMember(Name = "yColumn", EmitDefaultValue = false)]
         public string YColumn { get; set; }
 
         /// <summary>
         /// Gets or Sets GenerateYAxisTicks
         /// </summary>
-        [DataMember(Name="generateYAxisTicks", EmitDefaultValue=false)]
+        [DataMember(Name = "generateYAxisTicks", EmitDefaultValue = false)]
         public List<string> GenerateYAxisTicks { get; set; }
 
         /// <summary>
         /// Gets or Sets YTotalTicks
         /// </summary>
-        [DataMember(Name="yTotalTicks", EmitDefaultValue=false)]
+        [DataMember(Name = "yTotalTicks", EmitDefaultValue = false)]
         public int? YTotalTicks { get; set; }
 
         /// <summary>
         /// Gets or Sets YTickStart
         /// </summary>
-        [DataMember(Name="yTickStart", EmitDefaultValue=false)]
+        [DataMember(Name = "yTickStart", EmitDefaultValue = false)]
         public float? YTickStart { get; set; }
 
         /// <summary>
         /// Gets or Sets YTickStep
         /// </summary>
-        [DataMember(Name="yTickStep", EmitDefaultValue=false)]
+        [DataMember(Name = "yTickStep", EmitDefaultValue = false)]
         public float? YTickStep { get; set; }
 
         /// <summary>
         /// Gets or Sets ShadeBelow
         /// </summary>
-        [DataMember(Name="shadeBelow", EmitDefaultValue=false)]
+        [DataMember(Name = "shadeBelow", EmitDefaultValue = false)]
         public bool? ShadeBelow { get; set; }
-
-
 
 
         /// <summary>
         /// Gets or Sets LegendColorizeRows
         /// </summary>
-        [DataMember(Name="legendColorizeRows", EmitDefaultValue=false)]
+        [DataMember(Name = "legendColorizeRows", EmitDefaultValue = false)]
         public bool? LegendColorizeRows { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendHide
         /// </summary>
-        [DataMember(Name="legendHide", EmitDefaultValue=false)]
+        [DataMember(Name = "legendHide", EmitDefaultValue = false)]
         public bool? LegendHide { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendOpacity
         /// </summary>
-        [DataMember(Name="legendOpacity", EmitDefaultValue=false)]
+        [DataMember(Name = "legendOpacity", EmitDefaultValue = false)]
         public float? LegendOpacity { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendOrientationThreshold
         /// </summary>
-        [DataMember(Name="legendOrientationThreshold", EmitDefaultValue=false)]
+        [DataMember(Name = "legendOrientationThreshold", EmitDefaultValue = false)]
         public int? LegendOrientationThreshold { get; set; }
 
         /// <summary>
@@ -434,7 +445,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as XYViewProperties);
+            return Equals(input as XYViewProperties);
         }
 
         /// <summary>
@@ -445,126 +456,104 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(XYViewProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.TimeFormat == input.TimeFormat ||
-                    (this.TimeFormat != null && this.TimeFormat.Equals(input.TimeFormat))
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Queries == input.Queries ||
-                    this.Queries != null &&
-                    this.Queries.SequenceEqual(input.Queries)
-                ) && base.Equals(input) && 
-                (
-                    this.Colors == input.Colors ||
-                    this.Colors != null &&
-                    this.Colors.SequenceEqual(input.Colors)
-                ) && base.Equals(input) && 
-                (
-                    this.ColorMapping == input.ColorMapping ||
-                    this.ColorMapping != null &&
-                    this.ColorMapping.SequenceEqual(input.ColorMapping)
-                ) && base.Equals(input) && 
-                (
-                    this.Shape == input.Shape ||
-                    this.Shape.Equals(input.Shape)
-                ) && base.Equals(input) && 
-                (
-                    this.Note == input.Note ||
-                    (this.Note != null && this.Note.Equals(input.Note))
-                ) && base.Equals(input) && 
-                (
-                    this.ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
-                    (this.ShowNoteWhenEmpty != null && this.ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Axes != null && this.Axes.Equals(input.Axes))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.StaticLegend != null && this.StaticLegend.Equals(input.StaticLegend))
-                ) && base.Equals(input) && 
-                (
-                    this.XColumn == input.XColumn ||
-                    (this.XColumn != null && this.XColumn.Equals(input.XColumn))
-                ) && base.Equals(input) && 
-                (
-                    this.GenerateXAxisTicks == input.GenerateXAxisTicks ||
-                    this.GenerateXAxisTicks != null &&
-                    this.GenerateXAxisTicks.SequenceEqual(input.GenerateXAxisTicks)
-                ) && base.Equals(input) && 
-                (
-                    this.XTotalTicks == input.XTotalTicks ||
-                    (this.XTotalTicks != null && this.XTotalTicks.Equals(input.XTotalTicks))
-                ) && base.Equals(input) && 
-                (
-                    this.XTickStart == input.XTickStart ||
-                    (this.XTickStart != null && this.XTickStart.Equals(input.XTickStart))
-                ) && base.Equals(input) && 
-                (
-                    this.XTickStep == input.XTickStep ||
-                    (this.XTickStep != null && this.XTickStep.Equals(input.XTickStep))
-                ) && base.Equals(input) && 
-                (
-                    this.YColumn == input.YColumn ||
-                    (this.YColumn != null && this.YColumn.Equals(input.YColumn))
-                ) && base.Equals(input) && 
-                (
-                    this.GenerateYAxisTicks == input.GenerateYAxisTicks ||
-                    this.GenerateYAxisTicks != null &&
-                    this.GenerateYAxisTicks.SequenceEqual(input.GenerateYAxisTicks)
-                ) && base.Equals(input) && 
-                (
-                    this.YTotalTicks == input.YTotalTicks ||
-                    (this.YTotalTicks != null && this.YTotalTicks.Equals(input.YTotalTicks))
-                ) && base.Equals(input) && 
-                (
-                    this.YTickStart == input.YTickStart ||
-                    (this.YTickStart != null && this.YTickStart.Equals(input.YTickStart))
-                ) && base.Equals(input) && 
-                (
-                    this.YTickStep == input.YTickStep ||
-                    (this.YTickStep != null && this.YTickStep.Equals(input.YTickStep))
-                ) && base.Equals(input) && 
-                (
-                    this.ShadeBelow == input.ShadeBelow ||
-                    (this.ShadeBelow != null && this.ShadeBelow.Equals(input.ShadeBelow))
-                ) && base.Equals(input) && 
-                (
-                    this.HoverDimension == input.HoverDimension ||
-                    this.HoverDimension.Equals(input.HoverDimension)
-                ) && base.Equals(input) && 
-                (
-                    this.Position == input.Position ||
-                    this.Position.Equals(input.Position)
-                ) && base.Equals(input) && 
-                (
-                    this.Geom == input.Geom ||
-                    this.Geom.Equals(input.Geom)
-                ) && base.Equals(input) && 
-                (
-                    this.LegendColorizeRows == input.LegendColorizeRows ||
-                    (this.LegendColorizeRows != null && this.LegendColorizeRows.Equals(input.LegendColorizeRows))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendHide == input.LegendHide ||
-                    (this.LegendHide != null && this.LegendHide.Equals(input.LegendHide))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendOpacity == input.LegendOpacity ||
-                    (this.LegendOpacity != null && this.LegendOpacity.Equals(input.LegendOpacity))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendOrientationThreshold == input.LegendOrientationThreshold ||
-                    (this.LegendOrientationThreshold != null && this.LegendOrientationThreshold.Equals(input.LegendOrientationThreshold))
-                );
+            return base.Equals(input) &&
+                   (
+                       TimeFormat == input.TimeFormat ||
+                       TimeFormat != null && TimeFormat.Equals(input.TimeFormat)
+                   ) && base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Queries == input.Queries ||
+                       Queries != null &&
+                       Queries.SequenceEqual(input.Queries)
+                   ) && base.Equals(input) &&
+                   (
+                       Colors == input.Colors ||
+                       Colors != null &&
+                       Colors.SequenceEqual(input.Colors)
+                   ) && base.Equals(input) &&
+                   (
+                       ColorMapping == input.ColorMapping ||
+                       ColorMapping != null &&
+                       ColorMapping.SequenceEqual(input.ColorMapping)
+                   ) && base.Equals(input) &&
+                   (
+                       Shape == input.Shape ||
+                       Shape.Equals(input.Shape)
+                   ) && base.Equals(input) &&
+                   (
+                       Note == input.Note ||
+                       Note != null && Note.Equals(input.Note)
+                   ) && base.Equals(input) &&
+                   (
+                       ShowNoteWhenEmpty == input.ShowNoteWhenEmpty ||
+                       ShowNoteWhenEmpty != null && ShowNoteWhenEmpty.Equals(input.ShowNoteWhenEmpty)
+                   ) && base.Equals(input) && Axes != null && Axes.Equals(input.Axes) && base.Equals(input) &&
+                   StaticLegend != null && StaticLegend.Equals(input.StaticLegend) && base.Equals(input) && (
+                       XColumn == input.XColumn ||
+                       XColumn != null && XColumn.Equals(input.XColumn)
+                   ) && base.Equals(input) && (
+                       GenerateXAxisTicks == input.GenerateXAxisTicks ||
+                       GenerateXAxisTicks != null &&
+                       GenerateXAxisTicks.SequenceEqual(input.GenerateXAxisTicks)
+                   ) && base.Equals(input) && (
+                       XTotalTicks == input.XTotalTicks ||
+                       XTotalTicks != null && XTotalTicks.Equals(input.XTotalTicks)
+                   ) && base.Equals(input) && (
+                       XTickStart == input.XTickStart ||
+                       XTickStart != null && XTickStart.Equals(input.XTickStart)
+                   ) && base.Equals(input) && (
+                       XTickStep == input.XTickStep ||
+                       XTickStep != null && XTickStep.Equals(input.XTickStep)
+                   ) && base.Equals(input) && (
+                       YColumn == input.YColumn ||
+                       YColumn != null && YColumn.Equals(input.YColumn)
+                   ) && base.Equals(input) && (
+                       GenerateYAxisTicks == input.GenerateYAxisTicks ||
+                       GenerateYAxisTicks != null &&
+                       GenerateYAxisTicks.SequenceEqual(input.GenerateYAxisTicks)
+                   ) && base.Equals(input) && (
+                       YTotalTicks == input.YTotalTicks ||
+                       YTotalTicks != null && YTotalTicks.Equals(input.YTotalTicks)
+                   ) && base.Equals(input) && (
+                       YTickStart == input.YTickStart ||
+                       YTickStart != null && YTickStart.Equals(input.YTickStart)
+                   ) && base.Equals(input) && (
+                       YTickStep == input.YTickStep ||
+                       YTickStep != null && YTickStep.Equals(input.YTickStep)
+                   ) && base.Equals(input) && (
+                       ShadeBelow == input.ShadeBelow ||
+                       ShadeBelow != null && ShadeBelow.Equals(input.ShadeBelow)
+                   ) && base.Equals(input) && (
+                       HoverDimension == input.HoverDimension ||
+                       HoverDimension.Equals(input.HoverDimension)
+                   ) && base.Equals(input) && (
+                       Position == input.Position ||
+                       Position.Equals(input.Position)
+                   ) && base.Equals(input) && (
+                       Geom == input.Geom ||
+                       Geom.Equals(input.Geom)
+                   ) && base.Equals(input) && (
+                       LegendColorizeRows == input.LegendColorizeRows ||
+                       LegendColorizeRows != null && LegendColorizeRows.Equals(input.LegendColorizeRows)
+                   ) && base.Equals(input) && (
+                       LegendHide == input.LegendHide ||
+                       LegendHide != null && LegendHide.Equals(input.LegendHide)
+                   ) && base.Equals(input) && (
+                       LegendOpacity == input.LegendOpacity ||
+                       LegendOpacity != null && LegendOpacity.Equals(input.LegendOpacity)
+                   ) && base.Equals(input) && (
+                       LegendOrientationThreshold == input.LegendOrientationThreshold ||
+                       LegendOrientationThreshold != null &&
+                       LegendOrientationThreshold.Equals(input.LegendOrientationThreshold)
+                   );
         }
 
         /// <summary>
@@ -575,63 +564,130 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.TimeFormat != null)
-                    hashCode = hashCode * 59 + this.TimeFormat.GetHashCode();
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Queries != null)
-                    hashCode = hashCode * 59 + this.Queries.GetHashCode();
-                if (this.Colors != null)
-                    hashCode = hashCode * 59 + this.Colors.GetHashCode();
-                if (this.ColorMapping != null)
-                    hashCode = hashCode * 59 + this.ColorMapping.GetHashCode();
-                hashCode = hashCode * 59 + this.Shape.GetHashCode();
-                if (this.Note != null)
-                    hashCode = hashCode * 59 + this.Note.GetHashCode();
-                if (this.ShowNoteWhenEmpty != null)
-                    hashCode = hashCode * 59 + this.ShowNoteWhenEmpty.GetHashCode();
-                if (this.Axes != null)
-                    hashCode = hashCode * 59 + this.Axes.GetHashCode();
-                if (this.StaticLegend != null)
-                    hashCode = hashCode * 59 + this.StaticLegend.GetHashCode();
-                if (this.XColumn != null)
-                    hashCode = hashCode * 59 + this.XColumn.GetHashCode();
-                if (this.GenerateXAxisTicks != null)
-                    hashCode = hashCode * 59 + this.GenerateXAxisTicks.GetHashCode();
-                if (this.XTotalTicks != null)
-                    hashCode = hashCode * 59 + this.XTotalTicks.GetHashCode();
-                if (this.XTickStart != null)
-                    hashCode = hashCode * 59 + this.XTickStart.GetHashCode();
-                if (this.XTickStep != null)
-                    hashCode = hashCode * 59 + this.XTickStep.GetHashCode();
-                if (this.YColumn != null)
-                    hashCode = hashCode * 59 + this.YColumn.GetHashCode();
-                if (this.GenerateYAxisTicks != null)
-                    hashCode = hashCode * 59 + this.GenerateYAxisTicks.GetHashCode();
-                if (this.YTotalTicks != null)
-                    hashCode = hashCode * 59 + this.YTotalTicks.GetHashCode();
-                if (this.YTickStart != null)
-                    hashCode = hashCode * 59 + this.YTickStart.GetHashCode();
-                if (this.YTickStep != null)
-                    hashCode = hashCode * 59 + this.YTickStep.GetHashCode();
-                if (this.ShadeBelow != null)
-                    hashCode = hashCode * 59 + this.ShadeBelow.GetHashCode();
-                hashCode = hashCode * 59 + this.HoverDimension.GetHashCode();
-                hashCode = hashCode * 59 + this.Position.GetHashCode();
-                hashCode = hashCode * 59 + this.Geom.GetHashCode();
-                if (this.LegendColorizeRows != null)
-                    hashCode = hashCode * 59 + this.LegendColorizeRows.GetHashCode();
-                if (this.LegendHide != null)
-                    hashCode = hashCode * 59 + this.LegendHide.GetHashCode();
-                if (this.LegendOpacity != null)
-                    hashCode = hashCode * 59 + this.LegendOpacity.GetHashCode();
-                if (this.LegendOrientationThreshold != null)
-                    hashCode = hashCode * 59 + this.LegendOrientationThreshold.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (TimeFormat != null)
+                {
+                    hashCode = hashCode * 59 + TimeFormat.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Queries != null)
+                {
+                    hashCode = hashCode * 59 + Queries.GetHashCode();
+                }
+
+                if (Colors != null)
+                {
+                    hashCode = hashCode * 59 + Colors.GetHashCode();
+                }
+
+                if (ColorMapping != null)
+                {
+                    hashCode = hashCode * 59 + ColorMapping.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + Shape.GetHashCode();
+                if (Note != null)
+                {
+                    hashCode = hashCode * 59 + Note.GetHashCode();
+                }
+
+                if (ShowNoteWhenEmpty != null)
+                {
+                    hashCode = hashCode * 59 + ShowNoteWhenEmpty.GetHashCode();
+                }
+
+                if (Axes != null)
+                {
+                    hashCode = hashCode * 59 + Axes.GetHashCode();
+                }
+
+                if (StaticLegend != null)
+                {
+                    hashCode = hashCode * 59 + StaticLegend.GetHashCode();
+                }
+
+                if (XColumn != null)
+                {
+                    hashCode = hashCode * 59 + XColumn.GetHashCode();
+                }
+
+                if (GenerateXAxisTicks != null)
+                {
+                    hashCode = hashCode * 59 + GenerateXAxisTicks.GetHashCode();
+                }
+
+                if (XTotalTicks != null)
+                {
+                    hashCode = hashCode * 59 + XTotalTicks.GetHashCode();
+                }
+
+                if (XTickStart != null)
+                {
+                    hashCode = hashCode * 59 + XTickStart.GetHashCode();
+                }
+
+                if (XTickStep != null)
+                {
+                    hashCode = hashCode * 59 + XTickStep.GetHashCode();
+                }
+
+                if (YColumn != null)
+                {
+                    hashCode = hashCode * 59 + YColumn.GetHashCode();
+                }
+
+                if (GenerateYAxisTicks != null)
+                {
+                    hashCode = hashCode * 59 + GenerateYAxisTicks.GetHashCode();
+                }
+
+                if (YTotalTicks != null)
+                {
+                    hashCode = hashCode * 59 + YTotalTicks.GetHashCode();
+                }
+
+                if (YTickStart != null)
+                {
+                    hashCode = hashCode * 59 + YTickStart.GetHashCode();
+                }
+
+                if (YTickStep != null)
+                {
+                    hashCode = hashCode * 59 + YTickStep.GetHashCode();
+                }
+
+                if (ShadeBelow != null)
+                {
+                    hashCode = hashCode * 59 + ShadeBelow.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + HoverDimension.GetHashCode();
+                hashCode = hashCode * 59 + Position.GetHashCode();
+                hashCode = hashCode * 59 + Geom.GetHashCode();
+                if (LegendColorizeRows != null)
+                {
+                    hashCode = hashCode * 59 + LegendColorizeRows.GetHashCode();
+                }
+
+                if (LegendHide != null)
+                {
+                    hashCode = hashCode * 59 + LegendHide.GetHashCode();
+                }
+
+                if (LegendOpacity != null)
+                {
+                    hashCode = hashCode * 59 + LegendOpacity.GetHashCode();
+                }
+
+                if (LegendOrientationThreshold != null)
+                {
+                    hashCode = hashCode * 59 + LegendOrientationThreshold.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

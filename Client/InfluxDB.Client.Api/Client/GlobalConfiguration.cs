@@ -29,6 +29,5 @@ namespace InfluxDB.Client.Api.Client
     /// </remarks>
     public partial class GlobalConfiguration : Configuration
     {
-
     }
 }

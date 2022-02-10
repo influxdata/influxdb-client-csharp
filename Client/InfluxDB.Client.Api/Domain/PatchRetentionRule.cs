@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Updates to a rule to expire or retain data.
     /// </summary>
     [DataContract]
-    public partial class PatchRetentionRule :  IEquatable<PatchRetentionRule>
+    public partial class PatchRetentionRule : IEquatable<PatchRetentionRule>
     {
         /// <summary>
         /// Defines Type
@@ -38,33 +38,36 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Expire for value: expire
             /// </summary>
-            [EnumMember(Value = "expire")]
-            Expire = 1
-
+            [EnumMember(Value = "expire")] Expire = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PatchRetentionRule" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PatchRetentionRule() { }
+        protected PatchRetentionRule()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PatchRetentionRule" /> class.
         /// </summary>
         /// <param name="type">type (required) (default to TypeEnum.Expire).</param>
         /// <param name="everySeconds">Duration in seconds for how long data will be kept in the database. 0 means infinite..</param>
         /// <param name="shardGroupDurationSeconds">Shard duration measured in seconds..</param>
-        public PatchRetentionRule(TypeEnum type = TypeEnum.Expire, long? everySeconds = default(long?), long? shardGroupDurationSeconds = default(long?))
+        public PatchRetentionRule(TypeEnum type = TypeEnum.Expire, long? everySeconds = default,
+            long? shardGroupDurationSeconds = default)
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
-            this.EverySeconds = everySeconds;
-            this.ShardGroupDurationSeconds = shardGroupDurationSeconds;
+            Type = type;
+            EverySeconds = everySeconds;
+            ShardGroupDurationSeconds = shardGroupDurationSeconds;
         }
 
 
@@ -72,14 +75,14 @@ namespace InfluxDB.Client.Api.Domain
         /// Duration in seconds for how long data will be kept in the database. 0 means infinite.
         /// </summary>
         /// <value>Duration in seconds for how long data will be kept in the database. 0 means infinite.</value>
-        [DataMember(Name="everySeconds", EmitDefaultValue=false)]
+        [DataMember(Name = "everySeconds", EmitDefaultValue = false)]
         public long? EverySeconds { get; set; }
 
         /// <summary>
         /// Shard duration measured in seconds.
         /// </summary>
         /// <value>Shard duration measured in seconds.</value>
-        [DataMember(Name="shardGroupDurationSeconds", EmitDefaultValue=false)]
+        [DataMember(Name = "shardGroupDurationSeconds", EmitDefaultValue = false)]
         public long? ShardGroupDurationSeconds { get; set; }
 
         /// <summary>
@@ -113,7 +116,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PatchRetentionRule);
+            return Equals(input as PatchRetentionRule);
         }
 
         /// <summary>
@@ -124,20 +127,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PatchRetentionRule input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
+                    Type == input.Type ||
+                    Type.Equals(input.Type)
+                ) &&
                 (
-                    this.EverySeconds == input.EverySeconds ||
-                    (this.EverySeconds != null && this.EverySeconds.Equals(input.EverySeconds))
-                ) && 
+                    EverySeconds == input.EverySeconds ||
+                    EverySeconds != null && EverySeconds.Equals(input.EverySeconds)
+                ) &&
                 (
-                    this.ShardGroupDurationSeconds == input.ShardGroupDurationSeconds ||
-                    (this.ShardGroupDurationSeconds != null && this.ShardGroupDurationSeconds.Equals(input.ShardGroupDurationSeconds))
+                    ShardGroupDurationSeconds == input.ShardGroupDurationSeconds ||
+                    ShardGroupDurationSeconds != null &&
+                    ShardGroupDurationSeconds.Equals(input.ShardGroupDurationSeconds)
                 );
         }
 
@@ -149,17 +155,21 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.EverySeconds != null)
-                    hashCode = hashCode * 59 + this.EverySeconds.GetHashCode();
-                if (this.ShardGroupDurationSeconds != null)
-                    hashCode = hashCode * 59 + this.ShardGroupDurationSeconds.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (EverySeconds != null)
+                {
+                    hashCode = hashCode * 59 + EverySeconds.GetHashCode();
+                }
+
+                if (ShardGroupDurationSeconds != null)
+                {
+                    hashCode = hashCode * 59 + ShardGroupDurationSeconds.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

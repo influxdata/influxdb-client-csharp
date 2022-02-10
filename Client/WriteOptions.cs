@@ -56,19 +56,19 @@ namespace InfluxDB.Client
         /// </summary>
         /// <seealso cref="Builder.RetryInterval(int)"/>
         public int RetryInterval { get; }
-        
+
         /// <summary>
         /// The number of max retries when write fails.
         /// </summary>
         /// <seealso cref="Builder.MaxRetries(int)"/>
         public int MaxRetries { get; }
-        
+
         /// <summary>
         /// The maximum delay between each retry attempt in milliseconds.
         /// </summary>
         /// <seealso cref="Builder.MaxRetryDelay(int)"/>
         public int MaxRetryDelay { get; }
-        
+
         /// <summary>
         /// The base for the exponential retry delay.
         /// </summary>
@@ -94,15 +94,16 @@ namespace InfluxDB.Client
             ExponentialBase = builder.ExponentialBaseBuilder;
             WriteScheduler = builder.WriteSchedulerBuilder;
         }
-        
+
         /// <summary>
         /// Create a <see cref="WriteOptions"/> builder.
         /// </summary>
         /// <returns>builder</returns>
-        public static Builder CreateNew() {
+        public static Builder CreateNew()
+        {
             return new Builder();
         }
-        
+
         public sealed class Builder
         {
             internal int BatchSizeBuilder = DefaultBatchSize;
@@ -169,7 +170,7 @@ namespace InfluxDB.Client
                 RetryIntervalBuilder = milliseconds;
                 return this;
             }
-            
+
             /// <summary>
             /// The number of max retries when write fails.
             /// </summary>
@@ -181,7 +182,7 @@ namespace InfluxDB.Client
                 MaxRetriesBuilder = count;
                 return this;
             }
-            
+
             /// <summary>
             /// The maximum delay between each retry attempt in milliseconds.
             /// </summary>
@@ -193,7 +194,7 @@ namespace InfluxDB.Client
                 MaxRetryDelayBuilder = milliseconds;
                 return this;
             }
-            
+
             /// <summary>
             /// The base for the exponential retry delay.
             /// </summary>

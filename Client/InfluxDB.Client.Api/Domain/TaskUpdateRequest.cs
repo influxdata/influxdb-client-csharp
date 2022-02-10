@@ -27,13 +27,14 @@ namespace InfluxDB.Client.Api.Domain
     /// TaskUpdateRequest
     /// </summary>
     [DataContract]
-    public partial class TaskUpdateRequest :  IEquatable<TaskUpdateRequest>
+    public partial class TaskUpdateRequest : IEquatable<TaskUpdateRequest>
     {
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public TaskStatusType? Status { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskUpdateRequest" /> class.
         /// </summary>
@@ -44,15 +45,16 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="cron">Override the &#39;cron&#39; option in the flux script..</param>
         /// <param name="offset">Override the &#39;offset&#39; option in the flux script..</param>
         /// <param name="description">An optional description of the task..</param>
-        public TaskUpdateRequest(TaskStatusType? status = default(TaskStatusType?), string flux = default(string), string name = default(string), string every = default(string), string cron = default(string), string offset = default(string), string description = default(string))
+        public TaskUpdateRequest(TaskStatusType? status = default, string flux = default, string name = default,
+            string every = default, string cron = default, string offset = default, string description = default)
         {
-            this.Status = status;
-            this.Flux = flux;
-            this.Name = name;
-            this.Every = every;
-            this.Cron = cron;
-            this.Offset = offset;
-            this.Description = description;
+            Status = status;
+            Flux = flux;
+            Name = name;
+            Every = every;
+            Cron = cron;
+            Offset = offset;
+            Description = description;
         }
 
 
@@ -60,42 +62,42 @@ namespace InfluxDB.Client.Api.Domain
         /// The Flux script to run for this task.
         /// </summary>
         /// <value>The Flux script to run for this task.</value>
-        [DataMember(Name="flux", EmitDefaultValue=false)]
+        [DataMember(Name = "flux", EmitDefaultValue = false)]
         public string Flux { get; set; }
 
         /// <summary>
         /// Override the &#39;name&#39; option in the flux script.
         /// </summary>
         /// <value>Override the &#39;name&#39; option in the flux script.</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Override the &#39;every&#39; option in the flux script.
         /// </summary>
         /// <value>Override the &#39;every&#39; option in the flux script.</value>
-        [DataMember(Name="every", EmitDefaultValue=false)]
+        [DataMember(Name = "every", EmitDefaultValue = false)]
         public string Every { get; set; }
 
         /// <summary>
         /// Override the &#39;cron&#39; option in the flux script.
         /// </summary>
         /// <value>Override the &#39;cron&#39; option in the flux script.</value>
-        [DataMember(Name="cron", EmitDefaultValue=false)]
+        [DataMember(Name = "cron", EmitDefaultValue = false)]
         public string Cron { get; set; }
 
         /// <summary>
         /// Override the &#39;offset&#39; option in the flux script.
         /// </summary>
         /// <value>Override the &#39;offset&#39; option in the flux script.</value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
         public string Offset { get; set; }
 
         /// <summary>
         /// An optional description of the task.
         /// </summary>
         /// <value>An optional description of the task.</value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
@@ -133,7 +135,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TaskUpdateRequest);
+            return Equals(input as TaskUpdateRequest);
         }
 
         /// <summary>
@@ -144,36 +146,38 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(TaskUpdateRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Status == input.Status ||
-                    this.Status.Equals(input.Status)
-                ) && 
+                    Status == input.Status ||
+                    Status.Equals(input.Status)
+                ) &&
                 (
-                    this.Flux == input.Flux ||
-                    (this.Flux != null && this.Flux.Equals(input.Flux))
-                ) && 
+                    Flux == input.Flux ||
+                    Flux != null && Flux.Equals(input.Flux)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Every == input.Every ||
-                    (this.Every != null && this.Every.Equals(input.Every))
-                ) && 
+                    Every == input.Every ||
+                    Every != null && Every.Equals(input.Every)
+                ) &&
                 (
-                    this.Cron == input.Cron ||
-                    (this.Cron != null && this.Cron.Equals(input.Cron))
-                ) && 
+                    Cron == input.Cron ||
+                    Cron != null && Cron.Equals(input.Cron)
+                ) &&
                 (
-                    this.Offset == input.Offset ||
-                    (this.Offset != null && this.Offset.Equals(input.Offset))
-                ) && 
+                    Offset == input.Offset ||
+                    Offset != null && Offset.Equals(input.Offset)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
                 );
         }
 
@@ -185,25 +189,41 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Status.GetHashCode();
-                if (this.Flux != null)
-                    hashCode = hashCode * 59 + this.Flux.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Every != null)
-                    hashCode = hashCode * 59 + this.Every.GetHashCode();
-                if (this.Cron != null)
-                    hashCode = hashCode * 59 + this.Cron.GetHashCode();
-                if (this.Offset != null)
-                    hashCode = hashCode * 59 + this.Offset.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Status.GetHashCode();
+                if (Flux != null)
+                {
+                    hashCode = hashCode * 59 + Flux.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Every != null)
+                {
+                    hashCode = hashCode * 59 + Every.GetHashCode();
+                }
+
+                if (Cron != null)
+                {
+                    hashCode = hashCode * 59 + Cron.GetHashCode();
+                }
+
+                if (Offset != null)
+                {
+                    hashCode = hashCode * 59 + Offset.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// RemoteConnectionUpdateRequest
     /// </summary>
     [DataContract]
-    public partial class RemoteConnectionUpdateRequest :  IEquatable<RemoteConnectionUpdateRequest>
+    public partial class RemoteConnectionUpdateRequest : IEquatable<RemoteConnectionUpdateRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoteConnectionUpdateRequest" /> class.
@@ -38,58 +38,60 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="remoteAPIToken">remoteAPIToken.</param>
         /// <param name="remoteOrgID">remoteOrgID.</param>
         /// <param name="allowInsecureTLS">allowInsecureTLS (default to false).</param>
-        public RemoteConnectionUpdateRequest(string name = default(string), string description = default(string), string remoteURL = default(string), string remoteAPIToken = default(string), string remoteOrgID = default(string), bool? allowInsecureTLS = false)
+        public RemoteConnectionUpdateRequest(string name = default, string description = default,
+            string remoteURL = default, string remoteAPIToken = default, string remoteOrgID = default,
+            bool? allowInsecureTLS = false)
         {
-            this.Name = name;
-            this.Description = description;
-            this.RemoteURL = remoteURL;
-            this.RemoteAPIToken = remoteAPIToken;
-            this.RemoteOrgID = remoteOrgID;
+            Name = name;
+            Description = description;
+            RemoteURL = remoteURL;
+            RemoteAPIToken = remoteAPIToken;
+            RemoteOrgID = remoteOrgID;
             // use default value if no "allowInsecureTLS" provided
             if (allowInsecureTLS == null)
             {
-                this.AllowInsecureTLS = false;
+                AllowInsecureTLS = false;
             }
             else
             {
-                this.AllowInsecureTLS = allowInsecureTLS;
+                AllowInsecureTLS = allowInsecureTLS;
             }
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets RemoteURL
         /// </summary>
-        [DataMember(Name="remoteURL", EmitDefaultValue=false)]
+        [DataMember(Name = "remoteURL", EmitDefaultValue = false)]
         public string RemoteURL { get; set; }
 
         /// <summary>
         /// Gets or Sets RemoteAPIToken
         /// </summary>
-        [DataMember(Name="remoteAPIToken", EmitDefaultValue=false)]
+        [DataMember(Name = "remoteAPIToken", EmitDefaultValue = false)]
         public string RemoteAPIToken { get; set; }
 
         /// <summary>
         /// Gets or Sets RemoteOrgID
         /// </summary>
-        [DataMember(Name="remoteOrgID", EmitDefaultValue=false)]
+        [DataMember(Name = "remoteOrgID", EmitDefaultValue = false)]
         public string RemoteOrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets AllowInsecureTLS
         /// </summary>
-        [DataMember(Name="allowInsecureTLS", EmitDefaultValue=false)]
+        [DataMember(Name = "allowInsecureTLS", EmitDefaultValue = false)]
         public bool? AllowInsecureTLS { get; set; }
 
         /// <summary>
@@ -126,7 +128,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as RemoteConnectionUpdateRequest);
+            return Equals(input as RemoteConnectionUpdateRequest);
         }
 
         /// <summary>
@@ -137,32 +139,34 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(RemoteConnectionUpdateRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.RemoteURL == input.RemoteURL ||
-                    (this.RemoteURL != null && this.RemoteURL.Equals(input.RemoteURL))
-                ) && 
+                    RemoteURL == input.RemoteURL ||
+                    RemoteURL != null && RemoteURL.Equals(input.RemoteURL)
+                ) &&
                 (
-                    this.RemoteAPIToken == input.RemoteAPIToken ||
-                    (this.RemoteAPIToken != null && this.RemoteAPIToken.Equals(input.RemoteAPIToken))
-                ) && 
+                    RemoteAPIToken == input.RemoteAPIToken ||
+                    RemoteAPIToken != null && RemoteAPIToken.Equals(input.RemoteAPIToken)
+                ) &&
                 (
-                    this.RemoteOrgID == input.RemoteOrgID ||
-                    (this.RemoteOrgID != null && this.RemoteOrgID.Equals(input.RemoteOrgID))
-                ) && 
+                    RemoteOrgID == input.RemoteOrgID ||
+                    RemoteOrgID != null && RemoteOrgID.Equals(input.RemoteOrgID)
+                ) &&
                 (
-                    this.AllowInsecureTLS == input.AllowInsecureTLS ||
-                    (this.AllowInsecureTLS != null && this.AllowInsecureTLS.Equals(input.AllowInsecureTLS))
+                    AllowInsecureTLS == input.AllowInsecureTLS ||
+                    AllowInsecureTLS != null && AllowInsecureTLS.Equals(input.AllowInsecureTLS)
                 );
         }
 
@@ -174,24 +178,40 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.RemoteURL != null)
-                    hashCode = hashCode * 59 + this.RemoteURL.GetHashCode();
-                if (this.RemoteAPIToken != null)
-                    hashCode = hashCode * 59 + this.RemoteAPIToken.GetHashCode();
-                if (this.RemoteOrgID != null)
-                    hashCode = hashCode * 59 + this.RemoteOrgID.GetHashCode();
-                if (this.AllowInsecureTLS != null)
-                    hashCode = hashCode * 59 + this.AllowInsecureTLS.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (RemoteURL != null)
+                {
+                    hashCode = hashCode * 59 + RemoteURL.GetHashCode();
+                }
+
+                if (RemoteAPIToken != null)
+                {
+                    hashCode = hashCode * 59 + RemoteAPIToken.GetHashCode();
+                }
+
+                if (RemoteOrgID != null)
+                {
+                    hashCode = hashCode * 59 + RemoteOrgID.GetHashCode();
+                }
+
+                if (AllowInsecureTLS != null)
+                {
+                    hashCode = hashCode * 59 + AllowInsecureTLS.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

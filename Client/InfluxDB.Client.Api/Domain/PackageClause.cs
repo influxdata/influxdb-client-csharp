@@ -27,30 +27,30 @@ namespace InfluxDB.Client.Api.Domain
     /// Defines a package identifier
     /// </summary>
     [DataContract]
-    public partial class PackageClause :  IEquatable<PackageClause>
+    public partial class PackageClause : IEquatable<PackageClause>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PackageClause" /> class.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
         /// <param name="name">name.</param>
-        public PackageClause(string type = default(string), Identifier name = default(Identifier))
+        public PackageClause(string type = default, Identifier name = default)
         {
-            this.Type = type;
-            this.Name = name;
+            Type = type;
+            Name = name;
         }
 
         /// <summary>
         /// Type of AST node
         /// </summary>
         /// <value>Type of AST node</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public Identifier Name { get; set; }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PackageClause);
+            return Equals(input as PackageClause);
         }
 
         /// <summary>
@@ -94,17 +94,15 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PackageClause input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null && this.Type.Equals(input.Type))
-                ) && 
-                (
-                    
-                    (this.Name != null && this.Name.Equals(input.Name))
-                );
+            return
+            (
+                Type == input.Type ||
+                Type != null && Type.Equals(input.Type)
+            ) && Name != null && Name.Equals(input.Name);
         }
 
         /// <summary>
@@ -115,16 +113,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                var hashCode = 41;
+
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Authorization
     /// </summary>
     [DataContract]
-    public partial class Authorization : AuthorizationUpdateRequest,  IEquatable<Authorization>
+    public partial class Authorization : AuthorizationUpdateRequest, IEquatable<Authorization>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Authorization" /> class.
@@ -35,77 +35,79 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="orgID">ID of the organization that the authorization is scoped to..</param>
         /// <param name="permissions">List of permissions for an authorization.  An authorization must have at least one permission..</param>
         /// <param name="links">links.</param>
-        public Authorization(string orgID = default(string), List<Permission> permissions = default(List<Permission>), AuthorizationLinks links = default(AuthorizationLinks), StatusEnum? status = StatusEnum.Active, string description = default(string)) : base(status, description)
+        public Authorization(string orgID = default, List<Permission> permissions = default,
+            AuthorizationLinks links = default, StatusEnum? status = StatusEnum.Active, string description = default) :
+            base(status, description)
         {
-            this.OrgID = orgID;
-            this.Permissions = permissions;
-            this.Links = links;
+            OrgID = orgID;
+            Permissions = permissions;
+            Links = links;
         }
 
         /// <summary>
         /// Gets or Sets CreatedAt
         /// </summary>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public DateTime? CreatedAt { get; private set; }
 
         /// <summary>
         /// Gets or Sets UpdatedAt
         /// </summary>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public DateTime? UpdatedAt { get; private set; }
 
         /// <summary>
         /// ID of the organization that the authorization is scoped to.
         /// </summary>
         /// <value>ID of the organization that the authorization is scoped to.</value>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// List of permissions for an authorization.  An authorization must have at least one permission.
         /// </summary>
         /// <value>List of permissions for an authorization.  An authorization must have at least one permission.</value>
-        [DataMember(Name="permissions", EmitDefaultValue=false)]
+        [DataMember(Name = "permissions", EmitDefaultValue = false)]
         public List<Permission> Permissions { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; private set; }
 
         /// <summary>
         /// Token used to authenticate API requests.
         /// </summary>
         /// <value>Token used to authenticate API requests.</value>
-        [DataMember(Name="token", EmitDefaultValue=false)]
+        [DataMember(Name = "token", EmitDefaultValue = false)]
         public string Token { get; private set; }
 
         /// <summary>
         /// ID of the user that created and owns the token.
         /// </summary>
         /// <value>ID of the user that created and owns the token.</value>
-        [DataMember(Name="userID", EmitDefaultValue=false)]
+        [DataMember(Name = "userID", EmitDefaultValue = false)]
         public string UserID { get; private set; }
 
         /// <summary>
         /// Name of the user that created and owns the token.
         /// </summary>
         /// <value>Name of the user that created and owns the token.</value>
-        [DataMember(Name="user", EmitDefaultValue=false)]
+        [DataMember(Name = "user", EmitDefaultValue = false)]
         public string User { get; private set; }
 
         /// <summary>
         /// Name of the organization that the token is scoped to.
         /// </summary>
         /// <value>Name of the organization that the token is scoped to.</value>
-        [DataMember(Name="org", EmitDefaultValue=false)]
+        [DataMember(Name = "org", EmitDefaultValue = false)]
         public string Org { get; private set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public AuthorizationLinks Links { get; set; }
 
         /// <summary>
@@ -147,7 +149,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Authorization);
+            return Equals(input as Authorization);
         }
 
         /// <summary>
@@ -158,50 +160,48 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Authorization input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.CreatedAt == input.CreatedAt ||
-                    (this.CreatedAt != null && this.CreatedAt.Equals(input.CreatedAt))
-                ) && base.Equals(input) && 
-                (
-                    this.UpdatedAt == input.UpdatedAt ||
-                    (this.UpdatedAt != null && this.UpdatedAt.Equals(input.UpdatedAt))
-                ) && base.Equals(input) && 
-                (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && base.Equals(input) && 
-                (
-                    this.Permissions == input.Permissions ||
-                    this.Permissions != null &&
-                    this.Permissions.SequenceEqual(input.Permissions)
-                ) && base.Equals(input) && 
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null && this.Id.Equals(input.Id))
-                ) && base.Equals(input) && 
-                (
-                    this.Token == input.Token ||
-                    (this.Token != null && this.Token.Equals(input.Token))
-                ) && base.Equals(input) && 
-                (
-                    this.UserID == input.UserID ||
-                    (this.UserID != null && this.UserID.Equals(input.UserID))
-                ) && base.Equals(input) && 
-                (
-                    this.User == input.User ||
-                    (this.User != null && this.User.Equals(input.User))
-                ) && base.Equals(input) && 
-                (
-                    this.Org == input.Org ||
-                    (this.Org != null && this.Org.Equals(input.Org))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+            return base.Equals(input) &&
+                   (
+                       CreatedAt == input.CreatedAt ||
+                       CreatedAt != null && CreatedAt.Equals(input.CreatedAt)
+                   ) && base.Equals(input) &&
+                   (
+                       UpdatedAt == input.UpdatedAt ||
+                       UpdatedAt != null && UpdatedAt.Equals(input.UpdatedAt)
+                   ) && base.Equals(input) &&
+                   (
+                       OrgID == input.OrgID ||
+                       OrgID != null && OrgID.Equals(input.OrgID)
+                   ) && base.Equals(input) &&
+                   (
+                       Permissions == input.Permissions ||
+                       Permissions != null &&
+                       Permissions.SequenceEqual(input.Permissions)
+                   ) && base.Equals(input) &&
+                   (
+                       Id == input.Id ||
+                       Id != null && Id.Equals(input.Id)
+                   ) && base.Equals(input) &&
+                   (
+                       Token == input.Token ||
+                       Token != null && Token.Equals(input.Token)
+                   ) && base.Equals(input) &&
+                   (
+                       UserID == input.UserID ||
+                       UserID != null && UserID.Equals(input.UserID)
+                   ) && base.Equals(input) &&
+                   (
+                       User == input.User ||
+                       User != null && User.Equals(input.User)
+                   ) && base.Equals(input) &&
+                   (
+                       Org == input.Org ||
+                       Org != null && Org.Equals(input.Org)
+                   ) && base.Equals(input) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -212,32 +212,60 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                if (this.CreatedAt != null)
-                    hashCode = hashCode * 59 + this.CreatedAt.GetHashCode();
-                if (this.UpdatedAt != null)
-                    hashCode = hashCode * 59 + this.UpdatedAt.GetHashCode();
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.Permissions != null)
-                    hashCode = hashCode * 59 + this.Permissions.GetHashCode();
-                if (this.Id != null)
-                    hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Token != null)
-                    hashCode = hashCode * 59 + this.Token.GetHashCode();
-                if (this.UserID != null)
-                    hashCode = hashCode * 59 + this.UserID.GetHashCode();
-                if (this.User != null)
-                    hashCode = hashCode * 59 + this.User.GetHashCode();
-                if (this.Org != null)
-                    hashCode = hashCode * 59 + this.Org.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                if (CreatedAt != null)
+                {
+                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+                }
+
+                if (UpdatedAt != null)
+                {
+                    hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
+                }
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (Permissions != null)
+                {
+                    hashCode = hashCode * 59 + Permissions.GetHashCode();
+                }
+
+                if (Id != null)
+                {
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                }
+
+                if (Token != null)
+                {
+                    hashCode = hashCode * 59 + Token.GetHashCode();
+                }
+
+                if (UserID != null)
+                {
+                    hashCode = hashCode * 59 + UserID.GetHashCode();
+                }
+
+                if (User != null)
+                {
+                    hashCode = hashCode * 59 + User.GetHashCode();
+                }
+
+                if (Org != null)
+                {
+                    hashCode = hashCode * 59 + Org.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

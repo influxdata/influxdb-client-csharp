@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// DashboardLinks
     /// </summary>
     [DataContract]
-    public partial class DashboardLinks :  IEquatable<DashboardLinks>
+    public partial class DashboardLinks : IEquatable<DashboardLinks>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DashboardLinks" /> class.
@@ -41,42 +41,42 @@ namespace InfluxDB.Client.Api.Domain
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [DataMember(Name = "self", EmitDefaultValue = false)]
         public string Self { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="cells", EmitDefaultValue=false)]
+        [DataMember(Name = "cells", EmitDefaultValue = false)]
         public string Cells { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="members", EmitDefaultValue=false)]
+        [DataMember(Name = "members", EmitDefaultValue = false)]
         public string Members { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="owners", EmitDefaultValue=false)]
+        [DataMember(Name = "owners", EmitDefaultValue = false)]
         public string Owners { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="labels", EmitDefaultValue=false)]
+        [DataMember(Name = "labels", EmitDefaultValue = false)]
         public string Labels { get; private set; }
 
         /// <summary>
         /// URI of resource.
         /// </summary>
         /// <value>URI of resource.</value>
-        [DataMember(Name="org", EmitDefaultValue=false)]
+        [DataMember(Name = "org", EmitDefaultValue = false)]
         public string Org { get; private set; }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DashboardLinks);
+            return Equals(input as DashboardLinks);
         }
 
         /// <summary>
@@ -124,32 +124,34 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(DashboardLinks input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Self == input.Self ||
-                    (this.Self != null && this.Self.Equals(input.Self))
-                ) && 
+                    Self == input.Self ||
+                    Self != null && Self.Equals(input.Self)
+                ) &&
                 (
-                    this.Cells == input.Cells ||
-                    (this.Cells != null && this.Cells.Equals(input.Cells))
-                ) && 
+                    Cells == input.Cells ||
+                    Cells != null && Cells.Equals(input.Cells)
+                ) &&
                 (
-                    this.Members == input.Members ||
-                    (this.Members != null && this.Members.Equals(input.Members))
-                ) && 
+                    Members == input.Members ||
+                    Members != null && Members.Equals(input.Members)
+                ) &&
                 (
-                    this.Owners == input.Owners ||
-                    (this.Owners != null && this.Owners.Equals(input.Owners))
-                ) && 
+                    Owners == input.Owners ||
+                    Owners != null && Owners.Equals(input.Owners)
+                ) &&
                 (
-                    this.Labels == input.Labels ||
-                    (this.Labels != null && this.Labels.Equals(input.Labels))
-                ) && 
+                    Labels == input.Labels ||
+                    Labels != null && Labels.Equals(input.Labels)
+                ) &&
                 (
-                    this.Org == input.Org ||
-                    (this.Org != null && this.Org.Equals(input.Org))
+                    Org == input.Org ||
+                    Org != null && Org.Equals(input.Org)
                 );
         }
 
@@ -161,24 +163,40 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Self != null)
-                    hashCode = hashCode * 59 + this.Self.GetHashCode();
-                if (this.Cells != null)
-                    hashCode = hashCode * 59 + this.Cells.GetHashCode();
-                if (this.Members != null)
-                    hashCode = hashCode * 59 + this.Members.GetHashCode();
-                if (this.Owners != null)
-                    hashCode = hashCode * 59 + this.Owners.GetHashCode();
-                if (this.Labels != null)
-                    hashCode = hashCode * 59 + this.Labels.GetHashCode();
-                if (this.Org != null)
-                    hashCode = hashCode * 59 + this.Org.GetHashCode();
+                var hashCode = 41;
+
+                if (Self != null)
+                {
+                    hashCode = hashCode * 59 + Self.GetHashCode();
+                }
+
+                if (Cells != null)
+                {
+                    hashCode = hashCode * 59 + Cells.GetHashCode();
+                }
+
+                if (Members != null)
+                {
+                    hashCode = hashCode * 59 + Members.GetHashCode();
+                }
+
+                if (Owners != null)
+                {
+                    hashCode = hashCode * 59 + Owners.GetHashCode();
+                }
+
+                if (Labels != null)
+                {
+                    hashCode = hashCode * 59 + Labels.GetHashCode();
+                }
+
+                if (Org != null)
+                {
+                    hashCode = hashCode * 59 + Org.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

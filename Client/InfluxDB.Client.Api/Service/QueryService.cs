@@ -25,6 +25,7 @@ namespace InfluxDB.Client.Api.Service
     public interface IQueryService : IApiAccessor
     {
         #region Synchronous Operations
+
         /// <summary>
         /// Retrieve query suggestions
         /// </summary>
@@ -34,7 +35,7 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>FluxSuggestions</returns>
-        FluxSuggestions GetQuerySuggestions (string zapTraceSpan = null);
+        FluxSuggestions GetQuerySuggestions(string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve query suggestions
@@ -45,7 +46,8 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestions</returns>
-        ApiResponse<FluxSuggestions> GetQuerySuggestionsWithHttpInfo (string zapTraceSpan = null);
+        ApiResponse<FluxSuggestions> GetQuerySuggestionsWithHttpInfo(string zapTraceSpan = null);
+
         /// <summary>
         /// Retrieve query suggestions for a branching suggestion
         /// </summary>
@@ -56,7 +58,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>FluxSuggestion</returns>
-        FluxSuggestion GetQuerySuggestionsName (string name, string zapTraceSpan = null);
+        FluxSuggestion GetQuerySuggestionsName(string name, string zapTraceSpan = null);
 
         /// <summary>
         /// Retrieve query suggestions for a branching suggestion
@@ -68,7 +70,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestion</returns>
-        ApiResponse<FluxSuggestion> GetQuerySuggestionsNameWithHttpInfo (string name, string zapTraceSpan = null);
+        ApiResponse<FluxSuggestion> GetQuerySuggestionsNameWithHttpInfo(string name, string zapTraceSpan = null);
+
         /// <summary>
         /// Query data
         /// </summary>
@@ -83,7 +86,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <returns>string</returns>
-        string PostQuery (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        string PostQuery(string zapTraceSpan = null, string acceptEncoding = null, string contentType = null,
+            string org = null, string orgID = null, Query query = null);
 
         /// <summary>
         /// Query data
@@ -99,7 +103,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> PostQueryWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null);
+        ApiResponse<string> PostQueryWithHttpInfo(string zapTraceSpan = null, string acceptEncoding = null,
+            string contentType = null, string org = null, string orgID = null, Query query = null);
+
         /// <summary>
         /// Analyze a Flux query
         /// </summary>
@@ -111,7 +117,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <returns>AnalyzeQueryResponse</returns>
-        AnalyzeQueryResponse PostQueryAnalyze (string zapTraceSpan = null, string contentType = null, Query query = null);
+        AnalyzeQueryResponse PostQueryAnalyze(string zapTraceSpan = null, string contentType = null,
+            Query query = null);
 
         /// <summary>
         /// Analyze a Flux query
@@ -124,7 +131,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <returns>ApiResponse of AnalyzeQueryResponse</returns>
-        ApiResponse<AnalyzeQueryResponse> PostQueryAnalyzeWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null);
+        ApiResponse<AnalyzeQueryResponse> PostQueryAnalyzeWithHttpInfo(string zapTraceSpan = null,
+            string contentType = null, Query query = null);
+
         /// <summary>
         /// Generate an Abstract Syntax Tree (AST) from a query
         /// </summary>
@@ -136,7 +145,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <returns>ASTResponse</returns>
-        ASTResponse PostQueryAst (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null);
+        ASTResponse PostQueryAst(string zapTraceSpan = null, string contentType = null,
+            LanguageRequest languageRequest = null);
 
         /// <summary>
         /// Generate an Abstract Syntax Tree (AST) from a query
@@ -149,9 +159,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <returns>ApiResponse of ASTResponse</returns>
-        ApiResponse<ASTResponse> PostQueryAstWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null);
+        ApiResponse<ASTResponse> PostQueryAstWithHttpInfo(string zapTraceSpan = null, string contentType = null,
+            LanguageRequest languageRequest = null);
+
         #endregion Synchronous Operations
+
         #region Asynchronous Operations
+
         /// <summary>
         /// Retrieve query suggestions
         /// </summary>
@@ -162,7 +176,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxSuggestions</returns>
-        System.Threading.Tasks.Task<FluxSuggestions> GetQuerySuggestionsAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<FluxSuggestions> GetQuerySuggestionsAsync(string zapTraceSpan = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve query suggestions
@@ -174,7 +189,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxSuggestions)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> GetQuerySuggestionsAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> GetQuerySuggestionsAsyncWithHttpInfo(
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Retrieve query suggestions for a branching suggestion
         /// </summary>
@@ -186,7 +203,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxSuggestion</returns>
-        System.Threading.Tasks.Task<FluxSuggestion> GetQuerySuggestionsNameAsync (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<FluxSuggestion> GetQuerySuggestionsNameAsync(string name,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve query suggestions for a branching suggestion
@@ -199,7 +217,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxSuggestion)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FluxSuggestion>> GetQuerySuggestionsNameAsyncWithHttpInfo (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<FluxSuggestion>> GetQuerySuggestionsNameAsyncWithHttpInfo(string name,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Query data
         /// </summary>
@@ -215,7 +235,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<string> PostQueryAsync(string zapTraceSpan = null, string acceptEncoding = null,
+            string contentType = null, string org = null, string orgID = null, Query query = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Query data
@@ -232,7 +254,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo(string zapTraceSpan = null,
+            string acceptEncoding = null, string contentType = null, string org = null, string orgID = null,
+            Query query = null, CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Analyze a Flux query
         /// </summary>
@@ -245,7 +270,8 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of AnalyzeQueryResponse</returns>
-        System.Threading.Tasks.Task<AnalyzeQueryResponse> PostQueryAnalyzeAsync (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<AnalyzeQueryResponse> PostQueryAnalyzeAsync(string zapTraceSpan = null,
+            string contentType = null, Query query = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Analyze a Flux query
@@ -259,7 +285,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (AnalyzeQueryResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> PostQueryAnalyzeAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> PostQueryAnalyzeAsyncWithHttpInfo(
+            string zapTraceSpan = null, string contentType = null, Query query = null,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Generate an Abstract Syntax Tree (AST) from a query
         /// </summary>
@@ -272,7 +301,9 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ASTResponse</returns>
-        System.Threading.Tasks.Task<ASTResponse> PostQueryAstAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ASTResponse> PostQueryAstAsync(string zapTraceSpan = null,
+            string contentType = null, LanguageRequest languageRequest = null,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generate an Abstract Syntax Tree (AST) from a query
@@ -286,7 +317,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ASTResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ASTResponse>> PostQueryAstAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<ASTResponse>> PostQueryAstAsyncWithHttpInfo(string zapTraceSpan = null,
+            string contentType = null, LanguageRequest languageRequest = null,
+            CancellationToken cancellationToken = default);
+
         #endregion Asynchronous Operations
     }
 
@@ -295,17 +329,17 @@ namespace InfluxDB.Client.Api.Service
     /// </summary>
     public partial class QueryService : IQueryService
     {
-        private InfluxDB.Client.Api.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+        private ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryService"/> class.
         /// </summary>
         /// <returns></returns>
-        public QueryService(String basePath)
+        public QueryService(string basePath)
         {
-            this.Configuration = new InfluxDB.Client.Api.Client.Configuration { BasePath = basePath };
+            Configuration = new Configuration { BasePath = basePath };
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
@@ -314,31 +348,36 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public QueryService(InfluxDB.Client.Api.Client.Configuration configuration = null)
+        public QueryService(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                this.Configuration = InfluxDB.Client.Api.Client.Configuration.Default;
+            {
+                Configuration = Configuration.Default;
+            }
             else
-                this.Configuration = configuration;
+            {
+                Configuration = configuration;
+            }
 
-            ExceptionFactory = InfluxDB.Client.Api.Client.Configuration.DefaultExceptionFactory;
+            ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
         /// Gets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        public String GetBasePath()
+        public string GetBasePath()
         {
-            return this.Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClientOptions.BaseUrl.ToString();
         }
 
         /// <summary>
         /// Sets the base path of the API client.
         /// </summary>
         /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(String basePath)
+        [Obsolete(
+            "SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
+        public void SetBasePath(string basePath)
         {
             // do nothing
         }
@@ -347,12 +386,12 @@ namespace InfluxDB.Client.Api.Service
         /// Gets or sets the configuration object
         /// </summary>
         /// <value>An instance of the Configuration</value>
-        public InfluxDB.Client.Api.Client.Configuration Configuration {get; set;}
+        public Configuration Configuration { get; set; }
 
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public InfluxDB.Client.Api.Client.ExceptionFactory ExceptionFactory
+        public ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -360,9 +399,10 @@ namespace InfluxDB.Client.Api.Service
                 {
                     throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
                 }
+
                 return _exceptionFactory;
             }
-            set { _exceptionFactory = value; }
+            set => _exceptionFactory = value;
         }
 
         /// <summary>
@@ -370,9 +410,9 @@ namespace InfluxDB.Client.Api.Service
         /// </summary>
         /// <returns>Dictionary of HTTP header</returns>
         [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public IDictionary<String, String> DefaultHeader()
+        public IDictionary<string, string> DefaultHeader()
         {
-            return new ReadOnlyDictionary<string, string>(this.Configuration.DefaultHeader);
+            return new ReadOnlyDictionary<string, string>(Configuration.DefaultHeader);
         }
 
         /// <summary>
@@ -384,7 +424,7 @@ namespace InfluxDB.Client.Api.Service
         [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
         public void AddDefaultHeader(string key, string value)
         {
-            this.Configuration.AddDefaultHeader(key, value);
+            Configuration.AddDefaultHeader(key, value);
         }
 
         /// <summary>
@@ -393,10 +433,10 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>FluxSuggestions</returns>
-        public FluxSuggestions GetQuerySuggestions (string zapTraceSpan = null)
+        public FluxSuggestions GetQuerySuggestions(string zapTraceSpan = null)
         {
-             ApiResponse<FluxSuggestions> localVarResponse = GetQuerySuggestionsWithHttpInfo(zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse = GetQuerySuggestionsWithHttpInfo(zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -405,50 +445,61 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestions</returns>
-        public ApiResponse< FluxSuggestions > GetQuerySuggestionsWithHttpInfo (string zapTraceSpan = null)
+        public ApiResponse<FluxSuggestions> GetQuerySuggestionsWithHttpInfo(string zapTraceSpan = null)
         {
-
             var localVarPath = "/api/v2/query/suggestions";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<FluxSuggestions>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (FluxSuggestions) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestions)));
+                (FluxSuggestions)Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestions)));
         }
 
         /// <summary>
@@ -458,45 +509,57 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of FluxSuggestions</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetQuerySuggestionsWithIRestResponseAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetQuerySuggestionsWithIRestResponseAsync(
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/query/suggestions";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -508,86 +571,105 @@ namespace InfluxDB.Client.Api.Service
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestions</returns>
-        public RestResponse GetQuerySuggestionsWithIRestResponse (string zapTraceSpan = null)
+        public RestResponse GetQuerySuggestionsWithIRestResponse(string zapTraceSpan = null)
         {
-
             var localVarPath = "/api/v2/query/suggestions";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Retrieve query suggestions 
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestions</returns>
-        public RestRequest GetQuerySuggestionsWithRestRequest (string zapTraceSpan = null)
+        public RestRequest GetQuerySuggestionsWithRestRequest(string zapTraceSpan = null)
         {
-
             var localVarPath = "/api/v2/query/suggestions";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -598,11 +680,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxSuggestions</returns>
-        public async System.Threading.Tasks.Task<FluxSuggestions> GetQuerySuggestionsAsync (string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<FluxSuggestions> GetQuerySuggestionsAsync(string zapTraceSpan = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<FluxSuggestions> localVarResponse = await GetQuerySuggestionsAsyncWithHttpInfo(zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse = await GetQuerySuggestionsAsyncWithHttpInfo(zapTraceSpan, cancellationToken)
+                .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -612,24 +695,29 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxSuggestions)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> GetQuerySuggestionsAsyncWithHttpInfo (string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestions>> GetQuerySuggestionsAsyncWithHttpInfo(
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetQuerySuggestionsAsyncWithIRestResponse(zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await GetQuerySuggestionsAsyncWithIRestResponse(zapTraceSpan, cancellationToken)
+                .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<FluxSuggestions>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (FluxSuggestions) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestions)));
+                (FluxSuggestions)Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestions)));
         }
-            
+
         /// <summary>
         /// Retrieve query suggestions 
         /// </summary>
@@ -637,43 +725,55 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (FluxSuggestions)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetQuerySuggestionsAsyncWithIRestResponse (string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetQuerySuggestionsAsyncWithIRestResponse(
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/query/suggestions";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestions", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -686,10 +786,10 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>FluxSuggestion</returns>
-        public FluxSuggestion GetQuerySuggestionsName (string name, string zapTraceSpan = null)
+        public FluxSuggestion GetQuerySuggestionsName(string name, string zapTraceSpan = null)
         {
-             ApiResponse<FluxSuggestion> localVarResponse = GetQuerySuggestionsNameWithHttpInfo(name, zapTraceSpan);
-             return localVarResponse.Data;
+            var localVarResponse = GetQuerySuggestionsNameWithHttpInfo(name, zapTraceSpan);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -699,54 +799,73 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestion</returns>
-        public ApiResponse< FluxSuggestion > GetQuerySuggestionsNameWithHttpInfo (string name, string zapTraceSpan = null)
+        public ApiResponse<FluxSuggestion> GetQuerySuggestionsNameWithHttpInfo(string name, string zapTraceSpan = null)
         {
             // verify the required parameter 'name' is set
             if (name == null)
-                throw new ApiException(400, "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            }
 
             var localVarPath = "/api/v2/query/suggestions/{name}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (name != null) localVarPathParams.Add("name", this.Configuration.ApiClient.ParameterToString(name)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (name != null)
+            {
+                localVarPathParams.Add("name", Configuration.ApiClient.ParameterToString(name)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<FluxSuggestion>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (FluxSuggestion) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestion)));
+                (FluxSuggestion)Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestion)));
         }
 
         /// <summary>
@@ -757,49 +876,69 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of FluxSuggestion</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetQuerySuggestionsNameWithIRestResponseAsync (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetQuerySuggestionsNameWithIRestResponseAsync(
+            string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'name' is set
             if (name == null)
-                throw new ApiException(400, "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            }
 
             var localVarPath = "/api/v2/query/suggestions/{name}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (name != null) localVarPathParams.Add("name", this.Configuration.ApiClient.ParameterToString(name)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (name != null)
+            {
+                localVarPathParams.Add("name", Configuration.ApiClient.ParameterToString(name)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -812,54 +951,73 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestion</returns>
-        public RestResponse GetQuerySuggestionsNameWithIRestResponse (string name, string zapTraceSpan = null)
+        public RestResponse GetQuerySuggestionsNameWithIRestResponse(string name, string zapTraceSpan = null)
         {
             // verify the required parameter 'name' is set
             if (name == null)
-                throw new ApiException(400, "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            }
 
             var localVarPath = "/api/v2/query/suggestions/{name}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (name != null) localVarPathParams.Add("name", this.Configuration.ApiClient.ParameterToString(name)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (name != null)
+            {
+                localVarPathParams.Add("name", Configuration.ApiClient.ParameterToString(name)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Retrieve query suggestions for a branching suggestion 
         /// </summary>
@@ -867,40 +1025,56 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="name">The name of the branching suggestion.</param>
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <returns>ApiResponse of FluxSuggestion</returns>
-        public RestRequest GetQuerySuggestionsNameWithRestRequest (string name, string zapTraceSpan = null)
+        public RestRequest GetQuerySuggestionsNameWithRestRequest(string name, string zapTraceSpan = null)
         {
             // verify the required parameter 'name' is set
             if (name == null)
-                throw new ApiException(400, "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            }
 
             var localVarPath = "/api/v2/query/suggestions/{name}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (name != null) localVarPathParams.Add("name", this.Configuration.ApiClient.ParameterToString(name)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (name != null)
+            {
+                localVarPathParams.Add("name", Configuration.ApiClient.ParameterToString(name)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -912,11 +1086,12 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of FluxSuggestion</returns>
-        public async System.Threading.Tasks.Task<FluxSuggestion> GetQuerySuggestionsNameAsync (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<FluxSuggestion> GetQuerySuggestionsNameAsync(string name,
+            string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<FluxSuggestion> localVarResponse = await GetQuerySuggestionsNameAsyncWithHttpInfo(name, zapTraceSpan, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse = await GetQuerySuggestionsNameAsyncWithHttpInfo(name, zapTraceSpan, cancellationToken)
+                .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -927,24 +1102,30 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (FluxSuggestion)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestion>> GetQuerySuggestionsNameAsyncWithHttpInfo (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<FluxSuggestion>> GetQuerySuggestionsNameAsyncWithHttpInfo(
+            string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await GetQuerySuggestionsNameAsyncWithIRestResponse(name, zapTraceSpan, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await GetQuerySuggestionsNameAsyncWithIRestResponse(name, zapTraceSpan, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<FluxSuggestion>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (FluxSuggestion) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestion)));
+                (FluxSuggestion)Configuration.ApiClient.Deserialize(localVarResponse, typeof(FluxSuggestion)));
         }
-            
+
         /// <summary>
         /// Retrieve query suggestions for a branching suggestion 
         /// </summary>
@@ -953,47 +1134,67 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="zapTraceSpan">OpenTracing span context (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (FluxSuggestion)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> GetQuerySuggestionsNameAsyncWithIRestResponse (string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> GetQuerySuggestionsNameAsyncWithIRestResponse(
+            string name, string zapTraceSpan = null, CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'name' is set
             if (name == null)
-                throw new ApiException(400, "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            {
+                throw new ApiException(400,
+                    "Missing required parameter 'name' when calling QueryService->GetQuerySuggestionsName");
+            }
 
             var localVarPath = "/api/v2/query/suggestions/{name}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (name != null) localVarPathParams.Add("name", this.Configuration.ApiClient.ParameterToString(name)); // path parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            if (name != null)
+            {
+                localVarPathParams.Add("name", Configuration.ApiClient.ParameterToString(name)); // path parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("GetQuerySuggestionsName", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1010,10 +1211,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <returns>string</returns>
-        public string PostQuery (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public string PostQuery(string zapTraceSpan = null, string acceptEncoding = null, string contentType = null,
+            string org = null, string orgID = null, Query query = null)
         {
-             ApiResponse<string> localVarResponse = PostQueryWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query);
-             return localVarResponse.Data;
+            var localVarResponse = PostQueryWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1027,32 +1229,58 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public ApiResponse< string > PostQueryWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public ApiResponse<string> PostQueryWithHttpInfo(string zapTraceSpan = null, string acceptEncoding = null,
+            string contentType = null, string org = null, string orgID = null, Query query = null)
         {
-
             var localVarPath = "/api/v2/query";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
                 "application/vnd.flux"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1060,33 +1288,40 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "text/csv",
                 "application/vnd.influx.arrow",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQuery", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQuery", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<string>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+                (string)Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
         }
 
         /// <summary>
@@ -1101,32 +1336,59 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of string</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostQueryWithIRestResponseAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostQueryWithIRestResponseAsync(
+            string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null,
+            string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/query";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
                 "application/vnd.flux"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1134,28 +1396,35 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "text/csv",
                 "application/vnd.influx.arrow",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQuery", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQuery", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1172,32 +1441,58 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public RestResponse PostQueryWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public RestResponse PostQueryWithIRestResponse(string zapTraceSpan = null, string acceptEncoding = null,
+            string contentType = null, string org = null, string orgID = null, Query query = null)
         {
-
             var localVarPath = "/api/v2/query";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
                 "application/vnd.flux"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1205,33 +1500,40 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "text/csv",
                 "application/vnd.influx.arrow",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQuery", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQuery", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Query data Retrieves data from InfluxDB buckets.  To query data, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.1/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.1/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.1/reference/urls/)_. - **Flux query** – _See [Flux](https://docs.influxdata.com/flux/v0.x/)._  For more information and examples, see [Query with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.1/query-data/execute-queries/influx-api/).
         /// </summary>
@@ -1243,32 +1545,58 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <returns>ApiResponse of string</returns>
-        public RestRequest PostQueryWithRestRequest (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null)
+        public RestRequest PostQueryWithRestRequest(string zapTraceSpan = null, string acceptEncoding = null,
+            string contentType = null, string org = null, string orgID = null, Query query = null)
         {
-
             var localVarPath = "/api/v2/query";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
                 "application/vnd.flux"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1276,19 +1604,23 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "text/csv",
                 "application/vnd.influx.arrow",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1304,11 +1636,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> PostQueryAsync (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<string> PostQueryAsync(string zapTraceSpan = null,
+            string acceptEncoding = null, string contentType = null, string org = null, string orgID = null,
+            Query query = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<string> localVarResponse = await PostQueryAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await PostQueryAsyncWithHttpInfo(zapTraceSpan, acceptEncoding, contentType, org, orgID, query,
+                    cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1323,24 +1658,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<string>> PostQueryAsyncWithHttpInfo(
+            string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null,
+            string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostQueryAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, contentType, org, orgID, query, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PostQueryAsyncWithIRestResponse(zapTraceSpan, acceptEncoding, contentType, org, orgID, query,
+                    cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQuery", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQuery", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<string>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (string) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
+                (string)Configuration.ApiClient.Deserialize(localVarResponse, typeof(string)));
         }
-            
+
         /// <summary>
         /// Query data Retrieves data from InfluxDB buckets.  To query data, you need the following: - **organization** – _See [View organizations](https://docs.influxdata.com/influxdb/v2.1/organizations/view-orgs/#view-your-organization-id) for instructions on viewing your organization ID._ - **API token** – _See [View tokens](https://docs.influxdata.com/influxdb/v2.1/security/tokens/view-tokens/)  for instructions on viewing your API token._ - **InfluxDB URL** – _See [InfluxDB URLs](https://docs.influxdata.com/influxdb/v2.1/reference/urls/)_. - **Flux query** – _See [Flux](https://docs.influxdata.com/flux/v0.x/)._  For more information and examples, see [Query with the InfluxDB API](https://docs.influxdata.com/influxdb/v2.1/query-data/execute-queries/influx-api/).
         /// </summary>
@@ -1353,32 +1695,59 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query or specification to execute (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (string)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostQueryAsyncWithIRestResponse (string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null, string orgID = null, Query query = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostQueryAsyncWithIRestResponse(
+            string zapTraceSpan = null, string acceptEncoding = null, string contentType = null, string org = null,
+            string orgID = null, Query query = null, CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/query";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
+            var localVarHttpContentTypes = new string[]
+            {
+                "application/json",
                 "application/vnd.flux"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (org != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
-            if (orgID != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (acceptEncoding != null) localVarHeaderParams.Add("Accept-Encoding", this.Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (org != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "org", org)); // query parameter
+            }
+
+            if (orgID != null)
+            {
+                localVarQueryParams.AddRange(
+                    Configuration.ApiClient.ParameterToKeyValuePairs("", "orgID", orgID)); // query parameter
+            }
+
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (acceptEncoding != null)
+            {
+                localVarHeaderParams.Add("Accept-Encoding",
+                    Configuration.ApiClient.ParameterToString(acceptEncoding)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1386,26 +1755,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "text/csv",
                 "application/vnd.influx.arrow",
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQuery", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQuery", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1419,10 +1795,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <returns>AnalyzeQueryResponse</returns>
-        public AnalyzeQueryResponse PostQueryAnalyze (string zapTraceSpan = null, string contentType = null, Query query = null)
+        public AnalyzeQueryResponse PostQueryAnalyze(string zapTraceSpan = null, string contentType = null,
+            Query query = null)
         {
-             ApiResponse<AnalyzeQueryResponse> localVarResponse = PostQueryAnalyzeWithHttpInfo(zapTraceSpan, contentType, query);
-             return localVarResponse.Data;
+            var localVarResponse = PostQueryAnalyzeWithHttpInfo(zapTraceSpan, contentType, query);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1433,28 +1810,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <returns>ApiResponse of AnalyzeQueryResponse</returns>
-        public ApiResponse< AnalyzeQueryResponse > PostQueryAnalyzeWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null)
+        public ApiResponse<AnalyzeQueryResponse> PostQueryAnalyzeWithHttpInfo(string zapTraceSpan = null,
+            string contentType = null, Query query = null)
         {
-
             var localVarPath = "/api/v2/query/analyze";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1462,31 +1850,39 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<AnalyzeQueryResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (AnalyzeQueryResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(AnalyzeQueryResponse)));
+                (AnalyzeQueryResponse)Configuration.ApiClient.Deserialize(localVarResponse,
+                    typeof(AnalyzeQueryResponse)));
         }
 
         /// <summary>
@@ -1498,28 +1894,40 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of AnalyzeQueryResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostQueryAnalyzeWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostQueryAnalyzeWithIRestResponseAsync(
+            string zapTraceSpan = null, string contentType = null, Query query = null,
+            CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/query/analyze";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1527,26 +1935,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1560,28 +1975,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <returns>ApiResponse of AnalyzeQueryResponse</returns>
-        public RestResponse PostQueryAnalyzeWithIRestResponse (string zapTraceSpan = null, string contentType = null, Query query = null)
+        public RestResponse PostQueryAnalyzeWithIRestResponse(string zapTraceSpan = null, string contentType = null,
+            Query query = null)
         {
-
             var localVarPath = "/api/v2/query/analyze";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1589,31 +2015,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Analyze a Flux query 
         /// </summary>
@@ -1622,28 +2055,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <returns>ApiResponse of AnalyzeQueryResponse</returns>
-        public RestRequest PostQueryAnalyzeWithRestRequest (string zapTraceSpan = null, string contentType = null, Query query = null)
+        public RestRequest PostQueryAnalyzeWithRestRequest(string zapTraceSpan = null, string contentType = null,
+            Query query = null)
         {
-
             var localVarPath = "/api/v2/query/analyze";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1651,17 +2095,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -1674,11 +2122,13 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of AnalyzeQueryResponse</returns>
-        public async System.Threading.Tasks.Task<AnalyzeQueryResponse> PostQueryAnalyzeAsync (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<AnalyzeQueryResponse> PostQueryAnalyzeAsync(string zapTraceSpan = null,
+            string contentType = null, Query query = null, CancellationToken cancellationToken = default)
         {
-             ApiResponse<AnalyzeQueryResponse> localVarResponse = await PostQueryAnalyzeAsyncWithHttpInfo(zapTraceSpan, contentType, query, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await PostQueryAnalyzeAsyncWithHttpInfo(zapTraceSpan, contentType, query, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1690,24 +2140,32 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (AnalyzeQueryResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> PostQueryAnalyzeAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<AnalyzeQueryResponse>> PostQueryAnalyzeAsyncWithHttpInfo(
+            string zapTraceSpan = null, string contentType = null, Query query = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostQueryAnalyzeAsyncWithIRestResponse(zapTraceSpan, contentType, query, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PostQueryAnalyzeAsyncWithIRestResponse(zapTraceSpan, contentType, query, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<AnalyzeQueryResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (AnalyzeQueryResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(AnalyzeQueryResponse)));
+                (AnalyzeQueryResponse)Configuration.ApiClient.Deserialize(localVarResponse,
+                    typeof(AnalyzeQueryResponse)));
         }
-            
+
         /// <summary>
         /// Analyze a Flux query 
         /// </summary>
@@ -1717,28 +2175,40 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="query">Flux query to analyze (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (AnalyzeQueryResponse)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostQueryAnalyzeAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, Query query = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostQueryAnalyzeAsyncWithIRestResponse(
+            string zapTraceSpan = null, string contentType = null, Query query = null,
+            CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/query/analyze";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (query != null && query.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(query); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(query); // http body (model) parameter
             }
             else
             {
@@ -1746,24 +2216,31 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAnalyze", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1777,10 +2254,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <returns>ASTResponse</returns>
-        public ASTResponse PostQueryAst (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        public ASTResponse PostQueryAst(string zapTraceSpan = null, string contentType = null,
+            LanguageRequest languageRequest = null)
         {
-             ApiResponse<ASTResponse> localVarResponse = PostQueryAstWithHttpInfo(zapTraceSpan, contentType, languageRequest);
-             return localVarResponse.Data;
+            var localVarResponse = PostQueryAstWithHttpInfo(zapTraceSpan, contentType, languageRequest);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1791,28 +2269,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <returns>ApiResponse of ASTResponse</returns>
-        public ApiResponse< ASTResponse > PostQueryAstWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        public ApiResponse<ASTResponse> PostQueryAstWithHttpInfo(string zapTraceSpan = null, string contentType = null,
+            LanguageRequest languageRequest = null)
         {
-
             var localVarPath = "/api/v2/query/ast";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (languageRequest != null && languageRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
             }
             else
             {
@@ -1820,31 +2309,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAst", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAst", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<ASTResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ASTResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ASTResponse)));
+                (ASTResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ASTResponse)));
         }
 
         /// <summary>
@@ -1856,28 +2352,40 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>ApiResponse of ASTResponse</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostQueryAstWithIRestResponseAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostQueryAstWithIRestResponseAsync(
+            string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null,
+            CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/query/ast";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (languageRequest != null && languageRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
             }
             else
             {
@@ -1885,26 +2393,33 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAst", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAst", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
@@ -1918,28 +2433,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <returns>ApiResponse of ASTResponse</returns>
-        public RestResponse PostQueryAstWithIRestResponse (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        public RestResponse PostQueryAstWithIRestResponse(string zapTraceSpan = null, string contentType = null,
+            LanguageRequest languageRequest = null)
         {
-
             var localVarPath = "/api/v2/query/ast";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (languageRequest != null && languageRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
             }
             else
             {
@@ -1947,31 +2473,38 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAst", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAst", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-        
+
         /// <summary>
         /// Generate an Abstract Syntax Tree (AST) from a query Analyzes flux query and generates a query specification.
         /// </summary>
@@ -1980,28 +2513,39 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="contentType"> (optional)</param>
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <returns>ApiResponse of ASTResponse</returns>
-        public RestRequest PostQueryAstWithRestRequest (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null)
+        public RestRequest PostQueryAstWithRestRequest(string zapTraceSpan = null, string contentType = null,
+            LanguageRequest languageRequest = null)
         {
-
             var localVarPath = "/api/v2/query/ast";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (languageRequest != null && languageRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
             }
             else
             {
@@ -2009,17 +2553,21 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
-            return this.Configuration.ApiClient.PrepareRequest(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            return Configuration.ApiClient.PrepareRequest(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
         }
 
@@ -2032,11 +2580,14 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ASTResponse</returns>
-        public async System.Threading.Tasks.Task<ASTResponse> PostQueryAstAsync (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ASTResponse> PostQueryAstAsync(string zapTraceSpan = null,
+            string contentType = null, LanguageRequest languageRequest = null,
+            CancellationToken cancellationToken = default)
         {
-             ApiResponse<ASTResponse> localVarResponse = await PostQueryAstAsyncWithHttpInfo(zapTraceSpan, contentType, languageRequest, cancellationToken).ConfigureAwait(false);
-             return localVarResponse.Data;
-
+            var localVarResponse =
+                await PostQueryAstAsyncWithHttpInfo(zapTraceSpan, contentType, languageRequest, cancellationToken)
+                    .ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2048,24 +2599,31 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of ApiResponse (ASTResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ASTResponse>> PostQueryAstAsyncWithHttpInfo (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApiResponse<ASTResponse>> PostQueryAstAsyncWithHttpInfo(
+            string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null,
+            CancellationToken cancellationToken = default)
         {
             // make the HTTP request
-            RestResponse localVarResponse = await PostQueryAstAsyncWithIRestResponse(zapTraceSpan, contentType, languageRequest, cancellationToken).ConfigureAwait(false);
+            var localVarResponse =
+                await PostQueryAstAsyncWithIRestResponse(zapTraceSpan, contentType, languageRequest, cancellationToken)
+                    .ConfigureAwait(false);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAst", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAst", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return new ApiResponse<ASTResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ASTResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ASTResponse)));
+                (ASTResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ASTResponse)));
         }
-            
+
         /// <summary>
         /// Generate an Abstract Syntax Tree (AST) from a query Analyzes flux query and generates a query specification.
         /// </summary>
@@ -2075,28 +2633,40 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="languageRequest">Analyzed Flux query to generate abstract syntax tree. (optional)</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Task of RestResponse (ASTResponse)</returns>
-        public async System.Threading.Tasks.Task<RestResponse> PostQueryAstAsyncWithIRestResponse (string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null, CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RestResponse> PostQueryAstAsyncWithIRestResponse(
+            string zapTraceSpan = null, string contentType = null, LanguageRequest languageRequest = null,
+            CancellationToken cancellationToken = default)
         {
-
             var localVarPath = "/api/v2/query/ast";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new List<KeyValuePair<string, string>>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
+            var localVarHttpContentTypes = new string[]
+            {
                 "application/json"
             };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            var localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
-            if (zapTraceSpan != null) localVarHeaderParams.Add("Zap-Trace-Span", this.Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
-            if (contentType != null) localVarHeaderParams.Add("Content-Type", this.Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            if (zapTraceSpan != null)
+            {
+                localVarHeaderParams.Add("Zap-Trace-Span",
+                    Configuration.ApiClient.ParameterToString(zapTraceSpan)); // header parameter
+            }
+
+            if (contentType != null)
+            {
+                localVarHeaderParams.Add("Content-Type",
+                    Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+            }
+
             if (languageRequest != null && languageRequest.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
+                localVarPostBody = Configuration.ApiClient.Serialize(languageRequest); // http body (model) parameter
             }
             else
             {
@@ -2104,28 +2674,34 @@ namespace InfluxDB.Client.Api.Service
             }
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
+            var localVarHttpHeaderAccepts = new string[]
+            {
                 "application/json"
             };
 
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            var localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null && !localVarHeaderParams.ContainsKey("Accept"))
+            {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
+                localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("PostQueryAst", localVarResponse);
-                if (exception != null) throw exception;
+                var exception = ExceptionFactory("PostQueryAst", localVarResponse);
+                if (exception != null)
+                {
+                    throw exception;
+                }
             }
 
             return localVarResponse;
         }
-
     }
 }

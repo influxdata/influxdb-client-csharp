@@ -160,7 +160,7 @@ namespace InfluxDB.Client.Linq.Internal
                 //
                 // every
                 //
-                var every = (TimeSpan) ((ConstantExpression)expression.Arguments[1]).Value;
+                var every = (TimeSpan)((ConstantExpression)expression.Arguments[1]).Value;
                 Arguments.CheckNotNull(every, "every");
                 var everyVariable = _context.Variables.AddNamedVariable(every);
 
@@ -214,7 +214,7 @@ namespace InfluxDB.Client.Linq.Internal
                 return;
             }
 
-            var namedField = (NamedField) _expressionParts[index];
+            var namedField = (NamedField)_expressionParts[index];
             // Constant on right: a.Name == "quality"
             if (_expressionParts[index + 1] is BinaryOperator)
             {
@@ -249,7 +249,7 @@ namespace InfluxDB.Client.Linq.Internal
                 return;
             }
 
-            var namedField = (NamedFieldValue) _expressionParts[index];
+            var namedField = (NamedFieldValue)_expressionParts[index];
             // Constant on right: a.Value == "good"
             if (_expressionParts[index + 1] is BinaryOperator)
             {
@@ -273,13 +273,13 @@ namespace InfluxDB.Client.Linq.Internal
                 // ) and NamedField
                 var i = index + 3;
                 namedField.Left = _expressionParts.Count > i && _expressionParts[i] is NamedField;
-                
+
                 _expressionParts.RemoveAt(index + 1);
                 _expressionParts.RemoveAt(index - 1);
                 _expressionParts.RemoveAt(index - 2);
                 _expressionParts.RemoveAt(index - 3);
             }
-            
+
             // remove trailing operator: r["attribute_quality"] and  == p4
             index = _expressionParts.IndexOf(namedField);
             if (namedField.Left)
@@ -308,14 +308,14 @@ namespace InfluxDB.Client.Linq.Internal
                 // "sensorId == 123456"
                 if (index >= 1 && parts[index - 1] is TagColumnName && parts[index + 1] is AssignmentValue)
                 {
-                    var assignmentValue = (AssignmentValue) parts[index + 1];
+                    var assignmentValue = (AssignmentValue)parts[index + 1];
                     context.Variables.VariableIsTag(assignmentValue.Assignment);
                 }
 
                 // "123456 == sensorId"
                 if (index >= 1 && parts[index - 1] is AssignmentValue && parts[index + 1] is TagColumnName)
                 {
-                    var assignmentValue = (AssignmentValue) parts[index - 1];
+                    var assignmentValue = (AssignmentValue)parts[index - 1];
                     context.Variables.VariableIsTag(assignmentValue.Assignment);
                 }
             }
@@ -331,13 +331,12 @@ namespace InfluxDB.Client.Linq.Internal
                 var indexes = Enumerable.Range(0, parts.Count)
                     .Where(i => parts[i] is BinaryOperator)
                     .ToList();
-            
+
                 foreach (var index in indexes)
                 {
                     // "( and )"
                     if (index >= 1 && parts[index - 1] is LeftParenthesis && parts[index + 1] is RightParenthesis)
                     {
-
                         parts.RemoveAt(index + 1);
                         parts.RemoveAt(index);
                         parts.RemoveAt(index - 1);
@@ -349,7 +348,6 @@ namespace InfluxDB.Client.Linq.Internal
                     // "( timestamp > )"
                     if (index >= 2 && parts[index - 2] is LeftParenthesis && parts[index + 1] is RightParenthesis)
                     {
-
                         parts.RemoveAt(index + 1);
                         parts.RemoveAt(index);
                         parts.RemoveAt(index - 1);
@@ -362,7 +360,6 @@ namespace InfluxDB.Client.Linq.Internal
                     // "( < timestamp )"  
                     if (index >= 1 && parts[index - 1] is LeftParenthesis && parts[index + 2] is RightParenthesis)
                     {
-
                         parts.RemoveAt(index + 2);
                         parts.RemoveAt(index + 1);
                         parts.RemoveAt(index);
@@ -389,10 +386,9 @@ namespace InfluxDB.Client.Linq.Internal
                         NormalizeExpressions(parts);
                         return;
                     }
-
                 }
             }
-            
+
             // Parenthesis
             {
                 var indexes = Enumerable.Range(0, parts.Count)
@@ -400,7 +396,6 @@ namespace InfluxDB.Client.Linq.Internal
                     .ToList();
 
                 foreach (var index in indexes)
-                {
                     // ()
                     if (parts.Count > index + 1 && parts[index + 1] is RightParenthesis)
                     {
@@ -410,15 +405,14 @@ namespace InfluxDB.Client.Linq.Internal
                         NormalizeExpressions(parts);
                         return;
                     }
-                }
-                
+
                 // (( ))
                 if (parts.Count >= 4 && parts[0] is LeftParenthesis && parts[1] is LeftParenthesis &&
                     parts[parts.Count - 2] is RightParenthesis && parts[parts.Count - 1] is RightParenthesis)
                 {
                     parts.RemoveAt(parts.Count - 1);
                     parts.RemoveAt(0);
-                    
+
                     NormalizeExpressions(parts);
                 }
             }

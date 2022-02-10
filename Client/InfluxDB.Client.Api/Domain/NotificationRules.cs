@@ -27,29 +27,29 @@ namespace InfluxDB.Client.Api.Domain
     /// NotificationRules
     /// </summary>
     [DataContract]
-    public partial class NotificationRules :  IEquatable<NotificationRules>
+    public partial class NotificationRules : IEquatable<NotificationRules>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationRules" /> class.
         /// </summary>
         /// <param name="notificationRules">notificationRules.</param>
         /// <param name="links">links.</param>
-        public NotificationRules(List<NotificationRule> notificationRules = default(List<NotificationRule>), Links links = default(Links))
+        public NotificationRules(List<NotificationRule> notificationRules = default, Links links = default)
         {
-            this._NotificationRules = notificationRules;
-            this.Links = links;
+            _NotificationRules = notificationRules;
+            Links = links;
         }
 
         /// <summary>
         /// Gets or Sets _NotificationRules
         /// </summary>
-        [DataMember(Name="notificationRules", EmitDefaultValue=false)]
+        [DataMember(Name = "notificationRules", EmitDefaultValue = false)]
         public List<NotificationRule> _NotificationRules { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public Links Links { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as NotificationRules);
+            return Equals(input as NotificationRules);
         }
 
         /// <summary>
@@ -93,18 +93,16 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(NotificationRules input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this._NotificationRules == input._NotificationRules ||
-                    this._NotificationRules != null &&
-                    this._NotificationRules.SequenceEqual(input._NotificationRules)
-                ) && 
-                (
-                    
-                    (this.Links != null && this.Links.Equals(input.Links))
-                );
+            return
+            (
+                _NotificationRules == input._NotificationRules ||
+                _NotificationRules != null &&
+                _NotificationRules.SequenceEqual(input._NotificationRules)
+            ) && Links != null && Links.Equals(input.Links);
         }
 
         /// <summary>
@@ -115,16 +113,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this._NotificationRules != null)
-                    hashCode = hashCode * 59 + this._NotificationRules.GetHashCode();
-                if (this.Links != null)
-                    hashCode = hashCode * 59 + this.Links.GetHashCode();
+                var hashCode = 41;
+
+                if (_NotificationRules != null)
+                {
+                    hashCode = hashCode * 59 + _NotificationRules.GetHashCode();
+                }
+
+                if (Links != null)
+                {
+                    hashCode = hashCode * 59 + Links.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

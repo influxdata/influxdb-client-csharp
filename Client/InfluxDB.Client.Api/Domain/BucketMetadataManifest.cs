@@ -27,13 +27,16 @@ namespace InfluxDB.Client.Api.Domain
     /// BucketMetadataManifest
     /// </summary>
     [DataContract]
-    public partial class BucketMetadataManifest :  IEquatable<BucketMetadataManifest>
+    public partial class BucketMetadataManifest : IEquatable<BucketMetadataManifest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BucketMetadataManifest" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected BucketMetadataManifest() { }
+        protected BucketMetadataManifest()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BucketMetadataManifest" /> class.
         /// </summary>
@@ -44,87 +47,101 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="description">description.</param>
         /// <param name="defaultRetentionPolicy">defaultRetentionPolicy (required).</param>
         /// <param name="retentionPolicies">retentionPolicies (required).</param>
-        public BucketMetadataManifest(string organizationID = default(string), string organizationName = default(string), string bucketID = default(string), string bucketName = default(string), string description = default(string), string defaultRetentionPolicy = default(string), List<RetentionPolicyManifest> retentionPolicies = default(List<RetentionPolicyManifest>))
+        public BucketMetadataManifest(string organizationID = default, string organizationName = default,
+            string bucketID = default, string bucketName = default, string description = default,
+            string defaultRetentionPolicy = default, List<RetentionPolicyManifest> retentionPolicies = default)
         {
             // to ensure "organizationID" is required (not null)
             if (organizationID == null)
             {
-                throw new InvalidDataException("organizationID is a required property for BucketMetadataManifest and cannot be null");
+                throw new InvalidDataException(
+                    "organizationID is a required property for BucketMetadataManifest and cannot be null");
             }
-            this.OrganizationID = organizationID;
+
+            OrganizationID = organizationID;
             // to ensure "organizationName" is required (not null)
             if (organizationName == null)
             {
-                throw new InvalidDataException("organizationName is a required property for BucketMetadataManifest and cannot be null");
+                throw new InvalidDataException(
+                    "organizationName is a required property for BucketMetadataManifest and cannot be null");
             }
-            this.OrganizationName = organizationName;
+
+            OrganizationName = organizationName;
             // to ensure "bucketID" is required (not null)
             if (bucketID == null)
             {
-                throw new InvalidDataException("bucketID is a required property for BucketMetadataManifest and cannot be null");
+                throw new InvalidDataException(
+                    "bucketID is a required property for BucketMetadataManifest and cannot be null");
             }
-            this.BucketID = bucketID;
+
+            BucketID = bucketID;
             // to ensure "bucketName" is required (not null)
             if (bucketName == null)
             {
-                throw new InvalidDataException("bucketName is a required property for BucketMetadataManifest and cannot be null");
+                throw new InvalidDataException(
+                    "bucketName is a required property for BucketMetadataManifest and cannot be null");
             }
-            this.BucketName = bucketName;
+
+            BucketName = bucketName;
             // to ensure "defaultRetentionPolicy" is required (not null)
             if (defaultRetentionPolicy == null)
             {
-                throw new InvalidDataException("defaultRetentionPolicy is a required property for BucketMetadataManifest and cannot be null");
+                throw new InvalidDataException(
+                    "defaultRetentionPolicy is a required property for BucketMetadataManifest and cannot be null");
             }
-            this.DefaultRetentionPolicy = defaultRetentionPolicy;
+
+            DefaultRetentionPolicy = defaultRetentionPolicy;
             // to ensure "retentionPolicies" is required (not null)
             if (retentionPolicies == null)
             {
-                throw new InvalidDataException("retentionPolicies is a required property for BucketMetadataManifest and cannot be null");
+                throw new InvalidDataException(
+                    "retentionPolicies is a required property for BucketMetadataManifest and cannot be null");
             }
-            this.RetentionPolicies = retentionPolicies;
-            this.Description = description;
+
+            RetentionPolicies = retentionPolicies;
+            Description = description;
         }
 
         /// <summary>
         /// Gets or Sets OrganizationID
         /// </summary>
-        [DataMember(Name="organizationID", EmitDefaultValue=false)]
+        [DataMember(Name = "organizationID", EmitDefaultValue = false)]
         public string OrganizationID { get; set; }
 
         /// <summary>
         /// Gets or Sets OrganizationName
         /// </summary>
-        [DataMember(Name="organizationName", EmitDefaultValue=false)]
+        [DataMember(Name = "organizationName", EmitDefaultValue = false)]
         public string OrganizationName { get; set; }
 
         /// <summary>
         /// Gets or Sets BucketID
         /// </summary>
-        [DataMember(Name="bucketID", EmitDefaultValue=false)]
+        [DataMember(Name = "bucketID", EmitDefaultValue = false)]
         public string BucketID { get; set; }
 
         /// <summary>
         /// Gets or Sets BucketName
         /// </summary>
-        [DataMember(Name="bucketName", EmitDefaultValue=false)]
+        [DataMember(Name = "bucketName", EmitDefaultValue = false)]
         public string BucketName { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets DefaultRetentionPolicy
         /// </summary>
-        [DataMember(Name="defaultRetentionPolicy", EmitDefaultValue=false)]
+        [DataMember(Name = "defaultRetentionPolicy", EmitDefaultValue = false)]
         public string DefaultRetentionPolicy { get; set; }
 
         /// <summary>
         /// Gets or Sets RetentionPolicies
         /// </summary>
-        [DataMember(Name="retentionPolicies", EmitDefaultValue=false)]
+        [DataMember(Name = "retentionPolicies", EmitDefaultValue = false)]
         public List<RetentionPolicyManifest> RetentionPolicies { get; set; }
 
         /// <summary>
@@ -162,7 +179,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as BucketMetadataManifest);
+            return Equals(input as BucketMetadataManifest);
         }
 
         /// <summary>
@@ -173,37 +190,39 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(BucketMetadataManifest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.OrganizationID == input.OrganizationID ||
-                    (this.OrganizationID != null && this.OrganizationID.Equals(input.OrganizationID))
-                ) && 
+                    OrganizationID == input.OrganizationID ||
+                    OrganizationID != null && OrganizationID.Equals(input.OrganizationID)
+                ) &&
                 (
-                    this.OrganizationName == input.OrganizationName ||
-                    (this.OrganizationName != null && this.OrganizationName.Equals(input.OrganizationName))
-                ) && 
+                    OrganizationName == input.OrganizationName ||
+                    OrganizationName != null && OrganizationName.Equals(input.OrganizationName)
+                ) &&
                 (
-                    this.BucketID == input.BucketID ||
-                    (this.BucketID != null && this.BucketID.Equals(input.BucketID))
-                ) && 
+                    BucketID == input.BucketID ||
+                    BucketID != null && BucketID.Equals(input.BucketID)
+                ) &&
                 (
-                    this.BucketName == input.BucketName ||
-                    (this.BucketName != null && this.BucketName.Equals(input.BucketName))
-                ) && 
+                    BucketName == input.BucketName ||
+                    BucketName != null && BucketName.Equals(input.BucketName)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.DefaultRetentionPolicy == input.DefaultRetentionPolicy ||
-                    (this.DefaultRetentionPolicy != null && this.DefaultRetentionPolicy.Equals(input.DefaultRetentionPolicy))
-                ) && 
+                    DefaultRetentionPolicy == input.DefaultRetentionPolicy ||
+                    DefaultRetentionPolicy != null && DefaultRetentionPolicy.Equals(input.DefaultRetentionPolicy)
+                ) &&
                 (
-                    this.RetentionPolicies == input.RetentionPolicies ||
-                    this.RetentionPolicies != null &&
-                    this.RetentionPolicies.SequenceEqual(input.RetentionPolicies)
+                    RetentionPolicies == input.RetentionPolicies ||
+                    RetentionPolicies != null &&
+                    RetentionPolicies.SequenceEqual(input.RetentionPolicies)
                 );
         }
 
@@ -215,26 +234,45 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.OrganizationID != null)
-                    hashCode = hashCode * 59 + this.OrganizationID.GetHashCode();
-                if (this.OrganizationName != null)
-                    hashCode = hashCode * 59 + this.OrganizationName.GetHashCode();
-                if (this.BucketID != null)
-                    hashCode = hashCode * 59 + this.BucketID.GetHashCode();
-                if (this.BucketName != null)
-                    hashCode = hashCode * 59 + this.BucketName.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.DefaultRetentionPolicy != null)
-                    hashCode = hashCode * 59 + this.DefaultRetentionPolicy.GetHashCode();
-                if (this.RetentionPolicies != null)
-                    hashCode = hashCode * 59 + this.RetentionPolicies.GetHashCode();
+                var hashCode = 41;
+
+                if (OrganizationID != null)
+                {
+                    hashCode = hashCode * 59 + OrganizationID.GetHashCode();
+                }
+
+                if (OrganizationName != null)
+                {
+                    hashCode = hashCode * 59 + OrganizationName.GetHashCode();
+                }
+
+                if (BucketID != null)
+                {
+                    hashCode = hashCode * 59 + BucketID.GetHashCode();
+                }
+
+                if (BucketName != null)
+                {
+                    hashCode = hashCode * 59 + BucketName.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (DefaultRetentionPolicy != null)
+                {
+                    hashCode = hashCode * 59 + DefaultRetentionPolicy.GetHashCode();
+                }
+
+                if (RetentionPolicies != null)
+                {
+                    hashCode = hashCode * 59 + RetentionPolicies.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

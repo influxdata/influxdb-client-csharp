@@ -27,22 +27,22 @@ namespace InfluxDB.Client.Api.Domain
     /// Config
     /// </summary>
     [DataContract]
-    public partial class Config :  IEquatable<Config>
+    public partial class Config : IEquatable<Config>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Config" /> class.
         /// </summary>
         /// <param name="config">config.</param>
-        public Config(Dictionary<string, Object> config = default(Dictionary<string, Object>))
+        public Config(Dictionary<string, object> config = default)
         {
-            this._Config = config;
+            _Config = config;
         }
 
         /// <summary>
         /// Gets or Sets _Config
         /// </summary>
-        [DataMember(Name="config", EmitDefaultValue=false)]
-        public Dictionary<string, Object> _Config { get; set; }
+        [DataMember(Name = "config", EmitDefaultValue = false)]
+        public Dictionary<string, object> _Config { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Config);
+            return Equals(input as Config);
         }
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Config input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this._Config == input._Config ||
-                    this._Config != null &&
-                    this._Config.SequenceEqual(input._Config)
-                );
+            return
+                _Config == input._Config ||
+                _Config != null &&
+                _Config.SequenceEqual(input._Config);
         }
 
         /// <summary>
@@ -102,14 +102,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this._Config != null)
-                    hashCode = hashCode * 59 + this._Config.GetHashCode();
+                var hashCode = 41;
+
+                if (_Config != null)
+                {
+                    hashCode = hashCode * 59 + _Config.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

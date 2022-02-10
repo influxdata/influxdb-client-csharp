@@ -27,31 +27,31 @@ namespace InfluxDB.Client.Api.Domain
     /// PatchOrganizationRequest
     /// </summary>
     [DataContract]
-    public partial class PatchOrganizationRequest :  IEquatable<PatchOrganizationRequest>
+    public partial class PatchOrganizationRequest : IEquatable<PatchOrganizationRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PatchOrganizationRequest" /> class.
         /// </summary>
         /// <param name="name">New name to set on the organization.</param>
         /// <param name="description">New description to set on the organization.</param>
-        public PatchOrganizationRequest(string name = default(string), string description = default(string))
+        public PatchOrganizationRequest(string name = default, string description = default)
         {
-            this.Name = name;
-            this.Description = description;
+            Name = name;
+            Description = description;
         }
 
         /// <summary>
         /// New name to set on the organization
         /// </summary>
         /// <value>New name to set on the organization</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// New description to set on the organization
         /// </summary>
         /// <value>New description to set on the organization</value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PatchOrganizationRequest);
+            return Equals(input as PatchOrganizationRequest);
         }
 
         /// <summary>
@@ -95,16 +95,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PatchOrganizationRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
                 );
         }
 
@@ -116,16 +118,20 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

@@ -27,36 +27,38 @@ namespace InfluxDB.Client.Api.Domain
     /// BuilderTagsType
     /// </summary>
     [DataContract]
-    public partial class BuilderTagsType :  IEquatable<BuilderTagsType>
+    public partial class BuilderTagsType : IEquatable<BuilderTagsType>
     {
         /// <summary>
         /// Gets or Sets AggregateFunctionType
         /// </summary>
-        [DataMember(Name="aggregateFunctionType", EmitDefaultValue=false)]
+        [DataMember(Name = "aggregateFunctionType", EmitDefaultValue = false)]
         public BuilderAggregateFunctionType? AggregateFunctionType { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BuilderTagsType" /> class.
         /// </summary>
         /// <param name="key">key.</param>
         /// <param name="values">values.</param>
         /// <param name="aggregateFunctionType">aggregateFunctionType.</param>
-        public BuilderTagsType(string key = default(string), List<string> values = default(List<string>), BuilderAggregateFunctionType? aggregateFunctionType = default(BuilderAggregateFunctionType?))
+        public BuilderTagsType(string key = default, List<string> values = default,
+            BuilderAggregateFunctionType? aggregateFunctionType = default)
         {
-            this.Key = key;
-            this.Values = values;
-            this.AggregateFunctionType = aggregateFunctionType;
+            Key = key;
+            Values = values;
+            AggregateFunctionType = aggregateFunctionType;
         }
 
         /// <summary>
         /// Gets or Sets Key
         /// </summary>
-        [DataMember(Name="key", EmitDefaultValue=false)]
+        [DataMember(Name = "key", EmitDefaultValue = false)]
         public string Key { get; set; }
 
         /// <summary>
         /// Gets or Sets Values
         /// </summary>
-        [DataMember(Name="values", EmitDefaultValue=false)]
+        [DataMember(Name = "values", EmitDefaultValue = false)]
         public List<string> Values { get; set; }
 
 
@@ -91,7 +93,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as BuilderTagsType);
+            return Equals(input as BuilderTagsType);
         }
 
         /// <summary>
@@ -102,21 +104,23 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(BuilderTagsType input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Key == input.Key ||
-                    (this.Key != null && this.Key.Equals(input.Key))
-                ) && 
+                    Key == input.Key ||
+                    Key != null && Key.Equals(input.Key)
+                ) &&
                 (
-                    this.Values == input.Values ||
-                    this.Values != null &&
-                    this.Values.SequenceEqual(input.Values)
-                ) && 
+                    Values == input.Values ||
+                    Values != null &&
+                    Values.SequenceEqual(input.Values)
+                ) &&
                 (
-                    this.AggregateFunctionType == input.AggregateFunctionType ||
-                    this.AggregateFunctionType.Equals(input.AggregateFunctionType)
+                    AggregateFunctionType == input.AggregateFunctionType ||
+                    AggregateFunctionType.Equals(input.AggregateFunctionType)
                 );
         }
 
@@ -128,17 +132,21 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Key != null)
-                    hashCode = hashCode * 59 + this.Key.GetHashCode();
-                if (this.Values != null)
-                    hashCode = hashCode * 59 + this.Values.GetHashCode();
-                hashCode = hashCode * 59 + this.AggregateFunctionType.GetHashCode();
+                var hashCode = 41;
+
+                if (Key != null)
+                {
+                    hashCode = hashCode * 59 + Key.GetHashCode();
+                }
+
+                if (Values != null)
+                {
+                    hashCode = hashCode * 59 + Values.GetHashCode();
+                }
+
+                hashCode = hashCode * 59 + AggregateFunctionType.GetHashCode();
                 return hashCode;
             }
         }
-
     }
-
 }

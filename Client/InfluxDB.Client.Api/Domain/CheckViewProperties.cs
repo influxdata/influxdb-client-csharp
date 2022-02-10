@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// CheckViewProperties
     /// </summary>
     [DataContract]
-    public partial class CheckViewProperties : ViewProperties,  IEquatable<CheckViewProperties>
+    public partial class CheckViewProperties : ViewProperties, IEquatable<CheckViewProperties>
     {
         /// <summary>
         /// Defines Type
@@ -38,16 +38,15 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Check for value: check
             /// </summary>
-            [EnumMember(Value = "check")]
-            Check = 1
-
+            [EnumMember(Value = "check")] Check = 1
         }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum Type { get; set; }
+
         /// <summary>
         /// Defines Shape
         /// </summary>
@@ -57,21 +56,23 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum ChronografV2 for value: chronograf-v2
             /// </summary>
-            [EnumMember(Value = "chronograf-v2")]
-            ChronografV2 = 1
-
+            [EnumMember(Value = "chronograf-v2")] ChronografV2 = 1
         }
 
         /// <summary>
         /// Gets or Sets Shape
         /// </summary>
-        [DataMember(Name="shape", EmitDefaultValue=false)]
+        [DataMember(Name = "shape", EmitDefaultValue = false)]
         public ShapeEnum Shape { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckViewProperties" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected CheckViewProperties() { }
+        protected CheckViewProperties()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckViewProperties" /> class.
         /// </summary>
@@ -85,86 +86,94 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="legendHide">legendHide.</param>
         /// <param name="legendOpacity">legendOpacity.</param>
         /// <param name="legendOrientationThreshold">legendOrientationThreshold.</param>
-        public CheckViewProperties(TypeEnum type = TypeEnum.Check, ShapeEnum shape = ShapeEnum.ChronografV2, string checkID = default(string), Check check = default(Check), List<DashboardQuery> queries = default(List<DashboardQuery>), List<DashboardColor> colors = default(List<DashboardColor>), bool? legendColorizeRows = default(bool?), bool? legendHide = default(bool?), float? legendOpacity = default(float?), int? legendOrientationThreshold = default(int?)) : base()
+        public CheckViewProperties(TypeEnum type = TypeEnum.Check, ShapeEnum shape = ShapeEnum.ChronografV2,
+            string checkID = default, Check check = default, List<DashboardQuery> queries = default,
+            List<DashboardColor> colors = default, bool? legendColorizeRows = default, bool? legendHide = default,
+            float? legendOpacity = default, int? legendOrientationThreshold = default) : base()
         {
             // to ensure "type" is required (not null)
-            this.Type = type;
+            Type = type;
             // to ensure "shape" is required (not null)
-            this.Shape = shape;
+            Shape = shape;
             // to ensure "checkID" is required (not null)
             if (checkID == null)
             {
-                throw new InvalidDataException("checkID is a required property for CheckViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "checkID is a required property for CheckViewProperties and cannot be null");
             }
-            this.CheckID = checkID;
+
+            CheckID = checkID;
             // to ensure "queries" is required (not null)
             if (queries == null)
             {
-                throw new InvalidDataException("queries is a required property for CheckViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "queries is a required property for CheckViewProperties and cannot be null");
             }
-            this.Queries = queries;
+
+            Queries = queries;
             // to ensure "colors" is required (not null)
             if (colors == null)
             {
-                throw new InvalidDataException("colors is a required property for CheckViewProperties and cannot be null");
+                throw new InvalidDataException(
+                    "colors is a required property for CheckViewProperties and cannot be null");
             }
-            this.Colors = colors;
-            this.Check = check;
-            this.LegendColorizeRows = legendColorizeRows;
-            this.LegendHide = legendHide;
-            this.LegendOpacity = legendOpacity;
-            this.LegendOrientationThreshold = legendOrientationThreshold;
-        }
 
+            Colors = colors;
+            Check = check;
+            LegendColorizeRows = legendColorizeRows;
+            LegendHide = legendHide;
+            LegendOpacity = legendOpacity;
+            LegendOrientationThreshold = legendOrientationThreshold;
+        }
 
 
         /// <summary>
         /// Gets or Sets CheckID
         /// </summary>
-        [DataMember(Name="checkID", EmitDefaultValue=false)]
+        [DataMember(Name = "checkID", EmitDefaultValue = false)]
         public string CheckID { get; set; }
 
         /// <summary>
         /// Gets or Sets Check
         /// </summary>
-        [DataMember(Name="check", EmitDefaultValue=false)]
+        [DataMember(Name = "check", EmitDefaultValue = false)]
         public Check Check { get; set; }
 
         /// <summary>
         /// Gets or Sets Queries
         /// </summary>
-        [DataMember(Name="queries", EmitDefaultValue=false)]
+        [DataMember(Name = "queries", EmitDefaultValue = false)]
         public List<DashboardQuery> Queries { get; set; }
 
         /// <summary>
         /// Colors define color encoding of data into a visualization
         /// </summary>
         /// <value>Colors define color encoding of data into a visualization</value>
-        [DataMember(Name="colors", EmitDefaultValue=false)]
+        [DataMember(Name = "colors", EmitDefaultValue = false)]
         public List<DashboardColor> Colors { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendColorizeRows
         /// </summary>
-        [DataMember(Name="legendColorizeRows", EmitDefaultValue=false)]
+        [DataMember(Name = "legendColorizeRows", EmitDefaultValue = false)]
         public bool? LegendColorizeRows { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendHide
         /// </summary>
-        [DataMember(Name="legendHide", EmitDefaultValue=false)]
+        [DataMember(Name = "legendHide", EmitDefaultValue = false)]
         public bool? LegendHide { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendOpacity
         /// </summary>
-        [DataMember(Name="legendOpacity", EmitDefaultValue=false)]
+        [DataMember(Name = "legendOpacity", EmitDefaultValue = false)]
         public float? LegendOpacity { get; set; }
 
         /// <summary>
         /// Gets or Sets LegendOrientationThreshold
         /// </summary>
-        [DataMember(Name="legendOrientationThreshold", EmitDefaultValue=false)]
+        [DataMember(Name = "legendOrientationThreshold", EmitDefaultValue = false)]
         public int? LegendOrientationThreshold { get; set; }
 
         /// <summary>
@@ -206,7 +215,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as CheckViewProperties);
+            return Equals(input as CheckViewProperties);
         }
 
         /// <summary>
@@ -217,51 +226,44 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(CheckViewProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && base.Equals(input) && 
-                (
-                    this.Shape == input.Shape ||
-                    this.Shape.Equals(input.Shape)
-                ) && base.Equals(input) && 
-                (
-                    this.CheckID == input.CheckID ||
-                    (this.CheckID != null && this.CheckID.Equals(input.CheckID))
-                ) && base.Equals(input) && 
-                (
-                    
-                    (this.Check != null && this.Check.Equals(input.Check))
-                ) && base.Equals(input) && 
-                (
-                    this.Queries == input.Queries ||
-                    this.Queries != null &&
-                    this.Queries.SequenceEqual(input.Queries)
-                ) && base.Equals(input) && 
-                (
-                    this.Colors == input.Colors ||
-                    this.Colors != null &&
-                    this.Colors.SequenceEqual(input.Colors)
-                ) && base.Equals(input) && 
-                (
-                    this.LegendColorizeRows == input.LegendColorizeRows ||
-                    (this.LegendColorizeRows != null && this.LegendColorizeRows.Equals(input.LegendColorizeRows))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendHide == input.LegendHide ||
-                    (this.LegendHide != null && this.LegendHide.Equals(input.LegendHide))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendOpacity == input.LegendOpacity ||
-                    (this.LegendOpacity != null && this.LegendOpacity.Equals(input.LegendOpacity))
-                ) && base.Equals(input) && 
-                (
-                    this.LegendOrientationThreshold == input.LegendOrientationThreshold ||
-                    (this.LegendOrientationThreshold != null && this.LegendOrientationThreshold.Equals(input.LegendOrientationThreshold))
-                );
+            return base.Equals(input) &&
+                   (
+                       Type == input.Type ||
+                       Type.Equals(input.Type)
+                   ) && base.Equals(input) &&
+                   (
+                       Shape == input.Shape ||
+                       Shape.Equals(input.Shape)
+                   ) && base.Equals(input) &&
+                   (
+                       CheckID == input.CheckID ||
+                       CheckID != null && CheckID.Equals(input.CheckID)
+                   ) && base.Equals(input) && Check != null && Check.Equals(input.Check) && base.Equals(input) && (
+                       Queries == input.Queries ||
+                       Queries != null &&
+                       Queries.SequenceEqual(input.Queries)
+                   ) && base.Equals(input) && (
+                       Colors == input.Colors ||
+                       Colors != null &&
+                       Colors.SequenceEqual(input.Colors)
+                   ) && base.Equals(input) && (
+                       LegendColorizeRows == input.LegendColorizeRows ||
+                       LegendColorizeRows != null && LegendColorizeRows.Equals(input.LegendColorizeRows)
+                   ) && base.Equals(input) && (
+                       LegendHide == input.LegendHide ||
+                       LegendHide != null && LegendHide.Equals(input.LegendHide)
+                   ) && base.Equals(input) && (
+                       LegendOpacity == input.LegendOpacity ||
+                       LegendOpacity != null && LegendOpacity.Equals(input.LegendOpacity)
+                   ) && base.Equals(input) && (
+                       LegendOrientationThreshold == input.LegendOrientationThreshold ||
+                       LegendOrientationThreshold != null &&
+                       LegendOrientationThreshold.Equals(input.LegendOrientationThreshold)
+                   );
         }
 
         /// <summary>
@@ -272,30 +274,52 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
-                hashCode = hashCode * 59 + this.Type.GetHashCode();
-                hashCode = hashCode * 59 + this.Shape.GetHashCode();
-                if (this.CheckID != null)
-                    hashCode = hashCode * 59 + this.CheckID.GetHashCode();
-                if (this.Check != null)
-                    hashCode = hashCode * 59 + this.Check.GetHashCode();
-                if (this.Queries != null)
-                    hashCode = hashCode * 59 + this.Queries.GetHashCode();
-                if (this.Colors != null)
-                    hashCode = hashCode * 59 + this.Colors.GetHashCode();
-                if (this.LegendColorizeRows != null)
-                    hashCode = hashCode * 59 + this.LegendColorizeRows.GetHashCode();
-                if (this.LegendHide != null)
-                    hashCode = hashCode * 59 + this.LegendHide.GetHashCode();
-                if (this.LegendOpacity != null)
-                    hashCode = hashCode * 59 + this.LegendOpacity.GetHashCode();
-                if (this.LegendOrientationThreshold != null)
-                    hashCode = hashCode * 59 + this.LegendOrientationThreshold.GetHashCode();
+                var hashCode = base.GetHashCode();
+
+                hashCode = hashCode * 59 + Type.GetHashCode();
+                hashCode = hashCode * 59 + Shape.GetHashCode();
+                if (CheckID != null)
+                {
+                    hashCode = hashCode * 59 + CheckID.GetHashCode();
+                }
+
+                if (Check != null)
+                {
+                    hashCode = hashCode * 59 + Check.GetHashCode();
+                }
+
+                if (Queries != null)
+                {
+                    hashCode = hashCode * 59 + Queries.GetHashCode();
+                }
+
+                if (Colors != null)
+                {
+                    hashCode = hashCode * 59 + Colors.GetHashCode();
+                }
+
+                if (LegendColorizeRows != null)
+                {
+                    hashCode = hashCode * 59 + LegendColorizeRows.GetHashCode();
+                }
+
+                if (LegendHide != null)
+                {
+                    hashCode = hashCode * 59 + LegendHide.GetHashCode();
+                }
+
+                if (LegendOpacity != null)
+                {
+                    hashCode = hashCode * 59 + LegendOpacity.GetHashCode();
+                }
+
+                if (LegendOrientationThreshold != null)
+                {
+                    hashCode = hashCode * 59 + LegendOrientationThreshold.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

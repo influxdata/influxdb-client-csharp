@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// RoutesQuery
     /// </summary>
     [DataContract]
-    public partial class RoutesQuery :  IEquatable<RoutesQuery>
+    public partial class RoutesQuery : IEquatable<RoutesQuery>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoutesQuery" /> class.
@@ -36,36 +36,37 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="ast">ast.</param>
         /// <param name="analyze">analyze.</param>
         /// <param name="suggestions">suggestions.</param>
-        public RoutesQuery(string self = default(string), string ast = default(string), string analyze = default(string), string suggestions = default(string))
+        public RoutesQuery(string self = default, string ast = default, string analyze = default,
+            string suggestions = default)
         {
-            this.Self = self;
-            this.Ast = ast;
-            this.Analyze = analyze;
-            this.Suggestions = suggestions;
+            Self = self;
+            Ast = ast;
+            Analyze = analyze;
+            Suggestions = suggestions;
         }
 
         /// <summary>
         /// Gets or Sets Self
         /// </summary>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [DataMember(Name = "self", EmitDefaultValue = false)]
         public string Self { get; set; }
 
         /// <summary>
         /// Gets or Sets Ast
         /// </summary>
-        [DataMember(Name="ast", EmitDefaultValue=false)]
+        [DataMember(Name = "ast", EmitDefaultValue = false)]
         public string Ast { get; set; }
 
         /// <summary>
         /// Gets or Sets Analyze
         /// </summary>
-        [DataMember(Name="analyze", EmitDefaultValue=false)]
+        [DataMember(Name = "analyze", EmitDefaultValue = false)]
         public string Analyze { get; set; }
 
         /// <summary>
         /// Gets or Sets Suggestions
         /// </summary>
-        [DataMember(Name="suggestions", EmitDefaultValue=false)]
+        [DataMember(Name = "suggestions", EmitDefaultValue = false)]
         public string Suggestions { get; set; }
 
         /// <summary>
@@ -100,7 +101,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as RoutesQuery);
+            return Equals(input as RoutesQuery);
         }
 
         /// <summary>
@@ -111,24 +112,26 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(RoutesQuery input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Self == input.Self ||
-                    (this.Self != null && this.Self.Equals(input.Self))
-                ) && 
+                    Self == input.Self ||
+                    Self != null && Self.Equals(input.Self)
+                ) &&
                 (
-                    this.Ast == input.Ast ||
-                    (this.Ast != null && this.Ast.Equals(input.Ast))
-                ) && 
+                    Ast == input.Ast ||
+                    Ast != null && Ast.Equals(input.Ast)
+                ) &&
                 (
-                    this.Analyze == input.Analyze ||
-                    (this.Analyze != null && this.Analyze.Equals(input.Analyze))
-                ) && 
+                    Analyze == input.Analyze ||
+                    Analyze != null && Analyze.Equals(input.Analyze)
+                ) &&
                 (
-                    this.Suggestions == input.Suggestions ||
-                    (this.Suggestions != null && this.Suggestions.Equals(input.Suggestions))
+                    Suggestions == input.Suggestions ||
+                    Suggestions != null && Suggestions.Equals(input.Suggestions)
                 );
         }
 
@@ -140,20 +143,30 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Self != null)
-                    hashCode = hashCode * 59 + this.Self.GetHashCode();
-                if (this.Ast != null)
-                    hashCode = hashCode * 59 + this.Ast.GetHashCode();
-                if (this.Analyze != null)
-                    hashCode = hashCode * 59 + this.Analyze.GetHashCode();
-                if (this.Suggestions != null)
-                    hashCode = hashCode * 59 + this.Suggestions.GetHashCode();
+                var hashCode = 41;
+
+                if (Self != null)
+                {
+                    hashCode = hashCode * 59 + Self.GetHashCode();
+                }
+
+                if (Ast != null)
+                {
+                    hashCode = hashCode * 59 + Ast.GetHashCode();
+                }
+
+                if (Analyze != null)
+                {
+                    hashCode = hashCode * 59 + Analyze.GetHashCode();
+                }
+
+                if (Suggestions != null)
+                {
+                    hashCode = hashCode * 59 + Suggestions.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

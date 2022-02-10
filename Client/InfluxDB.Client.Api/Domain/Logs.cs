@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// Logs
     /// </summary>
     [DataContract]
-    public partial class Logs :  IEquatable<Logs>
+    public partial class Logs : IEquatable<Logs>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Logs" /> class.
@@ -40,7 +40,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <summary>
         /// Gets or Sets Events
         /// </summary>
-        [DataMember(Name="events", EmitDefaultValue=false)]
+        [DataMember(Name = "events", EmitDefaultValue = false)]
         public List<LogEvent> Events { get; private set; }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Logs);
+            return Equals(input as Logs);
         }
 
         /// <summary>
@@ -83,14 +83,14 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(Logs input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Events == input.Events ||
-                    this.Events != null &&
-                    this.Events.SequenceEqual(input.Events)
-                );
+            return
+                Events == input.Events ||
+                Events != null &&
+                Events.SequenceEqual(input.Events);
         }
 
         /// <summary>
@@ -101,14 +101,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Events != null)
-                    hashCode = hashCode * 59 + this.Events.GetHashCode();
+                var hashCode = 41;
+
+                if (Events != null)
+                {
+                    hashCode = hashCode * 59 + Events.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

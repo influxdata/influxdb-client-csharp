@@ -29,17 +29,25 @@ namespace InfluxDB.Client.Api.Domain
     /// </summary>
     [DataContract]
     [JsonConverter(typeof(JsonSubtypes), "type")]
-    public partial class NotificationEndpointDiscriminator : NotificationEndpointBase,  IEquatable<NotificationEndpointDiscriminator>
+    public partial class NotificationEndpointDiscriminator : NotificationEndpointBase,
+        IEquatable<NotificationEndpointDiscriminator>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationEndpointDiscriminator" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected NotificationEndpointDiscriminator() { }
+        protected NotificationEndpointDiscriminator()
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationEndpointDiscriminator" /> class.
         /// </summary>
-        public NotificationEndpointDiscriminator(string id = default(string), string orgID = default(string), string userID = default(string), string description = default(string), string name = default(string), StatusEnum? status = StatusEnum.Active, List<Label> labels = default(List<Label>), NotificationEndpointBaseLinks links = default(NotificationEndpointBaseLinks), NotificationEndpointType type = default(NotificationEndpointType)) : base(id, orgID, userID, description, name, status, labels, links, type)
+        public NotificationEndpointDiscriminator(string id = default, string orgID = default, string userID = default,
+            string description = default, string name = default, StatusEnum? status = StatusEnum.Active,
+            List<Label> labels = default, NotificationEndpointBaseLinks links = default,
+            NotificationEndpointType type = default) : base(id, orgID, userID, description, name, status, labels, links,
+            type)
         {
         }
 
@@ -72,7 +80,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as NotificationEndpointDiscriminator);
+            return Equals(input as NotificationEndpointDiscriminator);
         }
 
         /// <summary>
@@ -83,7 +91,9 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(NotificationEndpointDiscriminator input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
             return base.Equals(input);
         }
@@ -96,12 +106,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                
+                var hashCode = base.GetHashCode();
+
                 return hashCode;
             }
         }
-
     }
-
 }

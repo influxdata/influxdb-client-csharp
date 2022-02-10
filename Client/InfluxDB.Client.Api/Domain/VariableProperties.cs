@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// VariableProperties
     /// </summary>
     [DataContract]
-    public partial class VariableProperties :  IEquatable<VariableProperties>
+    public partial class VariableProperties : IEquatable<VariableProperties>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableProperties" /> class.
@@ -65,7 +65,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as VariableProperties);
+            return Equals(input as VariableProperties);
         }
 
         /// <summary>
@@ -76,7 +76,9 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(VariableProperties input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
             return false;
         }
@@ -89,12 +91,10 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
+                var hashCode = 41;
+
                 return hashCode;
             }
         }
-
     }
-
 }

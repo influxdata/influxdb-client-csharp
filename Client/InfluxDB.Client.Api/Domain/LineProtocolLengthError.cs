@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// LineProtocolLengthError
     /// </summary>
     [DataContract]
-    public partial class LineProtocolLengthError :  IEquatable<LineProtocolLengthError>
+    public partial class LineProtocolLengthError : IEquatable<LineProtocolLengthError>
     {
         /// <summary>
         /// Code is the machine-readable error code.
@@ -39,17 +39,16 @@ namespace InfluxDB.Client.Api.Domain
             /// <summary>
             /// Enum Invalid for value: invalid
             /// </summary>
-            [EnumMember(Value = "invalid")]
-            Invalid = 1
-
+            [EnumMember(Value = "invalid")] Invalid = 1
         }
 
         /// <summary>
         /// Code is the machine-readable error code.
         /// </summary>
         /// <value>Code is the machine-readable error code.</value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [DataMember(Name = "code", EmitDefaultValue = false)]
         public CodeEnum Code { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LineProtocolLengthError" /> class.
         /// </summary>
@@ -63,7 +62,7 @@ namespace InfluxDB.Client.Api.Domain
         /// Human-readable message.
         /// </summary>
         /// <value>Human-readable message.</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [DataMember(Name = "message", EmitDefaultValue = false)]
         public string Message { get; private set; }
 
         /// <summary>
@@ -96,7 +95,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as LineProtocolLengthError);
+            return Equals(input as LineProtocolLengthError);
         }
 
         /// <summary>
@@ -107,16 +106,18 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(LineProtocolLengthError input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.Code == input.Code ||
-                    this.Code.Equals(input.Code)
-                ) && 
+                    Code == input.Code ||
+                    Code.Equals(input.Code)
+                ) &&
                 (
-                    this.Message == input.Message ||
-                    (this.Message != null && this.Message.Equals(input.Message))
+                    Message == input.Message ||
+                    Message != null && Message.Equals(input.Message)
                 );
         }
 
@@ -128,15 +129,16 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                hashCode = hashCode * 59 + this.Code.GetHashCode();
-                if (this.Message != null)
-                    hashCode = hashCode * 59 + this.Message.GetHashCode();
+                var hashCode = 41;
+
+                hashCode = hashCode * 59 + Code.GetHashCode();
+                if (Message != null)
+                {
+                    hashCode = hashCode * 59 + Message.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

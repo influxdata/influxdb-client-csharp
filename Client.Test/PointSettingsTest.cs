@@ -29,13 +29,13 @@ namespace InfluxDB.Client.Test
         {
             Environment.SetEnvironmentVariable("datacenter", "LA");
             ConfigurationManager.AppSettings["mine-sensor.version"] = "1.23a";
-            
+
             _pointSettings
                 .AddDefaultTag("id", "132-987-655")
                 .AddDefaultTag("customer", "California Miner")
                 .AddDefaultTag("env-variable", "${env.datacenter}")
                 .AddDefaultTag("sensor-version", "${mine-sensor.version}");
-            
+
             var defaultTags = _pointSettings.GetDefaultTags();
 
             Assert.AreEqual(4, defaultTags.Count);

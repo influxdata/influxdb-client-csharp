@@ -27,21 +27,21 @@ namespace InfluxDB.Client.Api.Domain
     /// BuilderFunctionsType
     /// </summary>
     [DataContract]
-    public partial class BuilderFunctionsType :  IEquatable<BuilderFunctionsType>
+    public partial class BuilderFunctionsType : IEquatable<BuilderFunctionsType>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BuilderFunctionsType" /> class.
         /// </summary>
         /// <param name="name">name.</param>
-        public BuilderFunctionsType(string name = default(string))
+        public BuilderFunctionsType(string name = default)
         {
-            this.Name = name;
+            Name = name;
         }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as BuilderFunctionsType);
+            return Equals(input as BuilderFunctionsType);
         }
 
         /// <summary>
@@ -84,13 +84,13 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(BuilderFunctionsType input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                );
+            return
+                Name == input.Name ||
+                Name != null && Name.Equals(input.Name);
         }
 
         /// <summary>
@@ -101,14 +101,15 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                var hashCode = 41;
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }

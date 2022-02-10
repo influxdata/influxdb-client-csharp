@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Domain
     /// PostStackRequest
     /// </summary>
     [DataContract]
-    public partial class PostStackRequest :  IEquatable<PostStackRequest>
+    public partial class PostStackRequest : IEquatable<PostStackRequest>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PostStackRequest" /> class.
@@ -36,36 +36,37 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="name">name.</param>
         /// <param name="description">description.</param>
         /// <param name="urls">urls.</param>
-        public PostStackRequest(string orgID = default(string), string name = default(string), string description = default(string), List<string> urls = default(List<string>))
+        public PostStackRequest(string orgID = default, string name = default, string description = default,
+            List<string> urls = default)
         {
-            this.OrgID = orgID;
-            this.Name = name;
-            this.Description = description;
-            this.Urls = urls;
+            OrgID = orgID;
+            Name = name;
+            Description = description;
+            Urls = urls;
         }
 
         /// <summary>
         /// Gets or Sets OrgID
         /// </summary>
-        [DataMember(Name="orgID", EmitDefaultValue=false)]
+        [DataMember(Name = "orgID", EmitDefaultValue = false)]
         public string OrgID { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Urls
         /// </summary>
-        [DataMember(Name="urls", EmitDefaultValue=false)]
+        [DataMember(Name = "urls", EmitDefaultValue = false)]
         public List<string> Urls { get; set; }
 
         /// <summary>
@@ -100,7 +101,7 @@ namespace InfluxDB.Client.Api.Domain
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as PostStackRequest);
+            return Equals(input as PostStackRequest);
         }
 
         /// <summary>
@@ -111,25 +112,27 @@ namespace InfluxDB.Client.Api.Domain
         public bool Equals(PostStackRequest input)
         {
             if (input == null)
+            {
                 return false;
+            }
 
-            return 
+            return
                 (
-                    this.OrgID == input.OrgID ||
-                    (this.OrgID != null && this.OrgID.Equals(input.OrgID))
-                ) && 
+                    OrgID == input.OrgID ||
+                    OrgID != null && OrgID.Equals(input.OrgID)
+                ) &&
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null && this.Name.Equals(input.Name))
-                ) && 
+                    Name == input.Name ||
+                    Name != null && Name.Equals(input.Name)
+                ) &&
                 (
-                    this.Description == input.Description ||
-                    (this.Description != null && this.Description.Equals(input.Description))
-                ) && 
+                    Description == input.Description ||
+                    Description != null && Description.Equals(input.Description)
+                ) &&
                 (
-                    this.Urls == input.Urls ||
-                    this.Urls != null &&
-                    this.Urls.SequenceEqual(input.Urls)
+                    Urls == input.Urls ||
+                    Urls != null &&
+                    Urls.SequenceEqual(input.Urls)
                 );
         }
 
@@ -141,20 +144,30 @@ namespace InfluxDB.Client.Api.Domain
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                
-                if (this.OrgID != null)
-                    hashCode = hashCode * 59 + this.OrgID.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Description != null)
-                    hashCode = hashCode * 59 + this.Description.GetHashCode();
-                if (this.Urls != null)
-                    hashCode = hashCode * 59 + this.Urls.GetHashCode();
+                var hashCode = 41;
+
+                if (OrgID != null)
+                {
+                    hashCode = hashCode * 59 + OrgID.GetHashCode();
+                }
+
+                if (Name != null)
+                {
+                    hashCode = hashCode * 59 + Name.GetHashCode();
+                }
+
+                if (Description != null)
+                {
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                }
+
+                if (Urls != null)
+                {
+                    hashCode = hashCode * 59 + Urls.GetHashCode();
+                }
+
                 return hashCode;
             }
         }
-
     }
-
 }
