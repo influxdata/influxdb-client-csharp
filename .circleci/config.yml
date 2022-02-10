@@ -175,6 +175,7 @@ workflows:
   build:
     jobs:
       - check-compilation-warnings
+      - check-code-formatting
       - tests-dotnet:
           name: dotnet-3.1-nightly
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
@@ -193,6 +194,7 @@ workflows:
       - deploy-preview:
           requires:
             - check-compilation-warnings
+            - check-code-formatting
             - dotnet-3.1-nightly
             - dotnet-3.1
             - dotnet-5.0
