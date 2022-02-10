@@ -41,6 +41,7 @@ This release also uses new version of InfluxDB OSS API definitions - [oss.yml](h
 
 ### CI
 1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Remove out of support `.NET Core` versions - `2.2`, `3.0`
+1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Add check to compilation warnings
 
 ### Dependencies
 [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Update dependencies:
