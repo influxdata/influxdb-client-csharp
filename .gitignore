@@ -17,6 +17,7 @@ coverage.opencover.xml
 coverlet/
 coveralls/
 trx2junit/
+reSharperCLI/
 TestResults/
 DotnetVersion/
 

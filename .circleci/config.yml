@@ -127,7 +127,6 @@ jobs:
       - run: dotnet build
       - run: dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build
       
-      
   check-compilation-warnings:
     docker:
       - image: *default-dotnet-image
@@ -137,6 +136,18 @@ jobs:
           name: Check compilation warnings
           command: |
             dotnet clean --configuration Release
+            dotnet build --configuration Release -warnAsError -warnAsMessage:CS0618
+            git diff --exit-code
+      
+  check-code-formatting:
+    docker:
+      - image: *default-dotnet-image
+    steps:
+      - checkout
+      - run:
+          name: Check code formatting
+          command: |
+            ./Scripts/reformat-code.sh
             dotnet build --configuration Release -warnAsError -warnAsMessage:CS0618
           
   deploy-preview:
