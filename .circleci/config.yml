@@ -143,12 +143,21 @@ jobs:
       - image: *default-dotnet-image
     steps:
       - checkout
+      - restore_cache:
+          name: Restoring reSharper Cache
+          keys:
+              - &cache-key reSharper-cache-2021_3_3
       - run:
           name: Check code formatting
           command: |
             ./Scripts/reformat-code.sh
             git diff --exit-code
-          
+      - save_cache:
+            name: Saving reSharper Cache
+            key: *cache-key
+            paths:
+                - ./reSharperCLI
+  
   deploy-preview:
     parameters:
       influxdb-image:
