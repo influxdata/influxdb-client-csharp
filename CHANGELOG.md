@@ -6,9 +6,46 @@
 
 #### API
 
-- The `FluxClient` uses `IDisposable` interface to releasing underlying HTTP connections.
+- The `FluxClient` uses `IDisposable` interface to releasing underlying HTTP connections:
+  ##### From
+   ```csharp
+   var client = FluxClientFactory.Create("http://localhost:8086/");
+   ```
+  ##### To
+   ```csharp
+   using var client = FluxClientFactory.Create("http://localhost:8086/");
+   ```
+- The Query APIs uses `CancellationToken` instead of `ICancellable`:
+    ##### From
+    ```csharp
+    await QueryApi.QueryAsync(flux, (cancellable, record) =>
+    {
+        // process record
+        Console.WriteLine($"record: {record}");
+
+        if (your_condition)
+        {
+            // cancel stream
+            source.Cancel();
+        }
+    })
+   ```
+    ##### To
+    ```csharp
+    var source = new CancellationTokenSource();
+    await QueryApi.QueryAsync(flux, record =>
+    {
+        // process record
+        Console.WriteLine($"record: {record}");
+
+        if (your_condition)
+        {
+            // cancel stream
+            source.Cancel();
+        }
+    }, source.Token);
+    ```
 - The Client not longer support set the `ReadWriteTimeout` for HTTP Client. This settings is not supported by `HttpClient`
-- The Query APIs uses `CancellationToken` instead of `ICancellable`
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
 - `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
 - Rename `TelegrafPlugin` types:
