@@ -262,7 +262,6 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("https://github.com/influxdata/influxdb/issues/13577")]
         public async Task FindTasksAfterSpecifiedId()
         {
             var task1 = await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
@@ -275,44 +274,33 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        [Ignore("https://github.com/influxdata/influxdb/issues/11491")]
-        //_token
         public async Task FindTasksByOrganization()
         {
-            var taskOrg = await Client.GetOrganizationsApi().CreateOrganizationAsync(GenerateName("Task user"));
-            var authorization = await AddAuthorization(taskOrg);
-
-            Client.Dispose();
-            Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token);
-            _tasksApi = Client.GetTasksApi();
-
-            var count = (await _tasksApi.FindTasksByOrganizationAsync(taskOrg)).Count;
-            Assert.AreEqual(0, count);
-
-            await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", taskOrg);
-
-            var tasks = await _tasksApi.FindTasksByOrganizationAsync(taskOrg);
-
-            Assert.AreEqual(1, tasks.Count);
-
-            (await _tasksApi.FindTasksAsync()).ForEach(async task => await _tasksApi.DeleteTaskAsync(task));
-        }
-
-        [Test]
-        //_token
-        [Ignore("set user password -> https://github.com/influxdata/influxdb/issues/11590")]
-        public async Task FindTasksByUser()
-        {
-            var taskUser = await Client.GetUsersApi().CreateUserAsync(GenerateName("Task user"));
-
-            var count = (await _tasksApi.FindTasksByUserAsync(taskUser)).Count;
-            Assert.AreEqual(0, count);
+            var count = (await _tasksApi.FindTasksByOrganizationAsync(_organization)).Count;
+            Assert.GreaterOrEqual(count, 0);
 
             await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
 
-            var tasks = await _tasksApi.FindTasksByUserAsync(taskUser);
+            var tasks = await _tasksApi.FindTasksByOrganizationAsync(_organization);
+            Assert.AreEqual(count + 1, tasks.Count);
+        }
 
-            Assert.AreEqual(1, tasks.Count);
+        [Test]
+        public async Task FindTasksByUser()
+        {
+            Client.Dispose();
+            Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-user", "my-password".ToCharArray());
+            _tasksApi = Client.GetTasksApi();
+            
+            var user = (await Client.GetUsersApi().FindUsersAsync(name:"my-user"))[0];
+
+            var count = (await _tasksApi.FindTasksByUserAsync(user)).Count;
+            Assert.GreaterOrEqual(count, 0);
+
+            await _tasksApi.CreateTaskCronAsync(GenerateName("it task"), TaskFlux, "0 2 * * *", _organization);
+
+            var tasks = await _tasksApi.FindTasksByUserAsync(user);
+            Assert.AreEqual(count + 1, tasks.Count);
         }
 
         [Test]
