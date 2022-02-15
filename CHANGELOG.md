@@ -6,7 +6,7 @@
 
 #### API
 
-- The Client not longer support set the `ReadWriteTimeout` for HTTP Client. This settings is not supported by `HttpClient`
+- The Client not longer support set the `ReadWriteTimeout` for HTTP Client. This settings is not supported by `HttpClient`.
 - The `FluxClient` uses `IDisposable` interface to releasing underlying HTTP connections:
   ##### From
    ```csharp
@@ -180,8 +180,10 @@
   | `QueryRawAsync(String, String, Action<ICancellable, String>, Action<Exception>)`                 | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
   | `QueryRawAsync(String, String, Action<ICancellable, String>, Action<Exception>, Action)`         | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
 
-- Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
-- `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
+- Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`.
+- Response type for `WriteApiAsync.WriteMeasurementsAsyncWithIRestResponse` is `RestResponse` instead of `IRestResponse`.
+- Response type for `WriteApiAsync.WriteRecordsAsyncWithIRestResponse` is `RestResponse` instead of `IRestResponse`.
+- `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration.
 - Rename `TelegrafPlugin` types:
   - from `TelegrafPlugin.TypeEnum.Inputs` to `TelegrafPlugin.TypeEnum.Input`
   - from `TelegrafPlugin.TypeEnum.Outputs` to `TelegrafPlugin.TypeEnum.Output`

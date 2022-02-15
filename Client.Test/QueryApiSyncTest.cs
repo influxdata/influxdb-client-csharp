@@ -87,7 +87,7 @@ namespace InfluxDB.Client.Test
 
             Assert.NotNull(ae);
             Assert.AreEqual(
-                "Expecting a non-empty string for 'org' parameter. Please specify the source organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
+                "Expecting a non-empty string for 'org' parameter. Please specify the organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
                 ae.Message);
         }
 

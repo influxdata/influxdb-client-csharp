@@ -227,7 +227,7 @@ namespace InfluxDB.Client.Test
                     "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1", bucket: "b1"));
             Assert.NotNull(ae);
             Assert.AreEqual(
-                "Expecting a non-empty string for 'org' parameter. Please specify the source organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
+                "Expecting a non-empty string for 'org' parameter. Please specify the organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
                 ae.Message);
 
             ae = Assert.ThrowsAsync<ArgumentException>(async () =>
@@ -235,7 +235,7 @@ namespace InfluxDB.Client.Test
                     "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1", org: "org1"));
             Assert.NotNull(ae);
             Assert.AreEqual(
-                "Expecting a non-empty string for 'bucket' parameter. Please specify the source organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Bucket'.",
+                "Expecting a non-empty string for 'bucket' parameter. Please specify the bucket as a method parameter or use default configuration at 'InfluxDBClientOptions.Bucket'.",
                 ae.Message);
         }
 
