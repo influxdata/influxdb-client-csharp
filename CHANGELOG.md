@@ -102,10 +102,32 @@
   | `QuerySync(String, String)`                         | `QuerySync(String, String?, CancellationToken?)`    |
   | `QuerySync(Query)`                                  | `QuerySync(Query, String?, CancellationToken?)`     |
   | `QuerySync(Query, String)`                          | `QuerySync(Query, String?, CancellationToken?)`     |
-  | `QuerySync<T>(Query)`                               | `QuerySync<T>(Query, String?, CancellationToken?)`  |
-  | `QuerySync<T>(Query, String)`                       | `QuerySync<T>(Query, String?, CancellationToken?)`  |
   | `QuerySync<T>(String)`                              | `QuerySync<T>(String, String?, CancellationToken?)` |
   | `QuerySync<T>(String, String)`                      | `QuerySync<T>(String, String?, CancellationToken?)` |
+  | `QuerySync<T>(Query)`                               | `QuerySync<T>(Query, String?, CancellationToken?)`  |
+  | `QuerySync<T>(Query, String)`                       | `QuerySync<T>(Query, String?, CancellationToken?)`  |
+- `WriteApi` has changed method signatures:
+
+  | *3.3.0*                                                           | *4.0.0*                                                              |
+  |-------------------------------------------------------------------|----------------------------------------------------------------------|
+  | `WriteMeasurement<TM>(WritePrecision, TM)`                        | `WriteMeasurement<TM>(TM, WritePrecision?, String?, String?)`        |
+  | `WriteMeasurement<TM>(String, String, WritePrecision, TM)`        | `WriteMeasurement<TM>(TM, WritePrecision?, String?, String?)`        |
+  | `WriteMeasurements<TM>(WritePrecision, TM[])`                     | `WriteMeasurements<TM>(TM[], WritePrecision?, String?, String?)`     |
+  | `WriteMeasurements<TM>(String, String, WritePrecision, TM[])`     | `WriteMeasurements<TM>(TM[], WritePrecision?, String?, String?)`     |
+  | `WriteMeasurements<TM>(WritePrecision, List<TM>)`                 | `WriteMeasurements<TM>(List<TM>, WritePrecision?, String?, String?)` |
+  | `WriteMeasurements<TM>(String, String, WritePrecision, List<TM>)` | `WriteMeasurements<TM>(List<TM>, WritePrecision?, String?, String?)` |
+  | `WritePoint(PointData)`                                           | `WritePoint(PointData, String?, String?)`                            |
+  | `WritePoint(String, String, PointData)`                           | `WritePoint(PointData, String?, String?)`                            |
+  | `WritePoints(PointData[])`                                        | `WritePoints(PointData[], String?, String?)`                         |
+  | `WritePoints(String, String, PointData[])`                        | `WritePoints(PointData[], String?, String?)`                         |
+  | `WritePoints(List<PointData>)`                                    | `WritePoints(List<PointData>, String?, String?)`                     |
+  | `WritePoints(String, String, List<PointData>)`                    | `WritePoints(List<PointData>, String?, String?)`                     |
+  | `WriteRecord(WritePrecision, String)`                             | `WriteRecord(String, WritePrecision?, String?, String?)`             |
+  | `WriteRecord(String, String, WritePrecision, String)`             | `WriteRecord(String, WritePrecision?, String?, String?)`             |
+  | `WriteRecords(WritePrecision, String[])`                          | `WriteRecords(String[], WritePrecision?, String?, String?)`          |
+  | `WriteRecords(String, String, WritePrecision, String[])`          | `WriteRecords(String[], WritePrecision?, String?, String?)`          |
+  | `WriteRecords(WritePrecision, List<String>)`                      | `WriteRecords(List<String>, WritePrecision?, String?, String?)`      |
+  | `WriteRecords(String, String, WritePrecision, List<String>)`      | `WriteRecords(List<String>, WritePrecision?, String?, String?)`      |
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
 - `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
 - Rename `TelegrafPlugin` types:
