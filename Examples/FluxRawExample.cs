@@ -20,11 +20,12 @@ namespace Examples
                     // process the flux query result record
                     Console.WriteLine(line);
                 },
-                (error) =>
+                onError: error =>
                 {
                     // error handling while processing result
                     Console.WriteLine(error.ToString());
-                }, () =>
+                },
+                onComplete: () =>
                 {
                     // on complete
                     Console.WriteLine("Query completed");
