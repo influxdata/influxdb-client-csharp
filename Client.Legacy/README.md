@@ -80,7 +80,7 @@ string fluxQuery = "from(bucket: \"telegraf\")\n" +
     
 var source = new CancellationTokenSource();
 
-fluxClient.QueryAsync(fluxQuery, (record =>
+fluxClient.QueryAsync(fluxQuery, record =>
             {
                 // process the flux query records
                 Console.WriteLine(record.GetTime() + ": " + record.GetValue());
@@ -88,13 +88,13 @@ fluxClient.QueryAsync(fluxQuery, (record =>
                 if (some condition) 
                 {
                     // abort processing
-                    source.cancel();
+                    source.Cancel();
                 }
             },
             (error) =>
             {
                 // error handling while processing result
-                Console.WriteLine("Error occured: "+ error.TString());
+                Console.WriteLine($"Error occured: {error}");
             }, 
             () =>
             {
@@ -108,7 +108,7 @@ fluxClient.QueryAsync(fluxQuery, (record =>
 It is possible to parse a result line-by-line using the `QueryRaw` method.  
 
 ```c#
-void QueryRawAsync(string query, Action<string> onResponse, Action<Exception> onError, Action onComplete);
+void QueryRawAsync(string query, Action<string> onResponse, string dialect = null, Action<Exception> onError = null, Action onComplete = null, CancellationToken cancellationToken = default);
 ```
 
 ### Advanced Usage

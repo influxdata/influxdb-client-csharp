@@ -159,7 +159,7 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryAsync(flux, "org_id", record =>
+            await queryApi.QueryAsync(flux, record =>
             {
                 //
                 // The callback to consume a FluxRecord.
@@ -177,7 +177,7 @@ namespace Examples
                 // The callback to consume a notification about successfully end of stream.
                 //
                 Console.WriteLine("Query completed");
-            });
+            }, "org_id");
 
             influxDBClient.Dispose();
         }
@@ -210,13 +210,13 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryAsync<Temperature>(flux, "org_id", temperature =>
+            await queryApi.QueryAsync<Temperature>(flux, temperature =>
             {
                 //
                 // The callback to consume a FluxRecord mapped to POCO.
                 //
                 Console.WriteLine($"{temperature.Location}: {temperature.Value} at {temperature.Time}");
-            });
+            }, org: "org_id");
 
             influxDBClient.Dispose();
         }  
@@ -260,7 +260,7 @@ namespace Examples
             //
             // QueryData
             //
-            var csv = await queryApi.QueryRawAsync(flux, "org_id");
+            var csv = await queryApi.QueryRawAsync(flux, org: "org_id");
             
             Console.WriteLine($"CSV response: {csv}");
 
@@ -294,13 +294,13 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryRawAsync(flux, "org_id", line =>
+            await queryApi.QueryRawAsync(flux, line =>
             {
                 //
                 // The callback to consume a line of CSV response
                 //
                 Console.WriteLine($"Response: {line}");
-            });
+            }, org: "org_id");
 
             influxDBClient.Dispose();
         }
@@ -318,7 +318,7 @@ using InfluxDB.Client;
 
 namespace Examples
 {
-    public class SynchronousQuery
+    public static class SynchronousQuery
     {
         public static void Main(string[] args)
         {
@@ -407,7 +407,7 @@ namespace Examples
                 //
                 var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
 
-                writeApi.WriteMeasurement("bucket_name", "org_id", WritePrecision.Ns, temperature);
+                writeApi.WriteMeasurement(temperature, WritePrecision.Ns, "bucket_name", "org_id");
             }
             
             influxDBClient.Dispose();
@@ -459,7 +459,7 @@ namespace Examples
                     .Field("value", 55D)
                     .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
                 
-                writeApi.WritePoint("bucket_name", "org_id", point);
+                writeApi.WritePoint(point, "bucket_name", "org_id");
             }
             
             influxDBClient.Dispose();
@@ -503,13 +503,13 @@ namespace Examples
                     .Field("value", 55D)
                     .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
                 
-                writeApi.WritePoint("bucket_name", "org_id", pointA);
+                writeApi.WritePoint(pointA, "bucket_name", "org_id");
                 
                 var pointB = builder
                     .Field("age", 32)
                     .Timestamp(DateTime.UtcNow, WritePrecision.Ns);
                 
-                writeApi.WritePoint("bucket_name", "org_id", pointB);
+                writeApi.WritePoint(pointB, "bucket_name", "org_id");
             }
             
             influxDBClient.Dispose();
@@ -546,7 +546,7 @@ namespace Examples
                 //
                 // Write by LineProtocol
                 //
-                writeApi.WriteRecord("bucket_name", "org_id", WritePrecision.Ns, "temperature,location=north value=60.0");
+                writeApi.WriteRecord("temperature,location=north value=60.0", WritePrecision.Ns,"bucket_name", "org_id");
             }
             
             influxDBClient.Dispose();
@@ -575,7 +575,7 @@ namespace Examples
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time; { get; set; }
+            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
         
         public static async Task Main(string[] args)
@@ -592,8 +592,8 @@ namespace Examples
             //
             // Write by LineProtocol
             //
-            await writeApiAsync.WriteRecordAsync("my-bucket", "my-org", WritePrecision.Ns,
-                            "temperature,location=north value=60.0");
+            await writeApiAsync.WriteRecordAsync("temperature,location=north value=60.0", WritePrecision.Ns,
+                "my-bucket", "my-org");
 
             //
             //
@@ -604,14 +604,14 @@ namespace Examples
                             .Field("value", 55D)
                             .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
 
-            await writeApiAsync.WritePointAsync("my-bucket", "my-org", point);
+            await writeApiAsync.WritePointAsync(point, "my-bucket", "my-org");
 
             //
             // Write by POCO
             //
             var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
 
-            await writeApiAsync.WriteMeasurementAsync("my-bucket", "my-org", WritePrecision.Ns, temperature);
+            await writeApiAsync.WriteMeasurementAsync(temperature, WritePrecision.Ns, "my-bucket", "my-org");
 
             //
             // Check written data
@@ -944,11 +944,11 @@ namespace Examples
             /// <summary>
             /// Convert to DomainObject.
             /// </summary>
-            public T ConvertToEntity<T>(FluxRecord fluxRecord)
+            public object ConvertToEntity(FluxRecord fluxRecord, Type type)
             {
-                if (typeof(T) != typeof(Sensor))
+                if (type != typeof(Sensor))
                 {
-                    throw new NotSupportedException($"This converter doesn't supports: {typeof(T)}");
+                    throw new NotSupportedException($"This converter doesn't supports: {type}");
                 }
 
                 var customEntity = new Sensor
@@ -959,7 +959,15 @@ namespace Examples
                     Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
                 };
                 
-                return (T) Convert.ChangeType(customEntity, typeof(T));
+                return Convert.ChangeType(customEntity, type);
+            }
+            
+            /// <summary>
+            /// Convert to DomainObject.
+            /// </summary>
+            public T ConvertToEntity<T>(FluxRecord fluxRecord)
+            {
+                return (T)ConvertToEntity(fluxRecord, typeof(T));
             }
 
             /// <summary>
@@ -1038,7 +1046,7 @@ namespace Examples
             // Write data
             //
             await client.GetWriteApiAsync(converter)
-                .WriteMeasurementsAsync(WritePrecision.S, entity1, entity2, entity3, entity4);
+                .WriteMeasurementsAsync(new []{entity1, entity2, entity3, entity4}, WritePrecision.S);
 
             //
             // Query Data to Domain object
