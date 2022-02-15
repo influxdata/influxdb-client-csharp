@@ -128,6 +128,38 @@
   | `WriteRecords(String, String, WritePrecision, String[])`          | `WriteRecords(String[], WritePrecision?, String?, String?)`          |
   | `WriteRecords(WritePrecision, List<String>)`                      | `WriteRecords(List<String>, WritePrecision?, String?, String?)`      |
   | `WriteRecords(String, String, WritePrecision, List<String>)`      | `WriteRecords(List<String>, WritePrecision?, String?, String?)`      |
+
+- `WriteApiAsync` has changed method signatures:
+
+  | *3.3.0*                                                                                                           | *4.0.0*                                                                                                               |
+  |-------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+  | `WriteMeasurementAsync<TM>(WritePrecision, TM, CancellationToken)`                                                | `WriteMeasurementAsync<TM>(TM, WritePrecision?, String?, String?, CancellationToken?)`                                |
+  | `WriteMeasurementAsync<TM>(String, String, WritePrecision, TM, CancellationToken)`                                | `WriteMeasurementAsync<TM>(TM, WritePrecision?, String?, String?, CancellationToken?)`                                |
+  | `WriteMeasurementsAsync<TM>(WritePrecision, TM[])`                                                                | `WriteMeasurementsAsync<TM>(TM[], WritePrecision?, String?, String?, CancellationToken?)`                             |
+  | `WriteMeasurementsAsync<TM>(WritePrecision, CancellationToken, TM[])`                                             | `WriteMeasurementsAsync<TM>(TM[], WritePrecision?, String?, String?, CancellationToken?)`                             |
+  | `WriteMeasurementsAsync<TM>(String, String, WritePrecision, TM[])`                                                | `WriteMeasurementsAsync<TM>(TM[], WritePrecision?, String?, String?, CancellationToken?)`                             |
+  | `WriteMeasurementsAsync<TM>(String, String, WritePrecision, CancellationToken, TM[])`                             | `WriteMeasurementsAsync<TM>(TM[], WritePrecision?, String?, String?, CancellationToken?)`                             |
+  | `WriteMeasurementsAsync<TM>(WritePrecision, List<TM>, CancellationToken)`                                         | `WriteMeasurementsAsync<TM>(List<TM>, WritePrecision?, String?, String?, CancellationToken?)`                         |
+  | `WriteMeasurementsAsync<TM>(String, String, WritePrecision, List<TM>, CancellationToken)`                         | `WriteMeasurementsAsync<TM>(List<TM>, WritePrecision?, String?, String?, CancellationToken?)`                         |
+  | `WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM>, String, String, WritePrecision, CancellationToken)` | `WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM>, WritePrecision?, String?, String?, CancellationToken?)` |
+  | `WritePointAsync(PointData, CancellationToken)`                                                                   | `WritePointAsync(PointData, String?, String?, CancellationToken?)`                                                    |
+  | `WritePointAsync(String, String, PointData, CancellationToken)`                                                   | `WritePointAsync(PointData, String?, String?, CancellationToken?)`                                                    |
+  | `WritePointsAsync(PointData[])`                                                                                   | `WritePointsAsync(PointData[], String?, String?, CancellationToken?)`                                                 |
+  | `WritePointsAsync(CancellationToken, PointData[])`                                                                | `WritePointsAsync(PointData[], String?, String?, CancellationToken?)`                                                 |
+  | `WritePointsAsync(String, String, PointData[])`                                                                   | `WritePointsAsync(PointData[], String?, String?, CancellationToken?)`                                                 |
+  | `WritePointsAsync(String, String, CancellationToken, PointData[])`                                                | `WritePointsAsync(PointData[], String?, String?, CancellationToken?)`                                                 |
+  | `WritePointsAsync(List<PointData>, CancellationToken)`                                                            | `WritePointsAsync(List<PointData>, String?, String?, CancellationToken?)`                                             |
+  | `WritePointsAsync(String, String, List<PointData>, CancellationToken)`                                            | `WritePointsAsync(List<PointData>, String?, String?, CancellationToken?)`                                             |
+  | `WritePointsAsyncWithIRestResponse(IEnumerable<PointData>, String, String, CancellationToken)`                    | `WritePointsAsyncWithIRestResponse(IEnumerable<PointData>, String?, String?, CancellationToken?)`                     |
+  | `WriteRecordAsync(WritePrecision, String, CancellationToken)`                                                     | `WriteRecordAsync(String, WritePrecision?, String?, String?, CancellationToken?)`                                     |
+  | `WriteRecordAsync(String, String, WritePrecision, String, CancellationToken)`                                     | `WriteRecordAsync(String, WritePrecision?, String?, String?, CancellationToken?)`                                     |
+  | `WriteRecordsAsync(WritePrecision, String[])`                                                                     | `WriteRecordsAsync(String[], WritePrecision?, String?, String?, CancellationToken?)`                                  |
+  | `WriteRecordsAsync(WritePrecision, CancellationToken, String[])`                                                  | `WriteRecordsAsync(String[], WritePrecision?, String?, String?, CancellationToken?)`                                  |
+  | `WriteRecordsAsync(String, String, WritePrecision, String[])`                                                     | `WriteRecordsAsync(String[], WritePrecision?, String?, String?, CancellationToken?)`                                  |
+  | `WriteRecordsAsync(String, String, WritePrecision, CancellationToken, String[])`                                  | `WriteRecordsAsync(String[], WritePrecision?, String?, String?, CancellationToken?)`                                  |
+  | `WriteRecordsAsync(WritePrecision, List<String>, CancellationToken)`                                              | `WriteRecordsAsync(List<String>, WritePrecision?, String?, String?, CancellationToken?)`                              |
+  | `WriteRecordsAsync(String, String, WritePrecision, List<String>, CancellationToken)`                              | `WriteRecordsAsync(List<String>, WritePrecision?, String?, String?, CancellationToken?)`                              |
+  | `WriteRecordsAsyncWithIRestResponse(IEnumerable<String>, String, String, WritePrecision, CancellationToken)`      | `WriteRecordsAsyncWithIRestResponse(IEnumerable<String>, WritePrecision?, String?, String?, CancellationToken?)`      |
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
 - `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
 - Rename `TelegrafPlugin` types:
