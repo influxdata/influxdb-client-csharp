@@ -48,64 +48,64 @@
     ```
 - `QueryApi` has changed method signatures:
 
-  | *3.3.0*            | *4.0.0*                                                                                              |
+  | *3.3.0*                                                                                              | *4.0.0*                                                                                              |
   |------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-  | `QueryAsync(String)` | `QueryAsync(String, String?, CancellationToken?)`                                                    |
-  | `QueryAsync(String, String)` | `QueryAsync(String, String?, CancellationToken?)`                                                    |
-  | `QueryAsync(Query)` | `QueryAsync(Query, String?, CancellationToken?)`                                                     |
-  | `QueryAsync(Query, String)` | `QueryAsync(Query, String?, CancellationToken?)`                                                     |
-  | `QueryAsync(String, Type)` | `QueryAsync(String, Type, String?, CancellationToken?)`                                              |
-  | `QueryAsync(String, String, Type)` | `QueryAsync(String, Type, String?, CancellationToken?)`                                              |
-  | `QueryAsync(Query, Type)` | `QueryAsync(Query, Type, String?, CancellationToken?)`                                               |
-  | `QueryAsync(Query, String, Type)` | `QueryAsync(Query, Type, String?, CancellationToken?)`                                               |
-  | `QueryAsync(String, Action<ICancellable, FluxRecord>)` | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
-  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>)` | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
-  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)` | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
-  | `QueryAsync(String, String, Action<ICancellable, FluxRecord>)` | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
-  | `QueryAsync(String, String, Action<ICancellable, FluxRecord>, Action<Exception>)` | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
-  | `QueryAsync(String, String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)` | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
-  | `QueryAsync(Query, Action<ICancellable, FluxRecord>)`                  | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
-  | `QueryAsync(Query, Action<ICancellable, FluxRecord>, Action<Exception>)` | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
-  | `QueryAsync(Query, Action<ICancellable, FluxRecord>, Action<Exception>, Action)` | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
-  | `QueryAsync(Query, String, Action<ICancellable, FluxRecord>)` | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
-  | `QueryAsync(Query, String, Action<ICancellable, FluxRecord>, Action<Exception>)` | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
-  | `QueryAsync(Query, String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)` | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
-  | `QueryAsync(String, String, Action<ICancellable, Object>, Action<Exception>, Action, Type)` | `QueryAsync(String, Type, Action<Object>, Action<Exception>?, Action?, String?, CancellationToken?)` |
-  | `QueryAsync(Query, String, Action<ICancellable, Object>, Action<Exception>, Action, Type)` | `QueryAsync(Query, Type, Action<Object>, Action<Exception>?, Action?, String?, CancellationToken?)`  |
-  | `QueryAsync<T>(String)` | `QueryAsync<T>(String, String?, CancellationToken?)`                                                 |
-  | `QueryAsync<T>(String, String)` | `QueryAsync<T>(String, String?, CancellationToken?)`                                                 |
-  | `QueryAsync<T>(String, Action<ICancellable, T>)` | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
-  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>)` | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
-  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>, Action)` | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
-  | `QueryAsync<T>(String, String, Action<ICancellable, T>)` | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
-  | `QueryAsync<T>(String, String, Action<ICancellable, T>, Action<Exception>)` | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
-  | `QueryAsync<T>(String, String, Action<ICancellable, T>, Action<Exception>, Action)` | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
-  | `QueryAsync<T>(Query)` | `QueryAsync<T>(Query, String?, CancellationToken?)`                                                  |
-  | `QueryAsync<T>(Query, String)` | `QueryAsync<T>(Query, String?, CancellationToken?)`                                                  |
-  | `QueryAsync<T>(Query, Action<ICancellable, T>)` | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
-  | `QueryAsync<T>(Query, Action<ICancellable, T>, Action<Exception>)` | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
-  | `QueryAsync<T>(Query, Action<ICancellable, T>, Action<Exception>, Action)` | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
-  | `QueryAsync<T>(Query, String, Action<ICancellable, T>)` | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
-  | `QueryAsync<T>(Query, String, Action<ICancellable, T>, Action<Exception>)` | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
-  | `QueryAsync<T>(Query, String, Action<ICancellable, T>, Action<Exception>, Action)` | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
-  | `QueryAsyncEnumerable<T>(Query, String, CancellationToken)` | `QueryAsyncEnumerable<T>(Query, String?, CancellationToken?)`                                        |
-  | `QueryAsyncEnumerable<T>(String, CancellationToken)` | `QueryAsyncEnumerable<T>(String, String?, CancellationToken?)`                                       |
-  | `QueryAsyncEnumerable<T>(String, String, CancellationToken)` | `QueryAsyncEnumerable<T>(String, String?, CancellationToken?)`                                       |
-  | `QueryRawAsync(Query)` | `QueryRawAsync(Query, String?, CancellationToken?)`                                                  |
-  | `QueryRawAsync(Query, Action<ICancellable, String>)` | `QueryRawAsync(Query, Action<String>, Action<Exception>?, Action?, String?, CancellationToken?)`     |
-  | `QueryRawAsync(Query, Action<ICancellable, String>, Action<Exception>)` | `QueryRawAsync(Query, Action<String>, Action<Exception>?, Action?, String?, CancellationToken?)`     |
+  | `QueryAsync(String)`                                                                                 | `QueryAsync(String, String?, CancellationToken?)`                                                    |
+  | `QueryAsync(String, String)`                                                                         | `QueryAsync(String, String?, CancellationToken?)`                                                    |
+  | `QueryAsync(Query)`                                                                                  | `QueryAsync(Query, String?, CancellationToken?)`                                                     |
+  | `QueryAsync(Query, String)`                                                                          | `QueryAsync(Query, String?, CancellationToken?)`                                                     |
+  | `QueryAsync(String, Type)`                                                                           | `QueryAsync(String, Type, String?, CancellationToken?)`                                              |
+  | `QueryAsync(String, String, Type)`                                                                   | `QueryAsync(String, Type, String?, CancellationToken?)`                                              |
+  | `QueryAsync(Query, Type)`                                                                            | `QueryAsync(Query, Type, String?, CancellationToken?)`                                               |
+  | `QueryAsync(Query, String, Type)`                                                                    | `QueryAsync(Query, Type, String?, CancellationToken?)`                                               |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>)`                                               | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>)`                            | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`                    | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, String, Action<ICancellable, FluxRecord>)`                                       | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, String, Action<ICancellable, FluxRecord>, Action<Exception>)`                    | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`            | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(Query, Action<ICancellable, FluxRecord>)`                                                | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, Action<ICancellable, FluxRecord>, Action<Exception>)`                             | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`                     | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, String, Action<ICancellable, FluxRecord>)`                                        | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, String, Action<ICancellable, FluxRecord>, Action<Exception>)`                     | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`             | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(String, String, Action<ICancellable, Object>, Action<Exception>, Action, Type)`          | `QueryAsync(String, Type, Action<Object>, Action<Exception>?, Action?, String?, CancellationToken?)` |
+  | `QueryAsync(Query, String, Action<ICancellable, Object>, Action<Exception>, Action, Type)`           | `QueryAsync(Query, Type, Action<Object>, Action<Exception>?, Action?, String?, CancellationToken?)`  |
+  | `QueryAsync<T>(String)`                                                                              | `QueryAsync<T>(String, String?, CancellationToken?)`                                                 |
+  | `QueryAsync<T>(String, String)`                                                                      | `QueryAsync<T>(String, String?, CancellationToken?)`                                                 |
+  | `QueryAsync<T>(String, Action<ICancellable, T>)`                                                     | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>)`                                  | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>, Action)`                          | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, String, Action<ICancellable, T>)`                                             | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, String, Action<ICancellable, T>, Action<Exception>)`                          | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, String, Action<ICancellable, T>, Action<Exception>, Action)`                  | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(Query)`                                                                               | `QueryAsync<T>(Query, String?, CancellationToken?)`                                                  |
+  | `QueryAsync<T>(Query, String)`                                                                       | `QueryAsync<T>(Query, String?, CancellationToken?)`                                                  |
+  | `QueryAsync<T>(Query, Action<ICancellable, T>)`                                                      | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, Action<ICancellable, T>, Action<Exception>)`                                   | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, Action<ICancellable, T>, Action<Exception>, Action)`                           | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, String, Action<ICancellable, T>)`                                              | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, String, Action<ICancellable, T>, Action<Exception>)`                           | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, String, Action<ICancellable, T>, Action<Exception>, Action)`                   | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsyncEnumerable<T>(Query, String, CancellationToken)`                                          | `QueryAsyncEnumerable<T>(Query, String?, CancellationToken?)`                                        |
+  | `QueryAsyncEnumerable<T>(String, CancellationToken)`                                                 | `QueryAsyncEnumerable<T>(String, String?, CancellationToken?)`                                       |
+  | `QueryAsyncEnumerable<T>(String, String, CancellationToken)`                                         | `QueryAsyncEnumerable<T>(String, String?, CancellationToken?)`                                       |
+  | `QueryRawAsync(Query)`                                                                               | `QueryRawAsync(Query, String?, CancellationToken?)`                                                  |
+  | `QueryRawAsync(Query, Action<ICancellable, String>)`                                                 | `QueryRawAsync(Query, Action<String>, Action<Exception>?, Action?, String?, CancellationToken?)`     |
+  | `QueryRawAsync(Query, Action<ICancellable, String>, Action<Exception>)`                              | `QueryRawAsync(Query, Action<String>, Action<Exception>?, Action?, String?, CancellationToken?)`     |
 - `QueryApiSync` has changed method signatures:
 
-  | *3.3.0*            | *4.0.0*                                             |
-  |-----------------------------------------------------|------------------------------------------------------------------------------------------------------|
-  | `QuerySync(String)` | `QuerySync(String, String?, CancellationToken?)`    |
-  | `QuerySync(String, String)` | `QuerySync(String, String?, CancellationToken?)`    |
-  | `QuerySync(Query)` | `QuerySync(Query, String?, CancellationToken?)`     |
-  | `QuerySync(Query, String)` | `QuerySync(Query, String?, CancellationToken?)`     |
-  | `QuerySync<T>(Query)` | `QuerySync<T>(Query, String?, CancellationToken?)`  |
-  | `QuerySync<T>(Query, String)` | `QuerySync<T>(Query, String?, CancellationToken?)`  |
-  | `QuerySync<T>(String)` | `QuerySync<T>(String, String?, CancellationToken?)` |
-  | `QuerySync<T>(String, String)` | `QuerySync<T>(String, String?, CancellationToken?)` |
+  | *3.3.0*                                             | *4.0.0*                                             |
+  |-----------------------------------------------------|-----------------------------------------------------|
+  | `QuerySync(String)`                                 | `QuerySync(String, String?, CancellationToken?)`    |
+  | `QuerySync(String, String)`                         | `QuerySync(String, String?, CancellationToken?)`    |
+  | `QuerySync(Query)`                                  | `QuerySync(Query, String?, CancellationToken?)`     |
+  | `QuerySync(Query, String)`                          | `QuerySync(Query, String?, CancellationToken?)`     |
+  | `QuerySync<T>(Query)`                               | `QuerySync<T>(Query, String?, CancellationToken?)`  |
+  | `QuerySync<T>(Query, String)`                       | `QuerySync<T>(Query, String?, CancellationToken?)`  |
+  | `QuerySync<T>(String)`                              | `QuerySync<T>(String, String?, CancellationToken?)` |
+  | `QuerySync<T>(String, String)`                      | `QuerySync<T>(String, String?, CancellationToken?)` |
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
 - `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
 - Rename `TelegrafPlugin` types:
