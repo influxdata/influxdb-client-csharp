@@ -128,7 +128,6 @@
   | `WriteRecords(String, String, WritePrecision, String[])`          | `WriteRecords(String[], WritePrecision?, String?, String?)`          |
   | `WriteRecords(WritePrecision, List<String>)`                      | `WriteRecords(List<String>, WritePrecision?, String?, String?)`      |
   | `WriteRecords(String, String, WritePrecision, List<String>)`      | `WriteRecords(List<String>, WritePrecision?, String?, String?)`      |
-
 - `WriteApiAsync` has changed method signatures:
 
   | *3.3.0*                                                                                                           | *4.0.0*                                                                                                               |
@@ -160,6 +159,27 @@
   | `WriteRecordsAsync(WritePrecision, List<String>, CancellationToken)`                                              | `WriteRecordsAsync(List<String>, WritePrecision?, String?, String?, CancellationToken?)`                              |
   | `WriteRecordsAsync(String, String, WritePrecision, List<String>, CancellationToken)`                              | `WriteRecordsAsync(List<String>, WritePrecision?, String?, String?, CancellationToken?)`                              |
   | `WriteRecordsAsyncWithIRestResponse(IEnumerable<String>, String, String, WritePrecision, CancellationToken)`      | `WriteRecordsAsyncWithIRestResponse(IEnumerable<String>, WritePrecision?, String?, String?, CancellationToken?)`      |
+- `FluxClient` has changed method signatures:
+
+  | *3.3.0*                                                                                          | *4.0.0*                                                                                           |
+  |--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+  | `QueryAsync(String)`                                                                             | `QueryAsync(String, CancellationToken?)`                                                          |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>)`                                           | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, CancellationToken?)`         |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>)`                        | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, CancellationToken?)`         |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`                | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, CancellationToken?)`         |
+  | `QueryAsync<T>(String)`                                                                          | `QueryAsync<T>(String, CancellationToken?)`                                                       |
+  | `QueryAsync<T>(String, Action<ICancellable, T>)`                                                 | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, CancellationToken?)`               |
+  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>)`                              | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, CancellationToken?)`               |
+  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>, Action)`                      | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, CancellationToken?)`               |
+  | `QueryRawAsync(String)`                                                                          | `QueryRawAsync(String, String?, CancellationToken?)`                                              |
+  | `QueryRawAsync(String, String)`                                                                  | `QueryRawAsync(String, String?, CancellationToken?)`                                              |
+  | `QueryRawAsync(String, Action<ICancellable, String>)`                                            | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, Action<ICancellable, String>, Action<Exception>)`                         | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, Action<ICancellable, String>, Action<Exception>, Action)`                 | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, String, Action<ICancellable, String>)`                                    | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, String, Action<ICancellable, String>, Action<Exception>)`                 | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, String, Action<ICancellable, String>, Action<Exception>, Action)`         | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
 - `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
 - Rename `TelegrafPlugin` types:
