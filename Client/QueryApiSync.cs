@@ -40,33 +40,13 @@ namespace InfluxDB.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public List<T> QuerySync<T>(string query, CancellationToken cancellationToken = default)
+        public List<T> QuerySync<T>(string query, string org = null, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
-
-            return QuerySync<T>(query, _options.Org);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
-        /// to list of object with given type.
-        ///
-        /// <para>
-        /// NOTE: This method is not intended for large query results.
-        /// </para>
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="org">specifies the source organization</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <typeparam name="T">the type of measurement</typeparam>
-        /// <returns>Measurements which are matched the query</returns>
-        public List<T> QuerySync<T>(string query, string org, CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, nameof(query));
-            Arguments.CheckNonEmptyString(org, nameof(org));
 
             return QuerySync<T>(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org, cancellationToken);
         }
@@ -80,33 +60,16 @@ namespace InfluxDB.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
-        public List<T> QuerySync<T>(Query query, CancellationToken cancellationToken = default)
+        public List<T> QuerySync<T>(Query query, string org = null, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(query, nameof(query));
 
-            return QuerySync<T>(query, _options.Org, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
-        /// to list of object with given type.
-        ///
-        /// <para>
-        /// NOTE: This method is not intended for large query results.
-        /// </para>
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="org">specifies the source organization</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <typeparam name="T">the type of measurement</typeparam>
-        /// <returns>Measurements which are matched the query</returns>
-        public List<T> QuerySync<T>(Query query, string org, CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNotNull(query, nameof(query));
-            Arguments.CheckNonEmptyString(org, nameof(org));
+            var optionsOrg = org ?? _options.Org;
+            Arguments.CheckNonEmptyString(optionsOrg, OrgArgumentValidation);
 
             var measurements = new List<T>();
 
@@ -115,7 +78,7 @@ namespace InfluxDB.Client
             RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter)
             {
                 return _service
-                    .PostQueryWithRestRequest(null, "application/json", null, org, null, query)
+                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
             }
 
@@ -133,31 +96,12 @@ namespace InfluxDB.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> QuerySync(string query, CancellationToken cancellationToken = default)
+        public List<FluxTable> QuerySync(string query, string org = null, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
-
-            return QuerySync(query, _options.Org, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
-        /// to <see cref="FluxTable"/>s.
-        ///
-        /// <para>
-        /// NOTE: This method is not intended for large query results.
-        /// </para>
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="org">specifies the source organization</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> QuerySync(string query, string org, CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, nameof(query));
-            Arguments.CheckNonEmptyString(org, nameof(org));
 
             return QuerySync(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org, cancellationToken);
         }
@@ -171,38 +115,22 @@ namespace InfluxDB.Client
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> QuerySync(Query query, CancellationToken cancellationToken = default)
+        public List<FluxTable> QuerySync(Query query, string org = null, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(query, nameof(query));
-
-            return QuerySync(query, _options.Org, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
-        /// to <see cref="FluxTable"/>s.
-        ///
-        /// <para>
-        /// NOTE: This method is not intended for large query results.
-        /// </para>
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="org">specifies the source organization</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>FluxTables that are matched the query</returns>
-        public List<FluxTable> QuerySync(Query query, string org, CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNotNull(query, nameof(query));
-            Arguments.CheckNonEmptyString(org, nameof(org));
 
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();
+
+            var optionsOrg = org ?? _options.Org;
+            Arguments.CheckNonEmptyString(optionsOrg, OrgArgumentValidation);
 
             RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter)
             {
                 return _service
-                    .PostQueryWithRestRequest(null, "application/json", null, org, null, query)
+                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
             }
 

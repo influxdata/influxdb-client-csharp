@@ -146,32 +146,32 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point);
+            _writeApi.WritePoint(point, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point2);
+            _writeApi.WritePoint(point2, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point3);
+            _writeApi.WritePoint(point3, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point4);
+            _writeApi.WritePoint(point4, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point5);
+            _writeApi.WritePoint(point5, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point6);
+            _writeApi.WritePoint(point6, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();

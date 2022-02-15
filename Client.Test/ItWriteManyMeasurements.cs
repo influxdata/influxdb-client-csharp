@@ -63,8 +63,8 @@ namespace InfluxDB.Client.Test
                 start += MaxBarsPerRequest;
                 Trace.WriteLine(
                     $"Add bars to buffer From: {historyBars.First().Date}, To: {historyBars.Last().Date}. Remaining {CountToWrite - start}");
-                api.WriteMeasurements(HistoryBarConstant.Bucket, HistoryBarConstant.OrgId, WritePrecision.S,
-                    historyBars);
+                api.WriteMeasurements(historyBars, WritePrecision.S, HistoryBarConstant.Bucket,
+                    HistoryBarConstant.OrgId);
             }
 
             Trace.WriteLine("Flushing data...");

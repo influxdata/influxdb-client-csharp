@@ -85,7 +85,7 @@ namespace Examples
                 // Write by POCO
                 //
                 var temperature = new Temperature { Location = "south", Value = 62D, Time = DateTime.UtcNow };
-                writeClient.WriteMeasurement("temperature-sensors", medicalGMBH.Id, WritePrecision.Ns, temperature);
+                writeClient.WriteMeasurement(temperature, WritePrecision.Ns, "temperature-sensors", medicalGMBH.Id);
 
                 //
                 // Write by Point
@@ -94,13 +94,13 @@ namespace Examples
                     .Tag("location", "west")
                     .Field("value", 55D)
                     .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
-                writeClient.WritePoint("temperature-sensors", medicalGMBH.Id, point);
+                writeClient.WritePoint(point, "temperature-sensors", medicalGMBH.Id);
 
                 //
                 // Write by LineProtocol
                 //
                 var record = "temperature,location=north value=60.0";
-                writeClient.WriteRecord("temperature-sensors", medicalGMBH.Id, WritePrecision.Ns, record);
+                writeClient.WriteRecord(record, WritePrecision.Ns, "temperature-sensors", medicalGMBH.Id);
 
                 writeClient.Flush();
                 Thread.Sleep(2000);

@@ -116,8 +116,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             StringAssert.Contains("org=org1", writer.ToString());
@@ -139,8 +139,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             StringAssert.DoesNotContain("org=org1", writer.ToString());
@@ -171,8 +171,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             var request = MockServer.LogEntries.Last();
@@ -184,8 +184,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             request = MockServer.LogEntries.Last();
@@ -198,8 +198,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             request = MockServer.LogEntries.Last();
@@ -212,8 +212,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             request = MockServer.LogEntries.Last();

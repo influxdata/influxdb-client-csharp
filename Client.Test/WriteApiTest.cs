@@ -139,8 +139,8 @@ namespace InfluxDB.Client.Test
                 .WillSetStateTo("Retry Finished")
                 .RespondWith(CreateResponse("{}"));
 
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
 
             //
             // First request got Retry exception
@@ -184,8 +184,8 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingPost())
                 .RespondWith(CreateResponse("line protocol poorly formed and no points were written", 400));
 
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
             _writeApi.Flush();
 
             var error = listener.Get<WriteErrorEvent>();
@@ -205,8 +205,8 @@ namespace InfluxDB.Client.Test
                     "token does not have sufficient permissions to write to this organization and bucket or the organization and bucket do not exist",
                     401));
 
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
             _writeApi.Flush();
 
             error = listener.Get<WriteErrorEvent>();
@@ -226,8 +226,8 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingPost())
                 .RespondWith(CreateResponse("no token was sent and they are required", 403));
 
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
             _writeApi.Flush();
 
             error = listener.Get<WriteErrorEvent>();
@@ -247,8 +247,8 @@ namespace InfluxDB.Client.Test
                     "write has been rejected because the payload is too large. Error message returns max size supported. All data in body was rejected and not written",
                     413));
 
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
             _writeApi.Flush();
 
             error = listener.Get<WriteErrorEvent>();
@@ -281,8 +281,8 @@ namespace InfluxDB.Client.Test
                 .WillSetStateTo("RetryWithRetryAfter Finished")
                 .RespondWith(CreateResponse("{}"));
 
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
 
             // Retry response
             listener.Get<WriteRetriableErrorEvent>();
@@ -315,8 +315,8 @@ namespace InfluxDB.Client.Test
 
             var listener = new EventListener(_writeApi);
 
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
 
             // Three attempts
             listener.Get<WriteRetriableErrorEvent>();
@@ -364,8 +364,8 @@ namespace InfluxDB.Client.Test
             var writer = new StringWriter();
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
 
             // One attempt
             listener.Get<WriteRetriableErrorEvent>();
@@ -410,8 +410,8 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
 
-            _writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
 
             listener.Get<WriteSuccessEvent>();
 
@@ -462,7 +462,7 @@ namespace InfluxDB.Client.Test
                 Device = "id-1",
                 Value = 15
             };
-            _writeApi.WriteMeasurement("b1", "org1", WritePrecision.S, measurement);
+            _writeApi.WriteMeasurement(measurement, WritePrecision.S, "b1", "org1");
 
             var error = listener.Get<WriteRuntimeExceptionEvent>();
 
@@ -470,6 +470,37 @@ namespace InfluxDB.Client.Test
             StringAssert.StartsWith("Timestamps must be specified as UTC", error.Exception.Message);
 
             Assert.AreEqual(0, MockServer.LogEntries.Count());
+        }
+
+        [Test]
+        public void RequiredOrgBucketWriteApi()
+        {
+            _influxDbClient.Dispose();
+
+            var options = InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url(MockServerUrl)
+                .AuthenticateToken("token")
+                .Build();
+
+            _influxDbClient = InfluxDBClientFactory.Create(options);
+            _writeApi = _influxDbClient.GetWriteApi(WriteOptions.CreateNew().RetryInterval(1_000).Build());
+
+            var ae = Assert.Throws<ArgumentException>(() =>
+                _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                    bucket: "b1"));
+            Assert.NotNull(ae);
+            Assert.AreEqual(
+                "Expecting a non-empty string for 'org' parameter. Please specify the source organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
+                ae.Message);
+
+            ae = Assert.Throws<ArgumentException>(() =>
+                _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                    org: "org1"));
+            Assert.NotNull(ae);
+            Assert.AreEqual(
+                "Expecting a non-empty string for 'bucket' parameter. Please specify the source organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Bucket'.",
+                ae.Message);
         }
     }
 

@@ -96,87 +96,15 @@ namespace InfluxDB.Client.Flux
         /// </summary>
         /// <param name="query">the flux query to execute</param>
         /// <param name="onNext">the callback to consume the FluxRecord result</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>async task</returns>
-        public Task QueryAsync(string query, Action<FluxRecord> onNext,
-            CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-            Arguments.CheckNotNull(onNext, "onNext");
-
-            return QueryAsync(query, onNext, ErrorConsumer, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and asynchronously stream result as POCO.
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="onNext">the callback to consume the FluxRecord result</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <typeparam name="T">the type of measurement</typeparam>
-        /// <returns>async task</returns>
-        public Task QueryAsync<T>(string query, Action<T> onNext,
-            CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-            Arguments.CheckNotNull(onNext, "onNext");
-
-            return QueryAsync(query, onNext, ErrorConsumer, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and asynchronously stream <see cref="FluxRecord"/> to <see cref="onNext"/> consumer.
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="onNext">the callback to consume the FluxRecord result</param>
-        /// <param name="onError">the callback to consume any error notification</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>async task</returns>
-        public Task QueryAsync(string query, Action<FluxRecord> onNext, Action<Exception> onError,
-            CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-            Arguments.CheckNotNull(onNext, "onNext");
-            Arguments.CheckNotNull(onError, "onError");
-
-            return QueryAsync(query, onNext, onError, EmptyAction, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and asynchronously stream result as POCO.
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="onNext">the callback to consume the FluxRecord result</param>
-        /// <param name="onError">the callback to consume any error notification</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <typeparam name="T">the type of measurement</typeparam>
-        /// <returns>async task</returns>
-        public Task QueryAsync<T>(string query, Action<T> onNext, Action<Exception> onError,
-            CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-            Arguments.CheckNotNull(onNext, "onNext");
-            Arguments.CheckNotNull(onError, "onError");
-
-            return QueryAsync(query, onNext, onError, EmptyAction, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and asynchronously stream <see cref="FluxRecord"/> to <see cref="onNext"/> consumer.
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="onNext">the callback to consume the FluxRecord result</param>
         /// <param name="onError">the callback to consume any error notification</param>
         /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>async task</returns>
-        public Task QueryAsync(string query, Action<FluxRecord> onNext, Action<Exception> onError,
-            Action onComplete, CancellationToken cancellationToken = default)
+        public Task QueryAsync(string query, Action<FluxRecord> onNext, Action<Exception> onError = null,
+            Action onComplete = null, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, "query");
             Arguments.CheckNotNull(onNext, "onNext");
-            Arguments.CheckNotNull(onError, "onError");
-            Arguments.CheckNotNull(onComplete, "onComplete");
 
             var consumer = new FluxResponseConsumerRecord(onNext);
 
@@ -193,52 +121,22 @@ namespace InfluxDB.Client.Flux
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>async task</returns>
-        public Task QueryAsync<T>(string query, Action<T> onNext, Action<Exception> onError,
-            Action onComplete, CancellationToken cancellationToken = default)
+        public Task QueryAsync<T>(string query, Action<T> onNext, Action<Exception> onError = null,
+            Action onComplete = null, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, "query");
             Arguments.CheckNotNull(onNext, "onNext");
-            Arguments.CheckNotNull(onError, "onError");
-            Arguments.CheckNotNull(onComplete, "onComplete");
 
             var consumer = new FluxResponseConsumerPoco<T>(onNext, Mapper);
 
             return QueryAsync(query, GetDefaultDialect(), consumer, onError, onComplete, cancellationToken);
         }
 
-        private Task QueryAsync(string query,
-            string dialect,
-            FluxCsvParser.IFluxResponseConsumer responseConsumer,
-            Action<Exception> onError,
-            Action onComplete, CancellationToken cancellationToken = default)
-        {
-            var message = QueryRequest(CreateBody(dialect, query));
-
-            return Query(message, responseConsumer, onError, onComplete, cancellationToken);
-        }
-
         /// <summary>
         /// Executes the Flux query against the InfluxDB and synchronously map whole response to <see cref="string"/> result.
         /// <para>
         /// NOTE: This method is not intended for large responses, that do not fit into memory.
-        /// Use <see cref="QueryRawAsync(string,string,System.Action{string},System.Action{System.Exception},System.Action,System.Threading.CancellationToken)"/>
-        /// </para>
-        /// </summary>
-        /// <param name="query">the flux query to execute></param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>the raw response that matched the query</returns>
-        public Task<string> QueryRawAsync(string query, CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-
-            return QueryRawAsync(query, "", cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and synchronously map whole response to <see cref="string"/> result.
-        /// <para>
-        /// NOTE: This method is not intended for large responses, that do not fit into memory.
-        /// Use <see cref="QueryRawAsync(string,string,System.Action{string},System.Action{System.Exception},System.Action,System.Threading.CancellationToken)"/>
+        /// Use <see cref="QueryRawAsync(string,System.Action{string},string,System.Action{System.Exception},System.Action,System.Threading.CancellationToken)"/>
         /// </para>
         /// </summary>
         /// <param name="query">the flux query to execute></param>
@@ -246,7 +144,7 @@ namespace InfluxDB.Client.Flux
         /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>the raw response that matched the query</returns>
-        public async Task<string> QueryRawAsync(string query, string dialect,
+        public async Task<string> QueryRawAsync(string query, string dialect = null,
             CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, "query");
@@ -258,7 +156,7 @@ namespace InfluxDB.Client.Flux
                 rows.Add(row);
             }
 
-            await QueryRawAsync(query, dialect, Consumer, ErrorConsumer, EmptyAction, cancellationToken)
+            await QueryRawAsync(query, Consumer, dialect, ErrorConsumer, EmptyAction, cancellationToken)
                 .ConfigureAwait(false);
 
             return string.Join("\n", rows);
@@ -269,115 +167,21 @@ namespace InfluxDB.Client.Flux
         /// </summary>
         /// <param name="query">the flux query to execute</param>
         /// <param name="onResponse">the callback to consume the response line by line</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>async task</returns>
-        public Task QueryRawAsync(string query, Action<string> onResponse,
-            CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-            Arguments.CheckNotNull(onResponse, "onNext");
-
-            return QueryRawAsync(query, null, onResponse, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and asynchronously stream response (line by line) to <see cref="onResponse"/>.
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="dialect">Dialect is an object defining the options to use when encoding the response.
-        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
-        /// <param name="onResponse">the callback to consume the response line by line</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>async task</returns>
-        public Task QueryRawAsync(string query, string dialect, Action<string> onResponse,
-            CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-            Arguments.CheckNotNull(onResponse, "onNext");
-
-            return QueryRawAsync(query, dialect, onResponse, ErrorConsumer, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and asynchronously stream response (line by line) to <see cref="onResponse"/>.
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="onResponse">the callback to consume the response line by line</param>
-        /// <param name="onError">the callback to consume any error notification</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>async task</returns>
-        public Task QueryRawAsync(string query, Action<string> onResponse, Action<Exception> onError,
-            CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-            Arguments.CheckNotNull(onResponse, "onNext");
-            Arguments.CheckNotNull(onError, "onError");
-
-            return QueryRawAsync(query, onResponse, onError, EmptyAction, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and asynchronously stream response (line by line) to <see cref="onResponse"/>.
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="dialect">Dialect is an object defining the options to use when encoding the response.
-        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
-        /// <param name="onResponse">the callback to consume the response line by line</param>
-        /// <param name="onError">the callback to consume any error notification</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>async task</returns>
-        public Task QueryRawAsync(string query, string dialect, Action<string> onResponse,
-            Action<Exception> onError, CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-            Arguments.CheckNotNull(onResponse, "onNext");
-            Arguments.CheckNotNull(onError, "onError");
-
-            return QueryRawAsync(query, dialect, onResponse, onError, EmptyAction, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and asynchronously stream response (line by line) to <see cref="onResponse"/>.
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="onResponse">the callback to consume the response line by line</param>
+        /// <param name="dialect">Dialect is an object defining the options to use when encoding the response. <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
         /// <param name="onError">the callback to consume any error notification</param>
         /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
         /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
         /// <returns>async task</returns>
-        public Task QueryRawAsync(string query, Action<string> onResponse, Action<Exception> onError,
-            Action onComplete, CancellationToken cancellationToken = default)
+        public Task QueryRawAsync(string query, Action<string> onResponse, string dialect = null,
+            Action<Exception> onError = null, Action onComplete = null, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(query, "query");
             Arguments.CheckNotNull(onResponse, "onNext");
-            Arguments.CheckNotNull(onError, "onError");
-            Arguments.CheckNotNull(onComplete, "onComplete");
-
-            return QueryRawAsync(query, null, onResponse, onError, onComplete, cancellationToken);
-        }
-
-        /// <summary>
-        /// Executes the Flux query against the InfluxDB and asynchronously stream response (line by line) to <see cref="onResponse"/>.
-        /// </summary>
-        /// <param name="query">the flux query to execute</param>
-        /// <param name="dialect">Dialect is an object defining the options to use when encoding the response.
-        /// <a href="http://bit.ly/flux-dialect">See dialect SPEC.</a></param>
-        /// <param name="onResponse">the callback to consume the response line by line</param>
-        /// <param name="onError">the callback to consume any error notification</param>
-        /// <param name="onComplete">the callback to consume a notification about successfully end of stream</param>
-        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
-        /// <returns>async task</returns>
-        public Task QueryRawAsync(string query, string dialect, Action<string> onResponse,
-            Action<Exception> onError, Action onComplete, CancellationToken cancellationToken = default)
-        {
-            Arguments.CheckNonEmptyString(query, "query");
-            Arguments.CheckNotNull(onResponse, "onNext");
-            Arguments.CheckNotNull(onError, "onError");
-            Arguments.CheckNotNull(onComplete, "onComplete");
 
             var message = QueryRequest(CreateBody(dialect, query));
 
-            return QueryRaw(message, onResponse, onError, onComplete, cancellationToken);
+            return QueryRaw(message, onResponse, onError ?? ErrorConsumer, onComplete ?? EmptyAction,
+                cancellationToken);
         }
 
         /// <summary>
@@ -429,6 +233,19 @@ namespace InfluxDB.Client.Flux
             // Dispose HttpClient 
             // 
             RestClient.Dispose();
+        }
+
+        private Task QueryAsync(string query,
+            string dialect,
+            FluxCsvParser.IFluxResponseConsumer responseConsumer,
+            Action<Exception> onError = null,
+            Action onComplete = null,
+            CancellationToken cancellationToken = default)
+        {
+            var message = QueryRequest(CreateBody(dialect, query));
+
+            return Query(message, responseConsumer, onError ?? ErrorConsumer, onComplete ?? EmptyAction,
+                cancellationToken);
         }
 
         private async Task<RestResponse> ExecuteAsync(RestRequest request)

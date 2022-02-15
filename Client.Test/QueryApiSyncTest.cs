@@ -34,6 +34,12 @@ namespace InfluxDB.Client.Test
             _queryApiSync = _influxDbClient.GetQueryApiSync();
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _influxDbClient?.Dispose();
+        }
+
         [Test]
         public void Measurement()
         {
@@ -61,6 +67,28 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(2, tables[0].Records.Count);
             Assert.AreEqual(12.25, tables[0].Records[0].GetValue());
             Assert.AreEqual(13.00, tables[0].Records[1].GetValue());
+        }
+
+        [Test]
+        public void RequiredOrgQuerySync()
+        {
+            _influxDbClient.Dispose();
+
+            var options = InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url(MockServerUrl)
+                .AuthenticateToken("token")
+                .Build();
+
+            _influxDbClient = InfluxDBClientFactory.Create(options);
+            _queryApiSync = _influxDbClient.GetQueryApiSync();
+
+            var ae = Assert.Throws<ArgumentException>(() => _queryApiSync.QuerySync("from(..."));
+
+            Assert.NotNull(ae);
+            Assert.AreEqual(
+                "Expecting a non-empty string for 'org' parameter. Please specify the source organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
+                ae.Message);
         }
 
         private class SyncPoco

@@ -182,7 +182,7 @@ namespace InfluxDB.Client.Test
             var measurement = $"mem_{DateTimeOffset.Now.ToUnixTimeSeconds()}";
             await Client
                 .GetWriteApiAsync()
-                .WriteRecordAsync("my-bucket", "my-org", WritePrecision.Ns, $"{measurement},tag=a value=10i");
+                .WriteRecordAsync($"{measurement},tag=a value=10i", WritePrecision.Ns, "my-bucket", "my-org");
 
             var query = $@"from(bucket: ""my-bucket"")
                 |> range(start: 0)

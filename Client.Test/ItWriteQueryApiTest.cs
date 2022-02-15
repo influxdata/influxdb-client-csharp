@@ -94,7 +94,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WriteMeasurement(_bucket.Name, _organization.Id, WritePrecision.Ms, measurement1);
+            _writeApi.WriteMeasurement(measurement1, WritePrecision.Ms, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
@@ -139,7 +139,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WriteMeasurement(_bucket.Name, _organization.Id, WritePrecision.Ms, measurement1);
+            _writeApi.WriteMeasurement(measurement1, WritePrecision.Ms, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
@@ -182,7 +182,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point);
+            _writeApi.WritePoint(point, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
@@ -215,8 +215,8 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns,
-                new List<string> { record1, record2 });
+            _writeApi.WriteRecords(new List<string> { record1, record2 }, WritePrecision.Ns, bucketName,
+                _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
@@ -251,7 +251,7 @@ namespace InfluxDB.Client.Test
 
             var record = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record);
+            _writeApi.WriteRecord(record, WritePrecision.Ns, bucketName, _organization.Id);
             _writeApi.Flush();
             listener.WaitToSuccess();
 
@@ -289,18 +289,18 @@ namespace InfluxDB.Client.Test
             const string record5 = "h2o_feet,location=coyote_creek level\\ water_level=5.0 5";
             const string record6 = "h2o_feet,location=coyote_creek level\\ water_level=6.0 6";
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record1);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record2);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record3);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record4);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
+            _writeApi.WriteRecord(record1, WritePrecision.Ns, bucketName, _organization.Id);
+            _writeApi.WriteRecord(record2, WritePrecision.Ns, bucketName, _organization.Id);
+            _writeApi.WriteRecord(record3, WritePrecision.Ns, bucketName, _organization.Id);
+            _writeApi.WriteRecord(record4, WritePrecision.Ns, bucketName, _organization.Id);
+            _writeApi.WriteRecord(record5, WritePrecision.Ns, bucketName, _organization.Id);
 
             var query = await _queryApi.QueryAsync(
                 $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record6);
+            _writeApi.WriteRecord(record6, WritePrecision.Ns, bucketName, _organization.Id);
 
             listener.Get<WriteSuccessEvent>();
 
@@ -330,15 +330,15 @@ namespace InfluxDB.Client.Test
             const string record4 = "h2o_feet,location=coyote_creek level\\ water_level=4.0 4";
             const string record5 = "h2o_feet,location=coyote_creek level\\ water_level=5.0 5";
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record1);
+            _writeApi.WriteRecord(record1, WritePrecision.Ns, bucketName, _organization.Id);
             Thread.Sleep(100);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record2);
+            _writeApi.WriteRecord(record2, WritePrecision.Ns, bucketName, _organization.Id);
             Thread.Sleep(100);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record3);
+            _writeApi.WriteRecord(record3, WritePrecision.Ns, bucketName, _organization.Id);
             Thread.Sleep(100);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record4);
+            _writeApi.WriteRecord(record4, WritePrecision.Ns, bucketName, _organization.Id);
             Thread.Sleep(100);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
+            _writeApi.WriteRecord(record5, WritePrecision.Ns, bucketName, _organization.Id);
             Thread.Sleep(100);
 
             Assert.AreEqual(record1, eventListener.Get<WriteSuccessEvent>().LineProtocol);
@@ -373,11 +373,11 @@ namespace InfluxDB.Client.Test
             const string record4 = "h2o_feet,location=coyote_creek level\\ water_level=4.0 4";
             const string record5 = "h2o_feet,location=coyote_creek level\\ water_level=5.0 5";
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record1);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record2);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record3);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record4);
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record5);
+            _writeApi.WriteRecord(record1, WritePrecision.Ns, bucketName, _organization.Id);
+            _writeApi.WriteRecord(record2, WritePrecision.Ns, bucketName, _organization.Id);
+            _writeApi.WriteRecord(record3, WritePrecision.Ns, bucketName, _organization.Id);
+            _writeApi.WriteRecord(record4, WritePrecision.Ns, bucketName, _organization.Id);
+            _writeApi.WriteRecord(record5, WritePrecision.Ns, bucketName, _organization.Id);
 
             var query = await _queryApi.QueryAsync(
                 $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
@@ -406,14 +406,14 @@ namespace InfluxDB.Client.Test
 
             var record = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1";
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns, record);
+            _writeApi.WriteRecord(record, WritePrecision.Ns, bucketName, _organization.Id);
 
             var query = await _queryApi.QueryAsync(
                 $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
                 _organization.Id);
             Assert.AreEqual(0, query.Count);
 
-            Thread.Sleep(5_000);
+            Thread.Sleep(5_500);
 
             query = await _queryApi.QueryAsync(
                 $"from(bucket:\"{bucketName}\") |> range(start: 1970-01-01T00:00:00.000000001Z)",
@@ -430,8 +430,8 @@ namespace InfluxDB.Client.Test
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ water_level=1.0 123456.789",
+                WritePrecision.Ns, bucketName, _organization.Id);
             _writeApi.Flush();
 
             var error = listener.Get<WriteErrorEvent>();
@@ -450,8 +450,8 @@ namespace InfluxDB.Client.Test
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ water_level=1.0 1", WritePrecision.Ns,
+                bucketName, _organization.Id);
             _writeApi.Flush();
 
             var success = listener.Get<WriteSuccessEvent>();
@@ -473,7 +473,7 @@ namespace InfluxDB.Client.Test
             const string records = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1\n" +
                                    "h2o_feet,location=coyote_hill level\\ water_level=2.0 2x";
 
-            _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns, records);
+            _writeApi.WriteRecord(records, bucket: bucketName, org: _organization.Id);
             _writeApi.Flush();
             _writeApi.Dispose();
 
@@ -492,8 +492,8 @@ namespace InfluxDB.Client.Test
 
                 using (var writeApi = client.GetWriteApi())
                 {
-                    writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns,
-                        "temperature,location=north value=60.0 1");
+                    writeApi.WriteRecord("temperature,location=north value=60.0 1", WritePrecision.Ns, _bucket.Name,
+                        _organization.Id);
                 }
 
                 client.Dispose();
@@ -505,8 +505,8 @@ namespace InfluxDB.Client.Test
                 {
                     using (var writeApi = client.GetWriteApi())
                     {
-                        writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns,
-                            "temperature,location=north value=70.0 2");
+                        writeApi.WriteRecord("temperature,location=north value=70.0 2", WritePrecision.Ns, _bucket.Name,
+                            _organization.Id);
                     }
                 }
             }
@@ -516,8 +516,8 @@ namespace InfluxDB.Client.Test
                 var client = InfluxDBClientFactory.Create(InfluxDbUrl, _token);
                 var writeApi = client.GetWriteApi();
 
-                writeApi.WriteRecord(_bucket.Name, _organization.Id, WritePrecision.Ns,
-                    "temperature,location=north value=80.0 3");
+                writeApi.WriteRecord("temperature,location=north value=80.0 3", WritePrecision.Ns, _bucket.Name,
+                    _organization.Id);
 
                 client.Dispose();
             }
@@ -541,8 +541,8 @@ namespace InfluxDB.Client.Test
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ water_level=1.0 1x");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ water_level=1.0 1x", WritePrecision.Ns,
+                bucketName, _organization.Id);
             _writeApi.Flush();
 
             var error = listener.Get<WriteErrorEvent>();
@@ -552,8 +552,8 @@ namespace InfluxDB.Client.Test
                 "unable to parse 'h2o_feet,location=coyote_creek level\\ water_level=1.0 1x': bad timestamp",
                 error.Exception.Message);
 
-            _writeApi.WriteRecord(bucketName, _organization.Id, WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ water_level=1.0 1", WritePrecision.Ns,
+                bucketName, _organization.Id);
             _writeApi.Flush();
 
             listener.Get<WriteSuccessEvent>();
@@ -579,8 +579,8 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WriteRecords(bucketName, _organization.Name, WritePrecision.Ns,
-                new List<string> { record1, record2 });
+            _writeApi.WriteRecords(new List<string> { record1, record2 }, WritePrecision.Ns, bucketName,
+                _organization.Name);
             _writeApi.Flush();
             listener.WaitToSuccess();
 
@@ -620,7 +620,8 @@ namespace InfluxDB.Client.Test
                 Location = "coyote_creek", Level = 1.927, Time = time
             };
 
-            _writeApi.WriteMeasurements(bucketName, _organization.Id, WritePrecision.S, measurement1, measurement2);
+            _writeApi.WriteMeasurements(new[] { measurement1, measurement2 }, WritePrecision.S, bucketName,
+                _organization.Id);
             _writeApi.Dispose();
 
             var measurements = await _queryApi.QueryAsync<H20Measurement>(
@@ -658,7 +659,8 @@ namespace InfluxDB.Client.Test
                 Location = "coyote_creek", Level = null, Time = time
             };
 
-            _writeApi.WriteMeasurements(bucketName, _organization.Id, WritePrecision.S, measurement1, measurement2);
+            _writeApi.WriteMeasurements(new[] { measurement1, measurement2 }, WritePrecision.S, bucketName,
+                _organization.Id);
             _writeApi.Flush();
             listener.WaitToSuccess();
 
@@ -694,7 +696,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WritePoints(bucketName, _organization.Id, point1, point2);
+            _writeApi.WritePoints(new[] { point1, point2 }, bucketName, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
@@ -740,7 +742,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WritePoints(bucketName, _organization.Id, point1, point2);
+            _writeApi.WritePoints(new[] { point1, point2 }, bucketName, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
@@ -780,7 +782,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WritePoints(point1, point2);
+            _writeApi.WritePoints(new[] { point1, point2 });
             _writeApi.Flush();
 
             listener.WaitToSuccess();
@@ -816,8 +818,8 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns,
-                new List<string> { record1, record2 });
+            _writeApi.WriteRecords(new List<string> { record1, record2 }, WritePrecision.Ns, bucketName,
+                _organization.Id);
             _writeApi.Flush();
             listener.WaitToSuccess();
 
@@ -849,7 +851,7 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WriteRecords(bucketName, _organization.Id, WritePrecision.Ns, record1, record2);
+            _writeApi.WriteRecords(new[] { record1, record2 }, org: _organization.Id, bucket: bucketName);
             _writeApi.Flush();
             listener.WaitToSuccess();
 
@@ -907,8 +909,7 @@ namespace InfluxDB.Client.Test
                 start += batchSize;
                 Trace.WriteLine(
                     $"Add measurement to buffer From: {history.First().Time}, To: {history.Last().Time}. Remaining {count - start}");
-                _writeApi.WriteMeasurements(_bucket.Name, _organization.Name, WritePrecision.S,
-                    history);
+                _writeApi.WriteMeasurements(history, WritePrecision.S, _bucket.Name, _organization.Name);
             }
 
             Trace.WriteLine("Flushing data...");

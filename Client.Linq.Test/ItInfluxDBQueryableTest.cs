@@ -36,8 +36,10 @@ namespace Client.Linq.Test
 
             await _client
                 .GetWriteApiAsync()
-                .WriteRecordsAsync("my-bucket", "my-org", WritePrecision.S,
-                    sensor11, sensor21, sensor12, sensor22, sensor13, sensor23, sensor14, sensor24);
+                .WriteRecordsAsync(new[]
+                {
+                    sensor11, sensor21, sensor12, sensor22, sensor13, sensor23, sensor14, sensor24
+                }, WritePrecision.S, "my-bucket", "my-org");
         }
 
         [Test]

@@ -75,7 +75,7 @@ namespace Examples
             // Write data
             //
             await client.GetWriteApiAsync()
-                .WriteMeasurementsAsync(WritePrecision.S, sensorTime1, sensorTime2);
+                .WriteMeasurementsAsync(new[] { sensorTime1, sensorTime2 }, WritePrecision.S);
 
             //
             // Query Data to Domain object

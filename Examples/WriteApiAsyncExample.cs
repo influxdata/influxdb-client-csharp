@@ -33,8 +33,8 @@ namespace Examples
             //
             // Write by LineProtocol
             //
-            await writeApiAsync.WriteRecordAsync("my-bucket", "my-org", WritePrecision.Ns,
-                "temperature,location=north value=60.0");
+            await writeApiAsync.WriteRecordAsync("temperature,location=north value=60.0", WritePrecision.Ns,
+                "my-bucket", "my-org");
 
             //
             //
@@ -45,14 +45,14 @@ namespace Examples
                 .Field("value", 55D)
                 .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
 
-            await writeApiAsync.WritePointAsync("my-bucket", "my-org", point);
+            await writeApiAsync.WritePointAsync(point, "my-bucket", "my-org");
 
             //
             // Write by POCO
             //
             var temperature = new Temperature { Location = "south", Value = 62D, Time = DateTime.UtcNow };
 
-            await writeApiAsync.WriteMeasurementAsync("my-bucket", "my-org", WritePrecision.Ns, temperature);
+            await writeApiAsync.WriteMeasurementAsync(temperature, WritePrecision.Ns, "my-bucket", "my-org");
 
             //
             // Check written data

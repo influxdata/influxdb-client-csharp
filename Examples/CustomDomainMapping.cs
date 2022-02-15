@@ -143,7 +143,7 @@ namespace Examples
             // Write data
             //
             await client.GetWriteApiAsync(converter)
-                .WriteMeasurementsAsync(WritePrecision.S, entity1, entity2, entity3, entity4);
+                .WriteMeasurementsAsync(new[] { entity1, entity2, entity3, entity4 }, WritePrecision.S);
 
             //
             // Query Data to Domain object

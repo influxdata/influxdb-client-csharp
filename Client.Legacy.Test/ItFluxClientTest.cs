@@ -111,7 +111,7 @@ namespace Client.Legacy.Test
                     source.Cancel();
                     cancelCountDown.Signal();
                 }
-            }, source.Token);
+            }, cancellationToken: source.Token);
 
             // wait to cancel
             WaitToCallback(cancelCountDown, 30);

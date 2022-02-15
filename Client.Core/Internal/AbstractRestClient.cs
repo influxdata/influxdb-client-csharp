@@ -9,6 +9,12 @@ namespace InfluxDB.Client.Core.Internal
 {
     public abstract class AbstractRestClient
     {
+        internal const string OrgArgumentValidation =
+            "'org' parameter. Please specify the organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.";
+
+        internal const string BucketArgumentValidation =
+            "'bucket' parameter. Please specify the bucket as a method parameter or use default configuration at 'InfluxDBClientOptions.Bucket'.";
+
         protected async Task<bool> PingAsync(Task<RestResponse> request)
         {
             try

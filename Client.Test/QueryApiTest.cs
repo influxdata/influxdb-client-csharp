@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
@@ -38,8 +37,13 @@ namespace InfluxDB.Client.Test
                 .Build();
 
             _influxDbClient = InfluxDBClientFactory.Create(options);
-            _influxDbClient.SetLogLevel(LogLevel.Body);
             _queryApi = _influxDbClient.GetQueryApi();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _influxDbClient?.Dispose();
         }
 
         [Test]
@@ -92,12 +96,35 @@ namespace InfluxDB.Client.Test
 
             var measurements = _queryApi.QueryAsyncEnumerable<SyncPoco>(
                 new Query(null, "from(...)"),
-                "my-org", new CancellationToken());
+                "my-org");
 
             var list = new List<SyncPoco>();
             await foreach (var item in measurements.ConfigureAwait(false)) list.Add(item);
 
             Assert.AreEqual(2, list.Count);
+        }
+
+        [Test]
+        public void RequiredOrgQueryAsync()
+        {
+            _influxDbClient.Dispose();
+
+            var options = InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url(MockServerUrl)
+                .AuthenticateToken("token")
+                .Build();
+
+            _influxDbClient = InfluxDBClientFactory.Create(options);
+            _queryApi = _influxDbClient.GetQueryApi();
+
+            var ae = Assert.ThrowsAsync<ArgumentException>(async () =>
+                await _queryApi.QueryAsync<SyncPoco>("from(..."));
+
+            Assert.NotNull(ae);
+            Assert.AreEqual(
+                "Expecting a non-empty string for 'org' parameter. Please specify the source organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
+                ae.Message);
         }
 
         private class SyncPoco

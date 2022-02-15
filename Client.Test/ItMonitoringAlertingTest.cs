@@ -113,7 +113,7 @@ namespace InfluxDB.Client.Test
 
             var writeApi = _client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(writeApi);
-            writeApi.WritePoint("my-bucket", "my-org", point1);
+            writeApi.WritePoint(point1, "my-bucket", "my-org");
             writeApi.Flush();
             listener.WaitToSuccess();
 

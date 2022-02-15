@@ -71,25 +71,26 @@ namespace InfluxDB.Client.Test
         public async Task Write()
         {
             // By LineProtocol
-            await _writeApi.WriteRecordAsync(WritePrecision.S, "h2o,location=coyote_creek water_level=1.0 1");
-            await _writeApi.WriteRecordAsync(_bucket.Name, _organization.Name, WritePrecision.S,
-                "h2o,location=coyote_creek water_level=2.0 2");
-            await _writeApi.WriteRecordsAsync(WritePrecision.S,
-                new List<string>
-                {
-                    "h2o,location=coyote_creek water_level=3.0 3",
-                    "h2o,location=coyote_creek water_level=4.0 4"
-                });
-            await _writeApi.WriteRecordsAsync(_bucket.Name, _organization.Name, WritePrecision.S,
+            await _writeApi.WriteRecordAsync("h2o,location=coyote_creek water_level=1.0 1", WritePrecision.S);
+            await _writeApi.WriteRecordAsync("h2o,location=coyote_creek water_level=2.0 2", WritePrecision.S,
+                _bucket.Name, _organization.Name);
+            await _writeApi.WriteRecordsAsync(new List<string>
+            {
+                "h2o,location=coyote_creek water_level=3.0 3",
+                "h2o,location=coyote_creek water_level=4.0 4"
+            }, WritePrecision.S);
+            await _writeApi.WriteRecordsAsync(new[]
+            {
                 "h2o,location=coyote_creek water_level=5.0 5",
-                "h2o,location=coyote_creek water_level=6.0 6");
+                "h2o,location=coyote_creek water_level=6.0 6"
+            }, WritePrecision.S, _bucket.Name, _organization.Name);
 
             // By DataPoint
             await _writeApi.WritePointAsync(PointData.Measurement("h2o").Tag("location", "coyote_creek")
                 .Field("water_level", 7.0D).Timestamp(7L, WritePrecision.S));
-            await _writeApi.WritePointAsync(_bucket.Name, _organization.Name,
-                PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 8.0D)
-                    .Timestamp(8L, WritePrecision.S));
+            await _writeApi.WritePointAsync(PointData.Measurement("h2o").Tag("location", "coyote_creek")
+                .Field("water_level", 8.0D)
+                .Timestamp(8L, WritePrecision.S), _bucket.Name, _organization.Name);
             await _writeApi.WritePointsAsync(new List<PointData>
             {
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 9.0D)
@@ -97,28 +98,29 @@ namespace InfluxDB.Client.Test
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
                     .Timestamp(10L, WritePrecision.S)
             });
-            await _writeApi.WritePointsAsync(_bucket.Name, _organization.Name,
+            await _writeApi.WritePointsAsync(new[]
+            {
                 PointData.Measurement("h2o").Tag("location", "coyote_creek")
                     .Field("water_level", 11.0D)
                     .Timestamp(11L, WritePrecision.S),
                 PointData.Measurement("h2o").Tag("location", "coyote_creek")
                     .Field("water_level", 12.0D)
-                    .Timestamp(12L, WritePrecision.S));
+                    .Timestamp(12L, WritePrecision.S)
+            }, _bucket.Name, _organization.Name);
 
             // By Measurement
             var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            await _writeApi.WriteMeasurementAsync(WritePrecision.S,
+            await _writeApi.WriteMeasurementAsync(
                 new H20Measurement
                 {
                     Location = "coyote_creek", Level = 13.0D, Time = dtDateTime.AddSeconds(13)
-                });
+                }, WritePrecision.S);
 
-            await _writeApi.WriteMeasurementAsync(_bucket.Name, _organization.Name, WritePrecision.S,
-                new H20Measurement
-                {
-                    Location = "coyote_creek", Level = 14.0D, Time = dtDateTime.AddSeconds(14)
-                });
-            await _writeApi.WriteMeasurementsAsync(WritePrecision.S, new List<H20Measurement>
+            await _writeApi.WriteMeasurementAsync(new H20Measurement
+            {
+                Location = "coyote_creek", Level = 14.0D, Time = dtDateTime.AddSeconds(14)
+            }, WritePrecision.S, _bucket.Name, _organization.Name);
+            await _writeApi.WriteMeasurementsAsync(new List<H20Measurement>
             {
                 new H20Measurement
                 {
@@ -128,8 +130,9 @@ namespace InfluxDB.Client.Test
                 {
                     Location = "coyote_creek", Level = 16.0D, Time = dtDateTime.AddSeconds(16)
                 }
-            });
-            await _writeApi.WriteMeasurementsAsync(_bucket.Name, _organization.Name, WritePrecision.S,
+            }, WritePrecision.S);
+            await _writeApi.WriteMeasurementsAsync(new[]
+            {
                 new H20Measurement
                 {
                     Location = "coyote_creek", Level = 17.0D, Time = dtDateTime.AddSeconds(17)
@@ -137,7 +140,8 @@ namespace InfluxDB.Client.Test
                 new H20Measurement
                 {
                     Location = "coyote_creek", Level = 18.0D, Time = dtDateTime.AddSeconds(18)
-                });
+                }
+            }, WritePrecision.S, _bucket.Name, _organization.Name);
 
             var query = await Client.GetQueryApi().QueryAsync(
                 "from(bucket:\"" + _bucket.Name +
@@ -160,7 +164,6 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task WriteULongValues()
         {
-            Client.SetLogLevel(LogLevel.Body);
             var pointData = PointData.Measurement("h2o")
                 .Tag("location", "coyote_creek")
                 .Field("max_ulong", ulong.MaxValue)
