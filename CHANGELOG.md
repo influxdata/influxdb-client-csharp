@@ -6,6 +6,9 @@ Changed type of `Duration.magnitude` from `int?` to `long?`.
 ### Features
 1. [#282](https://github.com/influxdata/influxdb-client-csharp/pull/282): Add support for AggregateWindow function [LINQ]
 
+### Bug Fixes
+1. [#287](https://github.com/influxdata/influxdb-client-csharp/pull/287): Filter tasks by Organization ID
+
 ## 3.3.0 [2022-02-04]
 
 ### Bug Fixes

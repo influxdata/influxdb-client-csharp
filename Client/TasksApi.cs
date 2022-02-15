@@ -314,7 +314,8 @@ namespace InfluxDB.Client
         /// <returns>A list of tasks</returns>
         public async Task<List<TaskType>> FindTasksAsync(string afterId = null, string userId = null, string orgId = null)
         {
-            var response = await _service.GetTasksAsync(null, null, afterId, userId, orgId).ConfigureAwait(false);
+            var response = await _service.GetTasksAsync(after: afterId, user: userId, orgID: orgId)
+                .ConfigureAwait(false);
             return response._Tasks;
         }
 
