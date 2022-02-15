@@ -6,6 +6,7 @@
 
 #### API
 
+- The Client not longer support set the `ReadWriteTimeout` for HTTP Client. This settings is not supported by `HttpClient`
 - The `FluxClient` uses `IDisposable` interface to releasing underlying HTTP connections:
   ##### From
    ```csharp
@@ -93,7 +94,18 @@
   | `QueryRawAsync(Query)` | `QueryRawAsync(Query, String?, CancellationToken?)`                                                  |
   | `QueryRawAsync(Query, Action<ICancellable, String>)` | `QueryRawAsync(Query, Action<String>, Action<Exception>?, Action?, String?, CancellationToken?)`     |
   | `QueryRawAsync(Query, Action<ICancellable, String>, Action<Exception>)` | `QueryRawAsync(Query, Action<String>, Action<Exception>?, Action?, String?, CancellationToken?)`     |
-- The Client not longer support set the `ReadWriteTimeout` for HTTP Client. This settings is not supported by `HttpClient`
+- `QueryApiSync` has changed method signatures:
+
+  | *3.3.0*            | *4.0.0*                                             |
+  |-----------------------------------------------------|------------------------------------------------------------------------------------------------------|
+  | `QuerySync(String)` | `QuerySync(String, String?, CancellationToken?)`    |
+  | `QuerySync(String, String)` | `QuerySync(String, String?, CancellationToken?)`    |
+  | `QuerySync(Query)` | `QuerySync(Query, String?, CancellationToken?)`     |
+  | `QuerySync(Query, String)` | `QuerySync(Query, String?, CancellationToken?)`     |
+  | `QuerySync<T>(Query)` | `QuerySync<T>(Query, String?, CancellationToken?)`  |
+  | `QuerySync<T>(Query, String)` | `QuerySync<T>(Query, String?, CancellationToken?)`  |
+  | `QuerySync<T>(String)` | `QuerySync<T>(String, String?, CancellationToken?)` |
+  | `QuerySync<T>(String, String)` | `QuerySync<T>(String, String?, CancellationToken?)` |
 - Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`
 - `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration
 - Rename `TelegrafPlugin` types:
