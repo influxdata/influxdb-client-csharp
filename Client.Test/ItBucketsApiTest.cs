@@ -38,9 +38,10 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CloneBucket()
         {
-            var source = await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var source =
+                await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
 
             var label = await Client.GetLabelsApi()
                 .CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
@@ -117,7 +118,8 @@ namespace InfluxDB.Client.Test
             // delete task
             await _bucketsApi.DeleteBucketAsync(createBucket);
 
-            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _bucketsApi.FindBucketByIdAsync(createBucket.Id));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
+                await _bucketsApi.FindBucketByIdAsync(createBucket.Id));
 
             Assert.AreEqual("bucket not found", ioe.Message);
         }
@@ -198,7 +200,7 @@ namespace InfluxDB.Client.Test
             foreach (var i in Enumerable.Range(0, 20 - (await _bucketsApi.FindBucketsAsync()).Count))
                 await _bucketsApi.CreateBucketAsync(GenerateName($"{i}"), RetentionRule(), _organization);
 
-            var findOptions = new FindOptions {Limit = 5};
+            var findOptions = new FindOptions { Limit = 5 };
 
             var buckets = await _bucketsApi.FindBucketsAsync(findOptions);
             Assert.AreEqual(5, buckets._Buckets.Count);
@@ -226,9 +228,10 @@ namespace InfluxDB.Client.Test
         {
             var labelClient = Client.GetLabelsApi();
 
-            var bucket = await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var bucket =
+                await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
 
             var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
 
@@ -255,7 +258,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task Member()
         {
-            var bucket = await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var bucket =
+                await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
 
             var members = await _bucketsApi.GetMembersAsync(bucket);
             Assert.AreEqual(0, members.Count);
@@ -284,7 +288,8 @@ namespace InfluxDB.Client.Test
         [Ignore("TODO https://github.com/influxdata/influxdb/issues/17244")]
         public async Task Owner()
         {
-            var bucket = await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
+            var bucket =
+                await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
 
             var owners = await _bucketsApi.GetOwnersAsync(bucket);
             Assert.AreEqual(1, owners.Count);

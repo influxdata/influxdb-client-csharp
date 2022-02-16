@@ -171,7 +171,6 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(source, nameof(source));
 
             return HealthAsync(source.Id);
-
         }
 
         /// <summary>

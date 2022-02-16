@@ -57,7 +57,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(label, nameof(label));
 
-            var labelUpdate = new LabelUpdate {Properties = label.Properties};
+            var labelUpdate = new LabelUpdate { Properties = label.Properties };
 
             return UpdateLabelAsync(label.Id, labelUpdate);
         }

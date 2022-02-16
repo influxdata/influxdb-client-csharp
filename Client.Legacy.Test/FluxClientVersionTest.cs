@@ -9,20 +9,20 @@ namespace Client.Legacy.Test
     public class FluxClientVersionTest : AbstractFluxClientTest
     {
         [Test]
-        public async Task Version() 
+        public async Task Version()
         {
             MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
-                            .RespondWith(Response.Create().WithStatusCode(204)
-                                            .WithHeader("X-Influxdb-Version", "1.7.0"));
+                .RespondWith(Response.Create().WithStatusCode(204)
+                    .WithHeader("X-Influxdb-Version", "1.7.0"));
 
             Assert.AreEqual("1.7.0", await FluxClient.VersionAsync());
         }
 
         [Test]
-        public async Task  VersionUnknown() 
+        public async Task VersionUnknown()
         {
             MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
-                            .RespondWith(Response.Create().WithStatusCode(204));
+                .RespondWith(Response.Create().WithStatusCode(204));
 
             Assert.AreEqual("unknown", await FluxClient.VersionAsync());
         }
@@ -42,7 +42,6 @@ namespace Client.Legacy.Test
             {
                 Assert.IsNotEmpty(e.Message);
             }
-
         }
     }
 }

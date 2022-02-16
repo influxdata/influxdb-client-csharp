@@ -13,7 +13,7 @@ namespace InfluxDB.Client.Test
         public new async Task SetUp()
         {
             _usersApi = Client.GetUsersApi();
-            
+
             foreach (var user in (await _usersApi.FindUsersAsync()).Where(user => user.Name.EndsWith("-IT")))
                 await _usersApi.DeleteUserAsync(user);
         }
@@ -49,7 +49,8 @@ namespace InfluxDB.Client.Test
             // delete user
             await _usersApi.DeleteUserAsync(createdUser);
 
-            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _usersApi.FindUserByIdAsync(createdUser.Id));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
+                await _usersApi.FindUserByIdAsync(createdUser.Id));
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.Message);
         }
@@ -71,7 +72,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public void FindUserByIdNull()
         {
-            var ioe = Assert.ThrowsAsync<NotFoundException>(async () => await _usersApi.FindUserByIdAsync("020f755c3c082000"));
+            var ioe = Assert.ThrowsAsync<NotFoundException>(async () =>
+                await _usersApi.FindUserByIdAsync("020f755c3c082000"));
 
             Assert.IsNotNull(ioe);
             Assert.AreEqual("user not found", ioe.Message);
@@ -99,35 +101,11 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void MeNotAuthenticated()
-        {
-            Client.Dispose();
-
-            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () => await _usersApi.MeAsync());
-
-            Assert.IsNotNull(ioe);
-            Assert.AreEqual("unauthorized access", ioe.Message);
-        }
-
-        [Test]
         [Property("basic_auth", "true")]
         [Ignore("TODO not implemented set password https://github.com/influxdata/influxdb/pull/15981")]
         public async Task UpdateMePassword()
         {
             await _usersApi.MeUpdatePasswordAsync("my-password", "my-password");
-        }
-
-        [Test]
-        public void UpdateMePasswordWrongPassword()
-        {
-            Client.Dispose();
-
-            var ioe = Assert.ThrowsAsync<UnauthorizedException>(async () =>
-                await _usersApi.MeUpdatePasswordAsync("my-password-wrong", "my-password"));
-
-            Assert.IsNotNull(ioe);
-            Assert.AreEqual("unauthorized access", ioe.Message);
-            Assert.AreEqual(typeof(UnauthorizedException), ioe.GetType());
         }
 
         [Test]

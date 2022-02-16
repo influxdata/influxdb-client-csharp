@@ -76,6 +76,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     {
                         SetFieldValue(poco, property, record.GetMeasurement());
                     }
+
                     if (attribute != null && attribute.IsTimestamp)
                     {
                         SetFieldValue(poco, property, record.GetTime());
@@ -99,7 +100,9 @@ namespace InfluxDB.Client.Core.Flux.Internal
                         {
                             // No need to set field value when column does not exist (default poco field value will be the same)
                             if (recordValues.TryGetValue(col, out var value))
+                            {
                                 SetFieldValue(poco, property, value);
+                            }
                         }
                     }
                 }
@@ -120,7 +123,9 @@ namespace InfluxDB.Client.Core.Flux.Internal
         /// <returns></returns>
         /// <exception cref="InfluxException"></exception>
         internal T ToPoco<T>(FluxRecord record)
-            => (T)ToPoco(record, typeof(T));
+        {
+            return (T)ToPoco(record, typeof(T));
+        }
 
         private void SetFieldValue<T>(T poco, PropertyInfo property, object value)
         {
@@ -149,6 +154,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                     property.SetValue(poco, ToDateTimeValue(value));
                     return;
                 }
+
                 if (propertyType == typeof(Instant))
                 {
                     property.SetValue(poco, ToInstantValue(value));
@@ -197,24 +203,26 @@ namespace InfluxDB.Client.Core.Flux.Internal
             if (!_parseMethodCache.TryGetValue(key, out method))
             {
                 method = parserType.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                                   .Where(m => m.Name == "Parse")
-                                   .Where(m => m.ReturnType == parserType)
-                                   .Where(m =>
-                                   {
-                                       var parameters = m.GetParameters();
-                                       if (parameters.Length != 1)
-                                       {
-                                           return false;
-                                       }
+                    .Where(m => m.Name == "Parse")
+                    .Where(m => m.ReturnType == parserType)
+                    .Where(m =>
+                    {
+                        var parameters = m.GetParameters();
+                        if (parameters.Length != 1)
+                        {
+                            return false;
+                        }
 
-                                       var paramType = parameters[0].ParameterType;
-                                       if (valueType == paramType)
-                                           return true;
+                        var paramType = parameters[0].ParameterType;
+                        if (valueType == paramType)
+                        {
+                            return true;
+                        }
 
-                                       paramType = Nullable.GetUnderlyingType(paramType) ?? paramType;
-                                       return valueType == paramType;
-                                   })
-                                   .FirstOrDefault();
+                        paramType = Nullable.GetUnderlyingType(paramType) ?? paramType;
+                        return valueType == paramType;
+                    })
+                    .FirstOrDefault();
                 _parseMethodCache[key] = method;
             }
 

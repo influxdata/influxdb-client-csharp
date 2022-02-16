@@ -236,7 +236,7 @@ namespace InfluxDB.Client
 
             return DeleteSecretsAsync(new SecretKeys(secrets), orgId);
         }
-        
+
         /// <summary>
         /// Delete provided secrets.
         /// </summary>

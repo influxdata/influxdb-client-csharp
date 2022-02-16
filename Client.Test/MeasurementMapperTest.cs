@@ -25,20 +25,24 @@ namespace InfluxDB.Client.Test
         public void Precision()
         {
             var timeStamp = InstantPattern.ExtendedIso.Parse("1970-01-01T00:00:10.999999999Z").Value;
-            
+
             var poco = new Poco
             {
                 Tag = "value",
                 Value = "val",
-                Timestamp =  timeStamp
+                Timestamp = timeStamp
             };
-            
-            Assert.AreEqual("poco,tag=value value=\"val\" 10", _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol());
-            Assert.AreEqual("poco,tag=value value=\"val\" 10999", _mapper.ToPoint(poco, WritePrecision.Ms).ToLineProtocol());
-            Assert.AreEqual("poco,tag=value value=\"val\" 10999999", _mapper.ToPoint(poco, WritePrecision.Us).ToLineProtocol());
-            Assert.AreEqual("poco,tag=value value=\"val\" 10999999999", _mapper.ToPoint(poco, WritePrecision.Ns).ToLineProtocol());
-        }    
-        
+
+            Assert.AreEqual("poco,tag=value value=\"val\" 10",
+                _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol());
+            Assert.AreEqual("poco,tag=value value=\"val\" 10999",
+                _mapper.ToPoint(poco, WritePrecision.Ms).ToLineProtocol());
+            Assert.AreEqual("poco,tag=value value=\"val\" 10999999",
+                _mapper.ToPoint(poco, WritePrecision.Us).ToLineProtocol());
+            Assert.AreEqual("poco,tag=value value=\"val\" 10999999999",
+                _mapper.ToPoint(poco, WritePrecision.Ns).ToLineProtocol());
+        }
+
         [Test]
         public void ColumnWithoutName()
         {
@@ -52,10 +56,11 @@ namespace InfluxDB.Client.Test
             };
 
             var lineProtocol = _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol();
-            
-            Assert.AreEqual("poco,tag=tag\\ val value=15.444,ValueWithEmptyName=25,ValueWithoutDefaultName=20i 864000", lineProtocol);
+
+            Assert.AreEqual("poco,tag=tag\\ val value=15.444,ValueWithEmptyName=25,ValueWithoutDefaultName=20i 864000",
+                lineProtocol);
         }
-        
+
         [Test]
         public void DefaultToString()
         {
@@ -66,7 +71,7 @@ namespace InfluxDB.Client.Test
             };
 
             var lineProtocol = _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol();
-            
+
             Assert.AreEqual("poco,tag=value value=\"to-string\"", lineProtocol);
         }
 
@@ -76,9 +81,8 @@ namespace InfluxDB.Client.Test
             var measurements = new List<Poco>();
 
             for (var i = 0; i < 500_000; i++)
-            {
-                measurements.Add(new Poco{Value = i, Tag = "Europe", Timestamp = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i))});
-            }
+                measurements.Add(new Poco
+                    { Value = i, Tag = "Europe", Timestamp = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i)) });
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -88,7 +92,7 @@ namespace InfluxDB.Client.Test
 
             var ts = stopWatch.Elapsed;
             var elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}";
-            
+
             Assert.LessOrEqual(ts.Seconds, 10, $"Elapsed time: {elapsedTime}");
         }
 
@@ -107,7 +111,8 @@ namespace InfluxDB.Client.Test
 
             var lineProtocol = _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol();
 
-            Assert.AreEqual("poco,tag=tag\\ val value=15.444,ValueWithEmptyName=25,ValueWithoutDefaultName=20i 864000", lineProtocol);
+            Assert.AreEqual("poco,tag=tag\\ val value=15.444,ValueWithEmptyName=25,ValueWithoutDefaultName=20i 864000",
+                lineProtocol);
         }
 
         [Test]
@@ -132,48 +137,36 @@ namespace InfluxDB.Client.Test
         [Measurement("poco")]
         private class Poco
         {
-            [Column("tag", IsTag = true)] 
-            public string Tag { get; set; }
+            [Column("tag", IsTag = true)] public string Tag { get; set; }
 
-            [Column("value")]
-            public Object Value { get; set; }
+            [Column("value")] public object Value { get; set; }
 
-            [Column]
-            public int? ValueWithoutDefaultName { get; set; }
+            [Column] public int? ValueWithoutDefaultName { get; set; }
 
-            [Column("")]
-            public Double? ValueWithEmptyName { get; set; }
- 
-            [Column(IsTimestamp = true)]
-            public Object Timestamp { get; set; }
+            [Column("")] public double? ValueWithEmptyName { get; set; }
+
+            [Column(IsTimestamp = true)] public object Timestamp { get; set; }
         }
 
         private class MeasurementPropertyPoco
         {
-            [Column(IsMeasurement = true)]
-            public string Measurement { get; set; }
+            [Column(IsMeasurement = true)] public string Measurement { get; set; }
 
-            [Column("tag", IsTag = true)]
-            public string Tag { get; set; }
+            [Column("tag", IsTag = true)] public string Tag { get; set; }
 
-            [Column("value")]
-            public Object Value { get; set; }
+            [Column("value")] public object Value { get; set; }
 
-            [Column]
-            public int? ValueWithoutDefaultName { get; set; }
+            [Column] public int? ValueWithoutDefaultName { get; set; }
 
-            [Column("")]
-            public Double? ValueWithEmptyName { get; set; }
+            [Column("")] public double? ValueWithEmptyName { get; set; }
 
-            [Column(IsTimestamp = true)]
-            public Object Timestamp { get; set; }
+            [Column(IsTimestamp = true)] public object Timestamp { get; set; }
         }
 
         [Measurement("poco")]
         private class BadMeasurementAttributesPoco
         {
-            [Column(IsMeasurement = true)]
-            public string Measurement { get; set; }
+            [Column(IsMeasurement = true)] public string Measurement { get; set; }
         }
     }
 }

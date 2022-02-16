@@ -61,7 +61,7 @@ jobs:
     parameters:
       dotnet-image:
         type: string
-        default: &default-dotnet-image "mcr.microsoft.com/dotnet/core/sdk:3.1"
+        default: &default-dotnet-image "mcr.microsoft.com/dotnet/sdk:6.0"
       dotnet-target-version:
         type: string
         default: "netstandard2.1"
@@ -117,16 +117,47 @@ jobs:
           command: /c/influxdata/influxdb-1.8.0-1/influxd.exe -config "Scripts/influxdb.conf"
           background: true
       - run: |
-          sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Examples/Examples.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;netcoreapp5.0;netcoreapp6.0<\/TargetFrameworks>/c\<TargetFramework>'netcoreapp5.0'<\/TargetFramework>' Examples/Examples.csproj
       - run: dotnet nuget locals --clear all
       - run: dotnet restore --no-cache --force -s https://api.nuget.org/v3/index.json
       - run: dotnet build
       - run: dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build
       
+  check-compilation-warnings:
+    docker:
+      - image: *default-dotnet-image
+    steps:
+      - checkout
+      - run:
+          name: Check compilation warnings
+          command: |
+            dotnet clean --configuration Release
+            dotnet build --configuration Release -warnAsError -warnAsMessage:CS0618
+      
+  check-code-formatting:
+    docker:
+      - image: *default-dotnet-image
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restoring reSharper Cache
+          keys:
+              - &cache-key reSharper-cache-2021_3_3
+      - run:
+          name: Check code formatting
+          command: |
+            ./Scripts/reformat-code.sh
+            git diff --exit-code
+      - save_cache:
+            name: Saving reSharper Cache
+            key: *cache-key
+            paths:
+                - ./reSharperCLI
+  
   deploy-preview:
     parameters:
       influxdb-image:
@@ -151,32 +182,28 @@ workflows:
   version: 2
   build:
     jobs:
-      - tests-dotnet:
-          name: dotnet-2.2
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:2.2"
-          dotnet-target-version: "netstandard2.0"
+      - check-compilation-warnings
+      - check-code-formatting
       - tests-dotnet:
           name: dotnet-3.1-nightly
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
-      - tests-dotnet:
-          name: dotnet-3.0
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.0"
+          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
       - tests-dotnet:
           name: dotnet-3.1
+          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
       - tests-dotnet:
           name: dotnet-5.0
           code-coverage-report: true
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
       - tests-dotnet:
           name: dotnet-6.0
-          dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:
           requires:
-            - dotnet-2.2
+            - check-compilation-warnings
+            - check-code-formatting
             - dotnet-3.1-nightly
-            - dotnet-3.0
             - dotnet-3.1
             - dotnet-5.0
             - dotnet-6.0

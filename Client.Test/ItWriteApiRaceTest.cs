@@ -52,29 +52,31 @@ namespace InfluxDB.Client.Test
         public void Race()
         {
             var point = PointData.Measurement("race-test")
-                                 .Tag("test", "stress")
-                                 .Field("value", 1);
+                .Tag("test", "stress")
+                .Field("value", 1);
 
             const int RANGE = 1000;
             using (var gateStart = new ManualResetEventSlim(false))
             using (var gate = new CountdownEvent(RANGE))
             using (var gateEnd = new CountdownEvent(RANGE))
             {
-                for (int i = 0; i < RANGE; i++)
+                for (var i = 0; i < RANGE; i++)
                 {
                     var trd = new Thread(() =>
                     {
                         gateStart.Wait();
-                        using (WriteApi writer = Client.GetWriteApi())
+                        using (var writer = Client.GetWriteApi())
                         {
                             writer.WritePoint(point);
                             gate.Signal();
                             gate.Wait();
                         }
+
                         gateEnd.Signal();
                     });
                     trd.Start();
                 }
+
                 gateStart.Set();
                 gateEnd.Wait();
             }

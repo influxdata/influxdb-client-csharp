@@ -29,7 +29,8 @@ namespace InfluxDB.Client.Writes
         /// </summary>
         public Exception Exception { get; }
 
-        public WriteErrorEvent(string organization, string bucket, WritePrecision precision, string lineProtocol, Exception exception) :
+        public WriteErrorEvent(string organization, string bucket, WritePrecision precision, string lineProtocol,
+            Exception exception) :
             base(organization, bucket, precision, lineProtocol)
         {
             Exception = exception;
@@ -50,24 +51,26 @@ namespace InfluxDB.Client.Writes
         /// The exception that was throw.
         /// </summary>
         public Exception Exception { get; }
-        
+
         /// <summary>
         /// The time to wait before retry unsuccessful write (milliseconds)
         /// </summary>
         public long RetryInterval { get; }
-        
-        public WriteRetriableErrorEvent(string organization, string bucket, WritePrecision precision, string lineProtocol, Exception exception, long retryInterval) : base(organization, bucket, precision, lineProtocol)
+
+        public WriteRetriableErrorEvent(string organization, string bucket, WritePrecision precision,
+            string lineProtocol, Exception exception, long retryInterval) : base(organization, bucket, precision,
+            lineProtocol)
         {
             Exception = exception;
             RetryInterval = retryInterval;
         }
-        
+
         internal override void LogEvent()
         {
             var message = "The retriable error occurred during writing of data. " +
                           $"Reason: '{Exception.Message}'. " +
-                          $"Retry in: {(double) RetryInterval / 1000}s.";
-            
+                          $"Retry in: {(double)RetryInterval / 1000}s.";
+
             Trace.TraceWarning(message);
         }
     }

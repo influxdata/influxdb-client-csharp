@@ -36,8 +36,10 @@ namespace Client.Linq.Test
 
             await _client
                 .GetWriteApiAsync()
-                .WriteRecordsAsync("my-bucket", "my-org", WritePrecision.S,
-                    sensor11, sensor21, sensor12, sensor22, sensor13, sensor23, sensor14, sensor24);
+                .WriteRecordsAsync(new[]
+                {
+                    sensor11, sensor21, sensor12, sensor22, sensor13, sensor23, sensor14, sensor24
+                }, WritePrecision.S, "my-bucket", "my-org");
         }
 
         [Test]
@@ -128,10 +130,7 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(4, sensors.Count);
-            foreach (var sensor in sensors)
-            {
-                Assert.AreEqual("id-1", sensor.SensorId);
-            }
+            foreach (var sensor in sensors) Assert.AreEqual("id-1", sensor.SensorId);
         }
 
         [Test]
@@ -144,10 +143,7 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(4, sensors.Count);
-            foreach (var sensor in sensors)
-            {
-                Assert.AreEqual("id-2", sensor.SensorId);
-            }
+            foreach (var sensor in sensors) Assert.AreEqual("id-2", sensor.SensorId);
         }
 
         [Test]
@@ -160,10 +156,7 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(4, sensors.Count);
-            foreach (var sensor in sensors)
-            {
-                Assert.Less(sensor.Value, 28);
-            }
+            foreach (var sensor in sensors) Assert.Less(sensor.Value, 28);
         }
 
         [Test]
@@ -176,10 +169,7 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(6, sensors.Count);
-            foreach (var sensor in sensors)
-            {
-                Assert.LessOrEqual(sensor.Value, 28);
-            }
+            foreach (var sensor in sensors) Assert.LessOrEqual(sensor.Value, 28);
         }
 
         [Test]
@@ -192,10 +182,7 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(2, sensors.Count);
-            foreach (var sensor in sensors)
-            {
-                Assert.Greater(sensor.Value, 28);
-            }
+            foreach (var sensor in sensors) Assert.Greater(sensor.Value, 28);
         }
 
         [Test]
@@ -208,10 +195,7 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(4, sensors.Count);
-            foreach (var sensor in sensors)
-            {
-                Assert.GreaterOrEqual(sensor.Value, 28);
-            }
+            foreach (var sensor in sensors) Assert.GreaterOrEqual(sensor.Value, 28);
         }
 
         [Test]
@@ -224,10 +208,7 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(2, sensors.Count);
-            foreach (var sensor in sensors)
-            {
-                Assert.GreaterOrEqual(sensor.Value, 28);
-            }
+            foreach (var sensor in sensors) Assert.GreaterOrEqual(sensor.Value, 28);
         }
 
         [Test]
@@ -252,10 +233,7 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(2, sensors.Count);
-            foreach (var sensor in sensors)
-            {
-                Assert.GreaterOrEqual(sensor.Value, 89);
-            }
+            foreach (var sensor in sensors) Assert.GreaterOrEqual(sensor.Value, 89);
         }
 
         [Test]
@@ -280,10 +258,7 @@ namespace Client.Linq.Test
             var sensors = query.ToList();
 
             Assert.AreEqual(2, sensors.Count);
-            foreach (var sensor in sensors)
-            {
-                Assert.GreaterOrEqual(sensor.Value, 15);
-            }
+            foreach (var sensor in sensors) Assert.GreaterOrEqual(sensor.Value, 15);
         }
 
         [Test]
@@ -352,7 +327,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryContainsField()
         {
-            int[] values = {15, 28};
+            int[] values = { 15, 28 };
 
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where values.Contains(s.Value)
@@ -369,8 +344,8 @@ namespace Client.Linq.Test
             string[] deployment = { "production", "testing" };
 
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
-                        where deployment.Contains(s.Deployment)
-                        select s;
+                where deployment.Contains(s.Deployment)
+                select s;
 
             var sensors = query.Count();
 
@@ -454,7 +429,7 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(8, count);
         }
-        
+
         [Test]
         public void QueryAggregateWindow()
         {

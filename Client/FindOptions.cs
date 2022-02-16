@@ -37,15 +37,35 @@ namespace InfluxDB.Client.Domain
             var keys = qs.AllKeys;
             if (!keys.Contains(LimitKey) && !keys.Contains(OffsetKey) &&
                 !keys.Contains(SortByKey) && !keys.Contains(DescendingKey) && !keys.Contains(AfterKey))
+            {
                 return null;
+            }
 
             var findOptions = new FindOptions();
-            if (keys.Contains(LimitKey)) findOptions.Limit = int.Parse(qs.Get(LimitKey));
-            if (keys.Contains(OffsetKey)) findOptions.Offset = int.Parse(qs.Get(OffsetKey));
-            if (keys.Contains(SortByKey)) findOptions.SortBy = qs.Get(SortByKey);
-            if (keys.Contains(AfterKey)) findOptions.After = qs.Get(AfterKey);
+            if (keys.Contains(LimitKey))
+            {
+                findOptions.Limit = int.Parse(qs.Get(LimitKey));
+            }
+
+            if (keys.Contains(OffsetKey))
+            {
+                findOptions.Offset = int.Parse(qs.Get(OffsetKey));
+            }
+
+            if (keys.Contains(SortByKey))
+            {
+                findOptions.SortBy = qs.Get(SortByKey);
+            }
+
+            if (keys.Contains(AfterKey))
+            {
+                findOptions.After = qs.Get(AfterKey);
+            }
+
             if (keys.Contains(DescendingKey))
+            {
                 findOptions.Descending = bool.Parse(qs.Get(DescendingKey));
+            }
 
             return findOptions;
         }

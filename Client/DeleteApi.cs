@@ -18,7 +18,7 @@ namespace InfluxDB.Client
 
             _service = service;
         }
-        
+
         /// <summary>
         /// Delete Time series data from InfluxDB.
         /// </summary>
@@ -34,10 +34,10 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(predicate, "Predicate is required");
             Arguments.CheckNotNull(bucket, "Bucket is required");
             Arguments.CheckNotNull(org, "Organization is required");
-            
+
             return Delete(start, stop, predicate, bucket.Id, org.Id);
         }
-        
+
         /// <summary>
         /// Delete Time series data from InfluxDB.
         /// </summary>
@@ -53,7 +53,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(predicate, "Predicate is required");
             Arguments.CheckNonEmptyString(bucket, "Bucket is required");
             Arguments.CheckNonEmptyString(org, "Organization is required");
-            
+
             var predicateRequest = new DeletePredicateRequest(start, stop, predicate);
 
             return Delete(predicateRequest, bucket, org);
@@ -70,7 +70,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(predicate, "Predicate is required");
             Arguments.CheckNonEmptyString(bucket, "Bucket is required");
             Arguments.CheckNonEmptyString(org, "Organization is required");
-            
+
             return _service.PostDeleteAsync(predicate, null, org, bucket, null, null);
         }
     }

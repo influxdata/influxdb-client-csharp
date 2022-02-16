@@ -41,7 +41,7 @@ namespace Examples
         {
             public string Name { get; set; }
             public string Value { get; set; }
-            
+
             public override string ToString()
             {
                 return $"{Name}={Value}";
@@ -58,7 +58,9 @@ namespace Examples
             /// Convert to DomainObject.
             /// </summary>
             public T ConvertToEntity<T>(FluxRecord fluxRecord)
-                => (T)ConvertToEntity(fluxRecord, typeof(T));
+            {
+                return (T)ConvertToEntity(fluxRecord, typeof(T));
+            }
 
             public object ConvertToEntity(FluxRecord fluxRecord, Type type)
             {
@@ -74,19 +76,17 @@ namespace Examples
                     Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
                     Properties = new List<DomainEntityAttribute>()
                 };
-                
+
                 foreach (var (key, value) in fluxRecord.Values)
-                {
                     if (key.StartsWith("property_"))
                     {
                         var attribute = new DomainEntityAttribute
                         {
                             Name = key.Replace("property_", string.Empty), Value = Convert.ToString(value)
                         };
-                        
+
                         customEntity.Properties.Add(attribute);
                     }
-                }
 
                 return Convert.ChangeType(customEntity, type);
             }
@@ -165,15 +165,15 @@ namespace Examples
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            
+
             //
             // Select Cloud
             //
             var query = from s in InfluxDBQueryable<DomainEntity>.Queryable(bucket, organization, queryApi, converter)
                 select s;
-            
+
             var entities = query.ToList();
-            
+
             Console.WriteLine("==== Cloud Query Results ====");
             Console.WriteLine($"> count: {entities.Count}");
             Console.WriteLine($"> first: {entities.First()}");
@@ -184,7 +184,7 @@ namespace Examples
             // Debug Query
             //
             Console.WriteLine("==== Debug LINQ Queryable Flux output ====");
-            var influxQuery = ((InfluxDBQueryable<DomainEntity>) query).ToDebugQuery();
+            var influxQuery = ((InfluxDBQueryable<DomainEntity>)query).ToDebugQuery();
             Console.WriteLine("> variables:");
             foreach (var statement in influxQuery.Extern.Body)
             {
@@ -192,13 +192,14 @@ namespace Examples
                 var va = os?.Assignment as VariableAssignment;
                 var name = va?.Id.Name;
                 var value = va?.Init.GetType().GetProperty("Value")?.GetValue(va.Init, null);
-            
+
                 Console.WriteLine($"{name}={value}");
             }
+
             Console.WriteLine();
             Console.WriteLine("> query:");
             Console.WriteLine(influxQuery._Query);
-            
+
             client.Dispose();
         }
     }

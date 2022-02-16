@@ -40,8 +40,8 @@ namespace InfluxDB.Client.Test
         {
             Assert.IsNotEmpty(prefix);
 
-            return prefix + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
-                       CultureInfo.InvariantCulture) + "-IT";
+            return prefix + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff",
+                CultureInfo.InvariantCulture) + "-IT";
         }
 
         protected async Task<Organization> FindMyOrg()

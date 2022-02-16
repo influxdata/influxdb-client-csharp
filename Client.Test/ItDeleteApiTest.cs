@@ -19,14 +19,14 @@ namespace InfluxDB.Client.Test
             var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
             _bucket = await Client.GetBucketsApi()
-                            .CreateBucketAsync(GenerateName("h2o"), retention, _organization);
+                .CreateBucketAsync(GenerateName("h2o"), retention, _organization);
 
             //
             // Add Permissions to read and write to the Bucket
             //
             var resource =
-                            new PermissionResource(PermissionResource.TypeEnum.Buckets, _bucket.Id, null,
-                                            _organization.Id);
+                new PermissionResource(PermissionResource.TypeEnum.Buckets, _bucket.Id, null,
+                    _organization.Id);
 
             var readBucket = new Permission(Permission.ActionEnum.Read, resource);
             var writeBucket = new Permission(Permission.ActionEnum.Write, resource);
@@ -35,14 +35,14 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(loggedUser);
 
             var authorization = await Client.GetAuthorizationsApi()
-                            .CreateAuthorizationAsync(await FindMyOrg(),
-                                            new List<Permission> {readBucket, writeBucket});
+                .CreateAuthorizationAsync(await FindMyOrg(),
+                    new List<Permission> { readBucket, writeBucket });
 
             _token = authorization.Token;
 
             Client.Dispose();
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token)
-                            .Org(_organization.Id).Bucket(_bucket.Id).Build();
+                .Org(_organization.Id).Bucket(_bucket.Id).Build();
             Client = InfluxDBClientFactory.Create(options);
             _queryApi = Client.GetQueryApi();
         }
@@ -67,8 +67,8 @@ namespace InfluxDB.Client.Test
 
             WriteData();
 
-            string query = "from(bucket:\"" + _bucket.Name +
-                           "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+            var query = "from(bucket:\"" + _bucket.Name +
+                        "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
 
             _queryApi = Client.GetQueryApi();
             var tables = await _queryApi.QueryAsync(query, _organization.Id);
@@ -92,9 +92,9 @@ namespace InfluxDB.Client.Test
             Client.Dispose();
 
             WriteData();
-            
-            string query = "from(bucket:\"" + _bucket.Name +
-                           "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
+
+            var query = "from(bucket:\"" + _bucket.Name +
+                        "\") |> range(start: 1970-01-01T00:00:00.000000001Z) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
 
             _queryApi = Client.GetQueryApi();
             var tables = await _queryApi.QueryAsync(query, _organization.Id);
@@ -108,16 +108,17 @@ namespace InfluxDB.Client.Test
 
             _deleteApi = Client.GetDeleteApi();
             await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, predicate, _bucket, _organization);
-            
+
             var tablesAfterDelete = await _queryApi.QueryAsync(query, _organization.Id);
-            
+
             Assert.AreEqual(1, tablesAfterDelete.Count);
             Assert.AreEqual(5, tablesAfterDelete[0].Records.Count);
-            
-            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "location = \"west\"", _bucket, _organization);
-            
+
+            await _deleteApi.Delete(DateTime.Now.AddHours(-1), DateTime.Now, "location = \"west\"", _bucket,
+                _organization);
+
             var tablesAfterDelete2 = await _queryApi.QueryAsync(query, _organization.Id);
-            
+
             Assert.AreEqual(0, tablesAfterDelete2.Count);
         }
 
@@ -127,12 +128,12 @@ namespace InfluxDB.Client.Test
             ConfigurationManager.AppSettings["point-sensor.version"] = "1.23a";
 
             var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
-                            .AuthenticateToken(_token)
-                            .AddDefaultTag("id", "132-987-655")
-                            .AddDefaultTag("customer", "California Miner")
-                            .AddDefaultTag("env-var", "${env.point-datacenter}")
-                            .AddDefaultTag("sensor-version", "${point-sensor.version}")
-                            .Build();
+                .AuthenticateToken(_token)
+                .AddDefaultTag("id", "132-987-655")
+                .AddDefaultTag("customer", "California Miner")
+                .AddDefaultTag("env-var", "${env.point-datacenter}")
+                .AddDefaultTag("sensor-version", "${point-sensor.version}")
+                .Build();
 
             Client = InfluxDBClientFactory.Create(options);
 
@@ -145,32 +146,32 @@ namespace InfluxDB.Client.Test
 
             _writeApi = Client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(_writeApi);
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point);
+            _writeApi.WritePoint(point, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point2);
+            _writeApi.WritePoint(point2, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point3);
+            _writeApi.WritePoint(point3, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point4);
+            _writeApi.WritePoint(point4, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point5);
+            _writeApi.WritePoint(point5, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();
 
-            _writeApi.WritePoint(_bucket.Name, _organization.Id, point6);
+            _writeApi.WritePoint(point6, _bucket.Name, _organization.Id);
             _writeApi.Flush();
 
             listener.WaitToSuccess();

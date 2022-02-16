@@ -10,28 +10,30 @@ namespace Client.Legacy.Test
         protected const string DatabaseName = "flux_database";
 
         protected FluxClient FluxClient;
-        
+
         [SetUp]
         public new void SetUp()
         {
-            SetUpAsync().Wait();            
+            SetUpAsync().Wait();
         }
 
-        async Task SetUpAsync()
+        private async Task SetUpAsync()
         {
             var influxUrl = GetInfluxDbUrl();
-            
+
             var options = new FluxConnectionOptions(influxUrl);
-            
+
             FluxClient = FluxClientFactory.Create(options);
-            
-            await InfluxDbQuery("CREATE DATABASE " + DatabaseName, DatabaseName);        
+
+            await InfluxDbQuery("CREATE DATABASE " + DatabaseName, DatabaseName);
         }
 
         [TearDown]
-        protected void After() 
+        protected void After()
         {
-            InfluxDbQuery("DROP DATABASE " + DatabaseName, DatabaseName).GetAwaiter().GetResult();
+            InfluxDbQuery("DROP DATABASE " + DatabaseName, DatabaseName).ConfigureAwait(false).GetAwaiter().GetResult();
+
+            FluxClient.Dispose();
         }
     }
 }

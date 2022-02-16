@@ -65,8 +65,8 @@ namespace InfluxDB.Client.Test
 
             var writeApi = _client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(writeApi);
-            writeApi.WriteRecord("my-bucket", "my-org", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek water_level=1.0 1");
+            writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "my-bucket",
+                "my-org");
             writeApi.Flush();
             listener.WaitToSuccess();
 
@@ -113,7 +113,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual($"{MockServerUrl}/api/v2/query?org=my-org",
                 requestEntry.RequestMessage.Url);
             Assert.IsFalse(requestEntry.RequestMessage.Headers.ContainsKey("Content-Encoding"));
-            Assert.AreEqual("gzip, application/json", requestEntry.RequestMessage.Headers["Accept-Encoding"].First());
+            Assert.AreEqual("gzip", requestEntry.RequestMessage.Headers["Accept-Encoding"].First());
         }
 
         [Test]
@@ -127,8 +127,8 @@ namespace InfluxDB.Client.Test
 
             var writeApi = _client.GetWriteApi();
             var listener = new WriteApiTest.EventListener(writeApi);
-            writeApi.WriteRecord("my-bucket", "my-org", WritePrecision.Ns,
-                "h2o_feet,location=coyote_creek level\\ water_level=1.0 1");
+            writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ water_level=1.0 1", WritePrecision.Ns,
+                "my-bucket", "my-org");
             writeApi.Flush();
             listener.WaitToSuccess();
 

@@ -12,6 +12,7 @@ using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
+using InfluxDB.Client.Core.Internal;
 using InfluxDB.Client.Internal;
 using InfluxDB.Client.Writes;
 using Microsoft.Extensions.ObjectPool;
@@ -27,12 +28,16 @@ namespace InfluxDB.Client
         private readonly IDomainObjectMapper _mapper;
         private readonly InfluxDBClientOptions _options;
         private readonly Subject<BatchWriteData> _subject = new Subject<BatchWriteData>();
-        private static readonly ObjectPoolProvider _objectPoolProvider = new DefaultObjectPoolProvider();
-        private static readonly ObjectPool<StringBuilder> _stringBuilderPool = _objectPoolProvider.CreateStringBuilderPool();
+        private static readonly ObjectPoolProvider ObjectPoolProvider = new DefaultObjectPoolProvider();
+
+        private static readonly ObjectPool<StringBuilder> StringBuilderPool =
+            ObjectPoolProvider.CreateStringBuilderPool();
+
         private readonly IDisposable _unsubscribeDisposeCommand;
 
 
         private bool _disposed;
+
         protected internal WriteApi(
             InfluxDBClientOptions options,
             WriteService service,
@@ -51,7 +56,7 @@ namespace InfluxDB.Client
             _mapper = mapper;
             _influxDbClient = influxDbClient;
 
-            _unsubscribeDisposeCommand= disposeCommand.Subscribe(_ => Dispose());
+            _unsubscribeDisposeCommand = disposeCommand.Subscribe(_ => Dispose());
 
             // backpreasure - is not implemented in C#
             // 
@@ -60,22 +65,21 @@ namespace InfluxDB.Client
             // https://github.com/dotnet/reactive/issues/19
 
 
-
-            IObservable<IObservable<BatchWriteRecord>> batches = _subject
+            var batches = _subject
                 //
                 // Batching
                 //
                 .Publish(connectedSource =>
                 {
                     var trigger = Observable.Merge(
-                            // triggered by time & count
-                            connectedSource.Window(TimeSpan.FromMilliseconds(
-                                                writeOptions.FlushInterval),
-                                                writeOptions.BatchSize,
-                                                writeOptions.WriteScheduler),
-                            // flush trigger
-                            _flush
-                        );
+                        // triggered by time & count
+                        connectedSource.Window(TimeSpan.FromMilliseconds(
+                                writeOptions.FlushInterval),
+                            writeOptions.BatchSize,
+                            writeOptions.WriteScheduler),
+                        // flush trigger
+                        _flush
+                    );
                     return connectedSource
                         .Window(trigger);
                 })
@@ -89,11 +93,14 @@ namespace InfluxDB.Client
                 .Select(grouped =>
                 {
                     var aggregate = grouped
-                        .Aggregate(_stringBuilderPool.Get(), (builder, batchWrite) =>
+                        .Aggregate(StringBuilderPool.Get(), (builder, batchWrite) =>
                         {
                             var data = batchWrite.ToLineProtocol();
 
-                            if (string.IsNullOrEmpty(data)) return builder;
+                            if (string.IsNullOrEmpty(data))
+                            {
+                                return builder;
+                            }
 
                             if (builder.Length > 0)
                             {
@@ -105,12 +112,12 @@ namespace InfluxDB.Client
                         {
                             var result = builder.ToString();
                             builder.Clear();
-                            _stringBuilderPool.Return(builder);
+                            StringBuilderPool.Return(builder);
                             return result;
                         });
 
                     return aggregate.Select(records => new BatchWriteRecord(grouped.Key, records))
-                                    .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
+                        .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
                 });
 
             if (writeOptions.JitterInterval > 0)
@@ -121,11 +128,14 @@ namespace InfluxDB.Client
                     //
                     .Select(source =>
                     {
-                        return source.Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)), writeOptions.WriteScheduler));
+                        return source.Delay(_ =>
+                            Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
+                                writeOptions.WriteScheduler));
                     });
             }
-            var query = batches
-                .Concat() 
+
+            var unused = batches
+                .Concat()
                 //
                 // Map to Async request
                 //
@@ -143,7 +153,7 @@ namespace InfluxDB.Client
                                     "identity", "text/plain; charset=utf-8", null, "application/json", null, precision)
                                 .ToObservable())
                         .RetryWhen(f => f
-                            .Zip(Observable.Range(1, writeOptions.MaxRetries + 1), (exception, count) 
+                            .Zip(Observable.Range(1, writeOptions.MaxRetries + 1), (exception, count)
                                 => new RetryAttempt(exception, count, writeOptions))
                             .SelectMany(attempt =>
                             {
@@ -153,7 +163,7 @@ namespace InfluxDB.Client
 
                                     var retryable = new WriteRetriableErrorEvent(org, bucket, precision, lineProtocol,
                                         attempt.Error, retryInterval);
-                                    
+
                                     Publish(retryable);
 
                                     return Observable.Timer(TimeSpan.FromMilliseconds(retryInterval),
@@ -165,16 +175,20 @@ namespace InfluxDB.Client
                         .Select(result =>
                         {
                             // ReSharper disable once ConvertIfStatementToReturnStatement
-                            if (result.IsSuccessful) return Notification.CreateOnNext(result);
+                            if (result.IsSuccessful)
+                            {
+                                return Notification.CreateOnNext(result);
+                            }
 
-                            return Notification.CreateOnError<IRestResponse>(HttpException.Create(result, result.Content));
+                            return Notification.CreateOnError<RestResponse>(
+                                HttpException.Create(result, result.Content));
                         })
-                        .Catch<Notification<IRestResponse>, Exception>(ex =>
+                        .Catch<Notification<RestResponse>, Exception>(ex =>
                         {
                             var error = new WriteErrorEvent(org, bucket, precision, lineProtocol, ex);
                             Publish(error);
 
-                            return Observable.Return(Notification.CreateOnError<IRestResponse>(ex));
+                            return Observable.Return(Notification.CreateOnError<RestResponse>(ex));
                         }).Do(res =>
                         {
                             if (res.Kind == NotificationKind.OnNext)
@@ -221,9 +235,15 @@ namespace InfluxDB.Client
 
             Trace.WriteLine("Flushing batches before shutdown.");
 
-            if (!_subject.IsDisposed) _subject.OnCompleted();
+            if (!_subject.IsDisposed)
+            {
+                _subject.OnCompleted();
+            }
 
-            if (!_flush.IsDisposed) _flush.OnCompleted();
+            if (!_flush.IsDisposed)
+            {
+                _flush.OnCompleted();
+            }
 
             _subject.Dispose();
             _flush.Dispose();
@@ -238,195 +258,102 @@ namespace InfluxDB.Client
         /// <summary>
         /// Write Line Protocol record into specified bucket.
         /// </summary>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="record">
         ///     specifies the record in InfluxDB Line Protocol.
         ///     The <see cref="record" /> is considered as one batch unit.
         /// </param>
-        public void WriteRecord(WritePrecision precision, string record)
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        public void WriteRecord(string record, WritePrecision precision = WritePrecision.Ns, string bucket = null,
+            string org = null)
         {
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            WriteRecord(_options.Bucket, _options.Org, precision, record);
-        }
-
-        /// <summary>
-        /// Write Line Protocol record into specified bucket.
-        /// </summary>
-        /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="org">specifies the destination organization for writes</param>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
-        /// <param name="record">
-        ///     specifies the record in InfluxDB Line Protocol.
-        ///     The <see cref="record" /> is considered as one batch unit.
-        /// </param>
-        public void WriteRecord(string bucket, string org, WritePrecision precision, string record)
-        {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            _subject.OnNext(new BatchWriteRecord(new BatchWriteOptions(bucket, org, precision), record));
+            var options = new BatchWriteOptions(bucket ?? _options.Bucket, org ?? _options.Org, precision);
+            _subject.OnNext(new BatchWriteRecord(options, record));
         }
 
         /// <summary>
         /// Write Line Protocol records into specified bucket.
         /// </summary>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public void WriteRecords(WritePrecision precision, List<string> records)
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        public void WriteRecords(List<string> records, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null)
         {
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            WriteRecords(_options.Bucket, _options.Org, precision, records);
+            records.ForEach(record => WriteRecord(record, precision, bucket, org));
         }
 
         /// <summary>
         /// Write Line Protocol records into specified bucket.
         /// </summary>
-        /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="org">specifies the destination organization for writes</param>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public void WriteRecords(string bucket, string org, WritePrecision precision, List<string> records)
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        public void WriteRecords(string[] records, WritePrecision precision = WritePrecision.Ns, string bucket = null,
+            string org = null)
         {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            records.ForEach(record => WriteRecord(bucket, org, precision, record));
-        }
-
-        /// <summary>
-        /// Write Line Protocol records into specified bucket.
-        /// </summary>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
-        /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public void WriteRecords(WritePrecision precision, params string[] records)
-        {
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            WriteRecords(_options.Bucket, _options.Org, precision, records);
-        }
-
-        /// <summary>
-        /// Write Line Protocol records into specified bucket.
-        /// </summary>
-        /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="org">specifies the destination organization for writes</param>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
-        /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
-        public void WriteRecords(string bucket, string org, WritePrecision precision, params string[] records)
-        {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            foreach (var record in records) WriteRecord(bucket, org, precision, record);
+            foreach (var record in records) WriteRecord(record, precision, bucket, org);
         }
 
         /// <summary>
         /// Write a Data point into specified bucket.
         /// </summary>
         /// <param name="point">specifies the Data point to write into bucket</param>
-        public void WritePoint(PointData point)
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        public void WritePoint(PointData point, string bucket = null, string org = null)
         {
-            WritePoint(_options.Bucket, _options.Org, point);
-        }
+            if (point == null)
+            {
+                return;
+            }
 
-        /// <summary>
-        /// Write a Data point into specified bucket.
-        /// </summary>
-        /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="org">specifies the destination organization for writes</param>
-        /// <param name="point">specifies the Data point to write into bucket</param>
-        public void WritePoint(string bucket, string org, PointData point)
-        {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
-
-            if (point == null) return;
-
-            _subject.OnNext(new BatchWritePoint(new BatchWriteOptions(bucket, org, point.Precision), _options, point));
+            var options = new BatchWriteOptions(bucket ?? _options.Bucket, org ?? _options.Org, point.Precision);
+            _subject.OnNext(new BatchWritePoint(options, _options, point));
         }
 
         /// <summary>
         /// Write Data points into specified bucket.
         /// </summary>
         /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(List<PointData> points)
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        public void WritePoints(List<PointData> points, string bucket = null, string org = null)
         {
-            WritePoints(_options.Bucket, _options.Org, points);
-        }
-
-
-        /// <summary>
-        /// Write Data points into specified bucket.
-        /// </summary>
-        /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="org">specifies the destination organization for writes</param>
-        /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(string bucket, string org, List<PointData> points)
-        {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
-
-            foreach (var point in points) WritePoint(bucket, org, point);
+            foreach (var point in points) WritePoint(point, bucket, org);
         }
 
         /// <summary>
         /// Write Data points into specified bucket.
         /// </summary>
         /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(params PointData[] points)
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        public void WritePoints(PointData[] points, string bucket = null, string org = null)
         {
-            WritePoints(_options.Bucket, _options.Org, points);
-        }
-
-        /// <summary>
-        /// Write Data points into specified bucket.
-        /// </summary>
-        /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="org">specifies the destination organization for writes</param>
-        /// <param name="points">specifies the Data points to write into bucket</param>
-        public void WritePoints(string bucket, string org, params PointData[] points)
-        {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
-
-            WritePoints(bucket, org, points.ToList());
+            WritePoints(points.ToList(), bucket, org);
         }
 
         /// <summary>
         /// Write a Measurement into specified bucket.
         /// </summary>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="measurement">specifies the Measurement to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurement<TM>(WritePrecision precision, TM measurement)
+        public void WriteMeasurement<TM>(TM measurement, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null)
         {
-            Arguments.CheckNotNull(precision, nameof(precision));
+            if (measurement == null)
+            {
+                return;
+            }
 
-            WriteMeasurement(_options.Bucket, _options.Org, precision, measurement);
-        }
-
-        /// <summary>
-        /// Write a Measurement into specified bucket.
-        /// </summary>
-        /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="org">specifies the destination organization for writes</param>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
-        /// <param name="measurement">specifies the Measurement to write into bucket</param>
-        /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurement<TM>(string bucket, string org, WritePrecision precision, TM measurement)
-        {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            if (measurement == null) return;
-
-            var options = new BatchWriteOptions(bucket, org, precision);
+            var options = new BatchWriteOptions(bucket ?? _options.Bucket, org ?? _options.Org, precision);
 
             _subject.OnNext(new BatchWriteMeasurement<TM>(options, _options, measurement, _mapper));
         }
@@ -434,62 +361,29 @@ namespace InfluxDB.Client
         /// <summary>
         /// Write Measurements into specified bucket.
         /// </summary>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurements<TM>(WritePrecision precision, List<TM> measurements)
+        public void WriteMeasurements<TM>(List<TM> measurements, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null)
         {
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            WriteMeasurements(_options.Bucket, _options.Org, precision, measurements);
+            foreach (var measurement in measurements) WriteMeasurement(measurement, precision, bucket, org);
         }
 
         /// <summary>
         /// Write Measurements into specified bucket.
         /// </summary>
-        /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="org">specifies the destination organization for writes</param>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurements<TM>(string bucket, string org, WritePrecision precision, List<TM> measurements)
+        public void WriteMeasurements<TM>(TM[] measurements, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null)
         {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            foreach (var measurement in measurements) WriteMeasurement(bucket, org, precision, measurement);
-        }
-
-        /// <summary>
-        /// Write Measurements into specified bucket.
-        /// </summary>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
-        /// <param name="measurements">specifies Measurements to write into bucket</param>
-        /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurements<TM>(WritePrecision precision, params TM[] measurements)
-        {
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            WriteMeasurements(_options.Bucket, _options.Org, precision, measurements);
-        }
-
-        /// <summary>
-        /// Write Measurements into specified bucket.
-        /// </summary>
-        /// <param name="bucket">specifies the destination bucket for writes</param>
-        /// <param name="org">specifies the destination organization for writes</param>
-        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
-        /// <param name="measurements">specifies Measurements to write into bucket</param>
-        /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurements<TM>(string bucket, string org, WritePrecision precision,
-            params TM[] measurements)
-        {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
-            Arguments.CheckNotNull(precision, nameof(precision));
-
-            WriteMeasurements(bucket, org, precision, measurements.ToList());
+            WriteMeasurements(measurements.ToList(), precision, bucket, org);
         }
 
         /// <summary>
@@ -622,8 +516,8 @@ namespace InfluxDB.Client
 
         internal BatchWriteOptions(string bucket, string org, WritePrecision precision)
         {
-            Arguments.CheckNonEmptyString(bucket, nameof(bucket));
-            Arguments.CheckNonEmptyString(org, nameof(org));
+            Arguments.CheckNonEmptyString(bucket, AbstractRestClient.BucketArgumentValidation);
+            Arguments.CheckNonEmptyString(org, AbstractRestClient.OrgArgumentValidation);
             Arguments.CheckNotNull(precision, nameof(precision));
 
             Bucket = bucket;
@@ -633,10 +527,22 @@ namespace InfluxDB.Client
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((BatchWriteOptions) obj);
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((BatchWriteOptions)obj);
         }
 
         public override int GetHashCode()
@@ -645,7 +551,7 @@ namespace InfluxDB.Client
             {
                 var hashCode = Bucket != null ? Bucket.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ (OrganizationId != null ? OrganizationId.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (int) Precision;
+                hashCode = (hashCode * 397) ^ (int)Precision;
                 return hashCode;
             }
         }

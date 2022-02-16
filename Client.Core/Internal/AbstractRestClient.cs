@@ -9,7 +9,13 @@ namespace InfluxDB.Client.Core.Internal
 {
     public abstract class AbstractRestClient
     {
-        protected async Task<bool> PingAsync(Task<IRestResponse> request)
+        internal const string OrgArgumentValidation =
+            "'org' parameter. Please specify the organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.";
+
+        internal const string BucketArgumentValidation =
+            "'bucket' parameter. Please specify the bucket as a method parameter or use default configuration at 'InfluxDBClientOptions.Bucket'.";
+
+        protected async Task<bool> PingAsync(Task<RestResponse> request)
         {
             try
             {
@@ -24,7 +30,7 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-        protected async Task<string> VersionAsync(Task<IRestResponse> request)
+        protected async Task<string> VersionAsync(Task<RestResponse> request)
         {
             try
             {
@@ -37,8 +43,8 @@ namespace InfluxDB.Client.Core.Internal
                 throw new InfluxException(e);
             }
         }
-        
-        private string GetVersion(IRestResponse responseHttp)
+
+        private string GetVersion(RestResponse responseHttp)
         {
             Arguments.CheckNotNull(responseHttp, "responseHttp");
 

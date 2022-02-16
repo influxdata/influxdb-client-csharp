@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
 using NUnit.Framework;
@@ -38,13 +38,13 @@ namespace InfluxDB.Client.Test
                 .RespondWith(CreateResponse("{}"));
 
             var writeApi = _influxDbClient.GetWriteApiAsync();
-            await writeApi.WritePointsAsync("my-bucket", "my-org", new List<PointData>
+            await writeApi.WritePointsAsync(new List<PointData>
             {
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 9.0D)
                     .Timestamp(9L, WritePrecision.S),
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
                     .Timestamp(10L, WritePrecision.S)
-            });
+            }, "my-bucket", "my-org");
 
             Assert.AreEqual(1, MockServer.LogEntries.Count());
 
@@ -63,13 +63,13 @@ namespace InfluxDB.Client.Test
                 .RespondWith(CreateResponse("{}"));
 
             var writeApi = _influxDbClient.GetWriteApiAsync();
-            await writeApi.WritePointsAsync("my-bucket", "my-org", new List<PointData>
+            await writeApi.WritePointsAsync(new List<PointData>
             {
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 9.0D)
                     .Timestamp(9L, WritePrecision.S),
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 10.0D)
                     .Timestamp(10L, WritePrecision.Ms)
-            });
+            }, "my-bucket", "my-org");
 
             Assert.AreEqual(2, MockServer.LogEntries.Count());
 
@@ -124,15 +124,12 @@ namespace InfluxDB.Client.Test
             };
 
             var batches = points
-                .Select((x, i) => new {Index = i, Value = x})
+                .Select((x, i) => new { Index = i, Value = x })
                 .GroupBy(x => x.Index / 5)
                 .Select(x => x.Select(v => v.Value).ToList())
                 .ToList();
 
-            foreach (var batch in batches)
-            {
-                await writeApi.WritePointsAsync("my-bucket", "my-org", batch);
-            }
+            foreach (var batch in batches) await writeApi.WritePointsAsync(batch, "my-bucket", "my-org");
 
             Assert.AreEqual(3, MockServer.LogEntries.Count());
         }
@@ -146,10 +143,8 @@ namespace InfluxDB.Client.Test
 
             var writeApi = _influxDbClient.GetWriteApiAsync();
             var response = await writeApi.WriteRecordsAsyncWithIRestResponse(
-                new[] {"h2o,location=coyote_creek water_level=9 1"},
-                "my-bucket",
-                "my-org",
-                WritePrecision.Ms);
+                new[] { "h2o,location=coyote_creek water_level=9 1" },
+                WritePrecision.Ms, "my-bucket", "my-org");
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
 
             var request = MockServer.LogEntries.ToList()[0];
@@ -206,18 +201,51 @@ namespace InfluxDB.Client.Test
                         Value = 16
                     }
                 },
-                "my-bucket",
-                "my-org");
+                bucket: "my-bucket",
+                org: "my-org");
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             Assert.AreEqual("m,device=id-1 value=16i 1605428415000000000", GetRequestBody(response));
         }
 
-        private string GetRequestBody(IRestResponse restResponse)
+        [Test]
+        public void RequiredOrgBucketWriteApiAsync()
         {
-            var bytes = (byte[]) restResponse.Request.Body?.Value ??
+            _influxDbClient.Dispose();
+
+            var options = InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url(MockServerUrl)
+                .AuthenticateToken("token")
+                .Build();
+
+            _influxDbClient = InfluxDBClientFactory.Create(options);
+            var writeApi = _influxDbClient.GetWriteApiAsync();
+
+            var ae = Assert.ThrowsAsync<ArgumentException>(async () =>
+                await writeApi.WriteRecordAsync(
+                    "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1", bucket: "b1"));
+            Assert.NotNull(ae);
+            Assert.AreEqual(
+                "Expecting a non-empty string for 'org' parameter. Please specify the organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
+                ae.Message);
+
+            ae = Assert.ThrowsAsync<ArgumentException>(async () =>
+                await writeApi.WriteRecordAsync(
+                    "h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1", org: "org1"));
+            Assert.NotNull(ae);
+            Assert.AreEqual(
+                "Expecting a non-empty string for 'bucket' parameter. Please specify the bucket as a method parameter or use default configuration at 'InfluxDBClientOptions.Bucket'.",
+                ae.Message);
+        }
+
+        private string GetRequestBody(RestResponse restResponse)
+        {
+            var bytes = (byte[])restResponse.Request?.Parameters
+                            .GetParameters(ParameterType.RequestBody)
+                            .TryFind("text/plain")?.Value ??
                         throw new AssertionException("The body is required.");
-            return System.Text.Encoding.Default.GetString(bytes);
+            return Encoding.Default.GetString(bytes);
         }
     }
 }

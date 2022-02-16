@@ -14,7 +14,7 @@ namespace Examples
             const string url = "http://localhost:8086";
             const string token = "my-token";
             const string org = "my-org";
-            
+
             using var client = InfluxDBClientFactory.Create(url, token);
 
             // Find ID of Organization with specified name (PermissionAPI requires ID of Organization).

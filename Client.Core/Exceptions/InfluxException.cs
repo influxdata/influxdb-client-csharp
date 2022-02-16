@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using InfluxDB.Client.Core.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -55,25 +56,24 @@ namespace InfluxDB.Client.Core.Exceptions
         /// </summary>
         public int? RetryAfter { get; set; }
 
-        public static HttpException Create(IRestResponse requestResult, object body)
+        public static HttpException Create(RestResponse requestResult, object body)
         {
             Arguments.CheckNotNull(requestResult, nameof(requestResult));
 
-            var httpHeaders = LoggingHandler.ToHeaders(requestResult.Headers);
-            
-            return Create(body, httpHeaders, requestResult.ErrorMessage, requestResult.StatusCode, 
+            // var httpHeaders = LoggingHandler.ToHeaders(requestResult.Headers);
+
+            return Create(body, requestResult.Headers, requestResult.ErrorMessage, requestResult.StatusCode,
                 requestResult.ErrorException);
         }
 
-        public static HttpException Create(IHttpResponse requestResult, object body)
+        public static HttpException Create(HttpResponseMessage requestResult, object body)
         {
             Arguments.CheckNotNull(requestResult, nameof(requestResult));
 
-            return Create(body, requestResult.Headers, requestResult.ErrorMessage, requestResult.StatusCode, 
-                requestResult.ErrorException);
+            return Create(body, requestResult.Headers.ToHeaderParameters(), "", requestResult.StatusCode);
         }
-        
-        public static HttpException Create(object content, IList<HttpHeader> headers, string ErrorMessage, 
+
+        public static HttpException Create(object content, IEnumerable<HeaderParameter> headers, string ErrorMessage,
             HttpStatusCode statusCode, Exception exception = null)
         {
             string stringBody = null;
@@ -81,9 +81,13 @@ namespace InfluxDB.Client.Core.Exceptions
             string errorMessage = null;
 
             int? retryAfter = null;
+            var headerParameters = headers?.ToList();
             {
-                var retryHeader = headers.FirstOrDefault(header => header.Name.Equals("Retry-After"));
-                if (retryHeader != null) retryAfter = Convert.ToInt32(retryHeader.Value);
+                var retryHeader = headerParameters?.FirstOrDefault(header => header.Name.Equals("Retry-After"));
+                if (retryHeader != null)
+                {
+                    retryAfter = Convert.ToInt32(retryHeader.Value);
+                }
             }
 
             if (content != null)
@@ -115,18 +119,27 @@ namespace InfluxDB.Client.Core.Exceptions
                     errorBody = new JObject();
                 }
             }
-            
-            var keys = new[] {"X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error"};
+
+            var keys = new[] { "X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error" };
 
             if (string.IsNullOrEmpty(errorMessage))
-                errorMessage = headers
+            {
+                errorMessage = headerParameters?
                     .Where(header => keys.Contains(header.Name, StringComparer.OrdinalIgnoreCase))
                     .Select(header => header.Value.ToString()).FirstOrDefault();
+            }
 
-            if (string.IsNullOrEmpty(errorMessage)) errorMessage = ErrorMessage;
-            if (string.IsNullOrEmpty(errorMessage)) errorMessage = stringBody;
+            if (string.IsNullOrEmpty(errorMessage))
+            {
+                errorMessage = ErrorMessage;
+            }
 
-            var err = (int) statusCode switch
+            if (string.IsNullOrEmpty(errorMessage))
+            {
+                errorMessage = stringBody;
+            }
+
+            var err = (int)statusCode switch
             {
                 400 => new BadRequestException(errorMessage, exception),
                 401 => new UnauthorizedException(errorMessage, exception),
@@ -144,7 +157,7 @@ namespace InfluxDB.Client.Core.Exceptions
                 501 => new HttpNotImplementedException(errorMessage, exception),
                 502 => new BadGatewayException(errorMessage, exception),
                 503 => new ServiceUnavailableException(errorMessage, exception),
-                _ => new HttpException(errorMessage, (int) statusCode, exception)
+                _ => new HttpException(errorMessage, (int)statusCode, exception)
             };
 
             err.ErrorBody = errorBody;
@@ -229,7 +242,8 @@ namespace InfluxDB.Client.Core.Exceptions
     /// </summary>
     public class ProxyAuthenticationRequiredException : HttpException
     {
-        public ProxyAuthenticationRequiredException(string message, Exception exception = null) : base(message, 407, exception)
+        public ProxyAuthenticationRequiredException(string message, Exception exception = null) : base(message, 407,
+            exception)
         {
         }
     }
@@ -249,7 +263,8 @@ namespace InfluxDB.Client.Core.Exceptions
     /// </summary>
     public class RequestEntityTooLargeException : HttpException
     {
-        public RequestEntityTooLargeException(string message, Exception exception = null) : base(message, 413, exception)
+        public RequestEntityTooLargeException(string message, Exception exception = null) : base(message, 413,
+            exception)
         {
         }
     }

@@ -8,7 +8,7 @@ namespace InfluxDB.Client
     /// An implementation of this class is used to convert DomainObject entity into <see cref="InfluxDB.Client.Writes.PointData"/>
     /// and <see cref="InfluxDB.Client.Core.Flux.Domain.FluxRecord"/> back to DomainObject. 
     /// </summary>
-    public interface IDomainObjectMapper: IFluxResultMapper
+    public interface IDomainObjectMapper : IFluxResultMapper
     {
         /// <summary>
         /// Converts DomainObject to corresponding PointData.

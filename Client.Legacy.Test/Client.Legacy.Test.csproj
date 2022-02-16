@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netcoreapp2.2;netcoreapp3.1;netcoreapp5.0;netcoreapp6.0</TargetFrameworks>
+        <TargetFrameworks>netcoreapp3.1;netcoreapp5.0;netcoreapp6.0</TargetFrameworks>
         <LangVersion>8</LangVersion>
 
         <IsPackable>false</IsPackable>
@@ -11,8 +11,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -25,7 +25,7 @@
     </PropertyGroup>
 
     <ItemGroup Condition="$(NetCore5PlusFrameworks.Contains('|$(TargetFramework)|'))">
-        <PackageReference Include="coverlet.collector" Version="3.0.3">
+        <PackageReference Include="coverlet.collector" Version="3.1.2">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>

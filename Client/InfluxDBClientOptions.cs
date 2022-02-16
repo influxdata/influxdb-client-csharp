@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Web;
 using InfluxDB.Client.Configurations;
@@ -33,14 +34,15 @@ namespace InfluxDB.Client
         public string Bucket { get; }
 
         public TimeSpan Timeout { get; }
-        public TimeSpan ReadWriteTimeout { get; }
-        
+
         public IWebProxy WebProxy { get; }
         public bool AllowHttpRedirects { get; }
 
         public PointSettings PointSettings { get; }
 
         public bool VerifySsl { get; }
+
+        public X509CertificateCollection ClientCertificates { get; }
 
         private InfluxDBClientOptions(Builder builder)
         {
@@ -57,14 +59,14 @@ namespace InfluxDB.Client
             Bucket = builder.BucketString;
 
             Timeout = builder.Timeout;
-            ReadWriteTimeout = builder.ReadWriteTimeout;
-            
+
             WebProxy = builder.WebProxy;
             AllowHttpRedirects = builder.AllowHttpRedirects;
 
             PointSettings = builder.PointSettings;
 
             VerifySsl = builder.VerifySslCertificates;
+            ClientCertificates = builder.CertificateCollection;
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace InfluxDB.Client
             /// Anonymous.
             /// </summary>
             Anonymous,
-            
+
             /// <summary>
             /// Basic auth.
             /// </summary>
@@ -101,7 +103,6 @@ namespace InfluxDB.Client
             internal string Username;
             internal char[] Password;
             internal TimeSpan Timeout;
-            internal TimeSpan ReadWriteTimeout;
 
             internal string OrgString;
             internal string BucketString;
@@ -109,6 +110,7 @@ namespace InfluxDB.Client
             internal IWebProxy WebProxy;
             internal bool AllowHttpRedirects;
             internal bool VerifySslCertificates = true;
+            internal X509CertificateCollection CertificateCollection;
 
             internal PointSettings PointSettings = new PointSettings();
 
@@ -160,20 +162,6 @@ namespace InfluxDB.Client
             }
 
             /// <summary>
-            /// Set the read and write timeout from the InfluxDB.
-            /// </summary>
-            /// <param name="readWriteTimeout">the timeout to read and write from the InfluxDB. It must be defined.</param>
-            /// <returns><see cref="Builder"/></returns>
-            public Builder ReadWriteTimeOut(TimeSpan readWriteTimeout)
-            {
-                Arguments.CheckNotNull(readWriteTimeout, nameof(readWriteTimeout));
-
-                ReadWriteTimeout = readWriteTimeout;
-
-                return this;
-            }
-
-            /// <summary>
             /// Setup authorization by <see cref="AuthenticationScheme.Session"/>.
             /// </summary>
             /// <param name="username">the username to use in the basic auth</param>
@@ -206,7 +194,7 @@ namespace InfluxDB.Client
 
                 return this;
             }
-            
+
             /// <summary>
             /// Setup authorization by <see cref="AuthenticationScheme.Token"/>.
             /// </summary>
@@ -276,10 +264,10 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(webProxy, nameof(webProxy));
 
                 WebProxy = webProxy;
-                
+
                 return this;
             }
-            
+
             /// <summary>
             /// Configure automatically following HTTP 3xx redirects.
             /// </summary>
@@ -290,7 +278,7 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(allowHttpRedirects, nameof(allowHttpRedirects));
 
                 AllowHttpRedirects = allowHttpRedirects;
-                
+
                 return this;
             }
 
@@ -309,20 +297,34 @@ namespace InfluxDB.Client
             }
 
             /// <summary>
+            /// Set X509CertificateCollection to be sent with HTTP requests
+            /// </summary>
+            /// <param name="clientCertificates">certificate collections</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder ClientCertificates(X509CertificateCollection clientCertificates)
+            {
+                Arguments.CheckNotNull(clientCertificates, nameof(clientCertificates));
+
+                CertificateCollection = clientCertificates;
+
+                return this;
+            }
+
+            /// <summary>
             /// Configure Builder via App.config.
             /// </summary>
             /// <param name="sectionName">Name of configuration section. Useful for tests.</param>
             /// <returns><see cref="Builder"/></returns>
             internal Builder LoadConfig(string sectionName = "influx2")
             {
-                var config = (Influx2) ConfigurationManager.GetSection(sectionName);
+                var config = (Influx2)ConfigurationManager.GetSection(sectionName);
                 if (config == null)
                 {
                     const string message = "The configuration doesn't contains a 'influx2' section. " +
                                            "The minimal configuration should contains an url of InfluxDB. " +
                                            "For more details see: " +
                                            "https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/README.md#client-configuration-file";
-                    
+
                     throw new ConfigurationErrorsException(message);
                 }
 
@@ -332,20 +334,16 @@ namespace InfluxDB.Client
                 var token = config.Token;
                 var logLevel = config.LogLevel;
                 var timeout = config.Timeout;
-                var readWriteTimeout = config.ReadWriteTimeout;
                 var allowHttpRedirects = config.AllowHttpRedirects;
                 var verifySsl = config.VerifySsl;
 
                 var tags = config.Tags;
                 if (tags != null)
                 {
-                    foreach (Influx2.TagElement o in tags)
-                    {
-                        AddDefaultTag(o.Name, o.Value);
-                    }
+                    foreach (Influx2.TagElement o in tags) AddDefaultTag(o.Name, o.Value);
                 }
 
-                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout, allowHttpRedirects, verifySsl);
+                return Configure(url, org, bucket, token, logLevel, timeout, allowHttpRedirects, verifySsl);
             }
 
             /// <summary>
@@ -367,14 +365,15 @@ namespace InfluxDB.Client
                 var token = query.Get("token");
                 var logLevel = query.Get("logLevel");
                 var timeout = query.Get("timeout");
-                var readWriteTimeout = query.Get("readWriteTimeout");
                 var allowHttpRedirects = Convert.ToBoolean(query.Get("allowHttpRedirects"));
+                var verifySslValue = query.Get("verifySsl");
+                var verifySsl = Convert.ToBoolean(string.IsNullOrEmpty(verifySslValue) ? "true" : verifySslValue);
 
-                return Configure(url, org, bucket, token, logLevel, timeout, readWriteTimeout, allowHttpRedirects);
+                return Configure(url, org, bucket, token, logLevel, timeout, allowHttpRedirects, verifySsl);
             }
 
             private Builder Configure(string url, string org, string bucket, string token, string logLevel,
-                string timeout, string readWriteTimeout, bool allowHttpRedirects = false, bool verifySsl = true)
+                string timeout, bool allowHttpRedirects = false, bool verifySsl = true)
             {
                 Url(url);
                 Org(org);
@@ -393,11 +392,6 @@ namespace InfluxDB.Client
                 if (!string.IsNullOrWhiteSpace(timeout))
                 {
                     TimeOut(ToTimeout(timeout));
-                }
-
-                if (!string.IsNullOrWhiteSpace(readWriteTimeout))
-                {
-                    ReadWriteTimeOut(ToTimeout(readWriteTimeout));
                 }
 
                 AllowRedirects(allowHttpRedirects);
@@ -455,11 +449,6 @@ namespace InfluxDB.Client
                 if (Timeout == TimeSpan.Zero || Timeout == TimeSpan.FromMilliseconds(0))
                 {
                     Timeout = TimeSpan.FromSeconds(10);
-                }
-
-                if (ReadWriteTimeout == TimeSpan.Zero || ReadWriteTimeout == TimeSpan.FromMilliseconds(0))
-                {
-                    ReadWriteTimeout = TimeSpan.FromSeconds(10);
                 }
 
                 return new InfluxDBClientOptions(this);

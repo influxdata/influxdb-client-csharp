@@ -40,7 +40,7 @@ namespace Examples
         {
             public string Name { get; set; }
             public int Value { get; set; }
-            
+
             public override string ToString()
             {
                 return $"{Name}={Value}";
@@ -56,9 +56,11 @@ namespace Examples
             /// <summary>
             /// Convert to DomainObject.
             /// </summary>
-            public T ConvertToEntity<T>(FluxRecord fluxRecord) 
-                => (T)ConvertToEntity(fluxRecord, typeof(T));
-            
+            public T ConvertToEntity<T>(FluxRecord fluxRecord)
+            {
+                return (T)ConvertToEntity(fluxRecord, typeof(T));
+            }
+
 
             public object ConvertToEntity(FluxRecord fluxRecord, Type type)
             {
@@ -74,19 +76,17 @@ namespace Examples
                     Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
                     Properties = new List<DomainEntityAttribute>()
                 };
-                
+
                 foreach (var (key, value) in fluxRecord.Values)
-                {
                     if (key.StartsWith("property_"))
                     {
                         var attribute = new DomainEntityAttribute
                         {
                             Name = key.Replace("property_", string.Empty), Value = Convert.ToInt32(value)
                         };
-                        
+
                         customEntity.Properties.Add(attribute);
                     }
-                }
 
                 return Convert.ChangeType(customEntity, type);
             }
@@ -108,10 +108,8 @@ namespace Examples
                     .Timestamp(ce.Timestamp, precision);
 
                 foreach (var attribute in ce.Properties ?? new List<DomainEntityAttribute>())
-                {
                     point = point.Field($"property_{attribute.Name}", attribute.Value);
-                }
-                
+
                 Console.WriteLine($"LP: '{point.ToLineProtocol()}'");
 
                 return point;
@@ -192,9 +190,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = 4},
+                        { Name = "height", Value = 4 },
                     new DomainEntityAttribute
-                        {Name = "width", Value = 110}
+                        { Name = "width", Value = 110 }
                 }
             };
             var entity2 = new DomainEntity
@@ -205,9 +203,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = 5},
+                        { Name = "height", Value = 5 },
                     new DomainEntityAttribute
-                        {Name = "width", Value = 160}
+                        { Name = "width", Value = 160 }
                 }
             };
             var entity3 = new DomainEntity
@@ -218,9 +216,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = 5},
+                        { Name = "height", Value = 5 },
                     new DomainEntityAttribute
-                        {Name = "width", Value = 110}
+                        { Name = "width", Value = 110 }
                 }
             };
             var entity4 = new DomainEntity
@@ -231,9 +229,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = 6},
+                        { Name = "height", Value = 6 },
                     new DomainEntityAttribute
-                        {Name = "width", Value = 160}
+                        { Name = "width", Value = 160 }
                 }
             };
 
@@ -241,7 +239,7 @@ namespace Examples
             // Write data
             //
             await client.GetWriteApiAsync(converter)
-                .WriteMeasurementsAsync(WritePrecision.S, entity1, entity2, entity3, entity4);
+                .WriteMeasurementsAsync(new[] { entity1, entity2, entity3, entity4 }, WritePrecision.S);
 
             //
             // Query Data to Domain object
@@ -269,7 +267,7 @@ namespace Examples
             // Use Take + Skip
             //
             query = (from s in InfluxDBQueryable<DomainEntity>.Queryable("my-bucket", "my-org", queryApi, converter)
-                select s)
+                    select s)
                 .Take(1)
                 .Skip(1);
             Console.WriteLine("==== Use Take + Skip ====");
@@ -283,7 +281,7 @@ namespace Examples
                 select s;
             Console.WriteLine("==== Use Time Range ====");
             query.ToList().ForEach(it => Console.WriteLine(it.ToString()));
-            
+
             //
             // Use Any
             //
@@ -297,7 +295,7 @@ namespace Examples
             // Debug Query
             //
             Console.WriteLine("==== Debug LINQ Queryable Flux output ====");
-            var influxQuery = ((InfluxDBQueryable<DomainEntity>) query).ToDebugQuery();
+            var influxQuery = ((InfluxDBQueryable<DomainEntity>)query).ToDebugQuery();
             foreach (var statement in influxQuery.Extern.Body)
             {
                 var os = statement as OptionStatement;
@@ -307,9 +305,10 @@ namespace Examples
 
                 Console.WriteLine($"{name}={value}");
             }
+
             Console.WriteLine();
             Console.WriteLine(influxQuery._Query);
-            
+
             client.Dispose();
         }
     }

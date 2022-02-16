@@ -72,7 +72,7 @@ namespace InfluxDB.Client
 
             return Create(options);
         }
-        
+
         /// <summary>
         /// Create a instance of the InfluxDB 2.0 client.
         /// </summary>

@@ -17,7 +17,7 @@ namespace InfluxDB.Client.Core.Internal
             Level = logLevel;
         }
 
-        public void BeforeIntercept(IRestRequest request)
+        public void BeforeIntercept(RestRequest request)
         {
             if (Level == LogLevel.None)
             {
@@ -33,7 +33,7 @@ namespace InfluxDB.Client.Core.Internal
             {
                 var query = ToHeaders(request.Parameters, ParameterType.QueryString);
                 LogHeaders(query, "-->", "Query");
-                
+
                 var headers = ToHeaders(request.Parameters);
                 LogHeaders(headers, "-->");
             }
@@ -46,7 +46,7 @@ namespace InfluxDB.Client.Core.Internal
                 if (body != null)
                 {
                     string stringBody;
-                    
+
                     if (body.Value is byte[] bytes)
                     {
                         stringBody = Encoding.UTF8.GetString(bytes);
@@ -55,7 +55,7 @@ namespace InfluxDB.Client.Core.Internal
                     {
                         stringBody = body.Value.ToString();
                     }
-                    
+
                     Trace.WriteLine($"--> Body: {stringBody}");
                 }
             }
@@ -64,7 +64,7 @@ namespace InfluxDB.Client.Core.Internal
             Trace.WriteLine("-->");
         }
 
-        public object AfterIntercept(int statusCode, Func<IList<HttpHeader>> headers, object body)
+        public object AfterIntercept(int statusCode, Func<IEnumerable<HeaderParameter>> headers, object body)
         {
             var freshBody = body;
             if (Level == LogLevel.None)
@@ -110,20 +110,23 @@ namespace InfluxDB.Client.Core.Internal
             return freshBody;
         }
 
-        public static List<HttpHeader> ToHeaders(IList<Parameter> parameters, ParameterType type = ParameterType.HttpHeader)
+        private static IEnumerable<HeaderParameter> ToHeaders(ParametersCollection parameters,
+            ParameterType type = ParameterType.HttpHeader)
         {
             return parameters
                 .Where(parameter => parameter.Type.Equals(type))
-                .Select(h => new HttpHeader(h.Name, h.Value.ToString()))
+                .Select(h => new HeaderParameter(h.Name, h.Value?.ToString()))
                 .ToList();
         }
 
-        private void LogHeaders(IList<HttpHeader> headers, string direction, string type = "Header")
+        private void LogHeaders(IEnumerable<HeaderParameter> headers, string direction, string type = "Header")
         {
-            foreach (var emp in headers)
+            if (headers == null)
             {
-                Trace.WriteLine($"{direction} {type}: {emp.Name}={emp.Value}");
+                return;
             }
+
+            foreach (var emp in headers) Trace.WriteLine($"{direction} {type}: {emp.Name}={emp.Value}");
         }
     }
 }

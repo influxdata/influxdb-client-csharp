@@ -93,7 +93,7 @@ namespace InfluxDB.Client.Linq.Internal
             _rangeStopAssignment = rangeStop;
             _rangeStopExpression = expressionType;
         }
-        
+
         internal void AddAggregateWindow(string everyVariable, string periodVariable, string fnVariable)
         {
             _aggregateWindow = (everyVariable, periodVariable, fnVariable);
@@ -108,7 +108,7 @@ namespace InfluxDB.Client.Linq.Internal
             }
             else
             {
-                _limitNOffsetAssignments.Add(new LimitOffsetAssignment {N = limitNAssignment});
+                _limitNOffsetAssignments.Add(new LimitOffsetAssignment { N = limitNAssignment });
             }
         }
 
@@ -120,7 +120,7 @@ namespace InfluxDB.Client.Linq.Internal
             }
             else
             {
-                _limitNOffsetAssignments.Add(new LimitOffsetAssignment {Offset = limitOffsetAssignment});
+                _limitNOffsetAssignments.Add(new LimitOffsetAssignment { Offset = limitOffsetAssignment });
             }
         }
 
@@ -156,7 +156,7 @@ namespace InfluxDB.Client.Linq.Internal
         internal string BuildFluxQuery(QueryableOptimizerSettings settings)
         {
             Arguments.CheckNotNull(settings, nameof(settings));
-            
+
             var transforms = new List<string>();
             var parts = new List<string>
             {
@@ -177,27 +177,27 @@ namespace InfluxDB.Client.Linq.Internal
             parts.Add(BuildFilter(_filterByFields));
 
             // https://docs.influxdata.com/flux/v0.x/stdlib/universe/sort/
-            foreach (var ((column, columnVariable, descending, descendingVariable), index) in _orders.Select((value, i) => (value, i)))
+            foreach (var ((column, columnVariable, descending, descendingVariable), index) in _orders.Select(
+                         (value, i) => (value, i)))
             {
                 // skip default sorting if don't query to multiple time series
                 if (!settings.QueryMultipleTimeSeries && index == 0 && column == "_time" && !descending)
                 {
                     continue;
                 }
-                
-                parts.Add(BuildOperator("sort", "columns", new List<string> {columnVariable}, "desc", descendingVariable));
+
+                parts.Add(BuildOperator("sort", "columns", new List<string> { columnVariable }, "desc",
+                    descendingVariable));
             }
 
             // https://docs.influxdata.com/flux/v0.x/stdlib/universe/limit/
             foreach (var limitNOffsetAssignment in _limitNOffsetAssignments)
-            {
                 if (limitNOffsetAssignment.N != null)
                 {
                     parts.Add(BuildOperator("limit",
                         "n", limitNOffsetAssignment.N,
                         "offset", limitNOffsetAssignment.Offset));
                 }
-            }
 
             if (_resultFunction != ResultFunction.None)
             {
@@ -229,7 +229,7 @@ namespace InfluxDB.Client.Linq.Internal
             var list = new List<string>
             {
                 $"every: {every}",
-                period != null ? $"period: {period}" : null, 
+                period != null ? $"period: {period}" : null,
                 $"fn: {fn}"
             };
 

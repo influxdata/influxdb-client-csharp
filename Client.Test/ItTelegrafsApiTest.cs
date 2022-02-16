@@ -31,26 +31,26 @@ namespace InfluxDB.Client.Test
         {
             var config = new Dictionary<string, object>
             {
-                {"percpu", true},
-                {"totalcpu", true},
-                {"collect_cpu_time", false},
-                {"report_active", false},
-                {"avoid_null", null},
+                { "percpu", true },
+                { "totalcpu", true },
+                { "collect_cpu_time", false },
+                { "report_active", false },
+                { "avoid_null", null }
             };
-            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Inputs, "cpu", config: config);
+            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Input, "cpu", config: config);
         }
 
         private static TelegrafPlugin NewOutputPlugin()
         {
             var config = new Dictionary<string, object>
             {
-                {"organization", "my-org"},
-                {"bucket", "my-bucket"},
-                {"token", "$INFLUX_TOKEN"},
-                {"urls", new List<string> {"http://localhost:9999"}}
+                { "organization", "my-org" },
+                { "bucket", "my-bucket" },
+                { "token", "$INFLUX_TOKEN" },
+                { "urls", new List<string> { "http://localhost:9999" } }
             };
 
-            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Outputs, "influxdb_v2", "my instance",
+            return new TelegrafPlugin(TelegrafPlugin.TypeEnum.Output, "influxdb_v2", "my instance",
                 config);
         }
 
@@ -58,9 +58,9 @@ namespace InfluxDB.Client.Test
         public async Task CloneTelegraf()
         {
             var source = await _telegrafsApi.CreateTelegrafAsync(GenerateName("Telegraf"), "test-config", _organization,
-                new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
 
             var label = await Client.GetLabelsApi()
                 .CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
@@ -98,7 +98,7 @@ namespace InfluxDB.Client.Test
 
             var telegrafConfig = await _telegrafsApi
                 .CreateTelegrafAsync(name, "test-config", _organization,
-                    new List<TelegrafPlugin> {output, cpu});
+                    new List<TelegrafPlugin> { output, cpu });
 
             Assert.IsNotNull(telegrafConfig);
             Assert.AreEqual(name, telegrafConfig.Name);
@@ -110,31 +110,31 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(1, telegrafConfig.Metadata.Buckets.Count);
 
             var toml = Toml.Parse(telegrafConfig.Config).ToModel();
-            var agent = (TomlTable) toml["agent"];
+            var agent = (TomlTable)toml["agent"];
             Assert.IsNotNull(agent);
             Assert.AreEqual("10s", agent["interval"]);
-            Assert.IsTrue((bool) agent["round_interval"]);
+            Assert.IsTrue((bool)agent["round_interval"]);
             Assert.AreEqual(1000, agent["metric_batch_size"]);
             Assert.AreEqual(10000, agent["metric_buffer_limit"]);
             Assert.AreEqual("0s", agent["collection_jitter"]);
             Assert.AreEqual("0s", agent["flush_jitter"]);
             Assert.AreEqual("", agent["precision"]);
-            Assert.IsFalse((bool) agent["omit_hostname"]);
+            Assert.IsFalse((bool)agent["omit_hostname"]);
 
-            var tomlInflux = (TomlTableArray) ((TomlTable) toml["outputs"])["influxdb_v2"];
+            var tomlInflux = (TomlTableArray)((TomlTable)toml["outputs"])["influxdb_v2"];
             Assert.AreEqual(1, tomlInflux.Count);
             Assert.AreEqual("my-bucket", tomlInflux[0]["bucket"]);
             Assert.AreEqual("my-org", tomlInflux[0]["organization"]);
             Assert.AreEqual("$INFLUX_TOKEN", tomlInflux[0]["token"]);
-            Assert.AreEqual(1, ((TomlArray) tomlInflux[0]["urls"]).Count);
-            Assert.AreEqual("http://localhost:9999", ((TomlArray) tomlInflux[0]["urls"])[0]);
+            Assert.AreEqual(1, ((TomlArray)tomlInflux[0]["urls"]).Count);
+            Assert.AreEqual("http://localhost:9999", ((TomlArray)tomlInflux[0]["urls"])[0]);
 
-            var tomlCpu = (TomlTableArray) ((TomlTable) toml["inputs"])["cpu"];
+            var tomlCpu = (TomlTableArray)((TomlTable)toml["inputs"])["cpu"];
             Assert.AreEqual(1, tomlCpu.Count);
-            Assert.IsTrue((bool) tomlCpu[0]["totalcpu"]);
-            Assert.IsFalse((bool) tomlCpu[0]["collect_cpu_time"]);
-            Assert.IsFalse((bool) tomlCpu[0]["report_active"]);
-            Assert.IsTrue((bool) tomlCpu[0]["percpu"]);
+            Assert.IsTrue((bool)tomlCpu[0]["totalcpu"]);
+            Assert.IsFalse((bool)tomlCpu[0]["collect_cpu_time"]);
+            Assert.IsFalse((bool)tomlCpu[0]["report_active"]);
+            Assert.IsTrue((bool)tomlCpu[0]["percpu"]);
         }
 
         [Test]
@@ -142,7 +142,7 @@ namespace InfluxDB.Client.Test
         {
             var createdConfig = await _telegrafsApi
                 .CreateTelegrafAsync(GenerateName("Telegraf"), "test-config", _organization,
-                    new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                    new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
             Assert.IsNotNull(createdConfig);
 
             var foundTelegraf = await _telegrafsApi.FindTelegrafByIdAsync(createdConfig.Id);
@@ -174,7 +174,7 @@ namespace InfluxDB.Client.Test
             var name = GenerateName("Telegraf");
             var telegrafConfig = await _telegrafsApi
                 .CreateTelegrafAsync(name, "test-config", _organization,
-                    new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                    new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
 
             var telegrafConfigById = await _telegrafsApi.FindTelegrafByIdAsync(telegrafConfig.Id);
 
@@ -211,7 +211,7 @@ namespace InfluxDB.Client.Test
 
             await _telegrafsApi
                 .CreateTelegrafAsync(GenerateName("Telegraf"), "test-config", organization,
-                    new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                    new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
 
             telegrafConfigs = await _telegrafsApi.FindTelegrafsByOrgAsync(organization);
 
@@ -226,7 +226,7 @@ namespace InfluxDB.Client.Test
             var size = (await _telegrafsApi.FindTelegrafsAsync()).Count;
 
             await _telegrafsApi.CreateTelegrafAsync(GenerateName("Telegraf"), "test-config", _organization,
-                new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
 
             var telegrafConfigs = await _telegrafsApi.FindTelegrafsAsync();
             Assert.AreEqual(size + 1, telegrafConfigs.Count);
@@ -236,7 +236,7 @@ namespace InfluxDB.Client.Test
         public async Task GetToml()
         {
             var telegrafConfig = await _telegrafsApi.CreateTelegrafAsync(GenerateName("Telegraf"), "test-config",
-                _organization, new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                _organization, new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
 
             var toml = await _telegrafsApi.GetTOMLAsync(telegrafConfig);
 
@@ -262,9 +262,9 @@ namespace InfluxDB.Client.Test
             var labelClient = Client.GetLabelsApi();
 
             var telegrafConfig = await _telegrafsApi.CreateTelegrafAsync(GenerateName("Telegraf"), "test-config",
-                _organization, new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                _organization, new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
 
             var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
 
@@ -292,7 +292,7 @@ namespace InfluxDB.Client.Test
         public async Task Member()
         {
             var telegrafConfig = await _telegrafsApi.CreateTelegrafAsync(GenerateName("Telegraf"), "test-config",
-                _organization, new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                _organization, new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
 
             var members = await _telegrafsApi.GetMembersAsync(telegrafConfig);
             Assert.AreEqual(0, members.Count);
@@ -322,7 +322,7 @@ namespace InfluxDB.Client.Test
         public async Task Owner()
         {
             var telegrafConfig = await _telegrafsApi.CreateTelegrafAsync(GenerateName("Telegraf"), "test-config",
-                _organization, new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                _organization, new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
 
             var owners = await _telegrafsApi.GetOwnersAsync(telegrafConfig);
             Assert.AreEqual(1, owners.Count);
@@ -352,7 +352,7 @@ namespace InfluxDB.Client.Test
         public async Task UpdateTelegraf()
         {
             var telegrafConfig = await _telegrafsApi.CreateTelegrafAsync(GenerateName("Telegraf"), "test-config",
-                _organization, new List<TelegrafPlugin> {NewOutputPlugin(), NewCpuPlugin()});
+                _organization, new List<TelegrafPlugin> { NewOutputPlugin(), NewCpuPlugin() });
 
             telegrafConfig.Description = "updated";
             telegrafConfig.Config = "my-updated-config";

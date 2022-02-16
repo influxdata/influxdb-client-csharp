@@ -159,12 +159,10 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryAsync(flux, "org_id", (cancellable, record) =>
+            await queryApi.QueryAsync(flux, record =>
             {
                 //
                 // The callback to consume a FluxRecord.
-                //
-                // cancelable - object has the cancel method to stop asynchronous query
                 //
                 Console.WriteLine($"{record.GetTime()}: {record.GetValueByKey("_value")}");
             }, exception =>
@@ -179,7 +177,7 @@ namespace Examples
                 // The callback to consume a notification about successfully end of stream.
                 //
                 Console.WriteLine("Query completed");
-            });
+            }, "org_id");
 
             influxDBClient.Dispose();
         }
@@ -212,15 +210,13 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryAsync<Temperature>(flux, "org_id", (cancellable, temperature) =>
+            await queryApi.QueryAsync<Temperature>(flux, temperature =>
             {
                 //
                 // The callback to consume a FluxRecord mapped to POCO.
                 //
-                // cancelable - object has the cancel method to stop asynchronous query
-                //
                 Console.WriteLine($"{temperature.Location}: {temperature.Value} at {temperature.Time}");
-            });
+            }, org: "org_id");
 
             influxDBClient.Dispose();
         }  
@@ -264,7 +260,7 @@ namespace Examples
             //
             // QueryData
             //
-            var csv = await queryApi.QueryRawAsync(flux, "org_id");
+            var csv = await queryApi.QueryRawAsync(flux, org: "org_id");
             
             Console.WriteLine($"CSV response: {csv}");
 
@@ -298,15 +294,13 @@ namespace Examples
             //
             // QueryData
             //
-            await queryApi.QueryRawAsync(flux, "org_id", (cancellable, line) =>
+            await queryApi.QueryRawAsync(flux, line =>
             {
                 //
                 // The callback to consume a line of CSV response
                 //
-                // cancelable - object has the cancel method to stop asynchronous query
-                //
                 Console.WriteLine($"Response: {line}");
-            });
+            }, org: "org_id");
 
             influxDBClient.Dispose();
         }
@@ -324,7 +318,7 @@ using InfluxDB.Client;
 
 namespace Examples
 {
-    public class SynchronousQuery
+    public static class SynchronousQuery
     {
         public static void Main(string[] args)
         {
@@ -413,7 +407,7 @@ namespace Examples
                 //
                 var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
 
-                writeApi.WriteMeasurement("bucket_name", "org_id", WritePrecision.Ns, temperature);
+                writeApi.WriteMeasurement(temperature, WritePrecision.Ns, "bucket_name", "org_id");
             }
             
             influxDBClient.Dispose();
@@ -465,7 +459,7 @@ namespace Examples
                     .Field("value", 55D)
                     .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
                 
-                writeApi.WritePoint("bucket_name", "org_id", point);
+                writeApi.WritePoint(point, "bucket_name", "org_id");
             }
             
             influxDBClient.Dispose();
@@ -509,13 +503,13 @@ namespace Examples
                     .Field("value", 55D)
                     .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
                 
-                writeApi.WritePoint("bucket_name", "org_id", pointA);
+                writeApi.WritePoint(pointA, "bucket_name", "org_id");
                 
                 var pointB = builder
                     .Field("age", 32)
                     .Timestamp(DateTime.UtcNow, WritePrecision.Ns);
                 
-                writeApi.WritePoint("bucket_name", "org_id", pointB);
+                writeApi.WritePoint(pointB, "bucket_name", "org_id");
             }
             
             influxDBClient.Dispose();
@@ -552,7 +546,7 @@ namespace Examples
                 //
                 // Write by LineProtocol
                 //
-                writeApi.WriteRecord("bucket_name", "org_id", WritePrecision.Ns, "temperature,location=north value=60.0");
+                writeApi.WriteRecord("temperature,location=north value=60.0", WritePrecision.Ns,"bucket_name", "org_id");
             }
             
             influxDBClient.Dispose();
@@ -581,7 +575,7 @@ namespace Examples
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time; { get; set; }
+            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
         
         public static async Task Main(string[] args)
@@ -598,8 +592,8 @@ namespace Examples
             //
             // Write by LineProtocol
             //
-            await writeApiAsync.WriteRecordAsync("my-bucket", "my-org", WritePrecision.Ns,
-                            "temperature,location=north value=60.0");
+            await writeApiAsync.WriteRecordAsync("temperature,location=north value=60.0", WritePrecision.Ns,
+                "my-bucket", "my-org");
 
             //
             //
@@ -610,14 +604,14 @@ namespace Examples
                             .Field("value", 55D)
                             .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
 
-            await writeApiAsync.WritePointAsync("my-bucket", "my-org", point);
+            await writeApiAsync.WritePointAsync(point, "my-bucket", "my-org");
 
             //
             // Write by POCO
             //
             var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
 
-            await writeApiAsync.WriteMeasurementAsync("my-bucket", "my-org", WritePrecision.Ns, temperature);
+            await writeApiAsync.WriteMeasurementAsync(temperature, WritePrecision.Ns, "my-bucket", "my-org");
 
             //
             // Check written data
@@ -668,7 +662,6 @@ In a [configuration file](#client-configuration-file) you are able to specify de
              bucket="my-bucket"
              token="my-token"
              logLevel="BODY"
-             readWriteTimeout="5s"
              timeout="10s">
         <tags>
             <tag name="id" value="132-987-655"/>
@@ -951,11 +944,11 @@ namespace Examples
             /// <summary>
             /// Convert to DomainObject.
             /// </summary>
-            public T ConvertToEntity<T>(FluxRecord fluxRecord)
+            public object ConvertToEntity(FluxRecord fluxRecord, Type type)
             {
-                if (typeof(T) != typeof(Sensor))
+                if (type != typeof(Sensor))
                 {
-                    throw new NotSupportedException($"This converter doesn't supports: {typeof(T)}");
+                    throw new NotSupportedException($"This converter doesn't supports: {type}");
                 }
 
                 var customEntity = new Sensor
@@ -966,7 +959,15 @@ namespace Examples
                     Timestamp = fluxRecord.GetTime().GetValueOrDefault().ToDateTimeUtc(),
                 };
                 
-                return (T) Convert.ChangeType(customEntity, typeof(T));
+                return Convert.ChangeType(customEntity, type);
+            }
+            
+            /// <summary>
+            /// Convert to DomainObject.
+            /// </summary>
+            public T ConvertToEntity<T>(FluxRecord fluxRecord)
+            {
+                return (T)ConvertToEntity(fluxRecord, typeof(T));
             }
 
             /// <summary>
@@ -1045,7 +1046,7 @@ namespace Examples
             // Write data
             //
             await client.GetWriteApiAsync(converter)
-                .WriteMeasurementsAsync(WritePrecision.S, entity1, entity2, entity3, entity4);
+                .WriteMeasurementsAsync(new []{entity1, entity2, entity3, entity4}, WritePrecision.S);
 
             //
             // Query Data to Domain object
@@ -1080,18 +1081,18 @@ A client can be configured via `App.config` file.
 
 The following options are supported:
 
-| Property name     | default   | description |
-| ------------------|-----------|-------------| 
-| Url               | -         | the url to connect to InfluxDB |
-| Org               | -         | default destination organization for writes and queries |
-| Bucket            | -         | default destination bucket for writes |
-| Token             | -         | the token to use for the authorization |
-| LogLevel          | NONE      | rest client verbosity level |
-| ReadWriteTimeout  | 10000 ms  | read and write timeout |
-| Timeout           | 10000 ms  | socket timeout |
-| AllowHttpRedirects| false     | Configure automatically following HTTP 3xx redirects. |
+| Property name      | default  | description                                             |
+|--------------------|----------|---------------------------------------------------------| 
+| Url                | -        | the url to connect to InfluxDB                          |
+| Org                | -        | default destination organization for writes and queries |
+| Bucket             | -        | default destination bucket for writes                   |
+| Token              | -        | the token to use for the authorization                  |
+| LogLevel           | NONE     | rest client verbosity level                             |
+| Timeout            | 10000 ms | socket timeout                                          |
+| AllowHttpRedirects | false    | Configure automatically following HTTP 3xx redirects    |
+| VerifySsl          | true     | Ignore Certificate Validation Errors when false         |
 
-The `ReadWriteTimeout` and `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
+The `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
 
 ##### Configuration example
@@ -1108,7 +1109,6 @@ The `ReadWriteTimeout` and `Timeout` supports `ms`, `s` and `m` as unit. Default
              bucket="my-bucket"
              token="my-token"
              logLevel="BODY"
-             readWriteTimeout="5s"
              timeout="10s">
     </influx2>
 </configuration>
@@ -1126,21 +1126,21 @@ A client can be constructed using a connection string that can contain the Influ
  
 ```c#
 var influxDBClient = InfluxDBClientFactory
-            .Create("http://localhost:8086?timeout=5000&readWriteTimeout=5000&logLevel=BASIC")
+            .Create("http://localhost:8086?timeout=5000&logLevel=BASIC")
 ```
 The following options are supported:
 
-| Property name     | default   | description |
-| ------------------|-----------|-------------| 
-| org               | -         | default destination organization for writes and queries |
-| bucket            | -         | default destination bucket for writes |
-| token             | -         | the token to use for the authorization |
-| logLevel          | NONE      | rest client verbosity level |
-| readWriteTimeout  | 10000 ms  | read and write timeout |
-| timeout           | 10000 ms  | socket timeout |
-| allowHttpRedirects| false | Configure automatically following HTTP 3xx redirects. |
+| Property name      | default  | description                                             |
+|--------------------|----------|---------------------------------------------------------| 
+| org                | -        | default destination organization for writes and queries |
+| bucket             | -        | default destination bucket for writes                   |
+| token              | -        | the token to use for the authorization                  |
+| logLevel           | NONE     | rest client verbosity level                             |
+| timeout            | 10000 ms | socket timeout                                          |
+| allowHttpRedirects | false    | Configure automatically following HTTP 3xx redirects    |
+| verifySsl          | true     | Ignore Certificate Validation Errors when `false`       |
 
-The `readWriteTimeout` and `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
+The `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
 ### Gzip support
 `InfluxDBClient` does not enable gzip compress for http requests by default. If you want to enable gzip to reduce transfer data's size, you can call:

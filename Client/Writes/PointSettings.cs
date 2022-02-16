@@ -20,7 +20,7 @@ namespace InfluxDB.Client.Writes
             RegexOptions.Compiled |
             RegexOptions.CultureInvariant |
             RegexOptions.RightToLeft);
-        
+
         private static readonly Regex EnvVariableRegex = new Regex("^(\\${env.)(?<Value>.+)(})$",
             RegexOptions.ExplicitCapture |
             RegexOptions.Compiled |

@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Writes
             {
                 return new Builder(measurementName);
             }
-            
+
             /// <summary>
             /// Adds or replaces a tag value for a point.
             /// </summary>
@@ -51,7 +51,8 @@ namespace InfluxDB.Client.Writes
                 {
                     if (_tags.ContainsKey(name))
                     {
-                        Trace.TraceWarning($"Empty tags will cause deletion of, tag [{name}], measurement [{_measurementName}]");
+                        Trace.TraceWarning(
+                            $"Empty tags will cause deletion of, tag [{name}], measurement [{_measurementName}]");
                         _tags.Remove(name);
                     }
                     else
@@ -63,7 +64,7 @@ namespace InfluxDB.Client.Writes
                 {
                     _tags[name] = value;
                 }
-                
+
                 return this;
             }
 
@@ -175,7 +176,7 @@ namespace InfluxDB.Client.Writes
             public Builder Timestamp(long timestamp, WritePrecision timeUnit)
             {
                 _precision = timeUnit;
-                _time= timestamp;
+                _time = timestamp;
                 return this;
             }
 
@@ -187,7 +188,7 @@ namespace InfluxDB.Client.Writes
             /// <returns></returns>
             public Builder Timestamp(TimeSpan timestamp, WritePrecision timeUnit)
             {
-                _time = PointData.TimeSpanToBigInteger(timestamp, timeUnit);
+                _time = TimeSpanToBigInteger(timestamp, timeUnit);
                 _precision = timeUnit;
                 return this;
             }
@@ -205,7 +206,7 @@ namespace InfluxDB.Client.Writes
                     throw new ArgumentException("Timestamps must be specified as UTC", nameof(timestamp));
                 }
 
-                var timeSpan = timestamp.Subtract(PointData.EpochStart);
+                var timeSpan = timestamp.Subtract(EpochStart);
 
                 return Timestamp(timeSpan, timeUnit);
             }
@@ -229,7 +230,7 @@ namespace InfluxDB.Client.Writes
             /// <returns></returns>
             public Builder Timestamp(Instant timestamp, WritePrecision timeUnit)
             {
-                _time = PointData.InstantToBigInteger(timestamp, timeUnit);
+                _time = InstantToBigInteger(timestamp, timeUnit);
                 _precision = timeUnit;
                 return this;
             }
@@ -249,8 +250,8 @@ namespace InfluxDB.Client.Writes
             /// <returns></returns>
             public PointData ToPointData()
             {
-                return new PointData(_measurementName, _precision, _time, 
-                    ImmutableSortedDictionary.CreateRange(_tags), 
+                return new PointData(_measurementName, _precision, _time,
+                    ImmutableSortedDictionary.CreateRange(_tags),
                     ImmutableSortedDictionary.CreateRange(_fields));
             }
 

@@ -29,9 +29,15 @@ namespace InfluxDB.Client.Test
                 .AuthenticateToken("token")
                 .Org("my-org")
                 .Build();
-            
+
             _influxDbClient = InfluxDBClientFactory.Create(options);
             _queryApiSync = _influxDbClient.GetQueryApiSync();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _influxDbClient?.Dispose();
         }
 
         [Test]
@@ -63,13 +69,35 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(13.00, tables[0].Records[1].GetValue());
         }
 
+        [Test]
+        public void RequiredOrgQuerySync()
+        {
+            _influxDbClient.Dispose();
+
+            var options = InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url(MockServerUrl)
+                .AuthenticateToken("token")
+                .Build();
+
+            _influxDbClient = InfluxDBClientFactory.Create(options);
+            _queryApiSync = _influxDbClient.GetQueryApiSync();
+
+            var ae = Assert.Throws<ArgumentException>(() => _queryApiSync.QuerySync("from(..."));
+
+            Assert.NotNull(ae);
+            Assert.AreEqual(
+                "Expecting a non-empty string for 'org' parameter. Please specify the organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
+                ae.Message);
+        }
+
         private class SyncPoco
         {
             [Column("id", IsTag = true)] public string Tag { get; set; }
 
             [Column("_value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public Object Timestamp { get; set; }
+            [Column(IsTimestamp = true)] public object Timestamp { get; set; }
         }
     }
 }

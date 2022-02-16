@@ -9,17 +9,17 @@ namespace InfluxDB.Client.Core
         /// Disable logging.
         /// </summary>
         None,
-        
+
         /// <summary>
         /// Logs request and response lines.
         /// </summary>
         Basic,
-        
+
         /// <summary>
         /// Logs request and response lines including headers.
         /// </summary>
         Headers,
-        
+
         /// <summary>
         /// Logs request and response lines including headers and body (if present).
         /// <para>Note that applying the `Body` LogLevel will disable chunking while streaming

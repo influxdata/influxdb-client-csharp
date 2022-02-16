@@ -37,7 +37,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(threshold, nameof(threshold));
 
-            var thresholds = new List<Threshold> {threshold};
+            var thresholds = new List<Threshold> { threshold };
 
             return CreateThresholdCheckAsync(name, query, every, messageTemplate, thresholds, orgId);
         }
@@ -67,7 +67,7 @@ namespace InfluxDB.Client
                 orgID: orgId, every: every, statusMessageTemplate: messageTemplate, status: TaskStatusType.Active,
                 query: CreateDashboardQuery(query));
 
-            return (ThresholdCheck) await CreateCheckAsync(check).ConfigureAwait(false);
+            return (ThresholdCheck)await CreateCheckAsync(check).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace InfluxDB.Client
                 orgID: orgId, query: CreateDashboardQuery(query), statusMessageTemplate: messageTemplate,
                 status: TaskStatusType.Active);
 
-            return (DeadmanCheck) await CreateCheckAsync(check).ConfigureAwait(false);
+            return (DeadmanCheck)await CreateCheckAsync(check).ConfigureAwait(false);
         }
 
         /// <summary>

@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
@@ -83,10 +85,7 @@ namespace InfluxDB.Client.Test
 
             var runs = await _client.GetTasksApi().GetRunsAsync("taskId", "runId");
             Assert.AreEqual(20, runs.Count);
-            foreach (var run in runs)
-            {
-                Assert.IsNotNull(run.StartedAt);
-            }
+            foreach (var run in runs) Assert.IsNotNull(run.StartedAt);
         }
 
         [Test]
@@ -117,8 +116,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             StringAssert.Contains("org=org1", writer.ToString());
@@ -140,8 +139,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             StringAssert.DoesNotContain("org=org1", writer.ToString());
@@ -159,7 +158,7 @@ namespace InfluxDB.Client.Test
             await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
 
             var request = MockServer.LogEntries.Last();
-            StringAssert.StartsWith("influxdb-client-csharp/3.", request.RequestMessage.Headers["User-Agent"].First());
+            StringAssert.StartsWith("influxdb-client-csharp/4.", request.RequestMessage.Headers["User-Agent"].First());
             StringAssert.EndsWith(".0.0", request.RequestMessage.Headers["User-Agent"].First());
         }
 
@@ -172,8 +171,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             var request = MockServer.LogEntries.Last();
@@ -185,8 +184,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             request = MockServer.LogEntries.Last();
@@ -199,8 +198,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             request = MockServer.LogEntries.Last();
@@ -213,8 +212,8 @@ namespace InfluxDB.Client.Test
 
             using (var writeApi = _client.GetWriteApi())
             {
-                writeApi.WriteRecord("b1", "org1", WritePrecision.Ns,
-                    "h2o_feet,location=coyote_creek water_level=1.0 1");
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
             }
 
             request = MockServer.LogEntries.Last();
@@ -223,9 +222,7 @@ namespace InfluxDB.Client.Test
 
             Assert.True(MockServer.LogEntries.Any());
             foreach (var logEntry in MockServer.LogEntries)
-            {
                 StringAssert.StartsWith(MockServerUrl + "/api/v2/", logEntry.RequestMessage.AbsoluteUrl);
-            }
         }
 
         [Test]
@@ -259,7 +256,7 @@ namespace InfluxDB.Client.Test
                 .AuthenticateToken("my-token")
                 .AllowRedirects(true)
                 .Build());
-            
+
             var anotherServer = WireMockServer.Start(new WireMockServerSettings
             {
                 UseSSL = false
@@ -285,7 +282,7 @@ namespace InfluxDB.Client.Test
 
             anotherServer.Stop();
         }
-        
+
         [Test]
         public async Task Anonymous()
         {
@@ -297,11 +294,30 @@ namespace InfluxDB.Client.Test
             MockServer
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
-            
+
             await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
             var request = MockServer.LogEntries.Last();
-            
+
             CollectionAssert.DoesNotContain(request.RequestMessage.Headers.Keys, "Authorization");
+        }
+
+        [Test]
+        public void HttpClientIsDisposed()
+        {
+            _client.Dispose();
+            var apiClientInfo =
+                _client.GetType().GetField("_apiClient", BindingFlags.NonPublic | BindingFlags.Instance);
+            var apiClient = (ApiClient)apiClientInfo!.GetValue(_client);
+
+            var httpClientInfo =
+                apiClient!.RestClient.GetType()
+                    .GetProperty("HttpClient", BindingFlags.NonPublic | BindingFlags.Instance);
+            var httpClient = (HttpClient)httpClientInfo!.GetValue(apiClient.RestClient);
+            var disposedInfo =
+                httpClient!.GetType().GetField("_disposed", BindingFlags.NonPublic | BindingFlags.Instance);
+            var disposed = (bool)disposedInfo!.GetValue(httpClient)!;
+
+            Assert.AreEqual(true, disposed);
         }
     }
 }

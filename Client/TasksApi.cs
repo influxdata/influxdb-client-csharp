@@ -45,9 +45,9 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
-            var taskCreateRequest = new TaskCreateRequest(orgID: task.OrgID, org: task.Org, status: status,
-                flux: task.Flux, description: task.Description);
+            var status = (TaskStatusType)Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
+            var taskCreateRequest = new TaskCreateRequest(task.OrgID, task.Org, status,
+                task.Flux, task.Description);
 
             return CreateTaskAsync(taskCreateRequest);
         }
@@ -165,7 +165,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
+            var status = (TaskStatusType)Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
 
             var request = new TaskUpdateRequest(status, task.Flux, task.Name, task.Every, task.Cron);
 
@@ -221,7 +221,7 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
 
             var task = await FindTaskByIdAsync(taskId).ConfigureAwait(false);
-            
+
             return await CloneTaskAsync(task).ConfigureAwait(false);
         }
 
@@ -234,16 +234,13 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
-            var cloned = new TaskCreateRequest(orgID: task.OrgID, org: task.Org, status: status,
-                flux: task.Flux, description: task.Description);
+            var status = (TaskStatusType)Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
+            var cloned = new TaskCreateRequest(task.OrgID, task.Org, status,
+                task.Flux, task.Description);
 
             var created = await CreateTaskAsync(cloned).ConfigureAwait(false);
             var labels = await GetLabelsAsync(task).ConfigureAwait(false);
-            foreach (var label in labels)
-            {
-                await AddLabelAsync(label, created).ConfigureAwait(false);
-            }
+            foreach (var label in labels) await AddLabelAsync(label, created).ConfigureAwait(false);
 
             return created;
         }
@@ -312,7 +309,8 @@ namespace InfluxDB.Client
         /// <param name="userId">filter tasks to a specific user ID</param>
         /// <param name="orgId">filter tasks to a specific organization ID</param>
         /// <returns>A list of tasks</returns>
-        public async Task<List<TaskType>> FindTasksAsync(string afterId = null, string userId = null, string orgId = null)
+        public async Task<List<TaskType>> FindTasksAsync(string afterId = null, string userId = null,
+            string orgId = null)
         {
             var response = await _service.GetTasksAsync(after: afterId, user: userId, orgID: orgId)
                 .ConfigureAwait(false);
@@ -564,7 +562,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(taskId, nameof(taskId));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _service.GetTasksIDRunsAsync(taskId, null, null, limit, afterTime, beforeTime).ConfigureAwait(false);
+            var response = await _service.GetTasksIDRunsAsync(taskId, null, null, limit, afterTime, beforeTime)
+                .ConfigureAwait(false);
             return response._Runs;
         }
 
@@ -749,7 +748,10 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(flux, nameof(flux));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            if (every != null) Arguments.CheckDuration(every, nameof(every));
+            if (every != null)
+            {
+                Arguments.CheckDuration(every, nameof(every));
+            }
 
             var task = new TaskType(orgID: orgId, name: name, status: TaskStatusType.Active, flux: flux);
 

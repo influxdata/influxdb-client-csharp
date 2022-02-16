@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Linq
         {
             return Queryable(bucket, org, queryApi, new DefaultMemberNameResolver(), queryableOptimizerSettings);
         }
-     
+
         /// <summary>
         /// Create a new instance of IQueryable for asynchronous Queries.
         /// </summary>
@@ -174,7 +174,9 @@ namespace InfluxDB.Client.Linq
             var executor = provider?.Executor as InfluxDBQueryExecutor;
 
             if (executor == null)
+            {
                 throw new NotSupportedException("InfluxDBQueryable should use InfluxDBQueryExecutor");
+            }
 
             var parsedQuery = provider.QueryParser.GetParsedQuery(Expression);
             var generateQuery = executor.GenerateQuery(parsedQuery, out _);
@@ -233,11 +235,13 @@ namespace InfluxDB.Client.Linq
             }
 
             if (!(source is InfluxDBQueryable<T> queryable))
+            {
                 throw new InvalidCastException("Queryable should be InfluxDBQueryable");
+            }
 
             return queryable;
         }
-        
+
         /// <summary>
         /// The extension to use Flux window operator. For more info see https://docs.influxdata.com/flux/v0.x/stdlib/universe/aggregatewindow/
         ///
@@ -257,7 +261,8 @@ namespace InfluxDB.Client.Linq
         /// <returns>NotSupportedException if it's called outside LINQ expression.</returns>
         /// <exception cref="NotSupportedException">Caused by calling outside of LINQ expression.</exception>
         // ReSharper disable UnusedParameter.Global
-        public static bool AggregateWindow(this DateTime timestamp, TimeSpan every, TimeSpan? period = null, string fn = "mean")
+        public static bool AggregateWindow(this DateTime timestamp, TimeSpan every, TimeSpan? period = null,
+            string fn = "mean")
         {
             throw new NotSupportedException("This should be used only in LINQ expression. " +
                                             "Something like: 'where s.Timestamp.AggregateWindow(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(40), \"mean\")'.");

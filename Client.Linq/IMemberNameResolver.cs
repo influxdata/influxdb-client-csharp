@@ -37,8 +37,10 @@ namespace InfluxDB.Client.Linq
         Tag,
         Field,
         Timestamp,
+
         // Member Value is used as a name of field
         NamedField,
+
         // Member Value is used as a value of NamedField
         NamedFieldValue
     }
