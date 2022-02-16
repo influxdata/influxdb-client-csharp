@@ -6,7 +6,7 @@
 
 #### API
 
-- The Client not longer support set the `ReadWriteTimeout` for HTTP Client. This settings is not supported by `HttpClient`.
+- The Client no longer supports the `ReadWriteTimeout` for HTTP Client. This settings is not supported by the `HttpClient`. Use can use `Timeout` property instead.
 - The `FluxClient` uses `IDisposable` interface to releasing underlying HTTP connections:
   ##### From
    ```csharp
