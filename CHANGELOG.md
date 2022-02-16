@@ -2,7 +2,7 @@
 
 ### Breaking Changes
 
-:warning: The most important change is the update RestSharp to version `v107`. The RestSharp stop using the legacy `HttpWebRequest` class, and uses well-known `HttpClient` instead.
+:warning: The underlying `RestSharp` library was updated the latest major version `v107`. The new version of `RestSharp` switched from the legacy `HttpWebRequest` class to the standard well-known `System.Net.Http.HttpClient` instead. This improves performance and solves lots of issues, like hanging connections, updated protocols support, and many other problems.
 
 #### API
 
