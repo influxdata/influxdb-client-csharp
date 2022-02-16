@@ -298,8 +298,8 @@ namespace InfluxDB.Client.Test
             Client.Dispose();
             Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-user", "my-password".ToCharArray());
             _tasksApi = Client.GetTasksApi();
-            
-            var user = (await Client.GetUsersApi().FindUsersAsync(name:"my-user"))[0];
+
+            var user = (await Client.GetUsersApi().FindUsersAsync(name: "my-user"))[0];
 
             var count = (await _tasksApi.FindTasksByUserAsync(user)).Count;
             Assert.GreaterOrEqual(count, 0);
