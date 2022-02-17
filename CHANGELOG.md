@@ -221,6 +221,7 @@ This release also uses new version of InfluxDB OSS API definitions - [oss.yml](h
 [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Update dependencies:
  
 #### Build:
+    - RestSharp to 107.3.0
     - CsvHelper to 27.2.1
     - NodaTime to 3.0.9
     - Microsoft.Extensions.ObjectPool to 6.0.1
