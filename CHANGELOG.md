@@ -1,4 +1,4 @@
-## 4.0.0-rc1 [unreleased]
+## 4.0.0-rc1 [2022-02-18]
 
 ### Breaking Changes
 
