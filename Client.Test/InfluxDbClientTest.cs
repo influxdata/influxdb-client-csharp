@@ -83,7 +83,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingGet())
                 .RespondWith(CreateResponse(data, "application/json"));
 
-            var runs = await _client.GetTasksApi().GetRunsAsync("taskId", "runId");
+            var runs = await _client.GetTasksApi().GetRunsAsync("taskId");
             Assert.AreEqual(20, runs.Count);
             foreach (var run in runs) Assert.IsNotNull(run.StartedAt);
         }
