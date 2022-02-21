@@ -815,7 +815,7 @@ namespace Examples
             //
             // Create access token to "iot_bucket"
             //
-            var resource = new PermissionResource(PermissionResource.TypeEnum.Buckets, bucket.Id, null,
+            var resource = new PermissionResource(PermissionResource.TypeBuckets, bucket.Id, null,
                 orgId);
 
             // Read permission

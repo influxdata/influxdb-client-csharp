@@ -24,7 +24,7 @@ namespace InfluxDB.Client.Test
             // Add Permissions to read and write to the Bucket
             //
             var resource =
-                new PermissionResource(PermissionResource.TypeEnum.Buckets, _bucket.Id, null, _organization.Id);
+                new PermissionResource(PermissionResource.TypeBuckets, _bucket.Id, null, _organization.Id);
 
             var readBucket = new Permission(Permission.ActionEnum.Read, resource);
             var writeBucket = new Permission(Permission.ActionEnum.Write, resource);
