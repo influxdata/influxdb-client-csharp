@@ -48,12 +48,6 @@ namespace InfluxDB.Client.Api.Domain
         public PermissionResource(string type = default, string id = default, string name = default,
             string orgID = default, string org = default)
         {
-            // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new InvalidDataException("type is a required property for PermissionResource and cannot be null");
-            }
-
             Type = type;
             Id = id;
             Name = name;
