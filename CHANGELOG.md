@@ -17,7 +17,7 @@
 
 ### Features
 1. [#291](https://github.com/influxdata/influxdb-client-csharp/pull/291): Add possibility to generate Flux query without `pivot()` function [LINQ]
-1. [#289](https://github.com/influxdata/influxdb-client-csharp/pull/289): `TasksApi` uses `CancellationToken` in all `async` methods
+1. [#289](https://github.com/influxdata/influxdb-client-csharp/pull/289): Async APIs uses `CancellationToken` in all `async` methods
 
 ### CI
 1. [#292](https://github.com/influxdata/influxdb-client-csharp/pull/292): Use new Codecov uploader for reporting code coverage
