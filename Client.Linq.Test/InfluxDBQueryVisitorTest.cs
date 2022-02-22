@@ -1056,7 +1056,7 @@ namespace Client.Linq.Test
                     "from(bucket: p1) " +
                     "|> range(start: time(v: start_shifted)) " +
                     "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])"
-                ),
+                )
             };
 
             foreach (var (alignFieldsWithPivot, expected) in queries)
