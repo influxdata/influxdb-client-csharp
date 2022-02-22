@@ -164,7 +164,9 @@ namespace InfluxDB.Client.Linq.Internal
                 BuildRange(transforms),
                 BuildFilter(_filterByTags),
                 BuildAggregateWindow(_aggregateWindow),
-                "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")"
+                settings.AlignFieldsWithPivot
+                    ? "pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")"
+                    : ""
             };
 
             var drop = BuildDrop(settings);

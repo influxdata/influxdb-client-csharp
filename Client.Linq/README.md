@@ -263,6 +263,19 @@ The LINQ provider needs to aligns fields within each input table that have the s
 For that reason we need to use the [pivot()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/pivot/) function.
 The `pivot` is heavy and should be used at the end of our Flux query.
 
+There is an also possibility to disable appending `pivot` by:
+
+```c#
+var optimizerSettings =
+    new QueryableOptimizerSettings
+    {
+        AlignFieldsWithPivot = false
+    };
+    
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi, optimizerSettings)
+    select s;
+```
+
 ### Mapping LINQ filters
 
 For the best performance on the both side - `server`, `LINQ provider` we maps the LINQ expressions to FLUX query following way:
