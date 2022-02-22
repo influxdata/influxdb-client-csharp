@@ -100,6 +100,11 @@ jobs:
               - equal: [ true, << parameters.code-coverage-report >> ]
           steps:
               - run:
+                  name: Install GPG
+                  command: |
+                      apt-get update
+                      apt-get install gpg -y
+              - run:
                   name: Collecting coverage reports
                   command: |
                       curl -Os https://uploader.codecov.io/latest/linux/codecov
