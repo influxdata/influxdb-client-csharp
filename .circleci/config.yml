@@ -99,9 +99,22 @@ jobs:
             and:
               - equal: [ true, << parameters.code-coverage-report >> ]
           steps:
-            - run:
-                name: "Collecting coverage reports"
-                command: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+              - run:
+                  name: Install GPG
+                  command: |
+                      apt-get update
+                      apt-get install gpg -y
+              - run:
+                  name: Collecting coverage reports
+                  command: |
+                      curl -Os https://uploader.codecov.io/latest/linux/codecov
+                      curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM
+                      curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM.sig
+                      curl -s https://keybase.io/codecovsecurity/pgp_keys.asc | gpg --no-default-keyring --keyring trustedkeys.gpg --import
+                      gpgv codecov.SHA256SUM.sig codecov.SHA256SUM
+                      shasum -a 256 -c codecov.SHA256SUM
+                      chmod +x ./codecov
+                      ./codecov
 
   tests-windows:
     machine:
