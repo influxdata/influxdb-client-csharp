@@ -14,10 +14,18 @@
 #### API
 
 - Removed `orgId` argument from `TelegrafsApi.GetRunsAsync` methods
+- Change type of `PermissionResource.Type` to `string`. You are able to easily migrate by:
+    ```diff
+    - new PermissionResource { Type = PermissionResource.TypeEnum.Users, OrgID = _organization.Id }
+    + new PermissionResource { Type = PermissionResource.TypeUsers, OrgID = _organization.Id }
+    ```
 
 ### Features
 1. [#291](https://github.com/influxdata/influxdb-client-csharp/pull/291): Add possibility to generate Flux query without `pivot()` function [LINQ]
 1. [#289](https://github.com/influxdata/influxdb-client-csharp/pull/289): Async APIs uses `CancellationToken` in all `async` methods
+
+### Bug Fixes
+1. [#290](https://github.com/influxdata/influxdb-client-csharp/pull/290): Change `PermissionResource.Type` to `String`
 
 ### CI
 1. [#292](https://github.com/influxdata/influxdb-client-csharp/pull/292): Use new Codecov uploader for reporting code coverage

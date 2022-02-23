@@ -26,13 +26,13 @@ namespace InfluxDB.Client.Test
         {
             var readUsers = new Permission(
                 Permission.ActionEnum.Read,
-                new PermissionResource { Type = PermissionResource.TypeEnum.Users, OrgID = _organization.Id }
+                new PermissionResource { Type = PermissionResource.TypeUsers, OrgID = _organization.Id }
             );
 
             var writeOrganizations = new Permission
             (
                 Permission.ActionEnum.Write,
-                new PermissionResource { Type = PermissionResource.TypeEnum.Orgs, OrgID = _organization.Id }
+                new PermissionResource { Type = PermissionResource.TypeOrgs, OrgID = _organization.Id }
             );
 
             var permissions = new List<Permission> { readUsers, writeOrganizations };
@@ -47,11 +47,11 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(authorization.Status, AuthorizationUpdateRequest.StatusEnum.Active);
 
             Assert.AreEqual(authorization.Permissions.Count, 2);
-            Assert.AreEqual(authorization.Permissions[0].Resource.Type, PermissionResource.TypeEnum.Users);
+            Assert.AreEqual(authorization.Permissions[0].Resource.Type, PermissionResource.TypeUsers);
             Assert.AreEqual(authorization.Permissions[0].Resource.OrgID, _organization.Id);
             Assert.AreEqual(authorization.Permissions[0].Action, Permission.ActionEnum.Read);
 
-            Assert.AreEqual(authorization.Permissions[1].Resource.Type, PermissionResource.TypeEnum.Orgs);
+            Assert.AreEqual(authorization.Permissions[1].Resource.Type, PermissionResource.TypeOrgs);
             Assert.AreEqual(authorization.Permissions[1].Resource.OrgID, _organization.Id);
             Assert.AreEqual(authorization.Permissions[1].Action, Permission.ActionEnum.Write);
 
@@ -66,7 +66,7 @@ namespace InfluxDB.Client.Test
         public async Task AuthorizationDescription()
         {
             var writeSources = new Permission(Permission.ActionEnum.Write,
-                new PermissionResource { Type = PermissionResource.TypeEnum.Sources, OrgID = _organization.Id }
+                new PermissionResource { Type = PermissionResource.TypeSources, OrgID = _organization.Id }
             );
 
             var authorization = new AuthorizationPostRequest
@@ -86,7 +86,7 @@ namespace InfluxDB.Client.Test
         public async Task UpdateAuthorizationStatus()
         {
             var readUsers = new Permission(Permission.ActionEnum.Read,
-                new PermissionResource { Type = PermissionResource.TypeEnum.Users, OrgID = _organization.Id }
+                new PermissionResource { Type = PermissionResource.TypeUsers, OrgID = _organization.Id }
             );
 
             var permissions = new List<Permission> { readUsers };
@@ -200,7 +200,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(source.Description, cloned.Description);
             Assert.AreEqual(1, cloned.Permissions.Count);
             Assert.AreEqual(Permission.ActionEnum.Read, cloned.Permissions[0].Action);
-            Assert.AreEqual(PermissionResource.TypeEnum.Users, cloned.Permissions[0].Resource.Type);
+            Assert.AreEqual(PermissionResource.TypeUsers, cloned.Permissions[0].Resource.Type);
             Assert.AreEqual(_organization.Id, cloned.Permissions[0].Resource.OrgID);
         }
 
@@ -217,7 +217,7 @@ namespace InfluxDB.Client.Test
         private List<Permission> NewPermissions()
         {
             var resource = new PermissionResource
-                { Type = PermissionResource.TypeEnum.Users, OrgID = _organization.Id };
+                { Type = PermissionResource.TypeUsers, OrgID = _organization.Id };
 
             var permission = new Permission(Permission.ActionEnum.Read, resource);
 

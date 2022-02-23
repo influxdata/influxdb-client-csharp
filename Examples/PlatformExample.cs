@@ -50,7 +50,7 @@ namespace Examples
             // Add Permissions to read and write to the Bucket
             //
             var resource = new PermissionResource
-                { Type = PermissionResource.TypeEnum.Buckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id };
+                { Type = PermissionResource.TypeBuckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id };
 
             var readBucket = new Permission(Permission.ActionEnum.Read, resource);
             var writeBucket = new Permission(Permission.ActionEnum.Write, resource);

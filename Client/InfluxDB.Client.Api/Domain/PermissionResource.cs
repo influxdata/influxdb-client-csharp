@@ -30,141 +30,6 @@ namespace InfluxDB.Client.Api.Domain
     public partial class PermissionResource : IEquatable<PermissionResource>
     {
         /// <summary>
-        /// Defines Type
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum Authorizations for value: authorizations
-            /// </summary>
-            [EnumMember(Value = "authorizations")] Authorizations = 1,
-
-            /// <summary>
-            /// Enum Buckets for value: buckets
-            /// </summary>
-            [EnumMember(Value = "buckets")] Buckets = 2,
-
-            /// <summary>
-            /// Enum Dashboards for value: dashboards
-            /// </summary>
-            [EnumMember(Value = "dashboards")] Dashboards = 3,
-
-            /// <summary>
-            /// Enum Orgs for value: orgs
-            /// </summary>
-            [EnumMember(Value = "orgs")] Orgs = 4,
-
-            /// <summary>
-            /// Enum Sources for value: sources
-            /// </summary>
-            [EnumMember(Value = "sources")] Sources = 5,
-
-            /// <summary>
-            /// Enum Tasks for value: tasks
-            /// </summary>
-            [EnumMember(Value = "tasks")] Tasks = 6,
-
-            /// <summary>
-            /// Enum Telegrafs for value: telegrafs
-            /// </summary>
-            [EnumMember(Value = "telegrafs")] Telegrafs = 7,
-
-            /// <summary>
-            /// Enum Users for value: users
-            /// </summary>
-            [EnumMember(Value = "users")] Users = 8,
-
-            /// <summary>
-            /// Enum Variables for value: variables
-            /// </summary>
-            [EnumMember(Value = "variables")] Variables = 9,
-
-            /// <summary>
-            /// Enum Scrapers for value: scrapers
-            /// </summary>
-            [EnumMember(Value = "scrapers")] Scrapers = 10,
-
-            /// <summary>
-            /// Enum Secrets for value: secrets
-            /// </summary>
-            [EnumMember(Value = "secrets")] Secrets = 11,
-
-            /// <summary>
-            /// Enum Labels for value: labels
-            /// </summary>
-            [EnumMember(Value = "labels")] Labels = 12,
-
-            /// <summary>
-            /// Enum Views for value: views
-            /// </summary>
-            [EnumMember(Value = "views")] Views = 13,
-
-            /// <summary>
-            /// Enum Documents for value: documents
-            /// </summary>
-            [EnumMember(Value = "documents")] Documents = 14,
-
-            /// <summary>
-            /// Enum NotificationRules for value: notificationRules
-            /// </summary>
-            [EnumMember(Value = "notificationRules")]
-            NotificationRules = 15,
-
-            /// <summary>
-            /// Enum NotificationEndpoints for value: notificationEndpoints
-            /// </summary>
-            [EnumMember(Value = "notificationEndpoints")]
-            NotificationEndpoints = 16,
-
-            /// <summary>
-            /// Enum Checks for value: checks
-            /// </summary>
-            [EnumMember(Value = "checks")] Checks = 17,
-
-            /// <summary>
-            /// Enum Dbrp for value: dbrp
-            /// </summary>
-            [EnumMember(Value = "dbrp")] Dbrp = 18,
-
-            /// <summary>
-            /// Enum Notebooks for value: notebooks
-            /// </summary>
-            [EnumMember(Value = "notebooks")] Notebooks = 19,
-
-            /// <summary>
-            /// Enum Annotations for value: annotations
-            /// </summary>
-            [EnumMember(Value = "annotations")] Annotations = 20,
-
-            /// <summary>
-            /// Enum Remotes for value: remotes
-            /// </summary>
-            [EnumMember(Value = "remotes")] Remotes = 21,
-
-            /// <summary>
-            /// Enum Replications for value: replications
-            /// </summary>
-            [EnumMember(Value = "replications")] Replications = 22,
-
-            /// <summary>
-            /// Enum Flows for value: flows
-            /// </summary>
-            [EnumMember(Value = "flows")] Flows = 23,
-
-            /// <summary>
-            /// Enum Functions for value: functions
-            /// </summary>
-            [EnumMember(Value = "functions")] Functions = 24
-        }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = false)]
-        public TypeEnum Type { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PermissionResource" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -180,10 +45,9 @@ namespace InfluxDB.Client.Api.Domain
         /// <param name="name">Optional name of the resource if the resource has a name field..</param>
         /// <param name="orgID">If orgID is set that is a permission for all resources owned my that org. if it is not set it is a permission for all resources of that resource type..</param>
         /// <param name="org">Optional name of the organization of the organization with orgID..</param>
-        public PermissionResource(TypeEnum type = default, string id = default, string name = default,
+        public PermissionResource(string type = default, string id = default, string name = default,
             string orgID = default, string org = default)
         {
-            // to ensure "type" is required (not null)
             Type = type;
             Id = id;
             Name = name;
@@ -191,6 +55,37 @@ namespace InfluxDB.Client.Api.Domain
             Org = org;
         }
 
+        // Possible values for Type property:
+        public const string TypeAuthorizations = "authorizations";
+        public const string TypeBuckets = "buckets";
+        public const string TypeDashboards = "dashboards";
+        public const string TypeOrgs = "orgs";
+        public const string TypeSources = "sources";
+        public const string TypeTasks = "tasks";
+        public const string TypeTelegrafs = "telegrafs";
+        public const string TypeUsers = "users";
+        public const string TypeVariables = "variables";
+        public const string TypeScrapers = "scrapers";
+        public const string TypeSecrets = "secrets";
+        public const string TypeLabels = "labels";
+        public const string TypeViews = "views";
+        public const string TypeDocuments = "documents";
+        public const string TypeNotificationRules = "notificationRules";
+        public const string TypeNotificationEndpoints = "notificationEndpoints";
+        public const string TypeChecks = "checks";
+        public const string TypeDbrp = "dbrp";
+        public const string TypeNotebooks = "notebooks";
+        public const string TypeAnnotations = "annotations";
+        public const string TypeRemotes = "remotes";
+        public const string TypeReplications = "replications";
+        public const string TypeFlows = "flows";
+        public const string TypeFunctions = "functions";
+
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
+        public string Type { get; set; }
 
         /// <summary>
         /// If ID is set that is a permission for a specific resource. if it is not set it is a permission for all resources of that resource type.
@@ -271,7 +166,7 @@ namespace InfluxDB.Client.Api.Domain
             return
                 (
                     Type == input.Type ||
-                    Type.Equals(input.Type)
+                    Type != null && Type.Equals(input.Type)
                 ) &&
                 (
                     Id == input.Id ||
@@ -301,7 +196,11 @@ namespace InfluxDB.Client.Api.Domain
             {
                 var hashCode = 41;
 
-                hashCode = hashCode * 59 + Type.GetHashCode();
+                if (Type != null)
+                {
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                }
+
                 if (Id != null)
                 {
                     hashCode = hashCode * 59 + Id.GetHashCode();
