@@ -1041,6 +1041,35 @@ namespace Client.Linq.Test
                 nse?.Message);
         }
 
+        [Test]
+        public void AlignFieldsWithPivot()
+        {
+            var queries = new[]
+            {
+                (
+                    true,
+                    FluxStart
+                ),
+                (
+                    false,
+                    "start_shifted = int(v: time(v: p2))\n\n" +
+                    "from(bucket: p1) " +
+                    "|> range(start: time(v: start_shifted)) " +
+                    "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])"
+                )
+            };
+
+            foreach (var (alignFieldsWithPivot, expected) in queries)
+            {
+                var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
+                        new QueryableOptimizerSettings { AlignFieldsWithPivot = alignFieldsWithPivot })
+                    select s;
+                var visitor = BuildQueryVisitor(query);
+
+                Assert.AreEqual(expected, visitor.BuildFluxQuery());
+            }
+        }
+
         private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)
         {
             var queryExecutor = (InfluxDBQueryExecutor)((DefaultQueryProvider)queryable.Provider).Executor;

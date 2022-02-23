@@ -1,5 +1,8 @@
 ## 4.0.0-rc2 [unreleased]
 
+### Features
+1. [#291](https://github.com/influxdata/influxdb-client-csharp/pull/291): Add possibility to generate Flux query without `pivot()` function [LINQ]
+
 ### CI
 1. [#292](https://github.com/influxdata/influxdb-client-csharp/pull/292): Use new Codecov uploader for reporting code coverage
 

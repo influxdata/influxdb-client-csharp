@@ -18,6 +18,7 @@ namespace InfluxDB.Client.Linq
         public QueryableOptimizerSettings()
         {
             QueryMultipleTimeSeries = false;
+            AlignFieldsWithPivot = true;
             DropMeasurementColumn = true;
             DropStartColumn = true;
             DropStopColumn = true;
@@ -32,6 +33,12 @@ namespace InfluxDB.Client.Linq
         /// </list>
         /// </summary>
         public bool QueryMultipleTimeSeries { get; set; }
+
+        /// <summary>
+        /// Gets or set whether the drive should use a Flux <a href="https://docs.influxdata.com/flux/v0.x/stdlib/universe/pivot/">pivot()</a> function
+        /// to align fields to tabular way.
+        /// </summary>
+        public bool AlignFieldsWithPivot { get; set; }
 
         /// <summary>
         /// Gets or sets whether the _measurement column will be dropped from query results.
