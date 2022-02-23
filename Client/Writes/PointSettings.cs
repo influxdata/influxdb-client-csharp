@@ -51,7 +51,7 @@ namespace InfluxDB.Client.Writes
             {
                 return ImmutableDictionary<string, string>.Empty;
             }
-            
+
             string Evaluation(string expression)
             {
                 if (string.IsNullOrEmpty(expression))
