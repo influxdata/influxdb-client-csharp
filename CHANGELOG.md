@@ -26,6 +26,7 @@
 
 ### Bug Fixes
 1. [#290](https://github.com/influxdata/influxdb-client-csharp/pull/290): Change `PermissionResource.Type` to `String`
+1. [#293](https://github.com/influxdata/influxdb-client-csharp/pull/293): Type of `CheckBase.LatestCompleted` is `DateTime`
 
 ### CI
 1. [#292](https://github.com/influxdata/influxdb-client-csharp/pull/292): Use new Codecov uploader for reporting code coverage
