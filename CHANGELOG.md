@@ -219,6 +219,7 @@
 - Rename `TelegrafPlugin` types:
   - from `TelegrafPlugin.TypeEnum.Inputs` to `TelegrafPlugin.TypeEnum.Input`
   - from `TelegrafPlugin.TypeEnum.Outputs` to `TelegrafPlugin.TypeEnum.Output`
+- `TasksApi.FindTasksByOrganizationIdAsync(string orgId)` requires pass Organization `ID` as a parameter. For find Tasks by Organization name you can use: `_tasksApi.FindTasksAsync(org: "my-org")`.
 
 #### Services
 
