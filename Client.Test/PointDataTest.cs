@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Writes;
 using NodaTime.Text;
@@ -420,29 +417,6 @@ namespace InfluxDB.Client.Test
                 .Field("flout-nan", float.NaN);
 
             Assert.AreEqual("", point.ToLineProtocol());
-        }
-
-        [Test]
-        public void ToLineProtocolPerformance()
-        {
-            var points = new List<PointData>();
-            for (var i = 0; i < 1000000; i++)
-            {
-                points.Add(PointData.Measurement("h2o")
-                    .Tag("location", "europe")
-                    .Field("level", 2));
-            }
-            
-            var pointSettings = new PointSettings();
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            foreach (var point in points)
-            {
-                point.ToLineProtocol(pointSettings);
-            }
-            stopwatch.Stop();
-            
-            Console.WriteLine($"Elapsed milliseconds: {stopwatch.Elapsed.TotalMilliseconds}");
         }
     }
 }
