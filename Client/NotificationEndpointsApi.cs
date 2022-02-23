@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
@@ -26,14 +26,16 @@ namespace InfluxDB.Client
         /// <param name="name">Endpoint name</param>
         /// <param name="url">Slack WebHook URL</param>
         /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created Slack notification endpoint</returns>
-        public Task<SlackNotificationEndpoint> CreateSlackEndpointAsync(string name, string url, string orgId)
+        public Task<SlackNotificationEndpoint> CreateSlackEndpointAsync(string name, string url, string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(url, nameof(url));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return CreateSlackEndpointAsync(name, url, null, orgId);
+            return CreateSlackEndpointAsync(name, url, null, orgId, cancellationToken);
         }
 
         /// <summary>
@@ -43,9 +45,10 @@ namespace InfluxDB.Client
         /// <param name="url">Slack WebHook URL</param>
         /// <param name="token">Slack WebHook Token</param>
         /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created Slack notification endpoint</returns>
         public async Task<SlackNotificationEndpoint> CreateSlackEndpointAsync(string name, string url, string token,
-            string orgId)
+            string orgId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
@@ -54,7 +57,8 @@ namespace InfluxDB.Client
             var endpoint = new SlackNotificationEndpoint(type: NotificationEndpointType.Slack,
                 url: url, token: token, orgID: orgId, name: name, status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (SlackNotificationEndpoint)await CreateEndpointAsync(endpoint).ConfigureAwait(false);
+            return (SlackNotificationEndpoint)await CreateEndpointAsync(endpoint, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -64,9 +68,10 @@ namespace InfluxDB.Client
         /// <param name="clientUrl">Client URL</param>
         /// <param name="routingKey">Routing Key</param>
         /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created PagerDuty notification endpoint</returns>
         public async Task<PagerDutyNotificationEndpoint> CreatePagerDutyEndpointAsync(string name, string clientUrl,
-            string routingKey, string orgId)
+            string routingKey, string orgId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(clientUrl, nameof(clientUrl));
@@ -77,7 +82,8 @@ namespace InfluxDB.Client
                 clientURL: clientUrl, routingKey: routingKey, orgID: orgId, name: name,
                 status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (PagerDutyNotificationEndpoint)await CreateEndpointAsync(endpoint).ConfigureAwait(false);
+            return (PagerDutyNotificationEndpoint)await CreateEndpointAsync(endpoint, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -87,9 +93,10 @@ namespace InfluxDB.Client
         /// <param name="url">URL</param>
         /// <param name="method">HTTP Method</param>
         /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created HTTP notification endpoint</returns>
-        public async Task<HTTPNotificationEndpoint> CreateHttpEndpointAsync(string name,
-            string url, HTTPNotificationEndpoint.MethodEnum method, string orgId)
+        public async Task<HTTPNotificationEndpoint> CreateHttpEndpointAsync(string name, string url,
+            HTTPNotificationEndpoint.MethodEnum method, string orgId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(url, nameof(url));
@@ -101,7 +108,8 @@ namespace InfluxDB.Client
                 name: name, authMethod: HTTPNotificationEndpoint.AuthMethodEnum.None,
                 status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (HTTPNotificationEndpoint)await CreateEndpointAsync(endpoint).ConfigureAwait(false);
+            return (HTTPNotificationEndpoint)await CreateEndpointAsync(endpoint, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -113,9 +121,11 @@ namespace InfluxDB.Client
         /// <param name="username">HTTP Basic Username</param>
         /// <param name="password">HTTP Basic Password</param>
         /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created HTTP notification endpoint</returns>
         public async Task<HTTPNotificationEndpoint> CreateHttpEndpointBasicAuthAsync(string name, string url,
-            HTTPNotificationEndpoint.MethodEnum method, string username, string password, string orgId)
+            HTTPNotificationEndpoint.MethodEnum method, string username, string password, string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(url, nameof(url));
@@ -130,7 +140,8 @@ namespace InfluxDB.Client
                 password: password,
                 status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (HTTPNotificationEndpoint)await CreateEndpointAsync(endpoint).ConfigureAwait(false);
+            return (HTTPNotificationEndpoint)await CreateEndpointAsync(endpoint, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -141,9 +152,11 @@ namespace InfluxDB.Client
         /// <param name="method">HTTP Method</param>
         /// <param name="token">Bearer token</param>
         /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created HTTP notification endpoint</returns>
         public async Task<HTTPNotificationEndpoint> CreateHttpEndpointBearerAsync(string name, string url,
-            HTTPNotificationEndpoint.MethodEnum method, string token, string orgId)
+            HTTPNotificationEndpoint.MethodEnum method, string token, string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(url, nameof(url));
@@ -156,27 +169,32 @@ namespace InfluxDB.Client
                 name: name, authMethod: HTTPNotificationEndpoint.AuthMethodEnum.Bearer, token: token,
                 status: NotificationEndpointBase.StatusEnum.Active);
 
-            return (HTTPNotificationEndpoint)await CreateEndpointAsync(endpoint).ConfigureAwait(false);
+            return (HTTPNotificationEndpoint)await CreateEndpointAsync(endpoint, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
         /// Add new notification endpoint.
         /// </summary>
         /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint created</returns>
-        public Task<NotificationEndpoint> CreateEndpointAsync(NotificationEndpoint notificationEndpoint)
+        public Task<NotificationEndpoint> CreateEndpointAsync(NotificationEndpoint notificationEndpoint,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(notificationEndpoint, nameof(notificationEndpoint));
 
-            return _service.CreateNotificationEndpointAsync(notificationEndpoint);
+            return _service.CreateNotificationEndpointAsync(notificationEndpoint, cancellationToken);
         }
 
         /// <summary>
         /// Update a notification endpoint. The updates is used for fields from <see cref="NotificationEndpointUpdate"/>.
         /// </summary>
         /// <param name="notificationEndpoint">update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>An updated notification endpoint</returns>
-        public Task<NotificationEndpoint> UpdateEndpointAsync(NotificationEndpoint notificationEndpoint)
+        public Task<NotificationEndpoint> UpdateEndpointAsync(NotificationEndpoint notificationEndpoint,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(notificationEndpoint, nameof(notificationEndpoint));
 
@@ -185,7 +203,7 @@ namespace InfluxDB.Client
 
             return UpdateEndpointAsync(notificationEndpoint.Id,
                 new NotificationEndpointUpdate(notificationEndpoint.Name,
-                    notificationEndpoint.Description, status));
+                    notificationEndpoint.Description, status), cancellationToken);
         }
 
         /// <summary>
@@ -193,50 +211,58 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="endpointId">ID of notification endpoint</param>
         /// <param name="notificationEndpointUpdate">update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>An updated notification endpoint</returns>
         public Task<NotificationEndpoint> UpdateEndpointAsync(string endpointId,
-            NotificationEndpointUpdate notificationEndpointUpdate)
+            NotificationEndpointUpdate notificationEndpointUpdate, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
             Arguments.CheckNotNull(notificationEndpointUpdate, nameof(notificationEndpointUpdate));
 
-            return _service.PatchNotificationEndpointsIDAsync(endpointId, notificationEndpointUpdate);
+            return _service.PatchNotificationEndpointsIDAsync(endpointId, notificationEndpointUpdate,
+                cancellationToken: cancellationToken);
         }
 
         /// <summary>
         /// Delete a notification endpoint.
         /// </summary>
         /// <param name="notificationEndpoint">notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>delete has been accepted></returns>
-        public Task DeleteNotificationEndpointAsync(NotificationEndpoint notificationEndpoint)
+        public Task DeleteNotificationEndpointAsync(NotificationEndpoint notificationEndpoint,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(notificationEndpoint, nameof(notificationEndpoint));
 
-            return DeleteNotificationEndpointAsync(notificationEndpoint.Id);
+            return DeleteNotificationEndpointAsync(notificationEndpoint.Id, cancellationToken);
         }
 
         /// <summary>
         /// Delete a notification endpoint.
         /// </summary>
         /// <param name="endpointId">ID of notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>delete has been accepted</returns>
-        public Task DeleteNotificationEndpointAsync(string endpointId)
+        public Task DeleteNotificationEndpointAsync(string endpointId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
-            return _service.DeleteNotificationEndpointsIDAsync(endpointId);
+            return _service.DeleteNotificationEndpointsIDAsync(endpointId, cancellationToken: cancellationToken);
         }
 
         /// <summary>
         /// Get notification endpoints.
         /// </summary>
         /// <param name="orgId">only show notification endpoints belonging to specified organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>A list of notification endpoint</returns>
-        public async Task<List<NotificationEndpoint>> FindNotificationEndpointsAsync(string orgId)
+        public async Task<List<NotificationEndpoint>> FindNotificationEndpointsAsync(string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await FindNotificationEndpointsAsync(orgId, new FindOptions()).ConfigureAwait(false);
+            var response = await FindNotificationEndpointsAsync(orgId, new FindOptions(), cancellationToken)
+                .ConfigureAwait(false);
             return response._NotificationEndpoints;
         }
 
@@ -245,26 +271,30 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="orgId">only show notification endpoints belonging to specified organization</param>
         /// <param name="findOptions">the find options</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task<NotificationEndpoints> FindNotificationEndpointsAsync(string orgId, FindOptions findOptions)
+        public Task<NotificationEndpoints> FindNotificationEndpointsAsync(string orgId, FindOptions findOptions,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNotNull(findOptions, nameof(findOptions));
 
             return _service.GetNotificationEndpointsAsync(orgId, offset: findOptions.Offset,
-                limit: findOptions.Limit);
+                limit: findOptions.Limit, cancellationToken: cancellationToken);
         }
 
         /// <summary>
         /// Get a notification endpoint.
         /// </summary>
         /// <param name="endpointId">ID of notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>the notification endpoint requested</returns>
-        public Task<NotificationEndpoint> FindNotificationEndpointByIdAsync(string endpointId)
+        public Task<NotificationEndpoint> FindNotificationEndpointByIdAsync(string endpointId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
-            return _service.GetNotificationEndpointsIDAsync(endpointId);
+            return _service.GetNotificationEndpointsIDAsync(endpointId, cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -273,15 +303,17 @@ namespace InfluxDB.Client
         /// <param name="name">name of cloned endpoint</param>
         /// <param name="token">Slack WebHook Token</param>
         /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
         public async Task<SlackNotificationEndpoint> CloneSlackEndpointAsync(string name, string token,
-            string endpointId)
+            string endpointId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
             var endpoint =
-                (SlackNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId).ConfigureAwait(false);
+                (SlackNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId, cancellationToken)
+                    .ConfigureAwait(false);
             return await CloneSlackEndpointAsync(name, token, endpoint).ConfigureAwait(false);
         }
 
@@ -291,16 +323,18 @@ namespace InfluxDB.Client
         /// <param name="name">name of cloned endpoint</param>
         /// <param name="token"></param>
         /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
         public async Task<SlackNotificationEndpoint> CloneSlackEndpointAsync(string name, string token,
-            SlackNotificationEndpoint endpoint)
+            SlackNotificationEndpoint endpoint, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
 
             var cloned = new SlackNotificationEndpoint(endpoint.Url, token, name: name);
 
-            return (SlackNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
+            return (SlackNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -309,16 +343,17 @@ namespace InfluxDB.Client
         /// <param name="name">name of cloned endpoint</param>
         /// <param name="routingKey">Routing Key</param>
         /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
         public async Task<PagerDutyNotificationEndpoint> ClonePagerDutyEndpointAsync(string name, string routingKey,
-            string endpointId)
+            string endpointId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(routingKey, nameof(routingKey));
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
             var endpoint =
-                (PagerDutyNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId)
+                (PagerDutyNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId, cancellationToken)
                     .ConfigureAwait(false);
             return await ClonePagerDutyEndpointAsync(name, routingKey, endpoint).ConfigureAwait(false);
         }
@@ -329,9 +364,10 @@ namespace InfluxDB.Client
         /// <param name="name">name of cloned endpoint</param>
         /// <param name="routingKey">Routing Key</param>
         /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
         public async Task<PagerDutyNotificationEndpoint> ClonePagerDutyEndpointAsync(string name, string routingKey,
-            PagerDutyNotificationEndpoint endpoint)
+            PagerDutyNotificationEndpoint endpoint, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(routingKey, nameof(routingKey));
@@ -339,7 +375,7 @@ namespace InfluxDB.Client
 
             var cloned = new PagerDutyNotificationEndpoint(endpoint.ClientURL, routingKey, name: name);
 
-            return (PagerDutyNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned)
+            return (PagerDutyNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned, cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -348,14 +384,17 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="name">name of cloned endpoint</param>
         /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
-        public async Task<HTTPNotificationEndpoint> CloneHttpEndpointAsync(string name, string endpointId)
+        public async Task<HTTPNotificationEndpoint> CloneHttpEndpointAsync(string name, string endpointId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
             var endpoint =
-                (HTTPNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId).ConfigureAwait(false);
+                (HTTPNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId, cancellationToken)
+                    .ConfigureAwait(false);
             return await CloneHttpEndpoint(name, endpoint).ConfigureAwait(false);
         }
 
@@ -364,8 +403,10 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="name">name of cloned endpoint</param>
         /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
-        public async Task<HTTPNotificationEndpoint> CloneHttpEndpoint(string name, HTTPNotificationEndpoint endpoint)
+        public async Task<HTTPNotificationEndpoint> CloneHttpEndpoint(string name, HTTPNotificationEndpoint endpoint,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
@@ -374,7 +415,8 @@ namespace InfluxDB.Client
                 authMethod: HTTPNotificationEndpoint.AuthMethodEnum.None, contentTemplate: endpoint.ContentTemplate,
                 headers: endpoint.Headers);
 
-            return (HTTPNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
+            return (HTTPNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -384,9 +426,10 @@ namespace InfluxDB.Client
         /// <param name="username">HTTP Basic Username</param>
         /// <param name="password">HTTP Basic Password</param>
         /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
         public async Task<HTTPNotificationEndpoint> CloneHttpEndpointBasicAuthAsync(string name, string username,
-            string password, string endpointId)
+            string password, string endpointId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(username, nameof(username));
@@ -394,8 +437,10 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
             var endpoint =
-                (HTTPNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId).ConfigureAwait(false);
-            return await CloneHttpEndpointBasicAuthAsync(name, username, password, endpoint).ConfigureAwait(false);
+                (HTTPNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId, cancellationToken)
+                    .ConfigureAwait(false);
+            return await CloneHttpEndpointBasicAuthAsync(name, username, password, endpoint, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -405,9 +450,10 @@ namespace InfluxDB.Client
         /// <param name="username">HTTP Basic Username</param>
         /// <param name="password">HTTP Basic Password</param>
         /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
         public async Task<HTTPNotificationEndpoint> CloneHttpEndpointBasicAuthAsync(string name, string username,
-            string password, HTTPNotificationEndpoint endpoint)
+            string password, HTTPNotificationEndpoint endpoint, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(username, nameof(username));
@@ -420,7 +466,8 @@ namespace InfluxDB.Client
                 authMethod: HTTPNotificationEndpoint.AuthMethodEnum.Basic, contentTemplate: endpoint.ContentTemplate,
                 headers: endpoint.Headers);
 
-            return (HTTPNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
+            return (HTTPNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -429,17 +476,19 @@ namespace InfluxDB.Client
         /// <param name="name">name of cloned endpoint</param>
         /// <param name="token">Bearer token</param>
         /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
         public async Task<HTTPNotificationEndpoint> CloneHttpEndpointBearerAsync(string name, string token,
-            string endpointId)
+            string endpointId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(token, nameof(token));
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
             var endpoint =
-                (HTTPNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId).ConfigureAwait(false);
-            return await CloneHttpEndpointBearerAsync(name, token, endpoint).ConfigureAwait(false);
+                (HTTPNotificationEndpoint)await FindNotificationEndpointByIdAsync(endpointId, cancellationToken)
+                    .ConfigureAwait(false);
+            return await CloneHttpEndpointBearerAsync(name, token, endpoint, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -448,9 +497,10 @@ namespace InfluxDB.Client
         /// <param name="name">name of cloned endpoint</param>
         /// <param name="token">Bearer token</param>
         /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Notification endpoint cloned</returns>
         public async Task<HTTPNotificationEndpoint> CloneHttpEndpointBearerAsync(string name, string token,
-            HTTPNotificationEndpoint endpoint)
+            HTTPNotificationEndpoint endpoint, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
             Arguments.CheckNonEmptyString(token, nameof(token));
@@ -461,31 +511,37 @@ namespace InfluxDB.Client
                 authMethod: HTTPNotificationEndpoint.AuthMethodEnum.Bearer, contentTemplate: endpoint.ContentTemplate,
                 headers: endpoint.Headers);
 
-            return (HTTPNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned).ConfigureAwait(false);
+            return (HTTPNotificationEndpoint)await CloneEndpointAsync(name, endpoint, cloned, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
         /// List all labels for a notification endpoint.
         /// </summary>
         /// <param name="endpoint">the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>a list of all labels for a notification endpoint</returns>
-        public Task<List<Label>> GetLabelsAsync(NotificationEndpoint endpoint)
+        public Task<List<Label>> GetLabelsAsync(NotificationEndpoint endpoint,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
 
-            return GetLabelsAsync(endpoint.Id);
+            return GetLabelsAsync(endpoint.Id, cancellationToken);
         }
 
         /// <summary>
         /// List all labels for a notification endpoint.
         /// </summary>
         /// <param name="endpointId">ID of the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>a list of all labels for a notification endpoint</returns>
-        public async Task<List<Label>> GetLabelsAsync(string endpointId)
+        public async Task<List<Label>> GetLabelsAsync(string endpointId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
 
-            var response = await _service.GetNotificationEndpointsIDLabelsAsync(endpointId).ConfigureAwait(false);
+            var response = await _service
+                .GetNotificationEndpointsIDLabelsAsync(endpointId, cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
             return response.Labels;
         }
 
@@ -494,13 +550,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="label">label to add</param>
         /// <param name="endpoint">the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task<Label> AddLabelAsync(Label label, NotificationEndpoint endpoint)
+        public Task<Label> AddLabelAsync(Label label, NotificationEndpoint endpoint,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return AddLabelAsync(label.Id, endpoint.Id);
+            return AddLabelAsync(label.Id, endpoint.Id, cancellationToken);
         }
 
         /// <summary>
@@ -508,15 +566,18 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="labelId">the ID of label to add</param>
         /// <param name="endpointId">the ID of the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public async Task<Label> AddLabelAsync(string labelId, string endpointId)
+        public async Task<Label> AddLabelAsync(string labelId, string endpointId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
             var mapping = new LabelMapping(labelId);
 
-            var response = await _service.PostNotificationEndpointIDLabelsAsync(endpointId, mapping)
+            var response = await _service
+                .PostNotificationEndpointIDLabelsAsync(endpointId, mapping, cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
             return response.Label;
         }
@@ -526,13 +587,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="label">the label to delete</param>
         /// <param name="endpoint">the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task DeleteLabelAsync(Label label, NotificationEndpoint endpoint)
+        public Task DeleteLabelAsync(Label label, NotificationEndpoint endpoint,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(endpoint, nameof(endpoint));
             Arguments.CheckNotNull(label, nameof(label));
 
-            return DeleteLabelAsync(label.Id, endpoint.Id);
+            return DeleteLabelAsync(label.Id, endpoint.Id, cancellationToken);
         }
 
         /// <summary>
@@ -540,27 +603,29 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="labelId">the label id to delete</param>
         /// <param name="endpointId">ID of the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task DeleteLabelAsync(string labelId, string endpointId)
+        public Task DeleteLabelAsync(string labelId, string endpointId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(endpointId, nameof(endpointId));
             Arguments.CheckNonEmptyString(labelId, nameof(labelId));
 
-            return _service.DeleteNotificationEndpointsIDLabelsIDAsync(endpointId, labelId);
+            return _service.DeleteNotificationEndpointsIDLabelsIDAsync(endpointId, labelId,
+                cancellationToken: cancellationToken);
         }
 
         private async Task<NotificationEndpoint> CloneEndpointAsync(string name, NotificationEndpoint toCloneEndpoint,
-            NotificationEndpoint clonedEndpoint)
+            NotificationEndpoint clonedEndpoint, CancellationToken cancellationToken = default)
         {
             clonedEndpoint.OrgID = toCloneEndpoint.OrgID;
             clonedEndpoint.Description = toCloneEndpoint.Description;
             clonedEndpoint.Status = toCloneEndpoint.Status;
             clonedEndpoint.Type = toCloneEndpoint.Type;
 
-            var created = await CreateEndpointAsync(clonedEndpoint).ConfigureAwait(false);
-            var labels = await GetLabelsAsync(toCloneEndpoint).ConfigureAwait(false);
+            var created = await CreateEndpointAsync(clonedEndpoint, cancellationToken).ConfigureAwait(false);
+            var labels = await GetLabelsAsync(toCloneEndpoint, cancellationToken).ConfigureAwait(false);
 
-            foreach (var label in labels) await AddLabelAsync(label, created).ConfigureAwait(false);
+            foreach (var label in labels) await AddLabelAsync(label, created, cancellationToken).ConfigureAwait(false);
 
             return created;
         }

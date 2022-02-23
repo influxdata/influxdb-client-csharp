@@ -1,7 +1,23 @@
 ## 4.0.0-rc2 [unreleased]
 
+### Migration Notice
+
+- New versions of `QueryApi`, `QueryApiSync`, `WriteApi`, `WriteApiAsync` and `FluxClient` methods uses default named argument values so you are able to easily migrate by:
+
+```diff
+- _client.GetQueryApi().QueryAsyncEnumerable<T>(fluxQuery, token);
++ _client.GetQueryApi().QueryAsyncEnumerable<T>(fluxQuery, cancellationToken: token);
+```
+
+### Breaking Changes
+
+#### API
+
+- Removed `orgId` argument from `TelegrafsApi.GetRunsAsync` methods
+
 ### Features
 1. [#291](https://github.com/influxdata/influxdb-client-csharp/pull/291): Add possibility to generate Flux query without `pivot()` function [LINQ]
+1. [#289](https://github.com/influxdata/influxdb-client-csharp/pull/289): Async APIs uses `CancellationToken` in all `async` methods
 
 ### CI
 1. [#292](https://github.com/influxdata/influxdb-client-csharp/pull/292): Use new Codecov uploader for reporting code coverage
@@ -195,6 +211,7 @@
 - Rename `TelegrafPlugin` types:
   - from `TelegrafPlugin.TypeEnum.Inputs` to `TelegrafPlugin.TypeEnum.Input`
   - from `TelegrafPlugin.TypeEnum.Outputs` to `TelegrafPlugin.TypeEnum.Output`
+- `TasksApi.FindTasksByOrganizationIdAsync(string orgId)` requires pass Organization `ID` as a parameter. For find Tasks by Organization name you can use: `_tasksApi.FindTasksAsync(org: "my-org")`.
 
 #### Services
 

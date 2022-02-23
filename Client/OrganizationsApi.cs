@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
@@ -24,64 +25,71 @@ namespace InfluxDB.Client
         /// Creates a new organization and sets <see cref="InfluxDB.Client.Api.Domain.Organization.Id" /> with the new identifier.
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Created organization</returns>
-        public Task<Organization> CreateOrganizationAsync(string name)
+        public Task<Organization> CreateOrganizationAsync(string name, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(name, nameof(name));
 
             var organization = new Organization(null, name);
 
-            return CreateOrganizationAsync(organization);
+            return CreateOrganizationAsync(organization, cancellationToken);
         }
 
         /// <summary>
         /// Creates a new organization and sets <see cref="Organization.Id" /> with the new identifier.
         /// </summary>
         /// <param name="organization">the organization to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created organization</returns>
-        public Task<Organization> CreateOrganizationAsync(Organization organization)
+        public Task<Organization> CreateOrganizationAsync(Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
             var request = new PostOrganizationRequest(organization.Name, organization.Description);
-            return _service.PostOrgsAsync(request);
+            return _service.PostOrgsAsync(request, cancellationToken: cancellationToken);
         }
 
         /// <summary>
         /// Update an organization.
         /// </summary>
         /// <param name="organization">organization update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>updated organization</returns>
-        public Task<Organization> UpdateOrganizationAsync(Organization organization)
+        public Task<Organization> UpdateOrganizationAsync(Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
             var request = new PatchOrganizationRequest(organization.Name, organization.Description);
-            return _service.PatchOrgsIDAsync(organization.Id, request);
+            return _service.PatchOrgsIDAsync(organization.Id, request, cancellationToken: cancellationToken);
         }
 
         /// <summary>
         /// Delete an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>delete has been accepted</returns>
-        public Task DeleteOrganizationAsync(string orgId)
+        public Task DeleteOrganizationAsync(string orgId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(orgId, nameof(orgId));
 
-            return _service.DeleteOrgsIDAsync(orgId);
+            return _service.DeleteOrgsIDAsync(orgId, cancellationToken: cancellationToken);
         }
 
         /// <summary>
         /// Delete an organization.
         /// </summary>
         /// <param name="organization">organization to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>delete has been accepted</returns>
-        public Task DeleteOrganizationAsync(Organization organization)
+        public Task DeleteOrganizationAsync(Organization organization, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return DeleteOrganizationAsync(organization.Id);
+            return DeleteOrganizationAsync(organization.Id, cancellationToken);
         }
 
         /// <summary>
@@ -89,14 +97,16 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="clonedName">name of cloned organization</param>
         /// <param name="orgId">ID of organization to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>cloned organization</returns>
-        public async Task<Organization> CloneOrganizationAsync(string clonedName, string orgId)
+        public async Task<Organization> CloneOrganizationAsync(string clonedName, string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var org = await FindOrganizationByIdAsync(orgId).ConfigureAwait(false);
-            return await CloneOrganizationAsync(clonedName, org).ConfigureAwait(false);
+            var org = await FindOrganizationByIdAsync(orgId, cancellationToken).ConfigureAwait(false);
+            return await CloneOrganizationAsync(clonedName, org, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -104,27 +114,30 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="clonedName">name of cloned organization</param>
         /// <param name="organization">organization to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>cloned organization</returns>
-        public Task<Organization> CloneOrganizationAsync(string clonedName, Organization organization)
+        public Task<Organization> CloneOrganizationAsync(string clonedName, Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(clonedName, nameof(clonedName));
             Arguments.CheckNotNull(organization, nameof(organization));
 
             var cloned = new Organization(null, clonedName);
 
-            return CreateOrganizationAsync(cloned);
+            return CreateOrganizationAsync(cloned, cancellationToken);
         }
 
         /// <summary>
         /// Retrieve an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>organization details</returns>
-        public Task<Organization> FindOrganizationByIdAsync(string orgId)
+        public Task<Organization> FindOrganizationByIdAsync(string orgId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _service.GetOrgsIDAsync(orgId);
+            return _service.GetOrgsIDAsync(orgId, cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -136,12 +149,14 @@ namespace InfluxDB.Client
         /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
         /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
         /// <param name="userID">Filter organizations to a specific user ID. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>List all organizations</returns>
         public async Task<List<Organization>> FindOrganizationsAsync(int? limit = null, int? offset = null,
-            bool? descending = null, string org = null, string orgID = null, string userID = null)
+            bool? descending = null, string org = null, string orgID = null, string userID = null,
+            CancellationToken cancellationToken = default)
         {
             var response = await _service.GetOrgsAsync(limit: limit, offset: offset, descending: descending, org: org,
-                orgID: orgID, userID: userID).ConfigureAwait(false);
+                orgID: orgID, userID: userID, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             return response.Orgs;
         }
@@ -155,12 +170,14 @@ namespace InfluxDB.Client
         /// </code>
         /// </summary>
         /// <param name="organization">the organization for get secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>the secret keys</returns>
-        public Task<List<string>> GetSecretsAsync(Organization organization)
+        public Task<List<string>> GetSecretsAsync(Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return GetSecretsAsync(organization.Id);
+            return GetSecretsAsync(organization.Id, cancellationToken);
         }
 
         /// <summary>
@@ -172,12 +189,14 @@ namespace InfluxDB.Client
         /// </code>
         /// </summary>
         /// <param name="orgId">the organization for get secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>the secret keys</returns>
-        public async Task<List<string>> GetSecretsAsync(string orgId)
+        public async Task<List<string>> GetSecretsAsync(string orgId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _secretsService.GetOrgsIDSecretsAsync(orgId).ConfigureAwait(false);
+            var response = await _secretsService.GetOrgsIDSecretsAsync(orgId, cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
             return response.Secrets;
         }
 
@@ -186,13 +205,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="secrets">secrets to update/add</param>
         /// <param name="organization">the organization for put secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task PutSecretsAsync(Dictionary<string, string> secrets, Organization organization)
+        public Task PutSecretsAsync(Dictionary<string, string> secrets, Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return PutSecretsAsync(secrets, organization.Id);
+            return PutSecretsAsync(secrets, organization.Id, cancellationToken);
         }
 
         /// <summary>
@@ -200,13 +221,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="secrets">secrets to update/add</param>
         /// <param name="orgId">the organization for put secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task PutSecretsAsync(Dictionary<string, string> secrets, string orgId)
+        public Task PutSecretsAsync(Dictionary<string, string> secrets, string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _secretsService.PatchOrgsIDSecretsAsync(orgId, secrets);
+            return _secretsService.PatchOrgsIDSecretsAsync(orgId, secrets, cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -214,13 +237,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="secrets">secrets to delete</param>
         /// <param name="organization">the organization for delete secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>keys successfully patched</returns>
-        public Task DeleteSecretsAsync(List<string> secrets, Organization organization)
+        public Task DeleteSecretsAsync(List<string> secrets, Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return DeleteSecretsAsync(secrets, organization.Id);
+            return DeleteSecretsAsync(secrets, organization.Id, cancellationToken);
         }
 
         /// <summary>
@@ -228,13 +253,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="secrets">secrets to delete</param>
         /// <param name="orgId">the organization for delete secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>keys successfully patched</returns>
-        public Task DeleteSecretsAsync(List<string> secrets, string orgId)
+        public Task DeleteSecretsAsync(List<string> secrets, string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return DeleteSecretsAsync(new SecretKeys(secrets), orgId);
+            return DeleteSecretsAsync(new SecretKeys(secrets), orgId, cancellationToken);
         }
 
         /// <summary>
@@ -242,37 +269,43 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="secrets">secrets to delete</param>
         /// <param name="orgId">the organization for delete secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>keys successfully patched</returns>
-        public Task DeleteSecretsAsync(SecretKeys secrets, string orgId)
+        public Task DeleteSecretsAsync(SecretKeys secrets, string orgId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(secrets, nameof(secrets));
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            return _secretsService.PostOrgsIDSecretsAsync(orgId, secrets);
+            return _secretsService.PostOrgsIDSecretsAsync(orgId, secrets, cancellationToken: cancellationToken);
         }
 
         /// <summary>
         /// List all members of an organization.
         /// </summary>
         /// <param name="organization">organization of the members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>the List all members of an organization</returns>
-        public Task<List<ResourceMember>> GetMembersAsync(Organization organization)
+        public Task<List<ResourceMember>> GetMembersAsync(Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return GetMembersAsync(organization.Id);
+            return GetMembersAsync(organization.Id, cancellationToken);
         }
 
         /// <summary>
         /// List all members of an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to get members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>the List all members of an organization</returns>
-        public async Task<List<ResourceMember>> GetMembersAsync(string orgId)
+        public async Task<List<ResourceMember>> GetMembersAsync(string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _service.GetOrgsIDMembersAsync(orgId).ConfigureAwait(false);
+            var response = await _service.GetOrgsIDMembersAsync(orgId, cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
             return response.Users;
         }
 
@@ -281,13 +314,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="member">the member of an organization</param>
         /// <param name="organization">the organization of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created mapping</returns>
-        public Task<ResourceMember> AddMemberAsync(User member, Organization organization)
+        public Task<ResourceMember> AddMemberAsync(User member, Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(member, nameof(member));
 
-            return AddMemberAsync(member.Id, organization.Id);
+            return AddMemberAsync(member.Id, organization.Id, cancellationToken);
         }
 
         /// <summary>
@@ -295,13 +330,16 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="orgId">the ID of an organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created mapping</returns>
-        public Task<ResourceMember> AddMemberAsync(string memberId, string orgId)
+        public Task<ResourceMember> AddMemberAsync(string memberId, string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            return _service.PostOrgsIDMembersAsync(orgId, new AddResourceMemberRequestBody(memberId));
+            return _service.PostOrgsIDMembersAsync(orgId, new AddResourceMemberRequestBody(memberId),
+                cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -309,13 +347,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="member">the member of an organization</param>
         /// <param name="organization">the organization of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task DeleteMemberAsync(User member, Organization organization)
+        public Task DeleteMemberAsync(User member, Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(member, nameof(member));
 
-            return DeleteMemberAsync(member.Id, organization.Id);
+            return DeleteMemberAsync(member.Id, organization.Id, cancellationToken);
         }
 
         /// <summary>
@@ -323,37 +363,43 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="memberId">the ID of a member</param>
         /// <param name="orgId">the ID of an organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task DeleteMemberAsync(string memberId, string orgId)
+        public Task DeleteMemberAsync(string memberId, string orgId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(memberId, nameof(memberId));
 
-            return _service.DeleteOrgsIDMembersIDAsync(memberId, orgId);
+            return _service.DeleteOrgsIDMembersIDAsync(memberId, orgId, cancellationToken: cancellationToken);
         }
 
         /// <summary>
         /// List all owners of an organization.
         /// </summary>
         /// <param name="organization">organization of the owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>the List all owners of an organization</returns>
-        public Task<List<ResourceOwner>> GetOwnersAsync(Organization organization)
+        public Task<List<ResourceOwner>> GetOwnersAsync(Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
 
-            return GetOwnersAsync(organization.Id);
+            return GetOwnersAsync(organization.Id, cancellationToken);
         }
 
         /// <summary>
         /// List all owners of an organization.
         /// </summary>
         /// <param name="orgId">ID of organization to get owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>the List all owners of an organization</returns>
-        public async Task<List<ResourceOwner>> GetOwnersAsync(string orgId)
+        public async Task<List<ResourceOwner>> GetOwnersAsync(string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
-            var response = await _service.GetOrgsIDOwnersAsync(orgId).ConfigureAwait(false);
+            var response = await _service.GetOrgsIDOwnersAsync(orgId, cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
             return response.Users;
         }
 
@@ -362,13 +408,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="owner">the owner of an organization</param>
         /// <param name="organization">the organization of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created mapping</returns>
-        public Task<ResourceOwner> AddOwnerAsync(User owner, Organization organization)
+        public Task<ResourceOwner> AddOwnerAsync(User owner, Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            return AddOwnerAsync(owner.Id, organization.Id);
+            return AddOwnerAsync(owner.Id, organization.Id, cancellationToken);
         }
 
         /// <summary>
@@ -376,13 +424,16 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="orgId">the ID of an organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>created mapping</returns>
-        public Task<ResourceOwner> AddOwnerAsync(string ownerId, string orgId)
+        public Task<ResourceOwner> AddOwnerAsync(string ownerId, string orgId,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            return _service.PostOrgsIDOwnersAsync(orgId, new AddResourceMemberRequestBody(ownerId));
+            return _service.PostOrgsIDOwnersAsync(orgId, new AddResourceMemberRequestBody(ownerId),
+                cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -390,13 +441,15 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="owner">the owner of an organization</param>
         /// <param name="organization">the organization of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task DeleteOwnerAsync(User owner, Organization organization)
+        public Task DeleteOwnerAsync(User owner, Organization organization,
+            CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(organization, nameof(organization));
             Arguments.CheckNotNull(owner, nameof(owner));
 
-            return DeleteOwnerAsync(owner.Id, organization.Id);
+            return DeleteOwnerAsync(owner.Id, organization.Id, cancellationToken);
         }
 
         /// <summary>
@@ -404,13 +457,14 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="ownerId">the ID of a owner</param>
         /// <param name="orgId">the ID of an organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns></returns>
-        public Task DeleteOwnerAsync(string ownerId, string orgId)
+        public Task DeleteOwnerAsync(string ownerId, string orgId, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
             Arguments.CheckNonEmptyString(ownerId, nameof(ownerId));
 
-            return _service.DeleteOrgsIDOwnersIDAsync(ownerId, orgId);
+            return _service.DeleteOrgsIDOwnersIDAsync(ownerId, orgId, cancellationToken: cancellationToken);
         }
     }
 }

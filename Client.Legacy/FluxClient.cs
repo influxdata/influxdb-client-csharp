@@ -187,10 +187,11 @@ namespace InfluxDB.Client.Flux
         /// <summary>
         /// Check the status of InfluxDB Server.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>true if server is healthy otherwise return false</returns>
-        public async Task<bool> PingAsync()
+        public async Task<bool> PingAsync(CancellationToken cancellationToken = default)
         {
-            var request = ExecuteAsync(PingRequest());
+            var request = ExecuteAsync(PingRequest(), cancellationToken);
 
             return await PingAsync(request);
         }
@@ -198,11 +199,12 @@ namespace InfluxDB.Client.Flux
         /// <summary>
         ///  Return the version of the connected InfluxDB Server.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>the version String, otherwise unknown</returns>
         /// <exception cref="InfluxException">throws when request did not succesfully ends</exception>
-        public async Task<string> VersionAsync()
+        public async Task<string> VersionAsync(CancellationToken cancellationToken = default)
         {
-            var request = ExecuteAsync(PingRequest());
+            var request = ExecuteAsync(PingRequest(), cancellationToken);
 
             return await VersionAsync(request);
         }
@@ -248,11 +250,12 @@ namespace InfluxDB.Client.Flux
                 cancellationToken);
         }
 
-        private async Task<RestResponse> ExecuteAsync(RestRequest request)
+        private async Task<RestResponse> ExecuteAsync(RestRequest request,
+            CancellationToken cancellationToken = default)
         {
             BeforeIntercept(request);
 
-            var response = await RestClient.ExecuteAsync(request).ConfigureAwait(false);
+            var response = await RestClient.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
 
             RaiseForInfluxError(response, response.Content);
 
