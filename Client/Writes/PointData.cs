@@ -393,8 +393,7 @@ namespace InfluxDB.Client.Writes
             }
             else
             {
-                IReadOnlyDictionary<string, string> defaultTags =
-                    pointSettings.GetDefaultTags();
+                var defaultTags = pointSettings.GetDefaultTags();
                 try
                 {
                     entries = _tags.AddRange(defaultTags);

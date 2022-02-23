@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -44,8 +45,13 @@ namespace InfluxDB.Client.Writes
         /// Get default tags with evaluated expressions.
         /// </summary>
         /// <returns>evaluated default tags</returns>
-        internal Dictionary<string, string> GetDefaultTags()
+        internal IDictionary<string, string> GetDefaultTags()
         {
+            if (_defaultTags.Count == 0)
+            {
+                return ImmutableDictionary<string, string>.Empty;
+            }
+            
             string Evaluation(string expression)
             {
                 if (string.IsNullOrEmpty(expression))
