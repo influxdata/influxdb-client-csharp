@@ -178,7 +178,7 @@ namespace InfluxDB.Client.Api.Domain
         /// </summary>
         /// <value>Timestamp (in RFC3339 date/time format](https://datatracker.ietf.org/doc/html/rfc3339)) of the latest scheduled and completed run.</value>
         [DataMember(Name = "latestCompleted", EmitDefaultValue = false)]
-        public object LatestCompleted { get; private set; }
+        public DateTime? LatestCompleted { get; private set; }
 
 
         /// <summary>
