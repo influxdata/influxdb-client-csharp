@@ -23,6 +23,7 @@
 ### Features
 1. [#291](https://github.com/influxdata/influxdb-client-csharp/pull/291): Add possibility to generate Flux query without `pivot()` function [LINQ]
 1. [#289](https://github.com/influxdata/influxdb-client-csharp/pull/289): Async APIs uses `CancellationToken` in all `async` methods
+1. [#294](https://github.com/influxdata/influxdb-client-csharp/pull/294): Optimize serialization `PointData` into LineProtocol
 
 ### Bug Fixes
 1. [#290](https://github.com/influxdata/influxdb-client-csharp/pull/290): Change `PermissionResource.Type` to `String`
