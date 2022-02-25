@@ -1,4 +1,4 @@
-## 4.0.0-rc2 [unreleased]
+## 4.0.0-rc2 [2022-02-25]
 
 ### Migration Notice
 
