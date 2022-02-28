@@ -166,7 +166,7 @@ namespace InfluxDB.Client.Writes
             {
                 return PutField(name, value);
             }
-            
+
             /// <summary>
             /// Add a field with an <see cref="object"/> value.
             /// </summary>
