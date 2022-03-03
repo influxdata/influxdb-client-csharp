@@ -203,6 +203,17 @@ namespace InfluxDB.Client.Writes
         }
 
         /// <summary>
+        /// Add a field with an <see cref="object"/> value.
+        /// </summary>
+        /// <param name="name">the field name</param>
+        /// <param name="value">the field value</param>
+        /// <returns>this</returns>
+        public PointData Field(string name, object value)
+        {
+            return PutField(name, value);
+        }
+
+        /// <summary>
         /// Updates the timestamp for the point.
         /// </summary>
         /// <param name="timestamp">the timestamp</param>
@@ -489,7 +500,9 @@ namespace InfluxDB.Client.Writes
                 }
                 else
                 {
-                    sb.Append(value);
+                    sb.Append('"');
+                    EscapeValue(sb, value.ToString());
+                    sb.Append('"');
                 }
 
                 sb.Append(',');

@@ -418,5 +418,26 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual("", point.ToLineProtocol());
         }
+
+        [Test]
+        public void UseGenericObjectAsFieldValue()
+        {
+            var point = PointData.Measurement("h2o")
+                .Tag("location", "europe")
+                .Field("custom-object", new GenericObject { Value1 = "test", Value2 = 10 });
+
+            Assert.AreEqual("h2o,location=europe custom-object=\"test-10\"", point.ToLineProtocol());
+        }
+    }
+
+    internal class GenericObject
+    {
+        internal string Value1 { get; set; }
+        internal int Value2 { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Value1}-{Value2}";
+        }
     }
 }
