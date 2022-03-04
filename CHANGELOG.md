@@ -1,4 +1,4 @@
-## 4.0.0-rc3 [unreleased]
+## 4.0.0-rc3 [2022-03-04]
 
 ### Features
 1. [#295](https://github.com/influxdata/influxdb-client-csharp/pull/295): Add possibility to put generic type object as a value for `PointData` and `PointData.Builder`
