@@ -319,5 +319,15 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual(true, disposed);
         }
+        
+        [Test]
+        public async Task VersionIsNotCaseSensitive()
+        {
+            MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(204)
+                    .WithHeader("x-influxdb-version", "2.0.0"));
+
+            Assert.AreEqual("2.0.0", await _client.VersionAsync());
+        }
     }
 }
