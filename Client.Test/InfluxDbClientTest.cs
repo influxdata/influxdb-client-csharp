@@ -319,7 +319,7 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual(true, disposed);
         }
-        
+
         [Test]
         public async Task VersionIsNotCaseSensitive()
         {
