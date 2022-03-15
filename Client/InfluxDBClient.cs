@@ -443,7 +443,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// The readiness of the InfluxDB 2.0.
+        /// Check the readiness of InfluxDB Server at startup. It is not supported by InfluxDB Cloud. 
         /// </summary>
         /// <returns>return null if the InfluxDB is not ready</returns>
         public async Task<Ready> ReadyAsync()

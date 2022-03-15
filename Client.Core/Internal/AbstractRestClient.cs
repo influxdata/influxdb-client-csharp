@@ -49,7 +49,7 @@ namespace InfluxDB.Client.Core.Internal
             Arguments.CheckNotNull(responseHttp, "responseHttp");
 
             var value = responseHttp.Headers
-                .Where(header => header.Name.Equals("X-Influxdb-Version"))
+                .Where(header => header.Name.Equals("X-Influxdb-Version", StringComparison.OrdinalIgnoreCase))
                 .Select(header => header.Value.ToString())
                 .FirstOrDefault();
 

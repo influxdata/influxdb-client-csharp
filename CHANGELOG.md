@@ -1,5 +1,8 @@
 ## 4.0.0 [unreleased]
 
+### Bug Fixes
+1. [#297](https://github.com/influxdata/influxdb-client-csharp/pull/297): Get version from `X-Influxdb-Version` header
+
 ## 4.0.0-rc3 [2022-03-04]
 
 ### Features
