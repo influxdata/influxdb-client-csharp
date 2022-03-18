@@ -1,7 +1,267 @@
 ## 4.0.0 [unreleased]
 
+:warning: The underlying `RestSharp` library was updated the latest major version `v107`. The new version of `RestSharp` switched from the legacy `HttpWebRequest` class to the standard well-known `System.Net.Http.HttpClient` instead. This improves performance and solves lots of issues, like hanging connections, updated protocols support, and many other problems.
+
+### Migration Notice
+
+- New versions of `QueryApi`, `QueryApiSync`, `WriteApi`, `WriteApiAsync` and `FluxClient` methods uses default named argument values so you are able to easily migrate by:
+
+```diff
+- _client.GetQueryApi().QueryAsyncEnumerable<T>(fluxQuery, token);
++ _client.GetQueryApi().QueryAsyncEnumerable<T>(fluxQuery, cancellationToken: token);
+```
+
+### Breaking Changes
+
+#### API
+
+- The Client no longer supports the `ReadWriteTimeout` for HTTP Client. This settings is not supported by the `HttpClient`. Use can use `Timeout` property instead.
+- The `FluxClient` uses `IDisposable` interface to releasing underlying HTTP connections:
+  ##### From
+   ```csharp
+   var client = FluxClientFactory.Create("http://localhost:8086/");
+   ```
+  ##### To
+   ```csharp
+   using var client = FluxClientFactory.Create("http://localhost:8086/");
+   ```
+- The Query APIs uses `CancellationToken` instead of `ICancellable`:
+  ##### From
+    ```csharp
+    await QueryApi.QueryAsync(flux, (cancellable, record) =>
+    {
+        // process record
+        Console.WriteLine($"record: {record}");
+
+        if (your_condition)
+        {
+            // cancel stream
+            source.Cancel();
+        }
+    })
+   ```
+  ##### To
+    ```csharp
+    var source = new CancellationTokenSource();
+    await QueryApi.QueryAsync(flux, record =>
+    {
+        // process record
+        Console.WriteLine($"record: {record}");
+
+        if (your_condition)
+        {
+            // cancel stream
+            source.Cancel();
+        }
+    }, source.Token);
+    ```
+- `QueryApi` has changed method signatures:
+
+  | *3.3.0*                                                                                              | *4.0.0*                                                                                              |
+    |------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+  | `QueryAsync(String)`                                                                                 | `QueryAsync(String, String?, CancellationToken?)`                                                    |
+  | `QueryAsync(String, String)`                                                                         | `QueryAsync(String, String?, CancellationToken?)`                                                    |
+  | `QueryAsync(Query)`                                                                                  | `QueryAsync(Query, String?, CancellationToken?)`                                                     |
+  | `QueryAsync(Query, String)`                                                                          | `QueryAsync(Query, String?, CancellationToken?)`                                                     |
+  | `QueryAsync(String, Type)`                                                                           | `QueryAsync(String, Type, String?, CancellationToken?)`                                              |
+  | `QueryAsync(String, String, Type)`                                                                   | `QueryAsync(String, Type, String?, CancellationToken?)`                                              |
+  | `QueryAsync(Query, Type)`                                                                            | `QueryAsync(Query, Type, String?, CancellationToken?)`                                               |
+  | `QueryAsync(Query, String, Type)`                                                                    | `QueryAsync(Query, Type, String?, CancellationToken?)`                                               |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>)`                                               | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>)`                            | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`                    | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, String, Action<ICancellable, FluxRecord>)`                                       | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, String, Action<ICancellable, FluxRecord>, Action<Exception>)`                    | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(String, String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`            | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`   |
+  | `QueryAsync(Query, Action<ICancellable, FluxRecord>)`                                                | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, Action<ICancellable, FluxRecord>, Action<Exception>)`                             | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`                     | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, String, Action<ICancellable, FluxRecord>)`                                        | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, String, Action<ICancellable, FluxRecord>, Action<Exception>)`                     | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(Query, String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`             | `QueryAsync(Query, Action<FluxRecord>, Action<Exception>?, Action?, String?, CancellationToken?)`    |
+  | `QueryAsync(String, String, Action<ICancellable, Object>, Action<Exception>, Action, Type)`          | `QueryAsync(String, Type, Action<Object>, Action<Exception>?, Action?, String?, CancellationToken?)` |
+  | `QueryAsync(Query, String, Action<ICancellable, Object>, Action<Exception>, Action, Type)`           | `QueryAsync(Query, Type, Action<Object>, Action<Exception>?, Action?, String?, CancellationToken?)`  |
+  | `QueryAsync<T>(String)`                                                                              | `QueryAsync<T>(String, String?, CancellationToken?)`                                                 |
+  | `QueryAsync<T>(String, String)`                                                                      | `QueryAsync<T>(String, String?, CancellationToken?)`                                                 |
+  | `QueryAsync<T>(String, Action<ICancellable, T>)`                                                     | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>)`                                  | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>, Action)`                          | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, String, Action<ICancellable, T>)`                                             | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, String, Action<ICancellable, T>, Action<Exception>)`                          | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(String, String, Action<ICancellable, T>, Action<Exception>, Action)`                  | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`         |
+  | `QueryAsync<T>(Query)`                                                                               | `QueryAsync<T>(Query, String?, CancellationToken?)`                                                  |
+  | `QueryAsync<T>(Query, String)`                                                                       | `QueryAsync<T>(Query, String?, CancellationToken?)`                                                  |
+  | `QueryAsync<T>(Query, Action<ICancellable, T>)`                                                      | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, Action<ICancellable, T>, Action<Exception>)`                                   | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, Action<ICancellable, T>, Action<Exception>, Action)`                           | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, String, Action<ICancellable, T>)`                                              | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, String, Action<ICancellable, T>, Action<Exception>)`                           | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsync<T>(Query, String, Action<ICancellable, T>, Action<Exception>, Action)`                   | `QueryAsync<T>(Query, Action<T>, Action<Exception>?, Action?, String?, CancellationToken?)`          |
+  | `QueryAsyncEnumerable<T>(Query, String, CancellationToken)`                                          | `QueryAsyncEnumerable<T>(Query, String?, CancellationToken?)`                                        |
+  | `QueryAsyncEnumerable<T>(String, CancellationToken)`                                                 | `QueryAsyncEnumerable<T>(String, String?, CancellationToken?)`                                       |
+  | `QueryAsyncEnumerable<T>(String, String, CancellationToken)`                                         | `QueryAsyncEnumerable<T>(String, String?, CancellationToken?)`                                       |
+  | `QueryRawAsync(Query)`                                                                               | `QueryRawAsync(Query, String?, CancellationToken?)`                                                  |
+  | `QueryRawAsync(Query, Action<ICancellable, String>)`                                                 | `QueryRawAsync(Query, Action<String>, Action<Exception>?, Action?, String?, CancellationToken?)`     |
+  | `QueryRawAsync(Query, Action<ICancellable, String>, Action<Exception>)`                              | `QueryRawAsync(Query, Action<String>, Action<Exception>?, Action?, String?, CancellationToken?)`     |
+- `QueryApiSync` has changed method signatures:
+
+  | *3.3.0*                                             | *4.0.0*                                             |
+    |-----------------------------------------------------|-----------------------------------------------------|
+  | `QuerySync(String)`                                 | `QuerySync(String, String?, CancellationToken?)`    |
+  | `QuerySync(String, String)`                         | `QuerySync(String, String?, CancellationToken?)`    |
+  | `QuerySync(Query)`                                  | `QuerySync(Query, String?, CancellationToken?)`     |
+  | `QuerySync(Query, String)`                          | `QuerySync(Query, String?, CancellationToken?)`     |
+  | `QuerySync<T>(String)`                              | `QuerySync<T>(String, String?, CancellationToken?)` |
+  | `QuerySync<T>(String, String)`                      | `QuerySync<T>(String, String?, CancellationToken?)` |
+  | `QuerySync<T>(Query)`                               | `QuerySync<T>(Query, String?, CancellationToken?)`  |
+  | `QuerySync<T>(Query, String)`                       | `QuerySync<T>(Query, String?, CancellationToken?)`  |
+- `WriteApi` has changed method signatures:
+
+  | *3.3.0*                                                           | *4.0.0*                                                              |
+    |-------------------------------------------------------------------|----------------------------------------------------------------------|
+  | `WriteMeasurement<TM>(WritePrecision, TM)`                        | `WriteMeasurement<TM>(TM, WritePrecision?, String?, String?)`        |
+  | `WriteMeasurement<TM>(String, String, WritePrecision, TM)`        | `WriteMeasurement<TM>(TM, WritePrecision?, String?, String?)`        |
+  | `WriteMeasurements<TM>(WritePrecision, TM[])`                     | `WriteMeasurements<TM>(TM[], WritePrecision?, String?, String?)`     |
+  | `WriteMeasurements<TM>(String, String, WritePrecision, TM[])`     | `WriteMeasurements<TM>(TM[], WritePrecision?, String?, String?)`     |
+  | `WriteMeasurements<TM>(WritePrecision, List<TM>)`                 | `WriteMeasurements<TM>(List<TM>, WritePrecision?, String?, String?)` |
+  | `WriteMeasurements<TM>(String, String, WritePrecision, List<TM>)` | `WriteMeasurements<TM>(List<TM>, WritePrecision?, String?, String?)` |
+  | `WritePoint(PointData)`                                           | `WritePoint(PointData, String?, String?)`                            |
+  | `WritePoint(String, String, PointData)`                           | `WritePoint(PointData, String?, String?)`                            |
+  | `WritePoints(PointData[])`                                        | `WritePoints(PointData[], String?, String?)`                         |
+  | `WritePoints(String, String, PointData[])`                        | `WritePoints(PointData[], String?, String?)`                         |
+  | `WritePoints(List<PointData>)`                                    | `WritePoints(List<PointData>, String?, String?)`                     |
+  | `WritePoints(String, String, List<PointData>)`                    | `WritePoints(List<PointData>, String?, String?)`                     |
+  | `WriteRecord(WritePrecision, String)`                             | `WriteRecord(String, WritePrecision?, String?, String?)`             |
+  | `WriteRecord(String, String, WritePrecision, String)`             | `WriteRecord(String, WritePrecision?, String?, String?)`             |
+  | `WriteRecords(WritePrecision, String[])`                          | `WriteRecords(String[], WritePrecision?, String?, String?)`          |
+  | `WriteRecords(String, String, WritePrecision, String[])`          | `WriteRecords(String[], WritePrecision?, String?, String?)`          |
+  | `WriteRecords(WritePrecision, List<String>)`                      | `WriteRecords(List<String>, WritePrecision?, String?, String?)`      |
+  | `WriteRecords(String, String, WritePrecision, List<String>)`      | `WriteRecords(List<String>, WritePrecision?, String?, String?)`      |
+- `WriteApiAsync` has changed method signatures:
+
+  | *3.3.0*                                                                                                           | *4.0.0*                                                                                                               |
+    |-------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+  | `WriteMeasurementAsync<TM>(WritePrecision, TM, CancellationToken)`                                                | `WriteMeasurementAsync<TM>(TM, WritePrecision?, String?, String?, CancellationToken?)`                                |
+  | `WriteMeasurementAsync<TM>(String, String, WritePrecision, TM, CancellationToken)`                                | `WriteMeasurementAsync<TM>(TM, WritePrecision?, String?, String?, CancellationToken?)`                                |
+  | `WriteMeasurementsAsync<TM>(WritePrecision, TM[])`                                                                | `WriteMeasurementsAsync<TM>(TM[], WritePrecision?, String?, String?, CancellationToken?)`                             |
+  | `WriteMeasurementsAsync<TM>(WritePrecision, CancellationToken, TM[])`                                             | `WriteMeasurementsAsync<TM>(TM[], WritePrecision?, String?, String?, CancellationToken?)`                             |
+  | `WriteMeasurementsAsync<TM>(String, String, WritePrecision, TM[])`                                                | `WriteMeasurementsAsync<TM>(TM[], WritePrecision?, String?, String?, CancellationToken?)`                             |
+  | `WriteMeasurementsAsync<TM>(String, String, WritePrecision, CancellationToken, TM[])`                             | `WriteMeasurementsAsync<TM>(TM[], WritePrecision?, String?, String?, CancellationToken?)`                             |
+  | `WriteMeasurementsAsync<TM>(WritePrecision, List<TM>, CancellationToken)`                                         | `WriteMeasurementsAsync<TM>(List<TM>, WritePrecision?, String?, String?, CancellationToken?)`                         |
+  | `WriteMeasurementsAsync<TM>(String, String, WritePrecision, List<TM>, CancellationToken)`                         | `WriteMeasurementsAsync<TM>(List<TM>, WritePrecision?, String?, String?, CancellationToken?)`                         |
+  | `WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM>, String, String, WritePrecision, CancellationToken)` | `WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM>, WritePrecision?, String?, String?, CancellationToken?)` |
+  | `WritePointAsync(PointData, CancellationToken)`                                                                   | `WritePointAsync(PointData, String?, String?, CancellationToken?)`                                                    |
+  | `WritePointAsync(String, String, PointData, CancellationToken)`                                                   | `WritePointAsync(PointData, String?, String?, CancellationToken?)`                                                    |
+  | `WritePointsAsync(PointData[])`                                                                                   | `WritePointsAsync(PointData[], String?, String?, CancellationToken?)`                                                 |
+  | `WritePointsAsync(CancellationToken, PointData[])`                                                                | `WritePointsAsync(PointData[], String?, String?, CancellationToken?)`                                                 |
+  | `WritePointsAsync(String, String, PointData[])`                                                                   | `WritePointsAsync(PointData[], String?, String?, CancellationToken?)`                                                 |
+  | `WritePointsAsync(String, String, CancellationToken, PointData[])`                                                | `WritePointsAsync(PointData[], String?, String?, CancellationToken?)`                                                 |
+  | `WritePointsAsync(List<PointData>, CancellationToken)`                                                            | `WritePointsAsync(List<PointData>, String?, String?, CancellationToken?)`                                             |
+  | `WritePointsAsync(String, String, List<PointData>, CancellationToken)`                                            | `WritePointsAsync(List<PointData>, String?, String?, CancellationToken?)`                                             |
+  | `WritePointsAsyncWithIRestResponse(IEnumerable<PointData>, String, String, CancellationToken)`                    | `WritePointsAsyncWithIRestResponse(IEnumerable<PointData>, String?, String?, CancellationToken?)`                     |
+  | `WriteRecordAsync(WritePrecision, String, CancellationToken)`                                                     | `WriteRecordAsync(String, WritePrecision?, String?, String?, CancellationToken?)`                                     |
+  | `WriteRecordAsync(String, String, WritePrecision, String, CancellationToken)`                                     | `WriteRecordAsync(String, WritePrecision?, String?, String?, CancellationToken?)`                                     |
+  | `WriteRecordsAsync(WritePrecision, String[])`                                                                     | `WriteRecordsAsync(String[], WritePrecision?, String?, String?, CancellationToken?)`                                  |
+  | `WriteRecordsAsync(WritePrecision, CancellationToken, String[])`                                                  | `WriteRecordsAsync(String[], WritePrecision?, String?, String?, CancellationToken?)`                                  |
+  | `WriteRecordsAsync(String, String, WritePrecision, String[])`                                                     | `WriteRecordsAsync(String[], WritePrecision?, String?, String?, CancellationToken?)`                                  |
+  | `WriteRecordsAsync(String, String, WritePrecision, CancellationToken, String[])`                                  | `WriteRecordsAsync(String[], WritePrecision?, String?, String?, CancellationToken?)`                                  |
+  | `WriteRecordsAsync(WritePrecision, List<String>, CancellationToken)`                                              | `WriteRecordsAsync(List<String>, WritePrecision?, String?, String?, CancellationToken?)`                              |
+  | `WriteRecordsAsync(String, String, WritePrecision, List<String>, CancellationToken)`                              | `WriteRecordsAsync(List<String>, WritePrecision?, String?, String?, CancellationToken?)`                              |
+  | `WriteRecordsAsyncWithIRestResponse(IEnumerable<String>, String, String, WritePrecision, CancellationToken)`      | `WriteRecordsAsyncWithIRestResponse(IEnumerable<String>, WritePrecision?, String?, String?, CancellationToken?)`      |
+- `FluxClient` has changed method signatures:
+
+  | *3.3.0*                                                                                          | *4.0.0*                                                                                           |
+    |--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+  | `QueryAsync(String)`                                                                             | `QueryAsync(String, CancellationToken?)`                                                          |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>)`                                           | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, CancellationToken?)`         |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>)`                        | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, CancellationToken?)`         |
+  | `QueryAsync(String, Action<ICancellable, FluxRecord>, Action<Exception>, Action)`                | `QueryAsync(String, Action<FluxRecord>, Action<Exception>?, Action?, CancellationToken?)`         |
+  | `QueryAsync<T>(String)`                                                                          | `QueryAsync<T>(String, CancellationToken?)`                                                       |
+  | `QueryAsync<T>(String, Action<ICancellable, T>)`                                                 | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, CancellationToken?)`               |
+  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>)`                              | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, CancellationToken?)`               |
+  | `QueryAsync<T>(String, Action<ICancellable, T>, Action<Exception>, Action)`                      | `QueryAsync<T>(String, Action<T>, Action<Exception>?, Action?, CancellationToken?)`               |
+  | `QueryRawAsync(String)`                                                                          | `QueryRawAsync(String, String?, CancellationToken?)`                                              |
+  | `QueryRawAsync(String, String)`                                                                  | `QueryRawAsync(String, String?, CancellationToken?)`                                              |
+  | `QueryRawAsync(String, Action<ICancellable, String>)`                                            | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, Action<ICancellable, String>, Action<Exception>)`                         | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, Action<ICancellable, String>, Action<Exception>, Action)`                 | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, String, Action<ICancellable, String>)`                                    | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, String, Action<ICancellable, String>, Action<Exception>)`                 | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+  | `QueryRawAsync(String, String, Action<ICancellable, String>, Action<Exception>, Action)`         | `QueryRawAsync(String, Action<String>, String?, Action<Exception>?, Action?, CancellationToken?)` |
+
+- Response type for `WriteApiAsync.WritePointsAsyncWithIRestResponse` is `RestResponse[]` instead of `IRestResponse[]`.
+- Response type for `WriteApiAsync.WriteMeasurementsAsyncWithIRestResponse` is `RestResponse` instead of `IRestResponse`.
+- Response type for `WriteApiAsync.WriteRecordsAsyncWithIRestResponse` is `RestResponse` instead of `IRestResponse`.
+- `TelegrafsApi` uses `TelegrafPluginRequest` to create `Telegraf` configuration.
+- Rename `TelegrafPlugin` types:
+    - from `TelegrafPlugin.TypeEnum.Inputs` to `TelegrafPlugin.TypeEnum.Input`
+    - from `TelegrafPlugin.TypeEnum.Outputs` to `TelegrafPlugin.TypeEnum.Output`
+- `TasksApi.FindTasksByOrganizationIdAsync(string orgId)` requires pass Organization `ID` as a parameter. For find Tasks by Organization name you can use: `_tasksApi.FindTasksAsync(org: "my-org")`.
+- Removed `orgId` argument from `TelegrafsApi.GetRunsAsync` methods
+- Change type of `PermissionResource.Type` to `string`. You are able to easily migrate by:
+    ```diff
+    - new PermissionResource { Type = PermissionResource.TypeEnum.Users, OrgID = _organization.Id }
+    + new PermissionResource { Type = PermissionResource.TypeUsers, OrgID = _organization.Id }
+    ```
+
+#### Services
+
+This release also uses new version of InfluxDB OSS API definitions - [oss.yml](https://github.com/influxdata/openapi/blob/master/contracts/oss.yml). The following breaking changes are in underlying API services and doesn't affect common apis such as - `WriteApi`, `QueryApi`, `BucketsApi`, `OrganizationsApi`...
+
+- Add `ConfigService` to retrieve InfluxDB's runtime configuration
+- Add `RemoteConnectionsService` to deal with registered remote InfluxDB connections
+- Add `MetricsService` to deal with exposed prometheus metrics
+- Update `TemplatesService` to deal with `Stack` and `Template` API
+- Update `BackupService` to deal with new backup functions of InfluxDB
+- Update `RestoreService` to deal with new restore functions of InfluxDB
+- Remove `DocumentApi` in favour of [InfluxDB Community Templates](https://github.com/influxdata/community-templates). For more info see - [influxdb#19300](https://github.com/influxdata/influxdb/pull/19300), [openapi#192](https://github.com/influxdata/openapi/pull/192)
+- Remove `DefaultSerive`:
+    - `GetRoutes` operation is moved to `RoutesService`
+    - `GetTelegrafPlugin` operation is moved to `TelegrafsService`
+    - `PostSignin` operation is moved to `SigninService`
+    - `PostSignout` operation is moved to `SignoutService`
+- Change type of `Duration.magnitude` from `int?` to `long?`
+- `TelegrafsService` uses `TelegrafPluginRequest` to create `Telegraf` configuration
+- `TelegrafsService` uses `TelegrafPluginRequest` to update `Telegraf` configuration
+
+### Features
+1. [#282](https://github.com/influxdata/influxdb-client-csharp/pull/282): Add support for AggregateWindow function [LINQ]
+1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Allow to set a client certificates
+1. [#291](https://github.com/influxdata/influxdb-client-csharp/pull/291): Add possibility to generate Flux query without `pivot()` function [LINQ]
+1. [#289](https://github.com/influxdata/influxdb-client-csharp/pull/289): Async APIs uses `CancellationToken` in all `async` methods
+1. [#294](https://github.com/influxdata/influxdb-client-csharp/pull/294): Optimize serialization `PointData` into LineProtocol
+
 ### Bug Fixes
+1. [#287](https://github.com/influxdata/influxdb-client-csharp/pull/287): Filter tasks by Organization ID
+1. [#290](https://github.com/influxdata/influxdb-client-csharp/pull/290): Change `PermissionResource.Type` to `String`
+1. [#293](https://github.com/influxdata/influxdb-client-csharp/pull/293): Type of `CheckBase.LatestCompleted` is `DateTime`
 1. [#297](https://github.com/influxdata/influxdb-client-csharp/pull/297): Get version from `X-Influxdb-Version` header
+
+### CI
+1. [#292](https://github.com/influxdata/influxdb-client-csharp/pull/292): Use new Codecov uploader for reporting code coverage
+1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Remove out of support `.NET Core` versions - `2.2`, `3.0`
+1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Add check to compilation warnings
+1. [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Add check to correctness of code formatting
+
+### Dependencies
+[#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Update dependencies:
+
+#### Build:
+    - RestSharp to 107.3.0
+    - CsvHelper to 27.2.1
+    - NodaTime to 3.0.9
+    - Microsoft.Extensions.ObjectPool to 6.0.1
+    - System.Collections.Immutable to 6.0.0
+    - System.Configuration.ConfigurationManager to 6.0.0
+
+#### Test:
+    - Microsoft.NET.Test.Sdk to 17.0.0
+    - NUnit3TestAdapter to 4.2.1
+    - WireMock.Net to 1.4.34
+    - Moq to 4.16.1
+    - System.Linq.Async to 6.0.1
+    - Tomlyn.Signed to 0.10.2
+    - coverlet.collector to 3.1.2
 
 ## 4.0.0-rc3 [2022-03-04]
 
