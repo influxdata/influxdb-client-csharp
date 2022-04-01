@@ -22,6 +22,7 @@ namespace InfluxDB.Client.Api.Client
         internal readonly RestClientOptions RestClientOptions;
 
         private bool _initializedSessionTokens = false;
+        private char[] _sessionToken;
         private bool _signout;
 
         public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler, GzipHandler gzipHandler)
@@ -83,6 +84,11 @@ namespace InfluxDB.Client.Api.Client
             else if (InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme))
             {
                 InitToken();
+
+                if (_sessionToken != null)
+                {
+                    request.AddHeader("Cookie", "session=" + new string(_sessionToken));
+                }
             }
 
             _loggingHandler.BeforeIntercept(request);
@@ -126,6 +132,14 @@ namespace InfluxDB.Client.Api.Client
                 if (authResponse.Cookies != null)
                 {
                     _initializedSessionTokens = true;
+                    
+                    if (authResponse.Cookies.Count == 1)
+                    {
+                        if (authResponse.Cookies[0].Name.ToString().Equals("session"))
+                        {
+                            _sessionToken = authResponse.Cookies[0].Value.ToCharArray();
+                        }
+                    }
                 }
             }
         }
