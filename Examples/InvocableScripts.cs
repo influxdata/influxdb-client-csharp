@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
@@ -48,7 +50,7 @@ namespace Examples
             // Create Invocable Script
             //
             Console.WriteLine("------- Create -------\n");
-            const string scriptQuery = "from(bucket: params.bucket_name) |> range(start: -30d) |> limit(n:2)";
+            const string scriptQuery = "from(bucket: params.bucket_name) |> range(start: -6h) |> limit(n:2)";
             var createRequest = new ScriptCreateRequest(
                 $"my_script_{DateTime.Now.Ticks}",
                 "my first try",
@@ -67,14 +69,50 @@ namespace Examples
             Console.WriteLine(createdScript);
 
             //
+            // Invoke a script
+            //
+            var bindParams = new Dictionary<string, object>
+            {
+                { "bucket_name", bucket }
+            };
+            // FluxTables
+            Console.WriteLine("\n------- Invoke to FluxTables -------\n");
+            var tables = await scriptsApi.InvokeScriptAsync(createdScript.Id, bindParams);
+            foreach (var record in tables.SelectMany(table => table.Records))
+                Console.WriteLine(
+                    $"{record.GetValueByKey("_time")} {record.GetValueByKey("location")}: {record.GetField()} {record.GetValue()}");
+
+            // Stream of FluxRecords
+            Console.WriteLine("\n------- Invoke to Stream of FluxRecords -------\n");
+            var records = scriptsApi.InvokeScriptEnumerableAsync(createdScript.Id, bindParams);
+            await foreach (var record in records)
+                Console.WriteLine(
+                    $"{record.GetValueByKey("_time")} {record.GetValueByKey("location")}: {record.GetField()} {record.GetValue()}");
+
+            // RAW
+            Console.WriteLine("\n------- Invoke to Raw-------\n");
+            var raw = await scriptsApi.InvokeScriptRawAsync(createdScript.Id, bindParams);
+            Console.WriteLine($"RAW output:\n {raw}");
+
+            // Measurements
+            Console.WriteLine("\n------- Invoke to Measurements -------\n");
+            var measurements =
+                await scriptsApi.InvokeScriptMeasurementsAsync<InvocableScriptPojo>(createdScript.Id, bindParams);
+            foreach (var measurement in measurements) Console.WriteLine($"{measurement}");
+
+            // Invoke to Stream of Measurements
+            Console.WriteLine("\n------- Invoke to Stream of Measurements -------\n");
+            var measurementsStream =
+                scriptsApi.InvokeScriptMeasurementsEnumerableAsync<InvocableScriptPojo>(createdScript.Id, bindParams);
+            await foreach (var measurement in measurementsStream) Console.WriteLine($"{measurement}");
+
+            //
             // List scripts
             //
             Console.WriteLine("\n------- List -------\n");
             var scripts = await scriptsApi.FindScriptsAsync();
             foreach (var script in scripts)
-            {
                 Console.WriteLine($" ---\n ID: {script.Id}\n Name: {script.Name}\n Description: {script.Description}");
-            }
             Console.WriteLine("---");
 
             //
@@ -83,6 +121,20 @@ namespace Examples
             Console.WriteLine("------- Delete -------\n");
             await scriptsApi.DeleteScriptAsync(createdScript.Id);
             Console.WriteLine($"Successfully deleted script: '{createdScript.Name}'");
+        }
+
+        private class InvocableScriptPojo
+        {
+            [Column("location", IsTag = true)] public string Location { get; set; }
+
+            [Column("value")] public string Value { get; set; }
+
+            [Column("_time")] public string Time { get; set; }
+
+            public override string ToString()
+            {
+                return $"{Time:MM/dd/yyyy hh:mm:ss.fff tt} {Location} value: {Value}";
+            }
         }
     }
 }

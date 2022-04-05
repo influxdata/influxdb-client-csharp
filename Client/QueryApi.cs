@@ -161,7 +161,8 @@ namespace InfluxDB.Client
 
             var requestMessage = CreateRequest(CreateQuery(query), org);
 
-            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken).ConfigureAwait(false))
+            await foreach (var record in QueryEnumerable(requestMessage, it => Mapper.ConvertToEntity<T>(it),
+                               cancellationToken).ConfigureAwait(false))
                 yield return record;
         }
 
@@ -181,7 +182,8 @@ namespace InfluxDB.Client
 
             var requestMessage = CreateRequest(query, org);
 
-            await foreach (var record in QueryEnumerable<T>(requestMessage, cancellationToken).ConfigureAwait(false))
+            await foreach (var record in QueryEnumerable(requestMessage, it => Mapper.ConvertToEntity<T>(it),
+                               cancellationToken).ConfigureAwait(false))
                 yield return record;
         }
 
