@@ -21,7 +21,7 @@ namespace Examples
             const string token = "my-token";
             const string bucket = "my-bucket";
             const string organization = "my-org";
-            
+
             var options = new InfluxDBClientOptions.Builder()
                 .Url(host)
                 .AuthenticateToken(token.ToCharArray())
