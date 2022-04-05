@@ -22,11 +22,22 @@ namespace InfluxDB.Client.Core.Flux.Internal
         private const string AnnotationGroup = "#group";
         private const string AnnotationDefault = "#default";
         private static readonly string[] Annotations = { AnnotationDatatype, AnnotationGroup, AnnotationDefault };
+        private readonly ResponseMode _responseMode;
 
         private enum ParsingState
         {
             Normal,
             InError
+        }
+
+        // The configuration for expected amount of metadata response from InfluxDB.
+        internal enum ResponseMode
+        {
+            // full information about types, default values and groups
+            Full,
+
+            // useful for Invocable scripts
+            OnlyNames
         }
 
         public interface IFluxResponseConsumer
@@ -59,6 +70,11 @@ namespace InfluxDB.Client.Core.Flux.Internal
             {
                 Tables[index].Records.Add(record);
             }
+        }
+
+        internal FluxCsvParser(ResponseMode responseMode = ResponseMode.Full)
+        {
+            _responseMode = responseMode;
         }
 
         public void ParseFluxResponse(string source, CancellationToken cancellable, IFluxResponseConsumer consumer)
@@ -161,7 +177,8 @@ namespace InfluxDB.Client.Core.Flux.Internal
             var token = state.csv[0];
 
             //// start new table
-            if (Annotations.Contains(token) && !state.startNewTable)
+            if (Annotations.Contains(token) && !state.startNewTable ||
+                _responseMode == ResponseMode.OnlyNames && state.table == null)
             {
                 state.startNewTable = true;
 
@@ -181,7 +198,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             //#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string,string,string
             if (AnnotationDatatype.Equals(token))
             {
-                AddDataTypes(state.table, state.csv);
+                AddDataTypes(state.table, state.csv.Parser.Record);
             }
             else if (AnnotationGroup.Equals(token))
             {
@@ -196,6 +213,12 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 // parse column names
                 if (state.startNewTable)
                 {
+                    if (_responseMode == ResponseMode.OnlyNames && state.table.Columns.Count == 0)
+                    {
+                        AddDataTypes(state.table, state.csv.Parser.Record.Select(it => "string").ToArray());
+                        state.groups = state.csv.Parser.Record.Select(it => "false").ToArray();
+                    }
+
                     AddGroups(state.table, state.groups);
                     AddColumnNamesAndTags(state.table, state.csv);
                     state.startNewTable = false;
@@ -306,12 +329,12 @@ namespace InfluxDB.Client.Core.Flux.Internal
             return new BufferedStream(stream);
         }
 
-        private void AddDataTypes(FluxTable table, CsvReader dataTypes)
+        private void AddDataTypes(FluxTable table, string[] dataTypes)
         {
             Arguments.CheckNotNull(table, "table");
             Arguments.CheckNotNull(dataTypes, "dataTypes");
 
-            for (var index = 1; index < dataTypes.Parser.Record.Length; index++)
+            for (var index = 1; index < dataTypes.Length; index++)
             {
                 var dataType = dataTypes[index];
 
