@@ -347,6 +347,20 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Create an InvocableScripts API instance.
+        /// </summary>
+        /// <returns>New instance of InvocableScriptsApi.</returns>
+        public InvocableScriptsApi GetInvocableScriptsApi()
+        {
+            var service = new InvocableScriptsService((Configuration)_apiClient.Configuration)
+            {
+                ExceptionFactory = _exceptionFactory
+            };
+
+            return new InvocableScriptsApi(service);
+        }
+
+        /// <summary>
         /// Create a service for specified type.
         /// </summary>
         /// <param name="serviceType">type of service</param>
