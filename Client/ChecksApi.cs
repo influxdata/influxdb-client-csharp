@@ -10,7 +10,7 @@ using InfluxDB.Client.Domain;
 namespace InfluxDB.Client
 {
     /// <summary>
-    /// The client of the InfluxDB 2.0 that implement Check Api.
+    /// The client of the InfluxDB 2.x that implement Check Api.
     /// </summary>
     public class ChecksApi
     {

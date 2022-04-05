@@ -12,7 +12,7 @@ using InfluxDB.Client.Writes;
 namespace InfluxDB.Client
 {
     /// <summary>
-    /// InfluxDBClientOptions are used to configure the InfluxDB 2.0 connections.
+    /// InfluxDBClientOptions are used to configure the InfluxDB 2.x connections.
     /// </summary>
     public class InfluxDBClientOptions
     {

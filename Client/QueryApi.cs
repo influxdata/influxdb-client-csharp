@@ -44,7 +44,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to <see cref="FluxTable"/>s.
         ///
         /// <para>
@@ -66,7 +66,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to <see cref="FluxTable"/>s.
         ///
         /// <para>
@@ -93,7 +93,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to list of object with given type.
         ///
         /// <para>
@@ -116,7 +116,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to list of object with given type.
         ///
         /// <para>
@@ -146,7 +146,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously maps
         /// response to enumerable of objects of type <typeparamref name="T"/>.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -166,7 +166,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously maps
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously maps
         /// response to enumerable of objects of type <typeparamref name="T"/>. 
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -186,7 +186,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream <see cref="FluxRecord"/>
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously stream <see cref="FluxRecord"/>
         /// to <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -209,7 +209,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream <see cref="FluxRecord"/>
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously stream <see cref="FluxRecord"/>
         /// to <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -231,7 +231,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously stream Measurements
         /// to a <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -255,7 +255,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously stream Measurements
         /// to a <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -278,7 +278,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to list of object with given type.
         /// 
         /// <para>
@@ -299,7 +299,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to list of object with given type.
         /// 
         /// <para>
@@ -326,7 +326,7 @@ namespace InfluxDB.Client
 
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously stream Measurements
         /// to a <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -346,7 +346,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream Measurements
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously stream Measurements
         /// to a <see cref="onNext"/> consumer.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -427,7 +427,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream response
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously stream response
         /// (line by line) to <see cref="onResponse"/>.
         /// </summary>
         /// <param name="query">the flux query to execute</param>
@@ -449,7 +449,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and asynchronously stream response
+        /// Executes the Flux query against the InfluxDB 2.x and asynchronously stream response
         /// (line by line) to <see cref="onResponse"/>.
         /// </summary>
         /// <param name="query">the flux query to execute</param>

@@ -8,15 +8,15 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/pulls)
 [![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://www.influxdata.com/slack)
 
-This repository contains the reference C# client for the InfluxDB 2.0.
+This repository contains the reference C# client for the InfluxDB 2.x.
 
 #### Note: Use this client library with InfluxDB 2.x and InfluxDB 1.8+ ([see details](#influxdb-18-api-compatibility)). For connecting to InfluxDB 1.7 or earlier instances, use the [influxdb-csharp](https://github.com/influxdata/influxdb-csharp) client library.
 
 - [Features](#features)
 - [Documentation](#documentation)
 - [How To Use](#how-to-use)
-    - [Writes and Queries in InfluxDB 2.0](#writes-and-queries-in-influxdb-20)
-    - [Use Management API to create a new Bucket in InfluxDB 2.0](#use-management-api-to-create-a-new-bucket-in-influxdb-20)
+    - [Writes and Queries in InfluxDB 2.x](#writes-and-queries-in-influxdb-2x)
+    - [Use Management API to create a new Bucket in InfluxDB 2.x](#use-management-api-to-create-a-new-bucket-in-influxdb-2x)
     - [Flux queries in InfluxDB 1.7+](#flux-queries-in-influxdb-17)
 - [Contributing](#contributing)
 - [License](#license)
@@ -26,27 +26,27 @@ This repository contains the reference C# client for the InfluxDB 2.0.
 
 This section contains links to the client library documentation.
 
-* [Product documentation](https://docs.influxdata.com/influxdb/v2.0/api-guide/client-libraries/), [Getting Started](#how-to-use)
+* [Product documentation](https://docs.influxdata.com/influxdb/latest/api-guide/client-libraries/), [Getting Started](#how-to-use)
 * [Examples](Examples)
 * [API Reference](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.html)
 * [Changelog](CHANGELOG.md)
 
-| Client | Description | Documentation | Compatibility |
-| --- | --- | --- |                                      --- |
-| **[Client](./Client#influxdbclient)** | The reference C# client that allows query, write and InfluxDB 2.0 management. | [readme](./Client#influxdbclient)| 2.0 |
-| **[Client.Linq](./Client.Linq#influxdbclientlinq)**  | The library supports to use a LINQ expression to query the InfluxDB. | [readme](./Client.Linq#influxdbclientlinq) | 2.0 |
-| **[Client.Legacy](./Client.Legacy#influxdbclientflux)**  | The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+. | [readme](./Client.Legacy#influxdbclientflux) | 1.7+ |
+| Client | Description                                                                            | Documentation | Compatibility |
+| --- |----------------------------------------------------------------------------------------| --- |---------------|
+| **[Client](./Client#influxdbclient)** | The reference C# client that allows query, write and InfluxDB 2.x management.          | [readme](./Client#influxdbclient)| 2.x           |
+| **[Client.Linq](./Client.Linq#influxdbclientlinq)**  | The library supports to use a LINQ expression to query the InfluxDB.                   | [readme](./Client.Linq#influxdbclientlinq) | 2.x           |
+| **[Client.Legacy](./Client.Legacy#influxdbclientflux)**  | The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+. | [readme](./Client.Legacy#influxdbclientflux) | 1.7+          |
 
 ## Features
 
 - Supports querying using the Flux language over the InfluxDB 1.7+ REST API (`/api/v2/query endpoint`) 
-- InfluxDB 2.0 client
+- InfluxDB 2.x client
     - Querying data using the Flux language
     - Writing data using
         - [Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/) 
         - [Data Point](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/Writes/PointData.cs#L17) 
         - POCO
-    - InfluxDB 2.0 Management API client for managing
+    - InfluxDB 2.x Management API client for managing
         - sources, buckets
         - tasks
         - authorizations
@@ -55,9 +55,9 @@ This section contains links to the client library documentation.
     
 ## How To Use 
 
-### Writes and Queries in InfluxDB 2.0
+### Writes and Queries in InfluxDB 2.x
 
-The following example demonstrates how to write data to InfluxDB 2.0 and read them back using the Flux language:
+The following example demonstrates how to write data to InfluxDB 2.x and read them back using the Flux language:
 
 #### Installation
 
@@ -149,9 +149,9 @@ namespace Examples
 }
 ```
 
-### Use Management API to create a new Bucket in InfluxDB 2.0  
+### Use Management API to create a new Bucket in InfluxDB 2.x  
 
-The following example demonstrates how to use a InfluxDB 2.0 Management API. For further information see [client documentation](./Client#management-api).
+The following example demonstrates how to use a InfluxDB 2.x Management API. For further information see [client documentation](./Client#management-api).
 
 #### Installation
 
@@ -223,15 +223,15 @@ namespace Examples
 
 ### InfluxDB 1.8 API compatibility
 
-[InfluxDB 1.8.0 introduced forward compatibility APIs](https://docs.influxdata.com/influxdb/v1.8/tools/api/#influxdb-2-0-api-compatibility-endpoints) for InfluxDB 2.0. This allow you to easily move from InfluxDB 1.x to InfluxDB 2.0 Cloud or open source.
+[InfluxDB 1.8.0 introduced forward compatibility APIs](https://docs.influxdata.com/influxdb/v1.8/tools/api/#influxdb-2-0-api-compatibility-endpoints) for InfluxDB 2.x. This allow you to easily move from InfluxDB 1.x to InfluxDB 2.x Cloud or open source.
 
 The following forward compatible APIs are available:
 
-| API | Endpoint | Description |
-|:----------|:----------|:----------|
-| [QueryApi.cs](Client/QueryApi.cs) | [/api/v2/query](https://docs.influxdata.com/influxdb/v1.8/tools/api/#apiv2query-http-endpoint) | Query data in InfluxDB 1.8.0+ using the InfluxDB 2.0 API and [Flux](https://docs.influxdata.com/flux/latest/) _(endpoint should be enabled by [`flux-enabled` option](https://docs.influxdata.com/influxdb/latest/administration/config/#flux-enabled-false))_ |
-| [WriteApi.cs](Client/WriteApi.cs) | [/api/v2/write](https://docs.influxdata.com/influxdb/v1.8/tools/api/#apiv2write-http-endpoint) | Write data to InfluxDB 1.8.0+ using the InfluxDB 2.0 API |
-| [PingAsync](Client/InfluxDBClient.cs#L431) | [/ping](https://docs.influxdata.com/influxdb/v1.8/tools/api/#ping-http-endpoint) | Checks the status of InfluxDB instance and version of InfluxDB. |    
+| API | Endpoint | Description                                                                                                                                                                                                                                                    |
+|:----------|:----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [QueryApi.cs](Client/QueryApi.cs) | [/api/v2/query](https://docs.influxdata.com/influxdb/v1.8/tools/api/#apiv2query-http-endpoint) | Query data in InfluxDB 1.8.0+ using the InfluxDB 2.x API and [Flux](https://docs.influxdata.com/flux/latest/) _(endpoint should be enabled by [`flux-enabled` option](https://docs.influxdata.com/influxdb/latest/administration/config/#flux-enabled-false))_ |
+| [WriteApi.cs](Client/WriteApi.cs) | [/api/v2/write](https://docs.influxdata.com/influxdb/v1.8/tools/api/#apiv2write-http-endpoint) | Write data to InfluxDB 1.8.0+ using the InfluxDB 2.x API                                                                                                                                                                                                       |
+| [PingAsync](Client/InfluxDBClient.cs#L431) | [/ping](https://docs.influxdata.com/influxdb/v1.8/tools/api/#ping-http-endpoint) | Checks the status of InfluxDB instance and version of InfluxDB.                                                                                                                                                                                                |    
 
 For detail info see [InfluxDB 1.8 example](Examples/InfluxDB18Example.cs).
 
@@ -297,4 +297,4 @@ If you would like to contribute code you can do through GitHub by forking the re
 
 ## License
 
-The InfluxDB 2.0 Clients are released under the [MIT License](https://opensource.org/licenses/MIT).
+The InfluxDB 2.x Clients are released under the [MIT License](https://opensource.org/licenses/MIT).

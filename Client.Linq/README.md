@@ -6,7 +6,7 @@ The library supports to use a LINQ expression to query the InfluxDB.
 
 This section contains links to the client library documentation.
 
-* [Product documentation](https://docs.influxdata.com/influxdb/v2.0/api-guide/client-libraries/), [Getting Started](#how-to-start)
+* [Product documentation](https://docs.influxdata.com/influxdb/latest/api-guide/client-libraries/), [Getting Started](#how-to-start)
 * [Examples](../Examples)
 * [API Reference](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.Linq.InfluxDBQueryable-1.html)
 * [Changelog](../CHANGELOG.md)

@@ -7,7 +7,7 @@ namespace InfluxDB.Client
     public static class InfluxDBClientFactory
     {
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client that is configured via <code>App.config</code>.
+        /// Create a instance of the InfluxDB 2.x client that is configured via <code>App.config</code>.
         /// </summary>
         /// <returns>client</returns>
         public static InfluxDBClient Create()
@@ -21,7 +21,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client. The url could be a connection string with various configurations.
+        /// Create a instance of the InfluxDB 2.x client. The url could be a connection string with various configurations.
         /// <para>
         /// e.g.: "http://localhost:8086?readTimeout=5000&amp;connectTimeout=5000&amp;logLevel=BASIC
         /// </para>
@@ -39,9 +39,9 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client.
+        /// Create a instance of the InfluxDB 2.x client.
         /// </summary>
-        /// <param name="url">the url to connect to the InfluxDB 2.0</param>
+        /// <param name="url">the url to connect to the InfluxDB 2.x</param>
         /// <param name="username">the username to use in the basic auth</param>
         /// <param name="password">the password to use in the basic auth</param>
         /// <returns>client</returns>
@@ -57,9 +57,9 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client.
+        /// Create a instance of the InfluxDB 2.x client.
         /// </summary>
-        /// <param name="url">the url to connect to the InfluxDB 2.0</param>
+        /// <param name="url">the url to connect to the InfluxDB 2.x</param>
         /// <param name="token">the token to use for the authorization</param>
         /// <returns>client</returns>
         public static InfluxDBClient Create(string url, char[] token)
@@ -74,9 +74,9 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client.
+        /// Create a instance of the InfluxDB 2.x client.
         /// </summary>
-        /// <param name="url">the url to connect to the InfluxDB 2.0</param>
+        /// <param name="url">the url to connect to the InfluxDB 2.x</param>
         /// <param name="token">the token to use for the authorization</param>
         /// <returns>client</returns>
         public static InfluxDBClient Create(string url, string token)
@@ -91,7 +91,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client to connect into InfluxDB 1.8.
+        /// Create a instance of the InfluxDB 2.x client to connect into InfluxDB 1.8.
         /// </summary>
         /// <param name="url">the url to connect to the InfluxDB 1.8</param>
         /// <param name="username">authorization username</param>
@@ -116,7 +116,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.0 client.
+        /// Create a instance of the InfluxDB 2.x client.
         /// </summary>
         /// <param name="options">the connection configuration</param>
         /// <returns>client</returns>

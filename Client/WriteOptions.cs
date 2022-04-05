@@ -4,7 +4,7 @@ using InfluxDB.Client.Core;
 namespace InfluxDB.Client
 {
     /// <summary>
-    /// WriteOptions are used to configure writes the data point into InfluxDB 2.0.
+    /// WriteOptions are used to configure writes the data point into InfluxDB 2.x.
     ///
     /// <para>
     ///The default setting use the batching configured to (consistent with Telegraf):
