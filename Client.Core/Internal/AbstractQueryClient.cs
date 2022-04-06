@@ -20,16 +20,21 @@ namespace InfluxDB.Client.Core.Internal
 
         protected static readonly Action<Exception> ErrorConsumer = e => throw e;
 
-        private readonly FluxCsvParser _csvParser = new FluxCsvParser();
+        private readonly FluxCsvParser _csvParser;
 
         protected RestClient RestClient;
         protected readonly IFluxResultMapper Mapper;
 
-        protected AbstractQueryClient(IFluxResultMapper mapper)
+        protected AbstractQueryClient(IFluxResultMapper mapper) : this(mapper, new FluxCsvParser())
+        {
+        }
+
+        protected AbstractQueryClient(IFluxResultMapper mapper, FluxCsvParser csvParser)
         {
             Arguments.CheckNotNull(mapper, nameof(mapper));
 
             Mapper = mapper;
+            _csvParser = csvParser;
         }
 
         protected Task Query(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn,
@@ -180,7 +185,7 @@ namespace InfluxDB.Client.Core.Internal
         }
 
         protected async IAsyncEnumerable<T> QueryEnumerable<T>(
-            Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn,
+            Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn, Func<FluxRecord, T> convert,
             [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNotNull(queryFn, nameof(queryFn));
@@ -209,7 +214,7 @@ namespace InfluxDB.Client.Core.Internal
                                .ConfigureAwait(false))
                 if (!(record is null))
                 {
-                    yield return Mapper.ConvertToEntity<T>(record);
+                    yield return convert.Invoke(record);
                 }
         }
 

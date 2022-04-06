@@ -32,7 +32,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to list of object with given type.
         ///
         /// <para>
@@ -52,7 +52,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to list of object with given type.
         ///
         /// <para>
@@ -88,7 +88,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to <see cref="FluxTable"/>s.
         ///
         /// <para>
@@ -107,7 +107,7 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Executes the Flux query against the InfluxDB 2.0 and synchronously map whole response
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
         /// to <see cref="FluxTable"/>s.
         ///
         /// <para>

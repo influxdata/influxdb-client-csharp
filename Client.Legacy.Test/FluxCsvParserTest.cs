@@ -4,7 +4,6 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Exceptions;
 using InfluxDB.Client.Core.Flux.Internal;
@@ -19,7 +18,7 @@ namespace Client.Legacy.Test
     {
         private FluxCsvParser _parser;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
             _parser = new FluxCsvParser();
@@ -751,6 +750,25 @@ namespace Client.Legacy.Test
             Assert.AreEqual(12, tables[0].Records.Count);
             Assert.AreEqual(double.PositiveInfinity, tables[0].Records[10].GetValueByKey("le"));
             Assert.AreEqual(double.NegativeInfinity, tables[0].Records[11].GetValueByKey("le"));
+        }
+
+        [Test]
+        public void ParseWithoutDatatype()
+        {
+            const string data = @",result,table,_start,_stop,_field,_measurement,host,region,_value2,value1,value_str
+,,0,1677-09-21T00:12:43.145224192Z,2018-07-16T11:21:02.547596934Z,free,mem,A,west,121,11,test
+,,1,1677-09-21T00:12:43.145224192Z,2018-07-16T11:21:02.547596934Z,free,mem,A,west,121,11,test
+
+";
+
+            _parser = new FluxCsvParser(FluxCsvParser.ResponseMode.OnlyNames);
+            var tables = ParseFluxResponse(data);
+            Assert.AreEqual(2, tables.Count);
+            Assert.AreEqual(11, tables[0].Columns.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+            Assert.AreEqual("0", tables[0].Records[0].GetValueByKey("table"));
+            Assert.AreEqual("11", tables[0].Records[0].GetValueByKey("value1"));
+            Assert.AreEqual("west", tables[0].Records[0].GetValueByKey("region"));
         }
 
         private List<FluxTable> ParseFluxResponse(string data)

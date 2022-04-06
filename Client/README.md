@@ -2,13 +2,13 @@
 
 [![CircleCI](https://circleci.com/gh/influxdata/influxdb-client-csharp.svg?style=svg)](https://circleci.com/gh/influxdata/influxdb-client-csharp)
 
-The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.0.
+The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.x.
 
 ## Documentation
 
 This section contains links to the client library documentation.
 
-* [Product documentation](https://docs.influxdata.com/influxdb/v2.0/api-guide/client-libraries/), [Getting Started](#queries)
+* [Product documentation](https://docs.influxdata.com/influxdb/latest/api-guide/client-libraries/), [Getting Started](#queries)
 * [Examples](../Examples)
 * [API Reference](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.html)
 * [Changelog](../CHANGELOG.md)
@@ -26,7 +26,7 @@ This section contains links to the client library documentation.
     - [POCO](#by-poco)
     - [Default Tags](#default-tags)
 - [Delete data](#delete-data)    
-- [InfluxDB 2.0 Management API](#management-api)
+- [InfluxDB 2.x Management API](#management-api)
     - sources, buckets
     - tasks
     - authorizations
@@ -780,7 +780,7 @@ The client has following management API:
 | **/ready** | Get the readiness of a instance at startup| [InfluxDBClient#Ready()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L169--) |
 | **/health** | Get the health of an instance anytime during execution | [InfluxDBClient#Health()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L160--) |
 
-The following example demonstrates how to use a InfluxDB 2.0 Management API. For further information see endpoints implementation.
+The following example demonstrates how to use a InfluxDB 2.x Management API. For further information see endpoints implementation.
 
 ```c#
 using System;
