@@ -133,8 +133,9 @@ namespace InfluxDB.Client.Api.Client
                     {
                         var headerParameter = authResponse
                             .Headers?
-                            .FirstOrDefault(it => string.Equals("Set-Cookie", it.Name, StringComparison.OrdinalIgnoreCase));
-                        
+                            .FirstOrDefault(it =>
+                                string.Equals("Set-Cookie", it.Name, StringComparison.OrdinalIgnoreCase));
+
                         RestClient.Authenticator = new CookieRedirectAuthenticator(headerParameter);
                     }
                 }
@@ -170,6 +171,8 @@ namespace InfluxDB.Client.Api.Client
         }
 
         protected override ValueTask<Parameter> GetAuthenticationParameter(string cookie)
-            => new ValueTask<Parameter>(new HeaderParameter("Cookie", cookie));
+        {
+            return new ValueTask<Parameter>(new HeaderParameter("Cookie", cookie));
+        }
     }
 }
