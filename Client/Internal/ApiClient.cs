@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 using InfluxDB.Client.Core.Internal;
 using RestSharp;
+using RestSharp.Authenticators;
 
 namespace InfluxDB.Client.Api.Client
 {
@@ -126,6 +128,15 @@ namespace InfluxDB.Client.Api.Client
                 if (authResponse.Cookies != null)
                 {
                     _initializedSessionTokens = true;
+                    // The cookies doesn't follow redirects => we have to manually set `Cookie` header by Authenticator.
+                    if (_options.AllowHttpRedirects && authResponse.Cookies.Count > 0)
+                    {
+                        var headerParameter = authResponse
+                            .Headers?
+                            .FirstOrDefault(it => string.Equals("Set-Cookie", it.Name, StringComparison.OrdinalIgnoreCase));
+                        
+                        RestClient.Authenticator = new CookieRedirectAuthenticator(headerParameter);
+                    }
                 }
             }
         }
@@ -145,6 +156,20 @@ namespace InfluxDB.Client.Api.Client
 
             var request = new RestRequest("/api/v2/signout", Method.Post);
             RestClient.ExecuteAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
+            RestClient.Authenticator = null;
         }
+    }
+
+    /// <summary>
+    /// Set Cookies to HTTP Request.
+    /// </summary>
+    internal class CookieRedirectAuthenticator : AuthenticatorBase
+    {
+        internal CookieRedirectAuthenticator(Parameter setCookie) : base(setCookie.Value?.ToString() ?? "")
+        {
+        }
+
+        protected override ValueTask<Parameter> GetAuthenticationParameter(string cookie)
+            => new ValueTask<Parameter>(new HeaderParameter("Cookie", cookie));
     }
 }
