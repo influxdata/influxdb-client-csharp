@@ -293,17 +293,17 @@ namespace InfluxDB.Client.Test
                 .Authenticate("my-username", "my-password".ToCharArray())
                 .AllowRedirects(true)
                 .Build());
-            
+
             var anotherServer = WireMockServer.Start(new WireMockServerSettings
             {
                 UseSSL = false
             });
-            
+
             // auth cookies
             MockServer
                 .Given(Request.Create().UsingPost())
                 .RespondWith(Response.Create().WithHeader("Set-Cookie", "session=xyz"));
-            
+
             // redirect to another server
             MockServer
                 .Given(Request.Create().UsingGet())
@@ -317,7 +317,7 @@ namespace InfluxDB.Client.Test
             var authorization = await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
             Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, authorization.Status);
 
-            StringAssert.StartsWith("xyz", MockServer.LogEntries.Last().RequestMessage.Cookies["session"]);
+            Assert.AreEqual("xyz", MockServer.LogEntries.Last().RequestMessage.Cookies["session"]);
             Assert.AreEqual("xyz", anotherServer.LogEntries.Last().RequestMessage.Cookies["session"]);
 
             anotherServer.Stop();
