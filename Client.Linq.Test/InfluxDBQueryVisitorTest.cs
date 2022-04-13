@@ -98,6 +98,18 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
+        
+        [Test]
+        public void ResultOperatorTakeLast()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                select s;
+            var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.TakeLast(10)));
+
+            const string expected = FluxStart + " " + "|> tail(n: p3)";
+
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
 
         [Test]
         public void ResultOperatorSkip()
