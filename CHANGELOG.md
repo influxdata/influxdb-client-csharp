@@ -6,6 +6,9 @@
 ### Bug Fixes
 1. [#305](https://github.com/influxdata/influxdb-client-csharp/pull/305): Authentication Cookies follow redirects
 
+### Bug Fixes
+1. [#309](https://github.com/influxdata/influxdb-client-csharp/pull/309): Query expression for joins of binary operators [LINQ]
+
 ## 4.0.0 [2022-03-18]
 
 :warning: The underlying `RestSharp` library was updated the latest major version `v107`. The new version of `RestSharp` switched from the legacy `HttpWebRequest` class to the standard well-known `System.Net.Http.HttpClient` instead. This improves performance and solves lots of issues, like hanging connections, updated protocols support, and many other problems.
