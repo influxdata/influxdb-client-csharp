@@ -32,6 +32,7 @@ This section contains links to the client library documentation.
     - [Or](#or)
     - [Any](#any)
     - [Take](#take)
+    - [TakeLast](#takelast)
     - [Skip](#skip)
     - [OrderBy](#orderby)
     - [Count](#count)
@@ -848,6 +849,24 @@ from(bucket: "my-bucket")
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> limit(n: 10)
+```
+
+### TakeLast
+
+```c#
+var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
+    select s)
+    .TakeLast(10);
+```
+
+Flux Query:
+
+```flux
+from(bucket: "my-bucket") 
+    |> range(start: 0) 
+    |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
+    |> drop(columns: ["_start", "_stop", "_measurement"])
+    |> tail(n: 10)
 ```
 
 ### Skip

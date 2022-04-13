@@ -2,11 +2,10 @@
 
 ### Features
 1. [#304](https://github.com/influxdata/influxdb-client-csharp/pull/304): Add `InvocableScriptsApi` to create, update, list, delete and invoke scripts by seamless way
+1. [#308](https://github.com/influxdata/influxdb-client-csharp/pull/308): Add support for `TakeLast` expression [LINQ]
 
 ### Bug Fixes
 1. [#305](https://github.com/influxdata/influxdb-client-csharp/pull/305): Authentication Cookies follow redirects
-
-### Bug Fixes
 1. [#309](https://github.com/influxdata/influxdb-client-csharp/pull/309): Query expression for joins of binary operators [LINQ]
 
 ## 4.0.0 [2022-03-18]

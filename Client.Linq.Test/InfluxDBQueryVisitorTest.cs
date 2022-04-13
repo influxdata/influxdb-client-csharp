@@ -15,7 +15,6 @@ using Moq;
 using NUnit.Framework;
 using Remotion.Linq;
 using Remotion.Linq.Parsing.ExpressionVisitors;
-using Remotion.Linq.Parsing.Structure;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Client.Linq.Test
@@ -100,15 +99,30 @@ namespace Client.Linq.Test
         }
 
         [Test]
+        public void ResultOperatorTakeLast()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                select s;
+
+            var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.TakeLast(10)));
+
+            var expected = FluxStart + " " + "|> tail(n: p3)";
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+
+            visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.TakeLast(10).Skip(5)));
+
+            expected = FluxStart + " " + "|> tail(n: p3, offset: p4)";
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+
+        [Test]
         public void ResultOperatorSkip()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 select s;
             var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.Skip(5)));
 
-            const string expected = FluxStart;
-
-            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+            Assert.AreEqual(FluxStart, visitor.BuildFluxQuery());
         }
 
         [Test]
@@ -1097,7 +1111,8 @@ namespace Client.Linq.Test
         private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)
         {
             var queryExecutor = (InfluxDBQueryExecutor)((DefaultQueryProvider)queryable.Provider).Executor;
-            var queryModel = QueryParser.CreateDefault().GetParsedQuery(expression ?? queryable.Expression);
+            var queryModel = InfluxDBQueryable<Sensor>.CreateQueryParser()
+                .GetParsedQuery(expression ?? queryable.Expression);
             return queryExecutor.QueryVisitor(queryModel);
         }
 

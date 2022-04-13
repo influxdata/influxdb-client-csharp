@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Linq.Internal;
+using InfluxDB.Client.Linq.Internal.NodeTypes;
 using Remotion.Linq;
 using Remotion.Linq.Parsing.Structure;
+using Remotion.Linq.Parsing.Structure.NodeTypeProviders;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace InfluxDB.Client.Linq
 {
@@ -213,9 +215,12 @@ namespace InfluxDB.Client.Linq
                 queryableOptimizerSettings ?? new QueryableOptimizerSettings());
         }
 
-        private static QueryParser CreateQueryParser()
+        internal static QueryParser CreateQueryParser()
         {
-            return QueryParser.CreateDefault();
+            var queryParser = QueryParser.CreateDefault();
+            var compoundNodeTypeProvider = queryParser.NodeTypeProvider as CompoundNodeTypeProvider;
+            compoundNodeTypeProvider?.InnerProviders.Add(new InfluxDBNodeTypeProvider());
+            return queryParser;
         }
 
         public IAsyncEnumerable<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)

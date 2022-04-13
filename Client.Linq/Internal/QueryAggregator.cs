@@ -49,6 +49,7 @@ namespace InfluxDB.Client.Linq.Internal
 
     internal class LimitOffsetAssignment
     {
+        internal string FluxFunction;
         internal string N;
         internal string Offset;
     }
@@ -60,7 +61,7 @@ namespace InfluxDB.Client.Linq.Internal
         private RangeExpressionType _rangeStartExpression;
         private string _rangeStopAssignment;
         private RangeExpressionType _rangeStopExpression;
-        private readonly List<LimitOffsetAssignment> _limitNOffsetAssignments;
+        private readonly List<LimitOffsetAssignment> _limitTailNOffsetAssignments;
         private ResultFunction _resultFunction;
         private readonly List<string> _filterByTags;
         private readonly List<string> _filterByFields;
@@ -70,7 +71,7 @@ namespace InfluxDB.Client.Linq.Internal
         internal QueryAggregator()
         {
             _resultFunction = ResultFunction.None;
-            _limitNOffsetAssignments = new List<LimitOffsetAssignment>();
+            _limitTailNOffsetAssignments = new List<LimitOffsetAssignment>();
             _filterByTags = new List<string>();
             _filterByFields = new List<string>();
             _orders = new List<(string, string, bool, string)>();
@@ -100,27 +101,29 @@ namespace InfluxDB.Client.Linq.Internal
         }
 
 
-        internal void AddLimitN(string limitNAssignment)
+        internal void AddLimitTailN(string limitNAssignment, string fluxFunction)
         {
-            if (_limitNOffsetAssignments.Count > 0 && _limitNOffsetAssignments.Last().N == null)
+            if (_limitTailNOffsetAssignments.Count > 0 && _limitTailNOffsetAssignments.Last().N == null)
             {
-                _limitNOffsetAssignments.Last().N = limitNAssignment;
+                _limitTailNOffsetAssignments.Last().FluxFunction = fluxFunction;
+                _limitTailNOffsetAssignments.Last().N = limitNAssignment;
             }
             else
             {
-                _limitNOffsetAssignments.Add(new LimitOffsetAssignment { N = limitNAssignment });
+                _limitTailNOffsetAssignments.Add(new LimitOffsetAssignment
+                    { FluxFunction = fluxFunction, N = limitNAssignment });
             }
         }
 
-        internal void AddLimitOffset(string limitOffsetAssignment)
+        internal void AddLimitTailOffset(string limitOffsetAssignment)
         {
-            if (_limitNOffsetAssignments.Count > 0)
+            if (_limitTailNOffsetAssignments.Count > 0)
             {
-                _limitNOffsetAssignments.Last().Offset = limitOffsetAssignment;
+                _limitTailNOffsetAssignments.Last().Offset = limitOffsetAssignment;
             }
             else
             {
-                _limitNOffsetAssignments.Add(new LimitOffsetAssignment { Offset = limitOffsetAssignment });
+                _limitTailNOffsetAssignments.Add(new LimitOffsetAssignment { Offset = limitOffsetAssignment });
             }
         }
 
@@ -193,10 +196,10 @@ namespace InfluxDB.Client.Linq.Internal
             }
 
             // https://docs.influxdata.com/flux/v0.x/stdlib/universe/limit/
-            foreach (var limitNOffsetAssignment in _limitNOffsetAssignments)
+            foreach (var limitNOffsetAssignment in _limitTailNOffsetAssignments)
                 if (limitNOffsetAssignment.N != null)
                 {
-                    parts.Add(BuildOperator("limit",
+                    parts.Add(BuildOperator(limitNOffsetAssignment.FluxFunction,
                         "n", limitNOffsetAssignment.N,
                         "offset", limitNOffsetAssignment.Offset));
                 }
