@@ -97,18 +97,18 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
-        
+
         [Test]
         public void ResultOperatorTakeLast()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 select s;
-            
+
             var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.TakeLast(10)));
 
             var expected = FluxStart + " " + "|> tail(n: p3)";
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
-            
+
             visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.TakeLast(10).Skip(5)));
 
             expected = FluxStart + " " + "|> tail(n: p3, offset: p4)";
@@ -1111,7 +1111,8 @@ namespace Client.Linq.Test
         private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)
         {
             var queryExecutor = (InfluxDBQueryExecutor)((DefaultQueryProvider)queryable.Provider).Executor;
-            var queryModel = InfluxDBQueryable<Sensor>.CreateQueryParser().GetParsedQuery(expression ?? queryable.Expression);
+            var queryModel = InfluxDBQueryable<Sensor>.CreateQueryParser()
+                .GetParsedQuery(expression ?? queryable.Expression);
             return queryExecutor.QueryVisitor(queryModel);
         }
 

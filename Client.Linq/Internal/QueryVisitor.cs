@@ -143,7 +143,7 @@ namespace InfluxDB.Client.Linq.Internal
                     var takeLastVariable = GetFluxExpression(takeLastResultOperator.Count, takeLastResultOperator);
                     _context.QueryAggregator.AddLimitTailN(takeLastVariable, "tail");
                     break;
-                
+
                 case SkipResultOperator skipResultOperator:
                     var skipVariable = GetFluxExpression(skipResultOperator.Count, skipResultOperator);
                     _context.QueryAggregator.AddLimitTailOffset(skipVariable);

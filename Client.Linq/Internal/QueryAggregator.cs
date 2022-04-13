@@ -110,7 +110,8 @@ namespace InfluxDB.Client.Linq.Internal
             }
             else
             {
-                _limitTailNOffsetAssignments.Add(new LimitOffsetAssignment { FluxFunction = fluxFunction, N = limitNAssignment });
+                _limitTailNOffsetAssignments.Add(new LimitOffsetAssignment
+                    { FluxFunction = fluxFunction, N = limitNAssignment });
             }
         }
 

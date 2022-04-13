@@ -70,12 +70,17 @@ namespace InfluxDB.Client.Linq.Internal.NodeTypes
             }
         }
 
-        public override ResultOperatorBase Clone(CloneContext cloneContext) =>
-            new TakeResultOperator(Count);
+        public override ResultOperatorBase Clone(CloneContext cloneContext)
+        {
+            return new TakeResultOperator(Count);
+        }
 
-        public override StreamedSequence ExecuteInMemory<T>(StreamedSequence input) => new StreamedSequence(
-            input.GetTypedSequence<T>().Take(GetConstantCount()).AsQueryable(),
-            GetOutputDataInfo(input.DataInfo));
+        public override StreamedSequence ExecuteInMemory<T>(StreamedSequence input)
+        {
+            return new StreamedSequence(
+                input.GetTypedSequence<T>().Take(GetConstantCount()).AsQueryable(),
+                GetOutputDataInfo(input.DataInfo));
+        }
 
         public override void TransformExpressions(Func<Expression, Expression> transformation)
         {
@@ -83,7 +88,14 @@ namespace InfluxDB.Client.Linq.Internal.NodeTypes
             Count = transformation(Count);
         }
 
-        public override string ToString() => $"TakeLast({Count})";
-        private int GetConstantCount() => GetConstantValueFromExpression<int>("count", Count);
+        public override string ToString()
+        {
+            return $"TakeLast({Count})";
+        }
+
+        private int GetConstantCount()
+        {
+            return GetConstantValueFromExpression<int>("count", Count);
+        }
     }
 }
