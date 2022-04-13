@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Linq.Internal.Expressions;
+using InfluxDB.Client.Linq.Internal.NodeTypes;
 using Remotion.Linq;
 using Remotion.Linq.Clauses;
 using Remotion.Linq.Clauses.ResultOperators;
@@ -135,12 +136,17 @@ namespace InfluxDB.Client.Linq.Internal
             {
                 case TakeResultOperator takeResultOperator:
                     var takeVariable = GetFluxExpression(takeResultOperator.Count, takeResultOperator);
-                    _context.QueryAggregator.AddLimitN(takeVariable);
+                    _context.QueryAggregator.AddLimitTailN(takeVariable, "limit");
                     break;
 
+                case TakeLastResultOperator takeLastResultOperator:
+                    var takeLastVariable = GetFluxExpression(takeLastResultOperator.Count, takeLastResultOperator);
+                    _context.QueryAggregator.AddLimitTailN(takeLastVariable, "tail");
+                    break;
+                
                 case SkipResultOperator skipResultOperator:
                     var skipVariable = GetFluxExpression(skipResultOperator.Count, skipResultOperator);
-                    _context.QueryAggregator.AddLimitOffset(skipVariable);
+                    _context.QueryAggregator.AddLimitTailOffset(skipVariable);
                     break;
 
                 case AnyResultOperator _:

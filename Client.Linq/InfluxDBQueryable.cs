@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
+using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Linq.Internal;
+using InfluxDB.Client.Linq.Internal.NodeTypes;
 using Remotion.Linq;
 using Remotion.Linq.Parsing.Structure;
+using Remotion.Linq.Parsing.Structure.NodeTypeProviders;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace InfluxDB.Client.Linq
 {
@@ -175,7 +178,7 @@ namespace InfluxDB.Client.Linq
         /// Create a <see cref="Api.Domain.Query"/> object that will be used for Querying.
         /// </summary>
         /// <returns>Query that will be used to Querying</returns>
-        public Api.Domain.Query ToDebugQuery()
+        public Query ToDebugQuery()
         {
             var provider = Provider as DefaultQueryProvider;
             var executor = provider?.Executor as InfluxDBQueryExecutor;
@@ -213,9 +216,12 @@ namespace InfluxDB.Client.Linq
                 queryableOptimizerSettings ?? new QueryableOptimizerSettings());
         }
 
-        private static QueryParser CreateQueryParser()
+        internal static QueryParser CreateQueryParser()
         {
-            return QueryParser.CreateDefault();
+            var queryParser = QueryParser.CreateDefault();
+            var compoundNodeTypeProvider = queryParser.NodeTypeProvider as CompoundNodeTypeProvider;
+            compoundNodeTypeProvider?.InnerProviders.Add(new InfluxDBNodeTypeProvider());
+            return queryParser;
         }
 
         public IAsyncEnumerable<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
