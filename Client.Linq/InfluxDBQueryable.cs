@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Linq.Internal;
 using InfluxDB.Client.Linq.Internal.NodeTypes;
@@ -178,7 +177,7 @@ namespace InfluxDB.Client.Linq
         /// Create a <see cref="Api.Domain.Query"/> object that will be used for Querying.
         /// </summary>
         /// <returns>Query that will be used to Querying</returns>
-        public Query ToDebugQuery()
+        public Api.Domain.Query ToDebugQuery()
         {
             var provider = Provider as DefaultQueryProvider;
             var executor = provider?.Executor as InfluxDBQueryExecutor;
