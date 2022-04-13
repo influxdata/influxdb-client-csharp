@@ -395,7 +395,8 @@ namespace InfluxDB.Client.Linq.Internal
                     .Where(i => parts[i] is LeftParenthesis)
                     .ToList();
 
-                foreach (var index in indexes) {
+                foreach (var index in indexes)
+                {
                     // ()
                     if (parts.Count > index + 1 && parts[index + 1] is RightParenthesis)
                     {
@@ -405,11 +406,12 @@ namespace InfluxDB.Client.Linq.Internal
                         NormalizeExpressions(parts);
                         return;
                     }
+
                     // (
                     if (parts.Count == 1 && parts[index] is LeftParenthesis)
                     {
                         parts.RemoveAt(index);
-                        
+
                         NormalizeExpressions(parts);
                         return;
                     }

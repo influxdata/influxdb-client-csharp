@@ -1075,7 +1075,7 @@ namespace Client.Linq.Test
         {
             var start = new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc);
             var stop = new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc);
-            
+
             var query = from s in InfluxDBQueryable<SensorDateTimeOffset>.Queryable("my-bucket", "my-org", _queryApi)
                 where s.Timestamp >= start && s.Timestamp < stop && s.SensorId == "id-1"
                 select s;
@@ -1088,7 +1088,7 @@ namespace Client.Linq.Test
                                     "|> filter(fn: (r) => (r[\"sensor_id\"] == p5)) " +
                                     "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
                                     "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
-            
+
             Console.WriteLine(visitor.BuildFluxQuery());
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
