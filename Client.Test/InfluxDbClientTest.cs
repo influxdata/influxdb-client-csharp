@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -279,6 +280,45 @@ namespace InfluxDB.Client.Test
             StringAssert.StartsWith("Token my-token",
                 MockServer.LogEntries.Last().RequestMessage.Headers["Authorization"].First());
             Assert.False(anotherServer.LogEntries.Last().RequestMessage.Headers.ContainsKey("Authorization"));
+
+            anotherServer.Stop();
+        }
+
+        [Test]
+        public async Task RedirectCookie()
+        {
+            _client.Dispose();
+            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder()
+                .Url(MockServerUrl)
+                .Authenticate("my-username", "my-password".ToCharArray())
+                .AllowRedirects(true)
+                .Build());
+
+            var anotherServer = WireMockServer.Start(new WireMockServerSettings
+            {
+                UseSSL = false
+            });
+
+            // auth cookies
+            MockServer
+                .Given(Request.Create().UsingPost())
+                .RespondWith(Response.Create().WithHeader("Set-Cookie", "session=xyz"));
+
+            // redirect to another server
+            MockServer
+                .Given(Request.Create().UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(301).WithHeader("location", anotherServer.Urls[0]));
+
+            // success response
+            anotherServer
+                .Given(Request.Create().UsingGet())
+                .RespondWith(CreateResponse("{\"status\":\"active\"}", "application/json"));
+
+            var authorization = await _client.GetAuthorizationsApi().FindAuthorizationByIdAsync("id");
+            Assert.AreEqual(AuthorizationUpdateRequest.StatusEnum.Active, authorization.Status);
+
+            Assert.AreEqual("xyz", MockServer.LogEntries.Last().RequestMessage.Cookies["session"]);
+            Assert.AreEqual("xyz", anotherServer.LogEntries.Last().RequestMessage.Cookies["session"]);
 
             anotherServer.Stop();
         }

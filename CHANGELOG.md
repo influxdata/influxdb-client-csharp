@@ -1,7 +1,10 @@
 ## 4.1.0 [unreleased]
 
 ### Features
-1. [#101](https://github.com/influxdata/influxdb-client-csharp/pull/304): Add `InvocableScriptsApi` to create, update, list, delete and invoke scripts by seamless way
+1. [#304](https://github.com/influxdata/influxdb-client-csharp/pull/304): Add `InvocableScriptsApi` to create, update, list, delete and invoke scripts by seamless way
+
+### Bug Fixes
+1. [#305](https://github.com/influxdata/influxdb-client-csharp/pull/305): Authentication Cookies follow redirects
 
 ## 4.0.0 [2022-03-18]
 
