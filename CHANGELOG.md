@@ -1,4 +1,4 @@
-## 4.1.0 [unreleased]
+## 4.1.0 [2022-04-19]
 
 ### Features
 1. [#304](https://github.com/influxdata/influxdb-client-csharp/pull/304): Add `InvocableScriptsApi` to create, update, list, delete and invoke scripts by seamless way
