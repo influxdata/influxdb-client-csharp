@@ -95,10 +95,11 @@ namespace InfluxDB.Client
             WritePrecision precision = WritePrecision.Ns, string bucket = null, string org = null,
             CancellationToken cancellationToken = default)
         {
+            var options = new BatchWriteOptions(bucket ?? _options.Bucket, org ?? _options.Org, precision);
             var batch = records
-                .Select(it => new BatchWriteRecord(new BatchWriteOptions(bucket, org, precision), it));
+                .Select(it => new BatchWriteRecord(options, it));
 
-            return WriteDataAsyncWithIRestResponse(batch, bucket, org, precision, cancellationToken);
+            return WriteDataAsyncWithIRestResponse(batch, options.Bucket, options.OrganizationId, precision, cancellationToken);
         }
 
         /// <summary>
@@ -169,12 +170,12 @@ namespace InfluxDB.Client
             var tasks = new List<Task<RestResponse>>();
             foreach (var grouped in points.GroupBy(it => it.Precision))
             {
-                var options = new BatchWriteOptions(bucket, org, grouped.Key);
+                var options = new BatchWriteOptions(bucket ?? _options.Bucket, org ?? _options.Org, grouped.Key);
                 var groupedPoints = grouped
                     .Select(it => new BatchWritePoint(options, _options, it))
                     .ToList();
 
-                tasks.Add(WriteDataAsyncWithIRestResponse(groupedPoints, bucket, org, grouped.Key, cancellationToken));
+                tasks.Add(WriteDataAsyncWithIRestResponse(groupedPoints, options.Bucket, options.OrganizationId, grouped.Key, cancellationToken));
             }
 
             return Task.WhenAll(tasks);
