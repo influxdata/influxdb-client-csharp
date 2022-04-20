@@ -99,7 +99,8 @@ namespace InfluxDB.Client
             var batch = records
                 .Select(it => new BatchWriteRecord(options, it));
 
-            return WriteDataAsyncWithIRestResponse(batch, options.Bucket, options.OrganizationId, precision, cancellationToken);
+            return WriteDataAsyncWithIRestResponse(batch, options.Bucket, options.OrganizationId, precision,
+                cancellationToken);
         }
 
         /// <summary>
@@ -175,7 +176,8 @@ namespace InfluxDB.Client
                     .Select(it => new BatchWritePoint(options, _options, it))
                     .ToList();
 
-                tasks.Add(WriteDataAsyncWithIRestResponse(groupedPoints, options.Bucket, options.OrganizationId, grouped.Key, cancellationToken));
+                tasks.Add(WriteDataAsyncWithIRestResponse(groupedPoints, options.Bucket, options.OrganizationId,
+                    grouped.Key, cancellationToken));
             }
 
             return Task.WhenAll(tasks);
