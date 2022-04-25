@@ -239,6 +239,31 @@ namespace InfluxDB.Client.Test
                 ae.Message);
         }
 
+        [Test]
+        public async Task UseDefaultOrganizationAndBucket()
+        {
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            _influxDbClient.Dispose();
+
+            var options = InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url(MockServerUrl)
+                .AuthenticateToken("token")
+                .Bucket("my-bucket")
+                .Org("my-org")
+                .Build();
+
+            _influxDbClient = InfluxDBClientFactory.Create(options);
+
+            var writeApi = _influxDbClient.GetWriteApiAsync();
+            await writeApi.WriteRecordsAsyncWithIRestResponse(new[] { "mem,location=a level=1.0 1" });
+            await writeApi.WritePointsAsyncWithIRestResponse(new[]
+                { PointData.Measurement("h2o").Field("water_level", 9.0D) });
+        }
+
         private string GetRequestBody(RestResponse restResponse)
         {
             var bytes = (byte[])restResponse.Request?.Parameters

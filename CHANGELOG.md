@@ -1,5 +1,8 @@
 ## 4.2.0 [unreleased]
 
+### Bug Fixes
+1. [#313](https://github.com/influxdata/influxdb-client-csharp/pull/313): Using default `org` and `bucket` in `WriteApiAsync`
+
 ## 4.1.0 [2022-04-19]
 
 ### Features
