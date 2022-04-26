@@ -16,7 +16,7 @@ namespace InfluxDB.Client
 {
     public class QueryApi : AbstractQueryClient
     {
-        internal static readonly Dialect DefaultDialect = new Dialect
+        public static readonly Dialect Dialect = new Dialect
         {
             Header = true,
             Delimiter = ",",
@@ -62,7 +62,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
 
-            return QueryAsync(CreateQuery(query, DefaultDialect), org, cancellationToken);
+            return QueryAsync(CreateQuery(query, Dialect), org, cancellationToken);
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerRecord(onNext);
 
-            return QueryAsync(CreateQuery(query, DefaultDialect), consumer, onError, onComplete, org,
+            return QueryAsync(CreateQuery(query, Dialect), consumer, onError, onComplete, org,
                 cancellationToken);
         }
 
@@ -252,7 +252,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerPoco<T>(onNext, Mapper);
 
-            return QueryAsync(CreateQuery(query, DefaultDialect), consumer, onError, onComplete, org,
+            return QueryAsync(CreateQuery(query, Dialect), consumer, onError, onComplete, org,
                 cancellationToken);
         }
 
@@ -343,7 +343,7 @@ namespace InfluxDB.Client
             Action<Exception> onError = null, Action onComplete = null, string org = null,
             CancellationToken cancellationToken = default)
         {
-            return QueryAsync(CreateQuery(query, DefaultDialect), pocoType,
+            return QueryAsync(CreateQuery(query, Dialect), pocoType,
                 onNext, onError, onComplete, org, cancellationToken);
         }
 
@@ -511,8 +511,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
 
-            var created = new Query(null, query);
-            created.Dialect = dialect ?? DefaultDialect;
+            var created = new Query(query: query, dialect: dialect ?? Dialect);
 
             return created;
         }
