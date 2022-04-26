@@ -13,7 +13,7 @@ namespace Examples
     /// </summary>
     public static class ParametrizedQuery
     {
-        private const string Url = "http://localhost:9999";
+        private const string Url = "https://us-west-2-1.aws.cloud2.influxdata.com";
         private const string Token = "my-token";
         private const string Org = "my-org";
         private const string Bucket = "my-bucket";
@@ -39,14 +39,18 @@ namespace Examples
                 .Tag("location", "Prague")
                 .Field("temperature", 21.5);
             await client.GetWriteApiAsync().WritePointAsync(point);
+            
+            Console.WriteLine($"{point.ToLineProtocol()}");
 
             //
             // Query Data
             //
+            Console.WriteLine("*** Query Points ***");
+            
             var query = "from(bucket: params.bucketParam) |> range(start: duration(v: params.startParam))";
             var bindParams = new Dictionary<string, object>
             {
-                { "bucketParam", "my-bucket" },
+                { "bucketParam", Bucket },
                 { "startParam", "-1h" }
             };
 
@@ -56,7 +60,7 @@ namespace Examples
             // print results
             foreach (var record in tables.SelectMany(table => table.Records))
                 Console.WriteLine(
-                    $"{record.GetTime()} #{record.GetMeasurement()}: #{record.GetField()} #{record.GetValue()}");
+                    $"{record.GetTime()} {record.GetMeasurement()}: {record.GetField()} {record.GetValue()}");
         }
     }
 }
