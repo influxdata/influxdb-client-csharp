@@ -39,14 +39,14 @@ namespace Examples
                 .Tag("location", "Prague")
                 .Field("temperature", 21.5);
             await client.GetWriteApiAsync().WritePointAsync(point);
-            
+
             Console.WriteLine($"{point.ToLineProtocol()}");
 
             //
             // Query Data
             //
             Console.WriteLine("*** Query Points ***");
-            
+
             var query = "from(bucket: params.bucketParam) |> range(start: duration(v: params.startParam))";
             var bindParams = new Dictionary<string, object>
             {
