@@ -3,6 +3,9 @@
 ### Bug Fixes
 1. [#313](https://github.com/influxdata/influxdb-client-csharp/pull/313): Using default `org` and `bucket` in `WriteApiAsync`
 
+### Documentation
+1. [#315](https://github.com/influxdata/influxdb-client-csharp/pull/315): Clarify `timeout` option
+
 ## 4.1.0 [2022-04-19]
 
 ### Features
