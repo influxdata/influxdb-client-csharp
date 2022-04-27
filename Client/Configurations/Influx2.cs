@@ -56,7 +56,7 @@ namespace InfluxDB.Client.Configurations
         }
 
         /// <summary>
-        /// The timeout to connect the InfluxDB.
+        /// The timespan to wait before the HTTP request times out.
         /// </summary>
         [ConfigurationProperty("timeout", IsKey = true, IsRequired = false)]
         public string Timeout

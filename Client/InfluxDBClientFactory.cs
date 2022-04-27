@@ -23,7 +23,7 @@ namespace InfluxDB.Client
         /// <summary>
         /// Create a instance of the InfluxDB 2.x client. The url could be a connection string with various configurations.
         /// <para>
-        /// e.g.: "http://localhost:8086?readTimeout=5000&amp;connectTimeout=5000&amp;logLevel=BASIC
+        /// e.g.: "http://localhost:8086?timeout=5000&amp;logLevel=BASIC
         /// </para>
         /// </summary>
         /// <param name="connectionString">connection string with various configurations</param>

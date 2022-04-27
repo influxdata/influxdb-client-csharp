@@ -173,7 +173,7 @@ namespace InfluxDB.Client.Api.Client
         /// <param name="apiKeyPrefix">Dictionary of API key prefix</param>
         /// <param name="tempFolderPath">Temp folder path</param>
         /// <param name="dateTimeFormat">DateTime format string</param>
-        /// <param name="timeout">HTTP connection timeout (in milliseconds)</param>
+        /// <param name="timeout">The timespan to wait before the HTTP request times out (in milliseconds)</param>
         /// <param name="userAgent">HTTP user agent</param>
         [Obsolete("Use explicit object construction and setting of properties.", true)]
         public Configuration(

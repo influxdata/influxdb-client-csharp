@@ -1088,7 +1088,7 @@ The following options are supported:
 | Bucket             | -        | default destination bucket for writes                   |
 | Token              | -        | the token to use for the authorization                  |
 | LogLevel           | NONE     | rest client verbosity level                             |
-| Timeout            | 10000 ms | socket timeout                                          |
+| Timeout            | 10000 ms | The timespan to wait before the HTTP request times out  |
 | AllowHttpRedirects | false    | Configure automatically following HTTP 3xx redirects    |
 | VerifySsl          | true     | Ignore Certificate Validation Errors when false         |
 
@@ -1130,15 +1130,15 @@ var influxDBClient = InfluxDBClientFactory
 ```
 The following options are supported:
 
-| Property name      | default  | description                                             |
-|--------------------|----------|---------------------------------------------------------| 
-| org                | -        | default destination organization for writes and queries |
-| bucket             | -        | default destination bucket for writes                   |
-| token              | -        | the token to use for the authorization                  |
-| logLevel           | NONE     | rest client verbosity level                             |
-| timeout            | 10000 ms | socket timeout                                          |
-| allowHttpRedirects | false    | Configure automatically following HTTP 3xx redirects    |
-| verifySsl          | true     | Ignore Certificate Validation Errors when `false`       |
+| Property name      | default  | description                                              |
+|--------------------|----------|----------------------------------------------------------| 
+| org                | -        | default destination organization for writes and queries  |
+| bucket             | -        | default destination bucket for writes                    |
+| token              | -        | the token to use for the authorization                   |
+| logLevel           | NONE     | rest client verbosity level                              |
+| timeout            | 10000 ms | The timespan to wait before the HTTP request times out.  |
+| allowHttpRedirects | false    | Configure automatically following HTTP 3xx redirects     |
+| verifySsl          | true     | Ignore Certificate Validation Errors when `false`        |
 
 The `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
