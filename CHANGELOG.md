@@ -1,5 +1,8 @@
 ## 4.2.0 [unreleased]
 
+### Breaking Changes
+1. [#316](https://github.com/influxdata/influxdb-client-csharp/pull/316): Rename `InvocableScripts` to `InvokableScripts`
+
 ### Bug Fixes
 1. [#313](https://github.com/influxdata/influxdb-client-csharp/pull/313): Using default `org` and `bucket` in `WriteApiAsync`
 
