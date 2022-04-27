@@ -347,18 +347,18 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create an InvocableScripts API instance.
+        /// Create an InvokableScripts API instance.
         /// </summary>
         /// <param name="mapper">the mapper used for mapping invocation results to POCO</param>
-        /// <returns>New instance of InvocableScriptsApi.</returns>
-        public InvocableScriptsApi GetInvocableScriptsApi(IDomainObjectMapper mapper = null)
+        /// <returns>New instance of InvokableScriptsApi.</returns>
+        public InvokableScriptsApi GetInvokableScriptsApi(IDomainObjectMapper mapper = null)
         {
-            var service = new InvocableScriptsService((Configuration)_apiClient.Configuration)
+            var service = new InvokableScriptsService((Configuration)_apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
 
-            return new InvocableScriptsApi(service, mapper ?? new DefaultDomainObjectMapper());
+            return new InvokableScriptsApi(service, mapper ?? new DefaultDomainObjectMapper());
         }
 
         /// <summary>

@@ -10,10 +10,10 @@ using InfluxDB.Client.Writes;
 namespace Examples
 {
     /// <summary>
-    /// Warning: Invocable Scripts are supported only in InfluxDB Cloud,
+    /// Warning: Invokable Scripts are supported only in InfluxDB Cloud,
     /// currently there is no support in InfluxDB OSS.
     /// </summary>
-    public static class InvocableScripts
+    public static class InvokableScripts
     {
         public static async Task Main(string[] args)
         {
@@ -44,10 +44,10 @@ namespace Examples
 
             await client.GetWriteApiAsync().WritePointsAsync(new[] { point1, point2 });
 
-            var scriptsApi = client.GetInvocableScriptsApi();
+            var scriptsApi = client.GetInvokableScriptsApi();
 
             //
-            // Create Invocable Script
+            // Create Invokable Script
             //
             Console.WriteLine("------- Create -------\n");
             const string scriptQuery = "from(bucket: params.bucket_name) |> range(start: -6h) |> limit(n:2)";
@@ -61,7 +61,7 @@ namespace Examples
             Console.WriteLine(createdScript);
 
             //
-            // Update Invocable Script
+            // Update Invokable Script
             //
             Console.WriteLine("------- Update -------\n");
             var updateRequest = new ScriptUpdateRequest(description: "my updated description");
@@ -97,13 +97,13 @@ namespace Examples
             // Measurements
             Console.WriteLine("\n------- Invoke to Measurements -------\n");
             var measurements =
-                await scriptsApi.InvokeScriptMeasurementsAsync<InvocableScriptPojo>(createdScript.Id, bindParams);
+                await scriptsApi.InvokeScriptMeasurementsAsync<InvokableScriptPojo>(createdScript.Id, bindParams);
             foreach (var measurement in measurements) Console.WriteLine($"{measurement}");
 
             // Invoke to Stream of Measurements
             Console.WriteLine("\n------- Invoke to Stream of Measurements -------\n");
             var measurementsStream =
-                scriptsApi.InvokeScriptMeasurementsEnumerableAsync<InvocableScriptPojo>(createdScript.Id, bindParams);
+                scriptsApi.InvokeScriptMeasurementsEnumerableAsync<InvokableScriptPojo>(createdScript.Id, bindParams);
             await foreach (var measurement in measurementsStream) Console.WriteLine($"{measurement}");
 
             //
@@ -123,7 +123,7 @@ namespace Examples
             Console.WriteLine($"Successfully deleted script: '{createdScript.Name}'");
         }
 
-        private class InvocableScriptPojo
+        private class InvokableScriptPojo
         {
             [Column("location", IsTag = true)] public string Location { get; set; }
 

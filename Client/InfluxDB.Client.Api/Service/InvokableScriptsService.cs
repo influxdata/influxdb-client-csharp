@@ -22,7 +22,7 @@ namespace InfluxDB.Client.Api.Service
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IInvocableScriptsService : IApiAccessor
+    public interface IInvokableScriptsService : IApiAccessor
     {
         #region Synchronous Operations
 
@@ -76,7 +76,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a script
         /// </summary>
         /// <remarks>
-        /// Uses script ID to retrieve details of an invocable script.
+        /// Uses script ID to retrieve details of an invokable script.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -87,7 +87,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a script
         /// </summary>
         /// <remarks>
-        /// Uses script ID to retrieve details of an invocable script.
+        /// Uses script ID to retrieve details of an invokable script.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -98,7 +98,7 @@ namespace InfluxDB.Client.Api.Service
         /// Update a script
         /// </summary>
         /// <remarks>
-        /// Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -110,7 +110,7 @@ namespace InfluxDB.Client.Api.Service
         /// Update a script
         /// </summary>
         /// <remarks>
-        /// Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -227,7 +227,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a script
         /// </summary>
         /// <remarks>
-        /// Uses script ID to retrieve details of an invocable script.
+        /// Uses script ID to retrieve details of an invokable script.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -240,7 +240,7 @@ namespace InfluxDB.Client.Api.Service
         /// Retrieve a script
         /// </summary>
         /// <remarks>
-        /// Uses script ID to retrieve details of an invocable script.
+        /// Uses script ID to retrieve details of an invokable script.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -253,7 +253,7 @@ namespace InfluxDB.Client.Api.Service
         /// Update a script
         /// </summary>
         /// <remarks>
-        /// Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -267,7 +267,7 @@ namespace InfluxDB.Client.Api.Service
         /// Update a script
         /// </summary>
         /// <remarks>
-        /// Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </remarks>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -337,15 +337,15 @@ namespace InfluxDB.Client.Api.Service
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class InvocableScriptsService : IInvocableScriptsService
+    public partial class InvokableScriptsService : IInvokableScriptsService
     {
         private ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InvocableScriptsService"/> class.
+        /// Initializes a new instance of the <see cref="InvokableScriptsService"/> class.
         /// </summary>
         /// <returns></returns>
-        public InvocableScriptsService(string basePath)
+        public InvokableScriptsService(string basePath)
         {
             Configuration = new Configuration { BasePath = basePath };
 
@@ -353,12 +353,12 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InvocableScriptsService"/> class
+        /// Initializes a new instance of the <see cref="InvokableScriptsService"/> class
         /// using Configuration object
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public InvocableScriptsService(Configuration configuration = null)
+        public InvokableScriptsService(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
             {
@@ -460,7 +460,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->DeleteScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->DeleteScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -532,7 +532,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->DeleteScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->DeleteScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -600,7 +600,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->DeleteScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->DeleteScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -668,7 +668,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->DeleteScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->DeleteScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -767,7 +767,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->DeleteScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->DeleteScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1212,7 +1212,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a script Uses script ID to retrieve details of an invocable script.
+        /// Retrieve a script Uses script ID to retrieve details of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1224,7 +1224,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a script Uses script ID to retrieve details of an invocable script.
+        /// Retrieve a script Uses script ID to retrieve details of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1235,7 +1235,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->GetScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->GetScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1294,7 +1294,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a script Uses script ID to retrieve details of an invocable script.
+        /// Retrieve a script Uses script ID to retrieve details of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1307,7 +1307,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->GetScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->GetScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1364,7 +1364,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a script Uses script ID to retrieve details of an invocable script.
+        /// Retrieve a script Uses script ID to retrieve details of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1375,7 +1375,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->GetScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->GetScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1432,7 +1432,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a script Uses script ID to retrieve details of an invocable script.
+        /// Retrieve a script Uses script ID to retrieve details of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1443,7 +1443,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->GetScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->GetScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1486,7 +1486,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a script Uses script ID to retrieve details of an invocable script.
+        /// Retrieve a script Uses script ID to retrieve details of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1501,7 +1501,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a script Uses script ID to retrieve details of an invocable script.
+        /// Retrieve a script Uses script ID to retrieve details of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1531,7 +1531,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Retrieve a script Uses script ID to retrieve details of an invocable script.
+        /// Retrieve a script Uses script ID to retrieve details of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1544,7 +1544,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->GetScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->GetScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1599,7 +1599,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1612,7 +1612,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1624,14 +1624,14 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             // verify the required parameter 'scriptUpdateRequest' is set
             if (scriptUpdateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptUpdateRequest' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptUpdateRequest' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1701,7 +1701,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1715,14 +1715,14 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             // verify the required parameter 'scriptUpdateRequest' is set
             if (scriptUpdateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptUpdateRequest' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptUpdateRequest' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1790,7 +1790,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1802,14 +1802,14 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             // verify the required parameter 'scriptUpdateRequest' is set
             if (scriptUpdateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptUpdateRequest' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptUpdateRequest' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1877,7 +1877,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1889,14 +1889,14 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             // verify the required parameter 'scriptUpdateRequest' is set
             if (scriptUpdateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptUpdateRequest' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptUpdateRequest' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -1950,7 +1950,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1967,7 +1967,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -1999,7 +1999,7 @@ namespace InfluxDB.Client.Api.Service
         }
 
         /// <summary>
-        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invocable script.
+        /// Update a script Updates properties (&#x60;name&#x60;, &#x60;description&#x60;, and &#x60;script&#x60;) of an invokable script.
         /// </summary>
         /// <exception cref="InfluxDB.Client.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="scriptID">The script ID.</param>
@@ -2013,14 +2013,14 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             // verify the required parameter 'scriptUpdateRequest' is set
             if (scriptUpdateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptUpdateRequest' when calling InvocableScriptsService->PatchScriptsID");
+                    "Missing required parameter 'scriptUpdateRequest' when calling InvokableScriptsService->PatchScriptsID");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}";
@@ -2109,7 +2109,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptCreateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptCreateRequest' when calling InvocableScriptsService->PostScripts");
+                    "Missing required parameter 'scriptCreateRequest' when calling InvokableScriptsService->PostScripts");
             }
 
             var localVarPath = "/api/v2/scripts";
@@ -2186,7 +2186,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptCreateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptCreateRequest' when calling InvocableScriptsService->PostScripts");
+                    "Missing required parameter 'scriptCreateRequest' when calling InvokableScriptsService->PostScripts");
             }
 
             var localVarPath = "/api/v2/scripts";
@@ -2259,7 +2259,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptCreateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptCreateRequest' when calling InvocableScriptsService->PostScripts");
+                    "Missing required parameter 'scriptCreateRequest' when calling InvokableScriptsService->PostScripts");
             }
 
             var localVarPath = "/api/v2/scripts";
@@ -2332,7 +2332,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptCreateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptCreateRequest' when calling InvocableScriptsService->PostScripts");
+                    "Missing required parameter 'scriptCreateRequest' when calling InvokableScriptsService->PostScripts");
             }
 
             var localVarPath = "/api/v2/scripts";
@@ -2438,7 +2438,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptCreateRequest == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptCreateRequest' when calling InvocableScriptsService->PostScripts");
+                    "Missing required parameter 'scriptCreateRequest' when calling InvokableScriptsService->PostScripts");
             }
 
             var localVarPath = "/api/v2/scripts";
@@ -2524,7 +2524,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PostScriptsIDInvoke");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PostScriptsIDInvoke");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}/invoke";
@@ -2609,7 +2609,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PostScriptsIDInvoke");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PostScriptsIDInvoke");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}/invoke";
@@ -2690,7 +2690,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PostScriptsIDInvoke");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PostScriptsIDInvoke");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}/invoke";
@@ -2771,7 +2771,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PostScriptsIDInvoke");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PostScriptsIDInvoke");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}/invoke";
@@ -2890,7 +2890,7 @@ namespace InfluxDB.Client.Api.Service
             if (scriptID == null)
             {
                 throw new ApiException(400,
-                    "Missing required parameter 'scriptID' when calling InvocableScriptsService->PostScriptsIDInvoke");
+                    "Missing required parameter 'scriptID' when calling InvokableScriptsService->PostScriptsIDInvoke");
             }
 
             var localVarPath = "/api/v2/scripts/{scriptID}/invoke";

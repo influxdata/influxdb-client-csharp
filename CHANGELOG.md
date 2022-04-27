@@ -6,7 +6,7 @@
 ## 4.1.0 [2022-04-19]
 
 ### Features
-1. [#304](https://github.com/influxdata/influxdb-client-csharp/pull/304): Add `InvocableScriptsApi` to create, update, list, delete and invoke scripts by seamless way
+1. [#304](https://github.com/influxdata/influxdb-client-csharp/pull/304): Add `InvokableScriptsApi` to create, update, list, delete and invoke scripts by seamless way
 1. [#308](https://github.com/influxdata/influxdb-client-csharp/pull/308): Add support for `TakeLast` expression [LINQ]
 
 ### Bug Fixes

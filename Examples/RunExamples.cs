@@ -60,8 +60,8 @@ namespace Examples
                     case "ManagementExample":
                         await ManagementExample.Main(args);
                         break;
-                    case "InvocableScripts":
-                        await InvocableScripts.Main(args);
+                    case "InvokableScripts":
+                        await InvokableScripts.Main(args);
                         break;
                 }
             }
@@ -71,7 +71,7 @@ namespace Examples
                                   "FluxExample, FluxClientSimpleExample, FluxRawExample, FluxClientFactoryExample, " +
                                   "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, CustomDomainMapping" +
                                   "PocoQueryWriteExample, CustomDomainMappingAndLinq, SynchronousQuery, InfluxDB18Example, " +
-                                  "QueryLinqCloud, ManagementExample, InvocableScripts");
+                                  "QueryLinqCloud, ManagementExample, InvokableScripts");
             }
         }
     }
