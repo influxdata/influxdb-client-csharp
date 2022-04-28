@@ -114,7 +114,8 @@ namespace InfluxDB.Client.Core.Internal
                 var query = queryFn.Invoke(response =>
                 {
                     var result = GetStreamFromResponse(response, cancellationToken);
-                    result = AfterIntercept((int)response.StatusCode, () => response.Headers.ToHeaderParameters(),
+                    result = AfterIntercept((int)response.StatusCode,
+                        () => response.Headers.ToHeaderParameters(response.Content.Headers),
                         result);
 
                     RaiseForInfluxError(response, result);
@@ -157,7 +158,8 @@ namespace InfluxDB.Client.Core.Internal
                 var query = queryFn.Invoke(response =>
                 {
                     var result = GetStreamFromResponse(response, cancellationToken);
-                    result = AfterIntercept((int)response.StatusCode, () => response.Headers.ToHeaderParameters(),
+                    result = AfterIntercept((int)response.StatusCode,
+                        () => response.Headers.ToHeaderParameters(response.Content.Headers),
                         result);
 
                     RaiseForInfluxError(response, result);
@@ -196,7 +198,8 @@ namespace InfluxDB.Client.Core.Internal
             var query = queryFn.Invoke(response =>
             {
                 stream = GetStreamFromResponse(response, cancellationToken);
-                stream = AfterIntercept((int)response.StatusCode, () => response.Headers.ToHeaderParameters(), stream);
+                stream = AfterIntercept((int)response.StatusCode,
+                    () => response.Headers.ToHeaderParameters(response.Content.Headers), stream);
 
                 RaiseForInfluxError(response, stream);
 
