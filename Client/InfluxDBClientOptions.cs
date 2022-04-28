@@ -148,9 +148,9 @@ namespace InfluxDB.Client
             }
 
             /// <summary>
-            /// Set the Timeout to connect the InfluxDB.
+            /// Set the timespan to wait before the HTTP request times out.
             /// </summary>
-            /// <param name="timeout">the timeout to connect the InfluxDB. It must be defined.</param>
+            /// <param name="timeout">The timespan to wait before the HTTP request times out. It must be defined.</param>
             /// <returns><see cref="Builder"/></returns>
             public Builder TimeOut(TimeSpan timeout)
             {
