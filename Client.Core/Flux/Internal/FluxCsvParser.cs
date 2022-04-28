@@ -36,7 +36,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             // full information about types, default values and groups
             Full,
 
-            // useful for Invocable scripts
+            // useful for Invokable scripts
             OnlyNames
         }
 

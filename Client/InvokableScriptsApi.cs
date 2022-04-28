@@ -14,11 +14,11 @@ using RestSharp;
 
 namespace InfluxDB.Client
 {
-    public class InvocableScriptsApi : AbstractQueryClient
+    public class InvokableScriptsApi : AbstractQueryClient
     {
-        private readonly InvocableScriptsService _service;
+        private readonly InvokableScriptsService _service;
 
-        protected internal InvocableScriptsApi(InvocableScriptsService service, IFluxResultMapper mapper) : base(mapper,
+        protected internal InvokableScriptsApi(InvokableScriptsService service, IFluxResultMapper mapper) : base(mapper,
             new FluxCsvParser(FluxCsvParser.ResponseMode.OnlyNames))
         {
             Arguments.CheckNotNull(service, nameof(service));

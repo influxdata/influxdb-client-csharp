@@ -1,5 +1,8 @@
 ## 4.2.0 [unreleased]
 
+### Breaking Changes
+1. [#316](https://github.com/influxdata/influxdb-client-csharp/pull/316): Rename `InvocableScripts` to `InvokableScripts`
+
 ### Bug Fixes
 1. [#313](https://github.com/influxdata/influxdb-client-csharp/pull/313): Using default `org` and `bucket` in `WriteApiAsync`
 
@@ -9,7 +12,7 @@
 ## 4.1.0 [2022-04-19]
 
 ### Features
-1. [#304](https://github.com/influxdata/influxdb-client-csharp/pull/304): Add `InvocableScriptsApi` to create, update, list, delete and invoke scripts by seamless way
+1. [#304](https://github.com/influxdata/influxdb-client-csharp/pull/304): Add `InvokableScriptsApi` to create, update, list, delete and invoke scripts by seamless way
 1. [#308](https://github.com/influxdata/influxdb-client-csharp/pull/308): Add support for `TakeLast` expression [LINQ]
 
 ### Bug Fixes
