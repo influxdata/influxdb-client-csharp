@@ -8,7 +8,7 @@ cd "$SCRIPT_PATH"/..
 #
 # Install ReSharper command line tools
 #
-dotnet tool install --tool-path="./reSharperCLI" JetBrains.ReSharper.GlobalTools --version 2021.3.3 || true
+dotnet tool install --tool-path="./reSharperCLI" JetBrains.ReSharper.GlobalTools --version 2022.1.0 || true
 
 #
 # Reformat code
