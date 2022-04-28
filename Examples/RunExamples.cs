@@ -63,6 +63,9 @@ namespace Examples
                     case "InvokableScripts":
                         await InvokableScripts.Main(args);
                         break;
+                    case "ParametrizedQuery":
+                        await ParametrizedQuery.Main(args);
+                        break;
                 }
             }
             else
@@ -71,7 +74,7 @@ namespace Examples
                                   "FluxExample, FluxClientSimpleExample, FluxRawExample, FluxClientFactoryExample, " +
                                   "FluxClientPocoExample, PlatformExample, WriteApiAsyncExample, CustomDomainMapping" +
                                   "PocoQueryWriteExample, CustomDomainMappingAndLinq, SynchronousQuery, InfluxDB18Example, " +
-                                  "QueryLinqCloud, ManagementExample, InvokableScripts");
+                                  "QueryLinqCloud, ManagementExample, InvokableScripts, ParametrizedQuery");
             }
         }
     }

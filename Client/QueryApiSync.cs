@@ -48,7 +48,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
 
-            return QuerySync<T>(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org, cancellationToken);
+            return QuerySync<T>(QueryApi.CreateQuery(query, QueryApi.Dialect), org, cancellationToken);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNonEmptyString(query, nameof(query));
 
-            return QuerySync(QueryApi.CreateQuery(query, QueryApi.DefaultDialect), org, cancellationToken);
+            return QuerySync(QueryApi.CreateQuery(query, QueryApi.Dialect), org, cancellationToken);
         }
 
         /// <summary>
