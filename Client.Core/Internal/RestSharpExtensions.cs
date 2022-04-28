@@ -17,7 +17,7 @@ namespace InfluxDB.Client.Core.Internal
         /// <param name="httpContentHeaders">Additionally content Headers</param>
         /// <returns>IEnumerable&lt;HeaderParameter&gt;</returns>
         internal static IEnumerable<HeaderParameter> ToHeaderParameters(this HttpHeaders httpHeaders,
-            HttpContentHeaders? httpContentHeaders = null)
+            HttpContentHeaders httpContentHeaders = null)
         {
             return httpHeaders
                 .Concat(httpContentHeaders ?? Enumerable.Empty<KeyValuePair<string, IEnumerable<string>>>())
