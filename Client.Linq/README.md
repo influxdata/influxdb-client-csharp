@@ -851,6 +851,16 @@ from(bucket: "my-bucket")
     |> limit(n: 10)
 ```
 
+**_Note:_** the `limit()` function can be align before `pivot()` function by:
+
+```c#
+var optimizerSettings =
+    new QueryableOptimizerSettings
+    {
+        AlignLimitFunctionAfterPivot = false
+    };
+```
+
 ### TakeLast
 
 ```c#
@@ -867,6 +877,16 @@ from(bucket: "my-bucket")
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> drop(columns: ["_start", "_stop", "_measurement"])
     |> tail(n: 10)
+```
+
+**_Note:_** the `tail()` function can be align before `pivot()` function by:
+
+```c#
+var optimizerSettings =
+    new QueryableOptimizerSettings
+    {
+        AlignLimitFunctionAfterPivot = false
+    };
 ```
 
 ### Skip
