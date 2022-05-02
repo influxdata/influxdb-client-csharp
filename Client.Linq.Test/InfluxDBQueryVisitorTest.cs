@@ -1107,7 +1107,7 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
-        
+
         [Test]
         public void AlignLimitFunctionBeforePivot()
         {
@@ -1126,11 +1126,11 @@ namespace Client.Linq.Test
 
             visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.Take(10)));
             expected = "start_shifted = int(v: time(v: p2))\n\n" +
-                "from(bucket: p1) " +
-                "|> range(start: time(v: start_shifted)) " +
-                "|> limit(n: p3) " +
-                "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
-                "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
+                       "from(bucket: p1) " +
+                       "|> range(start: time(v: start_shifted)) " +
+                       "|> limit(n: p3) " +
+                       "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                       "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
 

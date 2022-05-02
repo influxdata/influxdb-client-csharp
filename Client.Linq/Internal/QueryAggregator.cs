@@ -169,16 +169,16 @@ namespace InfluxDB.Client.Linq.Internal
                 BuildAggregateWindow(_aggregateWindow)
             };
 
-            if  (!settings.AlignLimitFunctionAfterPivot)
+            if (!settings.AlignLimitFunctionAfterPivot)
             {
                 AddLimitFunctions(parts);
             }
 
             if (settings.AlignFieldsWithPivot)
             {
-                parts.Add("pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")");                
+                parts.Add("pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")");
             }
-            
+
             var drop = BuildDrop(settings);
             if (!string.IsNullOrEmpty(drop))
             {
@@ -231,14 +231,12 @@ namespace InfluxDB.Client.Linq.Internal
             // https://docs.influxdata.com/flux/latest/stdlib/universe/limit/
             // https://docs.influxdata.com/flux/latest/stdlib/universe/tail/
             foreach (var limitNOffsetAssignment in _limitTailNOffsetAssignments)
-            {
                 if (limitNOffsetAssignment.N != null)
                 {
                     parts.Add(BuildOperator(limitNOffsetAssignment.FluxFunction,
                         "n", limitNOffsetAssignment.N,
                         "offset", limitNOffsetAssignment.Offset));
                 }
-            }
         }
 
         private string BuildAggregateWindow((string Every, string Period, string Fn)? aggregateWindow)
