@@ -1107,6 +1107,32 @@ namespace Client.Linq.Test
 
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
+        
+        [Test]
+        public void AlignLimitFunctionBeforePivot()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
+                    new QueryableOptimizerSettings { AlignLimitFunctionAfterPivot = false })
+                select s;
+
+            var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.TakeLast(10)));
+            var expected = "start_shifted = int(v: time(v: p2))\n\n" +
+                           "from(bucket: p1) " +
+                           "|> range(start: time(v: start_shifted)) " +
+                           "|> tail(n: p3) " +
+                           "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                           "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+
+            visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.Take(10)));
+            expected = "start_shifted = int(v: time(v: p2))\n\n" +
+                "from(bucket: p1) " +
+                "|> range(start: time(v: start_shifted)) " +
+                "|> limit(n: p3) " +
+                "|> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") " +
+                "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
 
         private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)
         {
