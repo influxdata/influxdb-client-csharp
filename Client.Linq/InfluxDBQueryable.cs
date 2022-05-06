@@ -21,6 +21,7 @@ namespace InfluxDB.Client.Linq
         {
             QueryMultipleTimeSeries = false;
             AlignFieldsWithPivot = true;
+            AlignLimitFunctionAfterPivot = true;
             DropMeasurementColumn = true;
             DropStartColumn = true;
             DropStopColumn = true;
@@ -41,6 +42,12 @@ namespace InfluxDB.Client.Linq
         /// to align fields to tabular way.
         /// </summary>
         public bool AlignFieldsWithPivot { get; set; }
+
+        /// <summary>
+        /// Gets or set whether the drive should align <a>limit()</a> and <a>tail()</a> functions
+        /// after <a href="https://docs.influxdata.com/flux/v0.x/stdlib/universe/pivot/">pivot()</a> function.
+        /// </summary>
+        public bool AlignLimitFunctionAfterPivot { get; set; }
 
         /// <summary>
         /// Gets or sets whether the _measurement column will be dropped from query results.

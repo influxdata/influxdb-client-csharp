@@ -1,5 +1,8 @@
 ## 4.2.0 [unreleased]
 
+### Features
+1. [#319](https://github.com/influxdata/influxdb-client-csharp/pull/319): Optionally align `limit()` and `tail()` before `pivot()` function [LINQ]
+
 ### Breaking Changes
 1. [#316](https://github.com/influxdata/influxdb-client-csharp/pull/316): Rename `InvocableScripts` to `InvokableScripts`
 
