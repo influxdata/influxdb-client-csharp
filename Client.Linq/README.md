@@ -861,6 +861,8 @@ var optimizerSettings =
     };
 ```
 
+**_Performance:_** The `pivot()` is a [“heavy” function](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/#use-heavy-functions-sparingly). Using `limit()` before `pivot()` is much faster but works only if you have consistent data series. See [#318](https://github.com/influxdata/influxdb-client-csharp/issues/318) for more details.
+
 ### TakeLast
 
 ```c#
@@ -888,7 +890,8 @@ var optimizerSettings =
         AlignLimitFunctionAfterPivot = false
     };
 ```
-**_Performance note:_** The `pivot()` is a [“heavy” function](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/#use-heavy-functions-sparingly). Using `limit()` or `tail()` before `pivot()` is much faster but works only if you have consistent data series. See #318 for more details.
+**_Performance:_** The `pivot()` is a [“heavy” function](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/#use-heavy-functions-sparingly). Using `tail()` before `pivot()` is much faster but works only if you have consistent data series. See [#318](https://github.com/influxdata/influxdb-client-csharp/issues/318) for more details.
+
 ### Skip
 
 ```c#
