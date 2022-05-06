@@ -888,7 +888,7 @@ var optimizerSettings =
         AlignLimitFunctionAfterPivot = false
     };
 ```
-
+**_Performance note:_** The `pivot()` is a [“heavy” function](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/#use-heavy-functions-sparingly). Using `limit()` or `tail()` before `pivot()` is much faster but works only if you have consistent data series. See #318 for more details.
 ### Skip
 
 ```c#
