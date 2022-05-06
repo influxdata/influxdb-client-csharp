@@ -159,7 +159,7 @@ jobs:
       - restore_cache:
           name: Restoring reSharper Cache
           keys:
-              - &cache-key reSharper-cache-2021_3_3
+              - &cache-key reSharper-cache-2022_1_0
       - run:
           name: Check code formatting
           command: |

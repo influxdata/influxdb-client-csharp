@@ -920,5 +920,21 @@ namespace InfluxDB.Client.Test
             foreach (var successEvent in successEvents)
                 Assert.AreEqual(50_000, successEvent.LineProtocol.Split("\n").Length);
         }
+
+        [Test]
+        public async Task GzipWithLargeAmountOfData()
+        {
+            Client.EnableGzip();
+
+            var records = new List<string>();
+            for (var i = 0; i < 1000; i++) records.Add($"mem{i},tag=a value={i}i {i}");
+            await Client.GetWriteApiAsync().WriteRecordsAsync(records);
+
+            var tables = await _queryApi.QueryAsync(
+                $"from(bucket:\"{_bucket.Name}\") |> range(start: 0)");
+
+            Assert.AreEqual(1000, tables.Count);
+            Assert.AreEqual(1, tables[0].Records.Count);
+        }
     }
 }

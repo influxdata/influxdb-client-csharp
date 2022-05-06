@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
@@ -125,6 +126,23 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(
                 "Expecting a non-empty string for 'org' parameter. Please specify the organization as a method parameter or use default configuration at 'InfluxDBClientOptions.Org'.",
                 ae.Message);
+        }
+
+        [Test]
+        public async Task LoggedContentType()
+        {
+            var writer = new StringWriter();
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
+
+            _influxDbClient.SetLogLevel(LogLevel.Headers);
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/query").UsingPost())
+                .RespondWith(CreateResponse(Data));
+
+            await _queryApi.QueryAsync("from(...");
+
+            StringAssert.Contains("Content-Type=text/csv; charset=utf-8", writer.ToString());
         }
 
         private class SyncPoco

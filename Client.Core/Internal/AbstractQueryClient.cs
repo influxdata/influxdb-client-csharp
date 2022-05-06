@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -112,7 +114,8 @@ namespace InfluxDB.Client.Core.Internal
                 var query = queryFn.Invoke(response =>
                 {
                     var result = GetStreamFromResponse(response, cancellationToken);
-                    result = AfterIntercept((int)response.StatusCode, () => response.Headers.ToHeaderParameters(),
+                    result = AfterIntercept((int)response.StatusCode,
+                        () => response.Headers.ToHeaderParameters(response.Content.Headers),
                         result);
 
                     RaiseForInfluxError(response, result);
@@ -155,7 +158,8 @@ namespace InfluxDB.Client.Core.Internal
                 var query = queryFn.Invoke(response =>
                 {
                     var result = GetStreamFromResponse(response, cancellationToken);
-                    result = AfterIntercept((int)response.StatusCode, () => response.Headers.ToHeaderParameters(),
+                    result = AfterIntercept((int)response.StatusCode,
+                        () => response.Headers.ToHeaderParameters(response.Content.Headers),
                         result);
 
                     RaiseForInfluxError(response, result);
@@ -194,7 +198,8 @@ namespace InfluxDB.Client.Core.Internal
             var query = queryFn.Invoke(response =>
             {
                 stream = GetStreamFromResponse(response, cancellationToken);
-                stream = AfterIntercept((int)response.StatusCode, () => response.Headers.ToHeaderParameters(), stream);
+                stream = AfterIntercept((int)response.StatusCode,
+                    () => response.Headers.ToHeaderParameters(response.Content.Headers), stream);
 
                 RaiseForInfluxError(response, stream);
 
@@ -394,7 +399,13 @@ namespace InfluxDB.Client.Core.Internal
 # else
             var readAsStreamAsync = response.Content.ReadAsStreamAsync();
 #endif
-            return readAsStreamAsync.ConfigureAwait(false).GetAwaiter().GetResult();
+            var streamFromResponse = readAsStreamAsync.ConfigureAwait(false).GetAwaiter().GetResult();
+            if (response.Content.Headers.ContentEncoding.Any(x => "gzip".Equals(x, StringComparison.OrdinalIgnoreCase)))
+            {
+                streamFromResponse = new GZipStream(streamFromResponse, CompressionMode.Decompress);
+            }
+
+            return streamFromResponse;
         }
     }
 }
