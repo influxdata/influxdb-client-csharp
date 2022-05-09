@@ -90,7 +90,7 @@ namespace InfluxDB.Client.Linq
 
         /// <summary>
         /// Gets or sets the default value for a stop parameter of a <a href="https://docs.influxdata.com/flux/v0.x/stdlib/universe/range/">range function</a>.
-        /// The `start` is latest time to include in results. Results exclude points that match the specified stop time.
+        /// The `stop` is latest time to include in results. Results exclude points that match the specified stop time.
         /// Defaults to `now()`.
         /// </summary>
         public DateTime? RangeStopValue { get; set; }
