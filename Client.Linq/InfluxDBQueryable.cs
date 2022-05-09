@@ -25,6 +25,8 @@ namespace InfluxDB.Client.Linq
             DropMeasurementColumn = true;
             DropStartColumn = true;
             DropStopColumn = true;
+            RangeStartValue = null;
+            RangeStopValue = null;
         }
 
         /// <summary>
@@ -78,6 +80,20 @@ namespace InfluxDB.Client.Linq
         /// </list>
         /// </summary>
         public bool DropStopColumn { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default value for a start parameter of a <a href="https://docs.influxdata.com/flux/v0.x/stdlib/universe/range/">range function</a>.
+        /// The `start` is earliest time to include in results. Results include points that match the specified start time.
+        /// Defaults to `0`.
+        /// </summary>
+        public DateTime? RangeStartValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default value for a stop parameter of a <a href="https://docs.influxdata.com/flux/v0.x/stdlib/universe/range/">range function</a>.
+        /// The `start` is latest time to include in results. Results exclude points that match the specified stop time.
+        /// Defaults to `now()`.
+        /// </summary>
+        public DateTime? RangeStopValue { get; set; }
     }
 
     /// <summary>

@@ -324,6 +324,9 @@ namespace Client.Linq.Test
             var month10 = new DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc);
             var month11 = new DateTime(2020, 11, 15, 8, 20, 15, DateTimeKind.Utc);
 
+            var defaultStart = DateTime.UtcNow.AddHours(-15);
+            var defaultStop = DateTime.UtcNow.AddHours(15);
+
             var queries = new[]
             {
                 (
@@ -417,6 +420,71 @@ namespace Client.Linq.Test
                     "stop_shifted = int(v: time(v: p4))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
                     new Dictionary<int, DateTime> { { 2, month10 }, { 3, month11 } }
+                ),
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
+                        new QueryableOptimizerSettings
+                        {
+                            RangeStartValue = defaultStart
+                        })
+                    select s,
+                    "start_shifted = int(v: time(v: p2))\n\n",
+                    "range(start: time(v: start_shifted))",
+                    new Dictionary<int, DateTime> { { 1, defaultStart } }
+                ),
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
+                        new QueryableOptimizerSettings
+                        {
+                            RangeStopValue = defaultStop
+                        })
+                    select s,
+                    "start_shifted = int(v: time(v: p2))\n" +
+                    "stop_shifted = int(v: time(v: p3))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
+                    new Dictionary<int, DateTime> { { 2, defaultStop } }
+                ),
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
+                        new QueryableOptimizerSettings
+                        {
+                            RangeStartValue = defaultStart,
+                            RangeStopValue = defaultStop
+                        })
+                    select s,
+                    "start_shifted = int(v: time(v: p2))\n" +
+                    "stop_shifted = int(v: time(v: p3))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
+                    new Dictionary<int, DateTime> { { 1, defaultStart }, { 2, defaultStop } }
+                ),
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
+                        new QueryableOptimizerSettings
+                        {
+                            RangeStartValue = defaultStart,
+                            RangeStopValue = defaultStop
+                        })
+                    where s.Timestamp >= month10
+                    select s,
+                    "start_shifted = int(v: time(v: p4))\n" +
+                    "stop_shifted = int(v: time(v: p3))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
+                    new Dictionary<int, DateTime> { { 3, month10 }, { 2, defaultStop } }
+                ),
+                (
+                    from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
+                        new QueryableOptimizerSettings
+                        {
+                            RangeStartValue = defaultStart,
+                            RangeStopValue = defaultStop
+                        })
+                    where s.Timestamp >= month10
+                    where s.Timestamp < month11
+                    select s,
+                    "start_shifted = int(v: time(v: p4))\n" +
+                    "stop_shifted = int(v: time(v: p5))\n\n",
+                    "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
+                    new Dictionary<int, DateTime> { { 3, month10 }, { 4, month11 } }
                 )
             };
 

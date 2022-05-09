@@ -492,6 +492,18 @@ from(bucket: "my-bucket")
     |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
+There is an also possibility to specify default value for `start` and `stop` parameter:
+
+```c#
+var settings = new QueryableOptimizerSettings
+{
+    RangeStartValue = DateTime.UtcNow.AddHours(-24),
+    RangeStopValue = DateTime.UtcNow.AddHours(1)
+};
+var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi, settings)
+    select s;
+```
+
 ### TD;LR
 
 - [Optimize Flux queries](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/)

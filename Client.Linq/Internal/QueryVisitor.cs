@@ -21,14 +21,22 @@ namespace InfluxDB.Client.Linq.Internal
         internal InfluxDBQueryVisitor(
             string bucket,
             IMemberNameResolver memberResolver,
-            QueryableOptimizerSettings queryableOptimizerSettings) :
-            this(new QueryGenerationContext(new QueryAggregator(), new VariableAggregator(), memberResolver,
-                queryableOptimizerSettings))
+            QueryableOptimizerSettings settings) :
+            this(new QueryGenerationContext(new QueryAggregator(), new VariableAggregator(), memberResolver, settings))
         {
             var bucketVariable = _context.Variables.AddNamedVariable(bucket);
             _context.QueryAggregator.AddBucket(bucketVariable);
-            var rangeVariable = _context.Variables.AddNamedVariable(0);
-            _context.QueryAggregator.AddRangeStart(rangeVariable, RangeExpressionType.GreaterThanOrEqual);
+
+            // default range start
+            var rangeStart = _context.Variables.AddNamedVariable(settings.RangeStartValue as object ?? 0);
+            _context.QueryAggregator.AddRangeStart(rangeStart, RangeExpressionType.GreaterThanOrEqual);
+
+            // default range stop
+            if (settings.RangeStopValue != null)
+            {
+                var rangeStop = _context.Variables.AddNamedVariable(settings.RangeStopValue);
+                _context.QueryAggregator.AddRangeStop(rangeStop, RangeExpressionType.LessThan);
+            }
         }
 
         internal InfluxDBQueryVisitor(QueryGenerationContext context)

@@ -447,6 +447,19 @@ namespace Client.Linq.Test
             Assert.AreEqual(43, sensors.Last().Value);
         }
 
+        [Test]
+        public void RangeValue()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync(),
+                    new QueryableOptimizerSettings
+                        { RangeStartValue = new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc) })
+                select s;
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(2, sensors.Count);
+        }
+
         [TearDown]
         protected void After()
         {
