@@ -492,7 +492,7 @@ from(bucket: "my-bucket")
     |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
-There is an also possibility to specify default value for `start` and `stop` parameter:
+There is also a possibility to specify the default value for `start` and `stop` parameter. This is useful when you need to include data with future timestamps when no time bounds are explicitly set.
 
 ```c#
 var settings = new QueryableOptimizerSettings
