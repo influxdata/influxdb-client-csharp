@@ -2,6 +2,7 @@
 
 ### Features
 1. [#319](https://github.com/influxdata/influxdb-client-csharp/pull/319): Optionally align `limit()` and `tail()` before `pivot()` function [LINQ]
+1. [#322](https://github.com/influxdata/influxdb-client-csharp/pull/322): Possibility to specify default value for `start` and `stop` parameter of range function [LINQ]
 
 ### Breaking Changes
 1. [#316](https://github.com/influxdata/influxdb-client-csharp/pull/316): Rename `InvocableScripts` to `InvokableScripts`
