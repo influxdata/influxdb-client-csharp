@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -368,6 +367,31 @@ namespace InfluxDB.Client.Test
                     .WithHeader("x-influxdb-version", "2.0.0"));
 
             Assert.AreEqual("2.0.0", await _client.VersionAsync());
+        }
+
+        [Test]
+        public async Task CustomCertificateValidationCallback()
+        {
+            using var mockServerSsl = WireMockServer.Start(new WireMockServerSettings
+            {
+                UseSSL = true
+            });
+
+            var reached = false;
+            
+            _client.Dispose();
+            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder()
+                .Url(mockServerSsl.Urls[0])
+                .RemoteCertificateValidationCallback((sender, certificate, chain, errors) => reached = true)
+                .Build());
+            
+            mockServerSsl.Given(Request.Create().WithPath("/ping").UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(204)
+                    .WithHeader("x-influxdb-version", "2.0.0"));
+
+            await _client.VersionAsync();
+            
+            Assert.IsTrue(reached);
         }
     }
 }
