@@ -42,7 +42,7 @@ namespace InfluxDB.Client
         public PointSettings PointSettings { get; }
 
         public bool VerifySsl { get; }
-        
+
         public RemoteCertificateValidationCallback VerifySslCallback { get; }
 
         public X509CertificateCollection ClientCertificates { get; }
@@ -300,7 +300,7 @@ namespace InfluxDB.Client
 
                 return this;
             }
-            
+
             /// <summary>
             /// Callback function for handling the Certificate Validation of remote certificates to InfluxDB.
             /// The callback takes precedence over `VerifySsl`. 
@@ -310,7 +310,7 @@ namespace InfluxDB.Client
             public Builder RemoteCertificateValidationCallback(RemoteCertificateValidationCallback callback)
             {
                 VerifySslCallback = callback;
-                
+
                 return this;
             }
 

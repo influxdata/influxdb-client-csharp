@@ -378,19 +378,19 @@ namespace InfluxDB.Client.Test
             });
 
             var reached = false;
-            
+
             _client.Dispose();
             _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder()
                 .Url(mockServerSsl.Urls[0])
                 .RemoteCertificateValidationCallback((sender, certificate, chain, errors) => reached = true)
                 .Build());
-            
+
             mockServerSsl.Given(Request.Create().WithPath("/ping").UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(204)
                     .WithHeader("x-influxdb-version", "2.0.0"));
 
             await _client.VersionAsync();
-            
+
             Assert.IsTrue(reached);
         }
     }
