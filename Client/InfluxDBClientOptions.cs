@@ -302,7 +302,7 @@ namespace InfluxDB.Client
             }
 
             /// <summary>
-            /// Callback function for handling the Certificate Validation of remote certificates to InfluxDB.
+            /// Callback function for handling the remote SSL Certificate Validation.
             /// The callback takes precedence over `VerifySsl`. 
             /// </summary>
             /// <param name="callback"></param>
