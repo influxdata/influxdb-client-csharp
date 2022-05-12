@@ -48,6 +48,11 @@ then
 fi
 
 #
+# Generate testing certificates
+#
+dotnet dev-certs https
+
+#
 # Install testing tools
 #
 dotnet tool install --tool-path="./trx2junit/" trx2junit --version ${TRX2JUNIT_VERSION}

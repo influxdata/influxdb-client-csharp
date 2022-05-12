@@ -47,6 +47,11 @@ namespace InfluxDB.Client.Api.Client
                     (sender, certificate, chain, sslPolicyErrors) => true;
             }
 
+            if (options.VerifySslCallback != null)
+            {
+                RestClientOptions.RemoteCertificateValidationCallback = options.VerifySslCallback;
+            }
+
             if (options.ClientCertificates != null)
             {
                 RestClientOptions.ClientCertificates ??= new X509CertificateCollection();

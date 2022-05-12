@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Net;
+using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -42,6 +43,8 @@ namespace InfluxDB.Client
 
         public bool VerifySsl { get; }
 
+        public RemoteCertificateValidationCallback VerifySslCallback { get; }
+
         public X509CertificateCollection ClientCertificates { get; }
 
         private InfluxDBClientOptions(Builder builder)
@@ -66,6 +69,7 @@ namespace InfluxDB.Client
             PointSettings = builder.PointSettings;
 
             VerifySsl = builder.VerifySslCertificates;
+            VerifySslCallback = builder.VerifySslCallback;
             ClientCertificates = builder.CertificateCollection;
         }
 
@@ -110,6 +114,7 @@ namespace InfluxDB.Client
             internal IWebProxy WebProxy;
             internal bool AllowHttpRedirects;
             internal bool VerifySslCertificates = true;
+            internal RemoteCertificateValidationCallback VerifySslCallback;
             internal X509CertificateCollection CertificateCollection;
 
             internal PointSettings PointSettings = new PointSettings();
@@ -283,7 +288,7 @@ namespace InfluxDB.Client
             }
 
             /// <summary>
-            /// Ignore Certificate Validation Errors when false
+            /// Ignore Certificate Validation Errors when `false`.
             /// </summary>
             /// <param name="verifySsl">validates Certificates</param>
             /// <returns><see cref="Builder"/></returns>
@@ -292,6 +297,19 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(verifySsl, nameof(verifySsl));
 
                 VerifySslCertificates = verifySsl;
+
+                return this;
+            }
+
+            /// <summary>
+            /// Callback function for handling the remote SSL Certificate Validation.
+            /// The callback takes precedence over `VerifySsl`. 
+            /// </summary>
+            /// <param name="callback"></param>
+            /// <returns></returns>
+            public Builder RemoteCertificateValidationCallback(RemoteCertificateValidationCallback callback)
+            {
+                VerifySslCallback = callback;
 
                 return this;
             }
