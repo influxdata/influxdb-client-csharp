@@ -1,4 +1,4 @@
-## 4.2.0 [unreleased]
+## 4.2.0 [2022-05-20]
 
 ### Features
 1. [#319](https://github.com/influxdata/influxdb-client-csharp/pull/319): Optionally align `limit()` and `tail()` before `pivot()` function [LINQ]
