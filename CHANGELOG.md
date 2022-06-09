@@ -12,6 +12,13 @@
     - JsonSubTypes to 1.9.0
     - Microsoft.Extensions.ObjectPool to 6.0.5
 
+#### Test:
+    - Microsoft.NET.Test.Sdk to 17.2.0
+    - NUnit to 3.13.3
+    - WireMock.Net to 1.4.43
+    - Moq to 4.18.1
+    - Tomlyn.Signed to 0.14.3
+
 ## 4.2.0 [2022-05-20]
 
 ### Features
