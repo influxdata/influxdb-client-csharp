@@ -3,6 +3,15 @@
 ### Features
 1. [#327](https://github.com/influxdata/influxdb-client-csharp/pull/327): Add interfaces to client's APIs
 
+### Dependencies
+1. [#326](https://github.com/influxdata/influxdb-client-csharp/pull/326): Update dependencies:
+
+#### Build:
+    - RestSharp to 108.0.1
+    - NodaTime to 3.1.0
+    - JsonSubTypes to 1.9.0
+    - Microsoft.Extensions.ObjectPool to 6.0.5
+
 ## 4.2.0 [2022-05-20]
 
 ### Features
