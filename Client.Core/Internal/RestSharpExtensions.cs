@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using RestSharp;
 
 namespace InfluxDB.Client.Core.Internal
@@ -33,6 +35,14 @@ namespace InfluxDB.Client.Core.Internal
             field!.SetValue(restRequest, advancedResponseWriter);
 
             return restRequest;
+        }
+
+        //
+        internal static RestResponse ExecuteSync(this RestClient client,
+            RestRequest request, CancellationToken cancellationToken = default)
+        {
+            // return client.Execute(request);
+            return client.ExecuteAsync(request, cancellationToken).ConfigureAwait(false).GetAwaiter().GetResult();
         }
     }
 }

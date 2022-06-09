@@ -35,7 +35,7 @@ namespace InfluxDB.Client.Api.Client
             var version = AssemblyHelper.GetVersion(typeof(InfluxDBClient));
             RestClientOptions = new RestClientOptions(options.Url)
             {
-                Timeout = (int)options.Timeout.TotalMilliseconds,
+                MaxTimeout = (int)options.Timeout.TotalMilliseconds,
                 UserAgent = $"influxdb-client-csharp/{version}",
                 Proxy = options.WebProxy,
                 FollowRedirects = options.AllowHttpRedirects,
@@ -121,7 +121,7 @@ namespace InfluxDB.Client.Api.Client
                     var request = new RestRequest("/api/v2/signin", Method.Post)
                         .AddHeader("Authorization", header);
 
-                    authResponse = RestClient.ExecuteAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
+                    authResponse = RestClient.ExecuteSync(request);
                 }
                 catch (IOException e)
                 {
