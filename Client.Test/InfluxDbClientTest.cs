@@ -25,7 +25,7 @@ namespace InfluxDB.Client.Test
     [TestFixture]
     public class InfluxDbClientTest : AbstractMockServerTest
     {
-        private IInfluxDBClient _client;
+        private InfluxDBClient _client;
 
         [SetUp]
         public new void SetUp()
