@@ -222,7 +222,7 @@ namespace InfluxDB.Client
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
         IAsyncEnumerable<T> QueryAsyncEnumerable<T>(string query, string org = null,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Executes the Flux query against the InfluxDB 2.x and asynchronously maps
@@ -234,7 +234,7 @@ namespace InfluxDB.Client
         /// <typeparam name="T">the type of measurement</typeparam>
         /// <returns>Measurements which are matched the query</returns>
         IAsyncEnumerable<T> QueryAsyncEnumerable<T>(Query query, string org = null,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Executes the Flux query against the InfluxDB and synchronously map whole response to <see cref="string"/> result.
