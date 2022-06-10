@@ -14,7 +14,210 @@ using InfluxDB.Client.Internal;
 
 namespace InfluxDB.Client
 {
-    public class InfluxDBClient : AbstractRestClient, IDisposable
+    public interface IInfluxDBClient : IDisposable
+    {
+        /// <summary>
+        /// Get the Query client.
+        /// </summary>
+        /// <param name="mapper">the mapper used for mapping FluxResults to POCO</param>
+        /// <returns>the new client instance for the Query API</returns>
+        IQueryApi GetQueryApi(IDomainObjectMapper mapper = null);
+
+        /// <summary>
+        /// Get the synchronous version of Query client.
+        /// </summary>
+        /// <param name="mapper">the mapper used for mapping FluxResults to POCO</param>
+        /// <returns>the new synchronous client instance for the Query API</returns>
+        IQueryApiSync GetQueryApiSync(IDomainObjectMapper mapper = null);
+
+        /// <summary>
+        /// Get the Write client.
+        /// </summary>
+        /// <param name="mapper">the mapper used for mapping to PointData</param>
+        /// <returns>the new client instance for the Write API</returns>
+        IWriteApi GetWriteApi(IDomainObjectMapper mapper = null);
+
+        /// <summary>
+        /// Get the Write client.
+        /// </summary>
+        /// <param name="writeOptions">the configuration for a write client</param>
+        /// <param name="mapper">the converter used for mapping to PointData</param>
+        /// <returns>the new client instance for the Write API</returns>
+        IWriteApi GetWriteApi(WriteOptions writeOptions, IDomainObjectMapper mapper = null);
+
+        /// <summary>
+        /// Get the Write async client.
+        /// </summary>
+        /// <param name="mapper">the converter used for mapping to PointData</param>
+        /// <returns>the new client instance for the Write API Async without batching</returns>
+        IWriteApiAsync GetWriteApiAsync(IDomainObjectMapper mapper = null);
+
+        /// <summary>
+        /// Get the <see cref="Organization" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Organization API</returns>
+        IOrganizationsApi GetOrganizationsApi();
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.User" /> client.
+        /// </summary>
+        /// <returns>the new client instance for User API</returns>
+        IUsersApi GetUsersApi();
+
+        /// <summary>
+        /// Get the <see cref="Bucket" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Bucket API</returns>
+        IBucketsApi GetBucketsApi();
+
+        /// <summary>
+        /// Get the <see cref="Source" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Source API</returns>
+        ISourcesApi GetSourcesApi();
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Authorization" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Authorization API</returns>
+        IAuthorizationsApi GetAuthorizationsApi();
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.TaskType" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Task API</returns>
+        ITasksApi GetTasksApi();
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.ScraperTargetResponse" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Scraper API</returns>
+        IScraperTargetsApi GetScraperTargetsApi();
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Telegraf" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Telegrafs API</returns>
+        ITelegrafsApi GetTelegrafsApi();
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Label" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Label API</returns>
+        ILabelsApi GetLabelsApi();
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.NotificationEndpoint" /> client.
+        /// </summary>
+        /// <returns>the new client instance for NotificationEndpoint API</returns>
+        INotificationEndpointsApi GetNotificationEndpointsApi();
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.NotificationRules" /> client.
+        /// </summary>
+        /// <returns>the new client instance for NotificationRules API</returns>
+        INotificationRulesApi GetNotificationRulesApi();
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Check" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Checks API</returns>
+        IChecksApi GetChecksApi();
+
+        /// <summary>
+        /// Get the Delete client.
+        /// </summary>
+        /// <returns>the new client instance for Delete API</returns>
+        IDeleteApi GetDeleteApi();
+
+        /// <summary>
+        /// Create an InvokableScripts API instance.
+        /// </summary>
+        /// <param name="mapper">the mapper used for mapping invocation results to POCO</param>
+        /// <returns>New instance of InvokableScriptsApi.</returns>
+        IInvokableScriptsApi GetInvokableScriptsApi(IDomainObjectMapper mapper = null);
+
+        /// <summary>
+        /// Create a service for specified type.
+        /// </summary>
+        /// <param name="serviceType">type of service</param>
+        /// <typeparam name="TS">type of service</typeparam>
+        /// <returns>new instance of service</returns>
+        TS CreateService<TS>(Type serviceType) where TS : IApiAccessor;
+
+        /// <summary>
+        /// Set the log level for the request and response information.
+        /// </summary>
+        /// <param name="logLevel">the log level to set</param>
+        void SetLogLevel(LogLevel logLevel);
+
+        /// <summary>
+        /// Set the <see cref="LogLevel" /> that is used for logging requests and responses.
+        /// </summary>
+        /// <returns>Log Level</returns>
+        LogLevel GetLogLevel();
+
+        /// <summary>
+        /// Enable Gzip compress for http requests.
+        ///
+        /// <para>Currently only the "Write" and "Query" endpoints supports the Gzip compression.</para>
+        /// </summary>
+        /// <returns></returns>
+        IInfluxDBClient EnableGzip();
+
+        /// <summary>
+        /// Disable Gzip compress for http request body.
+        /// </summary>
+        /// <returns>this</returns>
+        IInfluxDBClient DisableGzip();
+
+        /// <summary>
+        /// Returns whether Gzip compress for http request body is enabled.
+        /// </summary>
+        /// <returns>true if gzip is enabled.</returns>
+        bool IsGzipEnabled();
+
+        /// <summary>
+        /// Get the health of an instance.
+        /// </summary>
+        /// <returns>health of an instance</returns>
+        Task<HealthCheck> HealthAsync();
+
+        /// <summary>
+        /// Check the status of InfluxDB Server.
+        /// </summary>
+        /// <returns>true if server is healthy otherwise return false</returns>
+        Task<bool> PingAsync();
+
+        /// <summary>
+        ///  Return the version of the connected InfluxDB Server.
+        /// </summary>
+        /// <returns>the version String, otherwise unknown</returns>
+        /// <exception cref="InfluxException">throws when request did not succesfully ends</exception>
+        Task<string> VersionAsync();
+
+        /// <summary>
+        /// Check the readiness of InfluxDB Server at startup. It is not supported by InfluxDB Cloud. 
+        /// </summary>
+        /// <returns>return null if the InfluxDB is not ready</returns>
+        Task<Ready> ReadyAsync();
+
+        /// <summary>
+        /// Post onboarding request, to setup initial user, org and bucket.
+        /// </summary>
+        /// <param name="onboarding">to setup defaults</param>
+        /// <exception cref="HttpException">With status code 422 when an onboarding has already been completed</exception>
+        /// <returns>defaults for first run</returns>
+        Task<OnboardingResponse> OnboardingAsync(OnboardingRequest onboarding);
+
+        /// <summary>
+        /// Check if database has default user, org, bucket created, returns true if not.
+        /// </summary>
+        /// <returns>True if onboarding has already been completed otherwise false</returns>
+        Task<bool> IsOnboardingAllowedAsync();
+    }
+
+    public class InfluxDBClient : AbstractRestClient, IInfluxDBClient
     {
         private readonly ApiClient _apiClient;
         private readonly ExceptionFactory _exceptionFactory;
@@ -91,6 +294,16 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="mapper">the mapper used for mapping FluxResults to POCO</param>
         /// <returns>the new client instance for the Query API</returns>
+        IQueryApi IInfluxDBClient.GetQueryApi(IDomainObjectMapper mapper)
+        {
+            return GetQueryApi(mapper);
+        }
+
+        /// <summary>
+        /// Get the Query client.
+        /// </summary>
+        /// <param name="mapper">the mapper used for mapping FluxResults to POCO</param>
+        /// <returns>the new client instance for the Query API</returns>
         public QueryApi GetQueryApi(IDomainObjectMapper mapper = null)
         {
             var service = new QueryService((Configuration)_apiClient.Configuration)
@@ -99,6 +312,16 @@ namespace InfluxDB.Client
             };
 
             return new QueryApi(_options, service, mapper ?? new DefaultDomainObjectMapper());
+        }
+
+        /// <summary>
+        /// Get the synchronous version of Query client.
+        /// </summary>
+        /// <param name="mapper">the mapper used for mapping FluxResults to POCO</param>
+        /// <returns>the new synchronous client instance for the Query API</returns>
+        IQueryApiSync IInfluxDBClient.GetQueryApiSync(IDomainObjectMapper mapper)
+        {
+            return GetQueryApiSync(mapper);
         }
 
         /// <summary>
@@ -121,9 +344,29 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="mapper">the mapper used for mapping to PointData</param>
         /// <returns>the new client instance for the Write API</returns>
+        IWriteApi IInfluxDBClient.GetWriteApi(IDomainObjectMapper mapper)
+        {
+            return GetWriteApi(mapper);
+        }
+
+        /// <summary>
+        /// Get the Write client.
+        /// </summary>
+        /// <param name="mapper">the mapper used for mapping to PointData</param>
+        /// <returns>the new client instance for the Write API</returns>
         public WriteApi GetWriteApi(IDomainObjectMapper mapper = null)
         {
             return GetWriteApi(WriteOptions.CreateNew().Build(), mapper);
+        }
+
+        /// <summary>
+        /// Get the Write async client.
+        /// </summary>
+        /// <param name="mapper">the converter used for mapping to PointData</param>
+        /// <returns>the new client instance for the Write API Async without batching</returns>
+        IWriteApiAsync IInfluxDBClient.GetWriteApiAsync(IDomainObjectMapper mapper)
+        {
+            return GetWriteApiAsync(mapper);
         }
 
         /// <summary>
@@ -139,6 +382,17 @@ namespace InfluxDB.Client
             };
 
             return new WriteApiAsync(_options, service, mapper ?? new DefaultDomainObjectMapper(), this);
+        }
+
+        /// <summary>
+        /// Get the Write client.
+        /// </summary>
+        /// <param name="writeOptions">the configuration for a write client</param>
+        /// <param name="mapper">the converter used for mapping to PointData</param>
+        /// <returns>the new client instance for the Write API</returns>
+        IWriteApi IInfluxDBClient.GetWriteApi(WriteOptions writeOptions, IDomainObjectMapper mapper)
+        {
+            return GetWriteApi(writeOptions, mapper);
         }
 
         /// <summary>
@@ -164,6 +418,15 @@ namespace InfluxDB.Client
         /// Get the <see cref="Organization" /> client.
         /// </summary>
         /// <returns>the new client instance for Organization API</returns>
+        IOrganizationsApi IInfluxDBClient.GetOrganizationsApi()
+        {
+            return GetOrganizationsApi();
+        }
+
+        /// <summary>
+        /// Get the <see cref="Organization" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Organization API</returns>
         public OrganizationsApi GetOrganizationsApi()
         {
             var service = new OrganizationsService((Configuration)_apiClient.Configuration)
@@ -176,6 +439,15 @@ namespace InfluxDB.Client
             };
 
             return new OrganizationsApi(service, secretService);
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.User" /> client.
+        /// </summary>
+        /// <returns>the new client instance for User API</returns>
+        IUsersApi IInfluxDBClient.GetUsersApi()
+        {
+            return GetUsersApi();
         }
 
         /// <summary>
@@ -196,6 +468,15 @@ namespace InfluxDB.Client
         /// Get the <see cref="Bucket" /> client.
         /// </summary>
         /// <returns>the new client instance for Bucket API</returns>
+        IBucketsApi IInfluxDBClient.GetBucketsApi()
+        {
+            return GetBucketsApi();
+        }
+
+        /// <summary>
+        /// Get the <see cref="Bucket" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Bucket API</returns>
         public BucketsApi GetBucketsApi()
         {
             var service = new BucketsService((Configuration)_apiClient.Configuration)
@@ -204,6 +485,15 @@ namespace InfluxDB.Client
             };
 
             return new BucketsApi(service);
+        }
+
+        /// <summary>
+        /// Get the <see cref="Source" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Source API</returns>
+        ISourcesApi IInfluxDBClient.GetSourcesApi()
+        {
+            return GetSourcesApi();
         }
 
         /// <summary>
@@ -224,6 +514,15 @@ namespace InfluxDB.Client
         /// Get the <see cref="InfluxDB.Client.Api.Domain.Authorization" /> client.
         /// </summary>
         /// <returns>the new client instance for Authorization API</returns>
+        IAuthorizationsApi IInfluxDBClient.GetAuthorizationsApi()
+        {
+            return GetAuthorizationsApi();
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Authorization" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Authorization API</returns>
         public AuthorizationsApi GetAuthorizationsApi()
         {
             var service = new AuthorizationsService((Configuration)_apiClient.Configuration)
@@ -235,7 +534,16 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Get the <see cref="InfluxDB.Client.Api.Domain.Task" /> client.
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.TaskType" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Task API</returns>
+        ITasksApi IInfluxDBClient.GetTasksApi()
+        {
+            return GetTasksApi();
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.TaskType" /> client.
         /// </summary>
         /// <returns>the new client instance for Task API</returns>
         public TasksApi GetTasksApi()
@@ -246,6 +554,15 @@ namespace InfluxDB.Client
             };
 
             return new TasksApi(service);
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.ScraperTargetResponse" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Scraper API</returns>
+        IScraperTargetsApi IInfluxDBClient.GetScraperTargetsApi()
+        {
+            return GetScraperTargetsApi();
         }
 
         /// <summary>
@@ -266,6 +583,15 @@ namespace InfluxDB.Client
         /// Get the <see cref="InfluxDB.Client.Api.Domain.Telegraf" /> client.
         /// </summary>
         /// <returns>the new client instance for Telegrafs API</returns>
+        ITelegrafsApi IInfluxDBClient.GetTelegrafsApi()
+        {
+            return GetTelegrafsApi();
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Telegraf" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Telegrafs API</returns>
         public TelegrafsApi GetTelegrafsApi()
         {
             var service = new TelegrafsService((Configuration)_apiClient.Configuration)
@@ -274,6 +600,15 @@ namespace InfluxDB.Client
             };
 
             return new TelegrafsApi(service);
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Label" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Label API</returns>
+        ILabelsApi IInfluxDBClient.GetLabelsApi()
+        {
+            return GetLabelsApi();
         }
 
         /// <summary>
@@ -294,6 +629,15 @@ namespace InfluxDB.Client
         /// Get the <see cref="InfluxDB.Client.Api.Domain.NotificationEndpoint" /> client.
         /// </summary>
         /// <returns>the new client instance for NotificationEndpoint API</returns>
+        INotificationEndpointsApi IInfluxDBClient.GetNotificationEndpointsApi()
+        {
+            return GetNotificationEndpointsApi();
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.NotificationEndpoint" /> client.
+        /// </summary>
+        /// <returns>the new client instance for NotificationEndpoint API</returns>
         public NotificationEndpointsApi GetNotificationEndpointsApi()
         {
             var service = new NotificationEndpointsService((Configuration)_apiClient.Configuration)
@@ -302,6 +646,15 @@ namespace InfluxDB.Client
             };
 
             return new NotificationEndpointsApi(service);
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.NotificationRules" /> client.
+        /// </summary>
+        /// <returns>the new client instance for NotificationRules API</returns>
+        INotificationRulesApi IInfluxDBClient.GetNotificationRulesApi()
+        {
+            return GetNotificationRulesApi();
         }
 
         /// <summary>
@@ -322,6 +675,15 @@ namespace InfluxDB.Client
         /// Get the <see cref="InfluxDB.Client.Api.Domain.Check" /> client.
         /// </summary>
         /// <returns>the new client instance for Checks API</returns>
+        IChecksApi IInfluxDBClient.GetChecksApi()
+        {
+            return GetChecksApi();
+        }
+
+        /// <summary>
+        /// Get the <see cref="InfluxDB.Client.Api.Domain.Check" /> client.
+        /// </summary>
+        /// <returns>the new client instance for Checks API</returns>
         public ChecksApi GetChecksApi()
         {
             var service = new ChecksService((Configuration)_apiClient.Configuration)
@@ -336,6 +698,15 @@ namespace InfluxDB.Client
         /// Get the Delete client.
         /// </summary>
         /// <returns>the new client instance for Delete API</returns>
+        IDeleteApi IInfluxDBClient.GetDeleteApi()
+        {
+            return GetDeleteApi();
+        }
+
+        /// <summary>
+        /// Get the Delete client.
+        /// </summary>
+        /// <returns>the new client instance for Delete API</returns>
         public DeleteApi GetDeleteApi()
         {
             var service = new DeleteService((Configuration)_apiClient.Configuration)
@@ -344,6 +715,16 @@ namespace InfluxDB.Client
             };
 
             return new DeleteApi(service);
+        }
+
+        /// <summary>
+        /// Create an InvokableScripts API instance.
+        /// </summary>
+        /// <param name="mapper">the mapper used for mapping invocation results to POCO</param>
+        /// <returns>New instance of InvokableScriptsApi.</returns>
+        IInvokableScriptsApi IInfluxDBClient.GetInvokableScriptsApi(IDomainObjectMapper mapper)
+        {
+            return GetInvokableScriptsApi(mapper);
         }
 
         /// <summary>
@@ -401,11 +782,31 @@ namespace InfluxDB.Client
         /// <para>Currently only the "Write" and "Query" endpoints supports the Gzip compression.</para>
         /// </summary>
         /// <returns></returns>
+        IInfluxDBClient IInfluxDBClient.EnableGzip()
+        {
+            return EnableGzip();
+        }
+
+        /// <summary>
+        /// Enable Gzip compress for http requests.
+        ///
+        /// <para>Currently only the "Write" and "Query" endpoints supports the Gzip compression.</para>
+        /// </summary>
+        /// <returns></returns>
         public InfluxDBClient EnableGzip()
         {
             _gzipHandler.EnableGzip();
 
             return this;
+        }
+
+        /// <summary>
+        /// Disable Gzip compress for http request body.
+        /// </summary>
+        /// <returns>this</returns>
+        IInfluxDBClient IInfluxDBClient.DisableGzip()
+        {
+            return DisableGzip();
         }
 
         /// <summary>

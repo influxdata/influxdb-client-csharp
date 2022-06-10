@@ -8,7 +8,117 @@ using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
-    public class LabelsApi
+    public interface ILabelsApi
+    {
+        /// <summary>
+        /// Create a label
+        /// </summary>
+        /// <param name="request">label to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Added label</returns>
+        Task<Label> CreateLabelAsync(LabelCreateRequest request,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create a label
+        /// </summary>
+        /// <param name="name">name of a label</param>
+        /// <param name="properties">properties of a label</param>
+        /// <param name="orgId">owner of a label</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Added label</returns>
+        Task<Label> CreateLabelAsync(string name, Dictionary<string, string> properties,
+            string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a single label
+        /// </summary>
+        /// <param name="label">label to update</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Updated label</returns>
+        Task<Label> UpdateLabelAsync(Label label, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a single label
+        /// </summary>
+        /// <param name="labelId">ID of label to update</param>
+        /// <param name="labelUpdate">label update</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Updated label</returns>
+        Task<Label> UpdateLabelAsync(string labelId, LabelUpdate labelUpdate,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a label.
+        /// </summary>
+        /// <param name="label">label to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(Label label, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a label.
+        /// </summary>
+        /// <param name="labelId">ID of label to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(string labelId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a label.
+        /// </summary>
+        /// <param name="clonedName">name of cloned label</param>
+        /// <param name="labelId">ID of label to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned label</returns>
+        Task<Label> CloneLabelAsync(string clonedName, string labelId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a label.
+        /// </summary>
+        /// <param name="clonedName">name of cloned label</param>
+        /// <param name="label">label to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned label</returns>
+        Task<Label> CloneLabelAsync(string clonedName, Label label,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a label.
+        /// </summary>
+        /// <param name="labelId">ID of a label to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Label detail</returns>
+        Task<Label> FindLabelByIdAsync(string labelId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels.
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// </summary>
+        /// <returns>List all labels.</returns>
+        Task<List<Label>> FindLabelsAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all labels.
+        /// </summary>
+        /// <param name="organization">specifies the organization of the resource</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>all labels</returns>
+        Task<List<Label>> FindLabelsByOrgAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all labels.
+        /// </summary>
+        /// <param name="orgId">specifies the organization ID of the resource</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>all labels</returns>
+        Task<List<Label>> FindLabelsByOrgIdAsync(string orgId,
+            CancellationToken cancellationToken = default);
+    }
+
+    public class LabelsApi : ILabelsApi
     {
         private readonly LabelsService _service;
 

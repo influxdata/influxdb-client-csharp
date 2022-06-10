@@ -7,7 +7,44 @@ using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
-    public class DeleteApi
+    public interface IDeleteApi
+    {
+        /// <summary>
+        /// Delete Time series data from InfluxDB.
+        /// </summary>
+        /// <param name="start">Start time</param>
+        /// <param name="stop">Stop time</param>
+        /// <param name="predicate">Sql where like delete statement</param>
+        /// <param name="bucket">The bucket from which data will be deleted</param>
+        /// <param name="org">The organization of the above bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        Task Delete(DateTime start, DateTime stop, string predicate, Bucket bucket, Organization org,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete Time series data from InfluxDB.
+        /// </summary>
+        /// <param name="start">Start time</param>
+        /// <param name="stop">Stop time</param>
+        /// <param name="predicate">Sql where like delete statement</param>
+        /// <param name="bucket">The bucket from which data will be deleted</param>
+        /// <param name="org">The organization of the above bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        Task Delete(DateTime start, DateTime stop, string predicate, string bucket, string org,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete Time series data from InfluxDB.
+        /// </summary>
+        /// <param name="predicate">Predicate delete request</param>
+        /// <param name="bucket">The bucket from which data will be deleted</param>
+        /// <param name="org">The organization of the above bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        Task Delete(DeletePredicateRequest predicate, string bucket, string org,
+            CancellationToken cancellationToken = default);
+    }
+
+    public class DeleteApi : IDeleteApi
     {
         private readonly DeleteService _service;
 

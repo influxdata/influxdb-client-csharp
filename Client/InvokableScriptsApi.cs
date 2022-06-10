@@ -14,7 +14,101 @@ using RestSharp;
 
 namespace InfluxDB.Client
 {
-    public class InvokableScriptsApi : AbstractQueryClient
+    public interface IInvokableScriptsApi
+    {
+        /// <summary>
+        /// Create a script.
+        /// </summary>
+        /// <param name="createRequest">The script to create.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The created script.</returns>
+        Task<Script> CreateScriptAsync(ScriptCreateRequest createRequest,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a script.
+        /// </summary>
+        /// <param name="scriptId">The ID of the script to update. (required)</param>
+        /// <param name="updateRequest">Script updates to apply (required)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The updated script.</returns>
+        Task<Script> UpdateScriptAsync(string scriptId, ScriptUpdateRequest updateRequest,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a script.
+        /// </summary>
+        /// <param name="scriptId">The ID of the script to delete. (required)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteScriptAsync(string scriptId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List scripts.
+        /// </summary>
+        /// <param name="offset">The offset for pagination.</param>
+        /// <param name="limit">The number of scripts to return.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>[Script]</returns>
+        Task<List<Script>> FindScriptsAsync(int? offset = null, int? limit = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Invoke a script and return result as a [FluxTable].
+        /// </summary>
+        /// <param name="scriptId">The ID of the script to invoke. (required)</param>
+        /// <param name="bindParams">Represent key/value pairs parameters to be injected into script</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>[FluxTable]</returns>
+        Task<List<FluxTable>> InvokeScriptAsync(string scriptId,
+            Dictionary<string, object> bindParams = default,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Invoke a script and return result as a [T].
+        /// </summary>
+        /// <param name="scriptId">The ID of the script to invoke. (required)</param>
+        /// <param name="bindParams">Represent key/value pairs parameters to be injected into script</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>[T]</returns>
+        Task<List<T>> InvokeScriptMeasurementsAsync<T>(string scriptId,
+            Dictionary<string, object> bindParams = default,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Invoke a script and return result as a raw string.
+        /// </summary>
+        /// <param name="scriptId">The ID of the script to invoke. (required)</param>
+        /// <param name="bindParams">Represent key/value pairs parameters to be injected into script</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>String</returns>
+        Task<string> InvokeScriptRawAsync(string scriptId, Dictionary<string, object> bindParams = default,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Invoke a script and return result as a stream of FluxRecord.
+        /// </summary>
+        /// <param name="scriptId">The ID of the script to invoke. (required)</param>
+        /// <param name="bindParams">Represent key/value pairs parameters to be injected into script</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>stream of FluxRecord</returns>
+        IAsyncEnumerable<FluxRecord> InvokeScriptEnumerableAsync(string scriptId,
+            Dictionary<string, object> bindParams = default,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Invoke a script and return result as a stream of Measurement.
+        /// </summary>
+        /// <param name="scriptId">The ID of the script to invoke. (required)</param>
+        /// <param name="bindParams">Represent key/value pairs parameters to be injected into script</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>stream of Measurement</returns>
+        IAsyncEnumerable<T> InvokeScriptMeasurementsEnumerableAsync<T>(string scriptId,
+            Dictionary<string, object> bindParams = default,
+            CancellationToken cancellationToken = default);
+    }
+
+    public class InvokableScriptsApi : AbstractQueryClient, IInvokableScriptsApi
     {
         private readonly InvokableScriptsService _service;
 

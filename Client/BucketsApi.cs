@@ -10,7 +10,333 @@ using InfluxDB.Client.Domain;
 
 namespace InfluxDB.Client
 {
-    public class BucketsApi
+    public interface IBucketsApi
+    {
+        /// <summary>
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="bucket">bucket to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created Bucket</returns>
+        Task<Bucket> CreateBucketAsync(Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="bucket">bucket to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created Bucket</returns>
+        Task<Bucket> CreateBucketAsync(PostBucketRequest bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="name">name of the bucket</param>
+        /// <param name="organization">owner of the bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created Bucket</returns>
+        Task<Bucket> CreateBucketAsync(string name, Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="name">name of the bucket</param>
+        /// <param name="bucketRetentionRules">retention rule of the bucket</param>
+        /// <param name="organization">owner of the bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created Bucket</returns>
+        Task<Bucket> CreateBucketAsync(string name, BucketRetentionRules bucketRetentionRules,
+            Organization organization, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="name">name of the bucket</param>
+        /// <param name="orgId">owner of the bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created Bucket</returns>
+        Task<Bucket> CreateBucketAsync(string name, string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new bucket and sets <see cref="Bucket.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="name">name of the bucket</param>
+        /// <param name="bucketRetentionRules">retention rule of the bucket</param>
+        /// <param name="orgId">owner of the bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created Bucket</returns>
+        Task<Bucket> CreateBucketAsync(string name, BucketRetentionRules bucketRetentionRules, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a bucket name and retention.
+        /// </summary>
+        /// <param name="bucket">bucket update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>bucket updated</returns>
+        Task<Bucket> UpdateBucketAsync(Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of bucket to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteBucketAsync(string bucketId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a bucket.
+        /// </summary>
+        /// <param name="bucket">bucket to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteBucketAsync(Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a bucket.
+        /// </summary>
+        /// <param name="clonedName">name of cloned bucket</param>
+        /// <param name="bucketId">ID of bucket to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned bucket</returns>
+        Task<Bucket> CloneBucketAsync(string clonedName, string bucketId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a bucket.
+        /// </summary>
+        /// <param name="clonedName">name of cloned bucket</param>
+        /// <param name="bucket">bucket to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned bucket</returns>
+        Task<Bucket> CloneBucketAsync(string clonedName, Bucket bucket,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of bucket to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Bucket Details</returns>
+        Task<Bucket> FindBucketByIdAsync(string bucketId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a bucket.
+        /// </summary>
+        /// <param name="bucketName">Name of bucket to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Bucket Details</returns>
+        Task<Bucket> FindBucketByNameAsync(string bucketName,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all buckets for specified organization.
+        /// </summary>
+        /// <param name="organization">filter buckets to a specific organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of buckets</returns>
+        Task<List<Bucket>> FindBucketsByOrganizationAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all buckets for specified orgId.
+        /// </summary>
+        /// <param name="orgName">filter buckets to a specific organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of buckets</returns>
+        Task<List<Bucket>> FindBucketsByOrgNameAsync(string orgName,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all buckets.
+        /// </summary>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
+        /// <param name="org">The name of the organization. (optional)</param>
+        /// <param name="orgID">The organization ID. (optional)</param>
+        /// <param name="name">Only returns buckets with a specific name. (optional)</param>
+        /// <param name="id">Only returns buckets with a specific ID. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>List all buckets</returns>
+        Task<List<Bucket>> FindBucketsAsync(int? offset = null, int? limit = null, string after = null,
+            string org = null, string orgID = null, string name = null, string id = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all buckets.
+        /// </summary>
+        /// <param name="findOptions">the find options</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>List all buckets</returns>
+        Task<Buckets> FindBucketsAsync(FindOptions findOptions, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all members of a bucket.
+        /// </summary>
+        /// <param name="bucket">bucket of the members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all members of a bucket</returns>
+        Task<List<ResourceMember>> GetMembersAsync(Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all members of a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of bucket to get members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all members of a bucket</returns>
+        Task<List<ResourceMember>> GetMembersAsync(string bucketId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a bucket member.
+        /// </summary>
+        /// <param name="member">the member of a bucket</param>
+        /// <param name="bucket">the bucket of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceMember> AddMemberAsync(User member, Bucket bucket,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a bucket member.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceMember> AddMemberAsync(string memberId, string bucketId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from a bucket.
+        /// </summary>
+        /// <param name="member">the member of a bucket</param>
+        /// <param name="bucket">the bucket of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>member removed</returns>
+        Task DeleteMemberAsync(User member, Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from a bucket.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>member removed</returns>
+        Task DeleteMemberAsync(string memberId, string bucketId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of a bucket.
+        /// </summary>
+        /// <param name="bucket">bucket of the owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all owners of a bucket</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of a bucket to get owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all owners of a bucket</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(string bucketId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a bucket owner.
+        /// </summary>
+        /// <param name="owner">the owner of a bucket</param>
+        /// <param name="bucket">the bucket of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceOwner> AddOwnerAsync(User owner, Bucket bucket,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a bucket owner.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceOwner> AddOwnerAsync(string ownerId, string bucketId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a owner from a bucket.
+        /// </summary>
+        /// <param name="owner">the owner of a bucket</param>
+        /// <param name="bucket">the bucket of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>owner removed</returns>
+        Task DeleteOwnerAsync(User owner, Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a owner from a bucket.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>owner removed</returns>
+        Task DeleteOwnerAsync(string ownerId, string bucketId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels of a bucket.
+        /// </summary>
+        /// <param name="bucket">bucket of the labels</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all labels of a bucket</returns>
+        Task<List<Label>> GetLabelsAsync(Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels of a bucket.
+        /// </summary>
+        /// <param name="bucketId">ID of a bucket to get labels</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all labels of a bucket</returns>
+        Task<List<Label>> GetLabelsAsync(string bucketId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a bucket label.
+        /// </summary>
+        /// <param name="label">the label of a bucket</param>
+        /// <param name="bucket">the bucket of a label</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>added label</returns>
+        Task<Label> AddLabelAsync(Label label, Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a bucket label.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>added label</returns>
+        Task<Label> AddLabelAsync(string labelId, string bucketId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a label from a bucket.
+        /// </summary>
+        /// <param name="label">the label of a bucket</param>
+        /// <param name="bucket">the bucket of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(Label label, Bucket bucket, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a label from a bucket.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="bucketId">the ID of a bucket</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(string labelId, string bucketId, CancellationToken cancellationToken = default);
+    }
+
+    public class BucketsApi : IBucketsApi
     {
         private readonly BucketsService _service;
 

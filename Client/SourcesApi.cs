@@ -7,7 +7,110 @@ using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
-    public class SourcesApi
+    public interface ISourcesApi
+    {
+        /// <summary>
+        /// Creates a new Source and sets <see cref="InfluxDB.Client.Api.Domain.Source.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="source">source to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created Source</returns>
+        Task<Source> CreateSourceAsync(Source source, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a Source.
+        /// </summary>
+        /// <param name="source">source update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>updated source</returns>
+        Task<Source> UpdateSourceAsync(Source source, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a source.
+        /// </summary>
+        /// <param name="sourceId">ID of source to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteSourceAsync(string sourceId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a source.
+        /// </summary>
+        /// <param name="source">source to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteSourceAsync(Source source, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a source.
+        /// </summary>
+        /// <param name="clonedName">name of cloned source</param>
+        /// <param name="sourceId">ID of source to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned source</returns>
+        Task<Source> CloneSourceAsync(string clonedName, string sourceId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a source.
+        /// </summary>
+        /// <param name="clonedName">name of cloned source</param>
+        /// <param name="source">source to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned source</returns>
+        Task<Source> CloneSourceAsync(string clonedName, Source source,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a source.
+        /// </summary>
+        /// <param name="sourceId">ID of source to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>source details</returns>
+        Task<Source> FindSourceByIdAsync(string sourceId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all sources.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of sources</returns>
+        Task<List<Source>> FindSourcesAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source).
+        /// </summary>
+        /// <param name="source">filter buckets to a specific source</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The buckets for source. If source does not exist than return null.</returns>
+        Task<List<Bucket>> FindBucketsBySourceAsync(Source source, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a sources buckets (will return dbrps in the form of buckets if it is a v1 source).
+        /// </summary>
+        /// <param name="sourceId">filter buckets to a specific source ID</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The buckets for source. If source does not exist than return null.</returns>
+        Task<List<Bucket>> FindBucketsBySourceIdAsync(string sourceId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a sources health.
+        /// </summary>
+        /// <param name="source">source to check health</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>health of source</returns>
+        Task<HealthCheck> HealthAsync(Source source, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a sources health.
+        /// </summary>
+        /// <param name="sourceId">source to check health</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>health of source</returns>
+        Task<HealthCheck> HealthAsync(string sourceId, CancellationToken cancellationToken = default);
+    }
+
+    public class SourcesApi : ISourcesApi
     {
         private readonly SourcesService _service;
 

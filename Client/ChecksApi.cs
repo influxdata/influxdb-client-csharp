@@ -9,10 +9,180 @@ using InfluxDB.Client.Domain;
 
 namespace InfluxDB.Client
 {
+    public interface IChecksApi
+    {
+        /// <summary>
+        /// Add new Threshold check.
+        /// </summary>
+        /// <param name="name">the check name</param>
+        /// <param name="query">The text of the flux query</param>
+        /// <param name="every">Check repetition interval</param>
+        /// <param name="messageTemplate">template that is used to generate and write a status message</param>
+        /// <param name="threshold">condition for that specific status</param>
+        /// <param name="orgId">the organization that owns this check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>ThresholdCheck created</returns>
+        Task<ThresholdCheck> CreateThresholdCheckAsync(string name, string query, string every,
+            string messageTemplate, Threshold threshold, string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add new Threshold check.
+        /// </summary>
+        /// <param name="name">the check name</param>
+        /// <param name="query">The text of the flux query</param>
+        /// <param name="every">Check repetition interval</param>
+        /// <param name="messageTemplate">template that is used to generate and write a status message</param>
+        /// <param name="thresholds">conditions for that specific status</param>
+        /// <param name="orgId">the organization that owns this check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>ThresholdCheck created</returns>
+        Task<ThresholdCheck> CreateThresholdCheckAsync(string name, string query, string every,
+            string messageTemplate, List<Threshold> thresholds, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add new Deadman check.
+        /// </summary>
+        /// <param name="name">the check name</param>
+        /// <param name="query">The text of the flux query</param>
+        /// <param name="every">Check repetition interval</param>
+        /// <param name="timeSince">string duration before deadman triggers</param>
+        /// <param name="staleTime">string duration for time that a series is considered stale and should not trigger deadman</param>
+        /// <param name="messageTemplate">template that is used to generate and write a status message</param>
+        /// <param name="level">the state to record if check matches a criteria</param>
+        /// <param name="orgId">the organization that owns this check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>DeadmanCheck created</returns>
+        Task<DeadmanCheck> CreateDeadmanCheckAsync(string name, string query, string every,
+            string timeSince, string staleTime, string messageTemplate, CheckStatusLevel level, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add new check.
+        /// </summary>
+        /// <param name="check">check to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Check created</returns>
+        Task<Check> CreateCheckAsync(Check check, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a check.
+        /// </summary>
+        /// <param name="check">check update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>An updated check</returns>
+        Task<Check> UpdateCheckAsync(Check check, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a check.
+        /// </summary>
+        /// <param name="checkId">ID of check</param>
+        /// <param name="patch">update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>An updated check</returns>
+        Task<Check> UpdateCheckAsync(string checkId, CheckPatch patch,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a check.
+        /// </summary>
+        /// <param name="check">the check to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteCheckAsync(Check check, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a check.
+        /// </summary>
+        /// <param name="checkId">checkID the ID of check to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteCheckAsync(string checkId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a check.
+        /// </summary>
+        /// <param name="checkId">ID of check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the check requested</returns>
+        Task<Check> FindCheckByIdAsync(string checkId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get checks.
+        /// </summary>
+        /// <param name="orgId">only show checks belonging to specified organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of checks</returns>
+        Task<List<Check>> FindChecksAsync(string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all checks.
+        /// </summary>
+        /// <param name="orgId">only show checks belonging to specified organization</param>
+        /// <param name="findOptions">find options</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of checks</returns>
+        Task<Checks> FindChecksAsync(string orgId, FindOptions findOptions,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels for a check.
+        /// </summary>
+        /// <param name="check"> the check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of all labels for a check</returns>
+        Task<List<Label>> GetLabelsAsync(Check check, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels for a check.
+        /// </summary>
+        /// <param name="checkId">ID of the check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of all labels for a check</returns>
+        Task<List<Label>> GetLabelsAsync(string checkId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a label to a check.
+        /// </summary>
+        /// <param name="label">label to add</param>
+        /// <param name="check">the check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the label was added to the check</returns>
+        Task<Label> AddLabelAsync(Label label, Check check, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a label to a check.
+        /// </summary>
+        /// <param name="labelId">ID of label to add</param>
+        /// <param name="checkId">ID of the check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the label was added to the check</returns>
+        Task<Label> AddLabelAsync(string labelId, string checkId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete label from a check.
+        /// </summary>
+        /// <param name="label">the label to delete</param>
+        /// <param name="check">the check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteLabelAsync(Label label, Check check, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete label from a check.
+        /// </summary>
+        /// <param name="labelId">labelID the label id to delete</param>
+        /// <param name="checkId">checkID ID of the check</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteLabelAsync(string labelId, string checkId, CancellationToken cancellationToken = default);
+    }
+
     /// <summary>
     /// The client of the InfluxDB 2.x that implement Check Api.
     /// </summary>
-    public class ChecksApi
+    public class ChecksApi : IChecksApi
     {
         private readonly ChecksService _service;
 

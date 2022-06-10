@@ -8,7 +8,491 @@ using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
-    public class TasksApi
+    public interface ITasksApi
+    {
+        /// <summary>
+        /// Creates a new task. The <see cref="InfluxDB.Client.Api.Domain.TaskType"/> has to have defined a cron or a every repetition
+        /// by the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// <example>
+        ///     This sample shows how to specify every repetition
+        ///     <code>
+        /// option task = {
+        /// name: "mean",
+        /// every: 1h,
+        /// }
+        /// 
+        /// from(bucket:"metrics/autogen")
+        /// |&gt; range(start:-task.every)
+        /// |&gt; group(columns:["level"])
+        /// |&gt; mean()
+        /// |&gt; yield(name:"mean")
+        /// </code>
+        /// </example>
+        /// </summary>
+        /// <param name="task">task to create (required)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Created Task</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        Task<TaskType> CreateTaskAsync(TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create a new task.
+        /// </summary>
+        /// <param name="taskCreateRequest">task to create (required)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Created Task</returns>
+        Task<TaskType> CreateTaskAsync(TaskCreateRequest taskCreateRequest,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new task with task repetition by cron. The <see cref="TaskType.Flux" /> is without a cron or a every
+        /// repetition.
+        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// </summary>
+        /// <param name="name">description of the task</param>
+        /// <param name="flux">the Flux script to run for this task</param>
+        /// <param name="cron">a task repetition schedule in the form '* * * * * *'</param>
+        /// <param name="organization">the organization that owns this Task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        Task<TaskType> CreateTaskCronAsync(string name, string flux, string cron,
+            Organization organization, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new task with task repetition by cron. The <see cref="TaskType.Flux" /> is without a cron or a every
+        /// repetition.
+        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// </summary>
+        /// <param name="name">description of the task</param>
+        /// <param name="flux">the Flux script to run for this task</param>
+        /// <param name="cron">a task repetition schedule in the form '* * * * * *'</param>
+        /// <param name="orgId">the organization ID that owns this Task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        Task<TaskType> CreateTaskCronAsync(string name, string flux, string cron,
+            string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="TaskType.Flux" /> is
+        /// without a cron or a every repetition.
+        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// </summary>
+        /// <param name="name">description of the task</param>
+        /// <param name="flux">the Flux script to run for this task</param>
+        /// <param name="every">a task repetition by duration expression</param>
+        /// <param name="organization">the organization that owns this Task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Created Task</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        Task<TaskType> CreateTaskEveryAsync(string name, string flux, string every,
+            Organization organization, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new task with task repetition by duration expression ("1h", "30s"). The <see cref="TaskType.Flux" /> is
+        /// without a cron or a every repetition.
+        /// The repetition is automatically append to the <a href="http://bit.ly/option-statement">option statement</a>.
+        /// </summary>
+        /// <param name="name">description of the task</param>
+        /// <param name="flux">the Flux script to run for this task</param>
+        /// <param name="every">a task repetition by duration expression</param>
+        /// <param name="orgId">the organization ID that owns this Task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Created Task</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        Task<TaskType> CreateTaskEveryAsync(string name, string flux, string every,
+            string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a task. This will cancel all queued runs.
+        /// </summary>
+        /// <param name="task">task update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>task updated</returns>
+        Task<TaskType> UpdateTaskAsync(TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a task. This will cancel all queued runs.
+        /// </summary>
+        /// <param name="taskId">ID of task to get</param>
+        /// <param name="request">task update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>task updated</returns>
+        Task<TaskType> UpdateTaskAsync(string taskId, TaskUpdateRequest request,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>task deleted</returns>
+        Task DeleteTaskAsync(string taskId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a task.
+        /// </summary>
+        /// <param name="task">task to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>task deleted</returns>
+        Task DeleteTaskAsync(TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned task</returns>
+        Task<TaskType> CloneTaskAsync(string taskId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a task.
+        /// </summary>
+        /// <param name="task">task to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned task</returns>
+        Task<TaskType> CloneTaskAsync(TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>task details</returns>
+        Task<TaskType> FindTaskByIdAsync(string taskId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Lists tasks, limit 100.
+        /// </summary>
+        /// <param name="user">filter tasks to a specific user</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of tasks</returns>
+        Task<List<TaskType>> FindTasksByUserAsync(User user, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Lists tasks, limit 100.
+        /// </summary>
+        /// <param name="userId">filter tasks to a specific user ID</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of tasks</returns>
+        Task<List<TaskType>> FindTasksByUserIdAsync(string userId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Lists tasks, limit 100.
+        /// </summary>
+        /// <param name="organization">filter tasks to a specific organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of tasks</returns>
+        Task<List<TaskType>> FindTasksByOrganizationAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Lists tasks, limit 100.
+        /// </summary>
+        /// <param name="orgId">filter tasks to a specific organization ID</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of tasks</returns>
+        Task<List<TaskType>> FindTasksByOrganizationIdAsync(string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Lists tasks, limit 100.
+        /// </summary>
+        /// <param name="afterId">returns tasks after specified ID</param>
+        /// <param name="userId">filter tasks to a specific user ID</param>
+        /// <param name="orgId">filter tasks to a specific organization ID</param>
+        /// <param name="org">Filter tasks to a specific organization name. (optional)</param>
+        /// <param name="name">Returns task with a specific name. (optional)</param>
+        /// <param name="limit">The number of tasks to return (optional, default to 100)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of tasks</returns>
+        Task<List<TaskType>> FindTasksAsync(string afterId = null, string userId = null,
+            string orgId = null, string org = null, string name = null, int? limit = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all members of a task.
+        /// </summary>
+        /// <param name="task">task of the members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all members of a task</returns>
+        Task<List<ResourceMember>> GetMembersAsync(TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all members of a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all members of a task</returns>
+        Task<List<ResourceMember>> GetMembersAsync(string taskId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a task member.
+        /// </summary>
+        /// <param name="member">the member of a task</param>
+        /// <param name="task">the task of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceMember> AddMemberAsync(User member, TaskType task,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a task member.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="taskId">the ID of a task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceMember> AddMemberAsync(string memberId, string taskId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from a task.
+        /// </summary>
+        /// <param name="member">the member of a task</param>
+        /// <param name="task">the task of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>member removed</returns>
+        Task DeleteMemberAsync(User member, TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from a task.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="taskId">the ID of a task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>member removed</returns>
+        Task DeleteMemberAsync(string memberId, string taskId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of a task.
+        /// </summary>
+        /// <param name="task">task of the owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all owners of a task</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of a task.
+        /// </summary>
+        /// <param name="taskId">ID of a task to get owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all owners of a task</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(string taskId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a task owner.
+        /// </summary>
+        /// <param name="owner">the owner of a task</param>
+        /// <param name="task">the task of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceOwner> AddOwnerAsync(User owner, TaskType task,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a task owner.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="taskId">the ID of a task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceOwner> AddOwnerAsync(string ownerId, string taskId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a owner from a task.
+        /// </summary>
+        /// <param name="owner">the owner of a task</param>
+        /// <param name="task">the task of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>owner removed</returns>
+        Task DeleteOwnerAsync(User owner, TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a owner from a task.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="taskId">the ID of a task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>owner removed</returns>
+        Task DeleteOwnerAsync(string ownerId, string taskId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve all logs for a task.
+        /// </summary>
+        /// <param name="task">task to get logs for</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the list of all logs for a task</returns>
+        Task<List<LogEvent>> GetLogsAsync(TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve all logs for a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get logs for</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the list of all logs for a task</returns>
+        Task<List<LogEvent>> GetLogsAsync(string taskId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve list of run records for a task.
+        /// </summary>
+        /// <param name="task"> task to get runs for</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the list of run records for a task</returns>
+        Task<List<Run>> GetRunsAsync(TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve list of run records for a task.
+        /// </summary>
+        /// <param name="task"> task to get runs for</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time</param>
+        /// <param name="limit">the number of runs to return. Default value: 20.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the list of run records for a task</returns>
+        Task<List<Run>> GetRunsAsync(TaskType task, DateTime? afterTime,
+            DateTime? beforeTime, int? limit, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve list of run records for a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get runs for</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the list of run records for a task</returns>
+        Task<List<Run>> GetRunsAsync(string taskId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve list of run records for a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get runs for</param>
+        /// <param name="afterTime">filter runs to those scheduled after this time</param>
+        /// <param name="beforeTime">filter runs to those scheduled before this time</param>
+        /// <param name="limit">the number of runs to return. Default value: 20.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the list of run records for a task</returns>
+        Task<List<Run>> GetRunsAsync(string taskId,
+            DateTime? afterTime, DateTime? beforeTime, int? limit, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a single run record for a task.
+        /// </summary>
+        /// <param name="taskId">ID of task to get runs for</param>
+        /// <param name="runId">ID of run</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a single run record for a task</returns>
+        Task<Run> GetRunAsync(string taskId, string runId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retry a task run.
+        /// </summary>
+        /// <param name="run">the run to retry</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the executed run</returns>
+        Task<Run> RetryRunAsync(Run run, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retry a task run.
+        /// </summary>
+        /// <param name="taskId">ID of task with the run to retry</param>
+        /// <param name="runId">ID of run to retry</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the executed run</returns>
+        Task<Run> RetryRunAsync(string taskId, string runId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Cancels a currently running run.
+        /// </summary>
+        /// <param name="run">the run to cancel</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task CancelRunAsync(Run run, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Cancels a currently running run.
+        /// </summary>
+        /// <param name="taskId">ID of task with the run to cancel</param>
+        /// <param name="runId">ID of run to cancel</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task CancelRunAsync(string taskId, string runId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve all logs for a run.
+        /// </summary>
+        /// <param name="run">the run to gets logs for it</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the list of all logs for a run</returns>
+        Task<List<LogEvent>> GetRunLogsAsync(Run run, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve all logs for a run.
+        /// </summary>
+        /// <param name="taskId">ID of task to get run logs for it</param>
+        /// <param name="runId">ID of run to get logs for it</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the list of all logs for a run</returns>
+        Task<List<LogEvent>> GetRunLogsAsync(string taskId, string runId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels of a Task.
+        /// </summary>
+        /// <param name="task">a Task of the labels</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all labels of a Task</returns>
+        Task<List<Label>> GetLabelsAsync(TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels of a Task.
+        /// </summary>
+        /// <param name="taskId">ID of a Task to get labels</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all labels of a Task</returns>
+        Task<List<Label>> GetLabelsAsync(string taskId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a Task label.
+        /// </summary>
+        /// <param name="label">the label of a Task</param>
+        /// <param name="task">a Task of a label</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>added label</returns>
+        Task<Label> AddLabelAsync(Label label, TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a Task label.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="taskId">the ID of a Task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>added label</returns>
+        Task<Label> AddLabelAsync(string labelId, string taskId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a label from a Task.
+        /// </summary>
+        /// <param name="label">the label of a Task</param>
+        /// <param name="task">a Task of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(Label label, TaskType task, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a label from a Task.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="taskId">the ID of a Task</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(string labelId, string taskId, CancellationToken cancellationToken = default);
+    }
+
+    public class TasksApi : ITasksApi
     {
         private readonly TasksService _service;
 
