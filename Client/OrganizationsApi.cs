@@ -7,7 +7,285 @@ using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
-    public class OrganizationsApi
+    public interface IOrganizationsApi
+    {
+        /// <summary>
+        /// Creates a new organization and sets <see cref="InfluxDB.Client.Api.Domain.Organization.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Created organization</returns>
+        Task<Organization> CreateOrganizationAsync(string name, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new organization and sets <see cref="Organization.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="organization">the organization to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created organization</returns>
+        Task<Organization> CreateOrganizationAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update an organization.
+        /// </summary>
+        /// <param name="organization">organization update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>updated organization</returns>
+        Task<Organization> UpdateOrganizationAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete an organization.
+        /// </summary>
+        /// <param name="orgId">ID of organization to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteOrganizationAsync(string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete an organization.
+        /// </summary>
+        /// <param name="organization">organization to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteOrganizationAsync(Organization organization, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone an organization.
+        /// </summary>
+        /// <param name="clonedName">name of cloned organization</param>
+        /// <param name="orgId">ID of organization to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned organization</returns>
+        Task<Organization> CloneOrganizationAsync(string clonedName, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone an organization.
+        /// </summary>
+        /// <param name="clonedName">name of cloned organization</param>
+        /// <param name="organization">organization to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned organization</returns>
+        Task<Organization> CloneOrganizationAsync(string clonedName, Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve an organization.
+        /// </summary>
+        /// <param name="orgId">ID of organization to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>organization details</returns>
+        Task<Organization> FindOrganizationByIdAsync(string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all organizations.
+        /// </summary>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="descending"> (optional, default to false)</param>
+        /// <param name="org">Filter organizations to a specific organization name. (optional)</param>
+        /// <param name="orgID">Filter organizations to a specific organization ID. (optional)</param>
+        /// <param name="userID">Filter organizations to a specific user ID. (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>List all organizations</returns>
+        Task<List<Organization>> FindOrganizationsAsync(int? limit = null, int? offset = null,
+            bool? descending = null, string org = null, string orgID = null, string userID = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List of secret keys the are stored for Organization. For example:
+        /// <code>
+        /// github_api_key,
+        /// some_other_key,
+        /// a_secret_key
+        /// </code>
+        /// </summary>
+        /// <param name="organization">the organization for get secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the secret keys</returns>
+        Task<List<string>> GetSecretsAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List of secret keys the are stored for Organization. For example:
+        /// <code>
+        /// github_api_key,
+        /// some_other_key,
+        /// a_secret_key
+        /// </code>
+        /// </summary>
+        /// <param name="orgId">the organization for get secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the secret keys</returns>
+        Task<List<string>> GetSecretsAsync(string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Patches all provided secrets and updates any previous values.
+        /// </summary>
+        /// <param name="secrets">secrets to update/add</param>
+        /// <param name="organization">the organization for put secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task PutSecretsAsync(Dictionary<string, string> secrets, Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Patches all provided secrets and updates any previous values.
+        /// </summary>
+        /// <param name="secrets">secrets to update/add</param>
+        /// <param name="orgId">the organization for put secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task PutSecretsAsync(Dictionary<string, string> secrets, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete provided secrets.
+        /// </summary>
+        /// <param name="secrets">secrets to delete</param>
+        /// <param name="organization">the organization for delete secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>keys successfully patched</returns>
+        Task DeleteSecretsAsync(List<string> secrets, Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete provided secrets.
+        /// </summary>
+        /// <param name="secrets">secrets to delete</param>
+        /// <param name="orgId">the organization for delete secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>keys successfully patched</returns>
+        Task DeleteSecretsAsync(List<string> secrets, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete provided secrets.
+        /// </summary>
+        /// <param name="secrets">secrets to delete</param>
+        /// <param name="orgId">the organization for delete secrets</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>keys successfully patched</returns>
+        Task DeleteSecretsAsync(SecretKeys secrets, string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all members of an organization.
+        /// </summary>
+        /// <param name="organization">organization of the members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all members of an organization</returns>
+        Task<List<ResourceMember>> GetMembersAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all members of an organization.
+        /// </summary>
+        /// <param name="orgId">ID of organization to get members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all members of an organization</returns>
+        Task<List<ResourceMember>> GetMembersAsync(string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add organization member.
+        /// </summary>
+        /// <param name="member">the member of an organization</param>
+        /// <param name="organization">the organization of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceMember> AddMemberAsync(User member, Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add organization member.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="orgId">the ID of an organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceMember> AddMemberAsync(string memberId, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from an organization.
+        /// </summary>
+        /// <param name="member">the member of an organization</param>
+        /// <param name="organization">the organization of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteMemberAsync(User member, Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from an organization.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="orgId">the ID of an organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteMemberAsync(string memberId, string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of an organization.
+        /// </summary>
+        /// <param name="organization">organization of the owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all owners of an organization</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of an organization.
+        /// </summary>
+        /// <param name="orgId">ID of organization to get owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all owners of an organization</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add organization owner.
+        /// </summary>
+        /// <param name="owner">the owner of an organization</param>
+        /// <param name="organization">the organization of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceOwner> AddOwnerAsync(User owner, Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add organization owner.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="orgId">the ID of an organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceOwner> AddOwnerAsync(string ownerId, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a owner from an organization.
+        /// </summary>
+        /// <param name="owner">the owner of an organization</param>
+        /// <param name="organization">the organization of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteOwnerAsync(User owner, Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a owner from an organization.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="orgId">the ID of an organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteOwnerAsync(string ownerId, string orgId, CancellationToken cancellationToken = default);
+    }
+
+    public class OrganizationsApi : IOrganizationsApi
     {
         private readonly OrganizationsService _service;
         private readonly SecretsService _secretsService;

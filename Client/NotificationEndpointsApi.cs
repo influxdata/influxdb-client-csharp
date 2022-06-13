@@ -9,7 +9,325 @@ using InfluxDB.Client.Domain;
 
 namespace InfluxDB.Client
 {
-    public class NotificationEndpointsApi
+    public interface INotificationEndpointsApi
+    {
+        /// <summary>
+        /// Add new Slack notification endpoint. The 'url' should be defined.
+        /// </summary>
+        /// <param name="name">Endpoint name</param>
+        /// <param name="url">Slack WebHook URL</param>
+        /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created Slack notification endpoint</returns>
+        Task<SlackNotificationEndpoint> CreateSlackEndpointAsync(string name, string url, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        ///  Add new Slack notification endpoint. The 'url' should be defined.
+        /// </summary>
+        /// <param name="name">Endpoint name</param>
+        /// <param name="url">Slack WebHook URL</param>
+        /// <param name="token">Slack WebHook Token</param>
+        /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created Slack notification endpoint</returns>
+        Task<SlackNotificationEndpoint> CreateSlackEndpointAsync(string name, string url, string token,
+            string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add new PagerDuty notification endpoint.
+        /// </summary>
+        /// <param name="name">Endpoint name</param>
+        /// <param name="clientUrl">Client URL</param>
+        /// <param name="routingKey">Routing Key</param>
+        /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created PagerDuty notification endpoint</returns>
+        Task<PagerDutyNotificationEndpoint> CreatePagerDutyEndpointAsync(string name, string clientUrl,
+            string routingKey, string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add new HTTP notification endpoint without authentication.
+        /// </summary>
+        /// <param name="name">Endpoint name</param>
+        /// <param name="url">URL</param>
+        /// <param name="method">HTTP Method</param>
+        /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created HTTP notification endpoint</returns>
+        Task<HTTPNotificationEndpoint> CreateHttpEndpointAsync(string name, string url,
+            HTTPNotificationEndpoint.MethodEnum method, string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">Endpoint name</param>
+        /// <param name="url">URL</param>
+        /// <param name="method">HTTP Method</param>
+        /// <param name="username">HTTP Basic Username</param>
+        /// <param name="password">HTTP Basic Password</param>
+        /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created HTTP notification endpoint</returns>
+        Task<HTTPNotificationEndpoint> CreateHttpEndpointBasicAuthAsync(string name, string url,
+            HTTPNotificationEndpoint.MethodEnum method, string username, string password, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">Endpoint name</param>
+        /// <param name="url">URL</param>
+        /// <param name="method">HTTP Method</param>
+        /// <param name="token">Bearer token</param>
+        /// <param name="orgId">Owner of an endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created HTTP notification endpoint</returns>
+        Task<HTTPNotificationEndpoint> CreateHttpEndpointBearerAsync(string name, string url,
+            HTTPNotificationEndpoint.MethodEnum method, string token, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add new notification endpoint.
+        /// </summary>
+        /// <param name="notificationEndpoint">notificationEndpoint to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint created</returns>
+        Task<NotificationEndpoint> CreateEndpointAsync(NotificationEndpoint notificationEndpoint,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a notification endpoint. The updates is used for fields from <see cref="NotificationEndpointUpdate"/>.
+        /// </summary>
+        /// <param name="notificationEndpoint">update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>An updated notification endpoint</returns>
+        Task<NotificationEndpoint> UpdateEndpointAsync(NotificationEndpoint notificationEndpoint,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a notification endpoint.
+        /// </summary>
+        /// <param name="endpointId">ID of notification endpoint</param>
+        /// <param name="notificationEndpointUpdate">update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>An updated notification endpoint</returns>
+        Task<NotificationEndpoint> UpdateEndpointAsync(string endpointId,
+            NotificationEndpointUpdate notificationEndpointUpdate, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a notification endpoint.
+        /// </summary>
+        /// <param name="notificationEndpoint">notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted></returns>
+        Task DeleteNotificationEndpointAsync(NotificationEndpoint notificationEndpoint,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a notification endpoint.
+        /// </summary>
+        /// <param name="endpointId">ID of notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteNotificationEndpointAsync(string endpointId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get notification endpoints.
+        /// </summary>
+        /// <param name="orgId">only show notification endpoints belonging to specified organization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of notification endpoint</returns>
+        Task<List<NotificationEndpoint>> FindNotificationEndpointsAsync(string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all notification endpoints.
+        /// </summary>
+        /// <param name="orgId">only show notification endpoints belonging to specified organization</param>
+        /// <param name="findOptions">the find options</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task<NotificationEndpoints> FindNotificationEndpointsAsync(string orgId, FindOptions findOptions,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a notification endpoint.
+        /// </summary>
+        /// <param name="endpointId">ID of notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the notification endpoint requested</returns>
+        Task<NotificationEndpoint> FindNotificationEndpointByIdAsync(string endpointId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a Slack Notification endpoint.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="token">Slack WebHook Token</param>
+        /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<SlackNotificationEndpoint> CloneSlackEndpointAsync(string name, string token,
+            string endpointId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a Slack Notification endpoint.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="token"></param>
+        /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<SlackNotificationEndpoint> CloneSlackEndpointAsync(string name, string token,
+            SlackNotificationEndpoint endpoint, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a PagerDuty Notification endpoint.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="routingKey">Routing Key</param>
+        /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<PagerDutyNotificationEndpoint> ClonePagerDutyEndpointAsync(string name, string routingKey,
+            string endpointId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a PagerDuty Notification endpoint.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="routingKey">Routing Key</param>
+        /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<PagerDutyNotificationEndpoint> ClonePagerDutyEndpointAsync(string name, string routingKey,
+            PagerDutyNotificationEndpoint endpoint, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a Http Notification endpoint without authentication.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<HTTPNotificationEndpoint> CloneHttpEndpointAsync(string name, string endpointId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a Http Notification endpoint without authentication.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<HTTPNotificationEndpoint> CloneHttpEndpoint(string name, HTTPNotificationEndpoint endpoint,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a Http Notification endpoint with Http Basic authentication.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="username">HTTP Basic Username</param>
+        /// <param name="password">HTTP Basic Password</param>
+        /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<HTTPNotificationEndpoint> CloneHttpEndpointBasicAuthAsync(string name, string username,
+            string password, string endpointId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a Http Notification endpoint with Http Basic authentication.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="username">HTTP Basic Username</param>
+        /// <param name="password">HTTP Basic Password</param>
+        /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<HTTPNotificationEndpoint> CloneHttpEndpointBasicAuthAsync(string name, string username,
+            string password, HTTPNotificationEndpoint endpoint, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a Http Notification endpoint with Bearer authentication.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="token">Bearer token</param>
+        /// <param name="endpointId">ID of endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<HTTPNotificationEndpoint> CloneHttpEndpointBearerAsync(string name, string token,
+            string endpointId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a Http Notification endpoint with Bearer authentication.
+        /// </summary>
+        /// <param name="name">name of cloned endpoint</param>
+        /// <param name="token">Bearer token</param>
+        /// <param name="endpoint">endpoint to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification endpoint cloned</returns>
+        Task<HTTPNotificationEndpoint> CloneHttpEndpointBearerAsync(string name, string token,
+            HTTPNotificationEndpoint endpoint, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels for a notification endpoint.
+        /// </summary>
+        /// <param name="endpoint">the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of all labels for a notification endpoint</returns>
+        Task<List<Label>> GetLabelsAsync(NotificationEndpoint endpoint,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels for a notification endpoint.
+        /// </summary>
+        /// <param name="endpointId">ID of the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of all labels for a notification endpoint</returns>
+        Task<List<Label>> GetLabelsAsync(string endpointId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a label to a notification endpoint.
+        /// </summary>
+        /// <param name="label">label to add</param>
+        /// <param name="endpoint">the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task<Label> AddLabelAsync(Label label, NotificationEndpoint endpoint,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a label to a notification endpoint.
+        /// </summary>
+        /// <param name="labelId">the ID of label to add</param>
+        /// <param name="endpointId">the ID of the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task<Label> AddLabelAsync(string labelId, string endpointId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete label from a notification endpoint.
+        /// </summary>
+        /// <param name="label">the label to delete</param>
+        /// <param name="endpoint">the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteLabelAsync(Label label, NotificationEndpoint endpoint,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete label from a notification endpoint.
+        /// </summary>
+        /// <param name="labelId">the label id to delete</param>
+        /// <param name="endpointId">ID of the notification endpoint</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteLabelAsync(string labelId, string endpointId, CancellationToken cancellationToken = default);
+    }
+
+    public class NotificationEndpointsApi : INotificationEndpointsApi
     {
         private readonly NotificationEndpointsService _service;
 

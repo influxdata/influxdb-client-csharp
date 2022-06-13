@@ -1,15 +1,19 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Api.Service;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
+using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Test;
+using Moq;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
@@ -392,6 +396,25 @@ namespace InfluxDB.Client.Test
             await _client.VersionAsync();
 
             Assert.IsTrue(reached);
+        }
+
+        [Test]
+        public void TestMocking()
+        {
+            var mockClient = new Mock<IInfluxDBClient>();
+            var mockQueryApi = new Mock<IQueryApiSync>();
+
+            mockClient
+                .Setup(library => library.GetQueryApiSync(null))
+                .Returns(mockQueryApi.Object);
+
+            var mockTables = new List<FluxTable> { new FluxTable() };
+            mockQueryApi
+                .Setup(api => api.QuerySync("from(...", "my-org", CancellationToken.None))
+                .Returns(mockTables);
+
+            var tables = mockClient.Object.GetQueryApiSync().QuerySync("from(...", "my-org");
+            Assert.AreEqual(mockTables, tables);
         }
     }
 }

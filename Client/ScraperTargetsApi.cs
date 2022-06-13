@@ -7,7 +7,296 @@ using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
-    public class ScraperTargetsApi
+    public interface IScraperTargetsApi
+    {
+        /// <summary>
+        /// Creates a new ScraperTarget and sets <see cref="ScraperTargetResponse.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="scraperTargetRequest">the scraper to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created ScraperTarget</returns>
+        Task<ScraperTargetResponse> CreateScraperTargetAsync(ScraperTargetRequest scraperTargetRequest,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new ScraperTarget and sets <see cref="ScraperTargetResponse.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="name">the name of the new ScraperTarget</param>
+        /// <param name="url">the url of the new ScraperTarget</param>
+        /// <param name="bucketId">the id of the bucket that its use to writes</param>
+        /// <param name="orgId">the id of the organization that owns new ScraperTarget</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created ScraperTarget</returns>
+        Task<ScraperTargetResponse> CreateScraperTargetAsync(string name, string url,
+            string bucketId, string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetResponse">ScraperTarget update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>updated ScraperTarget</returns>
+        Task<ScraperTargetResponse> UpdateScraperTargetAsync(ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetId">id of the scraper target (required)</param>
+        /// <param name="scraperTargetRequest">ScraperTargetRequest update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>updated ScraperTarget</returns>
+        Task<ScraperTargetResponse> UpdateScraperTargetAsync(string scraperTargetId,
+            ScraperTargetRequest scraperTargetRequest, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetId">ID of ScraperTarget to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>scraper target deleted</returns>
+        Task DeleteScraperTargetAsync(string scraperTargetId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetResponse">ScraperTarget to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>scraper target deleted</returns>
+        Task DeleteScraperTargetAsync(ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a ScraperTarget.
+        /// </summary>
+        /// <param name="clonedName">name of cloned ScraperTarget</param>
+        /// <param name="scraperTargetId">ID of ScraperTarget to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned ScraperTarget</returns>
+        Task<ScraperTargetResponse> CloneScraperTargetAsync(string clonedName, string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a ScraperTarget.
+        /// </summary>
+        /// <param name="clonedName">name of cloned ScraperTarget</param>
+        /// <param name="scraperTargetResponse">ScraperTarget to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned ScraperTarget</returns>
+        Task<ScraperTargetResponse> CloneScraperTargetAsync(string clonedName,
+            ScraperTargetResponse scraperTargetResponse, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetId">ID of ScraperTarget to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>ScraperTarget details</returns>
+        Task<ScraperTargetResponse> FindScraperTargetByIdAsync(string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all ScraperTargets.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of ScraperTargets</returns>
+        Task<List<ScraperTargetResponse>> FindScraperTargetsAsync(
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all ScraperTargets.
+        /// </summary>
+        /// <param name="organization">specifies the organization of the resource</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of ScraperTargets</returns>
+        Task<List<ScraperTargetResponse>> FindScraperTargetsByOrgAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all ScraperTargets.
+        /// </summary>
+        /// <param name="orgId">specifies the organization ID of the resource</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of ScraperTargets</returns>
+        Task<List<ScraperTargetResponse>> FindScraperTargetsByOrgIdAsync(string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all members of a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetResponse">ScraperTarget of the members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all members of a ScraperTarget</returns>
+        Task<List<ResourceMember>> GetMembersAsync(ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all members of a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetId">ID of ScraperTarget to get members</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all members of a ScraperTarget</returns>
+        Task<List<ResourceMember>> GetMembersAsync(string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a ScraperTarget member.
+        /// </summary>
+        /// <param name="member">the member of a scraperTarget</param>
+        /// <param name="scraperTargetResponse">the ScraperTarget of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceMember> AddMemberAsync(User member, ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a ScraperTarget member.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="scraperTargetId">the ID of a scraperTarget</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceMember> AddMemberAsync(string memberId, string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from a ScraperTarget.
+        /// </summary>
+        /// <param name="member">the member of a ScraperTarget</param>
+        /// <param name="scraperTargetResponse">the ScraperTarget of a member</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>async task</returns>
+        Task DeleteMemberAsync(User member, ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from a ScraperTarget.
+        /// </summary>
+        /// <param name="memberId">the ID of a member</param>
+        /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>async task</returns>
+        Task DeleteMemberAsync(string memberId, string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetResponse">ScraperTarget of the owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all owners of a ScraperTarget</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetId">ID of a ScraperTarget to get owners</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all owners of a scraperTarget</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a ScraperTarget owner.
+        /// </summary>
+        /// <param name="owner">the owner of a ScraperTarget</param>
+        /// <param name="scraperTargetResponse">the ScraperTarget of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceOwner> AddOwnerAsync(User owner, ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a ScraperTarget owner.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>created mapping</returns>
+        Task<ResourceOwner> AddOwnerAsync(string ownerId, string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a owner from a ScraperTarget.
+        /// </summary>
+        /// <param name="owner">the owner of a scraperTarget</param>
+        /// <param name="scraperTargetResponse">the ScraperTarget of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>async task</returns>
+        Task DeleteOwnerAsync(User owner, ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a owner from a ScraperTarget.
+        /// </summary>
+        /// <param name="ownerId">the ID of a owner</param>
+        /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>async task</returns>
+        Task DeleteOwnerAsync(string ownerId, string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels of a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetResponse">a ScraperTarget of the labels</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all labels of a ScraperTarget</returns>
+        Task<List<Label>> GetLabelsAsync(ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels of a ScraperTarget.
+        /// </summary>
+        /// <param name="scraperTargetId">ID of a ScraperTarget to get labels</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the List all labels of a ScraperTarget</returns>
+        Task<List<Label>> GetLabelsAsync(string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a ScraperTarget label.
+        /// </summary>
+        /// <param name="label">the label of a ScraperTarget</param>
+        /// <param name="scraperTargetResponse">a ScraperTarget of a label</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>added label</returns>
+        Task<Label> AddLabelAsync(Label label, ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a ScraperTarget label.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>added label</returns>
+        Task<Label> AddLabelAsync(string labelId, string scraperTargetId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a label from a ScraperTarget.
+        /// </summary>
+        /// <param name="label">the label of a ScraperTarget</param>
+        /// <param name="scraperTargetResponse">a ScraperTarget of a owner</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(Label label, ScraperTargetResponse scraperTargetResponse,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a label from a ScraperTarget.
+        /// </summary>
+        /// <param name="labelId">the ID of a label</param>
+        /// <param name="scraperTargetId">the ID of a ScraperTarget</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(string labelId, string scraperTargetId,
+            CancellationToken cancellationToken = default);
+    }
+
+    public class ScraperTargetsApi : IScraperTargetsApi
     {
         private readonly ScraperTargetsService _service;
 

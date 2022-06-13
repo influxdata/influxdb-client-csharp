@@ -9,10 +9,390 @@ using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
+    public interface ITelegrafsApi
+    {
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="org">The organization that owns this config</param>
+        /// <param name="plugins">The telegraf plugins config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Telegraf config created</returns>
+        Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+            List<TelegrafPlugin> plugins, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="org">The organization that owns this config</param>
+        /// <param name="agentConfiguration">The telegraf agent config</param>
+        /// <param name="plugins">The telegraf plugins config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Telegraf config created</returns>
+        Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+            Dictionary<string, object> agentConfiguration, List<TelegrafPlugin> plugins,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="orgId">The organization that owns this config</param>
+        /// <param name="plugins">The telegraf plugins config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Telegraf config created</returns>
+        Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
+            List<TelegrafPlugin> plugins, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="orgId">The organization that owns this config</param>
+        /// <param name="agentConfiguration">The telegraf agent config</param>
+        /// <param name="plugins">The telegraf plugins config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Telegraf config created</returns>
+        Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
+            Dictionary<string, object> agentConfiguration, List<TelegrafPlugin> plugins,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="org">The organization that owns this config</param>
+        /// <param name="config">ConfigTOML contains the raw toml config</param>
+        /// <param name="metadata">Metadata for the config</param>
+        /// <param name="plugins">Plugins to use.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Telegraf config created</returns>
+        Task<Telegraf> CreateTelegrafAsync(string name, string description, Organization org,
+            string config, TelegrafRequestMetadata metadata, List<TelegrafPluginRequestPlugins> plugins = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="name">Telegraf Configuration Name</param>
+        /// <param name="description">Telegraf Configuration Description</param>
+        /// <param name="orgId">The organization that owns this config</param>
+        /// <param name="config">ConfigTOML contains the raw toml config</param>
+        /// <param name="metadata">Metadata for the config</param>
+        /// <param name="plugins">Plugins to use.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Telegraf config created</returns>
+        Task<Telegraf> CreateTelegrafAsync(string name, string description, string orgId,
+            string config, TelegrafRequestMetadata metadata, List<TelegrafPluginRequestPlugins> plugins = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create a telegraf config.
+        /// </summary>
+        /// <param name="telegrafRequest">Telegraf Configuration to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Telegraf config created</returns>
+        Task<Telegraf> CreateTelegrafAsync(TelegrafPluginRequest telegrafRequest,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Created default Telegraf Agent configuration.
+        /// <example>
+        /// [agent]
+        ///    interval = "10s"
+        ///    round_interval = true
+        ///    metric_batch_size = 1000
+        ///    metric_buffer_limit = 10000
+        ///    collection_jitter = "0s"
+        ///    flush_jitter = "0s"
+        ///    precision = ""
+        ///    omit_hostname = false
+        /// </example>
+        /// </summary>
+        /// <returns>default configuration</returns>
+        Dictionary<string, object> CreateAgentConfiguration();
+
+        /// <summary>
+        /// Update a telegraf config.
+        /// </summary>
+        /// <param name="telegraf">telegraf config update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>An updated telegraf</returns>
+        Task<Telegraf> UpdateTelegrafAsync(Telegraf telegraf, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a telegraf config.
+        /// </summary>
+        /// <param name="telegrafId">ID of telegraf config</param>
+        /// <param name="telegrafRequest">telegraf config update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>An updated telegraf</returns>
+        Task<Telegraf> UpdateTelegrafAsync(string telegrafId, TelegrafPluginRequest telegrafRequest,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a telegraf config.
+        /// </summary>
+        /// <param name="telegraf">telegraf config to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteTelegrafAsync(Telegraf telegraf, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a telegraf config.
+        /// </summary>
+        /// <param name="telegrafId">ID of telegraf config to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteTelegrafAsync(string telegrafId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a telegraf config.
+        /// </summary>
+        /// <param name="clonedName">name of cloned telegraf config</param>
+        /// <param name="telegrafId">ID of telegraf config to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned telegraf config</returns>
+        Task<Telegraf> CloneTelegrafAsync(string clonedName, string telegrafId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone a telegraf config.
+        /// </summary>
+        /// <param name="clonedName">name of cloned telegraf config</param>
+        /// <param name="telegraf">telegraf config to clone></param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned telegraf config</returns>
+        Task<Telegraf> CloneTelegrafAsync(string clonedName, Telegraf telegraf,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a telegraf config.
+        /// </summary>
+        /// <param name="telegrafId">ID of telegraf config to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>telegraf config details</returns>
+        Task<Telegraf> FindTelegrafByIdAsync(string telegrafId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns a list of telegraf configs.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of telegraf configs</returns>
+        Task<List<Telegraf>> FindTelegrafsAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns a list of telegraf configs for specified organization.
+        /// </summary>
+        /// <param name="organization">specifies the organization of the telegraf configs</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of telegraf configs</returns>
+        Task<List<Telegraf>> FindTelegrafsByOrgAsync(Organization organization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns a list of telegraf configs for specified organization.
+        /// </summary>
+        /// <param name="orgId">specifies the organization of the telegraf configs</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of telegraf configs</returns>
+        Task<List<Telegraf>> FindTelegrafsByOrgIdAsync(string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a telegraf config in TOML.
+        /// </summary>
+        /// <param name="telegraf">telegraf config to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>telegraf config details in TOML format</returns>
+        Task<string> GetTOMLAsync(Telegraf telegraf, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve a telegraf config in TOML.
+        /// </summary>
+        /// <param name="telegrafId">ID of telegraf config to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>telegraf config details in TOML format</returns>
+        Task<string> GetTOMLAsync(string telegrafId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all users with member privileges for a telegraf config.
+        /// </summary>
+        /// <param name="telegraf">the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of telegraf config members</returns>
+        Task<List<ResourceMember>> GetMembersAsync(Telegraf telegraf,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all users with member privileges for a telegraf config.
+        /// </summary>
+        /// <param name="telegrafId">ID of the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of telegraf config members</returns>
+        Task<List<ResourceMember>> GetMembersAsync(string telegrafId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add telegraf config member.
+        /// </summary>
+        /// <param name="member">user to add as member</param>
+        /// <param name="telegraf">the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>member added to telegraf</returns>
+        Task<ResourceMember> AddMemberAsync(User member, Telegraf telegraf,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add telegraf config member.
+        /// </summary>
+        /// <param name="memberId">user ID to add as member</param>
+        /// <param name="telegrafId">ID of the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>member added to telegraf</returns>
+        Task<ResourceMember> AddMemberAsync(string memberId, string telegrafId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from a telegraf config.
+        /// </summary>
+        /// <param name="member">member to remove</param>
+        /// <param name="telegraf">the telegraf</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>member removed</returns>
+        Task DeleteMemberAsync(User member, Telegraf telegraf, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes a member from a telegraf config.
+        /// </summary>
+        /// <param name="memberId">ID of member to remove</param>
+        /// <param name="telegrafId">ID of the telegraf</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>member removed</returns>
+        Task DeleteMemberAsync(string memberId, string telegrafId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of a telegraf config.
+        /// </summary>
+        /// <param name="telegraf">the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of telegraf config owners</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(Telegraf telegraf,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all owners of a telegraf config.
+        /// </summary>
+        /// <param name="telegrafId">ID of the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of telegraf config owners</returns>
+        Task<List<ResourceOwner>> GetOwnersAsync(string telegrafId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add telegraf config owner.
+        /// </summary>
+        /// <param name="owner">user to add as owner</param>
+        /// <param name="telegraf">the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>telegraf config owner added</returns>
+        Task<ResourceOwner> AddOwnerAsync(User owner, Telegraf telegraf,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add telegraf config owner.
+        /// </summary>
+        /// <param name="ownerId">ID of user to add as owner</param>
+        /// <param name="telegrafId"> ID of the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>telegraf config owner added</returns>
+        Task<ResourceOwner> AddOwnerAsync(string ownerId, string telegrafId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes an owner from a telegraf config.
+        /// </summary>
+        /// <param name="owner">owner to remove</param>
+        /// <param name="telegraf">the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>owner removed</returns>
+        Task DeleteOwnerAsync(User owner, Telegraf telegraf, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes an owner from a telegraf config.
+        /// </summary>
+        /// <param name="ownerId">ID of owner to remove</param>
+        /// <param name="telegrafId">ID of the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>owner removed</returns>
+        Task DeleteOwnerAsync(string ownerId, string telegrafId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels for a telegraf config.
+        /// </summary>
+        /// <param name="telegraf">the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of all labels for a telegraf config</returns>
+        Task<List<Label>> GetLabelsAsync(Telegraf telegraf, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels for a telegraf config.
+        /// </summary>
+        /// <param name="telegrafId">ID of the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>a list of all labels for a telegraf config</returns>
+        Task<List<Label>> GetLabelsAsync(string telegrafId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a label to a telegraf config.
+        /// </summary>
+        /// <param name="label">label to add</param>
+        /// <param name="telegraf">the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>added label</returns>
+        Task<Label> AddLabelAsync(Label label, Telegraf telegraf, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a label to a telegraf config.
+        /// </summary>
+        /// <param name="labelId">ID of label to add</param>
+        /// <param name="telegrafId">ID of the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>added label</returns>
+        Task<Label> AddLabelAsync(string labelId, string telegrafId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a label from a telegraf config.
+        /// </summary>
+        /// <param name="label">label to delete</param>
+        /// <param name="telegraf">the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(Label label, Telegraf telegraf, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a label from a telegraf config.
+        /// </summary>
+        /// <param name="labelId">ID of label to delete</param>
+        /// <param name="telegrafId">ID of the telegraf config</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>delete has been accepted</returns>
+        Task DeleteLabelAsync(string labelId, string telegrafId, CancellationToken cancellationToken = default);
+    }
+
     /// <summary>
     /// The client of the InfluxDB 2.x that implement Telegrafs HTTP API endpoint.
     /// </summary>
-    public class TelegrafsApi
+    public class TelegrafsApi : ITelegrafsApi
     {
         private readonly TelegrafsService _service;
 

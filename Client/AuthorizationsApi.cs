@@ -9,7 +9,134 @@ using Task = System.Threading.Tasks.Task;
 
 namespace InfluxDB.Client
 {
-    public class AuthorizationsApi
+    public interface IAuthorizationsApi
+    {
+        /// <summary>
+        /// Create an authorization with defined permissions.
+        /// </summary>
+        /// <param name="organization">the owner of the authorization</param>
+        /// <param name="permissions">the permissions for the authorization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the created authorization</returns>
+        Task<Authorization> CreateAuthorizationAsync(Organization organization, List<Permission> permissions,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create an authorization with defined permissions.
+        /// </summary>
+        /// <param name="orgId">the owner id of the authorization</param>
+        /// <param name="permissions">the permissions for the authorization</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the created authorization</returns>
+        Task<Authorization> CreateAuthorizationAsync(string orgId, List<Permission> permissions,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create an authorization with defined permissions.
+        /// </summary>
+        /// <param name="authorization">authorization to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the created authorization</returns>
+        Task<Authorization> CreateAuthorizationAsync(Authorization authorization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Create an authorization with defined permissions.
+        /// </summary>
+        /// <param name="authorization">authorization to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the created authorization</returns>
+        Task<Authorization> CreateAuthorizationAsync(AuthorizationPostRequest authorization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Updates the status of the authorization. Useful for setting an authorization to inactive or active.
+        /// </summary>
+        /// <param name="authorization">the authorization with updated status</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>the updated authorization</returns>
+        Task<Authorization> UpdateAuthorizationAsync(Authorization authorization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete an authorization.
+        /// </summary>
+        /// <param name="authorization">authorization to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>authorization deleted</returns>
+        Task DeleteAuthorizationAsync(Authorization authorization, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete an authorization.
+        /// </summary>
+        /// <param name="authorizationId">ID of authorization to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>authorization deleted</returns>
+        Task DeleteAuthorizationAsync(string authorizationId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone an authorization.
+        /// </summary>
+        /// <param name="authorizationId">ID of authorization to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned authorization</returns>
+        Task<Authorization> CloneAuthorizationAsync(string authorizationId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone an authorization.
+        /// </summary>
+        /// <param name="authorization">authorization to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned authorization</returns>
+        Task<Authorization> CloneAuthorizationAsync(Authorization authorization,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve an authorization.
+        /// </summary>
+        /// <param name="authorizationId">ID of authorization to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>authorization details</returns>
+        Task<Authorization> FindAuthorizationByIdAsync(string authorizationId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all authorizations.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>List all authorizations.</returns>
+        Task<List<Authorization>> FindAuthorizationsAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all authorizations belonging to specified user.
+        /// </summary>
+        /// <param name="user">user</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of authorizations</returns>
+        Task<List<Authorization>> FindAuthorizationsByUserAsync(User user,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all authorizations belonging to specified user.
+        /// </summary>
+        /// <param name="userId">ID of user</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of authorizations</returns>
+        Task<List<Authorization>> FindAuthorizationsByUserIdAsync(string userId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all authorizations belonging to specified user.
+        /// </summary>
+        /// <param name="userName">Name of User</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of authorizations</returns>
+        Task<List<Authorization>> FindAuthorizationsByUserNameAsync(string userName,
+            CancellationToken cancellationToken = default);
+    }
+
+    public class AuthorizationsApi : IAuthorizationsApi
     {
         private readonly AuthorizationsService _service;
 

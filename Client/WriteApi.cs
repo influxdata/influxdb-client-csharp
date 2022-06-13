@@ -20,7 +20,105 @@ using RestSharp;
 
 namespace InfluxDB.Client
 {
-    public class WriteApi : IDisposable
+    public interface IWriteApi : IDisposable
+    {
+        /// <summary>
+        /// Write Line Protocol record into specified bucket.
+        /// </summary>
+        /// <param name="record">
+        ///     specifies the record in InfluxDB Line Protocol.
+        ///     The <see cref="record" /> is considered as one batch unit.
+        /// </param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        void WriteRecord(string record, WritePrecision precision = WritePrecision.Ns, string bucket = null,
+            string org = null);
+
+        /// <summary>
+        /// Write Line Protocol records into specified bucket.
+        /// </summary>
+        /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        void WriteRecords(List<string> records, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null);
+
+        /// <summary>
+        /// Write Line Protocol records into specified bucket.
+        /// </summary>
+        /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        void WriteRecords(string[] records, WritePrecision precision = WritePrecision.Ns, string bucket = null,
+            string org = null);
+
+        /// <summary>
+        /// Write a Data point into specified bucket.
+        /// </summary>
+        /// <param name="point">specifies the Data point to write into bucket</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        void WritePoint(PointData point, string bucket = null, string org = null);
+
+        /// <summary>
+        /// Write Data points into specified bucket.
+        /// </summary>
+        /// <param name="points">specifies the Data points to write into bucket</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        void WritePoints(List<PointData> points, string bucket = null, string org = null);
+
+        /// <summary>
+        /// Write Data points into specified bucket.
+        /// </summary>
+        /// <param name="points">specifies the Data points to write into bucket</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        void WritePoints(PointData[] points, string bucket = null, string org = null);
+
+        /// <summary>
+        /// Write a Measurement into specified bucket.
+        /// </summary>
+        /// <param name="measurement">specifies the Measurement to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        void WriteMeasurement<TM>(TM measurement, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null);
+
+        /// <summary>
+        /// Write Measurements into specified bucket.
+        /// </summary>
+        /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        void WriteMeasurements<TM>(List<TM> measurements, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null);
+
+        /// <summary>
+        /// Write Measurements into specified bucket.
+        /// </summary>
+        /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        void WriteMeasurements<TM>(TM[] measurements, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null);
+
+        /// <summary>
+        /// Forces the client to flush all pending writes from the buffer to the InfluxDB via HTTP.
+        /// </summary>
+        void Flush();
+    }
+
+    public class WriteApi : IWriteApi
     {
         private readonly Subject<IObservable<BatchWriteData>> _flush = new Subject<IObservable<BatchWriteData>>();
 

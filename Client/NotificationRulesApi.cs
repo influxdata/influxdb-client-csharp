@@ -9,7 +9,196 @@ using InfluxDB.Client.Domain;
 
 namespace InfluxDB.Client
 {
-    public class NotificationRulesApi
+    public interface INotificationRulesApi
+    {
+        /// <summary>
+        /// Add a Slack notification rule.
+        /// </summary>
+        /// <param name="name">Human-readable name describing the notification rule.</param>
+        /// <param name="every">The notification repetition interval.</param>
+        /// <param name="messageTemplate">The template used to generate notification.</param>
+        /// <param name="status">Status rule the notification rule attempts to match.</param>
+        /// <param name="endpoint">The endpoint to use for notification.</param>
+        /// <param name="orgId">The ID of the organization that owns this notification rule.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification rule created</returns>
+        Task<SlackNotificationRule> CreateSlackRuleAsync(string name, string every, string messageTemplate,
+            RuleStatusLevel status, SlackNotificationEndpoint endpoint, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a Slack notification rule.
+        /// </summary>
+        /// <param name="name">Human-readable name describing the notification rule.</param>
+        /// <param name="every">The notification repetition interval.</param>
+        /// <param name="messageTemplate">The template used to generate notification.</param>
+        /// <param name="status">Status rule the notification rule attempts to match.</param>
+        /// <param name="tagRules">List of tag rules the notification rule attempts to match.</param>
+        /// <param name="endpoint">The endpoint to use for notification.</param>
+        /// <param name="orgId">The ID of the organization that owns this notification rule.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification rule created</returns>
+        Task<SlackNotificationRule> CreateSlackRuleAsync(string name, string every, string messageTemplate,
+            RuleStatusLevel status, List<TagRule> tagRules, SlackNotificationEndpoint endpoint, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a PagerDuty notification rule. 
+        /// </summary>
+        /// <param name="name">Human-readable name describing the notification rule.</param>
+        /// <param name="every">The notification repetition interval.</param>
+        /// <param name="messageTemplate">The template used to generate notification.</param>
+        /// <param name="status">Status rule the notification rule attempts to match.</param>
+        /// <param name="tagRules">List of tag rules the notification rule attempts to match.</param>
+        /// <param name="endpoint">The endpoint to use for notification.</param>
+        /// <param name="orgId">The ID of the organization that owns this notification rule</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification rule created</returns>
+        Task<PagerDutyNotificationRule> CreatePagerDutyRuleAsync(string name, string every,
+            string messageTemplate, RuleStatusLevel status, List<TagRule> tagRules,
+            PagerDutyNotificationEndpoint endpoint, string orgId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a HTTP notification rule.
+        /// </summary>
+        /// <param name="name">Human-readable name describing the notification rule.</param>
+        /// <param name="every">The notification repetition interval.</param>
+        /// <param name="status">Status rule the notification rule attempts to match.</param>
+        /// <param name="tagRules">List of tag rules the notification rule attempts to match.</param>
+        /// <param name="endpoint">The endpoint to use for notification.</param>
+        /// <param name="orgId">The ID of the organization that owns this notification rule.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification rule created</returns>
+        Task<HTTPNotificationRule> CreateHttpRuleAsync(string name, string every, RuleStatusLevel status,
+            List<TagRule> tagRules, HTTPNotificationEndpoint endpoint, string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a notification rule.
+        /// </summary>
+        /// <param name="rule">Notification rule to create</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Notification rule created</returns>
+        Task<NotificationRule> CreateRuleAsync(NotificationRule rule,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a notification rule.
+        /// </summary>
+        /// <param name="rule">Notification rule update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>An updated notification rule</returns>
+        Task<NotificationRule> UpdateNotificationRuleAsync(NotificationRule rule,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update a notification rule.
+        /// </summary>
+        /// <param name="ruleId">The notification rule ID.</param>
+        /// <param name="update">Notification rule update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>An updated notification rule</returns>
+        Task<NotificationRule> UpdateNotificationRuleAsync(string ruleId, NotificationRuleUpdate update,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a notification rule.
+        /// </summary>
+        /// <param name="rule">The notification rule</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteNotificationRuleAsync(NotificationRule rule, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete a notification rule.
+        /// </summary>
+        /// <param name="ruleId">The notification rule ID</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task DeleteNotificationRuleAsync(string ruleId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get a notification rule.
+        /// </summary>
+        /// <param name="ruleId">The notification rule ID</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The notification rule requested</returns>
+        Task<NotificationRule> FindNotificationRuleByIdAsync(string ruleId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get notification rules.
+        /// </summary>
+        /// <param name="orgId">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of notification rules</returns>
+        Task<List<NotificationRule>> FindNotificationRulesAsync(string orgId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all notification rules.
+        /// </summary>
+        /// <param name="orgId">Only show notification rules that belong to a specific organization ID.</param>
+        /// <param name="findOptions">find options</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns></returns>
+        Task<NotificationRules> FindNotificationRulesAsync(string orgId, FindOptions findOptions,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels for a notification rule.
+        /// </summary>
+        /// <param name="rule">The notification rule.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of all labels for a notification rule</returns>
+        Task<List<Label>> GetLabelsAsync(NotificationRule rule, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all labels for a notification rule
+        /// </summary>
+        /// <param name="ruleId"> The notification rule ID.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>A list of all labels for a notification rule</returns>
+        Task<List<Label>> GetLabelsAsync(string ruleId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a label to a notification rule.
+        /// </summary>
+        /// <param name="label">Label to add</param>
+        /// <param name="rule">The notification rule.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The label was added to the notification rule</returns>
+        Task<Label> AddLabelAsync(Label label, NotificationRule rule,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Add a label to a notification rule.
+        /// </summary>
+        /// <param name="labelId">Label to add</param>
+        /// <param name="ruleId">The notification rule ID.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>The label was added to the notification rule</returns>
+        Task<Label> AddLabelAsync(string labelId, string ruleId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete label from a notification rule.
+        /// </summary>
+        /// <param name="label">The label to delete.</param>
+        /// <param name="rule">The notification rule.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        Task DeleteLabelAsync(Label label, NotificationRule rule, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete label from a notification rule.
+        /// </summary>
+        /// <param name="labelId">The ID of the label to delete.</param>
+        /// <param name="ruleId">The notification rule ID.</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        Task DeleteLabelAsync(string labelId, string ruleId, CancellationToken cancellationToken = default);
+    }
+
+    public class NotificationRulesApi : INotificationRulesApi
     {
         private readonly NotificationRulesService _service;
 

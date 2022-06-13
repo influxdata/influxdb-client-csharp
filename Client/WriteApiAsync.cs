@@ -13,7 +13,148 @@ using RestSharp;
 
 namespace InfluxDB.Client
 {
-    public class WriteApiAsync
+    public interface IWriteApiAsync
+    {
+        /// <summary>
+        /// Write Line Protocol record into specified bucket.
+        /// </summary>
+        /// <param name="record">specifies the record in InfluxDB Line Protocol. The <see cref="record" /> is considered as one batch unit. </param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        Task WriteRecordAsync(string record, WritePrecision precision = WritePrecision.Ns, string bucket = null,
+            string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write Line Protocol records into specified bucket.
+        /// </summary>
+        /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        Task WriteRecordsAsync(List<string> records, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write Line Protocol records into specified bucket.
+        /// </summary>
+        /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        Task WriteRecordsAsync(string[] records, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write Line Protocols records into specified bucket.
+        /// </summary>
+        /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        /// <returns>Write Task with IRestResponse</returns>
+        Task<RestResponse> WriteRecordsAsyncWithIRestResponse(IEnumerable<string> records,
+            WritePrecision precision = WritePrecision.Ns, string bucket = null, string org = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write a Data point into specified bucket.
+        /// </summary>
+        /// <param name="point">specifies the Data point to write into bucket</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        Task WritePointAsync(PointData point, string bucket = null, string org = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write Data points into specified bucket.
+        /// </summary>
+        /// <param name="points">specifies the Data points to write into bucket</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        Task WritePointsAsync(List<PointData> points, string bucket = null, string org = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write Data points into specified bucket.
+        /// </summary>
+        /// <param name="points">specifies the Data points to write into bucket</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        Task WritePointsAsync(PointData[] points, string bucket = null, string org = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write Data points into specified bucket.
+        /// </summary>
+        /// <param name="points">specifies the Data points to write into bucket</param>
+        /// <param name="bucket">specifies the destination bucket for writes.
+        /// If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />. </param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        /// <returns>Write Tasks with IRestResponses.</returns>
+        Task<RestResponse[]> WritePointsAsyncWithIRestResponse(IEnumerable<PointData> points,
+            string bucket = null, string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write a Measurement into specified bucket.
+        /// </summary>
+        /// <param name="measurement">specifies the Measurement to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        Task WriteMeasurementAsync<TM>(TM measurement, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write Measurements into specified bucket.
+        /// </summary>
+        /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        Task WriteMeasurementsAsync<TM>(List<TM> measurements, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write Measurements into specified bucket.
+        /// </summary>
+        /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        Task WriteMeasurementsAsync<TM>(TM[] measurements, WritePrecision precision = WritePrecision.Ns,
+            string bucket = null, string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Write Measurements into specified bucket.
+        /// </summary>
+        /// <param name="measurements">specifies Measurements to write into bucket</param>
+        /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
+        /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
+        /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
+        /// <typeparam name="TM">measurement type</typeparam>
+        /// <returns>Write Task with IRestResponse</returns>
+        Task<RestResponse> WriteMeasurementsAsyncWithIRestResponse<TM>(IEnumerable<TM> measurements,
+            WritePrecision precision = WritePrecision.Ns, string bucket = null, string org = null,
+            CancellationToken cancellationToken = default);
+    }
+
+    public class WriteApiAsync : IWriteApiAsync
     {
         private readonly InfluxDBClient _influxDbClient;
         private readonly InfluxDBClientOptions _options;

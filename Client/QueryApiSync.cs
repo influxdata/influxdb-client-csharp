@@ -12,10 +12,71 @@ using RestSharp;
 
 namespace InfluxDB.Client
 {
+    public interface IQueryApiSync
+    {
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
+        /// to list of object with given type.
+        ///
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+        /// <typeparam name="T">the type of measurement</typeparam>
+        /// <returns>Measurements which are matched the query</returns>
+        List<T> QuerySync<T>(string query, string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
+        /// to list of object with given type.
+        ///
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+        /// <typeparam name="T">the type of measurement</typeparam>
+        /// <returns>Measurements which are matched the query</returns>
+        List<T> QuerySync<T>(Query query, string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
+        /// to <see cref="FluxTable"/>s.
+        ///
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+        /// <returns>FluxTables that are matched the query</returns>
+        List<FluxTable> QuerySync(string query, string org = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Executes the Flux query against the InfluxDB 2.x and synchronously map whole response
+        /// to <see cref="FluxTable"/>s.
+        ///
+        /// <para>
+        /// NOTE: This method is not intended for large query results.
+        /// </para>
+        /// </summary>
+        /// <param name="query">the flux query to execute</param>
+        /// <param name="org">specifies the source organization. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
+        /// <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+        /// <returns>FluxTables that are matched the query</returns>
+        List<FluxTable> QuerySync(Query query, string org = null, CancellationToken cancellationToken = default);
+    }
+
     /// <summary>
     /// The synchronous version of QueryApi.
     /// </summary>
-    public class QueryApiSync : AbstractQueryClient
+    public class QueryApiSync : AbstractQueryClient, IQueryApiSync
     {
         private readonly InfluxDBClientOptions _options;
         private readonly QueryService _service;

@@ -9,7 +9,129 @@ using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client
 {
-    public class UsersApi
+    public interface IUsersApi
+    {
+        /// <summary>
+        /// Creates a new user and sets <see cref="User.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="name">name of the user</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Created user</returns>
+        Task<User> CreateUserAsync(string name, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Creates a new user and sets <see cref="User.Id" /> with the new identifier.
+        /// </summary>
+        /// <param name="user">name of the user</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Created user</returns>
+        Task<User> CreateUserAsync(User user, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update an user.
+        /// </summary>
+        /// <param name="user">user update to apply</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>user updated</returns>
+        Task<User> UpdateUserAsync(User user, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update password to an user.
+        /// </summary>
+        /// <param name="user">user to update password</param>
+        /// <param name="oldPassword">old password</param>
+        /// <param name="newPassword">new password</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>user updated</returns>
+        Task UpdateUserPasswordAsync(User user, string oldPassword, string newPassword,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update password to an user.
+        /// </summary>
+        /// <param name="userId">ID of user to update password</param>
+        /// <param name="oldPassword">old password</param>
+        /// <param name="newPassword">new password</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>user updated</returns>
+        Task UpdateUserPasswordAsync(string userId, string oldPassword, string newPassword,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete an user.
+        /// </summary>
+        /// <param name="userId">ID of user to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>async task</returns>
+        Task DeleteUserAsync(string userId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete an user.
+        /// </summary>
+        /// <param name="user">user to delete</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>async task</returns>
+        Task DeleteUserAsync(User user, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone an user.
+        /// </summary>
+        /// <param name="clonedName">name of cloned user</param>
+        /// <param name="userId">ID of user to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned user</returns>
+        Task<User> CloneUserAsync(string clonedName, string userId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Clone an user.
+        /// </summary>
+        /// <param name="clonedName">name of cloned user</param>
+        /// <param name="user">user to clone</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>cloned user</returns>
+        Task<User> CloneUserAsync(string clonedName, User user, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Returns currently authenticated user.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>currently authenticated user</returns>
+        Task<User> MeAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Update the password to a currently authenticated user.
+        /// </summary>
+        /// <param name="oldPassword">old password</param>
+        /// <param name="newPassword">new password</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>currently authenticated user</returns>
+        Task MeUpdatePasswordAsync(string oldPassword, string newPassword,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieve an user.
+        /// </summary>
+        /// <param name="userId">ID of user to get</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>User Details</returns>
+        Task<User> FindUserByIdAsync(string userId, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List all users.
+        /// </summary>
+        /// <param name="offset"> (optional)</param>
+        /// <param name="limit"> (optional, default to 20)</param>
+        /// <param name="after">The last resource ID from which to seek from (but not including). This is to be used instead of &#x60;offset&#x60;. (optional)</param>
+        /// <param name="name"> (optional)</param>
+        /// <param name="id"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>List all users</returns>
+        Task<List<User>> FindUsersAsync(int? offset = null, int? limit = null, string after = null,
+            string name = null, string id = null, CancellationToken cancellationToken = default);
+    }
+
+    public class UsersApi : IUsersApi
     {
         private readonly UsersService _service;
 
