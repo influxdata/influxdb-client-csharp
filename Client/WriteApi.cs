@@ -188,7 +188,7 @@ namespace InfluxDB.Client
                 //
                 // Create Write Point = bucket, org, ... + data
                 //
-                .Select(grouped =>
+                .SelectMany(grouped =>
                 {
                     var aggregate = grouped
                         .Aggregate(StringBuilderPool.Get(), (builder, batchWrite) =>
@@ -220,20 +220,15 @@ namespace InfluxDB.Client
 
             if (writeOptions.JitterInterval > 0)
             {
+                //
+                // Jitter
+                //
                 batches = batches
-                    //
-                    // Jitter
-                    //
-                    .Select(source =>
-                    {
-                        return source.Delay(_ =>
-                            Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
-                                writeOptions.WriteScheduler));
-                    });
+                    .Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
+                        writeOptions.WriteScheduler));
             }
 
             var unused = batches
-                .Concat()
                 //
                 // Map to Async request
                 //
