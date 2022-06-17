@@ -534,13 +534,13 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual("my-bucket-2",
                 MockServer.LogEntries.ToArray()[1].RequestMessage.Query["bucket"].ToString());
         }
-        
+
         [Test]
         public void WritesToDifferentBucketsJitter()
         {
             _writeApi.Dispose();
             _writeApi = _influxDbClient.GetWriteApi(WriteOptions.CreateNew().JitterInterval(1_000).Build());
-            
+
             var listener = new EventListener(_writeApi);
 
             MockServer

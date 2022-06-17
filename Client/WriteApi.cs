@@ -240,7 +240,8 @@ namespace InfluxDB.Client
                             if (writeOptions.JitterInterval > 0)
                             {
                                 observable = observable
-                                    .Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
+                                    .Delay(_ => Observable.Timer(
+                                        TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
                                         writeOptions.WriteScheduler));
                             }
 
