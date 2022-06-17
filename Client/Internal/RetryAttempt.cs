@@ -114,7 +114,7 @@ namespace InfluxDB.Client.Internal
             // from header
             if (Error is HttpException httpException && httpException.RetryAfter.HasValue)
             {
-                return httpException.RetryAfter.Value * 1000 + JitterDelay(_writeOptions);
+                return httpException.RetryAfter.Value * 1000;
             }
 
             // from configuration

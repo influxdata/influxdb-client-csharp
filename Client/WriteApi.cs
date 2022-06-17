@@ -218,16 +218,6 @@ namespace InfluxDB.Client
                         .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
                 });
 
-            if (writeOptions.JitterInterval > 0)
-            {
-                //
-                // Jitter
-                //
-                batches = batches
-                    .Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
-                        writeOptions.WriteScheduler));
-            }
-
             var unused = batches
                 //
                 // Map to Async request
@@ -241,10 +231,21 @@ namespace InfluxDB.Client
 
                     return Observable
                         .Defer(() =>
-                            service.PostWriteAsyncWithIRestResponse(org, bucket,
+                        {
+                            var observable = service.PostWriteAsyncWithIRestResponse(org, bucket,
                                     Encoding.UTF8.GetBytes(lineProtocol), null,
                                     "identity", "text/plain; charset=utf-8", null, "application/json", null, precision)
-                                .ToObservable())
+                                .ToObservable();
+
+                            if (writeOptions.JitterInterval > 0)
+                            {
+                                observable = observable
+                                    .Delay(_ => Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
+                                        writeOptions.WriteScheduler));
+                            }
+
+                            return observable;
+                        })
                         .RetryWhen(f => f
                             .Zip(Observable.Range(1, writeOptions.MaxRetries + 1), (exception, count)
                                 => new RetryAttempt(exception, count, writeOptions))
