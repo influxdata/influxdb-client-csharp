@@ -90,16 +90,37 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public async Task BufferConsistency()
+        public async Task BatchConsistency()
         {
-            // Configuration
-            const int secondsCount = 5;
-            const int writerCount = 4;
-            var writeOptions = WriteOptions.CreateNew().FlushInterval(1_000_000).Build();
+            var options = WriteOptions.CreateNew().BatchSize(1_555).FlushInterval(1_000_000).Build();
+
+            await StressfulWriteAndValidate(1, 5, options, (sender, eventArgs) =>
+            {
+                if (eventArgs is WriteSuccessEvent successEvent)
+                {
+                    var length = successEvent.LineProtocol.Split("\n").Length;
+
+                    Trace.WriteLine($"Count: {length} {successEvent.Bucket}");
+                    Assert.AreEqual(1_555, length);
+                }
+            });
+        }
+
+        [Test]
+        public async Task MultipleBuckets()
+        {
+            await StressfulWriteAndValidate(4, 5);
+        }
+
+        private async Task StressfulWriteAndValidate(int writerCount, int secondsCount,
+            WriteOptions writeOptions = null, EventHandler eventHandler = null)
+        {
             var buckets = await CreateBuckets(writerCount);
 
             using var countdownEvent = new CountdownEvent(1);
-            using var writeApi = Client.GetWriteApi(writeOptions);
+            using var writeApi = Client
+                .GetWriteApi(writeOptions ?? WriteOptions.CreateNew().FlushInterval(1_000_000).Build());
+            writeApi.EventHandler += eventHandler;
 
             var writers = new List<Writer>();
             for (var i = 1; i <= writerCount; i++)
