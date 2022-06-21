@@ -158,9 +158,9 @@ namespace InfluxDB.Client.Test
             countdownEvent.Signal();
 
             // wait to finish
-            Trace.WriteLine("Wait to finish the writer...");
-            writeApi.Dispose();
-            Trace.WriteLine("Finished");
+            Console.WriteLine("Wait to finish the writer...");
+            writeApi.ReleaseAndClose(millis: 180_000);
+            Console.WriteLine("Finished");
 
             // check successfully written
             foreach (var writer in writers) await writer.Check(Client.GetQueryApi());
@@ -196,15 +196,15 @@ namespace InfluxDB.Client.Test
 
                 WriteApi.WritePoint(point, Bucket.Id);
 
-                if (Identifier == 1 && _time % 50_000 == 0)
+                if (Identifier == 1 && _time % 100_000 == 0)
                 {
-                    Trace.WriteLine($"Generated point: {point.ToLineProtocol()}, bucket: {Bucket.Name}");
+                    Console.WriteLine($"Generated point: {point.ToLineProtocol()}, bucket: {Bucket.Name}");
                 }
             }
 
             if (Identifier == 1)
             {
-                Trace.WriteLine($"Generated points: {_time}");
+                Console.WriteLine($"Generated points: {_time}");
             }
         }
 
@@ -213,7 +213,7 @@ namespace InfluxDB.Client.Test
             var query = $"from(bucket: \"{Bucket.Name}\") |> range(start: 0) |> count()";
             var value = (await queryApi.QueryAsync(query))[0].Records[0].GetValue();
 
-            Trace.WriteLine($"Written count [{Identifier}]: {value}");
+            Console.WriteLine($"Written count [{Identifier}]: {value}");
 
             Assert.AreEqual(value, _time);
         }
