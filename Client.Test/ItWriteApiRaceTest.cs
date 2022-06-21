@@ -139,7 +139,7 @@ namespace InfluxDB.Client.Test
 
             using var countdownEvent = new CountdownEvent(1);
             using var writeApi = Client
-                .GetWriteApi(writeOptions ?? WriteOptions.CreateNew().FlushInterval(10_000).Build());
+                .GetWriteApi(writeOptions ?? WriteOptions.CreateNew().FlushInterval(20_000).Build());
             writeApi.EventHandler += eventHandler;
 
             var writers = new List<Writer>();
