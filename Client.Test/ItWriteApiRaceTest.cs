@@ -128,7 +128,7 @@ namespace InfluxDB.Client.Test
         public async Task MultipleBucketsWithFlush()
         {
             var writeOptions = WriteOptions.CreateNew().FlushInterval(1_000).Build();
-            
+
             await StressfulWriteAndValidate(4, 5, writeOptions);
         }
 
