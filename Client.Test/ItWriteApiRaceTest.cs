@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
@@ -94,16 +95,27 @@ namespace InfluxDB.Client.Test
         {
             var options = WriteOptions.CreateNew().BatchSize(1_555).FlushInterval(1_000_000).Build();
 
+            var batches = new List<WriteSuccessEvent>();
             await StressfulWriteAndValidate(1, 5, options, (sender, eventArgs) =>
             {
                 if (eventArgs is WriteSuccessEvent successEvent)
                 {
-                    var length = successEvent.LineProtocol.Split("\n").Length;
-
-                    Trace.WriteLine($"Count: {length} {successEvent.Bucket}");
-                    Assert.AreEqual(1_555, length);
+                    batches.Add(successEvent);
                 }
             });
+
+            foreach (var batch in batches)
+            {
+                var length = batch.LineProtocol.Split("\n").Length;
+
+                Trace.WriteLine($"Count: {length} {batch.Bucket}");
+
+                // last element flush the rest
+                if (batches.Last() != batch)
+                {
+                    Assert.AreEqual(1_555, length);
+                }
+            }
         }
 
         [Test]
