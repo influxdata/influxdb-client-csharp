@@ -121,18 +121,18 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task MultipleBuckets()
         {
-            await StressfulWriteAndValidate(4, 5);
+            await StressfulWriteAndValidate();
         }
 
         [Test]
         public async Task MultipleBucketsWithFlush()
         {
-            var writeOptions = WriteOptions.CreateNew().FlushInterval(1_000).Build();
+            var writeOptions = WriteOptions.CreateNew().FlushInterval(100).Build();
 
-            await StressfulWriteAndValidate(4, 5, writeOptions);
+            await StressfulWriteAndValidate(writeOptions: writeOptions);
         }
 
-        private async Task StressfulWriteAndValidate(int writerCount, int secondsCount,
+        private async Task StressfulWriteAndValidate(int writerCount = 4, int secondsCount = 5,
             WriteOptions writeOptions = null, EventHandler eventHandler = null)
         {
             var buckets = await CreateBuckets(writerCount);
@@ -159,7 +159,7 @@ namespace InfluxDB.Client.Test
 
             // wait to finish
             Console.WriteLine("Wait to finish the writer...");
-            writeApi.ReleaseAndClose(millis: 180_000);
+            writeApi.ReleaseAndClose(180_000);
             Console.WriteLine("Finished");
 
             // check successfully written
