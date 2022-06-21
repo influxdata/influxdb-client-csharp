@@ -113,7 +113,7 @@ namespace InfluxDB.Client
             internal int MaxRetriesBuilder = DefaultMaxRetries;
             internal int MaxRetryDelayBuilder = DefaultMaxRetryDelay;
             internal int ExponentialBaseBuilder = DefaultExponentialBase;
-            internal IScheduler WriteSchedulerBuilder = NewThreadScheduler.Default;
+            internal IScheduler WriteSchedulerBuilder = ThreadPoolScheduler.Instance;
 
             /// <summary>
             /// Set the number of data point to collect in batch.
