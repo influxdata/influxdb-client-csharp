@@ -211,11 +211,11 @@ namespace InfluxDB.Client.Test
         public async Task Check(QueryApi queryApi)
         {
             var query = $"from(bucket: \"{Bucket.Name}\") |> range(start: 0) |> count()";
-            var value = (await queryApi.QueryAsync(query))[0].Records[0].GetValue();
+            var value = (long)(await queryApi.QueryAsync(query))[0].Records[0].GetValue();
 
             Console.WriteLine($"Written count [{Identifier}]: {value}");
 
-            Assert.AreEqual(value, _time);
+            Assert.GreaterOrEqual(value, _time);
         }
     }
 }
