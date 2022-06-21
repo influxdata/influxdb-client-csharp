@@ -23,6 +23,7 @@ namespace InfluxDB.Client.Core.Test
 
             if (!Trace.Listeners.Contains(ConsoleOutListener))
             {
+                Console.SetOut(TestContext.Progress);
                 Trace.Listeners.Add(ConsoleOutListener);
             }
         }
