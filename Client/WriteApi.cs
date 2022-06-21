@@ -326,6 +326,15 @@ namespace InfluxDB.Client
 
         public void Dispose()
         {
+            ReleaseAndClose();
+        }
+
+        /// <summary>
+        /// Release all resources and flush remaining data into database.
+        /// </summary>
+        /// <param name="millis">How much milliseconds wait to flush data.</param>
+        internal void ReleaseAndClose(int millis = 30000)
+        {
             _unsubscribeDisposeCommand.Dispose(); // avoid duplicate call to dispose
 
             Trace.WriteLine("Flushing batches before shutdown.");
@@ -343,7 +352,7 @@ namespace InfluxDB.Client
             _subject.Dispose();
             _flush.Dispose();
 
-            WaitToCondition(() => _disposed, 30000);
+            WaitToCondition(() => _disposed, millis);
         }
 
         public bool Disposed => _disposed;
