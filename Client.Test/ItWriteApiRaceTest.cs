@@ -215,7 +215,7 @@ namespace InfluxDB.Client.Test
 
             Console.WriteLine($"Written count [{Identifier}]: {value}");
 
-            Assert.GreaterOrEqual(value, _time);
+            Assert.GreaterOrEqual(_time, value);
         }
     }
 }
