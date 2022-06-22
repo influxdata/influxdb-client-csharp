@@ -170,8 +170,7 @@ namespace InfluxDB.Client.Core.Internal
 
                 BeforeIntercept(query);
 
-                var restResponse = RestClient.ExecuteAsync(query, Method.Post, cancellationToken).ConfigureAwait(false)
-                    .GetAwaiter().GetResult();
+                var restResponse = RestClient.ExecuteSync(query, cancellationToken);
                 if (restResponse.ErrorException != null)
                 {
                     throw restResponse.ErrorException;

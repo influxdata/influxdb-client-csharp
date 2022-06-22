@@ -28,9 +28,9 @@ namespace Client.Legacy.Test
         [Test]
         public void ProxyDefault()
         {
-            var restClient = GetRestClientOptions(_fluxClient);
+            var restClient = GetRestClient(_fluxClient).Options;
 
-            Assert.AreEqual(null, restClient?.Proxy);
+            Assert.AreEqual(null, restClient.Proxy);
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace Client.Legacy.Test
 
             var fluxClient = FluxClientFactory.Create(options);
 
-            Assert.AreEqual(webProxy, GetRestClientOptions(fluxClient).Proxy);
+            Assert.AreEqual(webProxy, GetRestClient(fluxClient).Options.Proxy);
         }
 
         [Test]
@@ -69,14 +69,6 @@ namespace Client.Legacy.Test
                 fluxClient.GetType().BaseType!.GetField("RestClient", BindingFlags.NonPublic | BindingFlags.Instance);
             var restClient = (RestClient)restClientInfo!.GetValue(fluxClient);
             return restClient;
-        }
-
-        private RestClientOptions GetRestClientOptions(FluxClient fluxClient)
-        {
-            var restClient = GetRestClient(fluxClient);
-            var restClientOptionsInfo = restClient!.GetType()
-                .GetProperty("Options", BindingFlags.NonPublic | BindingFlags.Instance);
-            return (RestClientOptions)restClientOptionsInfo!.GetValue(restClient);
         }
     }
 }

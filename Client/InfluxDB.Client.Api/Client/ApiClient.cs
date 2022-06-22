@@ -14,12 +14,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.IO;
-using System.Web;
 using System.Linq;
-using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
+using InfluxDB.Client.Core.Internal;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -173,7 +172,7 @@ namespace InfluxDB.Client.Api.Client
                 pathParams, contentType);
 
             InterceptRequest(request);
-            var response = RestClient.ExecuteAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
+            var response = RestClient.ExecuteSync(request);
             InterceptResponse(request, response);
 
             return (object)response;

@@ -3,6 +3,22 @@
 ### Features
 1. [#327](https://github.com/influxdata/influxdb-client-csharp/pull/327): Add interfaces to client's APIs
 
+### Dependencies
+1. [#326](https://github.com/influxdata/influxdb-client-csharp/pull/326): Update dependencies:
+
+#### Build:
+    - RestSharp to 108.0.1
+    - NodaTime to 3.1.0
+    - JsonSubTypes to 1.9.0
+    - Microsoft.Extensions.ObjectPool to 6.0.5
+
+#### Test:
+    - Microsoft.NET.Test.Sdk to 17.2.0
+    - NUnit to 3.13.3
+    - WireMock.Net to 1.4.43
+    - Moq to 4.18.1
+    - Tomlyn.Signed to 0.14.3
+
 ## 4.2.0 [2022-05-20]
 
 ### Features
