@@ -502,6 +502,73 @@ namespace InfluxDB.Client.Test
                 "Expecting a non-empty string for 'bucket' parameter. Please specify the bucket as a method parameter or use default configuration at 'InfluxDBClientOptions.Bucket'.",
                 ae.Message);
         }
+
+        [Test]
+        public void WritesToDifferentBuckets()
+        {
+            var listener = new EventListener(_writeApi);
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            var entryA = PointData.Measurement("myData")
+                .Tag("id", 54836.ToString())
+                .Field("valueA", 12)
+                .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
+
+            _writeApi.WritePoint(entryA, "my-bucket-1", "my-org");
+
+            var entryB = PointData.Measurement("myData")
+                .Field("valueB", 42)
+                .Timestamp(DateTime.UtcNow, WritePrecision.Ns);
+
+            _writeApi.WritePoint(entryB, "my-bucket-2", "my-org");
+
+            listener.Get<WriteSuccessEvent>();
+            listener.Get<WriteSuccessEvent>();
+
+            Assert.AreEqual(2, MockServer.LogEntries.Count());
+            Assert.AreEqual("my-bucket-1",
+                MockServer.LogEntries.ToArray()[0].RequestMessage.Query["bucket"].ToString());
+            Assert.AreEqual("my-bucket-2",
+                MockServer.LogEntries.ToArray()[1].RequestMessage.Query["bucket"].ToString());
+        }
+
+        [Test]
+        public void WritesToDifferentBucketsJitter()
+        {
+            _writeApi.Dispose();
+            _writeApi = _influxDbClient.GetWriteApi(WriteOptions.CreateNew().JitterInterval(1_000).Build());
+
+            var listener = new EventListener(_writeApi);
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            var entryA = PointData.Measurement("myData")
+                .Tag("id", 54836.ToString())
+                .Field("valueA", 12)
+                .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
+
+            _writeApi.WritePoint(entryA, "my-bucket-1", "my-org");
+
+            var entryB = PointData.Measurement("myData")
+                .Field("valueB", 42)
+                .Timestamp(DateTime.UtcNow, WritePrecision.Ns);
+
+            _writeApi.WritePoint(entryB, "my-bucket-2", "my-org");
+
+            listener.Get<WriteSuccessEvent>();
+            listener.Get<WriteSuccessEvent>();
+
+            Assert.AreEqual(2, MockServer.LogEntries.Count());
+            Assert.AreEqual("my-bucket-1",
+                MockServer.LogEntries.ToArray()[0].RequestMessage.Query["bucket"].ToString());
+            Assert.AreEqual("my-bucket-2",
+                MockServer.LogEntries.ToArray()[1].RequestMessage.Query["bucket"].ToString());
+        }
     }
 
     [Measurement("m")]

@@ -188,7 +188,7 @@ namespace InfluxDB.Client
                 //
                 // Create Write Point = bucket, org, ... + data
                 //
-                .Select(grouped =>
+                .SelectMany(grouped =>
                 {
                     var aggregate = grouped
                         .Aggregate(StringBuilderPool.Get(), (builder, batchWrite) =>
@@ -218,22 +218,7 @@ namespace InfluxDB.Client
                         .Where(batchWriteItem => !string.IsNullOrEmpty(batchWriteItem.ToLineProtocol()));
                 });
 
-            if (writeOptions.JitterInterval > 0)
-            {
-                batches = batches
-                    //
-                    // Jitter
-                    //
-                    .Select(source =>
-                    {
-                        return source.Delay(_ =>
-                            Observable.Timer(TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
-                                writeOptions.WriteScheduler));
-                    });
-            }
-
             var unused = batches
-                .Concat()
                 //
                 // Map to Async request
                 //
@@ -246,10 +231,22 @@ namespace InfluxDB.Client
 
                     return Observable
                         .Defer(() =>
-                            service.PostWriteAsyncWithIRestResponse(org, bucket,
+                        {
+                            var observable = service.PostWriteAsyncWithIRestResponse(org, bucket,
                                     Encoding.UTF8.GetBytes(lineProtocol), null,
                                     "identity", "text/plain; charset=utf-8", null, "application/json", null, precision)
-                                .ToObservable())
+                                .ToObservable();
+
+                            if (writeOptions.JitterInterval > 0)
+                            {
+                                observable = observable
+                                    .Delay(_ => Observable.Timer(
+                                        TimeSpan.FromMilliseconds(RetryAttempt.JitterDelay(writeOptions)),
+                                        writeOptions.WriteScheduler));
+                            }
+
+                            return observable;
+                        })
                         .RetryWhen(f => f
                             .Zip(Observable.Range(1, writeOptions.MaxRetries + 1), (exception, count)
                                 => new RetryAttempt(exception, count, writeOptions))
@@ -329,6 +326,15 @@ namespace InfluxDB.Client
 
         public void Dispose()
         {
+            ReleaseAndClose();
+        }
+
+        /// <summary>
+        /// Release all resources and flush remaining data into database.
+        /// </summary>
+        /// <param name="millis">How much milliseconds wait to flush data.</param>
+        internal void ReleaseAndClose(int millis = 30000)
+        {
             _unsubscribeDisposeCommand.Dispose(); // avoid duplicate call to dispose
 
             Trace.WriteLine("Flushing batches before shutdown.");
@@ -346,7 +352,7 @@ namespace InfluxDB.Client
             _subject.Dispose();
             _flush.Dispose();
 
-            WaitToCondition(() => _disposed, 30000);
+            WaitToCondition(() => _disposed, millis);
         }
 
         public bool Disposed => _disposed;

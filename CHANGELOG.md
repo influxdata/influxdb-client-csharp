@@ -3,6 +3,9 @@
 ### Features
 1. [#327](https://github.com/influxdata/influxdb-client-csharp/pull/327): Add interfaces to client's APIs
 
+### Bug Fixes
+1. [#329](https://github.com/influxdata/influxdb-client-csharp/pull/329): Writing data to multiple destination by the background writer
+
 ### Dependencies
 1. [#326](https://github.com/influxdata/influxdb-client-csharp/pull/326): Update dependencies:
 
