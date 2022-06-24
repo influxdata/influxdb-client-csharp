@@ -1,4 +1,4 @@
-## 4.3.0 [unreleased]
+## 4.3.0 [2022-06-24]
 
 ### Features
 1. [#327](https://github.com/influxdata/influxdb-client-csharp/pull/327): Add interfaces to client's APIs
