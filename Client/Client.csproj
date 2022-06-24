@@ -7,8 +7,8 @@
       <Description>The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.x.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client</AssemblyName>
-        <VersionPrefix>4.3.0</VersionPrefix>
-        <VersionSuffix></VersionSuffix>
+        <VersionPrefix>4.4.0</VersionPrefix>
+        <VersionSuffix>dev</VersionSuffix>
 
         <PackageId>InfluxDB.Client</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
