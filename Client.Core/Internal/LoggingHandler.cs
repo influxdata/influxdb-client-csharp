@@ -126,7 +126,13 @@ namespace InfluxDB.Client.Core.Internal
                 return;
             }
 
-            foreach (var emp in headers) Trace.WriteLine($"{direction} {type}: {emp.Name}={emp.Value}");
+            foreach (var emp in headers)
+            {
+                var value = string.Equals(emp.Name, "Authorization", StringComparison.OrdinalIgnoreCase)
+                    ? "***"
+                    : emp.Value;
+                Trace.WriteLine($"{direction} {type}: {emp.Name}={value}");
+            }
         }
     }
 }

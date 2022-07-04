@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -415,6 +416,30 @@ namespace InfluxDB.Client.Test
 
             var tables = mockClient.Object.GetQueryApiSync().QuerySync("from(...", "my-org");
             Assert.AreEqual(mockTables, tables);
+        }
+
+        [Test]
+        public void RedactedAuthorizationHeader()
+        {
+            _client.Dispose();
+            _client = InfluxDBClientFactory.Create(MockServerUrl, "my-token");
+
+            var writer = new StringWriter();
+            Trace.Listeners.Add(new TextWriterTraceListener(writer));
+
+            _client.SetLogLevel(LogLevel.Headers);
+
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(CreateResponse("{}"));
+
+            using (var writeApi = _client.GetWriteApi())
+            {
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "b1",
+                    "org1");
+            }
+
+            StringAssert.Contains("Header: Authorization=***", writer.ToString());
         }
     }
 }
