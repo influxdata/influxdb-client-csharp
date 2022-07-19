@@ -34,7 +34,7 @@
 
     <ItemGroup>
         <PackageReference Include="JsonSubTypes" Version="1.9.0" />
-        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.5" />
+        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.7" />
         <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
         <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
