@@ -1,0 +1,18 @@
+﻿@page "/"
+@using ExampleBlazor.Data
+
+<PageTitle>Index</PageTitle>
+
+<h1 class="h1_blue">Client<span class="h1_pink">Settings</span></h1> 
+
+<hr/>
+
+<p><label>Url: </label><input placeholder="Tag Name" @bind="ClientSettings.Url" style="width: 665px;"/></p>
+<p>
+    <label>Username: </label><input placeholder="Tag Name" @bind="ClientSettings.Username"/>
+    <label style="margin-left: 50px;">Password: </label><input placeholder="Tag Name" @bind="ClientSettings.Password"/>
+</p>
+<p>
+    <label>Token: </label><input placeholder="Tag Name" @bind="ClientSettings.Token"/>
+    <label style="margin-left: 50px;">Org: </label><input placeholder="Tag Name" @bind="ClientSettings.Org"/>
+</p>

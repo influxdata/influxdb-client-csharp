@@ -1,0 +1,92 @@
+﻿@page "/write-api"
+@using ExampleBlazor.Data
+@using InfluxDB.Client.Api.Domain
+@using InfluxDB.Client.Writes
+
+@inject IJSRuntime JsRuntime
+
+<PageTitle>WriteAPI</PageTitle>
+
+<h1 class="h1_blue">Write<span class="h1_pink">API</span></h1> 
+
+<p role="status">
+    @if (_bucketList == null)
+    {
+        <select @bind="SelectedBucket">
+            <option>-- bucket --</option>
+        </select>
+    }
+    else
+    {
+        <select @bind="SelectedBucket">
+            <option>-- bucket --</option>
+
+            @foreach (var bucket in _bucketList)
+            {
+                <option value="@bucket.Name">@bucket.Name</option>
+            }
+        </select>
+    }
+ 
+    <input placeholder="Measurement" @bind="Measurement"/>
+</p>
+
+<p role="status">
+    <input placeholder="Tag Name" @bind="TagName"/>
+    <input placeholder="Tag Value" @bind="TagValue"/>
+</p>
+
+<p role="status">
+    <input placeholder="Field Name" @bind="FieldName"/>
+    <input placeholder="Field Value" @bind="FieldValue"/>
+</p>
+
+<button class="btn btn-influx" @onclick="WritePoint" style="width: 520px;">Write point</button>
+
+
+
+@code {
+    private List<Bucket>? _bucketList;
+    
+    private string? SelectedBucket { get; set; }
+    private string? Measurement { get; set; }
+    private string? TagName { get; set; }
+    private string? TagValue { get; set; }
+    private string? FieldName { get; set; }
+    private string? FieldValue { get; set; }
+   
+    protected override async Task OnInitializedAsync()
+    {
+        
+        var influxDbClient = ClientSettings.GetClient();
+
+        _bucketList = await influxDbClient.GetBucketsApi().FindBucketsAsync();
+
+        influxDbClient.Dispose();
+        
+    }
+    
+    private async Task WritePoint()
+    {
+        var influxDbClient = ClientSettings.GetClient();
+        var orgId = (await influxDbClient.GetOrganizationsApi().FindOrganizationsAsync(org: ClientSettings.Org)).First().Id;
+       
+        using (var writeApi = influxDbClient.GetWriteApi())
+        {
+            var point = PointData.Measurement(Measurement)
+                .Tag(TagName, TagValue)
+                .Field(FieldName, FieldValue);
+
+            writeApi.WritePoint(point, SelectedBucket, orgId);
+        }
+
+        Measurement = "";
+        TagName = "";
+        TagValue = "";
+        FieldName = "";
+        FieldValue = "";
+        
+        influxDbClient.Dispose();
+        await JsRuntime.InvokeAsync<bool>("confirm", "Point was written successfully.");
+    }
+}

@@ -1,0 +1,192 @@
+﻿@page "/query-api"
+@using ExampleBlazor.Data
+@using InfluxDB.Client.Api.Domain
+@using InfluxDB.Client.Core.Flux.Domain
+
+
+@inject IJSRuntime JsRuntime
+
+<PageTitle>QueryAPI</PageTitle>
+
+<h1 class="h1_blue">Query<span class="h1_pink">API</span></h1> 
+
+<p role="status">
+    @if (_bucketList == null)
+    {
+                <select @bind="SelectedBucket">
+                    <option>-- bucket --</option>
+                </select>
+    }
+    else
+    {
+        <select @bind="SelectedBucket">
+            <option>-- bucket --</option>
+
+            @foreach (var bucket in _bucketList)
+            {
+                <option value="@bucket.Name">@bucket.Name</option>
+            }
+        </select>
+    }
+     @if (MeasurementList == null)
+        {
+                    <select @bind="_selectedMeasurement">
+                        <option>-- measurement --</option>
+                    </select>
+        }
+        else
+        {
+            <select @bind="_selectedMeasurement">
+                <option>-- measurement --</option>
+    
+                @foreach (var measurement in MeasurementList)
+                {
+                    <option value="@measurement">@measurement</option>
+                }
+            </select>
+        }
+    <select @bind="_selectedTimeRange">
+        <option>-- time range --</option>
+            @foreach (var timeRange in _timeRangeList)
+            {
+                <option value="@timeRange">Past @timeRange</option> 
+            }
+    </select>
+    <button class="btn btn-influx" @onclick="RefreshData">Refresh data</button>
+</p>
+
+@if (_recordList == null)
+{
+    <p></p>
+}
+else
+{
+    <table class="custom-table table">
+        <thead>
+        <tr class="header-row">
+             @foreach (var column in _recordList.First().Columns)
+                {
+                    <th>@column.Label</th>  
+                }
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{int i = 0;}
+        @foreach (var table in _recordList)
+        {
+            if(i % 2 == 0) {
+                <tr>
+                    @foreach (var value in table.Records.SelectMany(record => record.Values))
+                    {
+                        <td>@value.Value</td>
+                    }
+                </tr>
+            }
+            else
+            {
+                <tr class="odd-row">
+                    @foreach (var value in table.Records.SelectMany(record => record.Values))
+                    {
+                        <td>@value.Value</td>
+                    }
+                </tr>                
+            }
+            {i++;}
+        }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Bucket>? _bucketList;
+    private string? _selectedBucket;
+    string? SelectedBucket
+    {
+        get => _selectedBucket;
+        set
+        {
+            _selectedBucket = value;
+            FetchMeasurements(value);
+        }
+    }
+
+    private readonly List<string> _timeRangeList = new List<string>() {"5m", "15m", "1h", "6h", "1d", "3d","7d","30d"};
+    private string? _selectedTimeRange;
+
+    private List<string?>? _measurementList;
+    private List<string?>? MeasurementList
+    {
+        get => _measurementList;
+        set
+        {
+            _measurementList = value;
+            StateHasChanged();
+        }
+    }
+    private string? _selectedMeasurement;
+
+    private List<FluxTable>? _recordList;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        MeasurementList = new List<string?>();
+        
+        var influxDbClient = ClientSettings.GetClient();
+
+        _bucketList = await influxDbClient.GetBucketsApi().FindBucketsAsync();
+
+        influxDbClient.Dispose();
+        
+    }
+
+    private async void FetchMeasurements(string? bucket)
+    {
+        if(bucket != null)
+        {
+            var influxDbClient = ClientSettings.GetClient();
+            
+            var orgId = (await influxDbClient.GetOrganizationsApi().FindOrganizationsAsync(org: ClientSettings.Org)).First().Id;
+            
+            var query = "import \"influxdata/influxdb/schema\""
+                            + $" schema.measurements(bucket: \"{bucket}\")";
+            
+            var result = await influxDbClient.GetQueryApi().QueryAsync(query, orgId);
+
+            MeasurementList = result.First().Records.Select(item => item.GetValue().ToString()).ToList();
+        }
+        else
+        {
+            MeasurementList = new List<string?>();
+        }
+
+    }
+    
+    private async Task RefreshData()
+    {
+        var influxDbClient = ClientSettings.GetClient();
+        var orgId = (await influxDbClient.GetOrganizationsApi().FindOrganizationsAsync(org: ClientSettings.Org)).First().Id;
+        
+        var fluxQuery = $"from(bucket: \"{SelectedBucket}\")"
+                        + $" |> range(start: -{_selectedTimeRange})"
+                        + $" |> filter(fn: (r) => (r[\"_measurement\"] == \"{_selectedMeasurement}\"))";
+
+        _recordList = await influxDbClient.GetQueryApi().QueryAsync(fluxQuery, orgId);
+        
+        // int i = 0;
+        //
+        // recordList.ForEach(fluxTable =>
+        // {
+        //     var fluxRecords = fluxTable.Records;
+        //     fluxRecords.ForEach(fluxRecord =>
+        //     {
+        //         Console.WriteLine(i + "\t" + $"{fluxRecord.GetTime()}\t{fluxRecord.GetValue()}\t{fluxRecord.GetValueByIndex(8)}");
+        //         i++;
+        //     });
+        // });
+
+        influxDbClient.Dispose();
+    }
+}

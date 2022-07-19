@@ -1,0 +1,221 @@
+﻿@page "/bucket-api"
+@using InfluxDB.Client.Api.Domain
+@using ExampleBlazor.Data
+
+@inject IJSRuntime JsRuntime
+
+<style>
+    .navbar {
+        position: relative;
+        padding-top: 0;
+        opacity: 80%
+    }
+  
+    #addBucket{
+    float: right;
+    }
+</style>
+
+<PageTitle>BucketAPI</PageTitle>
+
+<h1 class="h1_blue">Bucket<span class="h1_pink">API</span></h1> 
+
+<p id="addBucket" role="status">
+    <input placeholder="Bucket Name" value="@_stringValue" @oninput="eventArgs => { SetNewBucketValue(eventArgs.Value as string); }"/>
+    <button class="btn btn-influx" @onclick="CreateBucket">Create bucket</button>
+</p>
+
+@if (_bucketList == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="custom-table table">
+        <thead>
+        <tr class="header-row">
+            <th>Name</th>
+            <th>Id</th>
+            <th>Created at</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{int i = 0;}
+        @foreach (var bucket in _bucketList)
+        {
+            if(i % 2 == 0) {
+                <tr>
+                    <td>@bucket.Name</td>
+                    <td>@bucket.Id</td>
+                    <td>@bucket.CreatedAt</td>
+                    <td>@bucket.Description</td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary" type="button" @onclick="() => DeleteBucket(bucket)">Delete</button>
+                        <button class="btn btn-primary" type="button" @onclick="() => CloneBucket(bucket)">Clone</button>
+                    </td>
+                    @{i++;}
+                </tr>
+            }
+            else
+            {
+                <tr class="odd-row">
+                    <td>@bucket.Name</td>
+                    <td>@bucket.Id</td>
+                    <td>@bucket.CreatedAt</td>
+                    <td>@bucket.Description</td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-primary" type="button" @onclick="() => DeleteBucket(bucket)">Delete</button>
+                        <button class="btn btn-primary" type="button" @onclick="() => CloneBucket(bucket)">Clone</button>
+                    </td>
+                    @{ i++; }
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+}
+
+<button class="btn btn-influx" @onclick="RefreshBuckets">Refresh buckets</button>
+
+
+@code {
+    private List<Bucket>? _bucketList;
+
+    string? _stringValue = "";
+
+    private void SetNewBucketValue(string? value)
+    {
+        _stringValue = value;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshBuckets();
+    }
+
+    private async Task RefreshBuckets()
+    {
+        var influxDbClient = ClientSettings.GetClient();
+
+        _bucketList = await influxDbClient.GetBucketsApi().FindBucketsAsync();
+
+        influxDbClient.Dispose();
+    }
+
+    private async Task DeleteBucket(Bucket bucket)
+    {
+        var confirmed = await JsRuntime.InvokeAsync<bool>("confirm", $"Delete bucket {bucket.Name}?");
+        if (confirmed)
+        {
+            var influxDbClient = ClientSettings.GetClient();
+
+            await influxDbClient.GetBucketsApi().DeleteBucketAsync(bucket);
+
+            influxDbClient.Dispose();
+
+            await JsRuntime.InvokeAsync<bool>("confirm", "Bucket was deleted.");
+            await RefreshBuckets();
+        }
+    }
+    
+    private async Task CloneBucket(Bucket bucket)
+    {
+        var confirmed = await JsRuntime.InvokeAsync<bool>("confirm", $"Clone bucket {bucket.Name}?");
+        if (confirmed)
+        {
+            var influxDbClient = ClientSettings.GetClient();
+
+            var name = bucket.Name + "_clone";
+            if (_bucketList != null && _bucketList.Exists(item => item.Name == name))
+            {
+                var append = 2;
+                while (_bucketList.Exists(item => item.Name == name + append))
+                {
+                    append++;
+                }
+                name += append;
+            }
+            
+            await influxDbClient.GetBucketsApi().CloneBucketAsync(name, bucket);
+
+            influxDbClient.Dispose();
+
+            await JsRuntime.InvokeAsync<bool>("confirm", "Bucket was cloned.");
+            await RefreshBuckets();
+        }
+    }
+
+    private async Task CreateBucket()
+    {
+        if (_stringValue != null && _stringValue.Any())
+        {
+            var influxDbClient = ClientSettings.GetClient();
+
+            // Find ID of Organization with specified name (PermissionAPI requires ID of Organization).
+            var orgId = (await influxDbClient.GetOrganizationsApi().FindOrganizationsAsync(org: ClientSettings.Org)).First().Id;
+
+            // Create bucket "iot_bucket" with data retention set to 3,600 seconds
+            var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
+
+            var bucket = await influxDbClient.GetBucketsApi().CreateBucketAsync(_stringValue, retention, orgId);
+
+            // Create access token to "iot_bucket"
+            var resource = new PermissionResource(PermissionResource.TypeBuckets, bucket.Id, null,
+                orgId);
+
+            // Read permission
+            var read = new Permission(Permission.ActionEnum.Read, resource);
+
+            // Write permission
+            var write = new Permission(Permission.ActionEnum.Write, resource);
+
+            var authorization = await influxDbClient.GetAuthorizationsApi()
+                .CreateAuthorizationAsync(orgId, new List<Permission> {read, write});
+
+            influxDbClient.Dispose();
+
+            await JsRuntime.InvokeAsync<bool>("confirm", $"Bucket {bucket.Name} was created.");
+            SetNewBucketValue("");
+            await RefreshBuckets();
+        }
+        else
+        {
+            await JsRuntime.InvokeAsync<bool>("confirm", "Bucket Name cannot be empty.");
+        }
+    }
+    
+    private async Task FindBucketByName(string bucketName)
+    {
+        var influxDbClient = ClientSettings.GetClient();
+
+        await influxDbClient.GetBucketsApi().FindBucketByNameAsync(bucketName);
+
+        influxDbClient.Dispose();
+    }
+    
+    private async Task FindBucketById(string bucketId)
+    {
+        var influxDbClient = ClientSettings.GetClient();
+
+        await influxDbClient.GetBucketsApi().FindBucketByIdAsync(bucketId);
+
+        influxDbClient.Dispose();
+    }
+
+    private async Task FindBucketsByOrgName(string orgName)
+    {
+        var influxDbClient = ClientSettings.GetClient();
+
+        await influxDbClient.GetBucketsApi().FindBucketsByOrgNameAsync(orgName);
+
+        influxDbClient.Dispose();
+    }
+    
+}
