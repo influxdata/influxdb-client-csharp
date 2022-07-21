@@ -45,6 +45,8 @@ fi
 if [[ "$NET_TEST_VERSION" = "netcoreapp6.0" ]]
 then
   TRX2JUNIT_VERSION="1.6.0"
+else
+  dotnet sln remove ExampleBlazor/ExampleBlazor.csproj
 fi
 
 #

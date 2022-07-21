@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="InfluxDB.Client" Version="4.4.0-dev.6843" />
+        <ProjectReference Include="..\Client\Client.csproj" />
     </ItemGroup>
 
 </Project>
