@@ -11,7 +11,7 @@ Update dependencies:
   - [#336](https://github.com/influxdata/influxdb-client-csharp/pull/336): `Microsoft.Extensions.ObjectPool` to `6.0.7`
 
 #### Test:
-  - [#335](https://github.com/influxdata/influxdb-client-csharp/pull/335): `WireMock.Net` to `1.5.1`
+  - [#340](https://github.com/influxdata/influxdb-client-csharp/pull/340): `WireMock.Net` to `1.5.2`
   - [#337](https://github.com/influxdata/influxdb-client-csharp/pull/337): `Tomlyn.Signed` to `0.15.0`
 
 ## 4.3.0 [2022-06-24]
