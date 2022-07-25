@@ -21,7 +21,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
         private const string AnnotationDatatype = "#datatype";
         private const string AnnotationGroup = "#group";
         private const string AnnotationDefault = "#default";
-        private static readonly string[] Annotations = {AnnotationDatatype, AnnotationGroup, AnnotationDefault};
+        private static readonly string[] Annotations = { AnnotationDatatype, AnnotationGroup, AnnotationDefault };
         private readonly ResponseMode _responseMode;
 
         private enum ParsingState
@@ -95,7 +95,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             Arguments.CheckNotNull(source, "source");
 
             using var csv = new CsvReader(new StreamReader(source), CultureInfo.InvariantCulture);
-            var state = new ParseFluxResponseState {csv = csv};
+            var state = new ParseFluxResponseState { csv = csv };
 
             while (csv.Read())
             {
@@ -127,7 +127,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             Arguments.CheckNotNull(reader, nameof(reader));
 
             using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-            var state = new ParseFluxResponseState {csv = csv};
+            var state = new ParseFluxResponseState { csv = csv };
 
             while (await csv.ReadAsync().ConfigureAwait(false) && !cancellationToken.IsCancellationRequested)
                 foreach (var response in ParseNextFluxResponse(state))

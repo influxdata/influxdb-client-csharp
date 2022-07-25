@@ -335,7 +335,7 @@ namespace InfluxDB.Client
             /// <returns><see cref="Builder"/></returns>
             internal Builder LoadConfig(string sectionName = "influx2")
             {
-                var config = (Influx2) ConfigurationManager.GetSection(sectionName);
+                var config = (Influx2)ConfigurationManager.GetSection(sectionName);
                 if (config == null)
                 {
                     const string message = "The configuration doesn't contains a 'influx2' section. " +

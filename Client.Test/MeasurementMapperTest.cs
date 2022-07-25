@@ -82,7 +82,7 @@ namespace InfluxDB.Client.Test
 
             for (var i = 0; i < 500_000; i++)
                 measurements.Add(new Poco
-                    {Value = i, Tag = "Europe", Timestamp = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i))});
+                    { Value = i, Tag = "Europe", Timestamp = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i)) });
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();

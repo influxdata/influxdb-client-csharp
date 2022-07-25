@@ -150,7 +150,7 @@ namespace InfluxDB.Client.Linq.Internal
         {
             if (expression.Method.Name.Equals("AggregateWindow"))
             {
-                var member = (MemberExpression) expression.Arguments[0];
+                var member = (MemberExpression)expression.Arguments[0];
                 if (_context.MemberResolver.ResolveMemberType(member.Member) != MemberType.Timestamp)
                 {
                     throw new NotSupportedException(
@@ -160,7 +160,7 @@ namespace InfluxDB.Client.Linq.Internal
                 //
                 // every
                 //
-                var every = (TimeSpan) ((ConstantExpression) expression.Arguments[1]).Value;
+                var every = (TimeSpan)((ConstantExpression)expression.Arguments[1]).Value;
                 Arguments.CheckNotNull(every, "every");
                 var everyVariable = _context.Variables.AddNamedVariable(every);
 
@@ -168,7 +168,7 @@ namespace InfluxDB.Client.Linq.Internal
                 // period
                 //
                 string periodVariable = null;
-                var period = ((ConstantExpression) expression.Arguments[2]).Value as TimeSpan?;
+                var period = ((ConstantExpression)expression.Arguments[2]).Value as TimeSpan?;
                 if (period.HasValue)
                 {
                     Arguments.CheckNotNull(period, "period");
@@ -178,7 +178,7 @@ namespace InfluxDB.Client.Linq.Internal
                 //
                 // fn
                 //
-                var fn = ((ConstantExpression) expression.Arguments[3]).Value as string;
+                var fn = ((ConstantExpression)expression.Arguments[3]).Value as string;
                 Arguments.CheckNonEmptyString(fn, "fn");
                 var fnVariable = _context.Variables.AddNamedVariable(new Identifier("Identifier", "mean"));
 
@@ -214,7 +214,7 @@ namespace InfluxDB.Client.Linq.Internal
                 return;
             }
 
-            var namedField = (NamedField) _expressionParts[index];
+            var namedField = (NamedField)_expressionParts[index];
             // Constant on right: a.Name == "quality"
             if (_expressionParts[index + 1] is BinaryOperator)
             {
@@ -249,7 +249,7 @@ namespace InfluxDB.Client.Linq.Internal
                 return;
             }
 
-            var namedField = (NamedFieldValue) _expressionParts[index];
+            var namedField = (NamedFieldValue)_expressionParts[index];
             // Constant on right: a.Value == "good"
             if (_expressionParts[index + 1] is BinaryOperator)
             {
@@ -308,14 +308,14 @@ namespace InfluxDB.Client.Linq.Internal
                 // "sensorId == 123456"
                 if (index >= 1 && parts[index - 1] is TagColumnName && parts[index + 1] is AssignmentValue)
                 {
-                    var assignmentValue = (AssignmentValue) parts[index + 1];
+                    var assignmentValue = (AssignmentValue)parts[index + 1];
                     context.Variables.VariableIsTag(assignmentValue.Assignment);
                 }
 
                 // "123456 == sensorId"
                 if (index >= 1 && parts[index - 1] is AssignmentValue && parts[index + 1] is TagColumnName)
                 {
-                    var assignmentValue = (AssignmentValue) parts[index - 1];
+                    var assignmentValue = (AssignmentValue)parts[index - 1];
                     context.Variables.VariableIsTag(assignmentValue.Assignment);
                 }
             }

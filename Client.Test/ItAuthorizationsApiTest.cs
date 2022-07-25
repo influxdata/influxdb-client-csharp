@@ -26,16 +26,16 @@ namespace InfluxDB.Client.Test
         {
             var readUsers = new Permission(
                 Permission.ActionEnum.Read,
-                new PermissionResource {Type = PermissionResource.TypeUsers, OrgID = _organization.Id}
+                new PermissionResource { Type = PermissionResource.TypeUsers, OrgID = _organization.Id }
             );
 
             var writeOrganizations = new Permission
             (
                 Permission.ActionEnum.Write,
-                new PermissionResource {Type = PermissionResource.TypeOrgs, OrgID = _organization.Id}
+                new PermissionResource { Type = PermissionResource.TypeOrgs, OrgID = _organization.Id }
             );
 
-            var permissions = new List<Permission> {readUsers, writeOrganizations};
+            var permissions = new List<Permission> { readUsers, writeOrganizations };
 
             var authorization = await _authorizationsApi.CreateAuthorizationAsync(_organization, permissions);
 
@@ -66,13 +66,13 @@ namespace InfluxDB.Client.Test
         public async Task AuthorizationDescription()
         {
             var writeSources = new Permission(Permission.ActionEnum.Write,
-                new PermissionResource {Type = PermissionResource.TypeSources, OrgID = _organization.Id}
+                new PermissionResource { Type = PermissionResource.TypeSources, OrgID = _organization.Id }
             );
 
             var authorization = new AuthorizationPostRequest
             {
                 OrgID = _organization.Id,
-                Permissions = new List<Permission> {writeSources},
+                Permissions = new List<Permission> { writeSources },
                 Description = "My description!"
             };
 
@@ -86,10 +86,10 @@ namespace InfluxDB.Client.Test
         public async Task UpdateAuthorizationStatus()
         {
             var readUsers = new Permission(Permission.ActionEnum.Read,
-                new PermissionResource {Type = PermissionResource.TypeUsers, OrgID = _organization.Id}
+                new PermissionResource { Type = PermissionResource.TypeUsers, OrgID = _organization.Id }
             );
 
-            var permissions = new List<Permission> {readUsers};
+            var permissions = new List<Permission> { readUsers };
 
             var authorization = await _authorizationsApi.CreateAuthorizationAsync(_organization, permissions);
 
@@ -217,11 +217,11 @@ namespace InfluxDB.Client.Test
         private List<Permission> NewPermissions()
         {
             var resource = new PermissionResource
-                {Type = PermissionResource.TypeUsers, OrgID = _organization.Id};
+                { Type = PermissionResource.TypeUsers, OrgID = _organization.Id };
 
             var permission = new Permission(Permission.ActionEnum.Read, resource);
 
-            var permissions = new List<Permission> {permission};
+            var permissions = new List<Permission> { permission };
 
             return permissions;
         }

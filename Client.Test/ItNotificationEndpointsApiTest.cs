@@ -71,7 +71,7 @@ namespace InfluxDB.Client.Test
                 url: "https://hooks.slack.com/services/x/y/z", description: "my production slack channel",
                 orgID: _orgId, name: GenerateName("slack"), status: NotificationEndpointBase.StatusEnum.Active);
 
-            endpoint = (SlackNotificationEndpoint) await _notificationEndpointsApi.CreateEndpointAsync(endpoint);
+            endpoint = (SlackNotificationEndpoint)await _notificationEndpointsApi.CreateEndpointAsync(endpoint);
 
             Assert.AreEqual("my production slack channel", endpoint.Description);
         }
@@ -220,7 +220,7 @@ namespace InfluxDB.Client.Test
         {
             var name = GenerateName("http");
 
-            var headers = new Dictionary<string, string> {{"custom-header", "123"}, {"client", "InfluxDB"}};
+            var headers = new Dictionary<string, string> { { "custom-header", "123" }, { "client", "InfluxDB" } };
 
             var endpoint = new HTTPNotificationEndpoint(type: NotificationEndpointType.Http,
                 method: HTTPNotificationEndpoint.MethodEnum.POST, url: "http://localhost:1234/mock",
@@ -228,7 +228,7 @@ namespace InfluxDB.Client.Test
                 name: name, authMethod: HTTPNotificationEndpoint.AuthMethodEnum.None,
                 status: NotificationEndpointBase.StatusEnum.Active, headers: headers);
 
-            endpoint = (HTTPNotificationEndpoint) await _notificationEndpointsApi.CreateEndpointAsync(endpoint);
+            endpoint = (HTTPNotificationEndpoint)await _notificationEndpointsApi.CreateEndpointAsync(endpoint);
 
             Assert.IsNotNull(endpoint);
             Assert.AreEqual(2, endpoint.Headers.Count);
@@ -248,7 +248,7 @@ namespace InfluxDB.Client.Test
             endpoint.Description = "updated description";
             endpoint.Status = NotificationEndpointBase.StatusEnum.Inactive;
 
-            endpoint = (HTTPNotificationEndpoint) await _notificationEndpointsApi.UpdateEndpointAsync(endpoint);
+            endpoint = (HTTPNotificationEndpoint)await _notificationEndpointsApi.UpdateEndpointAsync(endpoint);
 
             Assert.AreEqual(name, endpoint.Name);
             Assert.AreEqual("updated description", endpoint.Description);
@@ -274,7 +274,7 @@ namespace InfluxDB.Client.Test
                 .CreatePagerDutyEndpointAsync(GenerateName("pager-duty"), "https://events.pagerduty.com/v2/enqueue",
                     "secret-key", _orgId);
 
-            var found = (PagerDutyNotificationEndpoint) await _notificationEndpointsApi
+            var found = (PagerDutyNotificationEndpoint)await _notificationEndpointsApi
                 .FindNotificationEndpointByIdAsync(created.Id);
 
             await _notificationEndpointsApi.DeleteNotificationEndpointAsync(found);
@@ -301,7 +301,7 @@ namespace InfluxDB.Client.Test
                 .CreatePagerDutyEndpointAsync(GenerateName("pager-duty"), "https://events.pagerduty.com/v2/enqueue",
                     "secret-key", _orgId);
 
-            var found = (PagerDutyNotificationEndpoint) await _notificationEndpointsApi
+            var found = (PagerDutyNotificationEndpoint)await _notificationEndpointsApi
                 .FindNotificationEndpointByIdAsync(endpoint.Id);
 
             Assert.AreEqual(endpoint.Id, found.Id);
@@ -344,7 +344,7 @@ namespace InfluxDB.Client.Test
             endpoint.Description = "my production slack channel";
             endpoint.Status = NotificationEndpointBase.StatusEnum.Active;
 
-            endpoint = (SlackNotificationEndpoint) await _notificationEndpointsApi.CreateEndpointAsync(endpoint);
+            endpoint = (SlackNotificationEndpoint)await _notificationEndpointsApi.CreateEndpointAsync(endpoint);
 
             var name = GenerateName("cloned-slack");
             var cloned = await _notificationEndpointsApi
@@ -379,7 +379,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CloneHttpBearerToken()
         {
-            var headers = new Dictionary<string, string> {{"custom-header", "123"}, {"client", "InfluxDB"}};
+            var headers = new Dictionary<string, string> { { "custom-header", "123" }, { "client", "InfluxDB" } };
 
             var endpoint = new HTTPNotificationEndpoint(type: NotificationEndpointType.Http,
                 method: HTTPNotificationEndpoint.MethodEnum.POST, url: "http://localhost:1234/mock",
@@ -389,7 +389,7 @@ namespace InfluxDB.Client.Test
                 contentTemplate: "content - template",
                 status: NotificationEndpointBase.StatusEnum.Active, headers: headers);
 
-            endpoint = (HTTPNotificationEndpoint) await _notificationEndpointsApi.CreateEndpointAsync(endpoint);
+            endpoint = (HTTPNotificationEndpoint)await _notificationEndpointsApi.CreateEndpointAsync(endpoint);
 
             var name = GenerateName("cloned-http");
             var cloned = await _notificationEndpointsApi
@@ -465,7 +465,7 @@ namespace InfluxDB.Client.Test
                 .CreateHttpEndpointBasicAuthAsync(GenerateName("http"), "http://localhost:1234/mock",
                     HTTPNotificationEndpoint.MethodEnum.PUT, "my-user", "my-password", _orgId);
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
 
             var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _orgId);
 
@@ -514,7 +514,7 @@ namespace InfluxDB.Client.Test
                     .CreateHttpEndpointBasicAuthAsync(GenerateName("http"), "http://localhost:1234/mock",
                         HTTPNotificationEndpoint.MethodEnum.PUT, "my-user", "my-password", _orgId);
 
-            var findOptions = new FindOptions {Limit = 5};
+            var findOptions = new FindOptions { Limit = 5 };
 
             var endpoints = await _notificationEndpointsApi.FindNotificationEndpointsAsync(_orgId, findOptions);
             Assert.AreEqual(5, endpoints._NotificationEndpoints.Count);

@@ -36,7 +36,7 @@ namespace InfluxDB.Client.Test
 
             var authorization = await Client.GetAuthorizationsApi()
                 .CreateAuthorizationAsync(await FindMyOrg(),
-                    new List<Permission> {readBucket, writeBucket});
+                    new List<Permission> { readBucket, writeBucket });
 
             _token = authorization.Token;
 

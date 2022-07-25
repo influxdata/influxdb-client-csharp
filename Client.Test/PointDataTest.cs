@@ -136,14 +136,14 @@ namespace InfluxDB.Client.Test
                 .Field("double", 250.69D)
                 .Field("float", 35.0F)
                 .Field("integer", 7)
-                .Field("short", (short) 8)
-                .Field("byte", (byte) 9)
-                .Field("ulong", (ulong) 10)
-                .Field("uint", (uint) 11)
-                .Field("sbyte", (sbyte) 12)
-                .Field("ushort", (ushort) 13)
+                .Field("short", (short)8)
+                .Field("byte", (byte)9)
+                .Field("ulong", (ulong)10)
+                .Field("uint", (uint)11)
+                .Field("sbyte", (sbyte)12)
+                .Field("ushort", (ushort)13)
                 .Field("point", 13.3)
-                .Field("decimal", (decimal) 25.6)
+                .Field("decimal", (decimal)25.6)
                 .Field("boolean", false)
                 .Field("string", "string value");
 
@@ -424,7 +424,7 @@ namespace InfluxDB.Client.Test
         {
             var point = PointData.Measurement("h2o")
                 .Tag("location", "europe")
-                .Field("custom-object", new GenericObject {Value1 = "test", Value2 = 10});
+                .Field("custom-object", new GenericObject { Value1 = "test", Value2 = 10 });
 
             Assert.AreEqual("h2o,location=europe custom-object=\"test-10\"", point.ToLineProtocol());
         }

@@ -140,8 +140,8 @@ namespace InfluxDB.Client.Api.Domain
             private static readonly Dictionary<string[], Type> Types =
                 new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
                 {
-                    {new[] {"VariableAssignment"}, typeof(VariableAssignment)},
-                    {new[] {"MemberAssignment"}, typeof(MemberAssignment)}
+                    { new[] { "VariableAssignment" }, typeof(VariableAssignment) },
+                    { new[] { "MemberAssignment" }, typeof(MemberAssignment) }
                 };
 
             public override bool CanConvert(Type objectType)
@@ -168,7 +168,7 @@ namespace InfluxDB.Client.Api.Domain
 
                         var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                        var discriminator = new[] {"type"}.Select(key => jObject[key].ToString()).ToArray();
+                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
 
                         Types.TryGetValue(discriminator, out var type);
 
@@ -186,7 +186,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 var elementType = targetType.GenericTypeArguments.FirstOrDefault();
 
-                var list = (IList) Activator.CreateInstance(targetType);
+                var list = (IList)Activator.CreateInstance(targetType);
                 while (reader.Read() && reader.TokenType != JsonToken.EndArray)
                     list.Add(Deserialize(reader, elementType, serializer));
 

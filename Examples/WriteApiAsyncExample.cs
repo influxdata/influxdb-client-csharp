@@ -50,7 +50,7 @@ namespace Examples
             //
             // Write by POCO
             //
-            var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
+            var temperature = new Temperature { Location = "south", Value = 62D, Time = DateTime.UtcNow };
 
             await writeApiAsync.WriteMeasurementAsync(temperature, WritePrecision.Ns, "my-bucket", "my-org");
 

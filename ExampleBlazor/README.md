@@ -14,7 +14,6 @@
 ## Getting Started
 
 ### Prerequisites
-
 - dotnet - [Download .NET](https://dotnet.microsoft.com/en-us/download)
 - Docker - [Get started with docker](https://www.docker.com/get-started)
 - **InfluxDB** on port **8086** (influxdb 2.0 OSS)home
@@ -24,16 +23,12 @@
       ```
 
 ## Run Application
-
 Launch app by typing the following commands in a terminal window:
-
 ```bash
 cd ExampleBlazor
 dotnet run
 ```
-
-After a few seconds, you should get your application up and running. Take a look at your terminal window to get the
-address your application is listening to.
+After a few seconds, you should get your application up and running. Take a look at your terminal window to get the address your application is listening to.
 
 <img src="wwwroot/assets/readme/terminal-url.png" alt="drawing">
 
@@ -41,10 +36,9 @@ address your application is listening to.
 
 On Home page is InfluxDB client settings - credentials are preset to same values as in docker-compose.
 
-### BucketAPI
+### BucketAPI 
 
 This page contains basic methods from `GetBucketsApi()` in **influxdb-client-csharp**:
-
 - `FindBucketsAsync` - for listing all buckets
 - `CreateBucketAsync` - for creating new bucket
 - `DeleteBucketAsync` - for deleting selected bucket
@@ -52,17 +46,14 @@ This page contains basic methods from `GetBucketsApi()` in **influxdb-client-csh
 
 ### WriteAPI
 
-On this page is use method from `GetWriteApi()` in **influxdb-client-csharp** for writing point to InfluxDB
-- `WritePoint`.
+On this page is use method from `GetWriteApi()` in **influxdb-client-csharp** for writing point to InfluxDB - `WritePoint`.
 
 ### QueryAPI
 
-This page contains multiple `select` for filtering data - after selecting Bucket, Measurement, Time range and clicking
-on
+This page contains multiple `select` for filtering data - after selecting Bucket, Measurement, Time range and clicking on 
 `button` Refresh data `GetQueryApi()` in **influxdb-client-csharp** is used.
 
 With selected data, flux query is created and `QueryAsync` is called.
-
 ```csharp
 var fluxQuery = $"from(bucket: \"{SelectedBucket}\")"
               + $" |> range(start: -{_selectedTimeRange})"

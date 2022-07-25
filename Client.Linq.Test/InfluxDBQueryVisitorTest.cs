@@ -65,11 +65,11 @@ namespace Client.Linq.Test
             Assert.NotNull(ast.Body);
             Assert.AreEqual(2, ast.Body.Count);
 
-            var bucketAssignment = ((OptionStatement) ast.Body[0]).Assignment as VariableAssignment;
+            var bucketAssignment = ((OptionStatement)ast.Body[0]).Assignment as VariableAssignment;
             Assert.AreEqual("p1", bucketAssignment?.Id.Name);
             Assert.AreEqual("my-bucket", (bucketAssignment?.Init as StringLiteral)?.Value);
 
-            var rangeAssignment = ((OptionStatement) ast.Body[1]).Assignment as VariableAssignment;
+            var rangeAssignment = ((OptionStatement)ast.Body[1]).Assignment as VariableAssignment;
             Assert.AreEqual("p2", rangeAssignment?.Id.Name);
             Assert.AreEqual("0", (rangeAssignment?.Init as IntegerLiteral)?.Value);
         }
@@ -149,43 +149,43 @@ namespace Client.Linq.Test
                 (
                     q => q.Take(10).Skip(5),
                     "|> limit(n: p3, offset: p4)",
-                    new Dictionary<int, string> {{2, "10"}, {3, "5"}}
+                    new Dictionary<int, string> { { 2, "10" }, { 3, "5" } }
                 ),
                 (
                     q => q.Take(2).Take(65252),
                     "|> limit(n: p3) |> limit(n: p4)",
-                    new Dictionary<int, string> {{2, "2"}, {3, "65252"}}
+                    new Dictionary<int, string> { { 2, "2" }, { 3, "65252" } }
                 ),
                 (
                     q => q.Take(10).Skip(5).Take(3),
                     "|> limit(n: p3, offset: p4) |> limit(n: p5)",
-                    new Dictionary<int, string> {{2, "10"}, {3, "5"}, {4, "3"}}
+                    new Dictionary<int, string> { { 2, "10" }, { 3, "5" }, { 4, "3" } }
                 ),
                 (
                     q => q.Take(10).Skip(5).Take(3).Skip(2),
                     "|> limit(n: p3, offset: p4) |> limit(n: p5, offset: p6)",
-                    new Dictionary<int, string> {{2, "10"}, {3, "5"}, {4, "3"}, {5, "2"}}
+                    new Dictionary<int, string> { { 2, "10" }, { 3, "5" }, { 4, "3" }, { 5, "2" } }
                 ),
                 (
                     q => q.Take(10).Skip(5).Take(3).Skip(2).Take(663),
                     "|> limit(n: p3, offset: p4) |> limit(n: p5, offset: p6) |> limit(n: p7)",
-                    new Dictionary<int, string> {{2, "10"}, {3, "5"}, {4, "3"}, {5, "2"}, {6, "663"}}
+                    new Dictionary<int, string> { { 2, "10" }, { 3, "5" }, { 4, "3" }, { 5, "2" }, { 6, "663" } }
                 ),
                 (
                     q => q.Take(10).Skip(5).Skip(2),
                     "|> limit(n: p3, offset: p5)",
-                    new Dictionary<int, string> {{2, "10"}, {3, "5"}, {4, "2"}}
+                    new Dictionary<int, string> { { 2, "10" }, { 3, "5" }, { 4, "2" } }
                 ),
                 (
                     q => q.Take(10).Skip(5).Take(3).Skip(2).Skip(15).Take(663),
                     "|> limit(n: p3, offset: p4) |> limit(n: p5, offset: p7) |> limit(n: p8)",
                     new Dictionary<int, string>
-                        {{2, "10"}, {3, "5"}, {4, "3"}, {5, "2"}, {6, "15"}, {7, "663"}}
+                        { { 2, "10" }, { 3, "5" }, { 4, "3" }, { 5, "2" }, { 6, "15" }, { 7, "663" } }
                 ),
                 (
                     q => q.Skip(5).Take(10),
                     "|> limit(n: p4, offset: p3)",
-                    new Dictionary<int, string> {{2, "5"}, {3, "10"}}
+                    new Dictionary<int, string> { { 2, "5" }, { 3, "10" } }
                 )
             };
 
@@ -335,7 +335,7 @@ namespace Client.Linq.Test
                     select s,
                     "start_shifted = int(v: time(v: p3)) + 1\n\n",
                     "range(start: time(v: start_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}}
+                    new Dictionary<int, DateTime> { { 2, month10 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -344,7 +344,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p2))\n" +
                     "stop_shifted = int(v: time(v: p3))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}}
+                    new Dictionary<int, DateTime> { { 2, month10 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -352,7 +352,7 @@ namespace Client.Linq.Test
                     select s,
                     "start_shifted = int(v: time(v: p3))\n\n",
                     "range(start: time(v: start_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}}
+                    new Dictionary<int, DateTime> { { 2, month10 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -361,7 +361,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p2))\n" +
                     "stop_shifted = int(v: time(v: p3)) + 1\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}}
+                    new Dictionary<int, DateTime> { { 2, month10 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -371,7 +371,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p3)) + 1\n" +
                     "stop_shifted = int(v: time(v: p4))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
+                    new Dictionary<int, DateTime> { { 2, month10 }, { 3, month11 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -380,7 +380,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p3)) + 1\n" +
                     "stop_shifted = int(v: time(v: p4))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
+                    new Dictionary<int, DateTime> { { 2, month10 }, { 3, month11 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -390,7 +390,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p3))\n" +
                     "stop_shifted = int(v: time(v: p4)) + 1\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
+                    new Dictionary<int, DateTime> { { 2, month10 }, { 3, month11 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -400,7 +400,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p3))\n" +
                     "stop_shifted = int(v: time(v: p4))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
+                    new Dictionary<int, DateTime> { { 2, month10 }, { 3, month11 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -409,7 +409,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p3))\n" +
                     "stop_shifted = int(v: time(v: p3)) + 1\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}}
+                    new Dictionary<int, DateTime> { { 2, month10 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
@@ -419,7 +419,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p3)) + 1\n" +
                     "stop_shifted = int(v: time(v: p4))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{2, month10}, {3, month11}}
+                    new Dictionary<int, DateTime> { { 2, month10 }, { 3, month11 } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
@@ -430,7 +430,7 @@ namespace Client.Linq.Test
                     select s,
                     "start_shifted = int(v: time(v: p2))\n\n",
                     "range(start: time(v: start_shifted))",
-                    new Dictionary<int, DateTime> {{1, defaultStart}}
+                    new Dictionary<int, DateTime> { { 1, defaultStart } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
@@ -442,7 +442,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p2))\n" +
                     "stop_shifted = int(v: time(v: p3))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{2, defaultStop}}
+                    new Dictionary<int, DateTime> { { 2, defaultStop } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
@@ -455,7 +455,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p2))\n" +
                     "stop_shifted = int(v: time(v: p3))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{1, defaultStart}, {2, defaultStop}}
+                    new Dictionary<int, DateTime> { { 1, defaultStart }, { 2, defaultStop } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
@@ -469,7 +469,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p4))\n" +
                     "stop_shifted = int(v: time(v: p3))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{3, month10}, {2, defaultStop}}
+                    new Dictionary<int, DateTime> { { 3, month10 }, { 2, defaultStop } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
@@ -484,7 +484,7 @@ namespace Client.Linq.Test
                     "start_shifted = int(v: time(v: p4))\n" +
                     "stop_shifted = int(v: time(v: p5))\n\n",
                     "range(start: time(v: start_shifted), stop: time(v: stop_shifted))",
-                    new Dictionary<int, DateTime> {{3, month10}, {4, month11}}
+                    new Dictionary<int, DateTime> { { 3, month10 }, { 4, month11 } }
                 )
             };
 
@@ -534,7 +534,7 @@ namespace Client.Linq.Test
 
             var ast = visitor.BuildFluxAST();
 
-            var measurementAssignment = ((OptionStatement) ast.Body[3]).Assignment as VariableAssignment;
+            var measurementAssignment = ((OptionStatement)ast.Body[3]).Assignment as VariableAssignment;
             Assert.AreEqual("p4", measurementAssignment?.Id.Name);
             Assert.AreEqual("my-measurement", (measurementAssignment?.Init as StringLiteral)?.Value);
         }
@@ -579,7 +579,7 @@ namespace Client.Linq.Test
                     where s.Attributes.Any(a => a.Name == "quality" && a.Value == "good")
                     select s,
                     "(r[\"attribute_quality\"] == p4)",
-                    new Dictionary<int, string> {{3, "good"}}
+                    new Dictionary<int, string> { { 3, "good" } }
                 ),
                 (
                     from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my-org", _queryApi,
@@ -587,7 +587,7 @@ namespace Client.Linq.Test
                     where s.Attributes.Any(a => "quality" == a.Name && "good" == a.Value)
                     select s,
                     "(r[\"attribute_quality\"] == p4)",
-                    new Dictionary<int, string> {{3, "good"}}
+                    new Dictionary<int, string> { { 3, "good" } }
                 ),
                 (
                     from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my-org", _queryApi,
@@ -595,7 +595,7 @@ namespace Client.Linq.Test
                     where s.Attributes.Any(a => a.Value == "good" && a.Name == "quality")
                     select s,
                     "(p3 == r[\"attribute_quality\"])",
-                    new Dictionary<int, string> {{2, "good"}}
+                    new Dictionary<int, string> { { 2, "good" } }
                 )
             };
 
@@ -649,7 +649,7 @@ namespace Client.Linq.Test
         [Test]
         public void ResultOperatorContainsField()
         {
-            int[] values = {15, 28};
+            int[] values = { 15, 28 };
 
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where values.Contains(s.Value)
@@ -667,7 +667,7 @@ namespace Client.Linq.Test
 
             var ast = visitor.BuildFluxAST();
 
-            var arrayAssignment = ((OptionStatement) ast.Body[2]).Assignment as VariableAssignment;
+            var arrayAssignment = ((OptionStatement)ast.Body[2]).Assignment as VariableAssignment;
             var arrayAssignmentValues =
                 (arrayAssignment.Init as ArrayExpression).Elements
                 .Cast<IntegerLiteral>()
@@ -682,7 +682,7 @@ namespace Client.Linq.Test
         [Test]
         public void ResultOperatorContainsTag()
         {
-            string[] deployment = {"production", "testing"};
+            string[] deployment = { "production", "testing" };
 
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                 where deployment.Contains(s.Deployment)
@@ -700,7 +700,7 @@ namespace Client.Linq.Test
 
             var ast = visitor.BuildFluxAST();
 
-            var arrayAssignment = ((OptionStatement) ast.Body[2]).Assignment as VariableAssignment;
+            var arrayAssignment = ((OptionStatement)ast.Body[2]).Assignment as VariableAssignment;
             var arrayAssignmentValues =
                 (arrayAssignment.Init as ArrayExpression).Elements
                 .Cast<StringLiteral>()
@@ -831,30 +831,30 @@ namespace Client.Linq.Test
                     orderby s.Timestamp
                     select s,
                     "",
-                    new Dictionary<int, object> {{2, "_time"}, {3, false}}
+                    new Dictionary<int, object> { { 2, "_time" }, { 3, false } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
                     orderby s.Timestamp descending
                     select s,
                     " |> sort(columns: [p3], desc: p4)",
-                    new Dictionary<int, object> {{2, "_time"}, {3, true}}
+                    new Dictionary<int, object> { { 2, "_time" }, { 3, true } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
-                        new QueryableOptimizerSettings {QueryMultipleTimeSeries = true})
+                        new QueryableOptimizerSettings { QueryMultipleTimeSeries = true })
                     orderby s.Timestamp
                     select s,
                     " |> group() |> sort(columns: [p3], desc: p4)",
-                    new Dictionary<int, object> {{2, "_time"}, {3, false}}
+                    new Dictionary<int, object> { { 2, "_time" }, { 3, false } }
                 ),
                 (
                     from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
-                        new QueryableOptimizerSettings {QueryMultipleTimeSeries = true})
+                        new QueryableOptimizerSettings { QueryMultipleTimeSeries = true })
                     orderby s.Timestamp descending
                     select s,
                     " |> group() |> sort(columns: [p3], desc: p4)",
-                    new Dictionary<int, object> {{2, "_time"}, {3, true}}
+                    new Dictionary<int, object> { { 2, "_time" }, { 3, true } }
                 )
             };
 
@@ -909,13 +909,13 @@ namespace Client.Linq.Test
                                     "|> filter(fn: (r) => (r[\"data\"] > p4)) " +
                                     "|> limit(n: p9, offset: p10)";
 
-            Assert.AreEqual(expected, ((InfluxDBQueryable<Sensor>) query).ToDebugQuery()._Query);
+            Assert.AreEqual(expected, ((InfluxDBQueryable<Sensor>)query).ToDebugQuery()._Query);
         }
 
         [Test]
         public void ToDebugQueryMultipleTimeSeries()
         {
-            var settings = new QueryableOptimizerSettings {QueryMultipleTimeSeries = true};
+            var settings = new QueryableOptimizerSettings { QueryMultipleTimeSeries = true };
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi, settings)
                     where s.SensorId == "id-1"
                     where s.Value > 12
@@ -938,7 +938,7 @@ namespace Client.Linq.Test
                                     "|> sort(columns: [p7], desc: p8) " +
                                     "|> limit(n: p9, offset: p10)";
 
-            Assert.AreEqual(expected, ((InfluxDBQueryable<Sensor>) query).ToDebugQuery()._Query);
+            Assert.AreEqual(expected, ((InfluxDBQueryable<Sensor>)query).ToDebugQuery()._Query);
         }
 
         [Test]
@@ -997,15 +997,15 @@ namespace Client.Linq.Test
             Assert.NotNull(ast.Body);
             Assert.AreEqual(3, ast.Body.Count);
 
-            var bucketAssignment = ((OptionStatement) ast.Body[0]).Assignment as VariableAssignment;
+            var bucketAssignment = ((OptionStatement)ast.Body[0]).Assignment as VariableAssignment;
             Assert.AreEqual("p1", bucketAssignment?.Id.Name);
             Assert.AreEqual("my-bucket", (bucketAssignment?.Init as StringLiteral)?.Value);
 
-            var rangeAssignment = ((OptionStatement) ast.Body[1]).Assignment as VariableAssignment;
+            var rangeAssignment = ((OptionStatement)ast.Body[1]).Assignment as VariableAssignment;
             Assert.AreEqual("p2", rangeAssignment?.Id.Name);
             Assert.AreEqual("0", (rangeAssignment?.Init as IntegerLiteral)?.Value);
 
-            var endWithTicksAssignment = ((OptionStatement) ast.Body[2]).Assignment as VariableAssignment;
+            var endWithTicksAssignment = ((OptionStatement)ast.Body[2]).Assignment as VariableAssignment;
             Assert.AreEqual("p3", endWithTicksAssignment?.Id.Name);
             Assert.AreEqual("637656739543829486", (endWithTicksAssignment?.Init as IntegerLiteral)?.Value);
         }
@@ -1027,17 +1027,17 @@ namespace Client.Linq.Test
             Assert.NotNull(ast.Body);
             Assert.AreEqual(6, ast.Body.Count);
 
-            var everyAssignment = ((OptionStatement) ast.Body[2]).Assignment as VariableAssignment;
+            var everyAssignment = ((OptionStatement)ast.Body[2]).Assignment as VariableAssignment;
             Assert.AreEqual("p3", everyAssignment?.Id.Name);
             Assert.AreEqual(20000000, (everyAssignment.Init as DurationLiteral)?.Values[0].Magnitude);
             Assert.AreEqual("us", (everyAssignment.Init as DurationLiteral)?.Values[0].Unit);
 
-            var periodAssignment = ((OptionStatement) ast.Body[3]).Assignment as VariableAssignment;
+            var periodAssignment = ((OptionStatement)ast.Body[3]).Assignment as VariableAssignment;
             Assert.AreEqual("p4", periodAssignment?.Id.Name);
             Assert.AreEqual(40000000, (periodAssignment.Init as DurationLiteral)?.Values[0].Magnitude);
             Assert.AreEqual("us", (periodAssignment.Init as DurationLiteral)?.Values[0].Unit);
 
-            var fnAssignment = ((OptionStatement) ast.Body[4]).Assignment as VariableAssignment;
+            var fnAssignment = ((OptionStatement)ast.Body[4]).Assignment as VariableAssignment;
             Assert.AreEqual("p5", fnAssignment?.Id.Name);
             Assert.AreEqual("mean", (fnAssignment.Init as Identifier)?.Name);
         }
@@ -1144,7 +1144,7 @@ namespace Client.Linq.Test
             foreach (var (alignFieldsWithPivot, expected) in queries)
             {
                 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
-                        new QueryableOptimizerSettings {AlignFieldsWithPivot = alignFieldsWithPivot})
+                        new QueryableOptimizerSettings { AlignFieldsWithPivot = alignFieldsWithPivot })
                     select s;
                 var visitor = BuildQueryVisitor(query);
 
@@ -1180,7 +1180,7 @@ namespace Client.Linq.Test
         public void AlignLimitFunctionBeforePivot()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi,
-                    new QueryableOptimizerSettings {AlignLimitFunctionAfterPivot = false})
+                    new QueryableOptimizerSettings { AlignLimitFunctionAfterPivot = false })
                 select s;
 
             var visitor = BuildQueryVisitor(query, MakeExpression(query, q => q.TakeLast(10)));
@@ -1204,7 +1204,7 @@ namespace Client.Linq.Test
 
         private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)
         {
-            var queryExecutor = (InfluxDBQueryExecutor) ((DefaultQueryProvider) queryable.Provider).Executor;
+            var queryExecutor = (InfluxDBQueryExecutor)((DefaultQueryProvider)queryable.Provider).Executor;
             var queryModel = InfluxDBQueryable<Sensor>.CreateQueryParser()
                 .GetParsedQuery(expression ?? queryable.Expression);
             return queryExecutor.QueryVisitor(queryModel);
@@ -1226,7 +1226,7 @@ namespace Client.Linq.Test
 
         private TLiteralType GetLiteral<TLiteralType>(Statement statement) where TLiteralType : class
         {
-            return (((OptionStatement) statement).Assignment as VariableAssignment)?.Init as TLiteralType;
+            return (((OptionStatement)statement).Assignment as VariableAssignment)?.Init as TLiteralType;
         }
     }
 }

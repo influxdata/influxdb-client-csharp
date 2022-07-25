@@ -676,7 +676,7 @@ namespace InfluxDB.Client.Api.Service
         /// <returns></returns>
         public OrganizationsService(string basePath)
         {
-            Configuration = new Configuration {BasePath = basePath};
+            Configuration = new Configuration { BasePath = basePath };
 
             ExceptionFactory = Configuration.DefaultExceptionFactory;
         }
@@ -833,12 +833,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -911,12 +911,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -985,12 +985,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1093,7 +1093,7 @@ namespace InfluxDB.Client.Api.Service
             var localVarResponse = await DeleteOrgsIDAsyncWithIRestResponse(orgID, zapTraceSpan, cancellationToken)
                 .ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1166,7 +1166,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -1265,12 +1265,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1356,12 +1356,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1444,12 +1444,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1568,7 +1568,7 @@ namespace InfluxDB.Client.Api.Service
                 await DeleteOrgsIDMembersIDAsyncWithIRestResponse(userID, orgID, zapTraceSpan, cancellationToken)
                     .ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1654,7 +1654,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -1753,12 +1753,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1844,12 +1844,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1932,12 +1932,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2056,7 +2056,7 @@ namespace InfluxDB.Client.Api.Service
                 await DeleteOrgsIDOwnersIDAsyncWithIRestResponse(userID, orgID, zapTraceSpan, cancellationToken)
                     .ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2142,7 +2142,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -2263,12 +2263,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2281,7 +2281,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<Organizations>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Organizations) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organizations)));
+                (Organizations)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organizations)));
         }
 
         /// <summary>
@@ -2371,12 +2371,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2475,12 +2475,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2629,7 +2629,7 @@ namespace InfluxDB.Client.Api.Service
                 await GetOrgsAsyncWithIRestResponse(zapTraceSpan, offset, limit, descending, org, orgID, userID,
                     cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2642,7 +2642,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<Organizations>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Organizations) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organizations)));
+                (Organizations)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organizations)));
         }
 
         /// <summary>
@@ -2732,7 +2732,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -2817,12 +2817,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2835,7 +2835,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<Organization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Organization) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
+                (Organization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
         }
 
         /// <summary>
@@ -2895,12 +2895,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2969,12 +2969,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3079,7 +3079,7 @@ namespace InfluxDB.Client.Api.Service
             var localVarResponse = await GetOrgsIDAsyncWithIRestResponse(orgID, zapTraceSpan, cancellationToken)
                 .ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3092,7 +3092,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<Organization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Organization) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
+                (Organization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
         }
 
         /// <summary>
@@ -3152,7 +3152,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -3237,12 +3237,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3255,7 +3255,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<ResourceMembers>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+                (ResourceMembers)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
         }
 
         /// <summary>
@@ -3315,12 +3315,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3389,12 +3389,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3499,7 +3499,7 @@ namespace InfluxDB.Client.Api.Service
             var localVarResponse = await GetOrgsIDMembersAsyncWithIRestResponse(orgID, zapTraceSpan, cancellationToken)
                 .ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3512,7 +3512,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<ResourceMembers>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMembers) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
+                (ResourceMembers)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMembers)));
         }
 
         /// <summary>
@@ -3572,7 +3572,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -3657,12 +3657,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3675,7 +3675,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<ResourceOwners>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+                (ResourceOwners)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
         }
 
         /// <summary>
@@ -3735,12 +3735,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3809,12 +3809,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3919,7 +3919,7 @@ namespace InfluxDB.Client.Api.Service
             var localVarResponse = await GetOrgsIDOwnersAsyncWithIRestResponse(orgID, zapTraceSpan, cancellationToken)
                 .ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -3932,7 +3932,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<ResourceOwners>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwners) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
+                (ResourceOwners)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwners)));
         }
 
         /// <summary>
@@ -3992,7 +3992,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -4099,12 +4099,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -4117,7 +4117,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<Organization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Organization) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
+                (Organization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
         }
 
         /// <summary>
@@ -4197,12 +4197,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -4291,12 +4291,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -4427,7 +4427,7 @@ namespace InfluxDB.Client.Api.Service
                 await PatchOrgsIDAsyncWithIRestResponse(orgID, patchOrganizationRequest, zapTraceSpan,
                     cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -4440,7 +4440,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<Organization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Organization) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
+                (Organization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
         }
 
         /// <summary>
@@ -4520,7 +4520,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -4612,12 +4612,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -4630,7 +4630,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<Organization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Organization) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
+                (Organization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
         }
 
         /// <summary>
@@ -4697,12 +4697,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -4778,12 +4778,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -4899,7 +4899,7 @@ namespace InfluxDB.Client.Api.Service
                 await PostOrgsAsyncWithIRestResponse(postOrganizationRequest, zapTraceSpan, cancellationToken)
                     .ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -4912,7 +4912,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<Organization>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (Organization) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
+                (Organization)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Organization)));
         }
 
         /// <summary>
@@ -4979,7 +4979,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -5086,12 +5086,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -5104,7 +5104,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<ResourceMember>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMember) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
+                (ResourceMember)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
         }
 
         /// <summary>
@@ -5184,12 +5184,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -5278,12 +5278,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -5414,7 +5414,7 @@ namespace InfluxDB.Client.Api.Service
                 await PostOrgsIDMembersAsyncWithIRestResponse(orgID, addResourceMemberRequestBody, zapTraceSpan,
                     cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -5427,7 +5427,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<ResourceMember>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceMember) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
+                (ResourceMember)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceMember)));
         }
 
         /// <summary>
@@ -5507,7 +5507,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
@@ -5614,12 +5614,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -5632,7 +5632,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<ResourceOwner>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwner) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
+                (ResourceOwner)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
         }
 
         /// <summary>
@@ -5712,12 +5712,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -5806,12 +5806,12 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            var localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -5942,7 +5942,7 @@ namespace InfluxDB.Client.Api.Service
                 await PostOrgsIDOwnersAsyncWithIRestResponse(orgID, addResourceMemberRequestBody, zapTraceSpan,
                     cancellationToken).ConfigureAwait(false);
 
-            var localVarStatusCode = (int) localVarResponse.StatusCode;
+            var localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -5955,7 +5955,7 @@ namespace InfluxDB.Client.Api.Service
 
             return new ApiResponse<ResourceOwner>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ResourceOwner) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
+                (ResourceOwner)Configuration.ApiClient.Deserialize(localVarResponse, typeof(ResourceOwner)));
         }
 
         /// <summary>
@@ -6035,7 +6035,7 @@ namespace InfluxDB.Client.Api.Service
 
 
             // make the HTTP request
-            var localVarResponse = (RestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            var localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType, cancellationToken).ConfigureAwait(false);

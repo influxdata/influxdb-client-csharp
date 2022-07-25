@@ -133,7 +133,7 @@ namespace InfluxDB.Client.Flux
             var version = AssemblyHelper.GetVersion(typeof(FluxClient));
             var restClientOptions = new RestClientOptions(options.Url)
             {
-                MaxTimeout = (int) options.Timeout.TotalMilliseconds,
+                MaxTimeout = (int)options.Timeout.TotalMilliseconds,
                 UserAgent = $"influxdb-client-csharp/{version}",
                 Proxy = options.WebProxy
             };
@@ -369,7 +369,7 @@ namespace InfluxDB.Client.Flux
             RaiseForInfluxError(response, response.Content);
 
             AfterIntercept(
-                (int) response.StatusCode,
+                (int)response.StatusCode,
                 () => response.Headers,
                 response.Content);
 
@@ -383,7 +383,7 @@ namespace InfluxDB.Client.Flux
 
         protected override T AfterIntercept<T>(int statusCode, Func<IEnumerable<HeaderParameter>> headers, T body)
         {
-            return (T) _loggingHandler.AfterIntercept(statusCode, headers, body);
+            return (T)_loggingHandler.AfterIntercept(statusCode, headers, body);
         }
 
         private RestRequest PingRequest()

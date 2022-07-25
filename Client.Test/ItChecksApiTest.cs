@@ -40,7 +40,7 @@ namespace InfluxDB.Client.Test
             var range = new RangeThreshold(min: 50F, max: 70F, level: CheckStatusLevel.WARN, within: false,
                 type: RangeThreshold.TypeEnum.Range);
 
-            var thresholds = new List<Threshold> {greater, lesser, range};
+            var thresholds = new List<Threshold> { greater, lesser, range };
             var name = GenerateName("th-check");
             var threshold = await _checksApi.CreateThresholdCheckAsync(name,
                 "from(bucket: \"foo\") |> range(start: -1d, stop: now()) |> aggregateWindow(every: 1m, fn: mean) |> filter(fn: (r) => r._field == \"usage_user\") |> yield()",
@@ -53,19 +53,19 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(ThresholdCheck.TypeEnum.Threshold, threshold.Type);
             Assert.AreEqual(3, threshold.Thresholds.Count);
 
-            var greaterThreshold = (GreaterThreshold) threshold.Thresholds[0];
+            var greaterThreshold = (GreaterThreshold)threshold.Thresholds[0];
             Assert.AreEqual(GreaterThreshold.TypeEnum.Greater, greaterThreshold.Type);
             Assert.AreEqual(80F, greaterThreshold.Value);
             Assert.AreEqual(CheckStatusLevel.CRIT, greater.Level);
             Assert.IsTrue(greaterThreshold.AllValues);
 
-            var lesserThreshold = (LesserThreshold) threshold.Thresholds[1];
+            var lesserThreshold = (LesserThreshold)threshold.Thresholds[1];
             Assert.AreEqual(LesserThreshold.TypeEnum.Lesser, lesserThreshold.Type);
             Assert.AreEqual(20F, lesserThreshold.Value);
             Assert.AreEqual(CheckStatusLevel.OK, lesserThreshold.Level);
             Assert.IsFalse(lesserThreshold.AllValues);
 
-            var rangeThreshold = (RangeThreshold) threshold.Thresholds[2];
+            var rangeThreshold = (RangeThreshold)threshold.Thresholds[2];
             Assert.AreEqual(RangeThreshold.TypeEnum.Range, rangeThreshold.Type);
             Assert.AreEqual(50F, rangeThreshold.Min);
             Assert.AreEqual(70F, rangeThreshold.Max);
@@ -161,7 +161,7 @@ namespace InfluxDB.Client.Test
             threshold.Description = "updated description";
             threshold.Status = TaskStatusType.Inactive;
 
-            threshold = (ThresholdCheck) await _checksApi.UpdateCheckAsync(threshold);
+            threshold = (ThresholdCheck)await _checksApi.UpdateCheckAsync(threshold);
 
             Assert.AreEqual(updatedName, threshold.Name);
             Assert.AreEqual("updated description", threshold.Description);
@@ -227,7 +227,7 @@ namespace InfluxDB.Client.Test
                 greater,
                 _orgId);
 
-            var found = (ThresholdCheck) await _checksApi.FindCheckByIdAsync(check.Id);
+            var found = (ThresholdCheck)await _checksApi.FindCheckByIdAsync(check.Id);
 
             Assert.AreEqual(check.Id, found.Id);
         }
@@ -257,7 +257,7 @@ namespace InfluxDB.Client.Test
                 greater,
                 _orgId);
 
-            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
+            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
 
             var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _orgId);
 
@@ -316,7 +316,7 @@ namespace InfluxDB.Client.Test
                     greater,
                     _orgId);
 
-            var findOptions = new FindOptions {Limit = 5};
+            var findOptions = new FindOptions { Limit = 5 };
 
             var checks = await _checksApi.FindChecksAsync(_orgId, findOptions);
             Assert.AreEqual(5, checks._Checks.Count);

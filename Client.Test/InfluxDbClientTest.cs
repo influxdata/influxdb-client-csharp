@@ -351,15 +351,15 @@ namespace InfluxDB.Client.Test
             _client.Dispose();
             var apiClientInfo =
                 _client.GetType().GetField("_apiClient", BindingFlags.NonPublic | BindingFlags.Instance);
-            var apiClient = (ApiClient) apiClientInfo!.GetValue(_client);
+            var apiClient = (ApiClient)apiClientInfo!.GetValue(_client);
 
             var httpClientInfo =
                 apiClient!.RestClient.GetType()
                     .GetProperty("HttpClient", BindingFlags.NonPublic | BindingFlags.Instance);
-            var httpClient = (HttpClient) httpClientInfo!.GetValue(apiClient.RestClient);
+            var httpClient = (HttpClient)httpClientInfo!.GetValue(apiClient.RestClient);
             var disposedInfo =
                 httpClient!.GetType().GetField("_disposed", BindingFlags.NonPublic | BindingFlags.Instance);
-            var disposed = (bool) disposedInfo!.GetValue(httpClient)!;
+            var disposed = (bool)disposedInfo!.GetValue(httpClient)!;
 
             Assert.AreEqual(true, disposed);
         }
@@ -409,7 +409,7 @@ namespace InfluxDB.Client.Test
                 .Setup(library => library.GetQueryApiSync(null))
                 .Returns(mockQueryApi.Object);
 
-            var mockTables = new List<FluxTable> {new FluxTable()};
+            var mockTables = new List<FluxTable> { new FluxTable() };
             mockQueryApi
                 .Setup(api => api.QuerySync("from(...", "my-org", CancellationToken.None))
                 .Returns(mockTables);

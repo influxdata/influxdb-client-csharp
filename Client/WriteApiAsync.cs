@@ -189,7 +189,7 @@ namespace InfluxDB.Client
         public Task WriteRecordAsync(string record, WritePrecision precision = WritePrecision.Ns, string bucket = null,
             string org = null, CancellationToken cancellationToken = default)
         {
-            return WriteRecordsAsync(new List<string> {record}, precision, bucket, org, cancellationToken);
+            return WriteRecordsAsync(new List<string> { record }, precision, bucket, org, cancellationToken);
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace InfluxDB.Client
                 return Task.CompletedTask;
             }
 
-            return WritePointsAsync(new List<PointData> {point}, bucket, org, cancellationToken);
+            return WritePointsAsync(new List<PointData> { point }, bucket, org, cancellationToken);
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace InfluxDB.Client
                 return Task.CompletedTask;
             }
 
-            return WriteMeasurementsAsync(new List<TM> {measurement}, precision, bucket, org, cancellationToken);
+            return WriteMeasurementsAsync(new List<TM> { measurement }, precision, bucket, org, cancellationToken);
         }
 
         /// <summary>

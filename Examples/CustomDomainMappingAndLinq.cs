@@ -58,7 +58,7 @@ namespace Examples
             /// </summary>
             public T ConvertToEntity<T>(FluxRecord fluxRecord)
             {
-                return (T) ConvertToEntity(fluxRecord, typeof(T));
+                return (T)ConvertToEntity(fluxRecord, typeof(T));
             }
 
 
@@ -190,9 +190,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = 4},
+                        { Name = "height", Value = 4 },
                     new DomainEntityAttribute
-                        {Name = "width", Value = 110}
+                        { Name = "width", Value = 110 }
                 }
             };
             var entity2 = new DomainEntity
@@ -203,9 +203,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = 5},
+                        { Name = "height", Value = 5 },
                     new DomainEntityAttribute
-                        {Name = "width", Value = 160}
+                        { Name = "width", Value = 160 }
                 }
             };
             var entity3 = new DomainEntity
@@ -216,9 +216,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = 5},
+                        { Name = "height", Value = 5 },
                     new DomainEntityAttribute
-                        {Name = "width", Value = 110}
+                        { Name = "width", Value = 110 }
                 }
             };
             var entity4 = new DomainEntity
@@ -229,9 +229,9 @@ namespace Examples
                 Properties = new List<DomainEntityAttribute>
                 {
                     new DomainEntityAttribute
-                        {Name = "height", Value = 6},
+                        { Name = "height", Value = 6 },
                     new DomainEntityAttribute
-                        {Name = "width", Value = 160}
+                        { Name = "width", Value = 160 }
                 }
             };
 
@@ -239,7 +239,7 @@ namespace Examples
             // Write data
             //
             await client.GetWriteApiAsync(converter)
-                .WriteMeasurementsAsync(new[] {entity1, entity2, entity3, entity4}, WritePrecision.S);
+                .WriteMeasurementsAsync(new[] { entity1, entity2, entity3, entity4 }, WritePrecision.S);
 
             //
             // Query Data to Domain object
@@ -295,7 +295,7 @@ namespace Examples
             // Debug Query
             //
             Console.WriteLine("==== Debug LINQ Queryable Flux output ====");
-            var influxQuery = ((InfluxDBQueryable<DomainEntity>) query).ToDebugQuery();
+            var influxQuery = ((InfluxDBQueryable<DomainEntity>)query).ToDebugQuery();
             foreach (var statement in influxQuery.Extern.Body)
             {
                 var os = statement as OptionStatement;

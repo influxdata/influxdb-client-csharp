@@ -40,7 +40,7 @@ namespace Examples
             var write = new Permission(Permission.ActionEnum.Write, resource);
 
             var authorization = await client.GetAuthorizationsApi()
-                .CreateAuthorizationAsync(orgId, new List<Permission> {read, write});
+                .CreateAuthorizationAsync(orgId, new List<Permission> { read, write });
 
             //
             // Created token that can be use for writes to "iot_bucket"

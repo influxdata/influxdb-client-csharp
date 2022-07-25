@@ -186,21 +186,21 @@ namespace InfluxDB.Client.Api.Domain
                 new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
                 {
                     {
-                        new[] {"LinePlusSingleStatProperties", "line-plus-single-stat", "chronograf-v2"},
+                        new[] { "LinePlusSingleStatProperties", "line-plus-single-stat", "chronograf-v2" },
                         typeof(LinePlusSingleStatProperties)
                     },
-                    {new[] {"XYViewProperties", "xy", "chronograf-v2"}, typeof(XYViewProperties)},
-                    {new[] {"single-stat", "chronograf-v2"}, typeof(SingleStatViewProperties)},
-                    {new[] {"histogram", "chronograf-v2"}, typeof(HistogramViewProperties)},
-                    {new[] {"gauge", "chronograf-v2"}, typeof(GaugeViewProperties)},
-                    {new[] {"table", "chronograf-v2"}, typeof(TableViewProperties)},
-                    {new[] {"simple-table", "chronograf-v2"}, typeof(SimpleTableViewProperties)},
-                    {new[] {"markdown", "chronograf-v2"}, typeof(MarkdownViewProperties)},
-                    {new[] {"check", "chronograf-v2"}, typeof(CheckViewProperties)},
-                    {new[] {"ScatterViewProperties", "scatter", "chronograf-v2"}, typeof(ScatterViewProperties)},
-                    {new[] {"HeatmapViewProperties", "heatmap", "chronograf-v2"}, typeof(HeatmapViewProperties)},
-                    {new[] {"MosaicViewProperties", "mosaic", "chronograf-v2"}, typeof(MosaicViewProperties)},
-                    {new[] {"BandViewProperties", "band", "chronograf-v2"}, typeof(BandViewProperties)}
+                    { new[] { "XYViewProperties", "xy", "chronograf-v2" }, typeof(XYViewProperties) },
+                    { new[] { "single-stat", "chronograf-v2" }, typeof(SingleStatViewProperties) },
+                    { new[] { "histogram", "chronograf-v2" }, typeof(HistogramViewProperties) },
+                    { new[] { "gauge", "chronograf-v2" }, typeof(GaugeViewProperties) },
+                    { new[] { "table", "chronograf-v2" }, typeof(TableViewProperties) },
+                    { new[] { "simple-table", "chronograf-v2" }, typeof(SimpleTableViewProperties) },
+                    { new[] { "markdown", "chronograf-v2" }, typeof(MarkdownViewProperties) },
+                    { new[] { "check", "chronograf-v2" }, typeof(CheckViewProperties) },
+                    { new[] { "ScatterViewProperties", "scatter", "chronograf-v2" }, typeof(ScatterViewProperties) },
+                    { new[] { "HeatmapViewProperties", "heatmap", "chronograf-v2" }, typeof(HeatmapViewProperties) },
+                    { new[] { "MosaicViewProperties", "mosaic", "chronograf-v2" }, typeof(MosaicViewProperties) },
+                    { new[] { "BandViewProperties", "band", "chronograf-v2" }, typeof(BandViewProperties) }
                 };
 
             public override bool CanConvert(Type objectType)
@@ -227,7 +227,7 @@ namespace InfluxDB.Client.Api.Domain
 
                         var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                        var discriminator = new[] {"timeFormat", "type", "shape"}
+                        var discriminator = new[] { "timeFormat", "type", "shape" }
                             .Select(key => jObject[key].ToString()).ToArray();
 
                         Types.TryGetValue(discriminator, out var type);
@@ -246,7 +246,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 var elementType = targetType.GenericTypeArguments.FirstOrDefault();
 
-                var list = (IList) Activator.CreateInstance(targetType);
+                var list = (IList)Activator.CreateInstance(targetType);
                 while (reader.Read() && reader.TokenType != JsonToken.EndArray)
                     list.Add(Deserialize(reader, elementType, serializer));
 

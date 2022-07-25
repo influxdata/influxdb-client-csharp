@@ -120,7 +120,7 @@ namespace InfluxDB.Client.Core.Exceptions
                 }
             }
 
-            var keys = new[] {"X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error"};
+            var keys = new[] { "X-Platform-Error-Code", "X-Influx-Error", "X-InfluxDb-Error" };
 
             if (string.IsNullOrEmpty(errorMessage))
             {
@@ -139,7 +139,7 @@ namespace InfluxDB.Client.Core.Exceptions
                 errorMessage = stringBody;
             }
 
-            var err = (int) statusCode switch
+            var err = (int)statusCode switch
             {
                 400 => new BadRequestException(errorMessage, exception),
                 401 => new UnauthorizedException(errorMessage, exception),
@@ -157,7 +157,7 @@ namespace InfluxDB.Client.Core.Exceptions
                 501 => new HttpNotImplementedException(errorMessage, exception),
                 502 => new BadGatewayException(errorMessage, exception),
                 503 => new ServiceUnavailableException(errorMessage, exception),
-                _ => new HttpException(errorMessage, (int) statusCode, exception)
+                _ => new HttpException(errorMessage, (int)statusCode, exception)
             };
 
             err.ErrorBody = errorBody;

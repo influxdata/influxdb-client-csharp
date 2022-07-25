@@ -68,7 +68,7 @@ namespace InfluxDB.Client.Linq.Internal
         internal File BuildFluxAST()
         {
             return new File
-                {Imports = new List<ImportDeclaration>(), Package = null, Body = _context.Variables.GetStatements()};
+                { Imports = new List<ImportDeclaration>(), Package = null, Body = _context.Variables.GetStatements() };
         }
 
         internal string BuildFluxQuery()
@@ -170,7 +170,7 @@ namespace InfluxDB.Client.Linq.Internal
                         queryModel.MainFromClause);
                     var columnExpression =
                         GetExpressions(containsResultOperator.Item, queryModel.MainFromClause).First();
-                    var columnVariable = ConcatExpression(new[] {columnExpression});
+                    var columnVariable = ConcatExpression(new[] { columnExpression });
                     var filter = $"contains(value: {columnVariable}, set: {setVariable})";
                     if (columnExpression is TagColumnName || columnExpression is MeasurementColumnName)
                     {
@@ -248,7 +248,7 @@ namespace InfluxDB.Client.Linq.Internal
                 var assignment = assignmentBuilder.ToString();
                 if (assignment.Length > 0)
                 {
-                    var binaryOperator = (BinaryOperator) rangeFilter[rangeBinaryIndex];
+                    var binaryOperator = (BinaryOperator)rangeFilter[rangeBinaryIndex];
                     switch (binaryOperator.Expression.NodeType)
                     {
                         case ExpressionType.Equal:

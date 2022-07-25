@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-        <LangVersion>8</LangVersion>
+      <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+      <LangVersion>8</LangVersion>
 
-        <Description>The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.x.</Description>
+      <Description>The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.x.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client</AssemblyName>
         <VersionPrefix>4.4.0</VersionPrefix>
@@ -28,17 +28,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath=""/>
-        <ProjectReference Include="..\Client.Core\Client.Core.csproj"/>
+        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
+        <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="JsonSubTypes" Version="1.9.0"/>
-        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.7"/>
-        <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8"/>
-        <PackageReference Include="System.Collections.Immutable" Version="6.0.0"/>
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0"/>
-        <PackageReference Include="System.Reactive" Version="5.0.0"/>
+        <PackageReference Include="JsonSubTypes" Version="1.9.0" />
+        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="6.0.7" />
+        <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
+        <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+        <PackageReference Include="System.Reactive" Version="5.0.0" />
     </ItemGroup>
 
 </Project>

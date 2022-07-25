@@ -530,7 +530,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
+            var status = (TaskStatusType)Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
             var taskCreateRequest = new TaskCreateRequest(task.OrgID, task.Org, status,
                 task.Flux, task.Description);
 
@@ -657,7 +657,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
+            var status = (TaskStatusType)Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
 
             var request = new TaskUpdateRequest(status, task.Flux, task.Name, task.Every, task.Cron);
 
@@ -732,7 +732,7 @@ namespace InfluxDB.Client
         {
             Arguments.CheckNotNull(task, nameof(task));
 
-            var status = (TaskStatusType) Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
+            var status = (TaskStatusType)Enum.Parse(typeof(TaskStatusType), task.Status.ToString());
             var cloned = new TaskCreateRequest(task.OrgID, task.Org, status,
                 task.Flux, task.Description);
 

@@ -31,13 +31,13 @@ namespace InfluxDB.Client.Core.Flux.Domain
         /// <returns>the inclusive lower time bound of all records</returns>
         public Instant? GetStart()
         {
-            return (Instant?) GetValueByKey("_start");
+            return (Instant?)GetValueByKey("_start");
         }
 
         /// <returns>the exclusive upper time bound of all records</returns>
         public Instant? GetStop()
         {
-            return (Instant?) GetValueByKey("_stop");
+            return (Instant?)GetValueByKey("_stop");
         }
 
         ///<summary>
@@ -46,7 +46,7 @@ namespace InfluxDB.Client.Core.Flux.Domain
         /// <returns>the time of the record</returns>
         public Instant? GetTime()
         {
-            return (Instant?) GetValueByKey("_time");
+            return (Instant?)GetValueByKey("_time");
         }
 
         ///<summary>
@@ -69,13 +69,13 @@ namespace InfluxDB.Client.Core.Flux.Domain
         /// <returns>get value with key <i>_field</i></returns>
         public string GetField()
         {
-            return (string) GetValueByKey("_field");
+            return (string)GetValueByKey("_field");
         }
 
         /// <returns>get value with key <i>_measurement</i></returns>
         public string GetMeasurement()
         {
-            return (string) GetValueByKey("_measurement");
+            return (string)GetValueByKey("_measurement");
         }
 
         /// <summary>

@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Internal
             var measurementType = measurement.GetType();
             CacheMeasurementClass(measurementType);
 
-            var measurementAttribute = (Measurement) measurementType.GetCustomAttribute(typeof(Measurement));
+            var measurementAttribute = (Measurement)measurementType.GetCustomAttribute(typeof(Measurement));
             var measurementColumn = CACHE[measurementType.Name].SingleOrDefault(p => p.Column.IsMeasurement);
 
             if (((measurementAttribute == null) ^ (measurementColumn == null)) == false)
@@ -48,7 +48,7 @@ namespace InfluxDB.Client.Internal
 
             var measurementName =
                 measurementAttribute == null
-                    ? (string) measurementColumn.Property.GetValue(measurement)
+                    ? (string)measurementColumn.Property.GetValue(measurement)
                     : measurementAttribute.Name;
 
             var point = PointData.Measurement(measurementName);
@@ -169,7 +169,7 @@ namespace InfluxDB.Client.Internal
 
             CACHE[measurementType.Name] = measurementType.GetProperties()
                 .Select(property => new PropertyInfoColumn
-                    {Column = (Column) property.GetCustomAttribute(typeof(Column)), Property = property})
+                    { Column = (Column)property.GetCustomAttribute(typeof(Column)), Property = property })
                 .Where(propertyInfo => propertyInfo.Column != null)
                 .ToArray();
         }

@@ -7,16 +7,16 @@
         <VersionPrefix>4.4.0</VersionPrefix>
         <VersionSuffix>dev</VersionSuffix>
         <IsPackable>false</IsPackable>
-
+        
         <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
         <StartupObject>Examples.RunExamples</StartupObject>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Client.Legacy\Client.Legacy.csproj"/>
-        <ProjectReference Include="..\Client.Linq\Client.Linq.csproj"/>
-        <ProjectReference Include="..\Client\Client.csproj"/>
+      <ProjectReference Include="..\Client.Legacy\Client.Legacy.csproj" />
+      <ProjectReference Include="..\Client.Linq\Client.Linq.csproj" />
+      <ProjectReference Include="..\Client\Client.csproj" />
     </ItemGroup>
 
 </Project>

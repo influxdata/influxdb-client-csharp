@@ -33,7 +33,7 @@ namespace InfluxDB.Client.Core.Test
 
         private static HttpResponseMessage Response(int statusCode)
         {
-            return new HttpResponseMessage((HttpStatusCode) statusCode);
+            return new HttpResponseMessage((HttpStatusCode)statusCode);
         }
     }
 }

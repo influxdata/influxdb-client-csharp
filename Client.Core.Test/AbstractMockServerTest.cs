@@ -13,7 +13,7 @@ namespace InfluxDB.Client.Core.Test
         [SetUp]
         public new void SetUp()
         {
-            if (MockServer is {IsStarted: true})
+            if (MockServer is { IsStarted: true })
             {
                 return;
             }

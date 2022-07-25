@@ -169,7 +169,7 @@ namespace InfluxDB.Client.Test
         {
             var point = PointData.Builder.Measurement("h2o")
                 .Tag("location", "europe")
-                .Field("custom-object", new GenericObject {Value1 = "test", Value2 = 10});
+                .Field("custom-object", new GenericObject { Value1 = "test", Value2 = 10 });
 
             Assert.AreEqual("h2o,location=europe custom-object=\"test-10\"", point.ToPointData().ToLineProtocol());
         }

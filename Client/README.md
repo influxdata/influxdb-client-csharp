@@ -8,25 +8,24 @@ The reference client that allows query, write and management (bucket, organizati
 
 This section contains links to the client library documentation.
 
-* [Product documentation](https://docs.influxdata.com/influxdb/latest/api-guide/client-libraries/)
-  , [Getting Started](#queries)
+* [Product documentation](https://docs.influxdata.com/influxdb/latest/api-guide/client-libraries/), [Getting Started](#queries)
 * [Examples](../Examples)
 * [API Reference](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.html)
 * [Changelog](../CHANGELOG.md)
 
 ## Features
-
+ 
 - [Querying data using Flux language](#queries)
     - [Asynchronous](#asynchronous-query)
     - [Streaming](#streaming-query)
     - [Synchronous](#synchronous-query)
     - [Raw Query](#raw-query)
 - [Writing data using](#writes)
-    - [Line Protocol](#by-lineprotocol)
-    - [Data Point](#by-data-point)
+    - [Line Protocol](#by-lineprotocol) 
+    - [Data Point](#by-data-point) 
     - [POCO](#by-poco)
     - [Default Tags](#default-tags)
-- [Delete data](#delete-data)
+- [Delete data](#delete-data)    
 - [InfluxDB 2.x Management API](#management-api)
     - sources, buckets
     - tasks
@@ -43,9 +42,7 @@ This section contains links to the client library documentation.
 
 ## Queries
 
-For querying data we
-use [QueryApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/QueryApi.cs#L1) that allow
-perform asynchronous, streaming, synchronous and also use raw query response.
+For querying data we use [QueryApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/QueryApi.cs#L1) that allow perform asynchronous, streaming, synchronous and also use raw query response.
 
 ### Asynchronous Query
 
@@ -137,8 +134,8 @@ namespace Examples
 
 ### Streaming Query
 
-The Streaming query offers possibility to process unbound query and allow user to handle exceptions,
-stop receiving more results and notify that all data arrived.
+The Streaming query offers possibility to process unbound query and allow user to handle exceptions, 
+stop receiving more results and notify that all data arrived. 
 
 ```c#
 using System;
@@ -239,7 +236,7 @@ namespace Examples
 
 ### Raw Query
 
-The Raw query allows direct processing original [CSV response](http://bit.ly/flux-spec#csv):
+The Raw query allows direct processing original [CSV response](http://bit.ly/flux-spec#csv): 
 
 ```c#
 using System;
@@ -352,16 +349,12 @@ namespace Examples
 
 ## Writes
 
-For writing data we
-use [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) or
-[WriteApiAsync](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApiAsync.cs) which is
-simplified version of WriteApi without batching support.
+For writing data we use [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) or 
+[WriteApiAsync](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApiAsync.cs) which is simplified version of WriteApi without batching support.
 
 [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) supports:
 
-1. writing data
-   using [InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/),
-   Data Point, POCO
+1. writing data using [InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/), Data Point, POCO 
 2. use batching for writes
 4. produces events that allow user to be notified and react to this events
     - `WriteSuccessEvent` - published when arrived the success response from server
@@ -377,12 +370,10 @@ The writes are processed in batches which are configurable by `WriteOptions`:
 | **BatchSize** | the number of data point to collect in batch | 1000 |
 | **FlushInterval** | the number of milliseconds before the batch is written | 1000 |
 | **JitterInterval** | the number of milliseconds to increase the batch flush interval by a random amount| 0 |
-| **
-RetryInterval** | the number of milliseconds to retry unsuccessful write. The retry interval is used when the InfluxDB server does not specify "Retry-After" header. | 5000 |
+| **RetryInterval** | the number of milliseconds to retry unsuccessful write. The retry interval is used when the InfluxDB server does not specify "Retry-After" header. | 5000 |
 | **MaxRetries** | the number of max retries when write fails | 3 |
 | **MaxRetryDelay** | the maximum delay between each retry attempt in milliseconds | 125_000 |
-| **
-ExponentialBase** |  the base for the exponential retry delay, the next delay is computed using random exponential backoff as a random value within the interval  ``retryInterval * exponentialBase^(attempts-1)`` and ``retryInterval * exponentialBase^(attempts)``. Example for ``retryInterval=5_000, exponentialBase=2, maxRetryDelay=125_000, maxRetries=5`` Retry delays are random distributed values within the ranges of ``[5_000-10_000, 10_000-20_000, 20_000-40_000, 40_000-80_000, 80_000-125_000]`` | 2 |
+| **ExponentialBase** |  the base for the exponential retry delay, the next delay is computed using random exponential backoff as a random value within the interval  ``retryInterval * exponentialBase^(attempts-1)`` and ``retryInterval * exponentialBase^(attempts)``. Example for ``retryInterval=5_000, exponentialBase=2, maxRetryDelay=125_000, maxRetries=5`` Retry delays are random distributed values within the ranges of ``[5_000-10_000, 10_000-20_000, 20_000-40_000, 40_000-80_000, 80_000-125_000]`` | 2 |
 
 ### Writing data
 
@@ -527,6 +518,7 @@ namespace Examples
 }
 ```
 
+
 #### By LineProtocol
 
 Write Line Protocol record into specified bucket:
@@ -564,7 +556,6 @@ namespace Examples
 ```
 
 #### Using WriteApiAsync
-
 ```c#
 using System;
 using System.Threading.Tasks;
@@ -645,11 +636,10 @@ namespace Examples
 
 #### Default Tags
 
-Sometimes is useful to store same information in every measurement e.g. `hostname`, `location`, `customer`.
+Sometimes is useful to store same information in every measurement e.g. `hostname`, `location`, `customer`. 
 The client is able to use static value, app settings or env variable as a tag value.
 
 The expressions:
-
 - `California Miner` - static value
 - `${version}` - application settings
 - `${env.hostname}` - environment property
@@ -777,33 +767,20 @@ The client has following management API:
 
 | API endpoint | Description | Implementation |
 | --- | --- | --- |
-| **
-/api/v2/authorizations** | Managing authorization data | [AuthorizationsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/AuthorizationsApi.cs#L1) |
-| **
-/api/v2/buckets** | Managing bucket data | [BucketsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/BucketsApi.cs#L1) |
-| **
-/api/v2/orgs** | Managing organization data | [OrganizationsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/OrganizationsApi.cs#L1) |
-| **
-/api/v2/users** | Managing user data | [UsersApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/UsersApi.cs#L1) |
-| **
-/api/v2/sources** | Managing sources | [SourcesApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/SourcesApi.cs#L1) |
-| **
-/api/v2/tasks** | Managing one-off and recurring tasks | [TasksApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/TasksApi.cs#L1) |
-| **
-/api/v2/scrapers** | Managing ScraperTarget data | [ScraperTargetsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/ScraperTargetsApi.cs#L1) |
-| **
-/api/v2/labels** | Managing resource labels | [LabelsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/LabelsApi.cs#L1) |
-| **
-/api/v2/telegrafs** | Managing telegraf config data | [TelegrafsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/TelegrafsApi.cs#L1) |
-| **
-/api/v2/setup** | Managing onboarding setup | [InfluxDBClient#OnBoarding()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L191-) |
-| **
-/ready** | Get the readiness of a instance at startup| [InfluxDBClient#Ready()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L169--) |
-| **
-/health** | Get the health of an instance anytime during execution | [InfluxDBClient#Health()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L160--) |
+| **/api/v2/authorizations** | Managing authorization data | [AuthorizationsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/AuthorizationsApi.cs#L1) |
+| **/api/v2/buckets** | Managing bucket data | [BucketsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/BucketsApi.cs#L1) |
+| **/api/v2/orgs** | Managing organization data | [OrganizationsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/OrganizationsApi.cs#L1) |
+| **/api/v2/users** | Managing user data | [UsersApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/UsersApi.cs#L1) |
+| **/api/v2/sources** | Managing sources | [SourcesApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/SourcesApi.cs#L1) |
+| **/api/v2/tasks** | Managing one-off and recurring tasks | [TasksApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/TasksApi.cs#L1) |
+| **/api/v2/scrapers** | Managing ScraperTarget data | [ScraperTargetsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/ScraperTargetsApi.cs#L1) |
+| **/api/v2/labels** | Managing resource labels | [LabelsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/LabelsApi.cs#L1) |
+| **/api/v2/telegrafs** | Managing telegraf config data | [TelegrafsApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/TelegrafsApi.cs#L1) |
+| **/api/v2/setup** | Managing onboarding setup | [InfluxDBClient#OnBoarding()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L191-) |
+| **/ready** | Get the readiness of a instance at startup| [InfluxDBClient#Ready()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L169--) |
+| **/health** | Get the health of an instance anytime during execution | [InfluxDBClient#Health()](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/InfluxDBClient.cs#L160--) |
 
-The following example demonstrates how to use a InfluxDB 2.x Management API. For further information see endpoints
-implementation.
+The following example demonstrates how to use a InfluxDB 2.x Management API. For further information see endpoints implementation.
 
 ```c#
 using System;
@@ -869,8 +846,7 @@ var dbrpService = _client.CreateService<DBRPsService>(typeof(DBRPsService));
 
 ### Monitoring & Alerting
 
-The example below show how to create a check for monitoring a stock price. A Slack notification is created if the price
-is lesser than `35`.
+The example below show how to create a check for monitoring a stock price. A Slack notification is created if the price is lesser than `35`.
 
 ##### Create Threshold Check
 
@@ -917,8 +893,7 @@ await Client
 
 ### Custom mapping of DomainObject to/from InfluxDB
 
-The [default mapper](/Client/Internal/DefaultDomainObjectMapper.cs) uses [Column](#by-poco) attributes to define how the
-DomainObject will be mapped `to` and `from` the InfluxDB.
+The [default mapper](/Client/Internal/DefaultDomainObjectMapper.cs) uses [Column](#by-poco) attributes to define how the DomainObject will be mapped `to` and `from` the InfluxDB.
 The our APIs also allow to specify custom mapper. For more information see following example:
 
 ```c#
@@ -1119,6 +1094,7 @@ The following options are supported:
 
 The `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
+
 ##### Configuration example
 
 ```xml
@@ -1146,14 +1122,12 @@ var influxDBClient = InfluxDBClientFactory.Create();
 
 ### Client connection string
 
-A client can be constructed using a connection string that can contain the InfluxDBClientOptions parameters encoded into
-the URL.
-
+A client can be constructed using a connection string that can contain the InfluxDBClientOptions parameters encoded into the URL.  
+ 
 ```c#
 var influxDBClient = InfluxDBClientFactory
             .Create("http://localhost:8086?timeout=5000&logLevel=BASIC")
 ```
-
 The following options are supported:
 
 | Property name      | default  | description                                              |
@@ -1169,9 +1143,7 @@ The following options are supported:
 The `timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 
 ### Gzip support
-
-`InfluxDBClient` does not enable gzip compress for http requests by default. If you want to enable gzip to reduce
-transfer data's size, you can call:
+`InfluxDBClient` does not enable gzip compress for http requests by default. If you want to enable gzip to reduce transfer data's size, you can call:
 
 ```c#
 influxDBClient.EnableGzip();
@@ -1193,8 +1165,7 @@ var client = InfluxDBClientFactory.Create(options);
 
 ### Proxy and redirects configuration
 
-You can configure the client to tunnel requests through an HTTP proxy. To configure the proxy use `Proxy` configuration
-option:
+You can configure the client to tunnel requests through an HTTP proxy. To configure the proxy use `Proxy` configuration option:
 
  ```csharp
 var options = new InfluxDBClientOptions.Builder()
@@ -1206,8 +1177,7 @@ var options = new InfluxDBClientOptions.Builder()
 using var client = InfluxDBClientFactory.Create(options);
 ```
 
-Client automatically **doesn't** follows HTTP redirects. You can enable redirects by `AllowRedirects` configuration
-option:
+Client automatically **doesn't** follows HTTP redirects. You can enable redirects by `AllowRedirects` configuration option:
 
 ```csharp
 var options = new InfluxDBClientOptions.Builder()
@@ -1219,14 +1189,12 @@ using var client = InfluxDBClientFactory.Create(options);
 ```
 
 > :warning: Due to a security reason `Authorization` header is not forwarded when redirect leads to a different domain.
-> You can create custom `Authenticator` which change this behaviour
-- [see more](https://stackoverflow.com/a/28285735/1953325).
+> You can create custom `Authenticator` which change this behaviour - [see more](https://stackoverflow.com/a/28285735/1953325).
 
 #### Log HTTP Request and Response
 
-The Requests and Responses can be logged by changing the LogLevel. LogLevel values are None, Basic, Headers, Body. Note
-that
-applying the `Body` LogLevel will disable chunking while streaming and will load the whole response into memory.
+The Requests and Responses can be logged by changing the LogLevel. LogLevel values are None, Basic, Headers, Body. Note that 
+applying the `Body` LogLevel will disable chunking while streaming and will load the whole response into memory.  
 
 ```c#
 influxDBClient.SetLogLevel(LogLevel.Body)
@@ -1235,17 +1203,15 @@ influxDBClient.SetLogLevel(LogLevel.Body)
 #### Check the server status and version
 
 Server availability can be checked using the `influxDBClient.PingAsync()` endpoint.
-
+ 
 ## Version
 
 The latest package for .NET CLI:
-
 ```bash
 dotnet add package InfluxDB.Client
 ```
-
+  
 Or when using with Package Manager:
-
 ```bash
 Install-Package InfluxDB.Client
 ```

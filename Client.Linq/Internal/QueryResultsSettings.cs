@@ -28,7 +28,7 @@ namespace InfluxDB.Client.Linq.Internal
                 {
                     ScalarAggregated = true;
                     AggregateFunction = objects => objects
-                        .Select(it => (long) Convert.ChangeType(it, typeof(long)))
+                        .Select(it => (long)Convert.ChangeType(it, typeof(long)))
                         .Sum();
                     return;
                 }

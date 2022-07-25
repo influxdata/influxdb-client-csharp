@@ -77,7 +77,7 @@ namespace Client.Legacy.Test
             fluxRecord.Values["tag"] = "production";
             fluxRecord.Values["min"] = 10.5;
             fluxRecord.Values["max"] = 20.0;
-            fluxRecord.Values["avg"] = (double) 18;
+            fluxRecord.Values["avg"] = (double)18;
             fluxRecord.Values["_time"] = Instant.FromDateTimeUtc(now);
 
             var poco = _parser.ToPoco<PointWithoutTimestampName>(fluxRecord);
@@ -122,7 +122,7 @@ namespace Client.Legacy.Test
         public void NullableParseableProperty(string guid)
         {
             var expectedTag = "test";
-            var expectedValue = guid == null ? (Guid?) null : Guid.Parse(guid);
+            var expectedValue = guid == null ? (Guid?)null : Guid.Parse(guid);
             var expectedTime = Instant.FromDateTimeUtc(DateTime.UtcNow);
 
             var record = new FluxRecord(0);

@@ -42,7 +42,7 @@ namespace Examples
                 .Tag("location", "New York")
                 .Field("temperature", 24.3);
 
-            await client.GetWriteApiAsync().WritePointsAsync(new[] {point1, point2});
+            await client.GetWriteApiAsync().WritePointsAsync(new[] { point1, point2 });
 
             var scriptsApi = client.GetInvokableScriptsApi();
 
@@ -73,7 +73,7 @@ namespace Examples
             //
             var bindParams = new Dictionary<string, object>
             {
-                {"bucket_name", bucket}
+                { "bucket_name", bucket }
             };
             // FluxTables
             Console.WriteLine("\n------- Invoke to FluxTables -------\n");

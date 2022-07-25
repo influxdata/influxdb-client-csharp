@@ -111,7 +111,7 @@ namespace InfluxDB.Client.Linq.Internal
             else
             {
                 _limitTailNOffsetAssignments.Add(new LimitOffsetAssignment
-                    {FluxFunction = fluxFunction, N = limitNAssignment});
+                    { FluxFunction = fluxFunction, N = limitNAssignment });
             }
         }
 
@@ -123,7 +123,7 @@ namespace InfluxDB.Client.Linq.Internal
             }
             else
             {
-                _limitTailNOffsetAssignments.Add(new LimitOffsetAssignment {Offset = limitOffsetAssignment});
+                _limitTailNOffsetAssignments.Add(new LimitOffsetAssignment { Offset = limitOffsetAssignment });
             }
         }
 
@@ -198,7 +198,7 @@ namespace InfluxDB.Client.Linq.Internal
                     continue;
                 }
 
-                parts.Add(BuildOperator("sort", "columns", new List<string> {columnVariable}, "desc",
+                parts.Add(BuildOperator("sort", "columns", new List<string> { columnVariable }, "desc",
                     descendingVariable));
             }
 

@@ -260,10 +260,10 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             var rule = new SlackNotificationRule(messageTemplate: messageTemplate, name: name, every: every,
-                orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> {new StatusRule(status)},
+                orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> { new StatusRule(status) },
                 endpointID: endpoint.Id, status: TaskStatusType.Active);
 
-            return (SlackNotificationRule) await CreateRuleAsync(rule, cancellationToken).ConfigureAwait(false);
+            return (SlackNotificationRule)await CreateRuleAsync(rule, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -291,10 +291,10 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(orgId, nameof(orgId));
 
             var rule = new PagerDutyNotificationRule(messageTemplate: messageTemplate, name: name, every: every,
-                orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> {new StatusRule(status)},
+                orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> { new StatusRule(status) },
                 endpointID: endpoint.Id, status: TaskStatusType.Active);
 
-            return (PagerDutyNotificationRule) await CreateRuleAsync(rule, cancellationToken).ConfigureAwait(false);
+            return (PagerDutyNotificationRule)await CreateRuleAsync(rule, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -313,10 +313,10 @@ namespace InfluxDB.Client
             CancellationToken cancellationToken = default)
         {
             var rule = new HTTPNotificationRule(name: name, every: every,
-                orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> {new StatusRule(status)},
+                orgID: orgId, tagRules: tagRules, statusRules: new List<StatusRule> { new StatusRule(status) },
                 endpointID: endpoint.Id, status: TaskStatusType.Active);
 
-            return (HTTPNotificationRule) await CreateRuleAsync(rule, cancellationToken).ConfigureAwait(false);
+            return (HTTPNotificationRule)await CreateRuleAsync(rule, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>

@@ -50,7 +50,7 @@ namespace InfluxDB.Client.Api.Client
         /// </summary>
         public static readonly ExceptionFactory DefaultExceptionFactory = (methodName, response) =>
         {
-            var status = (int) response.StatusCode;
+            var status = (int)response.StatusCode;
             if (status >= 400)
             {
                 return new ApiException(status,
@@ -413,7 +413,7 @@ namespace InfluxDB.Client.Api.Client
         /// <returns></returns>
         public ApiClient CreateApiClient()
         {
-            return new ApiClient(BasePath) {Configuration = this};
+            return new ApiClient(BasePath) { Configuration = this };
         }
 
 
