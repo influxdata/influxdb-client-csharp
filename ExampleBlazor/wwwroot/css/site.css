@@ -1,21 +1,21 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Proxima-Nova',proxima-nova,sans-serif;
+    font-family: 'Proxima-Nova', proxima-nova, sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
 }
 
-.h1_blue{
+.h1_blue {
     color: #020a47;
 }
 
-.h1_pink{
+.h1_pink {
     color: #d30971;
 }
 
-h1{
+h1 {
     font-weight: 700;
     font-size: 40px;
     line-height: 1.25em;
@@ -52,16 +52,16 @@ a, .btn-link {
 .btn-influx {
     line-height: 2.4em;
     font-weight: 500;
-    background: rgb(6,111,197);
+    background: rgb(6, 111, 197);
     background: linear-gradient(90deg, #D30971 0%, #9B2AFF 100%);
     border: none;
-    color: #fff!important;
+    color: #fff !important;
     border-radius: 10px;
     text-decoration: none;
     padding: 0 1em;
 }
 
-.btn-influx:hover, .btn-influx:focus{
+.btn-influx:hover, .btn-influx:focus {
     background: linear-gradient(90deg, #9B2AFF 0%, #D30971 100%);
     border: none;
     color: #fff;
@@ -75,8 +75,8 @@ label {
 }
 
 input, select {
-    border-radius: 10px!important;
-    border: 2px solid #ddd!important;
+    border-radius: 10px !important;
+    border: 2px solid #ddd !important;
     min-height: 40px;
     min-width: 250px;
     padding: 4px 30px;
@@ -86,7 +86,7 @@ input, select {
 }
 
 hr {
-    height: 2px!important;
+    height: 2px !important;
     margin-bottom: 50px;
     color: #dddddd;
     opacity: 1;
@@ -95,6 +95,7 @@ hr {
 a {
     color: #d30971;
 }
+
 a:hover {
     color: #5EE4E4;
 }
@@ -113,8 +114,8 @@ a:hover {
 }
 
 .custom-table {
-    border-bottom-width: 0px!important;
-    padding: 1rem 1rem!important;
+    border-bottom-width: 0px !important;
+    padding: 1rem 1rem !important;
 }
 
 .header-row {

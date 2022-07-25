@@ -18,7 +18,7 @@
 
 <PageTitle>BucketAPI</PageTitle>
 
-<h1 class="h1_blue">Bucket<span class="h1_pink">API</span></h1> 
+<h1 class="h1_blue">Bucket<span class="h1_pink">API</span></h1>
 
 <p id="addBucket" role="status">
     <input placeholder="Bucket Name" value="@_stringValue" @oninput="eventArgs => { SetNewBucketValue(eventArgs.Value as string); }"/>
@@ -45,10 +45,11 @@ else
         </tr>
         </thead>
         <tbody>
-        @{int i = 0;}
+        @{ var i = 0; }
         @foreach (var bucket in _bucketList)
         {
-            if(i % 2 == 0) {
+            if (i % 2 == 0)
+            {
                 <tr>
                     <td>@bucket.Name</td>
                     <td>@bucket.Id</td>
@@ -59,7 +60,7 @@ else
                         <button class="btn btn-primary" type="button" @onclick="() => DeleteBucket(bucket)">Delete</button>
                         <button class="btn btn-primary" type="button" @onclick="() => CloneBucket(bucket)">Clone</button>
                     </td>
-                    @{i++;}
+                    @{ i++; }
                 </tr>
             }
             else
@@ -124,7 +125,7 @@ else
             await RefreshBuckets();
         }
     }
-    
+
     private async Task CloneBucket(Bucket bucket)
     {
         var confirmed = await JsRuntime.InvokeAsync<bool>("confirm", $"Clone bucket {bucket.Name}?");
@@ -142,7 +143,7 @@ else
                 }
                 name += append;
             }
-            
+
             await influxDbClient.GetBucketsApi().CloneBucketAsync(name, bucket);
 
             influxDbClient.Dispose();
@@ -158,22 +159,22 @@ else
         {
             var influxDbClient = ClientSettings.GetClient();
 
-            // Find ID of Organization with specified name (PermissionAPI requires ID of Organization).
+    // Find ID of Organization with specified name (PermissionAPI requires ID of Organization).
             var orgId = (await influxDbClient.GetOrganizationsApi().FindOrganizationsAsync(org: ClientSettings.Org)).First().Id;
 
-            // Create bucket "iot_bucket" with data retention set to 3,600 seconds
+    // Create bucket "iot_bucket" with data retention set to 3,600 seconds
             var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
             var bucket = await influxDbClient.GetBucketsApi().CreateBucketAsync(_stringValue, retention, orgId);
 
-            // Create access token to "iot_bucket"
+    // Create access token to "iot_bucket"
             var resource = new PermissionResource(PermissionResource.TypeBuckets, bucket.Id, null,
                 orgId);
 
-            // Read permission
+    // Read permission
             var read = new Permission(Permission.ActionEnum.Read, resource);
 
-            // Write permission
+    // Write permission
             var write = new Permission(Permission.ActionEnum.Write, resource);
 
             var authorization = await influxDbClient.GetAuthorizationsApi()
@@ -190,7 +191,7 @@ else
             await JsRuntime.InvokeAsync<bool>("confirm", "Bucket Name cannot be empty.");
         }
     }
-    
+
     private async Task FindBucketByName(string bucketName)
     {
         var influxDbClient = ClientSettings.GetClient();
@@ -199,7 +200,7 @@ else
 
         influxDbClient.Dispose();
     }
-    
+
     private async Task FindBucketById(string bucketId)
     {
         var influxDbClient = ClientSettings.GetClient();
@@ -217,5 +218,5 @@ else
 
         influxDbClient.Dispose();
     }
-    
+
 }
