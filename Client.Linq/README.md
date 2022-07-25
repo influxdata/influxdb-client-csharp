@@ -1085,7 +1085,6 @@ from(bucket: "my-bucket")
 The `AggregateWindow` applies an aggregate function to fixed windows of time.
 Can be used only for a field which is defined as `timestamp` - `[Column(IsTimestamp = true)]`.
 For more info about `aggregateWindow() function` see Flux's documentation
-
 - https://docs.influxdata.com/flux/v0.x/stdlib/universe/aggregatewindow/.
 
 ```c#

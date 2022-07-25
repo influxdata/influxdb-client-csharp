@@ -1220,7 +1220,6 @@ using var client = InfluxDBClientFactory.Create(options);
 
 > :warning: Due to a security reason `Authorization` header is not forwarded when redirect leads to a different domain.
 > You can create custom `Authenticator` which change this behaviour
-
 - [see more](https://stackoverflow.com/a/28285735/1953325).
 
 #### Log HTTP Request and Response
