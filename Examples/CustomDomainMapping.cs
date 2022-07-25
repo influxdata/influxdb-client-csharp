@@ -47,7 +47,7 @@ namespace Examples
             /// </summary>
             public T ConvertToEntity<T>(FluxRecord fluxRecord)
             {
-                return (T)ConvertToEntity(fluxRecord, typeof(T));
+                return (T) ConvertToEntity(fluxRecord, typeof(T));
             }
 
             public object ConvertToEntity(FluxRecord fluxRecord, Type type)
@@ -143,7 +143,7 @@ namespace Examples
             // Write data
             //
             await client.GetWriteApiAsync(converter)
-                .WriteMeasurementsAsync(new[] { entity1, entity2, entity3, entity4 }, WritePrecision.S);
+                .WriteMeasurementsAsync(new[] {entity1, entity2, entity3, entity4}, WritePrecision.S);
 
             //
             // Query Data to Domain object

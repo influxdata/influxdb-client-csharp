@@ -29,7 +29,7 @@ namespace InfluxDB.Client.Test
         {
             var name = GenerateName("cloned");
 
-            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = await _labelsApi.CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
 
@@ -59,7 +59,7 @@ namespace InfluxDB.Client.Test
         {
             var name = GenerateName("Cool Resource");
 
-            var properties = new Dictionary<string, string> { { "color", "red" }, { "source", "remote api" } };
+            var properties = new Dictionary<string, string> {{"color", "red"}, {"source", "remote api"}};
 
             var label = await _labelsApi.CreateLabelAsync(name, properties, _organization.Id);
 
@@ -153,7 +153,7 @@ namespace InfluxDB.Client.Test
             var labels = await _labelsApi.FindLabelsByOrgIdAsync(organization.Id);
             Assert.AreEqual(0, labels.Count);
 
-            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             await _labelsApi.CreateLabelAsync(GenerateName("Cool Resource"), properties, organization.Id);
 
@@ -174,7 +174,7 @@ namespace InfluxDB.Client.Test
                 _organization.Id);
             Assert.IsNull(label.Properties);
 
-            label.Properties = new Dictionary<string, string> { { "color", "blue" } };
+            label.Properties = new Dictionary<string, string> {{"color", "blue"}};
 
             label = await _labelsApi.UpdateLabelAsync(label);
             Assert.AreEqual(1, label.Properties.Count);

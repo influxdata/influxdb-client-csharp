@@ -124,10 +124,10 @@ namespace InfluxDB.Client.Test
             var requestEntry = MockServer.LogEntries.Last();
             Assert.AreEqual($"{MockServerUrl}/", requestEntry.RequestMessage.Url);
 
-            var json = (JObject)requestEntry.RequestMessage.BodyAsJson;
+            var json = (JObject) requestEntry.RequestMessage.BodyAsJson;
             Assert.IsNotNull(json.GetValue("attachments"));
 
-            var attachments = (JArray)json.GetValue("attachments");
+            var attachments = (JArray) json.GetValue("attachments");
             Assert.AreEqual(1, attachments.Count);
 
             Assert.AreEqual("The Stock price for XYZ is on: crit level!", attachments[0]["text"].ToString());

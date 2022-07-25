@@ -580,14 +580,14 @@ namespace InfluxDB.Client
         {
             return new Dictionary<string, object>
             {
-                { "interval", "10s" },
-                { "round_interval", true },
-                { "metric_batch_size", 1000 },
-                { "metric_buffer_limit", 10000 },
-                { "collection_jitter", "0s" },
-                { "flush_jitter", "0s" },
-                { "precision", "" },
-                { "omit_hostname", false }
+                {"interval", "10s"},
+                {"round_interval", true},
+                {"metric_batch_size", 1000},
+                {"metric_buffer_limit", 10000},
+                {"collection_jitter", "0s"},
+                {"flush_jitter", "0s"},
+                {"precision", ""},
+                {"omit_hostname", false}
             };
         }
 
@@ -707,7 +707,7 @@ namespace InfluxDB.Client
                 .GetTelegrafsIDWithIRestResponseAsync(telegrafId, null, "application/json", cancellationToken)
                 .ConfigureAwait(false);
 
-            return (Telegraf)_service.Configuration.ApiClient.Deserialize(response, typeof(Telegraf));
+            return (Telegraf) _service.Configuration.ApiClient.Deserialize(response, typeof(Telegraf));
         }
 
         /// <summary>

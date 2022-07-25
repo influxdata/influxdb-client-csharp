@@ -55,10 +55,10 @@ namespace Client.Legacy.Test
 
             var httpClientInfo =
                 restClient.GetType().GetProperty("HttpClient", BindingFlags.NonPublic | BindingFlags.Instance);
-            var httpClient = (HttpClient)httpClientInfo!.GetValue(restClient);
+            var httpClient = (HttpClient) httpClientInfo!.GetValue(restClient);
             var disposedInfo =
                 httpClient!.GetType().GetField("_disposed", BindingFlags.NonPublic | BindingFlags.Instance);
-            var disposed = (bool)disposedInfo!.GetValue(httpClient)!;
+            var disposed = (bool) disposedInfo!.GetValue(httpClient)!;
 
             Assert.AreEqual(true, disposed);
         }
@@ -67,7 +67,7 @@ namespace Client.Legacy.Test
         {
             var restClientInfo =
                 fluxClient.GetType().BaseType!.GetField("RestClient", BindingFlags.NonPublic | BindingFlags.Instance);
-            var restClient = (RestClient)restClientInfo!.GetValue(fluxClient);
+            var restClient = (RestClient) restClientInfo!.GetValue(fluxClient);
             return restClient;
         }
     }

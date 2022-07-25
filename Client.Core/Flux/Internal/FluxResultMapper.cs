@@ -124,7 +124,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
         /// <exception cref="InfluxException"></exception>
         internal T ToPoco<T>(FluxRecord record)
         {
-            return (T)ToPoco(record, typeof(T));
+            return (T) ToPoco(record, typeof(T));
         }
 
         private void SetFieldValue<T>(T poco, PropertyInfo property, object value)
@@ -165,7 +165,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
                 var parseMethod = GetParseMethod(propertyType, valueType);
                 if (parseMethod != null)
                 {
-                    var parsed = parseMethod.Invoke(null, new[] { value });
+                    var parsed = parseMethod.Invoke(null, new[] {value});
                     property.SetValue(poco, parsed);
                     return;
                 }
@@ -243,7 +243,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
             if (value is IConvertible)
             {
-                return (DateTime)Convert.ChangeType(value, typeof(DateTime));
+                return (DateTime) Convert.ChangeType(value, typeof(DateTime));
             }
 
             throw new InvalidCastException(

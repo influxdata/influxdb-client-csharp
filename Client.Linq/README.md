@@ -6,7 +6,8 @@ The library supports to use a LINQ expression to query the InfluxDB.
 
 This section contains links to the client library documentation.
 
-* [Product documentation](https://docs.influxdata.com/influxdb/latest/api-guide/client-libraries/), [Getting Started](#how-to-start)
+* [Product documentation](https://docs.influxdata.com/influxdb/latest/api-guide/client-libraries/)
+  , [Getting Started](#how-to-start)
 * [Examples](../Examples)
 * [API Reference](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.Linq.InfluxDBQueryable-1.html)
 * [Changelog](../CHANGELOG.md)
@@ -95,8 +96,8 @@ class Sensor
 
 ## Time Series
 
-The InfluxDB uses concept of TimeSeries - a collection of data that shares a measurement, tag set, and bucket. 
-You always operate on each time-series, if you querying data with Flux. 
+The InfluxDB uses concept of TimeSeries - a collection of data that shares a measurement, tag set, and bucket.
+You always operate on each time-series, if you querying data with Flux.
 
 Imagine that you have following data:
 
@@ -108,6 +109,7 @@ sensor,deployment=production,sensor_id=id-1 data=89
 ```
 
 The corresponding time series are:
+
 - `sensor,deployment=production,sensor_id=id-1`
 - `sensor,deployment=testing,sensor_id=id-1`
 
@@ -128,9 +130,9 @@ sensor,deployment=production,sensor_id=id-1 data=15
 sensor,deployment=testing,sensor_id=id-1 data=28
 ```
 
-and this is also way how this LINQ driver works. 
+and this is also way how this LINQ driver works.
 
-**The driver supposes that you are querying over one time-series.** 
+**The driver supposes that you are querying over one time-series.**
 
 There is a way how to change this configuration:
 
@@ -142,7 +144,8 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
     select s;
 ```
 
-The [group()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/) function is way how to query multiple time-series and gets correct results.
+The [group()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/) function
+is way how to query multiple time-series and gets correct results.
 
 The following query works correctly:
 
@@ -161,11 +164,12 @@ and corresponding result:
 sensor,deployment=production,sensor_id=id-1 data=15
 ```
 
-Do not used this functionality if it is not required because **it brings a performance** costs caused by sorting: 
+Do not used this functionality if it is not required because **it brings a performance** costs caused by sorting:
 
 #### Group does not guarantee sort order
 
-The `group()` [does not guarantee sort order](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/#group-does-not-guarantee-sort-order) of output records. 
+The `group()` [does not guarantee sort order](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/group/#group-does-not-guarantee-sort-order)
+of output records.
 To ensure data is sorted correctly, use `orderby` expression.
 
 ### Client Side Evaluation
@@ -229,6 +233,7 @@ var sensors = query.ToList();
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15Z, stop: 2021-01-10T05:10:00Z) 
@@ -239,15 +244,20 @@ from(bucket: "my-bucket")
     |> limit(n: 2, offset: 2)
 ```
 
-## Filtering 
+## Filtering
 
-The [range()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/range/) and [filter()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/filter/) are `pushdown functions`
-that allow push their data manipulation down to the underlying data source rather than storing and manipulating data in memory. 
-Using pushdown functions at the beginning of query we greatly reduce the amount of server memory necessary to run a query.
+The [range()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/range/)
+and [filter()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/filter/)
+are `pushdown functions`
+that allow push their data manipulation down to the underlying data source rather than storing and manipulating data in
+memory.
+Using pushdown functions at the beginning of query we greatly reduce the amount of server memory necessary to run a
+query.
 
 The LINQ provider needs to aligns fields within each input table that have the same timestamp to column-wise format:
 
 ###### From
+
 |              _time             | _value | _measurement | _field |
 |:------------------------------:|:------:|:------------:|:------:|
 | 1970-01-01T00:00:00.000000001Z |   1.0  |     "m1"     |  "f1"  |
@@ -256,12 +266,15 @@ The LINQ provider needs to aligns fields within each input table that have the s
 | 1970-01-01T00:00:00.000000002Z |   4.0  |     "m1"     |  "f2"  |
 
 ###### To
+
 |              _time             | _measurement |  f1  |  f2  |
 |:------------------------------:|:------------:|:----:|:----:|
 | 1970-01-01T00:00:00.000000001Z |     "m1"     |  1.0 |  2.0 |
 | 1970-01-01T00:00:00.000000002Z |     "m1"     |  3.0 |  4.0 |
 
-For that reason we need to use the [pivot()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/pivot/) function.
+For that reason we need to use
+the [pivot()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/pivot/)
+function.
 The `pivot` is heavy and should be used at the end of our Flux query.
 
 There is an also possibility to disable appending `pivot` by:
@@ -279,7 +292,8 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 
 ### Mapping LINQ filters
 
-For the best performance on the both side - `server`, `LINQ provider` we maps the LINQ expressions to FLUX query following way:
+For the best performance on the both side - `server`, `LINQ provider` we maps the LINQ expressions to FLUX query
+following way:
 
 #### Filter by Timestamp
 
@@ -294,6 +308,7 @@ var sensors = query.ToList();
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15ZZ) 
@@ -303,7 +318,9 @@ from(bucket: "my-bucket")
 
 #### Filter by Tag
 
-Mapped to [filter()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/filter/) **before** `pivot()`.
+Mapped
+to [filter()](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/filter/) **
+before** `pivot()`.
 
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
@@ -312,6 +329,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0)
@@ -331,6 +349,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0)
@@ -375,6 +394,7 @@ from(bucket: "my-bucket")
     |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value") 
     |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
+
 Results:
 
 |              _time             |  f1  |
@@ -384,11 +404,13 @@ Results:
 
 ### Time Range Filtering
 
-The time filtering expressions are mapped to Flux `range()` function. 
+The time filtering expressions are mapped to Flux `range()` function.
 This function has `start` and `stop` parameters with following behaviour: `start <= _time < stop`:
-> Results include records with `_time` values greater than or equal to the specified `start` time and less than the specified `stop` time.
- 
-This means that we have to add one nanosecond to `start` if we want timestamp `greater than` and also add one nanosecond to `stop` if we want to timestamp `lesser or equal than`.
+> Results include records with `_time` values greater than or equal to the specified `start` time and less than the
+> specified `stop` time.
+
+This means that we have to add one nanosecond to `start` if we want timestamp `greater than` and also add one nanosecond
+to `stop` if we want to timestamp `lesser or equal than`.
 
 - [range() function](https://docs.influxdata.com/influxdb/cloud/reference/flux/stdlib/built-in/transformations/range/)
 
@@ -404,6 +426,7 @@ var sensors = query.ToList();
 ```
 
 Flux Query:
+
 ```flux
 start_shifted = int(v: time(v: "2019-11-16T08:20:15Z")) + 1
 
@@ -425,6 +448,7 @@ var sensors = query.ToList();
 ```
 
 Flux Query:
+
 ```flux
 stop_shifted = int(v: time(v: "2021-01-10T05:10:00Z")) + 1
 
@@ -445,6 +469,7 @@ var sensors = query.ToList();
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 2019-11-16T08:20:15ZZ) 
@@ -463,6 +488,7 @@ var sensors = query.ToList();
 ```
 
 Flux Query:
+
 ```flux
 stop_shifted = int(v: time(v: "2021-01-10T05:10:00Z")) + 1
 
@@ -483,6 +509,7 @@ var sensors = query.ToList();
 ```
 
 Flux Query:
+
 ```flux
 stop_shifted = int(v: time(v: "2019-11-16T08:20:15Z")) + 1
 
@@ -492,7 +519,8 @@ from(bucket: "my-bucket")
     |> drop(columns: ["_start", "_stop", "_measurement"])
 ```
 
-There is also a possibility to specify the default value for `start` and `stop` parameter. This is useful when you need to include data with future timestamps when no time bounds are explicitly set.
+There is also a possibility to specify the default value for `start` and `stop` parameter. This is useful when you need
+to include data with future timestamps when no time bounds are explicitly set.
 
 ```c#
 var settings = new QueryableOptimizerSettings
@@ -519,6 +547,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0)
@@ -536,6 +565,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0)
@@ -553,6 +583,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -570,6 +601,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -587,6 +619,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -604,6 +637,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -621,6 +655,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -639,6 +674,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -673,8 +709,10 @@ class SensorAttribute
 }
 ```
 
-To be able to store `SensorCustom` entity in InfluxDB and retrieve it from database you should implement [IDomainObjectMapper](/Client/IDomainObjectMapper.cs). 
-The converter tells to the Client how to map `DomainObject` into [PointData](/Client/Writes/PointData.cs) and how to map [FluxRecord](/Client.Core/Flux/Domain/FluxRecord.cs) to `DomainObject`.
+To be able to store `SensorCustom` entity in InfluxDB and retrieve it from database you should
+implement [IDomainObjectMapper](/Client/IDomainObjectMapper.cs).
+The converter tells to the Client how to map `DomainObject` into [PointData](/Client/Writes/PointData.cs) and how to
+map [FluxRecord](/Client.Core/Flux/Domain/FluxRecord.cs) to `DomainObject`.
 
 Entity Converter:
 
@@ -753,7 +791,8 @@ private class SensorEntityConverter : IDomainObjectMapper
 }
 ```
 
-The `Converter` could be passed to [QueryApiSync](/Client/QueryApiSync.cs), [QueryApi](/Client/QueryApi.cs) or [WriteApi](/Client/WriteApi.cs) by:
+The `Converter` could be passed to [QueryApiSync](/Client/QueryApiSync.cs), [QueryApi](/Client/QueryApi.cs)
+or [WriteApi](/Client/WriteApi.cs) by:
 
 ```c#
 // Create Converter
@@ -764,9 +803,12 @@ var queryApi = client.GetQueryApiSync(converter);
 var writeApi = client.GetWriteApi(converter);
 ```
 
-The LINQ provider needs to know how properties of `DomainObject` are stored in InfluxDB - their name and type (tag, field, timestamp). 
+The LINQ provider needs to know how properties of `DomainObject` are stored in InfluxDB - their name and type (tag,
+field, timestamp).
 
-If you use a [IDomainObjectMapper](/Client/IDomainObjectMapper.cs) instead of [InfluxDB Attributes](/Client.Core/Attributes.cs) you should implement [IMemberNameResolver](/Client.Linq/IMemberNameResolver.cs):
+If you use a [IDomainObjectMapper](/Client/IDomainObjectMapper.cs) instead
+of [InfluxDB Attributes](/Client.Core/Attributes.cs) you should
+implement [IMemberNameResolver](/Client.Linq/IMemberNameResolver.cs):
 
 ```c#
 private class SensorMemberResolver: IMemberNameResolver
@@ -873,7 +915,10 @@ var optimizerSettings =
     };
 ```
 
-**_Performance:_** The `pivot()` is a [“heavy” function](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/#use-heavy-functions-sparingly). Using `limit()` before `pivot()` is much faster but works only if you have consistent data series. See [#318](https://github.com/influxdata/influxdb-client-csharp/issues/318) for more details.
+**_Performance:_** The `pivot()` is
+a [“heavy” function](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/#use-heavy-functions-sparingly)
+. Using `limit()` before `pivot()` is much faster but works only if you have consistent data series.
+See [#318](https://github.com/influxdata/influxdb-client-csharp/issues/318) for more details.
 
 ### TakeLast
 
@@ -902,7 +947,11 @@ var optimizerSettings =
         AlignLimitFunctionAfterPivot = false
     };
 ```
-**_Performance:_** The `pivot()` is a [“heavy” function](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/#use-heavy-functions-sparingly). Using `tail()` before `pivot()` is much faster but works only if you have consistent data series. See [#318](https://github.com/influxdata/influxdb-client-csharp/issues/318) for more details.
+
+**_Performance:_** The `pivot()` is
+a [“heavy” function](https://docs.influxdata.com/influxdb/cloud/query-data/optimize-queries/#use-heavy-functions-sparingly)
+. Using `tail()` before `pivot()` is much faster but works only if you have consistent data series.
+See [#318](https://github.com/influxdata/influxdb-client-csharp/issues/318) for more details.
 
 ### Skip
 
@@ -934,6 +983,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -951,6 +1001,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -971,6 +1022,7 @@ var sensors = query.Count();
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -993,6 +1045,7 @@ var sensors = query.LongCount();
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0)
@@ -1016,6 +1069,7 @@ var sensors = query.Count();
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket")
     |> range(start: 0)
@@ -1028,9 +1082,10 @@ from(bucket: "my-bucket")
 
 ### AggregateWindow
 
-The `AggregateWindow` applies an aggregate function to fixed windows of time. 
-Can be used only for a field which is defined as `timestamp` - `[Column(IsTimestamp = true)]`. 
-For more info about `aggregateWindow() function` see Flux's documentation - https://docs.influxdata.com/flux/v0.x/stdlib/universe/aggregatewindow/.
+The `AggregateWindow` applies an aggregate function to fixed windows of time.
+Can be used only for a field which is defined as `timestamp` - `[Column(IsTimestamp = true)]`.
+For more info about `aggregateWindow() function` see Flux's documentation
+- https://docs.influxdata.com/flux/v0.x/stdlib/universe/aggregatewindow/.
 
 ```c#
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)
@@ -1039,6 +1094,7 @@ var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org",
 ```
 
 Flux Query:
+
 ```flux
 from(bucket: "my-bucket") 
     |> range(start: 0) 
@@ -1082,7 +1138,8 @@ var query = from s in InfluxDBQueryable<SensorCustom>.Queryable("my-bucket", "my
     select s;
 ```
 
-for more details see [Any](#any) operator and for full example see: [CustomDomainMappingAndLinq](/Examples/CustomDomainMappingAndLinq.cs#L54).
+for more details see [Any](#any) operator and for full example
+see: [CustomDomainMappingAndLinq](/Examples/CustomDomainMappingAndLinq.cs#L54).
 
 ## How to debug output Flux Query
 
@@ -1114,7 +1171,8 @@ Console.WriteLine(influxQuery._Query);
 
 ## How to filter by Measurement
 
-By default, as an optimization step, ***Flux queries generated by LINQ will automatically drop the Start, Stop and Measurement columns***:
+By default, as an optimization step, ***Flux queries generated by LINQ will automatically drop the Start, Stop and
+Measurement columns***:
 
 ```flux
 from(bucket: "my-bucket")
@@ -1122,7 +1180,9 @@ from(bucket: "my-bucket")
   |> drop(columns: ["_start", "_stop", "_measurement"])
   ...
 ```
+
 This is because typical POCO classes do not include them:
+
 ```c#
 [Measurement("temperature")]
 private class Temperature
@@ -1133,7 +1193,8 @@ private class Temperature
 }
 ```
 
-It is, however, possible to utilize the Measurement column in LINQ queries by enabling it in the query optimization settings:
+It is, however, possible to utilize the Measurement column in LINQ queries by enabling it in the query optimization
+settings:
 
 ```c#
 var optimizerSettings =
@@ -1167,7 +1228,8 @@ private class InfluxPoint
 
 ## Asynchronous Queries
 
-The LINQ driver also supports asynchronous querying. For asynchronous queries you have to initialize `InfluxDBQueryable` with asynchronous version of [QueryApi](/Client/QueryApi.cs) and transform `IQueryable<T>` to `IAsyncEnumerable<T>`:
+The LINQ driver also supports asynchronous querying. For asynchronous queries you have to initialize `InfluxDBQueryable`
+with asynchronous version of [QueryApi](/Client/QueryApi.cs) and transform `IQueryable<T>` to `IAsyncEnumerable<T>`:
 
 ```c#
 var client = InfluxDBClientFactory.Create("http://localhost:8086", "my-token");

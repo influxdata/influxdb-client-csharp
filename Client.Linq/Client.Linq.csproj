@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-      <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-      <LangVersion>8</LangVersion>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <LangVersion>8</LangVersion>
 
-      <Description>The library supports querying InfluxDB 2.x by LINQ expressions.</Description>
+        <Description>The library supports querying InfluxDB 2.x by LINQ expressions.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Linq</AssemblyName>
         <VersionPrefix>4.4.0</VersionPrefix>
@@ -28,12 +28,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
-        <ProjectReference Include="..\Client\Client.csproj" />
+        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath=""/>
+        <ProjectReference Include="..\Client\Client.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Remotion.Linq" Version="2.2.0" />
+        <PackageReference Include="Remotion.Linq" Version="2.2.0"/>
     </ItemGroup>
 
 </Project>

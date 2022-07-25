@@ -326,13 +326,13 @@ namespace Client.Legacy.Test
 
             // Columns
             var expected2 = new List<string>
-                { "result", "table", "_start", "_stop", "_value", "_field", "_measurement", "host", "region" };
+                {"result", "table", "_start", "_stop", "_value", "_field", "_measurement", "host", "region"};
             CollectionAssert.AreEquivalent(table1.Columns.Select(c => c.Label).ToList(), expected2);
 
             // Records
             Assert.That(table1.Records.Count == 1);
 
-            var records = new List<FluxRecord> { table1.Records[0], tables[1].Records[0] };
+            var records = new List<FluxRecord> {table1.Records[0], tables[1].Records[0]};
             AssertFluxRecords(records);
         }
 
@@ -355,7 +355,7 @@ namespace Client.Legacy.Test
 
             // Columns
             var expected2 = new List<string>
-                { "result", "table", "_start", "_stop", "_time", "_value", "_field", "_measurement", "host", "region" };
+                {"result", "table", "_start", "_stop", "_time", "_value", "_field", "_measurement", "host", "region"};
             CollectionAssert.AreEquivalent(table1.Columns.Select(c => c.Label).ToList(), expected2);
 
             // Records

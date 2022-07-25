@@ -646,7 +646,7 @@ namespace InfluxDB.Client
                 return false;
             }
 
-            return Equals((BatchWriteOptions)obj);
+            return Equals((BatchWriteOptions) obj);
         }
 
         public override int GetHashCode()
@@ -655,7 +655,7 @@ namespace InfluxDB.Client
             {
                 var hashCode = Bucket != null ? Bucket.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ (OrganizationId != null ? OrganizationId.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (int)Precision;
+                hashCode = (hashCode * 397) ^ (int) Precision;
                 return hashCode;
             }
         }

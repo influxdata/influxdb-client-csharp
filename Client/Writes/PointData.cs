@@ -348,13 +348,13 @@ namespace InfluxDB.Client.Writes
                     time = timestamp.Ticks * 100;
                     break;
                 case WritePrecision.Us:
-                    time = (BigInteger)(timestamp.Ticks * 0.1);
+                    time = (BigInteger) (timestamp.Ticks * 0.1);
                     break;
                 case WritePrecision.Ms:
-                    time = (BigInteger)timestamp.TotalMilliseconds;
+                    time = (BigInteger) timestamp.TotalMilliseconds;
                     break;
                 case WritePrecision.S:
-                    time = (BigInteger)timestamp.TotalSeconds;
+                    time = (BigInteger) timestamp.TotalSeconds;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(timeUnit), timeUnit,
@@ -376,7 +376,7 @@ namespace InfluxDB.Client.Writes
                     time = timestamp.ToUnixTimeMilliseconds();
                     break;
                 case WritePrecision.Us:
-                    time = (long)(timestamp.ToUnixTimeTicks() * 0.1);
+                    time = (long) (timestamp.ToUnixTimeTicks() * 0.1);
                     break;
                 case WritePrecision.Ns:
                     time = (timestamp - NodaConstants.UnixEpoch).ToBigIntegerNanoseconds();
@@ -472,16 +472,16 @@ namespace InfluxDB.Client.Writes
 
                 if (value is double || value is float)
                 {
-                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
                 }
                 else if (value is uint || value is ulong || value is ushort)
                 {
-                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
                     sb.Append('u');
                 }
                 else if (value is byte || value is int || value is long || value is sbyte || value is short)
                 {
-                    sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
+                    sb.Append(((IConvertible) value).ToString(CultureInfo.InvariantCulture));
                     sb.Append('i');
                 }
                 else if (value is bool b)
@@ -529,7 +529,7 @@ namespace InfluxDB.Client.Writes
             }
 
             sb.Append(' ');
-            sb.Append(((BigInteger)_time).ToString(CultureInfo.InvariantCulture));
+            sb.Append(((BigInteger) _time).ToString(CultureInfo.InvariantCulture));
         }
 
         /// <summary>

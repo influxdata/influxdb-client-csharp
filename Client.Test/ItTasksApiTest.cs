@@ -104,7 +104,7 @@ namespace InfluxDB.Client.Test
         {
             var source = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = await Client.GetLabelsApi()
                 .CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
@@ -384,7 +384,7 @@ namespace InfluxDB.Client.Test
 
             var task = await _tasksApi.CreateTaskEveryAsync(GenerateName("it task"), TaskFlux, "1s", _organization);
 
-            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
 

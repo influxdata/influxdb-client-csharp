@@ -245,19 +245,19 @@ namespace InfluxDB.Client
             _exceptionFactory = (methodName, response) =>
                 !response.IsSuccessful ? HttpException.Create(response, response.Content) : null;
 
-            _setupService = new SetupService((Configuration)_apiClient.Configuration)
+            _setupService = new SetupService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
-            _healthService = new HealthService((Configuration)_apiClient.Configuration)
+            _healthService = new HealthService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
-            _readyService = new ReadyService((Configuration)_apiClient.Configuration)
+            _readyService = new ReadyService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
-            _pingService = new PingService((Configuration)_apiClient.Configuration)
+            _pingService = new PingService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -306,7 +306,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for the Query API</returns>
         public QueryApi GetQueryApi(IDomainObjectMapper mapper = null)
         {
-            var service = new QueryService((Configuration)_apiClient.Configuration)
+            var service = new QueryService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -331,7 +331,7 @@ namespace InfluxDB.Client
         /// <returns>the new synchronous client instance for the Query API</returns>
         public QueryApiSync GetQueryApiSync(IDomainObjectMapper mapper = null)
         {
-            var service = new QueryService((Configuration)_apiClient.Configuration)
+            var service = new QueryService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -376,7 +376,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for the Write API Async without batching</returns>
         public WriteApiAsync GetWriteApiAsync(IDomainObjectMapper mapper = null)
         {
-            var service = new WriteService((Configuration)_apiClient.Configuration)
+            var service = new WriteService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -403,7 +403,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for the Write API</returns>
         public WriteApi GetWriteApi(WriteOptions writeOptions, IDomainObjectMapper mapper = null)
         {
-            var service = new WriteService((Configuration)_apiClient.Configuration)
+            var service = new WriteService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -429,11 +429,11 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Organization API</returns>
         public OrganizationsApi GetOrganizationsApi()
         {
-            var service = new OrganizationsService((Configuration)_apiClient.Configuration)
+            var service = new OrganizationsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
-            var secretService = new SecretsService((Configuration)_apiClient.Configuration)
+            var secretService = new SecretsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -456,7 +456,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for User API</returns>
         public UsersApi GetUsersApi()
         {
-            var service = new UsersService((Configuration)_apiClient.Configuration)
+            var service = new UsersService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -479,7 +479,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Bucket API</returns>
         public BucketsApi GetBucketsApi()
         {
-            var service = new BucketsService((Configuration)_apiClient.Configuration)
+            var service = new BucketsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -502,7 +502,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Source API</returns>
         public SourcesApi GetSourcesApi()
         {
-            var service = new SourcesService((Configuration)_apiClient.Configuration)
+            var service = new SourcesService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -525,7 +525,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Authorization API</returns>
         public AuthorizationsApi GetAuthorizationsApi()
         {
-            var service = new AuthorizationsService((Configuration)_apiClient.Configuration)
+            var service = new AuthorizationsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -548,7 +548,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Task API</returns>
         public TasksApi GetTasksApi()
         {
-            var service = new TasksService((Configuration)_apiClient.Configuration)
+            var service = new TasksService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -571,7 +571,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Scraper API</returns>
         public ScraperTargetsApi GetScraperTargetsApi()
         {
-            var service = new ScraperTargetsService((Configuration)_apiClient.Configuration)
+            var service = new ScraperTargetsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -594,7 +594,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Telegrafs API</returns>
         public TelegrafsApi GetTelegrafsApi()
         {
-            var service = new TelegrafsService((Configuration)_apiClient.Configuration)
+            var service = new TelegrafsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -617,7 +617,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Label API</returns>
         public LabelsApi GetLabelsApi()
         {
-            var service = new LabelsService((Configuration)_apiClient.Configuration)
+            var service = new LabelsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -640,7 +640,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for NotificationEndpoint API</returns>
         public NotificationEndpointsApi GetNotificationEndpointsApi()
         {
-            var service = new NotificationEndpointsService((Configuration)_apiClient.Configuration)
+            var service = new NotificationEndpointsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -663,7 +663,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for NotificationRules API</returns>
         public NotificationRulesApi GetNotificationRulesApi()
         {
-            var service = new NotificationRulesService((Configuration)_apiClient.Configuration)
+            var service = new NotificationRulesService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -686,7 +686,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Checks API</returns>
         public ChecksApi GetChecksApi()
         {
-            var service = new ChecksService((Configuration)_apiClient.Configuration)
+            var service = new ChecksService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -709,7 +709,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for Delete API</returns>
         public DeleteApi GetDeleteApi()
         {
-            var service = new DeleteService((Configuration)_apiClient.Configuration)
+            var service = new DeleteService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -734,7 +734,7 @@ namespace InfluxDB.Client
         /// <returns>New instance of InvokableScriptsApi.</returns>
         public InvokableScriptsApi GetInvokableScriptsApi(IDomainObjectMapper mapper = null)
         {
-            var service = new InvokableScriptsService((Configuration)_apiClient.Configuration)
+            var service = new InvokableScriptsService((Configuration) _apiClient.Configuration)
             {
                 ExceptionFactory = _exceptionFactory
             };
@@ -750,7 +750,7 @@ namespace InfluxDB.Client
         /// <returns>new instance of service</returns>
         public TS CreateService<TS>(Type serviceType) where TS : IApiAccessor
         {
-            var instance = (TS)Activator.CreateInstance(serviceType, (Configuration)_apiClient.Configuration);
+            var instance = (TS) Activator.CreateInstance(serviceType, (Configuration) _apiClient.Configuration);
             instance.ExceptionFactory = _exceptionFactory;
 
             return instance;

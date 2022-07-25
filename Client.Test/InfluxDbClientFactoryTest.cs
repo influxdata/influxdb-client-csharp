@@ -275,7 +275,7 @@ pG0N7yqaVwGv9jYQfmnnD7M5LYVweEZ3OzCbfZuNJ4+EHNdZKcJiu2TaOsyxK25q
 AJvDAFTSr5A9GSjJ3OyIeKoI8Q6xuaQBitpZR90P/Ah/Ymg490rpXavk";
 
             var certificateCollection = new X509CertificateCollection
-                { new X509Certificate2(Convert.FromBase64String(testingPem)) };
+                {new X509Certificate2(Convert.FromBase64String(testingPem))};
 
             var options = new InfluxDBClientOptions.Builder()
                 .Url("http://localhost:8086")
@@ -294,7 +294,7 @@ AJvDAFTSr5A9GSjJ3OyIeKoI8Q6xuaQBitpZR90P/Ah/Ymg490rpXavk";
             const BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
                                            | BindingFlags.Static | BindingFlags.DeclaredOnly;
             var field = type.GetField(fieldName, bindFlags);
-            return (T)field?.GetValue(instance);
+            return (T) field?.GetValue(instance);
         }
 
         private static void CopyAppConfig()

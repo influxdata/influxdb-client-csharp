@@ -169,29 +169,29 @@ namespace InfluxDB.Client.Api.Domain
             private static readonly Dictionary<string[], Type> Types =
                 new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
                 {
-                    { new[] { "ArrayExpression" }, typeof(ArrayExpression) },
-                    { new[] { "DictExpression" }, typeof(DictExpression) },
-                    { new[] { "FunctionExpression" }, typeof(FunctionExpression) },
-                    { new[] { "BinaryExpression" }, typeof(BinaryExpression) },
-                    { new[] { "CallExpression" }, typeof(CallExpression) },
-                    { new[] { "ConditionalExpression" }, typeof(ConditionalExpression) },
-                    { new[] { "LogicalExpression" }, typeof(LogicalExpression) },
-                    { new[] { "MemberExpression" }, typeof(MemberExpression) },
-                    { new[] { "IndexExpression" }, typeof(IndexExpression) },
-                    { new[] { "ObjectExpression" }, typeof(ObjectExpression) },
-                    { new[] { "ParenExpression" }, typeof(ParenExpression) },
-                    { new[] { "PipeExpression" }, typeof(PipeExpression) },
-                    { new[] { "UnaryExpression" }, typeof(UnaryExpression) },
-                    { new[] { "BooleanLiteral" }, typeof(BooleanLiteral) },
-                    { new[] { "DateTimeLiteral" }, typeof(DateTimeLiteral) },
-                    { new[] { "DurationLiteral" }, typeof(DurationLiteral) },
-                    { new[] { "FloatLiteral" }, typeof(FloatLiteral) },
-                    { new[] { "IntegerLiteral" }, typeof(IntegerLiteral) },
-                    { new[] { "PipeLiteral" }, typeof(PipeLiteral) },
-                    { new[] { "RegexpLiteral" }, typeof(RegexpLiteral) },
-                    { new[] { "StringLiteral" }, typeof(StringLiteral) },
-                    { new[] { "UnsignedIntegerLiteral" }, typeof(UnsignedIntegerLiteral) },
-                    { new[] { "Identifier" }, typeof(Identifier) }
+                    {new[] {"ArrayExpression"}, typeof(ArrayExpression)},
+                    {new[] {"DictExpression"}, typeof(DictExpression)},
+                    {new[] {"FunctionExpression"}, typeof(FunctionExpression)},
+                    {new[] {"BinaryExpression"}, typeof(BinaryExpression)},
+                    {new[] {"CallExpression"}, typeof(CallExpression)},
+                    {new[] {"ConditionalExpression"}, typeof(ConditionalExpression)},
+                    {new[] {"LogicalExpression"}, typeof(LogicalExpression)},
+                    {new[] {"MemberExpression"}, typeof(MemberExpression)},
+                    {new[] {"IndexExpression"}, typeof(IndexExpression)},
+                    {new[] {"ObjectExpression"}, typeof(ObjectExpression)},
+                    {new[] {"ParenExpression"}, typeof(ParenExpression)},
+                    {new[] {"PipeExpression"}, typeof(PipeExpression)},
+                    {new[] {"UnaryExpression"}, typeof(UnaryExpression)},
+                    {new[] {"BooleanLiteral"}, typeof(BooleanLiteral)},
+                    {new[] {"DateTimeLiteral"}, typeof(DateTimeLiteral)},
+                    {new[] {"DurationLiteral"}, typeof(DurationLiteral)},
+                    {new[] {"FloatLiteral"}, typeof(FloatLiteral)},
+                    {new[] {"IntegerLiteral"}, typeof(IntegerLiteral)},
+                    {new[] {"PipeLiteral"}, typeof(PipeLiteral)},
+                    {new[] {"RegexpLiteral"}, typeof(RegexpLiteral)},
+                    {new[] {"StringLiteral"}, typeof(StringLiteral)},
+                    {new[] {"UnsignedIntegerLiteral"}, typeof(UnsignedIntegerLiteral)},
+                    {new[] {"Identifier"}, typeof(Identifier)}
                 };
 
             public override bool CanConvert(Type objectType)
@@ -218,7 +218,7 @@ namespace InfluxDB.Client.Api.Domain
 
                         var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
+                        var discriminator = new[] {"type"}.Select(key => jObject[key].ToString()).ToArray();
 
                         Types.TryGetValue(discriminator, out var type);
 
@@ -236,7 +236,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 var elementType = targetType.GenericTypeArguments.FirstOrDefault();
 
-                var list = (IList)Activator.CreateInstance(targetType);
+                var list = (IList) Activator.CreateInstance(targetType);
                 while (reader.Read() && reader.TokenType != JsonToken.EndArray)
                     list.Add(Deserialize(reader, elementType, serializer));
 
@@ -249,29 +249,29 @@ namespace InfluxDB.Client.Api.Domain
             private static readonly Dictionary<string[], Type> Types =
                 new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
                 {
-                    { new[] { "ArrayExpression" }, typeof(ArrayExpression) },
-                    { new[] { "DictExpression" }, typeof(DictExpression) },
-                    { new[] { "FunctionExpression" }, typeof(FunctionExpression) },
-                    { new[] { "BinaryExpression" }, typeof(BinaryExpression) },
-                    { new[] { "CallExpression" }, typeof(CallExpression) },
-                    { new[] { "ConditionalExpression" }, typeof(ConditionalExpression) },
-                    { new[] { "LogicalExpression" }, typeof(LogicalExpression) },
-                    { new[] { "MemberExpression" }, typeof(MemberExpression) },
-                    { new[] { "IndexExpression" }, typeof(IndexExpression) },
-                    { new[] { "ObjectExpression" }, typeof(ObjectExpression) },
-                    { new[] { "ParenExpression" }, typeof(ParenExpression) },
-                    { new[] { "PipeExpression" }, typeof(PipeExpression) },
-                    { new[] { "UnaryExpression" }, typeof(UnaryExpression) },
-                    { new[] { "BooleanLiteral" }, typeof(BooleanLiteral) },
-                    { new[] { "DateTimeLiteral" }, typeof(DateTimeLiteral) },
-                    { new[] { "DurationLiteral" }, typeof(DurationLiteral) },
-                    { new[] { "FloatLiteral" }, typeof(FloatLiteral) },
-                    { new[] { "IntegerLiteral" }, typeof(IntegerLiteral) },
-                    { new[] { "PipeLiteral" }, typeof(PipeLiteral) },
-                    { new[] { "RegexpLiteral" }, typeof(RegexpLiteral) },
-                    { new[] { "StringLiteral" }, typeof(StringLiteral) },
-                    { new[] { "UnsignedIntegerLiteral" }, typeof(UnsignedIntegerLiteral) },
-                    { new[] { "Identifier" }, typeof(Identifier) }
+                    {new[] {"ArrayExpression"}, typeof(ArrayExpression)},
+                    {new[] {"DictExpression"}, typeof(DictExpression)},
+                    {new[] {"FunctionExpression"}, typeof(FunctionExpression)},
+                    {new[] {"BinaryExpression"}, typeof(BinaryExpression)},
+                    {new[] {"CallExpression"}, typeof(CallExpression)},
+                    {new[] {"ConditionalExpression"}, typeof(ConditionalExpression)},
+                    {new[] {"LogicalExpression"}, typeof(LogicalExpression)},
+                    {new[] {"MemberExpression"}, typeof(MemberExpression)},
+                    {new[] {"IndexExpression"}, typeof(IndexExpression)},
+                    {new[] {"ObjectExpression"}, typeof(ObjectExpression)},
+                    {new[] {"ParenExpression"}, typeof(ParenExpression)},
+                    {new[] {"PipeExpression"}, typeof(PipeExpression)},
+                    {new[] {"UnaryExpression"}, typeof(UnaryExpression)},
+                    {new[] {"BooleanLiteral"}, typeof(BooleanLiteral)},
+                    {new[] {"DateTimeLiteral"}, typeof(DateTimeLiteral)},
+                    {new[] {"DurationLiteral"}, typeof(DurationLiteral)},
+                    {new[] {"FloatLiteral"}, typeof(FloatLiteral)},
+                    {new[] {"IntegerLiteral"}, typeof(IntegerLiteral)},
+                    {new[] {"PipeLiteral"}, typeof(PipeLiteral)},
+                    {new[] {"RegexpLiteral"}, typeof(RegexpLiteral)},
+                    {new[] {"StringLiteral"}, typeof(StringLiteral)},
+                    {new[] {"UnsignedIntegerLiteral"}, typeof(UnsignedIntegerLiteral)},
+                    {new[] {"Identifier"}, typeof(Identifier)}
                 };
 
             public override bool CanConvert(Type objectType)
@@ -298,7 +298,7 @@ namespace InfluxDB.Client.Api.Domain
 
                         var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
+                        var discriminator = new[] {"type"}.Select(key => jObject[key].ToString()).ToArray();
 
                         Types.TryGetValue(discriminator, out var type);
 
@@ -316,7 +316,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 var elementType = targetType.GenericTypeArguments.FirstOrDefault();
 
-                var list = (IList)Activator.CreateInstance(targetType);
+                var list = (IList) Activator.CreateInstance(targetType);
                 while (reader.Read() && reader.TokenType != JsonToken.EndArray)
                     list.Add(Deserialize(reader, elementType, serializer));
 
@@ -329,29 +329,29 @@ namespace InfluxDB.Client.Api.Domain
             private static readonly Dictionary<string[], Type> Types =
                 new Dictionary<string[], Type>(new Client.DiscriminatorComparer<string>())
                 {
-                    { new[] { "ArrayExpression" }, typeof(ArrayExpression) },
-                    { new[] { "DictExpression" }, typeof(DictExpression) },
-                    { new[] { "FunctionExpression" }, typeof(FunctionExpression) },
-                    { new[] { "BinaryExpression" }, typeof(BinaryExpression) },
-                    { new[] { "CallExpression" }, typeof(CallExpression) },
-                    { new[] { "ConditionalExpression" }, typeof(ConditionalExpression) },
-                    { new[] { "LogicalExpression" }, typeof(LogicalExpression) },
-                    { new[] { "MemberExpression" }, typeof(MemberExpression) },
-                    { new[] { "IndexExpression" }, typeof(IndexExpression) },
-                    { new[] { "ObjectExpression" }, typeof(ObjectExpression) },
-                    { new[] { "ParenExpression" }, typeof(ParenExpression) },
-                    { new[] { "PipeExpression" }, typeof(PipeExpression) },
-                    { new[] { "UnaryExpression" }, typeof(UnaryExpression) },
-                    { new[] { "BooleanLiteral" }, typeof(BooleanLiteral) },
-                    { new[] { "DateTimeLiteral" }, typeof(DateTimeLiteral) },
-                    { new[] { "DurationLiteral" }, typeof(DurationLiteral) },
-                    { new[] { "FloatLiteral" }, typeof(FloatLiteral) },
-                    { new[] { "IntegerLiteral" }, typeof(IntegerLiteral) },
-                    { new[] { "PipeLiteral" }, typeof(PipeLiteral) },
-                    { new[] { "RegexpLiteral" }, typeof(RegexpLiteral) },
-                    { new[] { "StringLiteral" }, typeof(StringLiteral) },
-                    { new[] { "UnsignedIntegerLiteral" }, typeof(UnsignedIntegerLiteral) },
-                    { new[] { "Identifier" }, typeof(Identifier) }
+                    {new[] {"ArrayExpression"}, typeof(ArrayExpression)},
+                    {new[] {"DictExpression"}, typeof(DictExpression)},
+                    {new[] {"FunctionExpression"}, typeof(FunctionExpression)},
+                    {new[] {"BinaryExpression"}, typeof(BinaryExpression)},
+                    {new[] {"CallExpression"}, typeof(CallExpression)},
+                    {new[] {"ConditionalExpression"}, typeof(ConditionalExpression)},
+                    {new[] {"LogicalExpression"}, typeof(LogicalExpression)},
+                    {new[] {"MemberExpression"}, typeof(MemberExpression)},
+                    {new[] {"IndexExpression"}, typeof(IndexExpression)},
+                    {new[] {"ObjectExpression"}, typeof(ObjectExpression)},
+                    {new[] {"ParenExpression"}, typeof(ParenExpression)},
+                    {new[] {"PipeExpression"}, typeof(PipeExpression)},
+                    {new[] {"UnaryExpression"}, typeof(UnaryExpression)},
+                    {new[] {"BooleanLiteral"}, typeof(BooleanLiteral)},
+                    {new[] {"DateTimeLiteral"}, typeof(DateTimeLiteral)},
+                    {new[] {"DurationLiteral"}, typeof(DurationLiteral)},
+                    {new[] {"FloatLiteral"}, typeof(FloatLiteral)},
+                    {new[] {"IntegerLiteral"}, typeof(IntegerLiteral)},
+                    {new[] {"PipeLiteral"}, typeof(PipeLiteral)},
+                    {new[] {"RegexpLiteral"}, typeof(RegexpLiteral)},
+                    {new[] {"StringLiteral"}, typeof(StringLiteral)},
+                    {new[] {"UnsignedIntegerLiteral"}, typeof(UnsignedIntegerLiteral)},
+                    {new[] {"Identifier"}, typeof(Identifier)}
                 };
 
             public override bool CanConvert(Type objectType)
@@ -378,7 +378,7 @@ namespace InfluxDB.Client.Api.Domain
 
                         var jObject = Newtonsoft.Json.Linq.JObject.Load(reader);
 
-                        var discriminator = new[] { "type" }.Select(key => jObject[key].ToString()).ToArray();
+                        var discriminator = new[] {"type"}.Select(key => jObject[key].ToString()).ToArray();
 
                         Types.TryGetValue(discriminator, out var type);
 
@@ -396,7 +396,7 @@ namespace InfluxDB.Client.Api.Domain
             {
                 var elementType = targetType.GenericTypeArguments.FirstOrDefault();
 
-                var list = (IList)Activator.CreateInstance(targetType);
+                var list = (IList) Activator.CreateInstance(targetType);
                 while (reader.Read() && reader.TokenType != JsonToken.EndArray)
                     list.Add(Deserialize(reader, elementType, serializer));
 

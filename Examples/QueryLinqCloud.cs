@@ -59,7 +59,7 @@ namespace Examples
             /// </summary>
             public T ConvertToEntity<T>(FluxRecord fluxRecord)
             {
-                return (T)ConvertToEntity(fluxRecord, typeof(T));
+                return (T) ConvertToEntity(fluxRecord, typeof(T));
             }
 
             public object ConvertToEntity(FluxRecord fluxRecord, Type type)
@@ -184,7 +184,7 @@ namespace Examples
             // Debug Query
             //
             Console.WriteLine("==== Debug LINQ Queryable Flux output ====");
-            var influxQuery = ((InfluxDBQueryable<DomainEntity>)query).ToDebugQuery();
+            var influxQuery = ((InfluxDBQueryable<DomainEntity>) query).ToDebugQuery();
             Console.WriteLine("> variables:");
             foreach (var statement in influxQuery.Extern.Body)
             {

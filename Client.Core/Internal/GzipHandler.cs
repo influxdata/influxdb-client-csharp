@@ -57,7 +57,7 @@ namespace InfluxDB.Client.Core.Internal
 
                     if (body.Value is byte[])
                     {
-                        bytes = (byte[])body.Value;
+                        bytes = (byte[]) body.Value;
                     }
                     else
                     {

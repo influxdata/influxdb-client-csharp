@@ -170,7 +170,7 @@ namespace InfluxDB.Client.Test
 
         private HttpException CreateException(int retryAfter = 10)
         {
-            var headers = new List<HeaderParameter> { new HeaderParameter("Retry-After", retryAfter.ToString()) };
+            var headers = new List<HeaderParameter> {new HeaderParameter("Retry-After", retryAfter.ToString())};
             var exception = HttpException.Create("", headers, "", HttpStatusCode.TooManyRequests);
             return exception;
         }

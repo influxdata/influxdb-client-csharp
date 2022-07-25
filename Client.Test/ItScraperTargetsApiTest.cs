@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Test
                 .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
-            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = await Client.GetLabelsApi()
                 .CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
@@ -148,7 +148,7 @@ namespace InfluxDB.Client.Test
                 .CreateScraperTargetAsync(GenerateName("InfluxDB scraper"), "http://localhost:9999", _bucket.Id,
                     _organization.Id);
 
-            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
 

@@ -41,7 +41,7 @@ namespace InfluxDB.Client.Test
             var source =
                 await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = await Client.GetLabelsApi()
                 .CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
@@ -200,7 +200,7 @@ namespace InfluxDB.Client.Test
             foreach (var i in Enumerable.Range(0, 20 - (await _bucketsApi.FindBucketsAsync()).Count))
                 await _bucketsApi.CreateBucketAsync(GenerateName($"{i}"), RetentionRule(), _organization);
 
-            var findOptions = new FindOptions { Limit = 5 };
+            var findOptions = new FindOptions {Limit = 5};
 
             var buckets = await _bucketsApi.FindBucketsAsync(findOptions);
             Assert.AreEqual(5, buckets._Buckets.Count);
@@ -231,7 +231,7 @@ namespace InfluxDB.Client.Test
             var bucket =
                 await _bucketsApi.CreateBucketAsync(GenerateName("robot sensor"), RetentionRule(), _organization);
 
-            var properties = new Dictionary<string, string> { { "color", "green" }, { "location", "west" } };
+            var properties = new Dictionary<string, string> {{"color", "green"}, {"location", "west"}};
 
             var label = await labelClient.CreateLabelAsync(GenerateName("Cool Resource"), properties, _organization.Id);
 

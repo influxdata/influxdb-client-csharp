@@ -71,15 +71,15 @@ namespace InfluxDB.Client.Linq.Internal
                 {
                     var expressions =
                         e.Cast<object>()
-                            .Select(o => new NamedVariable { Value = o, IsTag = variable.IsTag })
+                            .Select(o => new NamedVariable {Value = o, IsTag = variable.IsTag})
                             .Select(CreateExpression)
                             .ToList();
                     return new ArrayExpression("ArrayExpression", expressions);
                 }
                 case TimeSpan timeSpan:
                     var timeSpanTotalMilliseconds = 1000.0 * timeSpan.TotalMilliseconds;
-                    var duration = new Duration("Duration", (long)timeSpanTotalMilliseconds, "us");
-                    return new DurationLiteral("DurationLiteral", new List<Duration> { duration });
+                    var duration = new Duration("Duration", (long) timeSpanTotalMilliseconds, "us");
+                    return new DurationLiteral("DurationLiteral", new List<Duration> {duration});
                 case Expression e:
                     return e;
                 default:

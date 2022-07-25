@@ -250,7 +250,7 @@ namespace Client.Legacy.Test
 
             Assert.That(records.Count == 2);
 
-            var value = (byte[])records[0].GetValueByKey("value");
+            var value = (byte[]) records[0].GetValueByKey("value");
 
             Assert.IsNotEmpty(value);
             Assert.That(binaryData.Equals(Encoding.UTF8.GetString(value)));

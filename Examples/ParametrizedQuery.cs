@@ -50,8 +50,8 @@ namespace Examples
             var query = "from(bucket: params.bucketParam) |> range(start: duration(v: params.startParam))";
             var bindParams = new Dictionary<string, object>
             {
-                { "bucketParam", Bucket },
-                { "startParam", "-1h" }
+                {"bucketParam", Bucket},
+                {"startParam", "-1h"}
             };
 
             var tables = await client.GetQueryApi()

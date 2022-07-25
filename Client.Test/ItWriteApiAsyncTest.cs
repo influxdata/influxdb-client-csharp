@@ -39,7 +39,7 @@ namespace InfluxDB.Client.Test
 
             var authorization = await Client.GetAuthorizationsApi()
                 .CreateAuthorizationAsync(_organization,
-                    new List<Permission> { readBucket, writeBucket });
+                    new List<Permission> {readBucket, writeBucket});
 
             _token = authorization.Token;
 
@@ -155,7 +155,7 @@ namespace InfluxDB.Client.Test
             {
                 var record = query[0].Records[ii - 1];
                 Assert.AreEqual("h2o", record.GetMeasurement());
-                Assert.AreEqual((double)ii, record.GetValue());
+                Assert.AreEqual((double) ii, record.GetValue());
                 Assert.AreEqual("water_level", record.GetField());
                 Assert.AreEqual(Instant.FromDateTimeUtc(dtDateTime.AddSeconds(ii)), record.GetTime());
             }

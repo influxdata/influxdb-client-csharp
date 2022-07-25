@@ -100,7 +100,7 @@ namespace InfluxDB.Client.Linq.Internal
             {
                 var result = ApplyAggregate<T>(_queryApiSync.QuerySync(query, _org), queryResultsSettings);
 
-                return new List<T> { result };
+                return new List<T> {result};
             }
 
             return _queryApiSync.QuerySync<T>(query, _org);
@@ -171,7 +171,7 @@ namespace InfluxDB.Client.Linq.Internal
 
             var aggregated = queryResultsSettings.AggregateFunction(enumerable);
 
-            return (T)Convert.ChangeType(aggregated, typeof(T));
+            return (T) Convert.ChangeType(aggregated, typeof(T));
         }
     }
 }

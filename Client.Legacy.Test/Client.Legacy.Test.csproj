@@ -5,19 +5,19 @@
         <LangVersion>8</LangVersion>
 
         <IsPackable>false</IsPackable>
-        
+
         <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0"/>
+        <PackageReference Include="NUnit3TestAdapter" Version="4.2.1"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Client.Legacy\Client.Legacy.csproj" />
-      <ProjectReference Include="..\Client.Core.Test\Client.Core.Test.csproj" />
+        <ProjectReference Include="..\Client.Legacy\Client.Legacy.csproj"/>
+        <ProjectReference Include="..\Client.Core.Test\Client.Core.Test.csproj"/>
     </ItemGroup>
 
     <PropertyGroup>

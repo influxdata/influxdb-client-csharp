@@ -175,7 +175,7 @@ namespace InfluxDB.Client.Api.Client
             var response = RestClient.ExecuteSync(request);
             InterceptResponse(request, response);
 
-            return (object)response;
+            return (object) response;
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace InfluxDB.Client.Api.Client
             InterceptRequest(request);
             var response = await RestClient.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
             InterceptResponse(request, response);
-            return (object)response;
+            return (object) response;
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace InfluxDB.Client.Api.Client
         {
             if (stream is FileStream)
             {
-                return FileParameter.Create(name, ReadAsBytes(stream), Path.GetFileName(((FileStream)stream).Name));
+                return FileParameter.Create(name, ReadAsBytes(stream), Path.GetFileName(((FileStream) stream).Name));
             }
             else
             {
@@ -250,7 +250,7 @@ namespace InfluxDB.Client.Api.Client
                 // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
                 // For example: 2009-06-15T13:45:30.0000000
             {
-                return ((DateTime)obj).ToString(Configuration.DateTimeFormat);
+                return ((DateTime) obj).ToString(Configuration.DateTimeFormat);
             }
             else if (obj is DateTimeOffset)
                 // Return a formatted date string - Can be customized with Configuration.DateTimeFormat
@@ -258,12 +258,12 @@ namespace InfluxDB.Client.Api.Client
                 // https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8
                 // For example: 2009-06-15T13:45:30.0000000
             {
-                return ((DateTimeOffset)obj).ToString(Configuration.DateTimeFormat);
+                return ((DateTimeOffset) obj).ToString(Configuration.DateTimeFormat);
             }
             else if (obj is IList)
             {
                 var flattenedString = new StringBuilder();
-                foreach (var param in (IList)obj)
+                foreach (var param in (IList) obj)
                 {
                     if (flattenedString.Length > 0)
                     {

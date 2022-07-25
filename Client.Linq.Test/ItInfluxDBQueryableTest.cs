@@ -101,7 +101,7 @@ namespace Client.Linq.Test
         public void QueryTakeMultipleTimeSeries()
         {
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync(),
-                    new QueryableOptimizerSettings { QueryMultipleTimeSeries = true })
+                    new QueryableOptimizerSettings {QueryMultipleTimeSeries = true})
                 select s).Take(2);
 
             var sensors = query.ToList();
@@ -327,7 +327,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryContainsField()
         {
-            int[] values = { 15, 28 };
+            int[] values = {15, 28};
 
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where values.Contains(s.Value)
@@ -341,7 +341,7 @@ namespace Client.Linq.Test
         [Test]
         public void QueryContainsTag()
         {
-            string[] deployment = { "production", "testing" };
+            string[] deployment = {"production", "testing"};
 
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
                 where deployment.Contains(s.Deployment)
@@ -452,7 +452,7 @@ namespace Client.Linq.Test
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync(),
                     new QueryableOptimizerSettings
-                        { RangeStartValue = new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc) })
+                        {RangeStartValue = new DateTime(2020, 11, 17, 8, 20, 15, DateTimeKind.Utc)})
                 select s;
 
             var sensors = query.ToList();

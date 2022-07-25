@@ -138,7 +138,7 @@ namespace InfluxDB.Client.Internal
                 rangeStop = _writeOptions.MaxRetryDelay;
             }
 
-            var retryInterval = (long)(rangeStart + (rangeStop - rangeStart) * _random.NextDouble());
+            var retryInterval = (long) (rangeStart + (rangeStop - rangeStart) * _random.NextDouble());
 
             Trace.WriteLine("The InfluxDB does not specify \"Retry-After\". " +
                             $"Use the default retryInterval: {retryInterval}");
@@ -148,7 +148,7 @@ namespace InfluxDB.Client.Internal
 
         internal static int JitterDelay(WriteOptions writeOptions)
         {
-            return (int)(new Random().NextDouble() * writeOptions.JitterInterval);
+            return (int) (new Random().NextDouble() * writeOptions.JitterInterval);
         }
 
         private Exception GetWebException(Exception exception)

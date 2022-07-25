@@ -11,7 +11,7 @@ namespace InfluxDB.Client.Configurations
         [ConfigurationProperty("url", IsKey = true, IsRequired = true)]
         public string Url
         {
-            get => (string)base["url"];
+            get => (string) base["url"];
             set => base["url"] = value;
         }
 
@@ -21,7 +21,7 @@ namespace InfluxDB.Client.Configurations
         [ConfigurationProperty("org", IsKey = true, IsRequired = false)]
         public string Org
         {
-            get => (string)base["org"];
+            get => (string) base["org"];
             set => base["org"] = value;
         }
 
@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Configurations
         [ConfigurationProperty("bucket", IsKey = true, IsRequired = false)]
         public string Bucket
         {
-            get => (string)base["bucket"];
+            get => (string) base["bucket"];
             set => base["bucket"] = value;
         }
 
@@ -41,7 +41,7 @@ namespace InfluxDB.Client.Configurations
         [ConfigurationProperty("token", IsKey = true, IsRequired = false)]
         public string Token
         {
-            get => (string)base["token"];
+            get => (string) base["token"];
             set => base["token"] = value;
         }
 
@@ -51,7 +51,7 @@ namespace InfluxDB.Client.Configurations
         [ConfigurationProperty("logLevel", IsKey = true, IsRequired = false)]
         public string LogLevel
         {
-            get => (string)base["logLevel"];
+            get => (string) base["logLevel"];
             set => base["logLevel"] = value;
         }
 
@@ -61,7 +61,7 @@ namespace InfluxDB.Client.Configurations
         [ConfigurationProperty("timeout", IsKey = true, IsRequired = false)]
         public string Timeout
         {
-            get => (string)base["timeout"];
+            get => (string) base["timeout"];
             set => base["timeout"] = value;
         }
 
@@ -71,7 +71,7 @@ namespace InfluxDB.Client.Configurations
         [ConfigurationProperty("allowHttpRedirects", IsKey = true, IsRequired = false)]
         public bool AllowHttpRedirects
         {
-            get => (bool)base["allowHttpRedirects"];
+            get => (bool) base["allowHttpRedirects"];
             set => base["allowHttpRedirects"] = value;
         }
 
@@ -81,7 +81,7 @@ namespace InfluxDB.Client.Configurations
         [ConfigurationProperty("verifySsl", IsKey = true, IsRequired = false, DefaultValue = true)]
         public bool VerifySsl
         {
-            get => (bool)base["verifySsl"];
+            get => (bool) base["verifySsl"];
             set => base["verifySsl"] = value;
         }
 
@@ -107,17 +107,17 @@ namespace InfluxDB.Client.Configurations
 
             protected override object GetElementKey(ConfigurationElement element)
             {
-                return ((TagElement)element).Name;
+                return ((TagElement) element).Name;
             }
         }
 
         public class TagElement : ConfigurationElement
         {
             [ConfigurationProperty("name", IsRequired = true, IsKey = true)]
-            public string Name => (string)base["name"];
+            public string Name => (string) base["name"];
 
             [ConfigurationProperty("value", IsRequired = false)]
-            public string Value => (string)base["value"];
+            public string Value => (string) base["value"];
         }
     }
 }

@@ -198,7 +198,7 @@ namespace InfluxDB.Client.Test
             var secrets = await _organizationsApi.GetSecretsAsync(organization);
             Assert.That(secrets, Is.Null.Or.Empty);
 
-            var secretsKv = new Dictionary<string, string> { { "gh", "123456789" }, { "az", "987654321" } };
+            var secretsKv = new Dictionary<string, string> {{"gh", "123456789"}, {"az", "987654321"}};
 
             await _organizationsApi.PutSecretsAsync(secretsKv, organization);
 
@@ -207,7 +207,7 @@ namespace InfluxDB.Client.Test
             Assert.Contains("gh", secrets);
             Assert.Contains("az", secrets);
 
-            await _organizationsApi.DeleteSecretsAsync(new List<string> { "gh" }, organization);
+            await _organizationsApi.DeleteSecretsAsync(new List<string> {"gh"}, organization);
 
             secrets = await _organizationsApi.GetSecretsAsync(organization);
             Assert.AreEqual(1, secrets.Count);
