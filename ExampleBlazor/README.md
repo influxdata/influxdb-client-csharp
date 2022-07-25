@@ -53,6 +53,7 @@ This page contains basic methods from `GetBucketsApi()` in **influxdb-client-csh
 ### WriteAPI
 
 On this page is use method from `GetWriteApi()` in **influxdb-client-csharp** for writing point to InfluxDB
+
 - `WritePoint`.
 
 ### QueryAPI
