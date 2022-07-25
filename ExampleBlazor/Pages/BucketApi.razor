@@ -10,10 +10,8 @@
         padding-top: 0;
         opacity: 80%
     }
-  
-    #addBucket{
-    float: right;
-    }
+
+    #addBucket { float: right; }
 </style>
 
 <PageTitle>BucketAPI</PageTitle>
@@ -178,7 +176,7 @@ else
             var write = new Permission(Permission.ActionEnum.Write, resource);
 
             var authorization = await influxDbClient.GetAuthorizationsApi()
-                .CreateAuthorizationAsync(orgId, new List<Permission> {read, write});
+                .CreateAuthorizationAsync(orgId, new List<Permission> { read, write });
 
             influxDbClient.Dispose();
 

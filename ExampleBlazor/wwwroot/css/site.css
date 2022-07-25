@@ -7,13 +7,9 @@ html, body {
     line-height: 1.7;
 }
 
-.h1_blue {
-    color: #020a47;
-}
+.h1_blue { color: #020a47; }
 
-.h1_pink {
-    color: #d30971;
-}
+.h1_pink { color: #d30971; }
 
 h1 {
     font-weight: 700;
@@ -21,13 +17,9 @@ h1 {
     line-height: 1.25em;
 }
 
-h1:focus {
-    outline: none;
-}
+h1:focus { outline: none; }
 
-a, .btn-link {
-    color: #0071c1;
-}
+a, .btn-link { color: #0071c1; }
 
 .btn-primary {
     font-weight: 400;
@@ -92,13 +84,9 @@ hr {
     opacity: 1;
 }
 
-a {
-    color: #d30971;
-}
+a { color: #d30971; }
 
-a:hover {
-    color: #5EE4E4;
-}
+a:hover { color: #5EE4E4; }
 
 .page-top {
     padding-left: 2rem !important;
@@ -123,25 +111,15 @@ a:hover {
     color: white;
 }
 
-.odd-row {
-    background: #FAFAFA;
-}
+.odd-row { background: #FAFAFA; }
 
-.content {
-    padding-top: 1.1rem;
-}
+.content { padding-top: 1.1rem; }
 
-.valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
-}
+.valid.modified:not([type=checkbox]) { outline: 1px solid #26b050; }
 
-.invalid {
-    outline: 1px solid red;
-}
+.invalid { outline: 1px solid red; }
 
-.validation-message {
-    color: red;
-}
+.validation-message { color: red; }
 
 #blazor-error-ui {
     background: lightyellow;
@@ -168,6 +146,4 @@ a:hover {
     color: white;
 }
 
-.blazor-error-boundary::after {
-    content: "An error has occurred."
-}
+.blazor-error-boundary::after { content: "An error has occurred." }
