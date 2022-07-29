@@ -1,4 +1,4 @@
-## 4.4.0 [unreleased]
+## 4.4.0 [2022-07-29]
 
 ### Bug Fixes
 1. [#330](https://github.com/influxdata/influxdb-client-csharp/pull/330): Redact the `Authorization` HTTP header from log
