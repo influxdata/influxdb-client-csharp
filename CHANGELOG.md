@@ -3,6 +3,9 @@
 ### Dependencies
 Update dependencies:
 
+#### Build:
+  - [#343](https://github.com/influxdata/influxdb-client-csharp/pull/343): `Microsoft.Extensions.ObjectPool` to `6.0.8`
+
 #### Test:
   - [#341](https://github.com/influxdata/influxdb-client-csharp/pull/341): `WireMock.Net` to `1.5.3`
   - [#342](https://github.com/influxdata/influxdb-client-csharp/pull/342): `Moq` to `4.18.2`
