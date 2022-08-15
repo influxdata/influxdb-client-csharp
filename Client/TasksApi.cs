@@ -1324,7 +1324,7 @@ namespace InfluxDB.Client
                 repetition += "\"" + cron + "\"";
             }
 
-            task.Flux = $"option task = {{name: \"{name}\", {repetition}}} \n {flux}";
+            task.Flux = $"{flux}\n\noption task = {{name: \"{name}\", {repetition}}}";
 
             return task;
         }
