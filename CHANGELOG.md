@@ -5,7 +5,7 @@ Update dependencies:
 
 #### Build:
   - [#343](https://github.com/influxdata/influxdb-client-csharp/pull/343): `Microsoft.Extensions.ObjectPool` to `6.0.8`
-  - [#347](https://github.com/influxdata/influxdb-client-csharp/pull/347): `NodaTime` to `3.1.1`
+  - [#349](https://github.com/influxdata/influxdb-client-csharp/pull/349): `NodaTime` to `3.1.2`
 
 #### Test:
   - [#341](https://github.com/influxdata/influxdb-client-csharp/pull/341): `WireMock.Net` to `1.5.3`
