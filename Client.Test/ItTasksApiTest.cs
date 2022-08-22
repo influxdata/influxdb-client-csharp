@@ -171,7 +171,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(TaskStatusType.Active, task.Status);
             Assert.AreEqual("0 2 * * *", task.Cron);
             Assert.IsNull(task.Every);
-            Assert.IsTrue(task.Flux.EndsWith(TaskFlux, StringComparison.OrdinalIgnoreCase));
+            StringAssert.StartsWith(TaskFlux, task.Flux);
         }
 
         [Test]
@@ -189,7 +189,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(TaskStatusType.Active, task.Status);
             Assert.AreEqual("1h", task.Every);
             Assert.IsNull(task.Cron);
-            Assert.IsTrue(task.Flux.EndsWith(TaskFlux, StringComparison.OrdinalIgnoreCase));
+            StringAssert.StartsWith(TaskFlux, task.Flux);
         }
 
         [Test]
@@ -586,7 +586,7 @@ namespace InfluxDB.Client.Test
             var cronTask =
                 await _tasksApi.CreateTaskCronAsync(taskName, TaskFlux, "0 2 * * *", _organization);
 
-            var flux = $"option task = {{name: \"{taskName}\", every: 3m}}\n\n{TaskFlux}";
+            var flux = $"{TaskFlux}\n\noption task = {{name: \"{taskName}\", every: 3m}}";
 
             cronTask.Every = "3m";
             cronTask.Cron = null;
@@ -606,6 +606,28 @@ namespace InfluxDB.Client.Test
                 $"Queries are not same: '{updatedTask.Flux}', '{flux}'.");
 
             Assert.IsNotNull(updatedTask.UpdatedAt);
+        }
+
+        [Test]
+        public async Task CreateTaskWithMoreFrom()
+        {
+            var taskName = GenerateName("it task");
+
+            const string flux = "procTotal = from(bucket: \"example-bucket\")" +
+                                "    |> range(start: -5m)" +
+                                "    |> filter(fn: (r) => r._measurement == \"processes\" and r._field == \"total\")" +
+                                "" +
+                                "procTotal";
+
+            var task = await _tasksApi.CreateTaskCronAsync(taskName, flux, "0 2 * * *", _organization);
+
+            Assert.IsNotNull(task);
+            Assert.IsNotEmpty(task.Id);
+            Assert.AreEqual(taskName, task.Name);
+            Assert.AreEqual(_organization.Id, task.OrgID);
+            Assert.AreEqual(TaskStatusType.Active, task.Status);
+            Assert.AreEqual("0 2 * * *", task.Cron);
+            StringAssert.StartsWith(flux, task.Flux);
         }
     }
 }
