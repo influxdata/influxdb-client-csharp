@@ -12,17 +12,17 @@
     <defs>
         <font id="open-iconic" horiz-adv-x="800">
             <font-face
-                font-family="Icons"
-                font-weight="400"
-                font-stretch="normal"
-                units-per-em="800"
-                panose-1="2 0 5 3 0 0 0 0 0 0"
-                ascent="800"
-                descent="0"
-                bbox="-0.5 -101 802 800.126"
-                underline-thickness="50"
-                underline-position="-100"
-                unicode-range="U+E000-E0DE"
+                    font-family="Icons"
+                    font-weight="400"
+                    font-stretch="normal"
+                    units-per-em="800"
+                    panose-1="2 0 5 3 0 0 0 0 0 0"
+                    ascent="800"
+                    descent="0"
+                    bbox="-0.5 -101 802 800.126"
+                    underline-thickness="50"
+                    underline-position="-100"
+                    unicode-range="U+E000-E0DE"
             />
             <missing-glyph/>
             <glyph glyph-name="" unicode="&#xe000;"

@@ -7,9 +7,13 @@ html, body {
     line-height: 1.7;
 }
 
-.h1_blue { color: #020a47; }
+.h1_blue {
+    color: #020a47;
+}
 
-.h1_pink { color: #d30971; }
+.h1_pink {
+    color: #d30971;
+}
 
 h1 {
     font-weight: 700;
@@ -17,9 +21,14 @@ h1 {
     line-height: 1.25em;
 }
 
-h1:focus { outline: none; }
 
-a, .btn-link { color: #0071c1; }
+h1:focus {
+    outline: none;
+}
+
+a, .btn-link {
+    color: #0071c1;
+}
 
 .btn-primary {
     font-weight: 400;
@@ -44,7 +53,6 @@ a, .btn-link { color: #0071c1; }
 .btn-influx {
     line-height: 2.4em;
     font-weight: 500;
-    background: rgb(6, 111, 197);
     background: linear-gradient(90deg, #D30971 0%, #9B2AFF 100%);
     border: none;
     color: #fff !important;
@@ -60,33 +68,44 @@ a, .btn-link { color: #0071c1; }
 }
 
 label {
-    display: inline-block;
-    min-width: 100px;
-    font-weight: 600;
-    color: #020A47;
+    font-weight: 400;
+    color: #777777;
+    font-size: small;
+    margin-left: 4px;
 }
 
 input, select {
     border-radius: 10px !important;
     border: 2px solid #ddd !important;
     min-height: 40px;
-    min-width: 250px;
     padding: 4px 30px;
     font-size: 16px;
     font-weight: 400;
     margin: 5px;
 }
 
+.input-fill-width {
+    width: -webkit-fill-available;
+}
+
 hr {
-    height: 2px !important;
-    margin-bottom: 50px;
-    color: #dddddd;
+    margin: 5px 0px 20px 0px;
+    color: #f3f5f7;
     opacity: 1;
 }
 
-a { color: #d30971; }
+a {
+    color: #d30971;
+}
 
-a:hover { color: #5EE4E4; }
+a:hover {
+    color: #5EE4E4;
+}
+
+.fill {
+    min-height: 100%!important;
+    height: 100%;
+}
 
 .page-top {
     padding-left: 2rem !important;
@@ -111,15 +130,25 @@ a:hover { color: #5EE4E4; }
     color: white;
 }
 
-.odd-row { background: #FAFAFA; }
+.odd-row {
+    background: #FAFAFA;
+}
 
-.content { padding-top: 1.1rem; }
+.content {
+    padding-top: 1.1rem;
+}
 
-.valid.modified:not([type=checkbox]) { outline: 1px solid #26b050; }
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
 
-.invalid { outline: 1px solid red; }
+.invalid {
+    outline: 1px solid red;
+}
 
-.validation-message { color: red; }
+.validation-message {
+    color: red;
+}
 
 #blazor-error-ui {
     background: lightyellow;
@@ -146,4 +175,85 @@ a:hover { color: #5EE4E4; }
     color: white;
 }
 
-.blazor-error-boundary::after { content: "An error has occurred." }
+.blazor-error-boundary::after {
+    content: "An error has occurred."
+}
+
+.right-bottom{
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+}
+
+.chart-pointer{
+    margin-top: 40px;
+}
+
+.chart-label {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #414141;
+}
+
+ .card-select{
+     color: #3a474d;
+     border-radius: 4px !important;
+     border: 2px solid #e6ecef !important;
+     min-height: 35px;
+     margin: 0.1rem;
+}
+ 
+ .rzi{
+     min-height: 39px;
+ }
+
+.rz-gauge .rz-tick-text {
+    font-size: 0.65rem!important;
+}
+
+.rz-button.rz-state-disabled, .rz-state-disabled.rz-paginator-element {
+    opacity: 0.7!important;
+}
+
+.my-col-xs,
+.my-col-sm,
+.my-col-md,
+.my-col-lg,
+.my-col-xl {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.my-col-xs {
+    width: 100%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .my-col-sm {
+        width: 100%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .my-col-md {
+        width: 50%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .my-col-lg {
+        width: 33.3%;
+        float: left;
+    }
+}
+@media (min-width: 1400px){
+    .my-col-xl {
+        width: 20%;
+        float: left;
+    }
+}
