@@ -17,6 +17,10 @@
       <ProjectReference Include="..\Client.Legacy\Client.Legacy.csproj" />
       <ProjectReference Include="..\Client.Linq\Client.Linq.csproj" />
       <ProjectReference Include="..\Client\Client.csproj" />
+        <Content Remove="ExampleBlazor\**" />
+        <Compile Remove="ExampleBlazor\**" />
+        <EmbeddedResource Remove="ExampleBlazor\**" />
+        <None Remove="ExampleBlazor\**" />
     </ItemGroup>
 
 </Project>

@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Client\Client.csproj" />
+        <ProjectReference Include="..\..\Client\Client.csproj" />
         <PackageReference Include="Radzen.Blazor" Version="3.19.7" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\assets\Readme" />
+      <Folder Include="..\wwwroot\assets\Readme" />
     </ItemGroup>
 
 </Project>
