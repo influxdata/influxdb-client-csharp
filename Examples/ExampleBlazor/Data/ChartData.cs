@@ -30,8 +30,8 @@ public class ChartData
         Sup = sup;
         Min = min;
         Max = max;
-        Step = (max - min)/4;
-        MinorStep = Step/10;
+        Step = (max - min) / 4;
+        MinorStep = Step / 10;
         _stateHasChanged = stateHasChanged;
     }
 
@@ -51,6 +51,9 @@ public class ChartData
                 Value = 0;
             }
         }
-        else Value = 0;
+        else
+        {
+            Value = 0;
+        }
     }
 }

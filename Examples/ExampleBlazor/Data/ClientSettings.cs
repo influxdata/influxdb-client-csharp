@@ -22,14 +22,17 @@ public class Client
     public string? Token;
     public string? Org;
 
-    public Client() {}
+    public Client()
+    {
+    }
+
     public Client(string? url, string? token, string? org)
     {
         Url = url;
         Token = token;
         Org = org;
     }
-    
+
     public InfluxDBClient GetClient()
     {
         var options = new InfluxDBClientOptions.Builder()
@@ -40,7 +43,7 @@ public class Client
 
         return InfluxDBClientFactory.Create(options);
     }
-    
+
     public InfluxDBClient GetClient(double timespanSeconds)
     {
         var options = new InfluxDBClientOptions.Builder()

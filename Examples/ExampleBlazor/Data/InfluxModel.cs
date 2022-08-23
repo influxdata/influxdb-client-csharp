@@ -121,7 +121,7 @@ public static class InfluxModel
             var write = new Permission(Permission.ActionEnum.Write, resource);
 
             await influxDbClient.GetAuthorizationsApi()
-                .CreateAuthorizationAsync(orgId, new List<Permission> {read, write});
+                .CreateAuthorizationAsync(orgId, new List<Permission> { read, write });
 
             return bucket;
         }
@@ -272,6 +272,7 @@ public static class InfluxModel
         var influxDbClient = Client.GetClient();
 
         if (authorization != null)
+        {
             try
             {
                 var point = PointData.Measurement("deviceauth")
@@ -290,6 +291,7 @@ public static class InfluxModel
             {
                 influxDbClient.Dispose();
             }
+        }
 
         return authorization;
     }
@@ -620,8 +622,8 @@ public static class InfluxModel
         var influxDbClient = Client.GetClient(100);
         try
         {
-            var toTime = Math.Truncate((double) DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() / 60000) * 60000;
-            var lastTime = Math.Truncate((double) DateTimeOffset.UtcNow.AddDays(-30).ToUnixTimeMilliseconds() / 60000) *
+            var toTime = Math.Truncate((double)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() / 60000) * 60000;
+            var lastTime = Math.Truncate((double)DateTimeOffset.UtcNow.AddDays(-30).ToUnixTimeMilliseconds() / 60000) *
                            60000;
 
             var totalPoints = (toTime - lastTime) / 60000;
@@ -679,9 +681,14 @@ public static class InfluxModel
                      dayValue +
                      Rnd.NextDouble() * 10;
         if (result > max)
+        {
             result -= (result - max) * 2;
+        }
         else if (result < min)
+        {
             result += (min - result) * 2;
+        }
+
         return result;
     }
 

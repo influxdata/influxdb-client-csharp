@@ -18,7 +18,7 @@
                     <h2 class="h1_blue">Client<span class="h1_pink">Settings</span></h2>
                 </div>
                 <div class="col-3 text-end">
-                    <RadzenButton Click="CheckConnection" Icon=@_buttonIcon IsBusy=@CheckConnectionBusy
+                    <RadzenButton Click="CheckConnection" Icon="@_buttonIcon" IsBusy="@CheckConnectionBusy"
                                   ButtonStyle="CheckConnectionButtonStyle"/>
                 </div>
             </div>
@@ -60,17 +60,17 @@
                         </select>
                     }
                     <input class="card-select" placeholder="New DeviceId" @bind="NewDevice"/>
-                    <RadzenButton Click="RegisterDevice" Icon="add_circle_outline" IsBusy=@RegisterDeviceBusy
+                    <RadzenButton Click="RegisterDevice" Icon="add_circle_outline" IsBusy="@RegisterDeviceBusy"
                                   ButtonStyle="ButtonStyle.Light"/>
 
-                    <RadzenButton Click="RefreshDevices" Icon="refresh" IsBusy=@RefreshDevicesBusy
+                    <RadzenButton Click="RefreshDevices" Icon="refresh" IsBusy="@RefreshDevicesBusy"
                                   ButtonStyle="ButtonStyle.Light"/>
                 </div>
             </div>
             <hr/>
             <div class="row">
                 <div class="col-12">
-                    <RadzenDataGrid Data="@DeviceList" TItem="FluxRecord" PagerPosition=PagerPosition.Bottom AllowPaging="true" AllowSorting="false" PageSize="3">
+                    <RadzenDataGrid Data="@DeviceList" TItem="FluxRecord" PagerPosition="PagerPosition.Bottom" AllowPaging="true" AllowSorting="false" PageSize="3">
                         <Columns>
                             <RadzenDataGridColumn TItem="FluxRecord" Property="deviceId" Title="DeviceID">
                                 <Template Context="record">
@@ -79,7 +79,7 @@
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="FluxRecord" Property="registrationTime" Title="Registration Time">
                                 <Template Context="record">
-                                   @FormatDateTime(record!.Values.FirstOrDefault(val => val.Key == "_time").Value)
+                                    @FormatDateTime(record!.Values.FirstOrDefault(val => val.Key == "_time").Value)
                                 </Template>
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="FluxRecord" Property="delete" Title="" Width="60px">
@@ -121,9 +121,9 @@
                             }
                         </select>
                     }
-                    <RadzenButton Click="WriteEmulatedData" Icon="edit_note" IsBusy=@WriteEmulatedDataBusy
+                    <RadzenButton Click="WriteEmulatedData" Icon="edit_note" IsBusy="@WriteEmulatedDataBusy"
                                   ButtonStyle="ButtonStyle.Light"/>
-                    <RadzenButton Click="RefreshData" Icon="refresh" IsBusy=@RefreshDataBusy
+                    <RadzenButton Click="RefreshData" Icon="refresh" IsBusy="@RefreshDataBusy"
                                   ButtonStyle="ButtonStyle.Light"/>
                 </div>
             </div>
@@ -131,7 +131,7 @@
             <div class="row">
                 @if (_chartDataList != null)
                 {
-            foreach (var data in _chartDataList)
+                    foreach (var data in _chartDataList)
                     {
                         <div class="my-col-xl my-col-lg my-col-md my-col-xs">
                             <div class="text-center">
@@ -159,7 +159,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <RadzenDataGrid Data="@Measurements" TItem="FluxTable" PagerPosition=PagerPosition.Bottom AllowPaging="true" AllowSorting="false">
+                    <RadzenDataGrid Data="@Measurements" TItem="FluxTable" PagerPosition="PagerPosition.Bottom" AllowPaging="true" AllowSorting="false">
                         <Columns>
                             <RadzenDataGridColumn TItem="FluxTable" Property="Field" Title="Field">
                                 <Template Context="table">
@@ -178,7 +178,7 @@
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="FluxTable" Property="MaxTime" Title="Max time">
                                 <Template Context="table">
-                                @FormatDateTime(table.Records.FirstOrDefault()?.Values.FirstOrDefault(rec => rec.Key == "maxTime").Value)
+                                    @FormatDateTime(table.Records.FirstOrDefault()?.Values.FirstOrDefault(rec => rec.Key == "maxTime").Value)
                                 </Template>
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="FluxTable" Property="EntryCount" Title="Entry count">
@@ -419,7 +419,7 @@
         {
             var dateTime = await InfluxModel.FetchDeviceCreatedAt(SelectedBucket,
                 record.Values.FirstOrDefault(val => val.Key == "deviceId").Value.ToString()!);
-        
+
             return dateTime.ToString(CultureInfo.InvariantCulture);
         }
         return "";
@@ -510,6 +510,7 @@
 
     string FormatDateTime(object? value)
     {
-        return value != null ? Convert.ToDateTime(value.ToString()).ToString(CultureInfo.InvariantCulture) : String.Empty;
+        return value != null ? Convert.ToDateTime(value.ToString()).ToString(CultureInfo.InvariantCulture) : string.Empty;
     }
+
 }

@@ -15,11 +15,11 @@
                     <h2 class="h1_blue">Buckets<span class="h1_pink">Registration</span></h2>
                 </div>
                 <div class="col-6 text-end">
-                    <input class="card-select" placeholder="Bucket Name" value="@_stringValue" 
+                    <input class="card-select" placeholder="Bucket Name" value="@_stringValue"
                            @oninput="eventArgs => { SetNewBucketValue(eventArgs.Value as string); }"/>
-                    <RadzenButton Click="CreateBucket" Icon="add_circle_outline" IsBusy=@CreateBucketBusy
+                    <RadzenButton Click="CreateBucket" Icon="add_circle_outline" IsBusy="@CreateBucketBusy"
                                   ButtonStyle="ButtonStyle.Light"/>
-                    <RadzenButton Click="RefreshBuckets" Icon="refresh" IsBusy=@RefreshBucketsBusy
+                    <RadzenButton Click="RefreshBuckets" Icon="refresh" IsBusy="@RefreshBucketsBusy"
                                   ButtonStyle="ButtonStyle.Light"/>
                 </div>
             </div>
@@ -27,11 +27,11 @@
 
             <div class="row">
                 <div class="col-12">
-                    <RadzenDataGrid Data="@_bucketList" TItem="Bucket" PagerPosition=PagerPosition.Bottom AllowPaging="true" AllowSorting="false">
+                    <RadzenDataGrid Data="@_bucketList" TItem="Bucket" PagerPosition="PagerPosition.Bottom" AllowPaging="true" AllowSorting="false">
                         <Columns>
                             <RadzenDataGridColumn TItem="Bucket" Property="Name" Title="Name">
                                 <Template Context="bucket">
-                                  @bucket.Name
+                                    @bucket.Name
                                 </Template>
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Bucket" Property="ID" Title="ID">
@@ -56,13 +56,13 @@
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Bucket" Property="OrgId" Title="Actions">
                                 <Template Context="bucket">
-                                    <RadzenButton Click="() => DeleteBucket(bucket)" Icon="delete" 
+                                    <RadzenButton Click="() => DeleteBucket(bucket)" Icon="delete"
                                                   ButtonStyle="ButtonStyle.Light"/>
-                                    <RadzenButton Click="() => CloneBucket(bucket)" Icon="control_point_duplicate" 
+                                    <RadzenButton Click="() => CloneBucket(bucket)" Icon="control_point_duplicate"
                                                   ButtonStyle="ButtonStyle.Light"/>
                                 </Template>
                             </RadzenDataGridColumn>
-                            
+
                         </Columns>
                     </RadzenDataGrid>
                 </div>
@@ -76,7 +76,7 @@
     private List<Bucket>? _bucketList;
 
     string? _stringValue = "";
-    
+
     private bool _createBucketBusy;
 
     private bool CreateBucketBusy
@@ -88,7 +88,7 @@
             StateHasChanged();
         }
     }
-    
+
     private bool _refreshBucketsBusy;
 
     private bool RefreshBucketsBusy
