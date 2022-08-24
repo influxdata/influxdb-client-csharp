@@ -286,7 +286,7 @@
         set
         {
             _selectedBucket = value;
-            FetchDevices(value);
+            FetchDevices(value).ConfigureAwait(false);
         }
     }
 
