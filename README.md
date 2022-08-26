@@ -104,18 +104,18 @@ namespace Examples
                     .Field("value", 55D)
                     .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
                 
-                writeApi.WritePoint("bucket_name", "org_id", point);
+                writeApi.WritePoint(point, "bucket_name", "org_id");
                 
                 //
                 // Write by LineProtocol
                 //
-                writeApi.WriteRecord("bucket_name", "org_id", WritePrecision.Ns, "temperature,location=north value=60.0");
+                writeApi.WriteRecord("temperature,location=north value=60.0", WritePrecision.Ns,"bucket_name", "org_id");
                 
                 //
                 // Write by POCO
                 //
                 var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
-                writeApi.WriteMeasurement("bucket_name", "org_id", WritePrecision.Ns, temperature);
+                writeApi.WriteMeasurement(temperature, WritePrecision.Ns, "bucket_name", "org_id");
             }
             
             //
@@ -139,11 +139,11 @@ namespace Examples
         [Measurement("temperature")]
         private class Temperature
         {
-            [Column("location", IsTag = true)] public string Location { get; set; }
+            [Column("location", IsTag = true)] public string? Location { get; set; }
 
             [Column("value")] public double Value { get; set; }
 
-            [Column(IsTimestamp = true)] public DateTime Time;
+            [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
     }
 }
