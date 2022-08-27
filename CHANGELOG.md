@@ -11,7 +11,7 @@ Update dependencies:
   - [#349](https://github.com/influxdata/influxdb-client-csharp/pull/349): `NodaTime` to `3.1.2`
 
 #### Test:
-  - [#341](https://github.com/influxdata/influxdb-client-csharp/pull/341): `WireMock.Net` to `1.5.3`
+  - [#350](https://github.com/influxdata/influxdb-client-csharp/pull/350): `WireMock.Net` to `1.5.4`
   - [#342](https://github.com/influxdata/influxdb-client-csharp/pull/342): `Moq` to `4.18.2`
   - [#345](https://github.com/influxdata/influxdb-client-csharp/pull/345): `Microsoft.NET.Test.Sdk` to `17.3.0`
 
