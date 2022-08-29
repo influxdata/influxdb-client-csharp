@@ -1,4 +1,4 @@
-## 4.5.0 [unreleased]
+## 4.5.0 [2022-08-29]
 
 ### Bug Fixes
 1. [#348](https://github.com/influxdata/influxdb-client-csharp/pull/348): Append `task option` at the end of script
