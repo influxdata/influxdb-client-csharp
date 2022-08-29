@@ -109,7 +109,7 @@ namespace Examples
                 //
                 // Write by LineProtocol
                 //
-                writeApi.WriteRecord("temperature,location=north value=60.0", WritePrecision.Ns,"bucket_name", "org_id");
+                writeApi.WriteRecord("temperature,location=north value=60.0", WritePrecision.Ns, "bucket_name", "org_id");
                 
                 //
                 // Write by POCO
