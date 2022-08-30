@@ -1,5 +1,11 @@
 ## 4.6.0 [unreleased]
 
+### Bug Fixes
+1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): Fix VariableAggregator
+
+#### Test:
+  - [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): `InfluxDBQueryVariableTest.cs`
+
 ## 4.5.0 [2022-08-29]
 
 ### Bug Fixes
