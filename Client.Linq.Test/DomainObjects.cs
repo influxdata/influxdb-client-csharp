@@ -4,6 +4,31 @@ using InfluxDB.Client.Core;
 
 namespace Client.Linq.Test
 {
+    [Measurement("test_point")]
+    internal class InfluxPoint
+    {
+        [Column("test_tag", IsTag = true)] 
+        public string TestTag { get; set; }
+        
+        [Column("int_value")]
+        public int IntValue { get; set; }
+        
+        [Column("short_value")]
+        public short ShortValue { get; set; }
+        
+        [Column("long_value")]
+        public long LongValue { get; set; }
+        
+        [Column("double_value")]
+        public double DoubleValue { get; set; }
+        
+        [Column("float_value")]
+        public float FloatValue { get; set; }
+    
+        [Column("_time", IsTimestamp = true)] 
+        public DateTime Timestamp { get; set; }
+    }
+    
     [Measurement("sensor")]
     internal class Sensor
     {
