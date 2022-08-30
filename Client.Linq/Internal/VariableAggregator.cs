@@ -61,6 +61,8 @@ namespace InfluxDB.Client.Linq.Internal
                     return new IntegerLiteral("IntegerLiteral", Convert.ToString(l));
                 case bool b:
                     return new BooleanLiteral("BooleanLiteral", b);
+                case double d:
+                    return new FloatLiteral("FloatLiteral", Convert.ToDecimal(d));
                 case float f:
                     return new FloatLiteral("FloatLiteral", Convert.ToDecimal(f));
                 case DateTime d:
