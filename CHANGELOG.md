@@ -3,6 +3,12 @@
 ### Bug Fixes
 1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): Support for `double` types in LINQ expression [LINQ]
 
+### Dependencies
+Update dependencies:
+
+#### Test:
+  - [#354](https://github.com/influxdata/influxdb-client-csharp/pull/354): `Microsoft.NET.Test.Sdk` to `17.3.1`
+
 ## 4.5.0 [2022-08-29]
 
 ### Bug Fixes
