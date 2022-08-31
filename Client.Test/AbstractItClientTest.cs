@@ -1,5 +1,3 @@
-using System;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
@@ -32,14 +30,6 @@ namespace InfluxDB.Client.Test
         protected void After()
         {
             Client.Dispose();
-        }
-
-        public static string GenerateName(string prefix)
-        {
-            Assert.IsNotEmpty(prefix);
-
-            return prefix + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff",
-                CultureInfo.InvariantCulture) + "-IT";
         }
 
         protected async Task<Organization> FindMyOrg()

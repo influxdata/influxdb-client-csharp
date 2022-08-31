@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -123,6 +124,14 @@ namespace InfluxDB.Client.Core.Test
             {
                 Assert.Fail("Unexpected exception: " + e);
             }
+        }
+
+        public static string GenerateName(string prefix)
+        {
+            Assert.IsNotEmpty(prefix);
+
+            return prefix + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff",
+                CultureInfo.InvariantCulture) + "-IT";
         }
     }
 }

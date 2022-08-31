@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InfluxDB.Client;
@@ -16,6 +15,7 @@ namespace Client.Linq.Test
     {
         private InfluxDBClient _client;
         private DateTime _dateTime;
+        private Bucket _bucket;
 
         [SetUp]
         public new Task SetUp()
@@ -34,7 +34,7 @@ namespace Client.Linq.Test
             _dateTime = DateTime.UtcNow;
 
             var orgId = (await _client.GetOrganizationsApi().FindOrganizationsAsync(org: "my-org")).First().Id;
-            var bucket = await _client.GetBucketsApi().CreateBucketAsync("test-bucket", orgId);
+            _bucket = await _client.GetBucketsApi().CreateBucketAsync(GenerateName("test-bucket"), orgId);
 
             var point1 = new InfluxPoint()
             {
@@ -92,14 +92,14 @@ namespace Client.Linq.Test
                 {
                     point1, point2, point3, point4, point5, point6,
                     point7, point8, point9, point10
-                }, WritePrecision.Ns, "test-bucket", "my-org");
+                }, WritePrecision.Ns, _bucket.Name, "my-org");
         }
 
         [Test]
         public void QueryAll()
         {
             var query = from s in InfluxDBQueryable<InfluxPoint>
-                    .Queryable("test-bucket", "my-org", _client.GetQueryApiSync())
+                    .Queryable(_bucket.Name, "my-org", _client.GetQueryApiSync())
                 select s;
 
             var sensors = query.ToList();
@@ -111,7 +111,7 @@ namespace Client.Linq.Test
         public void QueryWhereInt()
         {
             var query = from s in InfluxDBQueryable<InfluxPoint>
-                    .Queryable("test-bucket", "my-org", _client.GetQueryApiSync())
+                    .Queryable(_bucket.Name, "my-org", _client.GetQueryApiSync())
                 where s.IntValue > -200
                 select s;
 
@@ -125,7 +125,7 @@ namespace Client.Linq.Test
         public void QueryWhereShort()
         {
             var query = from s in InfluxDBQueryable<InfluxPoint>
-                    .Queryable("test-bucket", "my-org", _client.GetQueryApiSync())
+                    .Queryable(_bucket.Name, "my-org", _client.GetQueryApiSync())
                 where s.ShortValue >= 500
                 select s;
 
@@ -139,7 +139,7 @@ namespace Client.Linq.Test
         public void QueryWhereLong()
         {
             var query = from s in InfluxDBQueryable<InfluxPoint>
-                    .Queryable("test-bucket", "my-org", _client.GetQueryApiSync())
+                    .Queryable(_bucket.Name, "my-org", _client.GetQueryApiSync())
                 where s.LongValue < 200
                 select s;
 
@@ -153,7 +153,7 @@ namespace Client.Linq.Test
         public void QueryWhereDouble()
         {
             var query = from s in InfluxDBQueryable<InfluxPoint>
-                    .Queryable("test-bucket", "my-org", _client.GetQueryApiSync())
+                    .Queryable(_bucket.Name, "my-org", _client.GetQueryApiSync())
                 where s.DoubleValue <= 0
                 select s;
 
@@ -167,7 +167,7 @@ namespace Client.Linq.Test
         public void QueryWhereFloat()
         {
             var query = from s in InfluxDBQueryable<InfluxPoint>
-                    .Queryable("test-bucket", "my-org", _client.GetQueryApiSync())
+                    .Queryable(_bucket.Name, "my-org", _client.GetQueryApiSync())
                 where s.FloatValue < 100
                 select s;
 
