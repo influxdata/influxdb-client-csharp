@@ -1,7 +1,7 @@
 ## 4.6.0 [unreleased]
 
 ### Bug Fixes
-1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): LINQ creating expressions - add `double` type for comparison
+1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): Support for `double` types in LINQ expression [LINQ]
 
 ## 4.5.0 [2022-08-29]
 
