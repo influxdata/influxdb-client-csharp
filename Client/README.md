@@ -694,42 +694,184 @@ mine-sensor,id=132-987-655,customer="California Miner",hostname=example.com,sens
 
 ### Handle the Events
 
-#### Handle the Success write
+Events that can be handle by WriteAPI EventHandler are:
+- `WriteSuccessEvent` - for success response from server
+- `WriteErrorEvent` - for unhandled exception from server
+- `WriteRetriableErrorEvent` - for retriable error from server
+- `WriteRuntimeExceptionEvent` - for runtime exception in background batch processing
+
+Number of events depends on number of data point to collect in batch Batch option in WriteAPI (default setting is 1000) - in case 
+of one data point in batch option, event is handled for each point, independently on used writing method (even for mass writing of data like 
+`WriteMeasurements`, `WritePoints` and `WriteRecords`). 
+
+Events can be handled by register `writeApi.EventHandler` or by creating custom `EventListener`:
+
+#### Register EventHandler
 
 ```c#
-//
-// Register event handler
-//
 writeApi.EventHandler += (sender, eventArgs) =>
 {
-    if (eventArgs is WriteSuccessEvent @event)
+    switch (eventArgs)
     {
-        string data = @event.LineProtocol;
-        
-        //
-        // handle success
-        //
+        case WriteSuccessEvent successEvent:
+            string data = @event.LineProtocol;
+            //
+            // handle success response from server
+            // Console.WriteLine($"{data}");
+            //
+            break;
+        case WriteErrorEvent error:
+            string data = @error.LineProtocol;
+            string errorMessage = @error.Exception.Message;
+            //
+            // handle unhandled exception from server
+            //
+            // Console.WriteLine($"{data}");
+            // throw new Exception(errorMessage);
+            //
+            break;
+        case WriteRetriableErrorEvent error:
+            string data = @error.LineProtocol;
+            string errorMessage = @error.Exception.Message;
+            //
+            // handle retrievable error from server
+            //
+            // Console.WriteLine($"{data}");
+            // throw new Exception(errorMessage);
+            //
+            break;
+        case WriteRuntimeExceptionEvent error:
+            string errorMessage = @error.Exception.Message;
+            //
+            // handle runtime exception in background batch processing
+            // throw new Exception(errorMessage);
+            //
+            break;
     }
 };
+
+//
+// Write by LineProtocol
+//
+writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
+    $" {DateTime.UtcNow.Subtract(EpochStart).Ticks * 100}", WritePrecision.Ns, "my-bucket", "my-org");
 ```
 
-#### Handle the Error Write
+#### Custom EventListener
 
-```c#
-//
-// Register event handler
-//
-writeApi.EventHandler += (sender, eventArgs) =>
+Advantage of using custom Event Listener is possibility of waiting on handled event between different writings.
+
+```csharp
+internal class EventListener
 {
-    if (eventArgs is WriteErrorEvent @event)
+    private readonly AutoResetEvent _autoResetEvent = new AutoResetEvent(false);
+    private readonly List<EventArgs> _events = new List<EventArgs>();
+
+    internal EventListener(WriteApi writeApi)
     {
-        var exception = @event.Exception;
-        
-        //
-        // handle error
-        //
+        writeApi.EventHandler += (sender, eventArgs) =>
+        {
+            _events.Add(eventArgs);
+            _autoResetEvent.Set();
+
+            switch (eventArgs)
+            {
+                case WriteSuccessEvent successEvent:
+                    string data = @event.LineProtocol;
+                    // handle success response from server
+                    break;
+                case WriteErrorEvent error:
+                    string data = @error.LineProtocol;
+                    string errorMessage = @error.Exception.Message;
+                    // handle unhandled exception from server
+                    break;
+                case WriteRetriableErrorEvent error:
+                    string data = @error.LineProtocol;
+                    string errorMessage = @error.Exception.Message;
+                    // handle retrievable error from server
+                    break;
+                case WriteRuntimeExceptionEvent error:
+                    string errorMessage = @error.Exception.Message;
+                    // handle runtime exception in background batch processing
+                    break;
+            }                     
+        };
     }
-};
+
+    private T Get<T>() where T : EventArgs
+    {
+        if (EventCount() == 0)
+        {
+            _autoResetEvent.Reset();
+            var timeout = TimeSpan.FromSeconds(15);
+            _autoResetEvent.WaitOne(timeout);
+        }
+        var args = _events[0];
+        _events.RemoveAt(0);
+        Trace.WriteLine(args);
+
+        return args as T ?? throw new InvalidCastException(
+            $"{args.GetType().FullName} cannot be cast to {typeof(T).FullName}");
+    }
+
+    private int EventCount()
+    {
+        return _events.Count;
+    }
+
+    internal EventListener WaitToSuccess()
+    {
+        Get<WriteSuccessEvent>();
+        return this;
+    }
+             
+    internal EventListener WaitToResponse()
+    {
+        Get<EventArgs>();
+        return this;
+    }
+}
+```
+
+Example of using custom `EventListener`:
+```csharp
+var options = WriteOptions.CreateNew()
+    .BatchSize(5)
+    .FlushInterval(1000)
+    .RetryInterval(2000)
+    .MaxRetries(3)
+    .Build();
+                 
+using (var writeApi = influxDbClient.GetWriteApi(options))
+{
+    //
+    // Init EventListener
+    //
+    var listener = new EventListener(writeApi);
+
+    //
+    // Write by POCO 
+    //
+    var pointsToWrite = new List<InfluxPoint>();
+    for (var i = 1; i <= 5; i++)
+        pointsToWrite.Add(new InfluxPoint
+            {WriteType = "POCO", Value = i, Time = DateTime.UtcNow.AddSeconds(-i)});
+
+    writeApi.WriteMeasurements(pointsToWrite, WritePrecision.Ns, "my-bucket", "my-org");
+
+    //
+    // Wait to Success Response
+    //
+    listener.WaitToSuccess();
+                
+    //
+    // Write by LineProtocol - bad timestamp
+    //
+    writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
+        $" {DateTime.UtcNow}", WritePrecision.Ns, "my-bucket", "my-org");
+    listener.WaitToResponse();
+}
+influxDbClient.Dispose();
 ```
 
 ## Delete Data
