@@ -12,8 +12,6 @@ namespace Examples
 {
     public static class WriteApiExample
     {
-        private static readonly DateTime EpochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
         [Measurement("influxPoint")]
         private class InfluxPoint
         {
@@ -36,7 +34,7 @@ namespace Examples
 
         private static Task BasicEventHandler()
         {
-            var influxDbClient = InfluxDBClientFactory.Create("http://localhost:9999",
+            using var client = InfluxDBClientFactory.Create("http://localhost:9999",
                 "my-user", "my-password".ToCharArray());
 
             var options = WriteOptions.CreateNew()
@@ -49,7 +47,7 @@ namespace Examples
             //
             // Write Data
             //
-            using (var writeApi = influxDbClient.GetWriteApi(options))
+            using (var writeApi = client.GetWriteApi(options))
             {
                 //
                 // Handle the Events 
@@ -94,15 +92,15 @@ namespace Examples
                 //
                 // Write by LineProtocol
                 //
-                writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
-                                     $" {DateTime.UtcNow.Subtract(EpochStart).Ticks * 100}", WritePrecision.Ns,
-                    "my-bucket", "my-org");
+                var dateTimeOffset = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                writeApi.WriteRecord($"influxPoint,writeType=lineProtocol value=11.11 {dateTimeOffset}",
+                    WritePrecision.Ns, "my-bucket", "my-org");
 
                 //
                 // Write by LineProtocol - bad timestamp
                 //
-                writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
-                                     $" {DateTime.UtcNow}", WritePrecision.Ns, "my-bucket", "my-org");
+                writeApi.WriteRecord($"influxPoint,writeType=lineProtocol value=11.11 {DateTime.UtcNow}",
+                    WritePrecision.Ns, "my-bucket", "my-org");
 
                 //
                 // Write by Data Point
@@ -136,19 +134,15 @@ namespace Examples
                 //
                 writeApi.WriteMeasurement(influxPoint, WritePrecision.Ns, "my-bucket2", "my-org");
 
-                writeApi.Dispose();
-                while (!writeApi.Disposed) Thread.Sleep(10);
+                //
+                // Write list of points by POCO 
+                //
+                var pointsToWrite = new List<InfluxPoint>();
+                for (var i = 1; i <= 5; i++)
+                    pointsToWrite.Add(new InfluxPoint
+                        { WriteType = "POCO", Value = i, Time = DateTime.UtcNow.AddSeconds(-i) });
 
-                var tables = influxDbClient.GetQueryApi()
-                    .QueryAsync("from(bucket:\"my-bucket\") |> range(start: 0)", "my-org").Result;
-
-                tables.ForEach(table =>
-                {
-                    var fluxRecords = table.Records;
-                    fluxRecords.ForEach(record => { Console.WriteLine($"{record.GetTime()}: {record.GetValue()}"); });
-                });
-
-                influxDbClient.Dispose();
+                writeApi.WriteMeasurements(pointsToWrite, WritePrecision.Ns, "my-bucket", "my-org");
             }
 
             return Task.CompletedTask;
@@ -156,7 +150,7 @@ namespace Examples
 
         private static Task CustomEventListener()
         {
-            var influxDbClient = InfluxDBClientFactory.Create("http://localhost:9999/",
+            using var client = InfluxDBClientFactory.Create("http://localhost:9999/",
                 "my-user", "my-password".ToCharArray());
 
             var options = WriteOptions.CreateNew()
@@ -168,7 +162,7 @@ namespace Examples
             //
             // Write Data
             //
-            using (var writeApi = influxDbClient.GetWriteApi(options))
+            using (var writeApi = client.GetWriteApi(options))
             {
                 //
                 // Init EventListener
@@ -186,7 +180,7 @@ namespace Examples
                 writeApi.WriteMeasurements(pointsToWrite, WritePrecision.Ns, "my-bucket", "my-org");
 
                 //
-                // Wait to Success Response for each write
+                // Wait to Success Response
                 //
                 listener.WaitToSuccess();
 
@@ -204,8 +198,8 @@ namespace Examples
                 //
                 // Write by LineProtocol - bad timestamp
                 //
-                writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
-                                     $" {DateTime.UtcNow}", WritePrecision.Ns, "my-bucket", "my-org");
+                writeApi.WriteRecord($"influxPoint,writeType=lineProtocol value=11.11 {DateTime.UtcNow}",
+                    WritePrecision.Ns, "my-bucket", "my-org");
                 listener.WaitToResponse();
 
                 //
@@ -234,7 +228,6 @@ namespace Examples
                 listener.WaitToResponse();
             }
 
-            influxDbClient.Dispose();
             return Task.CompletedTask;
         }
 

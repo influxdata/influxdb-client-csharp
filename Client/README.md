@@ -700,9 +700,9 @@ Events that can be handle by WriteAPI EventHandler are:
 - `WriteRetriableErrorEvent` - for retriable error from server
 - `WriteRuntimeExceptionEvent` - for runtime exception in background batch processing
 
-Number of events depends on number of data point to collect in batch Batch option in WriteAPI (default setting is 1000) - in case 
-of one data point in batch option, event is handled for each point, independently on used writing method (even for mass writing of data like 
-`WriteMeasurements`, `WritePoints` and `WriteRecords`). 
+Number of events depends on number of data points to collect in batch. The batch size is configured by `BatchSize` option (default size is `1000`) - in case
+of one data point, event is handled for each point, independently on used writing method (even for mass writing of data like
+`WriteMeasurements`, `WritePoints` and `WriteRecords`).
 
 Events can be handled by register `writeApi.EventHandler` or by creating custom `EventListener`:
 
@@ -761,79 +761,7 @@ writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
 
 Advantage of using custom Event Listener is possibility of waiting on handled event between different writings.
 
-```csharp
-internal class EventListener
-{
-    private readonly AutoResetEvent _autoResetEvent = new AutoResetEvent(false);
-    private readonly List<EventArgs> _events = new List<EventArgs>();
-
-    internal EventListener(WriteApi writeApi)
-    {
-        writeApi.EventHandler += (sender, eventArgs) =>
-        {
-            _events.Add(eventArgs);
-            _autoResetEvent.Set();
-
-            switch (eventArgs)
-            {
-                case WriteSuccessEvent successEvent:
-                    string data = @event.LineProtocol;
-                    // handle success response from server
-                    break;
-                case WriteErrorEvent error:
-                    string data = @error.LineProtocol;
-                    string errorMessage = @error.Exception.Message;
-                    // handle unhandled exception from server
-                    break;
-                case WriteRetriableErrorEvent error:
-                    string data = @error.LineProtocol;
-                    string errorMessage = @error.Exception.Message;
-                    // handle retrievable error from server
-                    break;
-                case WriteRuntimeExceptionEvent error:
-                    string errorMessage = @error.Exception.Message;
-                    // handle runtime exception in background batch processing
-                    break;
-            }                     
-        };
-    }
-
-    private T Get<T>() where T : EventArgs
-    {
-        if (EventCount() == 0)
-        {
-            _autoResetEvent.Reset();
-            var timeout = TimeSpan.FromSeconds(15);
-            _autoResetEvent.WaitOne(timeout);
-        }
-        var args = _events[0];
-        _events.RemoveAt(0);
-        Trace.WriteLine(args);
-
-        return args as T ?? throw new InvalidCastException(
-            $"{args.GetType().FullName} cannot be cast to {typeof(T).FullName}");
-    }
-
-    private int EventCount()
-    {
-        return _events.Count;
-    }
-
-    internal EventListener WaitToSuccess()
-    {
-        Get<WriteSuccessEvent>();
-        return this;
-    }
-             
-    internal EventListener WaitToResponse()
-    {
-        Get<EventArgs>();
-        return this;
-    }
-}
-```
-
-Example of using custom `EventListener`:
+Example of using custom [EventListener](https://github.com/influxdata/influxdb-client-csharp/blob/master/Examples/WriteApiExample.cs#L241):
 ```csharp
 var options = WriteOptions.CreateNew()
     .BatchSize(5)
