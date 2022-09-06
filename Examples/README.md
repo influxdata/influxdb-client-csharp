@@ -1,4 +1,6 @@
 # Examples
+
+## Writes
 - [WriteApiExample.cs](WriteApiExample.cs) - How to use WriteAPI with batch options and how to handle events
 
 ## Others
