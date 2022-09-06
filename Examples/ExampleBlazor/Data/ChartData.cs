@@ -1,6 +1,3 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 namespace ExampleBlazor.Data;
 
 public class ChartData

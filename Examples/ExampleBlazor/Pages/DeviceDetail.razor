@@ -4,9 +4,6 @@
 @using InfluxDB.Client.Core.Flux.Domain
 @using Radzen
 @using System.Globalization
-@using Microsoft.Extensions.Primitives
-
-@inject IJSRuntime JsRuntime
 
 <PageTitle>Device Detail</PageTitle>
 
@@ -135,27 +132,9 @@
         <RadzenCard class="pb-5 fill">
             <div class="row">
                 <div class="col-6">
-                    <h2 class="h1_blue">Measurement<span class="h1_pink">Detail</span></h2>
+                    <h2 class="h1_blue">Measurements<span class="h1_pink">Detail</span></h2>
                 </div>
                 <div class="col-6 text-end">
-                    @if (Measurements == null)
-                    {
-                        <select class="card-select" @bind="SelectedMeasurement">
-                            <option>-- Measurement --</option>
-                        </select>
-                    }
-                    else
-                    {
-                        <select class="card-select" @bind="SelectedMeasurement">
-                            <option>-- Measurement --</option>
-
-                            @foreach (var measurement in Measurements)
-                            {
-                                var value = measurement.Records.FirstOrDefault()!.Values.FirstOrDefault(rec => rec.Key == "_field").Value.ToString();
-                                <option value="@value">@value</option>
-                            }
-                        </select>
-                    }
                     <select class="card-select" @bind="@SelectedTimeRange">
                         @foreach (var timeRange in _timeRangeList)
                         {
@@ -169,35 +148,44 @@
             <hr/>
             <div class="row">
                 <div class="col-12">
-
                     <RadzenChart>
-                        <RadzenLineSeries Smooth="true" Data="@ChartData" CategoryProperty="Date"
-                                          Title="@SelectedMeasurement" LineType="LineType.Solid"
-                                          ValueProperty="Value" Stroke="#d30971" StrokeWidth="2"/>
-                        <RadzenCategoryAxis Padding="20" Formatter="@FormatLabel"/>
+                        <RadzenLineSeries Smooth="true" Data="@LinqData" CategoryProperty="Timestamp"
+                                          Title="Temperature" LineType="LineType.Solid"
+                                          ValueProperty="Temperature" Stroke="#d30971" StrokeWidth="1"/>
+                        <RadzenLineSeries Smooth="true" Data="@LinqData" CategoryProperty="Timestamp"
+                                          Title="Humidity" LineType="LineType.Solid"
+                                          ValueProperty="Humidity" Stroke=" #0071c1" StrokeWidth="1"/>
                     </RadzenChart>
-
+                    <RadzenChart >
+                        <RadzenLineSeries Smooth="true" Data="@LinqData" CategoryProperty="Timestamp"
+                                          Title="Pressure" LineType="LineType.Solid"
+                                          ValueProperty="Pressure" Stroke="#d30971" StrokeWidth="1"/>
+                        <RadzenLineSeries Smooth="true" Data="@LinqData" CategoryProperty="Timestamp"
+                                          Title="CO2" LineType="LineType.Solid"
+                                          ValueProperty="Co2" Stroke=" #0071c1" StrokeWidth="1"/>
+                        <RadzenLineSeries Smooth="true" Data="@LinqData" CategoryProperty="Timestamp"
+                                          Title="TVOC" LineType="LineType.Solid"
+                                          ValueProperty="Tvoc" Stroke="#020a47" StrokeWidth="1"/>
+                    </RadzenChart>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 my-3">
-                    <RadzenDataGrid Data="@Data" TItem="FluxRecord" PagerPosition="PagerPosition.Bottom" AllowPaging="true" AllowSorting="false" PageSize="10">
+                    <RadzenDataGrid Data="@LinqData" TItem="InfluxModel.MeasurementPoint" 
+                                    PagerPosition="PagerPosition.Bottom" AllowPaging="true" AllowSorting="true" PageSize="10">
                         <Columns>
-                            <RadzenDataGridColumn TItem="FluxRecord" Property="Value" Title="Value">
-                                <Template Context="record">
-                                    @record.Values.FirstOrDefault(rec => rec.Key == "_value").Value
-                                </Template>
-                            </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="FluxRecord" Property="Time" Title="Time">
-                                <Template Context="record">
-                                    @FormatDateTime(record.Values.FirstOrDefault(rec => rec.Key == "_time").Value)
-                                </Template>
-                            </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="FluxRecord" Property="ClientID" Title="ClientID">
-                                <Template Context="record">
-                                    @record.Values.FirstOrDefault(rec => rec.Key == "clientId").Value
-                                </Template>
-                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                                                  Property="Timestamp" Title="Timestamp"/>
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                                                  Property="Temperature" Title="Temperature"/>
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                                                  Property="Humidity" Title="Humidity"/>
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                                                  Property="Pressure" Title="Pressure"/>
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                                                  Property="Co2" Title="CO2"/>
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                                                  Property="Tvoc" Title="TVOC"/>
                         </Columns>
                     </RadzenDataGrid>
                 </div>
@@ -257,7 +245,8 @@
             StateHasChanged();
             if (value == null || value.Count < 1)
                 SelectedDevice = "";
-            else if (string.IsNullOrEmpty(SelectedDevice) || value.FirstOrDefault(dev => dev!.Values.FirstOrDefault(rec => rec.Key == "deviceId").Value.ToString() == SelectedDevice) == null)
+            else if (string.IsNullOrEmpty(SelectedDevice) || 
+                     value.FirstOrDefault(dev => dev!.Values.FirstOrDefault(rec => rec.Key == "deviceId").Value.ToString() == SelectedDevice) == null)
             {
                 var device = value.FirstOrDefault(dev => dev!.Values.FirstOrDefault(rec => rec.Key == "deviceId").Value.ToString() == "virtual_device");
                 SelectedDevice = device != null ?
@@ -289,19 +278,6 @@
         {
             _selectedDeviceCreatedAt = value;
             StateHasChanged();
-        }
-    }
-
-    private string? _selectedMeasurement;
-
-    private string? SelectedMeasurement
-    {
-        get => _selectedMeasurement;
-        set
-        {
-            _selectedMeasurement = value;
-            StateHasChanged();
-            RefreshData();
         }
     }
 
@@ -338,13 +314,6 @@
         {
             _measurements = value;
             StateHasChanged();
-
-            if (value == null || value.Count < 1)
-                SelectedMeasurement = "";
-            else if (value.FirstOrDefault(meas => meas.Records.FirstOrDefault()!.Values.FirstOrDefault(rec => rec.Key == "_field").Value.ToString() == SelectedMeasurement) == null)
-                SelectedMeasurement = value.FirstOrDefault()!.Records.FirstOrDefault()!.GetValueByKey("_field").ToString();
-            else
-                SelectedMeasurement = SelectedMeasurement;
         }
     }
 
@@ -360,26 +329,14 @@
         }
     }
 
-    private List<FluxRecord>? _data;
+    private List<InfluxModel.MeasurementPoint>? _linqData;
 
-    private List<FluxRecord>? Data
+    private List<InfluxModel.MeasurementPoint>? LinqData
     {
-        get => _data;
+        get => _linqData;
         set
         {
-            _data = value;
-            StateHasChanged();
-        }
-    }
-
-    private List<DataItem> _chartData = new();
-
-    private List<DataItem> ChartData
-    {
-        get => _chartData;
-        set
-        {
-            _chartData = value;
+            _linqData = value;
             StateHasChanged();
         }
     }
@@ -409,8 +366,6 @@
             RefreshData();
         }
     }
-
-    int _counter = 0;
 
     private async void FetchDevices(string? value)
     {
@@ -463,27 +418,16 @@
         }
         else Measurements = new List<FluxTable>();
 
+        RefreshData();
+
         RefreshBucketsBusy = false;
     }
 
     private async void RefreshData()
     {
         RefreshDataBusy = true;
-        _counter = 0;
 
-        if (SelectedMeasurement != null)
-        {
-            var tmp = await InfluxModel.FetchData(SelectedBucket, SelectedDevice, SelectedTimeRange, "environment", SelectedMeasurement);
-            Data = tmp.Count > 0 ? tmp.FirstOrDefault()!.Records : new List<FluxRecord>();
-        }
-        else Data = new List<FluxRecord>();
-
-
-        var dataItems = new List<DataItem>();
-        foreach (var rec in Data)
-            dataItems.Add(new DataItem { Date = rec.GetTimeInDateTime().ToString(), Value = Convert.ToDouble(rec.GetValue()) });
-
-        ChartData = dataItems;
+        LinqData = await InfluxModel.FetchDataLinq(SelectedBucket, SelectedDevice, SelectedTimeRange);
 
         RefreshDataBusy = false;
     }
@@ -491,52 +435,6 @@
     string FormatDateTime(object? value)
     {
         return value != null ? Convert.ToDateTime(value.ToString()).ToString(CultureInfo.InvariantCulture) : string.Empty;
-    }
-
-    string FormatLabel(object? value)
-    {
-        if (value != null)
-        {
-            _counter++;
-            var median = 20;
-            switch (SelectedTimeRange)
-            {
-                case "5m":
-                    median = 20;
-                    break;
-                case "15m":
-                    median = 50;
-                    break;
-                case "1h":
-                    median = 10;
-                    break;
-                case "6h":
-                    median = 10;
-                    break;
-                case "1d":
-                    median = 20;
-                    break;
-                case "3d":
-                    median = 30;
-                    break;
-                case "7d":
-                    median = 40;
-                    break;
-                case "30d":
-                    median = 50;
-                    break;
-            }
-            if (_counter % median == 0)
-                return Convert.ToDateTime(value).ToString("s");
-        }
-
-        return string.Empty;
-    }
-
-    class DataItem
-    {
-        public string? Date { get; set; }
-        public double? Value { get; set; }
     }
 
     class TimeRange

@@ -4,7 +4,6 @@
 @using InfluxDB.Client.Core.Flux.Domain
 @using Radzen
 @using System.Globalization
-@using System.Runtime.CompilerServices
 
 @inject IJSRuntime JsRuntime
 
@@ -411,18 +410,6 @@
             _bucketList.FirstOrDefault(bucket => bucket.Name == "iot_center") != null)
             SelectedBucket = "iot_center";
         RefreshDevicesBusy = false;
-    }
-
-    private async Task<string> GetCreatedAt(FluxRecord record)
-    {
-        if (SelectedBucket != null)
-        {
-            var dateTime = await InfluxModel.FetchDeviceCreatedAt(SelectedBucket,
-                record.Values.FirstOrDefault(val => val.Key == "deviceId").Value.ToString()!);
-
-            return dateTime.ToString(CultureInfo.InvariantCulture);
-        }
-        return "";
     }
 
     #endregion ---------------------------- DeviceRegistration ----------------------------
