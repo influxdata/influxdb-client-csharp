@@ -171,20 +171,20 @@
             </div>
             <div class="row">
                 <div class="col-12 my-3">
-                    <RadzenDataGrid Data="@LinqData" TItem="InfluxModel.MeasurementPoint" 
+                    <RadzenDataGrid Data="@LinqData" TItem="InfluxModel.MeasurementPoint"
                                     PagerPosition="PagerPosition.Bottom" AllowPaging="true" AllowSorting="true" PageSize="10">
                         <Columns>
-                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint"
                                                   Property="Timestamp" Title="Timestamp"/>
-                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint"
                                                   Property="Temperature" Title="Temperature"/>
-                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint"
                                                   Property="Humidity" Title="Humidity"/>
-                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint"
                                                   Property="Pressure" Title="Pressure"/>
-                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint"
                                                   Property="Co2" Title="CO2"/>
-                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint" 
+                            <RadzenDataGridColumn TItem="InfluxModel.MeasurementPoint"
                                                   Property="Tvoc" Title="TVOC"/>
                         </Columns>
                     </RadzenDataGrid>
@@ -245,7 +245,7 @@
             StateHasChanged();
             if (value == null || value.Count < 1)
                 SelectedDevice = "";
-            else if (string.IsNullOrEmpty(SelectedDevice) || 
+            else if (string.IsNullOrEmpty(SelectedDevice) ||
                      value.FirstOrDefault(dev => dev!.Values.FirstOrDefault(rec => rec.Key == "deviceId").Value.ToString() == SelectedDevice) == null)
             {
                 var device = value.FirstOrDefault(dev => dev!.Values.FirstOrDefault(rec => rec.Key == "deviceId").Value.ToString() == "virtual_device");
