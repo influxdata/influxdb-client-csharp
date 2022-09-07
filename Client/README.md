@@ -355,13 +355,13 @@ For writing data we use [WriteApi](https://github.com/influxdata/influxdb-client
 [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) supports:
 
 1. writing data using [InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/), Data Point, POCO 
-2. use batching for writes
-4. produces events that allow user to be notified and react to this events
+1. use batching for writes
+1. produces events that allow user to be notified and react to this events
     - `WriteSuccessEvent` - published when arrived the success response from server
     - `WriteErrorEvent` - published when occurs a unhandled exception from server
     - `WriteRetriableErrorEvent` - published when occurs a retriable error from server
     - `WriteRuntimeExceptionEvent` - published when occurs a runtime exception in background batch processing
-5. use GZIP compression for data
+1. use GZIP compression for data
 
 The writes are processed in batches which are configurable by `WriteOptions`:
 
@@ -694,43 +694,72 @@ mine-sensor,id=132-987-655,customer="California Miner",hostname=example.com,sens
 
 ### Handle the Events
 
-#### Handle the Success write
+Events that can be handle by WriteAPI EventHandler are:
+- `WriteSuccessEvent` - for success response from server
+- `WriteErrorEvent` - for unhandled exception from server
+- `WriteRetriableErrorEvent` - for retriable error from server
+- `WriteRuntimeExceptionEvent` - for runtime exception in background batch processing
+
+Number of events depends on number of data points to collect in batch. The batch size is configured by `BatchSize` option (default size is `1000`) - in case
+of one data point, event is handled for each point, independently on used writing method (even for mass writing of data like
+`WriteMeasurements`, `WritePoints` and `WriteRecords`).
+
+Events can be handled by register `writeApi.EventHandler` or by creating custom `EventListener`:
+
+#### Register EventHandler
 
 ```c#
-//
-// Register event handler
-//
 writeApi.EventHandler += (sender, eventArgs) =>
 {
-    if (eventArgs is WriteSuccessEvent @event)
+    switch (eventArgs)
     {
-        string data = @event.LineProtocol;
-        
-        //
-        // handle success
-        //
+        case WriteSuccessEvent successEvent:
+            string data = @event.LineProtocol;
+            //
+            // handle success response from server
+            // Console.WriteLine($"{data}");
+            //
+            break;
+        case WriteErrorEvent error:
+            string data = @error.LineProtocol;
+            string errorMessage = @error.Exception.Message;
+            //
+            // handle unhandled exception from server
+            //
+            // Console.WriteLine($"{data}");
+            // throw new Exception(errorMessage);
+            //
+            break;
+        case WriteRetriableErrorEvent error:
+            string data = @error.LineProtocol;
+            string errorMessage = @error.Exception.Message;
+            //
+            // handle retrievable error from server
+            //
+            // Console.WriteLine($"{data}");
+            // throw new Exception(errorMessage);
+            //
+            break;
+        case WriteRuntimeExceptionEvent error:
+            string errorMessage = @error.Exception.Message;
+            //
+            // handle runtime exception in background batch processing
+            // throw new Exception(errorMessage);
+            //
+            break;
     }
 };
+
+//
+// Write by LineProtocol
+//
+writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
+    $" {DateTime.UtcNow.Subtract(EpochStart).Ticks * 100}", WritePrecision.Ns, "my-bucket", "my-org");
 ```
 
-#### Handle the Error Write
+#### Custom EventListener
 
-```c#
-//
-// Register event handler
-//
-writeApi.EventHandler += (sender, eventArgs) =>
-{
-    if (eventArgs is WriteErrorEvent @event)
-    {
-        var exception = @event.Exception;
-        
-        //
-        // handle error
-        //
-    }
-};
-```
+Advantage of using custom Event Listener is possibility of waiting on handled event between different writings - for more info see [EventListener](/Examples/WriteEventHandlerExample.cs#L234).
 
 ## Delete Data
 
