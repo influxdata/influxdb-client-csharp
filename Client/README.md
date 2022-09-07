@@ -759,7 +759,7 @@ writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
 
 #### Custom EventListener
 
-Advantage of using custom Event Listener is possibility of waiting on handled event between different writings. For more info see [EventListener](/Examples/WriteEventHandlerExample.cs#L241):
+Advantage of using custom Event Listener is possibility of waiting on handled event between different writings - for more info see [EventListener](/Examples/WriteEventHandlerExample.cs#L234).
 
 ## Delete Data
 
