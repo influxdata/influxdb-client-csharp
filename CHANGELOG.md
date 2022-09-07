@@ -1,7 +1,7 @@
 ## 4.6.0 [unreleased]
 
 ### Documentation
-1. [#355](https://github.com/influxdata/influxdb-client-csharp/pull/355): Add example how to use WriteAPI with `EventHandler`
+1. [#355](https://github.com/influxdata/influxdb-client-csharp/pull/355): Add an example how to use `EventHandler` for `WriteApi`
 
 ### Bug Fixes
 1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): Support for `double` types in LINQ expression [LINQ]

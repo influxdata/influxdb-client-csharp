@@ -355,13 +355,13 @@ For writing data we use [WriteApi](https://github.com/influxdata/influxdb-client
 [WriteApi](https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/WriteApi.cs#L1) supports:
 
 1. writing data using [InfluxDB Line Protocol](https://docs.influxdata.com/influxdb/v1.6/write_protocols/line_protocol_tutorial/), Data Point, POCO 
-2. use batching for writes
-4. produces events that allow user to be notified and react to this events
+1. use batching for writes
+1. produces events that allow user to be notified and react to this events
     - `WriteSuccessEvent` - published when arrived the success response from server
     - `WriteErrorEvent` - published when occurs a unhandled exception from server
     - `WriteRetriableErrorEvent` - published when occurs a retriable error from server
     - `WriteRuntimeExceptionEvent` - published when occurs a runtime exception in background batch processing
-5. use GZIP compression for data
+1. use GZIP compression for data
 
 The writes are processed in batches which are configurable by `WriteOptions`:
 
@@ -759,48 +759,7 @@ writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
 
 #### Custom EventListener
 
-Advantage of using custom Event Listener is possibility of waiting on handled event between different writings.
-
-Example of using custom [EventListener](https://github.com/influxdata/influxdb-client-csharp/blob/master/Examples/WriteApiExample.cs#L241):
-```csharp
-var options = WriteOptions.CreateNew()
-    .BatchSize(5)
-    .FlushInterval(1000)
-    .RetryInterval(2000)
-    .MaxRetries(3)
-    .Build();
-                 
-using (var writeApi = influxDbClient.GetWriteApi(options))
-{
-    //
-    // Init EventListener
-    //
-    var listener = new EventListener(writeApi);
-
-    //
-    // Write by POCO 
-    //
-    var pointsToWrite = new List<InfluxPoint>();
-    for (var i = 1; i <= 5; i++)
-        pointsToWrite.Add(new InfluxPoint
-            {WriteType = "POCO", Value = i, Time = DateTime.UtcNow.AddSeconds(-i)});
-
-    writeApi.WriteMeasurements(pointsToWrite, WritePrecision.Ns, "my-bucket", "my-org");
-
-    //
-    // Wait to Success Response
-    //
-    listener.WaitToSuccess();
-                
-    //
-    // Write by LineProtocol - bad timestamp
-    //
-    writeApi.WriteRecord("influxPoint,writeType=lineProtocol value=11.11" +
-        $" {DateTime.UtcNow}", WritePrecision.Ns, "my-bucket", "my-org");
-    listener.WaitToResponse();
-}
-influxDbClient.Dispose();
-```
+Advantage of using custom Event Listener is possibility of waiting on handled event between different writings. For more info see [EventListener](/Examples/WriteEventHandlerExample.cs#L241):
 
 ## Delete Data
 

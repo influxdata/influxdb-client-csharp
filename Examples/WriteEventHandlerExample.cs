@@ -10,7 +10,7 @@ using InfluxDB.Client.Writes;
 
 namespace Examples
 {
-    public static class WriteApiExample
+    public static class WriteEventHandlerExample
     {
         [Measurement("influxPoint")]
         private class InfluxPoint

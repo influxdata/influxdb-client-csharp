@@ -36,8 +36,8 @@ namespace Examples
                     case "PlatformExample":
                         await PlatformExample.Main(args);
                         break;
-                    case "WriteApiExample":
-                        await WriteApiExample.Main();
+                    case "WriteEventHandlerExample":
+                        await WriteEventHandlerExample.Main();
                         break;
                     case "WriteApiAsyncExample":
                         await WriteApiAsyncExample.Main(args);
@@ -75,7 +75,7 @@ namespace Examples
             {
                 Console.WriteLine("Please specify the name of example. One of: " +
                                   "FluxExample, FluxClientSimpleExample, FluxRawExample, FluxClientFactoryExample, " +
-                                  "FluxClientPocoExample, PlatformExample, WriteApiExample, WriteApiAsyncExample, " +
+                                  "FluxClientPocoExample, PlatformExample, WriteEventHandlerExample, WriteApiAsyncExample, " +
                                   "CustomDomainMapping, PocoQueryWriteExample, CustomDomainMappingAndLinq, " +
                                   "SynchronousQuery, InfluxDB18Example, QueryLinqCloud, ManagementExample, " +
                                   " InvokableScripts, ParametrizedQuery");
