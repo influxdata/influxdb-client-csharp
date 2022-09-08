@@ -160,6 +160,55 @@ namespace Client.Legacy.Test
             Assert.AreEqual(expectedTime, Instant.FromDateTimeUtc(poco.Time.Value));
         }
 
+        [Test]
+        public void NumberConversion()
+        {
+            var record = new FluxRecord(0)
+            {
+                Values =
+                {
+                    ["fieldLong"] = 55,
+                    ["fieldDouble"] = 55,
+                    ["fieldInt"] = 55
+                }
+            };
+
+            var poco = _parser.ToPoco<NumberFields>(record);
+            Assert.AreEqual(55L, poco.FieldLong);
+            Assert.AreEqual(55.0, poco.FieldDouble);
+            Assert.AreEqual(55, poco.FieldInt);
+
+            record = new FluxRecord(0)
+            {
+                Values =
+                {
+                    ["fieldLong"] = 55.0,
+                    ["fieldDouble"] = 55.0,
+                    ["fieldInt"] = 55.0
+                }
+            };
+
+            poco = _parser.ToPoco<NumberFields>(record);
+            Assert.AreEqual(55L, poco.FieldLong);
+            Assert.AreEqual(55.0, poco.FieldDouble);
+            Assert.AreEqual(55, poco.FieldInt);
+
+            record = new FluxRecord(0)
+            {
+                Values =
+                {
+                    ["fieldLong"] = 55L,
+                    ["fieldDouble"] = 55L,
+                    ["fieldInt"] = 55L
+                }
+            };
+
+            poco = _parser.ToPoco<NumberFields>(record);
+            Assert.AreEqual(55L, poco.FieldLong);
+            Assert.AreEqual(55.0, poco.FieldDouble);
+            Assert.AreEqual(55, poco.FieldInt);
+        }
+
         [Measurement("poco")]
         private class ParseablePoco
         {
@@ -188,6 +237,14 @@ namespace Client.Legacy.Test
             [Column("value")] public double Value { get; set; }
 
             [Column(IsTimestamp = true)] public DateTime? Time { get; set; }
+        }
+
+        [Measurement("poco")]
+        private class NumberFields
+        {
+            [Column("fieldLong")] public long FieldLong { get; set; }
+            [Column("fieldDouble")] public double FieldDouble { get; set; }
+            [Column("fieldInt")] public int FieldInt { get; set; }
         }
     }
 }
