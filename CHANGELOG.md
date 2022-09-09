@@ -10,7 +10,7 @@
 Update dependencies:
 
 #### Examples:
-  - [#357](https://github.com/influxdata/influxdb-client-csharp/pull/357): `Radzen.Blazor` to `3.20.10`
+  - [#358](https://github.com/influxdata/influxdb-client-csharp/pull/358): `Radzen.Blazor` to `3.20.11`
 
 #### Test:
   - [#354](https://github.com/influxdata/influxdb-client-csharp/pull/354): `Microsoft.NET.Test.Sdk` to `17.3.1`
