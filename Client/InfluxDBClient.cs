@@ -181,6 +181,7 @@ namespace InfluxDB.Client
         /// Get the health of an instance.
         /// </summary>
         /// <returns>health of an instance</returns>
+        [Obsolete("This method is obsolete. Call 'PingAsync()' instead.", false)]
         Task<HealthCheck> HealthAsync();
 
         /// <summary>
