@@ -5,6 +5,7 @@
 
 ### Bug Fixes
 1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): Support for `double` types in LINQ expression [LINQ]
+2. [#360](https://github.com/influxdata/influxdb-client-csharp/pull/360): Designated `HealthAsync` as obsolete in `IInfluxDBClient`
 
 ### Dependencies
 Update dependencies:
