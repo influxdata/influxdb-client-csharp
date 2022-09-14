@@ -10,6 +10,9 @@
 ### Dependencies
 Update dependencies:
 
+#### Build:
+  - [#365](https://github.com/influxdata/influxdb-client-csharp/pull/365): `Microsoft.Extensions.ObjectPool` to `6.0.9`
+
 #### Examples:
   - [#362](https://github.com/influxdata/influxdb-client-csharp/pull/362): `Radzen.Blazor` to `3.20.12`
 
