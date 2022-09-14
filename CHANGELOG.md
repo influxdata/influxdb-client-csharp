@@ -1,16 +1,17 @@
 ## 4.6.0 [unreleased]
 
-### Documentation
-1. [#355](https://github.com/influxdata/influxdb-client-csharp/pull/355): Add an example how to use `EventHandler` for `WriteApi`
-
 ### Bug Fixes
 1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): Support for `double` types in LINQ expression [LINQ]
-2. [#360](https://github.com/influxdata/influxdb-client-csharp/pull/360): Designated `HealthAsync` as obsolete in `IInfluxDBClient`
+1. [#360](https://github.com/influxdata/influxdb-client-csharp/pull/360): Designated `HealthAsync` as obsolete in `IInfluxDBClient`
+
+### Documentation
+1. [#355](https://github.com/influxdata/influxdb-client-csharp/pull/355): Add an example how to use `EventHandler` for `WriteApi`
 
 ### Dependencies
 Update dependencies:
 
 #### Build:
+  - [#364](https://github.com/influxdata/influxdb-client-csharp/pull/364): `System.Configuration.ConfigurationManager` to `6.0.1`
   - [#365](https://github.com/influxdata/influxdb-client-csharp/pull/365): `Microsoft.Extensions.ObjectPool` to `6.0.9`
 
 #### Examples:
