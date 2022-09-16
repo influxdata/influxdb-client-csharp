@@ -33,7 +33,7 @@ Launch app by typing the following commands in a terminal window:
 
 ```bash
 cd ExampleBlazor
-dotnet run
+dotnet compose start
 ```
 
 After a few seconds, you should get your application up and running. Take a look at your terminal window to get the
