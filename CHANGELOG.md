@@ -4,6 +4,9 @@
 1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): Support for `double` types in LINQ expression [LINQ]
 1. [#360](https://github.com/influxdata/influxdb-client-csharp/pull/360): Designated `HealthAsync` as obsolete in `IInfluxDBClient`
 
+### Others
+1. [#368](https://github.com/influxdata/influxdb-client-csharp/pull/368): Use builtin support for synchronous HTTP requests from `RestSharp`
+
 ### Documentation
 1. [#355](https://github.com/influxdata/influxdb-client-csharp/pull/355): Add an example how to use `EventHandler` for `WriteApi`
 
@@ -13,6 +16,7 @@ Update dependencies:
 #### Build:
   - [#364](https://github.com/influxdata/influxdb-client-csharp/pull/364): `System.Configuration.ConfigurationManager` to `6.0.1`
   - [#365](https://github.com/influxdata/influxdb-client-csharp/pull/365): `Microsoft.Extensions.ObjectPool` to `6.0.9`
+  - [#368](https://github.com/influxdata/influxdb-client-csharp/pull/368): `RestSharp` to `108.0.2`
 
 #### Examples:
   - [#367](https://github.com/influxdata/influxdb-client-csharp/pull/367): `Radzen.Blazor` to `4.0.0`
