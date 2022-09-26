@@ -17,6 +17,7 @@ Update dependencies:
   - [#364](https://github.com/influxdata/influxdb-client-csharp/pull/364): `System.Configuration.ConfigurationManager` to `6.0.1`
   - [#365](https://github.com/influxdata/influxdb-client-csharp/pull/365): `Microsoft.Extensions.ObjectPool` to `6.0.9`
   - [#368](https://github.com/influxdata/influxdb-client-csharp/pull/368): `RestSharp` to `108.0.2`
+  - [#371](https://github.com/influxdata/influxdb-client-csharp/pull/371): `NodaTime` to `3.1.3`
 
 #### Examples:
   - [#367](https://github.com/influxdata/influxdb-client-csharp/pull/367): `Radzen.Blazor` to `4.0.0`
