@@ -11,6 +11,7 @@ namespace Examples
         /// <param name="args"></param>
         public static async Task Main(string[] args)
         {
+            await RecordRowExample.Main();
             if (args.Length >= 1 && !string.IsNullOrEmpty(args[0]))
             {
                 Console.WriteLine($"Run solution: {args[0]}");
