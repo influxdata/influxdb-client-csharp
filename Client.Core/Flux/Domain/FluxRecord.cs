@@ -22,12 +22,12 @@ namespace InfluxDB.Client.Core.Flux.Domain
         /// The record's values.
         /// </summary>
         public Dictionary<string, object> Values { get; } = new Dictionary<string, object>();
-        
+
         /// <summary>
         /// The record's rows.
         /// </summary>
         public List<Row> Rows { get; } = new List<Row>();
-        
+
         public class Row
         {
             public string Field { get; }

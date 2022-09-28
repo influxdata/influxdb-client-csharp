@@ -11,7 +11,6 @@ namespace Examples
         /// <param name="args"></param>
         public static async Task Main(string[] args)
         {
-            await RecordRowExample.Main();
             if (args.Length >= 1 && !string.IsNullOrEmpty(args[0]))
             {
                 Console.WriteLine($"Run solution: {args[0]}");
@@ -70,6 +69,9 @@ namespace Examples
                     case "ParametrizedQuery":
                         await ParametrizedQuery.Main(args);
                         break;
+                    case "RecordRowExample":
+                        await RecordRowExample.Main();
+                        break;
                 }
             }
             else
@@ -79,7 +81,7 @@ namespace Examples
                                   "FluxClientPocoExample, PlatformExample, WriteEventHandlerExample, WriteApiAsyncExample, " +
                                   "CustomDomainMapping, PocoQueryWriteExample, CustomDomainMappingAndLinq, " +
                                   "SynchronousQuery, InfluxDB18Example, QueryLinqCloud, ManagementExample, " +
-                                  " InvokableScripts, ParametrizedQuery");
+                                  " InvokableScripts, ParametrizedQuery, RecordRowExample");
             }
         }
     }

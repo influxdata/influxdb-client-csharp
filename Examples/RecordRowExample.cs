@@ -16,9 +16,9 @@ namespace Examples
             const string password = "my-password";
             const string bucket = "my-bucket";
             const string org = "my-org";
-            
+
             using var client = InfluxDBClientFactory.Create(url, username, password.ToCharArray());
-            
+
             //
             // Get ID of Organization with specified name
             //
@@ -39,8 +39,8 @@ namespace Examples
                             + " |> range(start: -1m)"
                             + " |> filter(fn: (r) => (r[\"_measurement\"] == \"point\"))"
                             + " |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
-            var tables = await queryApi.QueryAsync(fluxQuery, org: orgId);
-            
+            var tables = await queryApi.QueryAsync(fluxQuery, orgId);
+
             //
             // Write data to output
             //
@@ -51,7 +51,7 @@ namespace Examples
                 foreach (var fluxRecord in tables.SelectMany(fluxTable => fluxTable.Records))
                     Console.WriteLine("{" + string.Join(", ",
                         fluxRecord.Values.Select(kv => kv.Key + ": " + kv.Value).ToArray()) + "}");
-                
+
                 // using FluxRecord.Rows - List<Row> - contains all data
                 Console.WriteLine("-------------------------------- FluxTable.Rows ---------------------------------");
                 foreach (var fluxRecord in tables.SelectMany(fluxTable => fluxTable.Records))
@@ -60,9 +60,8 @@ namespace Examples
                         Console.Write(row.Field + ": " + row.Value + ", ");
                     Console.Write("\n");
                 }
-
             }
-            
+
             client.Dispose();
         }
     }
