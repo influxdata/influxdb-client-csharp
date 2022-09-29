@@ -5,11 +5,11 @@
 #
 # How to run in Docker:
 #
-#   docker run --rm -it --platform linux/arm64 \
-#     -v /usr/local/share/dotnet/sdk/NuGetFallbackFolder:/usr/local/share/dotnet/sdk/NuGetFallbackFolder \
+#   docker run --rm \
 #     -v "${PWD}":/code \
 #     -w /code \
-#     mono:latest /code/Scripts/generate-docs-arm64.sh
+#     --user root \
+#     gabrielfreiredev/docfx_base_multiarch /code/Scripts/generate-docs-arm64.sh
 #
 # How to check generated site:
 #
@@ -19,16 +19,8 @@
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
 
-echo "# Install git, unzip"
-apt-get update \
-  && apt-get install git unzip --yes \
-
-#
-# Download and unzip docfx
-#
-cd /
-curl -L https://github.com/dotnet/docfx/releases/download/v2.56.7/docfx.zip --output docfx.zip
-unzip docfx.zip -d docfx
+echo "# Install git"
+apt-get update && apt-get install git --yes
 
 #
 # Remove old docs
@@ -39,4 +31,4 @@ rm -rf "${SCRIPT_PATH}"/../docfx_project/_site || true
 #
 # Build docs
 #
-mono docfx/docfx.exe code/docfx_project/docfx.json 
+mono /opt/docfx/docfx.exe /code/docfx_project/docfx.json 
