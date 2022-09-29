@@ -20,7 +20,7 @@ Update dependencies:
   - [#371](https://github.com/influxdata/influxdb-client-csharp/pull/371): `NodaTime` to `3.1.3`
 
 #### Examples:
-  - [#374](https://github.com/influxdata/influxdb-client-csharp/pull/374): `Radzen.Blazor` to `4.1.3`
+  - [#375](https://github.com/influxdata/influxdb-client-csharp/pull/375): `Radzen.Blazor` to `4.1.4`
 
 #### Test:
   - [#373](https://github.com/influxdata/influxdb-client-csharp/pull/373): `Microsoft.NET.Test.Sdk` to `17.3.2`
