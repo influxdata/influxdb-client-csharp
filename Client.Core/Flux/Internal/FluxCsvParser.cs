@@ -271,7 +271,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
                 record.Values[columnName] = value;
 
-                record.Rows.Add(new KeyValuePair<string, object>(columnName, value));
+                record.Row.Add(new KeyValuePair<string, object>(columnName, value));
             }
 
             return record;
@@ -401,7 +401,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             {
                 Console.WriteLine(
                     $"The response contains columns with duplicated names: {string.Join(", ", duplicates)}\n" +
-                    "You should use the 'record.Rows' to access your data instead of 'record.Values' dictionary.");
+                    "You should use the 'record.Row to access your data instead of 'record.Values' dictionary.");
             }
         }
 

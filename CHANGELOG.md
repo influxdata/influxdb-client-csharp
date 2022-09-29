@@ -9,7 +9,7 @@ Update dependencies:
 ## 4.6.0 [2022-09-29]
 
 ### Features
-1. [#376](https://github.com/influxdata/influxdb-client-csharp/pull/376): Added `FluxRecord.Rows` which stores response data in a list
+1. [#376](https://github.com/influxdata/influxdb-client-csharp/pull/376): Added `FluxRecord.Row` which stores response data in a list
 
 ### Bug Fixes
 1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): Support for `double` types in LINQ expression [LINQ]

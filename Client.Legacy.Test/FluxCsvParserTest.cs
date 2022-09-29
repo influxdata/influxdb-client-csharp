@@ -789,8 +789,8 @@ namespace Client.Legacy.Test
             Assert.AreEqual(8, tables[0].Columns.Count);
             Assert.AreEqual(3, tables[0].Records.Count);
             Assert.AreEqual(7, tables[0].Records[0].Values.Count);
-            Assert.AreEqual(8, tables[0].Records[0].Rows.Count);
-            Assert.AreEqual(25.3, tables[0].Records[0].Rows[7].Value);
+            Assert.AreEqual(8, tables[0].Records[0].Row.Count);
+            Assert.AreEqual(25.3, tables[0].Records[0].Row[7].Value);
         }
 
         private List<FluxTable> ParseFluxResponse(string data)
