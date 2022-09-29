@@ -47,17 +47,17 @@ namespace Examples
             if (tables != null)
             {
                 // using FluxRecord.Values - Dictionary<string,object> - can`t contains duplicity key names
-                Console.WriteLine("------------------------------- FluxTable.Records -------------------------------");
+                Console.WriteLine("------------------------------- FluxRecord.Values -------------------------------");
                 foreach (var fluxRecord in tables.SelectMany(fluxTable => fluxTable.Records))
                     Console.WriteLine("{" + string.Join(", ",
                         fluxRecord.Values.Select(kv => kv.Key + ": " + kv.Value).ToArray()) + "}");
 
-                // using FluxRecord.Rows - List<Row> - contains all data
-                Console.WriteLine("-------------------------------- FluxTable.Rows ---------------------------------");
+                // using FluxRecord.Rows - List<KeyValuePair<string, object>> - contains all data
+                Console.WriteLine("-------------------------------- FluxRecord.Rows ---------------------------------");
                 foreach (var fluxRecord in tables.SelectMany(fluxTable => fluxTable.Records))
                 {
                     foreach (var row in fluxRecord.Rows)
-                        Console.Write(row.Field + ": " + row.Value + ", ");
+                        Console.Write(row.Key + ": " + row.Value + ", ");
                     Console.Write("\n");
                 }
             }

@@ -26,19 +26,7 @@ namespace InfluxDB.Client.Core.Flux.Domain
         /// <summary>
         /// The record's rows.
         /// </summary>
-        public List<Row> Rows { get; } = new List<Row>();
-
-        public class Row
-        {
-            public string Field { get; }
-            public object Value { get; }
-
-            public Row(string field, object value)
-            {
-                Field = field;
-                Value = value;
-            }
-        }
+        public List<KeyValuePair<string, object>> Rows { get; } = new List<KeyValuePair<string, object>>();
 
         public FluxRecord(int table)
         {
