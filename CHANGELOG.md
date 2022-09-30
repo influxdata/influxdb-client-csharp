@@ -1,5 +1,11 @@
 ## 4.7.0 [unreleased]
 
+### Dependencies
+Update dependencies:
+
+#### Examples:
+  - [#377](https://github.com/influxdata/influxdb-client-csharp/pull/377): `Radzen.Blazor` to `4.1.5`
+
 ## 4.6.0 [2022-09-29]
 
 ### Bug Fixes
