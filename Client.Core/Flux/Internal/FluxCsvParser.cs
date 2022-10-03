@@ -271,7 +271,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
                 record.Values[columnName] = value;
 
-                record.Row.Add(new KeyValuePair<string, object>(columnName, value));
+                record.Row.Add(value);
             }
 
             return record;

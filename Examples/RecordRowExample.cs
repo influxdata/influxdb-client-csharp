@@ -56,8 +56,7 @@ namespace Examples
                 Console.WriteLine("--------------------------------- FluxRecord.Row ---------------------------------");
                 foreach (var fluxRecord in tables.SelectMany(fluxTable => fluxTable.Records))
                 {
-                    foreach (var row in fluxRecord.Row)
-                        Console.Write(row.Key + ": " + row.Value + ", ");
+                    Console.WriteLine("{" + string.Join(", ", fluxRecord.Row) + "}");
                     Console.Write("\n");
                 }
             }
