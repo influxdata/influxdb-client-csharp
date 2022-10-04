@@ -24,7 +24,7 @@ namespace InfluxDB.Client.Core.Flux.Domain
         public Dictionary<string, object> Values { get; } = new Dictionary<string, object>();
 
         /// <summary>
-        /// The record's rows.
+        /// The record's columns.
         /// </summary>
         public List<object> Row { get; } = new List<object>();
 
