@@ -267,7 +267,11 @@ namespace InfluxDB.Client.Core.Flux.Internal
 
                 var strValue = csv[fluxColumn.Index + 1];
 
-                record.Values.Add(columnName, ToValue(strValue, fluxColumn));
+                var value = ToValue(strValue, fluxColumn);
+
+                record.Values[columnName] = value;
+
+                record.Row.Add(value);
             }
 
             return record;
@@ -388,6 +392,16 @@ namespace InfluxDB.Client.Core.Flux.Internal
             {
                 var fluxColumn = GetFluxColumn(ii, table);
                 fluxColumn.Label = columnNames[ii + 1];
+            }
+
+            var duplicates = table.Columns.GroupBy(col => col.Label)
+                .Where(rec => rec.Count() > 1)
+                .Select(label => label.Key).ToList();
+            if (duplicates.Any())
+            {
+                Console.WriteLine(
+                    $"The response contains columns with duplicated names: {string.Join(", ", duplicates)}\n" +
+                    "You should use the 'FluxRecord.Row to access your data instead of 'FluxRecord.Values' dictionary.");
             }
         }
 

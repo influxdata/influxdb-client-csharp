@@ -771,6 +771,28 @@ namespace Client.Legacy.Test
             Assert.AreEqual("west", tables[0].Records[0].GetValueByKey("region"));
         }
 
+        [Test]
+        public void ParseDuplicateColumnNames()
+        {
+            const string data =
+                "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,string,string,double\n" +
+                "#group,false,false,true,true,false,true,true,false\n" +
+                "#default,_result,,,,,,,\n" +
+                " ,result,table,_start,_stop,_time,_measurement,location,result\n" +
+                ",,0,2022-09-13T06:14:40.469404272Z,2022-09-13T06:24:40.469404272Z,2022-09-13T06:24:33.746Z,my_measurement,Prague,25.3\n" +
+                ",,0,2022-09-13T06:14:40.469404272Z,2022-09-13T06:24:40.469404272Z,2022-09-13T06:24:39.299Z,my_measurement,Prague,25.3\n" +
+                ",,0,2022-09-13T06:14:40.469404272Z,2022-09-13T06:24:40.469404272Z,2022-09-13T06:24:40.454Z,my_measurement,Prague,25.3\n";
+
+            _parser = new FluxCsvParser(FluxCsvParser.ResponseMode.OnlyNames);
+            var tables = ParseFluxResponse(data);
+            Assert.AreEqual(1, tables.Count);
+            Assert.AreEqual(8, tables[0].Columns.Count);
+            Assert.AreEqual(3, tables[0].Records.Count);
+            Assert.AreEqual(7, tables[0].Records[0].Values.Count);
+            Assert.AreEqual(8, tables[0].Records[0].Row.Count);
+            Assert.AreEqual(25.3, tables[0].Records[0].Row[7]);
+        }
+
         private List<FluxTable> ParseFluxResponse(string data)
         {
             var consumer = new FluxCsvParser.FluxResponseConsumerTable();

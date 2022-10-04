@@ -23,6 +23,11 @@ namespace InfluxDB.Client.Core.Flux.Domain
         /// </summary>
         public Dictionary<string, object> Values { get; } = new Dictionary<string, object>();
 
+        /// <summary>
+        /// The record's columns.
+        /// </summary>
+        public List<object> Row { get; } = new List<object>();
+
         public FluxRecord(int table)
         {
             Table = table;
