@@ -1,5 +1,8 @@
 ## 4.7.0 [unreleased]
 
+### Features
+1. [#376](https://github.com/influxdata/influxdb-client-csharp/pull/376): Added `FluxRecord.Row` which stores response data in a list
+
 ### Dependencies
 Update dependencies:
 
@@ -7,9 +10,6 @@ Update dependencies:
   - [#377](https://github.com/influxdata/influxdb-client-csharp/pull/377): `Radzen.Blazor` to `4.1.5`
 
 ## 4.6.0 [2022-09-29]
-
-### Features
-1. [#376](https://github.com/influxdata/influxdb-client-csharp/pull/376): Added `FluxRecord.Row` which stores response data in a list
 
 ### Bug Fixes
 1. [#353](https://github.com/influxdata/influxdb-client-csharp/pull/353): Support for `double` types in LINQ expression [LINQ]
