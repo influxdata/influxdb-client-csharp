@@ -12,17 +12,11 @@ namespace Examples
         public static async Task Main()
         {
             const string url = "http://localhost:9999/";
-            const string username = "my-user";
-            const string password = "my-password";
+            const string token = "my-token";
             const string bucket = "my-bucket";
             const string org = "my-org";
 
-            using var client = InfluxDBClientFactory.Create(url, username, password.ToCharArray());
-
-            //
-            // Get ID of Organization with specified name
-            //
-            var orgId = (await client.GetOrganizationsApi().FindOrganizationsAsync(org: org)).First().Id;
+            using var client = InfluxDBClientFactory.Create(url, token.ToCharArray());
 
             //
             // Prepare Data
@@ -39,7 +33,7 @@ namespace Examples
                             + " |> range(start: -1m)"
                             + " |> filter(fn: (r) => (r[\"_measurement\"] == \"point\"))"
                             + " |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
-            var tables = await queryApi.QueryAsync(fluxQuery, orgId);
+            var tables = await queryApi.QueryAsync(fluxQuery, org);
 
             //
             // Write data to output
@@ -55,10 +49,7 @@ namespace Examples
                 // using FluxRecord.Row - List<KeyValuePair<string, object>> - contains all data
                 Console.WriteLine("--------------------------------- FluxRecord.Row ---------------------------------");
                 foreach (var fluxRecord in tables.SelectMany(fluxTable => fluxTable.Records))
-                {
                     Console.WriteLine("{" + string.Join(", ", fluxRecord.Row) + "}");
-                    Console.Write("\n");
-                }
             }
 
             client.Dispose();

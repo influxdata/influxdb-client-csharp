@@ -401,7 +401,7 @@ namespace InfluxDB.Client.Core.Flux.Internal
             {
                 Console.WriteLine(
                     $"The response contains columns with duplicated names: {string.Join(", ", duplicates)}\n" +
-                    "You should use the 'record.Row to access your data instead of 'record.Values' dictionary.");
+                    "You should use the 'FluxRecord.Row to access your data instead of 'FluxRecord.Values' dictionary.");
             }
         }
 
