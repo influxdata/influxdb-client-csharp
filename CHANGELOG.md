@@ -7,7 +7,7 @@
 Update dependencies:
 
 #### Examples:
-  - [#377](https://github.com/influxdata/influxdb-client-csharp/pull/377): `Radzen.Blazor` to `4.1.5`
+  - [#379](https://github.com/influxdata/influxdb-client-csharp/pull/379): `Radzen.Blazor` to `4.1.7`
 
 ## 4.6.0 [2022-09-29]
 
