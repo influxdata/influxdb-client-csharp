@@ -6,6 +6,9 @@
 ### Dependencies
 Update dependencies:
 
+#### Build:
+  - [#378](https://github.com/influxdata/influxdb-client-csharp/pull/378): `CsvHelper` to `29.0.0`
+
 #### Examples:
   - [#377](https://github.com/influxdata/influxdb-client-csharp/pull/377): `Radzen.Blazor` to `4.1.5`
 
