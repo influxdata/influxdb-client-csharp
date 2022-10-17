@@ -14,6 +14,9 @@ Update dependencies:
 #### Examples:
   - [#385](https://github.com/influxdata/influxdb-client-csharp/pull/385): `Radzen.Blazor` to `4.1.8`
 
+#### Test:
+  - [#386](https://github.com/influxdata/influxdb-client-csharp/pull/386): `Tomlyn.Signed` to `0.15.1`
+
 ## 4.6.0 [2022-09-29]
 
 ### Bug Fixes
