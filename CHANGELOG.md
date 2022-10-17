@@ -10,7 +10,7 @@ Update dependencies:
   - [#378](https://github.com/influxdata/influxdb-client-csharp/pull/378): `CsvHelper` to `29.0.0`
 
 #### Examples:
-  - [#379](https://github.com/influxdata/influxdb-client-csharp/pull/379): `Radzen.Blazor` to `4.1.8`
+  - [#385](https://github.com/influxdata/influxdb-client-csharp/pull/385): `Radzen.Blazor` to `4.1.8`
 
 ## 4.6.0 [2022-09-29]
 
