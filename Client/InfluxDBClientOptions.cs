@@ -102,7 +102,9 @@ namespace InfluxDB.Client
                 _username = value;
 
                 if (!string.IsNullOrEmpty(Username) && Password != null)
+                {
                     AuthScheme = AuthenticationScheme.Session;
+                }
             }
         }
 
@@ -118,7 +120,9 @@ namespace InfluxDB.Client
                 _password = value;
 
                 if (!string.IsNullOrEmpty(Username) && Password != null)
+                {
                     AuthScheme = AuthenticationScheme.Session;
+                }
             }
         }
 
@@ -249,14 +253,20 @@ namespace InfluxDB.Client
 
             Timeout = builder.Timeout;
 
-            if (builder.WebProxy != null) WebProxy = builder.WebProxy;
+            if (builder.WebProxy != null)
+            {
+                WebProxy = builder.WebProxy;
+            }
             AllowHttpRedirects = builder.AllowHttpRedirects;
 
             PointSettings = builder.PointSettings;
 
             VerifySsl = builder.VerifySslCertificates;
             VerifySslCallback = builder.VerifySslCallback;
-            if (builder.CertificateCollection != null) ClientCertificates = builder.CertificateCollection;
+            if (builder.CertificateCollection != null)
+            {
+                ClientCertificates = builder.CertificateCollection;
+            }
         }
 
         /// <summary>
@@ -521,7 +531,7 @@ namespace InfluxDB.Client
             /// <returns><see cref="Builder"/></returns>
             internal Builder LoadConfig(string sectionName = "influx2")
             {
-                var config = (Influx2) ConfigurationManager.GetSection(sectionName);
+                var config = (Influx2)ConfigurationManager.GetSection(sectionName);
                 if (config == null)
                 {
                     const string message = "The configuration doesn't contains a 'influx2' section. " +

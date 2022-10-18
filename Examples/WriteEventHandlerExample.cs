@@ -126,7 +126,7 @@ namespace Examples
                 //
                 // Write by POCO
                 //
-                var influxPoint = new InfluxPoint {WriteType = "POCO", Value = 33.33, Time = DateTime.UtcNow};
+                var influxPoint = new InfluxPoint { WriteType = "POCO", Value = 33.33, Time = DateTime.UtcNow };
 
                 writeApi.WriteMeasurement(influxPoint, WritePrecision.Ns, "my-bucket", "my-org");
 
@@ -141,7 +141,7 @@ namespace Examples
                 var pointsToWrite = new List<InfluxPoint>();
                 for (var i = 1; i <= 5; i++)
                     pointsToWrite.Add(new InfluxPoint
-                        {WriteType = "POCO", Value = i, Time = DateTime.UtcNow.AddSeconds(-i)});
+                        { WriteType = "POCO", Value = i, Time = DateTime.UtcNow.AddSeconds(-i) });
 
                 writeApi.WriteMeasurements(pointsToWrite, WritePrecision.Ns, "my-bucket", "my-org");
             }

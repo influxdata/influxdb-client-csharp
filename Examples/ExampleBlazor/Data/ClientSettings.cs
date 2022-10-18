@@ -21,12 +21,12 @@ public class Client
 
     public InfluxDBClient GetClient(double timespanSeconds = 10)
     {
-        var options = new InfluxDBClientOptions.Builder()
-            .Url(Url)
-            .AuthenticateToken(Token)
-            .TimeOut(TimeSpan.FromSeconds(timespanSeconds))
-            .Build();
+        var options = new InfluxDBClientOptions(Url)
+        {
+            Token = Token!.ToCharArray(),
+            Timeout = TimeSpan.FromSeconds(timespanSeconds)
+        };
 
-        return InfluxDBClientFactory.Create(options);
+        return new InfluxDBClient(options);
     }
 }
