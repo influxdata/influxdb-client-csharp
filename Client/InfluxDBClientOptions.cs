@@ -255,12 +255,12 @@ namespace InfluxDB.Client
             PointSettings = builder.PointSettings;
             VerifySsl = builder.VerifySslCertificates;
             VerifySslCallback = builder.VerifySslCallback;
-            
+
             if (builder.WebProxy != null)
             {
                 WebProxy = builder.WebProxy;
             }
-            
+
             if (builder.CertificateCollection != null)
             {
                 ClientCertificates = builder.CertificateCollection;
