@@ -23,30 +23,206 @@ namespace InfluxDB.Client
             RegexOptions.CultureInvariant |
             RegexOptions.RightToLeft);
 
-        public string Url { get; }
-        public LogLevel LogLevel { get; }
+        private char[] _token;
+        private string _url;
+        private TimeSpan _timeout;
+        private LogLevel _logLevel;
+        private string _username;
+        private char[] _password;
+        private IWebProxy _webProxy;
+        private bool _allowHttpRedirects;
+        private bool _verifySsl;
+        private X509CertificateCollection _clientCertificates;
+        
+        /// <summary>
+        /// Set the url to connect the InfluxDB.
+        /// </summary>
+        public string Url
+        {
+            get => _url;
+            set
+            {
+                Arguments.CheckNonEmptyString(value, "Url");
+                _url = value;
+            }
+        }
+        
+        /// <summary>
+        /// Set the timespan to wait before the HTTP request times out.
+        /// </summary>
+        public TimeSpan Timeout
+        {
+            get => _timeout;
+            set
+            {
+                Arguments.CheckNotNull(value, "Timeout");
+                _timeout = value;
+            }
+        }
+        
+        /// <summary>
+        /// Set the log level for the request and response information.
+        /// </summary>
+        public LogLevel LogLevel
+        {
+            get => _logLevel;
+            set
+            {
+                Arguments.CheckNotNull(value, "LogLevel");
+                _logLevel = value;
+            }
+        }
 
-        public AuthenticationScheme AuthScheme { get; }
-        public char[] Token { get; }
-        public string Username { get; }
-        public char[] Password { get; }
+        public AuthenticationScheme AuthScheme { get; private set; }
 
-        public string Org { get; }
-        public string Bucket { get; }
+        /// <summary>
+        /// Setup authorization by <see cref="AuthenticationScheme.Token"/>.
+        /// </summary>
+        public char[] Token
+        {
+            get => _token;
+            set
+            {
+                _token = value;
+                Arguments.CheckNotNull(_token, "Token");
 
-        public TimeSpan Timeout { get; }
+                AuthScheme = AuthenticationScheme.Token;
+            }
 
-        public IWebProxy WebProxy { get; }
-        public bool AllowHttpRedirects { get; }
+        }
+        
+        /// <summary>
+        /// Setup authorization by <see cref="AuthenticationScheme.Session"/>.
+        /// </summary>
+        public string Username
+        {
+            get => _username;
+            set
+            {
+                Arguments.CheckNonEmptyString(value, "Username");
+                _username = value;
+                
+                if (!string.IsNullOrEmpty(Username) && Password != null)
+                    AuthScheme = AuthenticationScheme.Session;
+            }
+        }
+        
+        /// <summary>
+        /// Setup authorization by <see cref="AuthenticationScheme.Session"/>.
+        /// </summary>
+        public char[] Password { 
+            get => _password;
+            set
+            {
+                Arguments.CheckNotNull(value, "Password");
+                _password = value;
+                
+                if (!string.IsNullOrEmpty(Username) && Password != null)
+                    AuthScheme = AuthenticationScheme.Session;
+            } 
+        }
 
+        /// <summary>
+        /// Specify the default destination organization for writes and queries.
+        /// </summary>
+        public string Org { get; set; }
+        
+        /// <summary>
+        /// Specify the default destination bucket for writes.
+        /// </summary>
+        public string Bucket { get; set; }
+
+        /// <summary>
+        /// Specify the WebProxy instance to use by the WebRequest to connect to external InfluxDB.
+        /// </summary>
+        public IWebProxy WebProxy
+        {
+            get => _webProxy;
+            set
+            {
+                Arguments.CheckNotNull(value, "WebProxy");
+                _webProxy = value;
+            }
+        }
+        
+        /// <summary>
+        /// Configure automatically following HTTP 3xx redirects.
+        /// </summary>
+        public bool AllowHttpRedirects
+        {
+            get => _allowHttpRedirects;
+            set
+            {
+                Arguments.CheckNotNull(value, "AllowHttpRedirects");
+                _allowHttpRedirects = value;
+            }
+        }
+
+        /// <summary>
+        /// Ignore Certificate Validation Errors when `false`.
+        /// </summary>
+        public bool VerifySsl
+        {
+            get => _verifySsl;
+            set
+            {
+                Arguments.CheckNotNull(value, "VerifySsl");
+                _verifySsl = value;
+            }
+        }
+
+        /// <summary>
+        /// Callback function for handling the remote SSL Certificate Validation.
+        /// The callback takes precedence over `VerifySsl`. 
+        /// </summary>
+        public RemoteCertificateValidationCallback VerifySslCallback { get; set; }
+
+        /// <summary>
+        /// Set X509CertificateCollection to be sent with HTTP requests
+        /// </summary>
+        public X509CertificateCollection ClientCertificates
+        {
+            get => _clientCertificates;
+            set
+            {
+                Arguments.CheckNotNull(value, "ClientCertificates");
+                _clientCertificates = value;
+            }
+        }
+        
         public PointSettings PointSettings { get; }
+        
+        /// <summary>
+        /// Add default tag that will be use for writes by Point and POJO.
+        ///
+        /// <para>
+        /// The expressions can be:
+        /// <list type="bullet">
+        /// <item>"California Miner" - static value</item>
+        /// <item>"${version}" - application settings</item>
+        /// <item>"${env.hostname}" - environment property</item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        /// <param name="tagName">the tag name</param>
+        /// <param name="expression">the tag value expression</param>
+        /// <returns><see cref="Builder"/></returns>
+        public void AddDefaultTag(string tagName, string expression)
+        {
+            Arguments.CheckNotNull(tagName, nameof(tagName));
+            PointSettings.AddDefaultTag(tagName, expression);
+        }
 
-        public bool VerifySsl { get; }
-
-        public RemoteCertificateValidationCallback VerifySslCallback { get; }
-
-        public X509CertificateCollection ClientCertificates { get; }
-
+        public InfluxDBClientOptions(string url)
+        {
+            Url = url;
+            if (string.IsNullOrEmpty(Url))
+            {
+                throw new InvalidOperationException("The url to connect the InfluxDB has to be defined.");
+            }
+            _timeout = TimeSpan.FromSeconds(10);
+            PointSettings = new PointSettings();
+        }
         private InfluxDBClientOptions(Builder builder)
         {
             Arguments.CheckNotNull(builder, nameof(builder));
@@ -54,23 +230,31 @@ namespace InfluxDB.Client
             Url = builder.UrlString;
             LogLevel = builder.LogLevelValue;
             AuthScheme = builder.AuthScheme;
-            Token = builder.Token;
-            Username = builder.Username;
-            Password = builder.Password;
+            
+            switch (builder.AuthScheme)
+            {
+                case AuthenticationScheme.Token:
+                    Token = builder.Token;
+                    break;
+                case AuthenticationScheme.Session:
+                    Username = builder.Username;
+                    Password = builder.Password;
+                    break;
+            }
 
             Org = builder.OrgString;
             Bucket = builder.BucketString;
 
             Timeout = builder.Timeout;
 
-            WebProxy = builder.WebProxy;
+            if (builder.WebProxy != null) WebProxy = builder.WebProxy;
             AllowHttpRedirects = builder.AllowHttpRedirects;
 
             PointSettings = builder.PointSettings;
 
             VerifySsl = builder.VerifySslCertificates;
             VerifySslCallback = builder.VerifySslCallback;
-            ClientCertificates = builder.CertificateCollection;
+            if (builder.CertificateCollection != null) ClientCertificates = builder.CertificateCollection;
         }
 
         /// <summary>
