@@ -87,9 +87,9 @@ namespace Examples
     {
         private static readonly char[] Token = "".ToCharArray();
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var influxDBClient = new InfluxDBClient("http://localhost:8086", Token);
 
             //
             // Write Data
@@ -132,8 +132,6 @@ namespace Examples
                     Console.WriteLine($"{fluxRecord.GetTime()}: {fluxRecord.GetValue()}");
                 });
             });
-
-            influxDBClient.Dispose();
         }
         
         [Measurement("temperature")]
@@ -179,13 +177,13 @@ namespace Examples
 {
     public static class ManagementExample
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
             const string url = "http://localhost:8086";
             const string token = "my-token";
             const string org = "my-org";
             
-            using var client = InfluxDBClientFactory.Create(url, token);
+            using var client = new InfluxDBClient(url, token);
 
             // Find ID of Organization with specified name (PermissionAPI requires ID of Organization).
             var orgId = (await client.GetOrganizationsApi().FindOrganizationsAsync(org: org)).First().Id;
@@ -264,7 +262,7 @@ namespace Examples
     {
         public static void Run()
         {
-            using var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
+            using var fluxClient = new FluxClient("http://localhost:8086/");
 
             var fluxQuery = "from(bucket: \"telegraf\")\n"
                                + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"

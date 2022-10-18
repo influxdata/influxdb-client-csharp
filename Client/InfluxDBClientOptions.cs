@@ -250,19 +250,17 @@ namespace InfluxDB.Client
 
             Org = builder.OrgString;
             Bucket = builder.BucketString;
-
             Timeout = builder.Timeout;
-
+            AllowHttpRedirects = builder.AllowHttpRedirects;
+            PointSettings = builder.PointSettings;
+            VerifySsl = builder.VerifySslCertificates;
+            VerifySslCallback = builder.VerifySslCallback;
+            
             if (builder.WebProxy != null)
             {
                 WebProxy = builder.WebProxy;
             }
-            AllowHttpRedirects = builder.AllowHttpRedirects;
-
-            PointSettings = builder.PointSettings;
-
-            VerifySsl = builder.VerifySslCertificates;
-            VerifySslCallback = builder.VerifySslCallback;
+            
             if (builder.CertificateCollection != null)
             {
                 ClientCertificates = builder.CertificateCollection;

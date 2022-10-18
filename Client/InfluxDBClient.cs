@@ -840,7 +840,7 @@ namespace InfluxDB.Client
         /// <returns>new instance of service</returns>
         public TS CreateService<TS>(Type serviceType) where TS : IApiAccessor
         {
-            var instance = (TS) Activator.CreateInstance(serviceType, (Configuration)_apiClient.Configuration);
+            var instance = (TS)Activator.CreateInstance(serviceType, (Configuration)_apiClient.Configuration);
             instance.ExceptionFactory = _exceptionFactory;
 
             return instance;
