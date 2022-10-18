@@ -33,7 +33,7 @@ namespace InfluxDB.Client
         private bool _allowHttpRedirects;
         private bool _verifySsl;
         private X509CertificateCollection _clientCertificates;
-        
+
         /// <summary>
         /// Set the url to connect the InfluxDB.
         /// </summary>
@@ -46,7 +46,7 @@ namespace InfluxDB.Client
                 _url = value;
             }
         }
-        
+
         /// <summary>
         /// Set the timespan to wait before the HTTP request times out.
         /// </summary>
@@ -59,7 +59,7 @@ namespace InfluxDB.Client
                 _timeout = value;
             }
         }
-        
+
         /// <summary>
         /// Set the log level for the request and response information.
         /// </summary>
@@ -88,9 +88,8 @@ namespace InfluxDB.Client
 
                 AuthScheme = AuthenticationScheme.Token;
             }
-
         }
-        
+
         /// <summary>
         /// Setup authorization by <see cref="AuthenticationScheme.Session"/>.
         /// </summary>
@@ -101,32 +100,33 @@ namespace InfluxDB.Client
             {
                 Arguments.CheckNonEmptyString(value, "Username");
                 _username = value;
-                
+
                 if (!string.IsNullOrEmpty(Username) && Password != null)
                     AuthScheme = AuthenticationScheme.Session;
             }
         }
-        
+
         /// <summary>
         /// Setup authorization by <see cref="AuthenticationScheme.Session"/>.
         /// </summary>
-        public char[] Password { 
+        public char[] Password
+        {
             get => _password;
             set
             {
                 Arguments.CheckNotNull(value, "Password");
                 _password = value;
-                
+
                 if (!string.IsNullOrEmpty(Username) && Password != null)
                     AuthScheme = AuthenticationScheme.Session;
-            } 
+            }
         }
 
         /// <summary>
         /// Specify the default destination organization for writes and queries.
         /// </summary>
         public string Org { get; set; }
-        
+
         /// <summary>
         /// Specify the default destination bucket for writes.
         /// </summary>
@@ -144,7 +144,7 @@ namespace InfluxDB.Client
                 _webProxy = value;
             }
         }
-        
+
         /// <summary>
         /// Configure automatically following HTTP 3xx redirects.
         /// </summary>
@@ -189,9 +189,9 @@ namespace InfluxDB.Client
                 _clientCertificates = value;
             }
         }
-        
+
         public PointSettings PointSettings { get; }
-        
+
         /// <summary>
         /// Add default tag that will be use for writes by Point and POJO.
         ///
@@ -220,9 +220,11 @@ namespace InfluxDB.Client
             {
                 throw new InvalidOperationException("The url to connect the InfluxDB has to be defined.");
             }
+
             _timeout = TimeSpan.FromSeconds(10);
             PointSettings = new PointSettings();
         }
+
         private InfluxDBClientOptions(Builder builder)
         {
             Arguments.CheckNotNull(builder, nameof(builder));
@@ -230,7 +232,7 @@ namespace InfluxDB.Client
             Url = builder.UrlString;
             LogLevel = builder.LogLevelValue;
             AuthScheme = builder.AuthScheme;
-            
+
             switch (builder.AuthScheme)
             {
                 case AuthenticationScheme.Token:
@@ -519,7 +521,7 @@ namespace InfluxDB.Client
             /// <returns><see cref="Builder"/></returns>
             internal Builder LoadConfig(string sectionName = "influx2")
             {
-                var config = (Influx2)ConfigurationManager.GetSection(sectionName);
+                var config = (Influx2) ConfigurationManager.GetSection(sectionName);
                 if (config == null)
                 {
                     const string message = "The configuration doesn't contains a 'influx2' section. " +

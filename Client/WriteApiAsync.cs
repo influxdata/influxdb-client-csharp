@@ -341,7 +341,7 @@ namespace InfluxDB.Client
                 return Task.CompletedTask;
             }
 
-            return WriteMeasurementsAsync(new List<TM> { measurement }, precision, bucket, org, cancellationToken);
+            return WriteMeasurementsAsync(new List<TM> {measurement}, precision, bucket, org, cancellationToken);
         }
 
         /// <summary>

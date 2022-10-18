@@ -27,9 +27,9 @@ namespace Examples
             }
         }
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDB = InfluxDBClientFactory.Create("http://localhost:9999",
+            var influxDB = new InfluxDBClient("http://localhost:9999",
                 "my-user", "my-password".ToCharArray());
 
             var organizationClient = influxDB.GetOrganizationsApi();
@@ -66,15 +66,15 @@ namespace Examples
             // Create new client with specified authorization token
             //
 
-            influxDB = InfluxDBClientFactory.Create("http://localhost:9999", authorization.Token);
+            influxDB = new InfluxDBClient("http://localhost:9999", authorization.Token);
 
-            var writeOptions = WriteOptions
-                .CreateNew()
-                .BatchSize(5000)
-                .FlushInterval(1000)
-                .JitterInterval(1000)
-                .RetryInterval(5000)
-                .Build();
+            var writeOptions = new WriteOptions
+            {
+                BatchSize = 5000,
+                FlushInterval = 1000,
+                JitterInterval = 1000,
+                RetryInterval = 5000
+            };
 
             //
             // Write data

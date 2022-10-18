@@ -19,9 +19,9 @@ namespace Examples
             [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDbClient = InfluxDBClientFactory.Create("http://localhost:9999",
+            using var influxDbClient = new InfluxDBClient("http://localhost:9999",
                 "my-user", "my-password".ToCharArray());
 
             //
@@ -65,8 +65,6 @@ namespace Examples
                 var fluxRecords = table.Records;
                 fluxRecords.ForEach(record => { Console.WriteLine($"{record.GetTime()}: {record.GetValue()}"); });
             });
-
-            influxDbClient.Dispose();
         }
     }
 }

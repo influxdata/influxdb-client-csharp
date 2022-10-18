@@ -34,15 +34,16 @@ namespace Examples
 
         private static Task BasicEventHandler()
         {
-            using var client = InfluxDBClientFactory.Create("http://localhost:9999",
+            using var client = new InfluxDBClient("http://localhost:9999",
                 "my-user", "my-password".ToCharArray());
 
-            var options = WriteOptions.CreateNew()
-                .BatchSize(1)
-                .FlushInterval(1000)
-                .RetryInterval(2000)
-                .MaxRetries(3)
-                .Build();
+            var options = new WriteOptions
+            {
+                BatchSize = 1,
+                FlushInterval = 1000,
+                RetryInterval = 2000,
+                MaxRetries = 3
+            };
 
             //
             // Write Data
@@ -125,7 +126,7 @@ namespace Examples
                 //
                 // Write by POCO
                 //
-                var influxPoint = new InfluxPoint { WriteType = "POCO", Value = 33.33, Time = DateTime.UtcNow };
+                var influxPoint = new InfluxPoint {WriteType = "POCO", Value = 33.33, Time = DateTime.UtcNow};
 
                 writeApi.WriteMeasurement(influxPoint, WritePrecision.Ns, "my-bucket", "my-org");
 
@@ -140,7 +141,7 @@ namespace Examples
                 var pointsToWrite = new List<InfluxPoint>();
                 for (var i = 1; i <= 5; i++)
                     pointsToWrite.Add(new InfluxPoint
-                        { WriteType = "POCO", Value = i, Time = DateTime.UtcNow.AddSeconds(-i) });
+                        {WriteType = "POCO", Value = i, Time = DateTime.UtcNow.AddSeconds(-i)});
 
                 writeApi.WriteMeasurements(pointsToWrite, WritePrecision.Ns, "my-bucket", "my-org");
             }
@@ -150,15 +151,17 @@ namespace Examples
 
         private static Task CustomEventListener()
         {
-            using var client = InfluxDBClientFactory.Create("http://localhost:9999/",
+            using var client = new InfluxDBClient("http://localhost:9999",
                 "my-user", "my-password".ToCharArray());
 
-            var options = WriteOptions.CreateNew()
-                .BatchSize(5)
-                .FlushInterval(1000)
-                .RetryInterval(2000)
-                .MaxRetries(3)
-                .Build();
+            var options = new WriteOptions
+            {
+                BatchSize = 5,
+                FlushInterval = 1000,
+                RetryInterval = 2000,
+                MaxRetries = 3
+            };
+
             //
             // Write Data
             //

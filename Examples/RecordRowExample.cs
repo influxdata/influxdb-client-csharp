@@ -16,7 +16,7 @@ namespace Examples
             const string bucket = "my-bucket";
             const string org = "my-org";
 
-            using var client = InfluxDBClientFactory.Create(url, token.ToCharArray());
+            using var client = new InfluxDBClient(url: url, token: token);
 
             //
             // Prepare Data

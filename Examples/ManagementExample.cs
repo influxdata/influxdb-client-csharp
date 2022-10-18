@@ -9,13 +9,13 @@ namespace Examples
 {
     public static class ManagementExample
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
             const string url = "http://localhost:8086";
             const string token = "my-token";
             const string org = "my-org";
 
-            using var client = InfluxDBClientFactory.Create(url, token);
+            using var client = new InfluxDBClient(url, token);
 
             // Find ID of Organization with specified name (PermissionAPI requires ID of Organization).
             var orgId = (await client.GetOrganizationsApi().FindOrganizationsAsync(org: org)).First().Id;

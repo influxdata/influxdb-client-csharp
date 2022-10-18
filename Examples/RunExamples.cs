@@ -19,55 +19,55 @@ namespace Examples
                 switch (args[0])
                 {
                     case "FluxExample":
-                        await FluxExample.Main(args);
+                        await FluxExample.Main();
                         break;
                     case "FluxClientSimpleExample":
-                        await FluxClientSimpleExample.Main(args);
+                        await FluxClientSimpleExample.Main();
                         break;
                     case "FluxRawExample":
-                        await FluxRawExample.Main(args);
+                        await FluxRawExample.Main();
                         break;
                     case "FluxClientFactoryExample":
-                        await FluxClientFactoryExample.Main(args);
+                        await FluxClientFactoryExample.Main();
                         break;
                     case "FluxClientPocoExample":
-                        await FluxClientPocoExample.Main(args);
+                        await FluxClientPocoExample.Main();
                         break;
                     case "PlatformExample":
-                        await PlatformExample.Main(args);
+                        await PlatformExample.Main();
                         break;
                     case "WriteEventHandlerExample":
                         await WriteEventHandlerExample.Main();
                         break;
                     case "WriteApiAsyncExample":
-                        await WriteApiAsyncExample.Main(args);
+                        await WriteApiAsyncExample.Main();
                         break;
                     case "PocoQueryWriteExample":
-                        await PocoQueryWriteExample.Main(args);
+                        await PocoQueryWriteExample.Main();
                         break;
                     case "CustomDomainMappingAndLinq":
-                        await CustomDomainMappingAndLinq.Main(args);
+                        await CustomDomainMappingAndLinq.Main();
                         break;
                     case "InfluxDB18Example":
-                        await InfluxDB18Example.Main(args);
+                        await InfluxDB18Example.Main();
                         break;
                     case "SynchronousQuery":
-                        SynchronousQuery.Main(args);
+                        SynchronousQuery.Main();
                         break;
                     case "CustomDomainMapping":
-                        await CustomDomainMapping.Main(args);
+                        await CustomDomainMapping.Main();
                         break;
                     case "QueryLinqCloud":
-                        QueryLinqCloud.Main(args);
+                        QueryLinqCloud.Main();
                         break;
                     case "ManagementExample":
-                        await ManagementExample.Main(args);
+                        await ManagementExample.Main();
                         break;
                     case "InvokableScripts":
-                        await InvokableScripts.Main(args);
+                        await InvokableScripts.Main();
                         break;
                     case "ParametrizedQuery":
-                        await ParametrizedQuery.Main(args);
+                        await ParametrizedQuery.Main();
                         break;
                     case "RecordRowExample":
                         await RecordRowExample.Main();

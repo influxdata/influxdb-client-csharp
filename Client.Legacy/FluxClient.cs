@@ -126,6 +126,18 @@ namespace InfluxDB.Client.Flux
     {
         private readonly LoggingHandler _loggingHandler;
 
+        /// <summary>
+        /// Create a instance of the Flux client.
+        /// </summary>
+        /// <param name="connectionString">the connectionString to connect to InfluxDB</param>
+        public FluxClient(string connectionString) : this(new FluxConnectionOptions(connectionString))
+        {
+        }
+
+        /// <summary>
+        /// Create a instance of the Flux client.
+        /// </summary>
+        /// <param name="options">the connection configuration</param>
         public FluxClient(FluxConnectionOptions options) : base(new FluxResultMapper())
         {
             _loggingHandler = new LoggingHandler(LogLevel.None);

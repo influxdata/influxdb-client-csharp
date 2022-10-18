@@ -243,7 +243,7 @@ namespace InfluxDB.Client
                 .Build())
         {
         }
-        
+
         /// <summary>
         /// Create a instance of the InfluxDB 2.x client. The url could be a connection string with various configurations.
         /// <para>
@@ -258,7 +258,7 @@ namespace InfluxDB.Client
                 .Build())
         {
         }
-        
+
         /// <summary>
         /// Create a instance of the InfluxDB 2.x client.
         /// </summary>
@@ -269,11 +269,11 @@ namespace InfluxDB.Client
             this(new InfluxDBClientOptions(url)
             {
                 Username = username,
-                Password = password,
+                Password = password
             })
         {
         }
-        
+
         /// <summary>
         /// Create a instance of the InfluxDB 2.x client.
         /// </summary>
@@ -282,11 +282,11 @@ namespace InfluxDB.Client
         public InfluxDBClient(string url, char[] token) :
             this(new InfluxDBClientOptions(url)
             {
-                Token = token,
+                Token = token
             })
         {
         }
-        
+
         /// <summary>
         /// Create a instance of the InfluxDB 2.x client.
         /// </summary>
@@ -295,11 +295,11 @@ namespace InfluxDB.Client
         public InfluxDBClient(string url, string token) :
             this(new InfluxDBClientOptions(url)
             {
-                Token = token.ToCharArray(),
+                Token = token.ToCharArray()
             })
         {
         }
-        
+
         /// <summary>
         /// Create a instance of the InfluxDB 2.x client to connect into InfluxDB 1.8.
         /// </summary>

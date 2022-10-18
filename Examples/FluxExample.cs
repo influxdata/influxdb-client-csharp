@@ -6,9 +6,9 @@ namespace Examples
 {
     public static class FluxExample
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            using var fluxClient = FluxClientFactory.Create("http://localhost:8086/");
+            using var fluxClient = new FluxClient("http://localhost:8086/");
 
             var fluxQuery = "from(bucket: \"telegraf\")\n"
                             + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"

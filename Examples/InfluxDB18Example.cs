@@ -7,12 +7,12 @@ namespace Examples
 {
     public class InfluxDB18Example
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
             const string database = "telegraf";
             const string retentionPolicy = "autogen";
 
-            var client = InfluxDBClientFactory.CreateV1("http://localhost:8086",
+            using var client = new InfluxDBClient("http://localhost:8086",
                 "username",
                 "password".ToCharArray(),
                 database,
@@ -39,8 +39,6 @@ namespace Examples
                 Console.WriteLine(
                     $"{record.GetTime()} {record.GetMeasurement()}: {record.GetField()} {record.GetValue()}");
             });
-
-            client.Dispose();
         }
     }
 }
