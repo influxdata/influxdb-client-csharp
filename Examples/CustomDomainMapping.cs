@@ -97,7 +97,7 @@ namespace Examples
 
             var options = new InfluxDBClientOptions(host)
             {
-                Token = token.ToCharArray(),
+                Token = token,
                 Org = organization,
                 Bucket = bucket
             };

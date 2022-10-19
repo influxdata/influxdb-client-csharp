@@ -14,7 +14,7 @@ namespace Examples
 
             using var client = new InfluxDBClient("http://localhost:8086",
                 "username",
-                "password".ToCharArray(),
+                "password",
                 database,
                 retentionPolicy);
 

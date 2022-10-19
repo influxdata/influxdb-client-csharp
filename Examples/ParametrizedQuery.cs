@@ -22,7 +22,7 @@ namespace Examples
         {
             var options = new InfluxDBClientOptions(Url)
             {
-                Token = Token.ToCharArray(),
+                Token = Token,
                 Org = Org,
                 Bucket = Bucket
             };

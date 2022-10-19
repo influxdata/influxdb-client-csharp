@@ -22,7 +22,7 @@ namespace Examples
         public static async Task Main()
         {
             using var influxDbClient = new InfluxDBClient("http://localhost:9999",
-                "my-user", "my-password".ToCharArray());
+                "my-user", "my-password");
 
             //
             // Write Data

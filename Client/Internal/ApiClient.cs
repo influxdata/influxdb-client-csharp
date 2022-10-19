@@ -85,7 +85,7 @@ namespace InfluxDB.Client.Api.Client
 
             if (InfluxDBClientOptions.AuthenticationScheme.Token.Equals(_options.AuthScheme))
             {
-                request.AddHeader("Authorization", "Token " + new string(_options.Token));
+                request.AddHeader("Authorization", "Token " + new string((char[])_options.Token));
             }
             else if (InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme))
             {

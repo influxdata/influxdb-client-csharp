@@ -23,7 +23,7 @@ public class Client
     {
         var options = new InfluxDBClientOptions(Url)
         {
-            Token = Token!.ToCharArray(),
+            Token = Token,
             Timeout = TimeSpan.FromSeconds(timespanSeconds)
         };
 

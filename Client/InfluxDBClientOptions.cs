@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Net.Security;
@@ -78,12 +79,12 @@ namespace InfluxDB.Client
         /// <summary>
         /// Setup authorization by <see cref="AuthenticationScheme.Token"/>.
         /// </summary>
-        public char[] Token
+        public object Token
         {
             get => _token;
             set
             {
-                _token = value;
+                _token = value as char[] ?? value.ToString().ToCharArray();
                 Arguments.CheckNotNull(_token, "Token");
 
                 AuthScheme = AuthenticationScheme.Token;
@@ -210,11 +211,23 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="tagName">the tag name</param>
         /// <param name="expression">the tag value expression</param>
-        /// <returns><see cref="Builder"/></returns>
         public void AddDefaultTag(string tagName, string expression)
         {
             Arguments.CheckNotNull(tagName, nameof(tagName));
             PointSettings.AddDefaultTag(tagName, expression);
+        }
+        
+        /// <summary>
+        /// Add default tags that will be use for writes by Point and POJO.
+        /// </summary>
+        /// <param name="tags">tags dictionary</param>
+        public void AddDefaultTags(Dictionary<string, string> tags)
+        {
+            foreach (var tag in tags)
+            {
+                Arguments.CheckNotNull(tag.Key, "TagName");
+                PointSettings.AddDefaultTag(tag.Key, tag.Value);
+            }
         }
 
         public InfluxDBClientOptions(string url)

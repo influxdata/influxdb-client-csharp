@@ -35,7 +35,7 @@ namespace Examples
         private static Task BasicEventHandler()
         {
             using var client = new InfluxDBClient("http://localhost:9999",
-                "my-user", "my-password".ToCharArray());
+                "my-user", "my-password");
 
             var options = new WriteOptions
             {
@@ -152,7 +152,7 @@ namespace Examples
         private static Task CustomEventListener()
         {
             using var client = new InfluxDBClient("http://localhost:9999",
-                "my-user", "my-password".ToCharArray());
+                "my-user", "my-password");
 
             var options = new WriteOptions
             {

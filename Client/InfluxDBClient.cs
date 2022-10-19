@@ -234,23 +234,23 @@ namespace InfluxDB.Client
         private readonly Subject<Unit> _disposeNotification = new Subject<Unit>();
 
         /// <summary>
-        /// Create a instance of the InfluxDB 2.x client that is configured via <code>App.config</code>.
-        /// </summary>
-        public InfluxDBClient() :
-            this(InfluxDBClientOptions.Builder
-                .CreateNew()
-                .LoadConfig()
-                .Build())
-        {
-        }
-
-        /// <summary>
         /// Create a instance of the InfluxDB 2.x client. The url could be a connection string with various configurations.
         /// <para>
         /// e.g.: "http://localhost:8086?timeout=5000&amp;logLevel=BASIC
+        /// The following options are supported:
+        /// <list type="bullet">
+        /// <item>org - default destination organization for writes and queries</item>
+        /// <item>bucket - default destination bucket for writes</item>
+        /// <item>token - the token to use for the authorization</item>
+        /// <item>logLevel (default - NONE) - rest client verbosity level</item>
+        /// <item>timeout (default - 10000ms) - The timespan to wait before the HTTP request times out</item>
+        /// <item>allowHttpRedirects (default - false) - Configure automatically following HTTP 3xx redirects</item>
+        /// <item>verifySsl (default - true) - Ignore Certificate Validation Errors when false</item>
+        /// </list>
         /// </para>
         /// </summary>
-        /// <param name="connectionString">connection string with various configurations</param>
+        /// <param name="connectionString">connection string with various configurations
+        /// </param>
         public InfluxDBClient(string connectionString) :
             this(InfluxDBClientOptions.Builder
                 .CreateNew()
@@ -265,24 +265,11 @@ namespace InfluxDB.Client
         /// <param name="url">the url to connect to the InfluxDB 2.x</param>
         /// <param name="username">the username to use in the basic auth</param>
         /// <param name="password">the password to use in the basic auth</param>
-        public InfluxDBClient(string url, string username, char[] password) :
+        public InfluxDBClient(string url, string username, string password) :
             this(new InfluxDBClientOptions(url)
             {
                 Username = username,
-                Password = password
-            })
-        {
-        }
-
-        /// <summary>
-        /// Create a instance of the InfluxDB 2.x client.
-        /// </summary>
-        /// <param name="url">the url to connect to the InfluxDB 2.x</param>
-        /// <param name="token">the token to use for the authorization</param>
-        public InfluxDBClient(string url, char[] token) :
-            this(new InfluxDBClientOptions(url)
-            {
-                Token = token
+                Password = password.ToCharArray()
             })
         {
         }
@@ -295,7 +282,7 @@ namespace InfluxDB.Client
         public InfluxDBClient(string url, string token) :
             this(new InfluxDBClientOptions(url)
             {
-                Token = token.ToCharArray()
+                Token = token
             })
         {
         }
@@ -308,11 +295,11 @@ namespace InfluxDB.Client
         /// <param name="password">authorization password</param>
         /// <param name="database">database name</param>
         /// <param name="retentionPolicy">retention policy</param>
-        public InfluxDBClient(string url, string username, char[] password, string database, string retentionPolicy) :
+        public InfluxDBClient(string url, string username, string password, string database, string retentionPolicy) :
             this(new InfluxDBClientOptions(url)
             {
                 Org = "-",
-                Token = $"{username}:{new string(password)}".ToCharArray(),
+                Token = $"{username}:{password}",
                 Bucket = $"{database}/{retentionPolicy}"
             })
         {

@@ -127,7 +127,20 @@ namespace InfluxDB.Client.Flux
         private readonly LoggingHandler _loggingHandler;
 
         /// <summary>
-        /// Create a instance of the Flux client.
+        /// Create a instance of the Flux client. The url could be a connection string with various configurations.
+        /// <para>
+        /// e.g.: "http://localhost:8086?timeout=5000&amp;logLevel=BASIC
+        /// The following options are supported:
+        /// <list type="bullet">
+        /// <item>org - default destination organization for writes and queries</item>
+        /// <item>bucket - default destination bucket for writes</item>
+        /// <item>token - the token to use for the authorization</item>
+        /// <item>logLevel (default - NONE) - rest client verbosity level</item>
+        /// <item>timeout (default - 10000ms) - The timespan to wait before the HTTP request times out</item>
+        /// <item>allowHttpRedirects (default - false) - Configure automatically following HTTP 3xx redirects</item>
+        /// <item>verifySsl (default - true) - Ignore Certificate Validation Errors when false</item>
+        /// </list>
+        /// </para>
         /// </summary>
         /// <param name="connectionString">the connectionString to connect to InfluxDB</param>
         public FluxClient(string connectionString) : this(new FluxConnectionOptions(connectionString))

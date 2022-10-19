@@ -123,7 +123,7 @@ The Requests and Responses can be logged by changing the LogLevel. LogLevel valu
 applying the `Body` LogLevel will disable chunking while streaming and will load the whole response into memory.  
 
 ```c#
-fluxClient.SetLogLevel(LogLevel.Body)
+client.SetLogLevel(LogLevel.Body)
 ```
  
 ## Version
