@@ -216,7 +216,7 @@ namespace InfluxDB.Client
             Arguments.CheckNotNull(tagName, nameof(tagName));
             PointSettings.AddDefaultTag(tagName, expression);
         }
-        
+
         /// <summary>
         /// Add default tags that will be use for writes by Point and POJO.
         /// </summary>
