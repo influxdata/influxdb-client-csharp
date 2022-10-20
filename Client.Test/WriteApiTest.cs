@@ -22,7 +22,7 @@ namespace InfluxDB.Client.Test
         public new void SetUp()
         {
             _client = new InfluxDBClient(MockServerUrl, "token");
-            _writeApi = _client.GetWriteApi(new WriteOptions {RetryInterval = 1_000});
+            _writeApi = _client.GetWriteApi(new WriteOptions { RetryInterval = 1_000 });
         }
 
         [TearDown]
@@ -511,10 +511,10 @@ namespace InfluxDB.Client.Test
         {
             _client.Dispose();
 
-            var options = new InfluxDBClientOptions(MockServerUrl) {Token = "token"};
+            var options = new InfluxDBClientOptions(MockServerUrl) { Token = "token" };
 
             _client = new InfluxDBClient(options);
-            _writeApi = _client.GetWriteApi(new WriteOptions {RetryInterval = 1_000});
+            _writeApi = _client.GetWriteApi(new WriteOptions { RetryInterval = 1_000 });
 
             var ae = Assert.Throws<ArgumentException>(() =>
                 _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
@@ -569,7 +569,7 @@ namespace InfluxDB.Client.Test
         public void WritesToDifferentBucketsJitter()
         {
             _writeApi.Dispose();
-            _writeApi = _client.GetWriteApi(new WriteOptions {JitterInterval = 1_000});
+            _writeApi = _client.GetWriteApi(new WriteOptions { JitterInterval = 1_000 });
 
             var listener = new EventListener(_writeApi);
 

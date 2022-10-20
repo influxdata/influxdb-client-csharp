@@ -30,7 +30,7 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new void SetUp()
         {
-            var options = new InfluxDBClientOptions(MockServerUrl) {Token = "token", Org = "my-org"};
+            var options = new InfluxDBClientOptions(MockServerUrl) { Token = "token", Org = "my-org" };
 
             _client = new InfluxDBClient(options);
             _queryApi = _client.GetQueryApi();
@@ -105,7 +105,7 @@ namespace InfluxDB.Client.Test
         {
             _client.Dispose();
 
-            var options = new InfluxDBClientOptions(MockServerUrl) {Token = "token"};
+            var options = new InfluxDBClientOptions(MockServerUrl) { Token = "token" };
 
             _client = new InfluxDBClient(options);
             _queryApi = _client.GetQueryApi();

@@ -42,7 +42,7 @@ namespace InfluxDB.Client.Test
         public async Task Write()
         {
             var client = new InfluxDBClient("http://localhost:9999", "my-token");
-            var api = client.GetWriteApi(new WriteOptions {BatchSize = MaxBarsPerRequest,FlushInterval=10_000});
+            var api = client.GetWriteApi(new WriteOptions { BatchSize = MaxBarsPerRequest, FlushInterval = 10_000 });
 
             var start = 0;
             for (;;)

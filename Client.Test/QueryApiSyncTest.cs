@@ -73,7 +73,7 @@ namespace InfluxDB.Client.Test
         {
             _client.Dispose();
 
-            var options = new InfluxDBClientOptions(MockServerUrl) {Token = "token"};
+            var options = new InfluxDBClientOptions(MockServerUrl) { Token = "token" };
 
             _client = new InfluxDBClient(options);
             _queryApiSync = _client.GetQueryApiSync();

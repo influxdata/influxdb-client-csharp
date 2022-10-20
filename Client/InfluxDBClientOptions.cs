@@ -333,7 +333,7 @@ namespace InfluxDB.Client
 
             PointSettings = new PointSettings();
         }
-        
+
         private InfluxDBClientOptions(Builder builder)
         {
             Arguments.CheckNotNull(builder, nameof(builder));
@@ -371,7 +371,7 @@ namespace InfluxDB.Client
                 ClientCertificates = builder.CertificateCollection;
             }
         }
-        
+
         private static TimeSpan ToTimeout(string value)
         {
             var matcher = DurationRegex.Match(value);
@@ -450,7 +450,7 @@ namespace InfluxDB.Client
             internal X509CertificateCollection CertificateCollection;
 
             internal PointSettings PointSettings = new PointSettings();
-            
+
             public static Builder CreateNew()
             {
                 return new Builder();

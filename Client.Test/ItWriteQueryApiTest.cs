@@ -83,7 +83,11 @@ namespace InfluxDB.Client.Test
         {
             Client.Dispose();
 
-            var options = new InfluxDBClientOptions(InfluxDbUrl) {Token = _token};
+            var options = new InfluxDBClientOptions.Builder()
+                .LoadConfig()
+                .Url(InfluxDbUrl)
+                .AuthenticateToken(_token)
+                .Build();
 
             Client = new InfluxDBClient(options);
 
@@ -127,10 +131,10 @@ namespace InfluxDB.Client.Test
                 Token = _token,
                 DefaultTags = new Dictionary<string, string>
                 {
-                    {"id", "132-987-655"},
-                    {"customer", "California Miner"},
-                    {"env-var", "${env.measurement-datacenter}"},
-                    {"sensor-version", "${measurement-sensor.version}"}
+                    { "id", "132-987-655" },
+                    { "customer", "California Miner" },
+                    { "env-var", "${env.measurement-datacenter}" },
+                    { "sensor-version", "${measurement-sensor.version}" }
                 }
             };
 
@@ -177,10 +181,10 @@ namespace InfluxDB.Client.Test
                 Token = _token,
                 DefaultTags = new Dictionary<string, string>
                 {
-                    {"id", "132-987-655"},
-                    {"customer", "California Miner"},
-                    {"env-var", "${env.point-datacenter}"},
-                    {"sensor-version", "${point-sensor.version}"}
+                    { "id", "132-987-655" },
+                    { "customer", "California Miner" },
+                    { "env-var", "${env.point-datacenter}" },
+                    { "sensor-version", "${point-sensor.version}" }
                 }
             };
 
@@ -252,7 +256,7 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            var writeOptions = new WriteOptions {BatchSize = 10, FlushInterval = 100_000};
+            var writeOptions = new WriteOptions { BatchSize = 10, FlushInterval = 100_000 };
 
             _writeApi = Client.GetWriteApi(writeOptions);
             var listener = new WriteApiTest.EventListener(_writeApi);
@@ -284,7 +288,7 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            var writeOptions = new WriteOptions {BatchSize = 6, FlushInterval = 500_000};
+            var writeOptions = new WriteOptions { BatchSize = 6, FlushInterval = 500_000 };
 
             _writeApi = Client.GetWriteApi(writeOptions);
 
@@ -326,7 +330,7 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            var writeOptions = new WriteOptions {BatchSize = 1, FlushInterval = 500_000};
+            var writeOptions = new WriteOptions { BatchSize = 1, FlushInterval = 500_000 };
 
             _writeApi = Client.GetWriteApi(writeOptions);
 
@@ -370,7 +374,7 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            var writeOptions = new WriteOptions {BatchSize = 10, FlushInterval = 500};
+            var writeOptions = new WriteOptions { BatchSize = 10, FlushInterval = 500 };
 
             _writeApi = Client.GetWriteApi(writeOptions);
             var listener = new WriteApiTest.EventListener(_writeApi);
@@ -408,7 +412,7 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            var writeOptions = new WriteOptions {BatchSize = 1, JitterInterval = 5_000};
+            var writeOptions = new WriteOptions { BatchSize = 1, JitterInterval = 5_000 };
 
             _writeApi = Client.GetWriteApi(writeOptions);
 
@@ -476,7 +480,7 @@ namespace InfluxDB.Client.Test
         {
             var bucketName = _bucket.Name;
 
-            _writeApi = Client.GetWriteApi(new WriteOptions {BatchSize = 2});
+            _writeApi = Client.GetWriteApi(new WriteOptions { BatchSize = 2 });
 
             const string records = "h2o_feet,location=coyote_creek level\\ water_level=1.0 1\n" +
                                    "h2o_feet,location=coyote_hill level\\ water_level=2.0 2x";
@@ -892,7 +896,7 @@ namespace InfluxDB.Client.Test
                     { Level = i, Time = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i)), Location = "Europe" });
 
             var successEvents = new List<WriteSuccessEvent>();
-            _writeApi = Client.GetWriteApi(new WriteOptions {BatchSize = batchSize, FlushInterval = 10_000});
+            _writeApi = Client.GetWriteApi(new WriteOptions { BatchSize = batchSize, FlushInterval = 10_000 });
             _writeApi.EventHandler += (sender, args) => { successEvents.Add(args as WriteSuccessEvent); };
 
             var start = 0;

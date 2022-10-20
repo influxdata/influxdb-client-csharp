@@ -33,7 +33,7 @@ namespace Client.Linq.Test
         [OneTimeSetUp]
         public void InitQueryApi()
         {
-            var options = new InfluxDBClientOptions("http://localhost:8086") {Token = "my-token"};
+            var options = new InfluxDBClientOptions("http://localhost:8086") { Token = "my-token" };
             var queryService = new Mock<QueryService>("http://localhost:8086/api/v2");
             _queryApi = new Mock<QueryApiSync>(options, queryService.Object, new FluxResultMapper()).Object;
         }

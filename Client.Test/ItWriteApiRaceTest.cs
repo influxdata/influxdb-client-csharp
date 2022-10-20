@@ -97,7 +97,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task BatchConsistency()
         {
-            var options = new WriteOptions {BatchSize = 1_555, FlushInterval = 10_000};
+            var options = new WriteOptions { BatchSize = 1_555, FlushInterval = 10_000 };
 
             var batches = new List<WriteSuccessEvent>();
             await StressfulWriteAndValidate(1, 5, options, (sender, eventArgs) =>
@@ -131,7 +131,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task MultipleBucketsWithFlush()
         {
-            var writeOptions = new WriteOptions {FlushInterval = 100};
+            var writeOptions = new WriteOptions { FlushInterval = 100 };
 
             await StressfulWriteAndValidate(writeOptions: writeOptions);
         }
@@ -143,7 +143,7 @@ namespace InfluxDB.Client.Test
 
             using var countdownEvent = new CountdownEvent(1);
             using var writeApi = Client
-                .GetWriteApi(writeOptions ?? new WriteOptions {FlushInterval = 20_000});
+                .GetWriteApi(writeOptions ?? new WriteOptions { FlushInterval = 20_000 });
             writeApi.EventHandler += eventHandler;
 
             var writers = new List<Writer>();

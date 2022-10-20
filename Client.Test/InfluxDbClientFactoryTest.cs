@@ -125,7 +125,7 @@ namespace InfluxDB.Client.Test
         public void LoadFromConnectionString()
         {
             _client = new InfluxDBClient("http://localhost:9999?" +
-                                                   "timeout=1000&logLevel=HEADERS&token=my-token&bucket=my-bucket&org=my-org&allowHttpRedirects=true");
+                                         "timeout=1000&logLevel=HEADERS&token=my-token&bucket=my-bucket&org=my-org&allowHttpRedirects=true");
 
             var options = GetDeclaredField<InfluxDBClientOptions>(_client.GetType(), _client, "_options");
             Assert.AreEqual("http://localhost:9999/", options.Url);
@@ -164,7 +164,7 @@ namespace InfluxDB.Client.Test
         public void LoadFromConnectionStringUnitsMillisecondsSeconds()
         {
             _client = new InfluxDBClient("http://localhost:9999?" +
-                                                   "timeout=1ms&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
+                                         "timeout=1ms&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
 
             var options = GetDeclaredField<InfluxDBClientOptions>(_client.GetType(), _client, "_options");
             Assert.AreEqual("http://localhost:9999/", options.Url);
@@ -201,7 +201,7 @@ namespace InfluxDB.Client.Test
         public void LoadFromConnectionStringUnitsMinutes()
         {
             _client = new InfluxDBClient("http://localhost:9999?" +
-                      "timeout=1ms&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
+                                         "timeout=1ms&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
 
             var options = GetDeclaredField<InfluxDBClientOptions>(_client.GetType(), _client, "_options");
             Assert.AreEqual("http://localhost:9999/", options.Url);
@@ -220,7 +220,7 @@ namespace InfluxDB.Client.Test
         public void LoadFromConnectionStringUnitsMinutesFactory()
         {
             _client = InfluxDBClientFactory.Create("http://localhost:9999?" +
-                      "timeout=1ms&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
+                                                   "timeout=1ms&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org");
 
             var options = GetDeclaredField<InfluxDBClientOptions>(_client.GetType(), _client, "_options");
             Assert.AreEqual("http://localhost:9999/", options.Url);
@@ -239,7 +239,7 @@ namespace InfluxDB.Client.Test
         public void LoadFromConnectionNotValidDuration()
         {
             var ioe = Assert.Throws<InfluxException>(() => new InfluxDBClient("http://localhost:9999?" +
-                "timeout=x&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org"));
+                                                                              "timeout=x&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org"));
 
             Assert.NotNull(ioe);
             Assert.AreEqual("'x' is not a valid duration", ioe.Message);
@@ -260,7 +260,7 @@ namespace InfluxDB.Client.Test
         public void LoadFromConnectionUnknownUnit()
         {
             var ioe = Assert.Throws<InfluxException>(() => new InfluxDBClient("http://localhost:9999?" +
-                "timeout=1y&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org"));
+                                                                              "timeout=1y&logLevel=Headers&token=my-token&bucket=my-bucket&org=my-org"));
 
             Assert.NotNull(ioe);
             Assert.AreEqual("unknown unit for '1y'", ioe.Message);

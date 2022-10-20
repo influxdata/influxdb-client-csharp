@@ -49,7 +49,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void MaxRetries()
         {
-            var options = new WriteOptions {MaxRetries = 5};
+            var options = new WriteOptions { MaxRetries = 5 };
 
             var retry = new RetryAttempt(new HttpException("", 429), 1, _default);
             Assert.IsTrue(retry.IsRetry());

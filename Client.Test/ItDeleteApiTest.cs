@@ -136,10 +136,10 @@ namespace InfluxDB.Client.Test
                 Token = _token,
                 DefaultTags = new Dictionary<string, string>
                 {
-                    {"id", "132-987-655"},
-                    {"customer", "California Miner"},
-                    {"env-var", "${env.point-datacenter}"},
-                    {"sensor-version", "${point-sensor.version}"}
+                    { "id", "132-987-655" },
+                    { "customer", "California Miner" },
+                    { "env-var", "${env.point-datacenter}" },
+                    { "sensor-version", "${point-sensor.version}" }
                 }
             };
 

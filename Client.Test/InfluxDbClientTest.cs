@@ -298,7 +298,7 @@ namespace InfluxDB.Client.Test
             _client.Dispose();
             _client = new InfluxDBClient(new InfluxDBClientOptions(MockServerUrl)
             {
-                Username = "my-username", 
+                Username = "my-username",
                 Password = "my-password",
                 AllowHttpRedirects = true
             });
