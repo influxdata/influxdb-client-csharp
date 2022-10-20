@@ -41,7 +41,7 @@ namespace InfluxDB.Client.Writes
                 foreach (var tag in value)
                 {
                     Arguments.CheckNotNull(tag.Key, "TagName");
-                   _defaultTags[tag.Key] = tag.Value;
+                    _defaultTags[tag.Key] = tag.Value;
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace InfluxDB.Client.Writes
             _defaultTags[key] = expression;
             return this;
         }
-        
+
         /// <summary>
         /// Get default tags with evaluated expressions.
         /// </summary>

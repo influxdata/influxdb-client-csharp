@@ -49,13 +49,13 @@ namespace Examples
                 // Add Permissions to read and write to the Bucket
                 //
                 var resource = new PermissionResource
-                    {Type = PermissionResource.TypeBuckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id};
+                    { Type = PermissionResource.TypeBuckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id };
 
                 var readBucket = new Permission(Permission.ActionEnum.Read, resource);
                 var writeBucket = new Permission(Permission.ActionEnum.Write, resource);
 
                 var authorization = await client.GetAuthorizationsApi()
-                    .CreateAuthorizationAsync(medicalGMBH, new List<Permission> {readBucket, writeBucket});
+                    .CreateAuthorizationAsync(medicalGMBH, new List<Permission> { readBucket, writeBucket });
 
                 Console.WriteLine($"The token to write to temperature-sensors bucket is: {authorization.Token}");
             }
@@ -67,7 +67,6 @@ namespace Examples
             using (var client = new InfluxDBClient("http://localhost:9999",
                        "my-user", "my-password"))
             {
-
                 var writeOptions = new WriteOptions
                 {
                     BatchSize = 5000,
@@ -93,7 +92,7 @@ namespace Examples
                     //
                     // Write by POCO
                     //
-                    var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
+                    var temperature = new Temperature { Location = "south", Value = 62D, Time = DateTime.UtcNow };
                     writeClient.WriteMeasurement(temperature, WritePrecision.Ns, "temperature-sensors", medicalGMBH.Id);
 
                     //
