@@ -48,9 +48,13 @@ namespace InfluxDB.Client.Test
                 .CreateAuthorizationAsync(await FindMyOrg(), permissions);
 
             Client.Dispose();
-            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(authorization.Token)
-                .Org(organization.Id).Bucket(buckets[0].Id).Build();
-            Client = InfluxDBClientFactory.Create(options);
+            var options = new InfluxDBClientOptions(InfluxDbUrl)
+            {
+                Token = authorization.Token,
+                Org = organization.Id,
+                Bucket = buckets[0].Id
+            };
+            Client = new InfluxDBClient(options);
 
             return buckets;
         }
@@ -93,7 +97,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task BatchConsistency()
         {
-            var options = WriteOptions.CreateNew().BatchSize(1_555).FlushInterval(10_000).Build();
+            var options = new WriteOptions {BatchSize = 1_555, FlushInterval = 10_000};
 
             var batches = new List<WriteSuccessEvent>();
             await StressfulWriteAndValidate(1, 5, options, (sender, eventArgs) =>
@@ -127,7 +131,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task MultipleBucketsWithFlush()
         {
-            var writeOptions = WriteOptions.CreateNew().FlushInterval(100).Build();
+            var writeOptions = new WriteOptions {FlushInterval = 100};
 
             await StressfulWriteAndValidate(writeOptions: writeOptions);
         }
@@ -139,7 +143,7 @@ namespace InfluxDB.Client.Test
 
             using var countdownEvent = new CountdownEvent(1);
             using var writeApi = Client
-                .GetWriteApi(writeOptions ?? WriteOptions.CreateNew().FlushInterval(20_000).Build());
+                .GetWriteApi(writeOptions ?? new WriteOptions {FlushInterval = 20_000});
             writeApi.EventHandler += eventHandler;
 
             var writers = new List<Writer>();

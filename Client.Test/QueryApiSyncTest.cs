@@ -9,7 +9,7 @@ namespace InfluxDB.Client.Test
     [TestFixture]
     public class QueryApiSyncTest : AbstractMockServerTest
     {
-        private InfluxDBClient _influxDbClient;
+        private InfluxDBClient _client;
         private QueryApiSync _queryApiSync;
 
         private const string Data =
@@ -23,21 +23,20 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new void SetUp()
         {
-            var options = InfluxDBClientOptions.Builder
-                .CreateNew()
-                .Url(MockServerUrl)
-                .AuthenticateToken("token")
-                .Org("my-org")
-                .Build();
+            var options = new InfluxDBClientOptions(MockServerUrl)
+            {
+                Token = "token",
+                Org = "my-org"
+            };
 
-            _influxDbClient = InfluxDBClientFactory.Create(options);
-            _queryApiSync = _influxDbClient.GetQueryApiSync();
+            _client = new InfluxDBClient(options);
+            _queryApiSync = _client.GetQueryApiSync();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _influxDbClient?.Dispose();
+            _client?.Dispose();
         }
 
         [Test]
@@ -72,16 +71,12 @@ namespace InfluxDB.Client.Test
         [Test]
         public void RequiredOrgQuerySync()
         {
-            _influxDbClient.Dispose();
+            _client.Dispose();
 
-            var options = InfluxDBClientOptions.Builder
-                .CreateNew()
-                .Url(MockServerUrl)
-                .AuthenticateToken("token")
-                .Build();
+            var options = new InfluxDBClientOptions(MockServerUrl) {Token = "token"};
 
-            _influxDbClient = InfluxDBClientFactory.Create(options);
-            _queryApiSync = _influxDbClient.GetQueryApiSync();
+            _client = new InfluxDBClient(options);
+            _queryApiSync = _client.GetQueryApiSync();
 
             var ae = Assert.Throws<ArgumentException>(() => _queryApiSync.QuerySync("from(..."));
 

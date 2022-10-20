@@ -213,7 +213,7 @@ namespace Client.Legacy.Test
         {
             var options = new FluxConnectionOptions("http://localhost:8003");
 
-            var client = FluxClientFactory.Create(options);
+            var client = new FluxClient(options);
 
             await client.QueryAsync(FromFluxDatabase + " |> last()",
                 record => { },

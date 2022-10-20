@@ -16,18 +16,18 @@ namespace InfluxDB.Client.Test
     [TestFixture]
     public class WriteApiAsyncTest : AbstractMockServerTest
     {
-        private InfluxDBClient _influxDbClient;
+        private InfluxDBClient _client;
 
         [SetUp]
         public new void SetUp()
         {
-            _influxDbClient = InfluxDBClientFactory.Create(MockServerUrl, "token");
+            _client = new InfluxDBClient(MockServerUrl, "token");
         }
 
         [TearDown]
         public new void ResetServer()
         {
-            _influxDbClient.Dispose();
+            _client.Dispose();
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
 
-            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var writeApi = _client.GetWriteApiAsync();
             await writeApi.WritePointsAsync(new List<PointData>
             {
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 9.0D)
@@ -62,7 +62,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
 
-            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var writeApi = _client.GetWriteApiAsync();
             await writeApi.WritePointsAsync(new List<PointData>
             {
                 PointData.Measurement("h2o").Tag("location", "coyote_creek").Field("water_level", 9.0D)
@@ -93,7 +93,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
 
-            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var writeApi = _client.GetWriteApiAsync();
 
             var points = new List<PointData>
             {
@@ -141,7 +141,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
 
-            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var writeApi = _client.GetWriteApiAsync();
             var response = await writeApi.WriteRecordsAsyncWithIRestResponse(
                 new[] { "h2o,location=coyote_creek water_level=9 1" },
                 WritePrecision.Ms, "my-bucket", "my-org");
@@ -160,7 +160,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
 
-            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var writeApi = _client.GetWriteApiAsync();
             var responses = await writeApi.WritePointsAsyncWithIRestResponse(
                 new[]
                 {
@@ -190,7 +190,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
 
-            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var writeApi = _client.GetWriteApiAsync();
             var response = await writeApi.WriteMeasurementsAsyncWithIRestResponse(
                 new[]
                 {
@@ -211,16 +211,12 @@ namespace InfluxDB.Client.Test
         [Test]
         public void RequiredOrgBucketWriteApiAsync()
         {
-            _influxDbClient.Dispose();
+            _client.Dispose();
 
-            var options = InfluxDBClientOptions.Builder
-                .CreateNew()
-                .Url(MockServerUrl)
-                .AuthenticateToken("token")
-                .Build();
+            var options = new InfluxDBClientOptions(MockServerUrl) {Token = "token"};
 
-            _influxDbClient = InfluxDBClientFactory.Create(options);
-            var writeApi = _influxDbClient.GetWriteApiAsync();
+            _client = new InfluxDBClient(options);
+            var writeApi = _client.GetWriteApiAsync();
 
             var ae = Assert.ThrowsAsync<ArgumentException>(async () =>
                 await writeApi.WriteRecordAsync(
@@ -246,19 +242,18 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
                 .RespondWith(CreateResponse("{}"));
 
-            _influxDbClient.Dispose();
+            _client.Dispose();
 
-            var options = InfluxDBClientOptions.Builder
-                .CreateNew()
-                .Url(MockServerUrl)
-                .AuthenticateToken("token")
-                .Bucket("my-bucket")
-                .Org("my-org")
-                .Build();
+            var options = new InfluxDBClientOptions(MockServerUrl)
+            {
+                Token = "token",
+                Bucket = "my-bucket",
+                Org = "my-org"
+            };
 
-            _influxDbClient = InfluxDBClientFactory.Create(options);
+            _client = new InfluxDBClient(options);
 
-            var writeApi = _influxDbClient.GetWriteApiAsync();
+            var writeApi = _client.GetWriteApiAsync();
             await writeApi.WriteRecordsAsyncWithIRestResponse(new[] { "mem,location=a level=1.0 1" });
             await writeApi.WritePointsAsyncWithIRestResponse(new[]
                 { PointData.Measurement("h2o").Field("water_level", 9.0D) });

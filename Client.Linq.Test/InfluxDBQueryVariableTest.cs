@@ -20,7 +20,7 @@ namespace Client.Linq.Test
         [SetUp]
         public new Task SetUp()
         {
-            _client = InfluxDBClientFactory.Create(GetInfluxDb2Url(), "my-token");
+            _client = new InfluxDBClient(GetInfluxDb2Url(), "my-token");
             _client.SetLogLevel(LogLevel.Body);
             return Task.CompletedTask;
         }
@@ -28,7 +28,7 @@ namespace Client.Linq.Test
         [OneTimeSetUp]
         public async Task OneTimeSetUp()
         {
-            _client = InfluxDBClientFactory.Create(GetInfluxDb2Url(), "my-token");
+            _client = new InfluxDBClient(GetInfluxDb2Url(), "my-token");
             _client.SetLogLevel(LogLevel.Body);
 
             _dateTime = DateTime.UtcNow;

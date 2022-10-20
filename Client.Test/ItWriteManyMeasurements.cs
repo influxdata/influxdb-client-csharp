@@ -41,9 +41,8 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task Write()
         {
-            var m_client = InfluxDBClientFactory.Create("http://localhost:9999", "my-token");
-            var api = m_client.GetWriteApi(WriteOptions.CreateNew().BatchSize(MaxBarsPerRequest).FlushInterval(10_000)
-                .Build());
+            var client = new InfluxDBClient("http://localhost:9999", "my-token");
+            var api = client.GetWriteApi(new WriteOptions {BatchSize = MaxBarsPerRequest,FlushInterval=10_000});
 
             var start = 0;
             for (;;)
@@ -69,7 +68,7 @@ namespace InfluxDB.Client.Test
 
             Trace.WriteLine("Flushing data...");
 
-            m_client.Dispose();
+            client.Dispose();
 
             Trace.WriteLine("Finished");
         }

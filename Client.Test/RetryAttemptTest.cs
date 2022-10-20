@@ -11,7 +11,7 @@ namespace InfluxDB.Client.Test
     [TestFixture]
     public class RetryAttemptTest
     {
-        private readonly WriteOptions _default = WriteOptions.CreateNew().Build();
+        private readonly WriteOptions _default = new WriteOptions();
 
         [Test]
         public void ErrorType()
@@ -49,7 +49,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void MaxRetries()
         {
-            var options = WriteOptions.CreateNew().MaxRetries(5).Build();
+            var options = new WriteOptions {MaxRetries = 5};
 
             var retry = new RetryAttempt(new HttpException("", 429), 1, _default);
             Assert.IsTrue(retry.IsRetry());
@@ -86,12 +86,13 @@ namespace InfluxDB.Client.Test
         [Test]
         public void ExponentialBase()
         {
-            var options = WriteOptions.CreateNew()
-                .RetryInterval(5_000)
-                .ExponentialBase(5)
-                .MaxRetries(4)
-                .MaxRetryDelay(int.MaxValue)
-                .Build();
+            var options = new WriteOptions
+            {
+                RetryInterval = 5_000,
+                ExponentialBase = 5,
+                MaxRetries = 4,
+                MaxRetryDelay = int.MaxValue
+            };
 
             var retry = new RetryAttempt(new HttpException("", 429), 1, options);
             var retryInterval = retry.GetRetryInterval();
@@ -137,12 +138,13 @@ namespace InfluxDB.Client.Test
         [Test]
         public void MaxRetryDelay()
         {
-            var options = WriteOptions.CreateNew()
-                .RetryInterval(2_000)
-                .ExponentialBase(2)
-                .MaxRetries(10)
-                .MaxRetryDelay(50_000)
-                .Build();
+            var options = new WriteOptions
+            {
+                RetryInterval = 2_000,
+                ExponentialBase = 2,
+                MaxRetries = 10,
+                MaxRetryDelay = 50_000
+            };
 
             var retry = new RetryAttempt(new HttpException("", 429), 1, options);
             Assert.GreaterOrEqual(retry.GetRetryInterval(), 2_000);

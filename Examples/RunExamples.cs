@@ -28,7 +28,7 @@ namespace Examples
                         await FluxRawExample.Main();
                         break;
                     case "FluxClientFactoryExample":
-                        await FluxClientFactoryExample.Main();
+                        await FluxClientExample.Main();
                         break;
                     case "FluxClientPocoExample":
                         await FluxClientPocoExample.Main();

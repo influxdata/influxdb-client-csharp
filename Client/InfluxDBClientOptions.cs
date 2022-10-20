@@ -94,7 +94,7 @@ namespace InfluxDB.Client
             set
             {
                 _token = value;
-                Arguments.CheckNotNull(_token, "Token");
+                Arguments.CheckNonEmptyString(_token, "token");
 
                 AuthScheme = AuthenticationScheme.Token;
             }
@@ -285,6 +285,55 @@ namespace InfluxDB.Client
             PointSettings = new PointSettings();
         }
 
+        public InfluxDBClientOptions(string connectionString, bool isConnectionString = true)
+        {
+            Arguments.CheckNonEmptyString(connectionString, nameof(connectionString));
+
+            var uri = new Uri(connectionString);
+
+            Url = uri.GetLeftPart(UriPartial.Path);
+
+            var query = HttpUtility.ParseQueryString(uri.Query);
+            Org = query.Get("org");
+            Bucket = query.Get("bucket");
+            AllowHttpRedirects = Convert.ToBoolean(query.Get("allowHttpRedirects"));
+
+            var verifySslValue = query.Get("verifySsl");
+            var token = query.Get("token");
+            var logLevel = query.Get("logLevel");
+            var timeout = query.Get("timeout");
+
+            VerifySsl = Convert.ToBoolean(string.IsNullOrEmpty(verifySslValue) ? "true" : verifySslValue);
+
+            if (string.IsNullOrEmpty(Url))
+            {
+                throw new InvalidOperationException("The url to connect the InfluxDB has to be defined.");
+            }
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                Token = token;
+            }
+
+            if (!string.IsNullOrWhiteSpace(logLevel))
+            {
+                Enum.TryParse(logLevel, true, out LogLevel logLevelValue);
+                LogLevel = logLevelValue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(timeout))
+            {
+                Timeout = ToTimeout(timeout);
+            }
+
+            if (Timeout == TimeSpan.Zero || Timeout == TimeSpan.FromMilliseconds(0))
+            {
+                Timeout = TimeSpan.FromSeconds(10);
+            }
+
+            PointSettings = new PointSettings();
+        }
+        
         private InfluxDBClientOptions(Builder builder)
         {
             Arguments.CheckNotNull(builder, nameof(builder));
@@ -321,6 +370,39 @@ namespace InfluxDB.Client
             {
                 ClientCertificates = builder.CertificateCollection;
             }
+        }
+        
+        private static TimeSpan ToTimeout(string value)
+        {
+            var matcher = DurationRegex.Match(value);
+            if (!matcher.Success)
+            {
+                throw new InfluxException($"'{value}' is not a valid duration");
+            }
+
+            var amount = matcher.Groups["Amount"].Value;
+            var unit = matcher.Groups["Unit"].Value;
+
+            TimeSpan duration;
+            switch (string.IsNullOrWhiteSpace(unit) ? "ms" : unit.ToLower())
+            {
+                case "ms":
+                    duration = TimeSpan.FromMilliseconds(double.Parse(amount));
+                    break;
+
+                case "s":
+                    duration = TimeSpan.FromSeconds(double.Parse(amount));
+                    break;
+
+                case "m":
+                    duration = TimeSpan.FromMinutes(double.Parse(amount));
+                    break;
+
+                default:
+                    throw new InfluxException($"unknown unit for '{value}'");
+            }
+
+            return duration;
         }
 
         /// <summary>
@@ -368,7 +450,7 @@ namespace InfluxDB.Client
             internal X509CertificateCollection CertificateCollection;
 
             internal PointSettings PointSettings = new PointSettings();
-
+            
             public static Builder CreateNew()
             {
                 return new Builder();
@@ -669,44 +751,13 @@ namespace InfluxDB.Client
                 return this;
             }
 
-            private TimeSpan ToTimeout(string value)
-            {
-                var matcher = DurationRegex.Match(value);
-                if (!matcher.Success)
-                {
-                    throw new InfluxException($"'{value}' is not a valid duration");
-                }
-
-                var amount = matcher.Groups["Amount"].Value;
-                var unit = matcher.Groups["Unit"].Value;
-
-                TimeSpan duration;
-                switch (string.IsNullOrWhiteSpace(unit) ? "ms" : unit.ToLower())
-                {
-                    case "ms":
-                        duration = TimeSpan.FromMilliseconds(double.Parse(amount));
-                        break;
-
-                    case "s":
-                        duration = TimeSpan.FromSeconds(double.Parse(amount));
-                        break;
-
-                    case "m":
-                        duration = TimeSpan.FromMinutes(double.Parse(amount));
-                        break;
-
-                    default:
-                        throw new InfluxException($"unknown unit for '{value}'");
-                }
-
-                return duration;
-            }
-
             /// <summary>
             /// Build an instance of InfluxDBClientOptions.
             /// </summary>
             /// <returns><see cref="InfluxDBClientOptions"/></returns>
             /// <exception cref="InvalidOperationException">If url is not defined.</exception>
+            /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClientOptions(string url)"/></remarks>
+            [Obsolete("This method is deprecated. Call 'InfluxDBClientOptions' initializer instead.", false)]
             public InfluxDBClientOptions Build()
             {
                 if (string.IsNullOrEmpty(UrlString))

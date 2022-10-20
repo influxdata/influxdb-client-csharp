@@ -11,6 +11,7 @@ namespace InfluxDB.Client.Test
     public class ItInfluxDBClientTest : AbstractItClientTest
     {
         [Test]
+        [Obsolete("Obsolete")]
         public async Task Health()
         {
             var health = await Client.HealthAsync();
@@ -22,9 +23,10 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        [Obsolete("Obsolete")]
         public async Task HealthNotRunningInstance()
         {
-            var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
+            var clientNotRunning = new InfluxDBClient("http://localhost:8099");
             var health = await clientNotRunning.HealthAsync();
 
             Assert.IsNotNull(health);
@@ -45,7 +47,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task PingNotRunningInstance()
         {
-            var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
+            var clientNotRunning = new InfluxDBClient("http://localhost:8099");
 
             Assert.IsFalse(await clientNotRunning.PingAsync());
 
@@ -61,7 +63,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public void VersionNotRunningInstance()
         {
-            var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
+            var clientNotRunning = new InfluxDBClient("http://localhost:8099");
 
             var ex = Assert.ThrowsAsync<InfluxException>(async () => await clientNotRunning.VersionAsync());
 
@@ -97,7 +99,7 @@ namespace InfluxDB.Client.Test
             var url = $"http://{GetOrDefaultEnvironmentVariable("INFLUXDB_2_ONBOARDING_IP", "localhost")}:" +
                       $"{GetOrDefaultEnvironmentVariable("INFLUXDB_2_ONBOARDING_PORT", "9990")}";
 
-            using (var client = InfluxDBClientFactory.Create(url))
+            using (var client = new InfluxDBClient(url))
             {
                 Assert.IsTrue(await client.IsOnboardingAllowedAsync());
             }
@@ -120,7 +122,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotEmpty(onboarding.Auth.Id);
             Assert.IsNotEmpty(onboarding.Auth.Token);
 
-            using (var client = InfluxDBClientFactory.Create(url, onboarding.Auth.Token))
+            using (var client = new InfluxDBClient(url, onboarding.Auth.Token))
             {
                 var user = await client.GetUsersApi().MeAsync();
 
@@ -164,7 +166,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task ReadyNotRunningInstance()
         {
-            var clientNotRunning = InfluxDBClientFactory.Create("http://localhost:8099");
+            var clientNotRunning = new InfluxDBClient("http://localhost:8099");
             var ready = await clientNotRunning.ReadyAsync();
 
             Assert.IsNull(ready);
@@ -177,7 +179,7 @@ namespace InfluxDB.Client.Test
         {
             Client.Dispose();
 
-            Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-user", "my-password".ToCharArray());
+            Client = new InfluxDBClient(InfluxDbUrl, "my-user", "my-password");
 
             var measurement = $"mem_{DateTimeOffset.Now.ToUnixTimeSeconds()}";
             await Client

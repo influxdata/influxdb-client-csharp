@@ -259,10 +259,7 @@ namespace InfluxDB.Client
         /// <param name="connectionString">connection string with various configurations
         /// </param>
         public InfluxDBClient(string connectionString) :
-            this(InfluxDBClientOptions.Builder
-                .CreateNew()
-                .ConnectionString(connectionString)
-                .Build())
+            this(new InfluxDBClientOptions(connectionString, true))
         {
         }
 
@@ -440,7 +437,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for the Write API</returns>
         public WriteApi GetWriteApi(IDomainObjectMapper mapper = null)
         {
-            return GetWriteApi(WriteOptions.CreateNew().Build(), mapper);
+            return GetWriteApi(new WriteOptions(), mapper);
         }
 
         /// <summary>

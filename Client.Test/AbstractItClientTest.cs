@@ -18,11 +18,11 @@ namespace InfluxDB.Client.Test
 
             if (!TestContext.CurrentContext.Test.Properties.ContainsKey("basic_auth"))
             {
-                Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-token");
+                Client = new InfluxDBClient(InfluxDbUrl, "my-token");
             }
             else
             {
-                Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-user", "my-password".ToCharArray());
+                Client = new InfluxDBClient(InfluxDbUrl, "my-user", "my-password");
             }
         }
 

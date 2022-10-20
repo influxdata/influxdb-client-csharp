@@ -21,7 +21,7 @@ namespace InfluxDB.Client.Test
             var authorization = await AddAuthorization(_organization);
 
             Client.Dispose();
-            Client = InfluxDBClientFactory.Create(InfluxDbUrl, authorization.Token);
+            Client = new InfluxDBClient(InfluxDbUrl, authorization.Token);
 
             _tasksApi = Client.GetTasksApi();
 
@@ -297,7 +297,7 @@ namespace InfluxDB.Client.Test
         public async Task FindTasksByUser()
         {
             Client.Dispose();
-            Client = InfluxDBClientFactory.Create(InfluxDbUrl, "my-user", "my-password".ToCharArray());
+            Client = new InfluxDBClient(InfluxDbUrl, "my-user", "my-password");
             _tasksApi = Client.GetTasksApi();
 
             var user = (await Client.GetUsersApi().FindUsersAsync(name: "my-user"))[0];

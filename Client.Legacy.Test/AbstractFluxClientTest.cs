@@ -21,7 +21,7 @@ namespace Client.Legacy.Test
         [SetUp]
         public new void SetUp()
         {
-            FluxClient = FluxClientFactory.Create(MockServerUrl);
+            FluxClient = new FluxClient(MockServerUrl);
         }
 
         [TearDown]

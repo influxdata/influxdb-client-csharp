@@ -1,3 +1,4 @@
+using System;
 using System.Reactive.Concurrency;
 using InfluxDB.Client.Core;
 
@@ -325,6 +326,8 @@ namespace InfluxDB.Client
             ///  Build an instance of WriteOptions.
             /// </summary>
             /// <returns><see cref="WriteOptions"/></returns>
+            /// <remarks>Deprecated - please use use object initializer <see cref="WriteOptions()"/></remarks>
+            [Obsolete("This method is deprecated. Call 'WriteOptions' initializer instead.", false)]
             public WriteOptions Build()
             {
                 return new WriteOptions(this);

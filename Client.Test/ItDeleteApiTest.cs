@@ -41,9 +41,13 @@ namespace InfluxDB.Client.Test
             _token = authorization.Token;
 
             Client.Dispose();
-            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl).AuthenticateToken(_token)
-                .Org(_organization.Id).Bucket(_bucket.Id).Build();
-            Client = InfluxDBClientFactory.Create(options);
+            var options = new InfluxDBClientOptions(InfluxDbUrl)
+            {
+                Token = _token,
+                Org = _organization.Id,
+                Bucket = _bucket.Id
+            };
+            Client = new InfluxDBClient(options);
             _queryApi = Client.GetQueryApi();
         }
 
@@ -127,15 +131,19 @@ namespace InfluxDB.Client.Test
             Environment.SetEnvironmentVariable("point-datacenter", "LA");
             ConfigurationManager.AppSettings["point-sensor.version"] = "1.23a";
 
-            var options = new InfluxDBClientOptions.Builder().Url(InfluxDbUrl)
-                .AuthenticateToken(_token)
-                .AddDefaultTag("id", "132-987-655")
-                .AddDefaultTag("customer", "California Miner")
-                .AddDefaultTag("env-var", "${env.point-datacenter}")
-                .AddDefaultTag("sensor-version", "${point-sensor.version}")
-                .Build();
+            var options = new InfluxDBClientOptions(InfluxDbUrl)
+            {
+                Token = _token,
+                DefaultTags = new Dictionary<string, string>
+                {
+                    {"id", "132-987-655"},
+                    {"customer", "California Miner"},
+                    {"env-var", "${env.point-datacenter}"},
+                    {"sensor-version", "${point-sensor.version}"}
+                }
+            };
 
-            Client = InfluxDBClientFactory.Create(options);
+            Client = new InfluxDBClient(options);
 
             var point = PointData.Measurement("h2o_feet").Tag("location", "east").Field("water_level", 1);
             var point2 = PointData.Measurement("h2o_feet").Tag("location", "west").Field("water_level", 2);

@@ -18,7 +18,7 @@ namespace Client.Linq.Test
         [SetUp]
         public new async Task SetUp()
         {
-            _client = InfluxDBClientFactory.Create(GetInfluxDb2Url(), "my-token");
+            _client = new InfluxDBClient(GetInfluxDb2Url(), "my-token");
             _client.SetLogLevel(LogLevel.Body);
 
             // DateTime(2020, 10, 15, 8, 20, 15, DateTimeKind.Utc)
