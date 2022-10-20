@@ -42,9 +42,9 @@ namespace Client.Legacy.Test
                 TimeSpan.FromSeconds(60),
                 webProxy: webProxy);
 
-            var fluxClient = FluxClientFactory.Create(options);
+            var client = FluxClientFactory.Create(options);
 
-            Assert.AreEqual(webProxy, GetRestClient(fluxClient).Options.Proxy);
+            Assert.AreEqual(webProxy, GetRestClient(client).Options.Proxy);
         }
 
         [Test]

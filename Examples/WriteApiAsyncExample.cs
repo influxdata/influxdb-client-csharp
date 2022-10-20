@@ -21,13 +21,13 @@ namespace Examples
 
         public static async Task Main()
         {
-            using var influxDbClient = new InfluxDBClient("http://localhost:9999",
+            using var client = new InfluxDBClient("http://localhost:9999",
                 "my-user", "my-password");
 
             //
             // Write Data
             //
-            var writeApiAsync = influxDbClient.GetWriteApiAsync();
+            var writeApiAsync = client.GetWriteApiAsync();
 
             //
             //
@@ -57,7 +57,7 @@ namespace Examples
             //
             // Check written data
             //
-            var tables = await influxDbClient.GetQueryApi()
+            var tables = await client.GetQueryApi()
                 .QueryAsync("from(bucket:\"my-bucket\") |> range(start: 0)", "my-org");
 
             tables.ForEach(table =>

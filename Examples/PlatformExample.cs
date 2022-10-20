@@ -29,104 +29,112 @@ namespace Examples
 
         public static async Task Main()
         {
-            var influxDB = new InfluxDBClient("http://localhost:9999",
-                "my-user", "my-password");
+            using (var client = new InfluxDBClient("http://localhost:9999",
+                       "my-user", "my-password"))
+            {
+                var organizationClient = client.GetOrganizationsApi();
 
-            var organizationClient = influxDB.GetOrganizationsApi();
+                var medicalGMBH = await organizationClient
+                    .CreateOrganizationAsync("Medical Corp " +
+                                             DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
+                                                 CultureInfo.InvariantCulture));
 
-            var medicalGMBH = await organizationClient
-                .CreateOrganizationAsync("Medical Corp " +
-                                         DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
-                                             CultureInfo.InvariantCulture));
+                //
+                // Create New Bucket with retention 1h
+                //
+                var temperatureBucket =
+                    await client.GetBucketsApi().CreateBucketAsync("temperature-sensors", medicalGMBH.Id);
 
+                //
+                // Add Permissions to read and write to the Bucket
+                //
+                var resource = new PermissionResource
+                    {Type = PermissionResource.TypeBuckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id};
 
-            //
-            // Create New Bucket with retention 1h
-            //
-            var temperatureBucket =
-                await influxDB.GetBucketsApi().CreateBucketAsync("temperature-sensors", medicalGMBH.Id);
+                var readBucket = new Permission(Permission.ActionEnum.Read, resource);
+                var writeBucket = new Permission(Permission.ActionEnum.Write, resource);
 
-            //
-            // Add Permissions to read and write to the Bucket
-            //
-            var resource = new PermissionResource
-                { Type = PermissionResource.TypeBuckets, OrgID = medicalGMBH.Id, Id = temperatureBucket.Id };
+                var authorization = await client.GetAuthorizationsApi()
+                    .CreateAuthorizationAsync(medicalGMBH, new List<Permission> {readBucket, writeBucket});
 
-            var readBucket = new Permission(Permission.ActionEnum.Read, resource);
-            var writeBucket = new Permission(Permission.ActionEnum.Write, resource);
-
-            var authorization = await influxDB.GetAuthorizationsApi()
-                .CreateAuthorizationAsync(medicalGMBH, new List<Permission> { readBucket, writeBucket });
-
-            Console.WriteLine($"The token to write to temperature-sensors bucket is: {authorization.Token}");
-
-            influxDB.Dispose();
+                Console.WriteLine($"The token to write to temperature-sensors bucket is: {authorization.Token}");
+            }
 
             //
             // Create new client with specified authorization token
             //
 
-            influxDB = new InfluxDBClient("http://localhost:9999", authorization.Token);
-
-            var writeOptions = new WriteOptions
+            using (var client = new InfluxDBClient("http://localhost:9999",
+                       "my-user", "my-password"))
             {
-                BatchSize = 5000,
-                FlushInterval = 1000,
-                JitterInterval = 1000,
-                RetryInterval = 5000
-            };
 
-            //
-            // Write data
-            //
-            using (var writeClient = influxDB.GetWriteApi(writeOptions))
-            {
-                //
-                // Write by POCO
-                //
-                var temperature = new Temperature { Location = "south", Value = 62D, Time = DateTime.UtcNow };
-                writeClient.WriteMeasurement(temperature, WritePrecision.Ns, "temperature-sensors", medicalGMBH.Id);
-
-                //
-                // Write by Point
-                //
-                var point = PointData.Measurement("temperature")
-                    .Tag("location", "west")
-                    .Field("value", 55D)
-                    .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
-                writeClient.WritePoint(point, "temperature-sensors", medicalGMBH.Id);
-
-                //
-                // Write by LineProtocol
-                //
-                var record = "temperature,location=north value=60.0";
-                writeClient.WriteRecord(record, WritePrecision.Ns, "temperature-sensors", medicalGMBH.Id);
-
-                writeClient.Flush();
-                Thread.Sleep(2000);
-            }
-
-            //
-            // Read data
-            //
-            var fluxTables = await influxDB.GetQueryApi()
-                .QueryAsync("from(bucket:\"temperature-sensors\") |> range(start: 0)", medicalGMBH.Id);
-            fluxTables.ForEach(fluxTable =>
-            {
-                var fluxRecords = fluxTable.Records;
-                fluxRecords.ForEach(fluxRecord =>
+                var writeOptions = new WriteOptions
                 {
-                    Console.WriteLine($"{fluxRecord.GetTime()}: {fluxRecord.GetValue()}");
+                    BatchSize = 5000,
+                    FlushInterval = 1000,
+                    JitterInterval = 1000,
+                    RetryInterval = 5000
+                };
+
+                var organizationClient = client.GetOrganizationsApi();
+
+                var medicalGMBH = await organizationClient
+                    .CreateOrganizationAsync("Medical Corp " +
+                                             DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff",
+                                                 CultureInfo.InvariantCulture));
+
+                var temperatureBucket = await client.GetBucketsApi().FindBucketByNameAsync("temperature-sensors");
+
+                //
+                // Write data
+                //
+                using (var writeClient = client.GetWriteApi(writeOptions))
+                {
+                    //
+                    // Write by POCO
+                    //
+                    var temperature = new Temperature {Location = "south", Value = 62D, Time = DateTime.UtcNow};
+                    writeClient.WriteMeasurement(temperature, WritePrecision.Ns, "temperature-sensors", medicalGMBH.Id);
+
+                    //
+                    // Write by Point
+                    //
+                    var point = PointData.Measurement("temperature")
+                        .Tag("location", "west")
+                        .Field("value", 55D)
+                        .Timestamp(DateTime.UtcNow.AddSeconds(-10), WritePrecision.Ns);
+                    writeClient.WritePoint(point, "temperature-sensors", medicalGMBH.Id);
+
+                    //
+                    // Write by LineProtocol
+                    //
+                    var record = "temperature,location=north value=60.0";
+                    writeClient.WriteRecord(record, WritePrecision.Ns, "temperature-sensors", medicalGMBH.Id);
+
+                    writeClient.Flush();
+                    Thread.Sleep(2000);
+                }
+
+                //
+                // Read data
+                //
+                var fluxTables = await client.GetQueryApi()
+                    .QueryAsync("from(bucket:\"temperature-sensors\") |> range(start: 0)", medicalGMBH.Id);
+                fluxTables.ForEach(fluxTable =>
+                {
+                    var fluxRecords = fluxTable.Records;
+                    fluxRecords.ForEach(fluxRecord =>
+                    {
+                        Console.WriteLine($"{fluxRecord.GetTime()}: {fluxRecord.GetValue()}");
+                    });
                 });
-            });
 
-            //
-            // Delete data
-            //
-            await influxDB.GetDeleteApi().Delete(DateTime.UtcNow.AddMinutes(-1), DateTime.Now, "", temperatureBucket,
-                medicalGMBH);
-
-            influxDB.Dispose();
+                //
+                // Delete data
+                //
+                await client.GetDeleteApi().Delete(DateTime.UtcNow.AddMinutes(-1), DateTime.Now, "", temperatureBucket,
+                    medicalGMBH);
+            }
         }
     }
 }

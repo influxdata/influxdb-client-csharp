@@ -85,7 +85,7 @@ namespace InfluxDB.Client.Api.Client
 
             if (InfluxDBClientOptions.AuthenticationScheme.Token.Equals(_options.AuthScheme))
             {
-                request.AddHeader("Authorization", "Token " + new string((char[])_options.Token));
+                request.AddHeader("Authorization", $"Token {_options.Token}");
             }
             else if (InfluxDBClientOptions.AuthenticationScheme.Session.Equals(_options.AuthScheme))
             {
@@ -116,7 +116,7 @@ namespace InfluxDB.Client.Api.Client
                 {
                     var header = "Basic " + Convert.ToBase64String(
                         Encoding.Default.GetBytes(
-                            _options.Username + ":" + new string(_options.Password)));
+                            _options.Username + ":" + _options.Password));
 
                     var request = new RestRequest("/api/v2/signin", Method.Post)
                         .AddHeader("Authorization", header);

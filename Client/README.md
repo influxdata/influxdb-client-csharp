@@ -656,13 +656,15 @@ In a [configuration file](#client-configuration-file) you are able to specify de
 ```c#
 var options = new InfluxDBClientOptions(Url)
 {
-    Token = token
+    Token = token,
+    DefaultTags = new Dictionary<string, string>
+    {
+        {"id", "132-987-655"},
+        {"customer", "California Miner"},
+    }
 };   
-options.AddDefaultTag("id", "132-987-655")
-options.AddDefaultTag("customer", "California Miner")
 options.AddDefaultTag("hostname", "${env.Hostname}")
-options.AddDefaultTag("sensor-version", "${SensorVersion}")
-options.AddDefaultTags(new Dictionary<string, string>{{ "id", "132-987-655" }, { "customer", "California Miner" }})
+options.AddDefaultTags(new Dictionary<string, string>{{ "sensor-version", "${SensorVersion}" }})
 ```
 
 Both of configurations will produce the Line protocol:
@@ -1154,19 +1156,8 @@ influxDBClient.EnableGzip();
 
 ### How to use WebProxy
 
-You can configure the client to tunnel requests through an HTTP proxy. The `WebProxy` could be 
-configured via `InfluxDBClientOptions.Builder` parameter `Proxy` or `InfluxDBClientOptions`
-parameter `WebProxy`:
-
-```c#
-var options = new InfluxDBClientOptions.Builder()
-    .Url("http://localhost:8086")
-    .AuthenticateToken("my-token")
-    .Proxy(new WebProxy("http://proxyserver:80/", true))
-    .Build();
-
-var client = InfluxDBClientFactory.Create(options);
-```
+You can configure the client to tunnel requests through an HTTP proxy. The `WebProxy` could be
+configured via `InfluxDBClientOptions` parameter `WebProxy`:
 
 ```c#
 var options = new InfluxDBClientOptions("http://localhost:8086")

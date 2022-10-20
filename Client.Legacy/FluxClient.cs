@@ -136,9 +136,16 @@ namespace InfluxDB.Client.Flux
         /// <item>bucket - default destination bucket for writes</item>
         /// <item>token - the token to use for the authorization</item>
         /// <item>logLevel (default - NONE) - rest client verbosity level</item>
-        /// <item>timeout (default - 10000ms) - The timespan to wait before the HTTP request times out</item>
+        /// <item>timeout (default - 10000) - The timespan to wait before the HTTP request times out in milliseconds</item>
         /// <item>allowHttpRedirects (default - false) - Configure automatically following HTTP 3xx redirects</item>
         /// <item>verifySsl (default - true) - Ignore Certificate Validation Errors when false</item>
+        /// </list>
+        /// Options for logLevel:
+        /// <list type="bullet">
+        /// <item>Basic - Logs request and response lines.</item>
+        /// <item>Body - Logs request and response lines including headers and body (if present). Note that applying the `Body` LogLevel will disable chunking while streaming and will load the whole response into memory.</item>
+        /// <item>Headers - Logs request and response lines including headers.</item>
+        /// <item>None - Disable logging.</item>
         /// </list>
         /// </para>
         /// </summary>

@@ -154,6 +154,21 @@ namespace InfluxDB.Client
             }
         }
 
+        /// <summary>
+        /// Create an instance of WriteOptions.
+        /// <para>
+        /// WriteOptions properties and their default values:
+        /// <list type="bullet">
+        /// <item>BatchSize:        1000</item>
+        /// <item>FlushInterval:    1000(ms)</item>
+        /// <item>JitterInterval:   0</item>
+        /// <item>RetryInterval:    5000(ms)</item>
+        /// <item>MaxRetries:       5</item>
+        /// <item>MaxRetryDelay:    125_000</item>
+        /// <item>ExponentialBase:  2</item>
+        /// </list>
+        /// </para>
+        /// </summary>
         public WriteOptions()
         {
             _batchSize = DefaultBatchSize;

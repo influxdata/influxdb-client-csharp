@@ -24,12 +24,12 @@ namespace InfluxDB.Client
             RegexOptions.CultureInvariant |
             RegexOptions.RightToLeft);
 
-        private char[] _token;
+        private string _token;
         private string _url;
         private TimeSpan _timeout;
         private LogLevel _logLevel;
         private string _username;
-        private char[] _password;
+        private string _password;
         private IWebProxy _webProxy;
         private bool _allowHttpRedirects;
         private bool _verifySsl;
@@ -41,7 +41,7 @@ namespace InfluxDB.Client
         public string Url
         {
             get => _url;
-            set
+            private set
             {
                 Arguments.CheckNonEmptyString(value, "Url");
                 _url = value;
@@ -63,6 +63,12 @@ namespace InfluxDB.Client
 
         /// <summary>
         /// Set the log level for the request and response information.
+        /// <list type="bullet">
+        /// <item>Basic - Logs request and response lines.</item>
+        /// <item>Body - Logs request and response lines including headers and body (if present). Note that applying the `Body` LogLevel will disable chunking while streaming and will load the whole response into memory.</item>
+        /// <item>Headers - Logs request and response lines including headers.</item>
+        /// <item>None - Disable logging.</item>
+        /// </list>
         /// </summary>
         public LogLevel LogLevel
         {
@@ -74,17 +80,20 @@ namespace InfluxDB.Client
             }
         }
 
+        /// <summary>
+        /// The scheme uses to Authentication.
+        /// </summary>
         public AuthenticationScheme AuthScheme { get; private set; }
 
         /// <summary>
         /// Setup authorization by <see cref="AuthenticationScheme.Token"/>.
         /// </summary>
-        public object Token
+        public string Token
         {
             get => _token;
             set
             {
-                _token = value as char[] ?? value.ToString().ToCharArray();
+                _token = value;
                 Arguments.CheckNotNull(_token, "Token");
 
                 AuthScheme = AuthenticationScheme.Token;
@@ -102,7 +111,7 @@ namespace InfluxDB.Client
                 Arguments.CheckNonEmptyString(value, "Username");
                 _username = value;
 
-                if (!string.IsNullOrEmpty(Username) && Password != null)
+                if (!string.IsNullOrEmpty(_username) && !string.IsNullOrEmpty(Password))
                 {
                     AuthScheme = AuthenticationScheme.Session;
                 }
@@ -112,7 +121,7 @@ namespace InfluxDB.Client
         /// <summary>
         /// Setup authorization by <see cref="AuthenticationScheme.Session"/>.
         /// </summary>
-        public char[] Password
+        public string Password
         {
             get => _password;
             set
@@ -120,7 +129,7 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(value, "Password");
                 _password = value;
 
-                if (!string.IsNullOrEmpty(Username) && Password != null)
+                if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(_password))
                 {
                     AuthScheme = AuthenticationScheme.Session;
                 }
@@ -195,11 +204,22 @@ namespace InfluxDB.Client
             }
         }
 
+        /// <summary>
+        /// The setting for store data point: default values, threshold, ...
+        /// </summary>
         public PointSettings PointSettings { get; }
 
         /// <summary>
+        /// Default tags that will be use for writes by Point and POJO.
+        /// </summary>
+        public Dictionary<string, string> DefaultTags
+        {
+            get => PointSettings.DefaultTags;
+            set => PointSettings.DefaultTags = value;
+        }
+
+        /// <summary>
         /// Add default tag that will be use for writes by Point and POJO.
-        ///
         /// <para>
         /// The expressions can be:
         /// <list type="bullet">
@@ -219,6 +239,7 @@ namespace InfluxDB.Client
 
         /// <summary>
         /// Add default tags that will be use for writes by Point and POJO.
+        /// <see cref="AddDefaultTag"/>
         /// </summary>
         /// <param name="tags">tags dictionary</param>
         public void AddDefaultTags(Dictionary<string, string> tags)
@@ -230,6 +251,28 @@ namespace InfluxDB.Client
             }
         }
 
+        /// <summary>
+        /// Create an instance of InfluxDBClientOptions.
+        /// <para>
+        /// InfluxDBClientOptions properties:
+        /// <list type="bullet">
+        /// <item>Timeout - timespan to wait before the HTTP request times out</item>
+        /// <item>LogLevel - log level for the request and response information</item>
+        /// <item>Token - setup authorization by <see cref="AuthenticationScheme.Token"/></item>
+        /// <item>Username - with Password property setup authorization by <see cref="AuthenticationScheme.Session"/></item>
+        /// <item>Password - with Username property setup authorization by <see cref="AuthenticationScheme.Session"/></item>
+        /// <item>Org - specify the default destination organization for writes and queries</item>
+        /// <item>Bucket - specify the default destination bucket for writes</item>
+        /// <item>WebProxy - specify the WebProxy instance to use by the WebRequest to connect to external InfluxDB.</item>
+        /// <item>AllowHttpRedirects - configure automatically following HTTP 3xx redirects</item>
+        /// <item>VerifySsl - ignore Certificate Validation Errors when `false`</item>
+        /// <item>VerifySslCallback - callback function for handling the remote SSL Certificate Validation. The callback takes precedence over `VerifySsl`</item>
+        /// <item>ClientCertificates - set X509CertificateCollection to be sent with HTTP requests</item>
+        /// <item>DefaultTags - tags that will be use for writes by Point and POJO</item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        /// <param name="url">url to connect the InfluxDB</param>
         public InfluxDBClientOptions(string url)
         {
             Url = url;
@@ -310,9 +353,9 @@ namespace InfluxDB.Client
             internal LogLevel LogLevelValue;
 
             internal AuthenticationScheme AuthScheme;
-            internal char[] Token;
+            internal string Token;
             internal string Username;
-            internal char[] Password;
+            internal string Password;
             internal TimeSpan Timeout;
 
             internal string OrgString;
@@ -387,7 +430,7 @@ namespace InfluxDB.Client
 
                 AuthScheme = AuthenticationScheme.Session;
                 Username = username;
-                Password = password;
+                Password = new string(password);
 
                 return this;
             }
@@ -402,7 +445,7 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(token, "token");
 
                 AuthScheme = AuthenticationScheme.Token;
-                Token = token;
+                Token = new string(token);
 
                 return this;
             }

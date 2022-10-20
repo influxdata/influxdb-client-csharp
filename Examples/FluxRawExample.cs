@@ -8,14 +8,14 @@ namespace Examples
     {
         public static async Task Main()
         {
-            using var fluxClient = new FluxClient("http://localhost:8086/");
+            using var client = new FluxClient("http://localhost:8086/");
 
             var fluxQuery = "from(bucket: \"telegraf\")\n"
                             + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
                             + " |> range(start: -1d)"
                             + " |> sample(n: 5, pos: 1)";
 
-            await fluxClient.QueryRawAsync(fluxQuery, line =>
+            await client.QueryRawAsync(fluxQuery, line =>
                 {
                     // process the flux query result record
                     Console.WriteLine(line);

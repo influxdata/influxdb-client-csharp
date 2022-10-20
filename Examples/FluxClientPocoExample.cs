@@ -10,7 +10,7 @@ namespace Examples
         {
             var options = new FluxConnectionOptions("http://127.0.0.1:8086");
 
-            using var fluxClient = new FluxClient(options);
+            using var client = new FluxClient(options);
 
             var fluxQuery = "from(bucket: \"telegraf\")\n"
                             + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" AND r[\"_field\"] == \"usage_system\"))"
@@ -18,7 +18,7 @@ namespace Examples
                             + " |> sample(n: 5, pos: 1)";
 
             ////Example of additional result stream processing on client side
-            await fluxClient.QueryAsync<Cpu>(fluxQuery, cpu =>
+            await client.QueryAsync<Cpu>(fluxQuery, cpu =>
                 {
                     // process the flux query records
                     Console.WriteLine(cpu.ToString());
