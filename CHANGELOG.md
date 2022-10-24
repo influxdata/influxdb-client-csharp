@@ -15,7 +15,7 @@ Update dependencies:
   - [#385](https://github.com/influxdata/influxdb-client-csharp/pull/385): `Radzen.Blazor` to `4.1.8`
 
 #### Test:
-  - [#386](https://github.com/influxdata/influxdb-client-csharp/pull/386): `Tomlyn.Signed` to `0.15.1`
+  - [#393](https://github.com/influxdata/influxdb-client-csharp/pull/393): `Tomlyn.Signed` to `0.16.0`
   - [#387](https://github.com/influxdata/influxdb-client-csharp/pull/387): `WireMock.Net` to `1.5.8`
 
 ## 4.6.0 [2022-09-29]
