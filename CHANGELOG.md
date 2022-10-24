@@ -12,7 +12,7 @@ Update dependencies:
   - [#383](https://github.com/influxdata/influxdb-client-csharp/pull/383): `NodaTime` to `3.1.4`
 
 #### Examples:
-  - [#385](https://github.com/influxdata/influxdb-client-csharp/pull/385): `Radzen.Blazor` to `4.1.8`
+  - [#391](https://github.com/influxdata/influxdb-client-csharp/pull/391): `Radzen.Blazor` to `4.1.12`
 
 #### Test:
   - [#393](https://github.com/influxdata/influxdb-client-csharp/pull/393): `Tomlyn.Signed` to `0.16.0`
