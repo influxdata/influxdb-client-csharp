@@ -225,9 +225,9 @@ workflows:
             - dotnet-5.0
             - dotnet-6.0
             - dotnet-windows
-          filters:
-            branches:
-              only: master
+#          filters:
+#            branches:
+#              only: master
 
   nightly:
     when:
