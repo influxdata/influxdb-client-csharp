@@ -20,6 +20,7 @@
 
         <PackageReleaseNotes>https://github.com/influxdata/influxdb-client-csharp/blob/master/CHANGELOG.md</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <RootNamespace>InfluxDB.Client.Flux</RootNamespace>
 
         <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
@@ -28,6 +29,7 @@
 
     <ItemGroup>
         <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
+        <None Include=".\README.md" Pack="true" PackagePath="\"/>
         <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
     </ItemGroup>
 
