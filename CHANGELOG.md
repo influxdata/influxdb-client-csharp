@@ -13,7 +13,7 @@ Update dependencies:
   - [#392](https://github.com/influxdata/influxdb-client-csharp/pull/392): `JsonSubTypes` to `2.0.1`
 
 #### Examples:
-  - [#391](https://github.com/influxdata/influxdb-client-csharp/pull/391): `Radzen.Blazor` to `4.1.12`
+  - [#401](https://github.com/influxdata/influxdb-client-csharp/pull/401): `Radzen.Blazor` to `4.1.15`
 
 #### Test:
   - [#393](https://github.com/influxdata/influxdb-client-csharp/pull/393): `Tomlyn.Signed` to `0.16.0`
