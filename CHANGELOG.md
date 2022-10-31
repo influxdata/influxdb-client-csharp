@@ -7,7 +7,7 @@
 Update dependencies:
 
 #### Build:
-  - [#378](https://github.com/influxdata/influxdb-client-csharp/pull/378): `CsvHelper` to `29.0.0`
+  - [#397](https://github.com/influxdata/influxdb-client-csharp/pull/397): `CsvHelper` to `30.0.0`
   - [#384](https://github.com/influxdata/influxdb-client-csharp/pull/384): `Microsoft.Extensions.ObjectPool` to `6.0.10`
   - [#383](https://github.com/influxdata/influxdb-client-csharp/pull/383): `NodaTime` to `3.1.4`
   - [#392](https://github.com/influxdata/influxdb-client-csharp/pull/392): `JsonSubTypes` to `2.0.1`
