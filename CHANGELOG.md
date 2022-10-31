@@ -19,6 +19,7 @@ Update dependencies:
   - [#403](https://github.com/influxdata/influxdb-client-csharp/pull/403): `Tomlyn.Signed` to `0.16.1`
   - [#400](https://github.com/influxdata/influxdb-client-csharp/pull/400): `WireMock.Net` to `1.5.9`
   - [#398](https://github.com/influxdata/influxdb-client-csharp/pull/398): `NUnit3TestAdapter` to `4.3.0`
+  - [#399](https://github.com/influxdata/influxdb-client-csharp/pull/399): `coverlet.collector` to `3.2.0`
 
 ## 4.6.0 [2022-09-29]
 
