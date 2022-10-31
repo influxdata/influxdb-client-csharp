@@ -17,7 +17,7 @@ Update dependencies:
 
 #### Test:
   - [#393](https://github.com/influxdata/influxdb-client-csharp/pull/393): `Tomlyn.Signed` to `0.16.0`
-  - [#387](https://github.com/influxdata/influxdb-client-csharp/pull/387): `WireMock.Net` to `1.5.8`
+  - [#400](https://github.com/influxdata/influxdb-client-csharp/pull/400): `WireMock.Net` to `1.5.9`
 
 ## 4.6.0 [2022-09-29]
 
