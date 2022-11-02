@@ -2,6 +2,7 @@
 
 ### Features
 1. [#376](https://github.com/influxdata/influxdb-client-csharp/pull/376): Add `FluxRecord.Row` which stores response data in a list
+1. [#404](https://github.com/influxdata/influxdb-client-csharp/pull/404): Expose `FluxCsvParser` as `AnnotatedCsvParser`
 
 ### Dependencies
 Update dependencies:

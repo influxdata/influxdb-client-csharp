@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Flux.Exceptions;
 using InfluxDB.Client.Core.Flux.Internal;
+using InfluxDB.Client.Core.Flux.Serialization;
 using NodaTime;
 using NodaTime.Text;
 using NUnit.Framework;
@@ -791,6 +792,23 @@ namespace Client.Legacy.Test
             Assert.AreEqual(7, tables[0].Records[0].Values.Count);
             Assert.AreEqual(8, tables[0].Records[0].Row.Count);
             Assert.AreEqual(25.3, tables[0].Records[0].Row[7]);
+        }
+
+        [Test]
+        public void AnnotatedCsvParser()
+        {
+            const string data =
+                "#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,string,string,string,string,long,long,string\n"
+                + "#group,false,false,true,true,true,true,true,true,false,false,false\n"
+                + "#default,_result,,,,,,,,,,\n"
+                + ",result,table,_start,_stop,_field,_measurement,host,region,_value2,value1,value_str\n"
+                + ",,0,1677-09-21T00:12:43.145224192Z,2018-07-16T11:21:02.547596934Z,free,mem,A,west,121,11,test\n"
+                + ",,1,1677-09-21T00:12:43.145224192Z,2018-07-16T11:21:02.547596934Z,free,mem,B,west,484,22,test\n"
+                + ",,2,1677-09-21T00:12:43.145224192Z,2018-07-16T11:21:02.547596934Z,usage_system,cpu,A,west,1444,38,test\n"
+                + ",,3,1677-09-21T00:12:43.145224192Z,2018-07-16T11:21:02.547596934Z,user_usage,cpu,A,west,2401,49,test";
+
+            var tables = new AnnotatedCsvParser().Parse(data);
+            Assert.AreEqual(4, tables.Count);
         }
 
         private List<FluxTable> ParseFluxResponse(string data)
