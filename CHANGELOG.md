@@ -1,4 +1,4 @@
-## 4.7.0 [unreleased]
+## 4.7.0 [2022-11-03]
 
 ### Features
 1. [#376](https://github.com/influxdata/influxdb-client-csharp/pull/376): Add `FluxRecord.Row` which stores response data in a list
