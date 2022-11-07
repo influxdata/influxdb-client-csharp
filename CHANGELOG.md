@@ -1,5 +1,11 @@
 ## 4.8.0 [unreleased]
 
+### Dependencies
+Update dependencies:
+
+#### Test:
+  - [#4077](https://github.com/influxdata/influxdb-client-csharp/pull/407): `WireMock.Net` to `1.5.10`
+
 ## 4.7.0 [2022-11-03]
 
 ### Features
