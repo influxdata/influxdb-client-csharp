@@ -3,6 +3,9 @@
 ### Dependencies
 Update dependencies:
 
+#### Build:
+  - [#405](https://github.com/influxdata/influxdb-client-csharp/pull/405): `NodaTime.Serialization.JsonNet` to `3.0.1`
+
 #### Examples:
   - [#406](https://github.com/influxdata/influxdb-client-csharp/pull/406): `Radzen.Blazor` to `4.2.2`
 
