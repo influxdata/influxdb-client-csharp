@@ -8,7 +8,7 @@ Update dependencies:
   - [#413](https://github.com/influxdata/influxdb-client-csharp/pull/413): `CsvHelper` to `30.0.1`
 
 #### Examples:
-  - [#406](https://github.com/influxdata/influxdb-client-csharp/pull/406): `Radzen.Blazor` to `4.2.2`
+  - [#411](https://github.com/influxdata/influxdb-client-csharp/pull/411): `Radzen.Blazor` to `4.3.2`
 
 #### Test:
   - [#407](https://github.com/influxdata/influxdb-client-csharp/pull/407): `WireMock.Net` to `1.5.10`
