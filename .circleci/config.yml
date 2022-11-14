@@ -214,6 +214,9 @@ workflows:
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
       - tests-dotnet:
           name: dotnet-6.0
+      - tests-dotnet:
+          name: dotnet-7.0
+          dotnet-image: "mcr.microsoft.com/dotnet/sdk:7.0"
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:
@@ -224,6 +227,7 @@ workflows:
             - dotnet-3.1
             - dotnet-5.0
             - dotnet-6.0
+            - dotnet-7.0
             - dotnet-windows
           filters:
             branches:
