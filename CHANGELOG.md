@@ -6,7 +6,6 @@ Update dependencies:
 #### Build:
   - [#405](https://github.com/influxdata/influxdb-client-csharp/pull/405): `NodaTime.Serialization.JsonNet` to `3.0.1`
   - [#413](https://github.com/influxdata/influxdb-client-csharp/pull/413): `CsvHelper` to `30.0.1`
-  - [#410](https://github.com/influxdata/influxdb-client-csharp/pull/410): `Microsoft.Extensions.ObjectPool` to `7.0.0`
 
 #### Examples:
   - [#411](https://github.com/influxdata/influxdb-client-csharp/pull/411): `Radzen.Blazor` to `4.3.2`
