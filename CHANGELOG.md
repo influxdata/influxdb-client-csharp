@@ -1,5 +1,8 @@
 ## 4.8.0 [unreleased]
 
+### CI
+1. [#416](https://github.com/influxdata/influxdb-client-csharp/pull/416): Add build for `.NET 7.0`
+
 ### Dependencies
 Update dependencies:
 
