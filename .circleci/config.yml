@@ -210,10 +210,13 @@ workflows:
           dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
       - tests-dotnet:
           name: dotnet-5.0
-          code-coverage-report: true
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
       - tests-dotnet:
           name: dotnet-6.0
+          code-coverage-report: true
+      - tests-dotnet:
+          name: dotnet-7.0
+          dotnet-image: "mcr.microsoft.com/dotnet/sdk:7.0"
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:
@@ -224,6 +227,7 @@ workflows:
             - dotnet-3.1
             - dotnet-5.0
             - dotnet-6.0
+            - dotnet-7.0
             - dotnet-windows
           filters:
             branches:
