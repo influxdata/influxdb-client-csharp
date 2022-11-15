@@ -194,7 +194,15 @@ namespace InfluxDB.Client.Test
                     .Field("value", _time)
                     .Timestamp(_time, WritePrecision.Ns);
 
-                WriteApi.WritePoint(point, Bucket.Id);
+                try
+                {
+                    WriteApi.WritePoint(point, Bucket.Id);
+                }
+                catch (ObjectDisposedException e)
+                {
+                    Console.WriteLine($"The WriteApi is already disposed by another thread: {e}.");
+                    break;
+                }
 
                 if (Identifier == 1 && _time % 100_000 == 0)
                 {
