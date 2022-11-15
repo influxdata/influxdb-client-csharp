@@ -175,6 +175,8 @@ a:hover { color: #5EE4E4; }
     margin: 0.1rem;
 }
 
+.rzi { min-height: 39px; }
+
 .rz-gauge .rz-tick-text { font-size: 0.65rem !important; }
 
 .rz-button.rz-state-disabled, .rz-state-disabled.rz-paginator-element { opacity: 0.7 !important; }
