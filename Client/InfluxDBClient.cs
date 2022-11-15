@@ -256,10 +256,9 @@ namespace InfluxDB.Client
         /// </list>
         /// </para>
         /// </summary>
-        /// <param name="connectionString">connection string with various configurations
-        /// </param>
-        public InfluxDBClient(string connectionString) :
-            this(new InfluxDBClientOptions(connectionString, true))
+        /// <param name="url">connection string with various configurations</param>
+        public InfluxDBClient(string url) :
+            this(new InfluxDBClientOptions(url))
         {
         }
 

@@ -252,9 +252,10 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
-        /// Create an instance of InfluxDBClientOptions.
-        /// <para>
-        /// InfluxDBClientOptions properties:
+        /// Create an instance of InfluxDBClientOptions. The url could be a connection string with various configurations.
+        ///<para>
+        /// e.g.: "http://localhost:8086?timeout=5000&amp;logLevel=BASIC
+        /// The following options are supported:
         /// <list type="bullet">
         /// <item>Timeout - timespan to wait before the HTTP request times out</item>
         /// <item>LogLevel - log level for the request and response information</item>
@@ -275,21 +276,12 @@ namespace InfluxDB.Client
         /// <param name="url">url to connect the InfluxDB</param>
         public InfluxDBClientOptions(string url)
         {
-            Url = url;
-            if (string.IsNullOrEmpty(Url))
+            if (string.IsNullOrEmpty(url))
             {
-                throw new InvalidOperationException("The url to connect the InfluxDB has to be defined.");
+                throw new ArgumentException("The url to connect the InfluxDB has to be defined.");
             }
 
-            _timeout = TimeSpan.FromSeconds(10);
-            PointSettings = new PointSettings();
-        }
-
-        public InfluxDBClientOptions(string connectionString, bool isConnectionString = true)
-        {
-            Arguments.CheckNonEmptyString(connectionString, nameof(connectionString));
-
-            var uri = new Uri(connectionString);
+            var uri = new Uri(url);
 
             Url = uri.GetLeftPart(UriPartial.Path);
 
@@ -756,8 +748,6 @@ namespace InfluxDB.Client
             /// </summary>
             /// <returns><see cref="InfluxDBClientOptions"/></returns>
             /// <exception cref="InvalidOperationException">If url is not defined.</exception>
-            /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClientOptions(string url)"/></remarks>
-            [Obsolete("This method is deprecated. Call 'InfluxDBClientOptions' initializer instead.", false)]
             public InfluxDBClientOptions Build()
             {
                 if (string.IsNullOrEmpty(UrlString))

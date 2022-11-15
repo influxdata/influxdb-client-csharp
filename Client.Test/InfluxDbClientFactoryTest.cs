@@ -336,7 +336,7 @@ namespace InfluxDB.Client.Test
                 "my-password", "database", "week");
 
             var options = GetDeclaredField<InfluxDBClientOptions>(_client.GetType(), _client, "_options");
-            Assert.AreEqual("http://localhost:8086", options.Url);
+            Assert.AreEqual("http://localhost:8086/", options.Url);
             Assert.AreEqual("-", options.Org);
             Assert.AreEqual("database/week", options.Bucket);
             Assert.AreEqual("my-username:my-password".ToCharArray(), options.Token);
@@ -345,7 +345,7 @@ namespace InfluxDB.Client.Test
             _client = new InfluxDBClient("http://localhost:8086", null, null, "database", null);
 
             options = GetDeclaredField<InfluxDBClientOptions>(_client.GetType(), _client, "_options");
-            Assert.AreEqual("http://localhost:8086", options.Url);
+            Assert.AreEqual("http://localhost:8086/", options.Url);
             Assert.AreEqual("-", options.Org);
             Assert.AreEqual("database/", options.Bucket);
             Assert.AreEqual(":".ToCharArray(), options.Token);
