@@ -284,6 +284,10 @@ namespace InfluxDB.Client
             var uri = new Uri(url);
 
             Url = uri.GetLeftPart(UriPartial.Path);
+            if (string.IsNullOrEmpty(Url))
+            {
+                throw new ArgumentException("The url to connect the InfluxDB has to be defined.");
+            }
 
             var query = HttpUtility.ParseQueryString(uri.Query);
             Org = query.Get("org");
@@ -296,11 +300,6 @@ namespace InfluxDB.Client
             var timeout = query.Get("timeout");
 
             VerifySsl = Convert.ToBoolean(string.IsNullOrEmpty(verifySslValue) ? "true" : verifySslValue);
-
-            if (string.IsNullOrEmpty(Url))
-            {
-                throw new InvalidOperationException("The url to connect the InfluxDB has to be defined.");
-            }
 
             if (!string.IsNullOrWhiteSpace(token))
             {
