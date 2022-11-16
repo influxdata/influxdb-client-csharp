@@ -141,22 +141,22 @@ namespace Examples
             }
         }
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             const string host = "https://us-west-2-1.aws.cloud2.influxdata.com";
             const string token = "...";
             const string bucket = "linq_bucket";
             const string organization = "jakub_bednar";
-            var options = new InfluxDBClientOptions.Builder()
-                .Url(host)
-                .AuthenticateToken(token.ToCharArray())
-                .Org(organization)
-                .Bucket(bucket)
-                .Build();
+
+            var options = new InfluxDBClientOptions(host)
+            {
+                Token = token,
+                Org = organization,
+                Bucket = bucket
+            };
 
             var converter = new DomainEntityConverter();
-            var client = InfluxDBClientFactory.Create(options)
-                .EnableGzip();
+            using var client = new InfluxDBClient(options).EnableGzip();
 
             //
             // Query Data to Domain object
@@ -199,8 +199,6 @@ namespace Examples
             Console.WriteLine();
             Console.WriteLine("> query:");
             Console.WriteLine(influxQuery._Query);
-
-            client.Dispose();
         }
     }
 }

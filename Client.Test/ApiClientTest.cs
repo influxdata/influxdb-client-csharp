@@ -15,10 +15,10 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public void SetUp()
         {
-            var options = new InfluxDBClientOptions.Builder()
-                .Url("http://localhost:8086")
-                .AuthenticateToken("my-token".ToCharArray())
-                .Build();
+            var options = new InfluxDBClientOptions("http://localhost:8086")
+            {
+                Token = "my-token"
+            };
 
             _apiClient = new ApiClient(options, new LoggingHandler(LogLevel.Body), new GzipHandler());
         }
@@ -51,11 +51,11 @@ namespace InfluxDB.Client.Test
         {
             var webProxy = new WebProxy("my-proxy", 8088);
 
-            var options = new InfluxDBClientOptions.Builder()
-                .Url("http://localhost:8086")
-                .AuthenticateToken("my-token".ToCharArray())
-                .Proxy(webProxy)
-                .Build();
+            var options = new InfluxDBClientOptions("http://localhost:8086")
+            {
+                Token = "my-token",
+                WebProxy = webProxy
+            };
 
             _apiClient = new ApiClient(options, new LoggingHandler(LogLevel.Body), new GzipHandler());
 

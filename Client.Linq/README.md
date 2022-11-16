@@ -64,7 +64,7 @@ using InfluxDB.Client.Linq;
 The LINQ query depends on `QueryApiSync`, you could create an instance of `QueryApiSync` by:
 
 ```c#
-var client = InfluxDBClientFactory.Create("http://localhost:8086", "my-token");
+var client = new InfluxDBClient("http://localhost:8086", "my-token");
 var queryApi = client.GetQueryApiSync();
 ```
 
@@ -1170,7 +1170,7 @@ private class InfluxPoint
 The LINQ driver also supports asynchronous querying. For asynchronous queries you have to initialize `InfluxDBQueryable` with asynchronous version of [QueryApi](/Client/QueryApi.cs) and transform `IQueryable<T>` to `IAsyncEnumerable<T>`:
 
 ```c#
-var client = InfluxDBClientFactory.Create("http://localhost:8086", "my-token");
+var client = new InfluxDBClient("http://localhost:8086", "my-token");
 var queryApi = client.GetQueryApi();
 
 var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", queryApi)

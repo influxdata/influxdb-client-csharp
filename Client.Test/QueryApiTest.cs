@@ -16,7 +16,7 @@ namespace InfluxDB.Client.Test
     [TestFixture]
     public class QueryApiTest : AbstractMockServerTest
     {
-        private InfluxDBClient _influxDbClient;
+        private InfluxDBClient _client;
         private QueryApi _queryApi;
 
         private const string Data =
@@ -30,21 +30,16 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new void SetUp()
         {
-            var options = InfluxDBClientOptions.Builder
-                .CreateNew()
-                .Url(MockServerUrl)
-                .AuthenticateToken("token")
-                .Org("my-org")
-                .Build();
+            var options = new InfluxDBClientOptions(MockServerUrl) { Token = "token", Org = "my-org" };
 
-            _influxDbClient = InfluxDBClientFactory.Create(options);
-            _queryApi = _influxDbClient.GetQueryApi();
+            _client = new InfluxDBClient(options);
+            _queryApi = _client.GetQueryApi();
         }
 
         [TearDown]
         public void TearDown()
         {
-            _influxDbClient?.Dispose();
+            _client?.Dispose();
         }
 
         [Test]
@@ -108,16 +103,12 @@ namespace InfluxDB.Client.Test
         [Test]
         public void RequiredOrgQueryAsync()
         {
-            _influxDbClient.Dispose();
+            _client.Dispose();
 
-            var options = InfluxDBClientOptions.Builder
-                .CreateNew()
-                .Url(MockServerUrl)
-                .AuthenticateToken("token")
-                .Build();
+            var options = new InfluxDBClientOptions(MockServerUrl) { Token = "token" };
 
-            _influxDbClient = InfluxDBClientFactory.Create(options);
-            _queryApi = _influxDbClient.GetQueryApi();
+            _client = new InfluxDBClient(options);
+            _queryApi = _client.GetQueryApi();
 
             var ae = Assert.ThrowsAsync<ArgumentException>(async () =>
                 await _queryApi.QueryAsync<SyncPoco>("from(..."));
@@ -134,7 +125,7 @@ namespace InfluxDB.Client.Test
             var writer = new StringWriter();
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
 
-            _influxDbClient.SetLogLevel(LogLevel.Headers);
+            _client.SetLogLevel(LogLevel.Headers);
 
             MockServer
                 .Given(Request.Create().WithPath("/api/v2/query").UsingPost())

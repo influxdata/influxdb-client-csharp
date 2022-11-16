@@ -18,17 +18,16 @@ namespace Examples
         private const string Org = "my-org";
         private const string Bucket = "my-bucket";
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var options = InfluxDBClientOptions.Builder
-                .CreateNew()
-                .Url(Url)
-                .AuthenticateToken(Token)
-                .Bucket(Bucket)
-                .Org(Org)
-                .Build();
+            var options = new InfluxDBClientOptions(Url)
+            {
+                Token = Token,
+                Org = Org,
+                Bucket = Bucket
+            };
 
-            using var client = InfluxDBClientFactory.Create(options);
+            using var client = new InfluxDBClient(options);
 
             //
             // Prepare Data

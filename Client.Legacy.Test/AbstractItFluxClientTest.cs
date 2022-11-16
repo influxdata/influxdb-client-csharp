@@ -23,7 +23,7 @@ namespace Client.Legacy.Test
 
             var options = new FluxConnectionOptions(influxUrl);
 
-            FluxClient = FluxClientFactory.Create(options);
+            FluxClient = new FluxClient(options);
 
             await InfluxDbQuery("CREATE DATABASE " + DatabaseName, DatabaseName);
         }

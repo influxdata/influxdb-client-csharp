@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
@@ -10,6 +11,10 @@ namespace InfluxDB.Client
         /// Create a instance of the InfluxDB 2.x client that is configured via <code>App.config</code>.
         /// </summary>
         /// <returns>client</returns>
+        /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClient(InfluxDBClientOptions)"/>
+        /// together with <see cref="InfluxDBClientOptions.LoadConfig"/>
+        /// </remarks>
+        [Obsolete("This method is deprecated. Call 'InfluxDBClient' initializer instead.", false)]
         public static InfluxDBClient Create()
         {
             var options = InfluxDBClientOptions.Builder
@@ -28,6 +33,8 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="connectionString">connection string with various configurations</param>
         /// <returns>client</returns>
+        /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClient(string)"/></remarks>
+        [Obsolete("This method is deprecated. Call 'InfluxDBClient' initializer instead.", false)]
         public static InfluxDBClient Create(string connectionString)
         {
             var options = InfluxDBClientOptions.Builder
@@ -45,6 +52,8 @@ namespace InfluxDB.Client
         /// <param name="username">the username to use in the basic auth</param>
         /// <param name="password">the password to use in the basic auth</param>
         /// <returns>client</returns>
+        /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClient(string, string, string)"/></remarks>
+        [Obsolete("This method is deprecated. Call 'InfluxDBClient' initializer instead.", false)]
         public static InfluxDBClient Create(string url, string username, char[] password)
         {
             var options = InfluxDBClientOptions.Builder
@@ -62,6 +71,8 @@ namespace InfluxDB.Client
         /// <param name="url">the url to connect to the InfluxDB 2.x</param>
         /// <param name="token">the token to use for the authorization</param>
         /// <returns>client</returns>
+        /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClient(string, string)"/></remarks>
+        [Obsolete("This method is deprecated. Call 'InfluxDBClient' initializer instead.", false)]
         public static InfluxDBClient Create(string url, char[] token)
         {
             var options = InfluxDBClientOptions.Builder
@@ -79,6 +90,8 @@ namespace InfluxDB.Client
         /// <param name="url">the url to connect to the InfluxDB 2.x</param>
         /// <param name="token">the token to use for the authorization</param>
         /// <returns>client</returns>
+        /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClient(string, string)"/></remarks>
+        [Obsolete("This method is deprecated. Call 'InfluxDBClient' initializer instead.", false)]
         public static InfluxDBClient Create(string url, string token)
         {
             var options = InfluxDBClientOptions.Builder
@@ -99,6 +112,8 @@ namespace InfluxDB.Client
         /// <param name="database">database name</param>
         /// <param name="retentionPolicy">retention policy</param>
         /// <returns>client</returns>
+        /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClient(string, string, string, string, string)"/></remarks>
+        [Obsolete("This method is deprecated. Call 'InfluxDBClient' initializer instead.", false)]
         public static InfluxDBClient CreateV1(string url, string username, char[] password, string database,
             string retentionPolicy)
         {
@@ -120,6 +135,8 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="options">the connection configuration</param>
         /// <returns>client</returns>
+        /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClient(InfluxDBClientOptions)"/></remarks>
+        [Obsolete("This method is deprecated. Call 'InfluxDBClient' initializer instead.", false)]
         public static InfluxDBClient Create(InfluxDBClientOptions options)
         {
             Arguments.CheckNotNull(options, nameof(options));
@@ -162,11 +179,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(url, nameof(url));
             Arguments.CheckNotNull(onboarding, nameof(onboarding));
 
-
-            using (var client = new InfluxDBClient(InfluxDBClientOptions.Builder.CreateNew().Url(url).Build()))
-            {
-                return await client.OnboardingAsync(onboarding).ConfigureAwait(false);
-            }
+            using var client = new InfluxDBClient(new InfluxDBClientOptions(url));
+            return await client.OnboardingAsync(onboarding).ConfigureAwait(false);
         }
     }
 }

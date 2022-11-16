@@ -19,15 +19,15 @@ namespace Examples
             [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDbClient = InfluxDBClientFactory.Create("http://localhost:9999",
-                "my-user", "my-password".ToCharArray());
+            using var client = new InfluxDBClient("http://localhost:9999",
+                "my-user", "my-password");
 
             //
             // Write Data
             //
-            var writeApiAsync = influxDbClient.GetWriteApiAsync();
+            var writeApiAsync = client.GetWriteApiAsync();
 
             //
             //
@@ -57,7 +57,7 @@ namespace Examples
             //
             // Check written data
             //
-            var tables = await influxDbClient.GetQueryApi()
+            var tables = await client.GetQueryApi()
                 .QueryAsync("from(bucket:\"my-bucket\") |> range(start: 0)", "my-org");
 
             tables.ForEach(table =>
@@ -65,8 +65,6 @@ namespace Examples
                 var fluxRecords = table.Records;
                 fluxRecords.ForEach(record => { Console.WriteLine($"{record.GetTime()}: {record.GetValue()}"); });
             });
-
-            influxDbClient.Dispose();
         }
     }
 }

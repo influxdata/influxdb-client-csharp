@@ -15,7 +15,7 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new void SetUp()
         {
-            _client = InfluxDBClientFactory.Create(MockServerUrl);
+            _client = new InfluxDBClient(MockServerUrl);
         }
 
         [Test]

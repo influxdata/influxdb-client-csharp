@@ -31,9 +31,9 @@ The `FluxClientFactory` creates an instance of a `FluxClient` client that can be
 // client creation
 var options = new FluxConnectionOptions("http://127.0.0.1:8086");
 
-using var fluxClient = FluxClientFactory.Create(options);
+using var client = new FluxClient(options);
 
-fluxClient.QueryAsync(...)
+client.QueryAsync(...)
 ...
 ```
 #### Authenticate requests
@@ -43,9 +43,9 @@ fluxClient.QueryAsync(...)
 // client creation
 var options = new FluxConnectionOptions("http://127.0.0.1:8086", "my-user", "my-password".ToCharArray());
 
-using var fluxClient = FluxClientFactory.Create(options);
+using var client = new FluxClient(options);
 
-fluxClient.QueryAsync(...)
+client.QueryAsync(...)
 ...
 ```
 
@@ -55,9 +55,9 @@ fluxClient.QueryAsync(...)
 var options = new FluxConnectionOptions("http://127.0.0.1:8086", "my-user", "my-password".ToCharArray(),
     FluxConnectionOptions.AuthenticationType.BasicAuthentication);
 
-using var fluxClient = FluxClientFactory.Create(options);
+using var client = new FluxClient(options);
 
-fluxClient.QueryAsync(...)
+client.QueryAsync(...)
 ...
 ```
 
@@ -123,7 +123,7 @@ The Requests and Responses can be logged by changing the LogLevel. LogLevel valu
 applying the `Body` LogLevel will disable chunking while streaming and will load the whole response into memory.  
 
 ```c#
-fluxClient.SetLogLevel(LogLevel.Body)
+client.SetLogLevel(LogLevel.Body)
 ```
  
 ## Version

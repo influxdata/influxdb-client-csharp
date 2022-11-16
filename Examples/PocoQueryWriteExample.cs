@@ -30,7 +30,7 @@ namespace Examples
             }
         }
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
             //
             // Initialize Client
@@ -39,13 +39,15 @@ namespace Examples
             const string token = "my-token";
             const string bucket = "my-bucket";
             const string organization = "my-org";
-            var options = new InfluxDBClientOptions.Builder()
-                .Url(host)
-                .AuthenticateToken(token.ToCharArray())
-                .Org(organization)
-                .Bucket(bucket)
-                .Build();
-            var client = InfluxDBClientFactory.Create(options);
+
+            var options = new InfluxDBClientOptions(host)
+            {
+                Token = token,
+                Org = organization,
+                Bucket = bucket
+            };
+
+            using var client = new InfluxDBClient(options);
 
             //
             // Prepare data to write
@@ -92,8 +94,6 @@ namespace Examples
             // Print result
             //
             list.ForEach(it => Console.WriteLine(it.ToString()));
-
-            client.Dispose();
         }
     }
 }

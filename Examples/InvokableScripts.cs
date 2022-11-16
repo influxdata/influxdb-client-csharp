@@ -15,21 +15,21 @@ namespace Examples
     /// </summary>
     public static class InvokableScripts
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
             const string host = "https://us-west-2-1.aws.cloud2.influxdata.com";
             const string token = "my-token";
             const string bucket = "my-bucket";
             const string organization = "my-org";
 
-            var options = new InfluxDBClientOptions.Builder()
-                .Url(host)
-                .AuthenticateToken(token.ToCharArray())
-                .Org(organization)
-                .Bucket(bucket)
-                .Build();
+            var options = new InfluxDBClientOptions(host)
+            {
+                Token = token,
+                Org = organization,
+                Bucket = bucket
+            };
 
-            using var client = InfluxDBClientFactory.Create(options);
+            using var client = new InfluxDBClient(options);
             client.SetLogLevel(LogLevel.Body);
 
             //

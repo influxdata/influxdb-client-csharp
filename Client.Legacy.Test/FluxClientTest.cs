@@ -16,7 +16,7 @@ namespace Client.Legacy.Test
         [SetUp]
         public void SetUp()
         {
-            _fluxClient = FluxClientFactory.Create("http://localhost:8093");
+            _fluxClient = new FluxClient("http://localhost:8093");
         }
 
         [Test]
@@ -42,9 +42,9 @@ namespace Client.Legacy.Test
                 TimeSpan.FromSeconds(60),
                 webProxy: webProxy);
 
-            var fluxClient = FluxClientFactory.Create(options);
+            var client = new FluxClient(options);
 
-            Assert.AreEqual(webProxy, GetRestClient(fluxClient).Options.Proxy);
+            Assert.AreEqual(webProxy, GetRestClient(client).Options.Proxy);
         }
 
         [Test]

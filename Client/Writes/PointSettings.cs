@@ -29,6 +29,24 @@ namespace InfluxDB.Client.Writes
             RegexOptions.RightToLeft);
 
         /// <summary>
+        /// Default tags that will be use for writes by Point and POJO.
+        /// </summary>
+        public Dictionary<string, string> DefaultTags
+        {
+            get => (Dictionary<string, string>)GetDefaultTags();
+            set
+            {
+                Arguments.CheckNotNull(value, "DefaultTags");
+                _defaultTags.Clear();
+                foreach (var tag in value)
+                {
+                    Arguments.CheckNotNull(tag.Key, "TagName");
+                    _defaultTags[tag.Key] = tag.Value;
+                }
+            }
+        }
+
+        /// <summary>
         /// Add default tag. 
         /// </summary>
         /// <param name="key">the tag name</param>

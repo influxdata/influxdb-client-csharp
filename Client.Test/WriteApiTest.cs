@@ -21,19 +21,19 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new void SetUp()
         {
-            _influxDbClient = InfluxDBClientFactory.Create(MockServerUrl, "token");
-            _writeApi = _influxDbClient.GetWriteApi(WriteOptions.CreateNew().RetryInterval(1_000).Build());
+            _client = new InfluxDBClient(MockServerUrl, "token");
+            _writeApi = _client.GetWriteApi(new WriteOptions { RetryInterval = 1_000 });
         }
 
         [TearDown]
         public new void ResetServer()
         {
-            _influxDbClient.Dispose();
+            _client.Dispose();
             _writeApi.Dispose();
         }
 
         private WriteApi _writeApi;
-        private InfluxDBClient _influxDbClient;
+        private InfluxDBClient _client;
 
         private IResponseBuilder CreateResponse(string error, int status)
         {
@@ -101,23 +101,23 @@ namespace InfluxDB.Client.Test
         [Test]
         public void DisposeCallFromInfluxDbClientToWriteApi()
         {
-            var writeApi = _influxDbClient.GetWriteApi();
+            var writeApi = _client.GetWriteApi();
 
             Assert.False(writeApi.Disposed);
-            _influxDbClient.Dispose();
+            _client.Dispose();
             Assert.True(writeApi.Disposed);
         }
 
         [Test]
         public void DisposedClientRemovedFromApis()
         {
-            var writeApi = _influxDbClient.GetWriteApi();
+            var writeApi = _client.GetWriteApi();
 
             Assert.False(writeApi.Disposed);
             writeApi.Dispose();
             Assert.True(writeApi.Disposed);
 
-            _influxDbClient.Dispose();
+            _client.Dispose();
             // nothing bad happens
         }
 
@@ -306,12 +306,14 @@ namespace InfluxDB.Client.Test
             MockServer.Stop();
             _writeApi.Dispose();
 
-            var options = WriteOptions.CreateNew()
-                .BatchSize(1)
-                .MaxRetryDelay(2_000)
-                .MaxRetries(3)
-                .Build();
-            _writeApi = _influxDbClient.GetWriteApi(options);
+            var options = new WriteOptions
+            {
+                BatchSize = 1,
+                MaxRetryDelay = 2_000,
+                MaxRetries = 3
+            };
+
+            _writeApi = _client.GetWriteApi(options);
 
             var listener = new EventListener(_writeApi);
 
@@ -352,12 +354,14 @@ namespace InfluxDB.Client.Test
                 .WillSetStateTo("RetryWithRetryAfter Finished")
                 .RespondWith(CreateResponse("{}"));
 
-            var options = WriteOptions.CreateNew()
-                .BatchSize(1)
-                .RetryInterval(100)
-                .MaxRetries(1)
-                .Build();
-            _writeApi = _influxDbClient.GetWriteApi(options);
+            var options = new WriteOptions
+            {
+                BatchSize = 1,
+                RetryInterval = 100,
+                MaxRetries = 1
+            };
+
+            _writeApi = _client.GetWriteApi(options);
 
             var listener = new EventListener(_writeApi);
 
@@ -382,8 +386,8 @@ namespace InfluxDB.Client.Test
             _writeApi.Dispose();
             _writeApi.Dispose();
 
-            _influxDbClient.Dispose();
-            _influxDbClient.Dispose();
+            _client.Dispose();
+            _client.Dispose();
         }
 
         [Test]
@@ -421,7 +425,8 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void WriteOptionsDefaults()
+        [Obsolete("Obsolete")]
+        public void WriteOptionsDefaultsBuilder()
         {
             var options = WriteOptions.CreateNew().Build();
 
@@ -432,7 +437,19 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void WriteOptionsCustom()
+        public void WriteOptionsDefaults()
+        {
+            var options = new WriteOptions();
+
+            Assert.AreEqual(5_000, options.RetryInterval);
+            Assert.AreEqual(5, options.MaxRetries);
+            Assert.AreEqual(125_000, options.MaxRetryDelay);
+            Assert.AreEqual(2, options.ExponentialBase);
+        }
+
+        [Test]
+        [Obsolete("Obsolete")]
+        public void WriteOptionsCustomBuilder()
         {
             var options = WriteOptions.CreateNew()
                 .RetryInterval(1_250)
@@ -440,6 +457,23 @@ namespace InfluxDB.Client.Test
                 .MaxRetryDelay(1_800_000)
                 .ExponentialBase(2)
                 .Build();
+
+            Assert.AreEqual(1_250, options.RetryInterval);
+            Assert.AreEqual(25, options.MaxRetries);
+            Assert.AreEqual(1_800_000, options.MaxRetryDelay);
+            Assert.AreEqual(2, options.ExponentialBase);
+        }
+
+        [Test]
+        public void WriteOptionsCustom()
+        {
+            var options = new WriteOptions
+            {
+                RetryInterval = 1_250,
+                MaxRetries = 25,
+                MaxRetryDelay = 1_800_000,
+                ExponentialBase = 2
+            };
 
             Assert.AreEqual(1_250, options.RetryInterval);
             Assert.AreEqual(25, options.MaxRetries);
@@ -475,16 +509,12 @@ namespace InfluxDB.Client.Test
         [Test]
         public void RequiredOrgBucketWriteApi()
         {
-            _influxDbClient.Dispose();
+            _client.Dispose();
 
-            var options = InfluxDBClientOptions.Builder
-                .CreateNew()
-                .Url(MockServerUrl)
-                .AuthenticateToken("token")
-                .Build();
+            var options = new InfluxDBClientOptions(MockServerUrl) { Token = "token" };
 
-            _influxDbClient = InfluxDBClientFactory.Create(options);
-            _writeApi = _influxDbClient.GetWriteApi(WriteOptions.CreateNew().RetryInterval(1_000).Build());
+            _client = new InfluxDBClient(options);
+            _writeApi = _client.GetWriteApi(new WriteOptions { RetryInterval = 1_000 });
 
             var ae = Assert.Throws<ArgumentException>(() =>
                 _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
@@ -539,7 +569,7 @@ namespace InfluxDB.Client.Test
         public void WritesToDifferentBucketsJitter()
         {
             _writeApi.Dispose();
-            _writeApi = _influxDbClient.GetWriteApi(WriteOptions.CreateNew().JitterInterval(1_000).Build());
+            _writeApi = _client.GetWriteApi(new WriteOptions { JitterInterval = 1_000 });
 
             var listener = new EventListener(_writeApi);
 

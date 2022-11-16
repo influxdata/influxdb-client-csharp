@@ -88,21 +88,22 @@ namespace Examples
             }
         }
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
             const string host = "http://localhost:9999";
             const string token = "my-token";
             const string bucket = "my-bucket";
             const string organization = "my-org";
-            var options = new InfluxDBClientOptions.Builder()
-                .Url(host)
-                .AuthenticateToken(token.ToCharArray())
-                .Org(organization)
-                .Bucket(bucket)
-                .Build();
+
+            var options = new InfluxDBClientOptions(host)
+            {
+                Token = token,
+                Org = organization,
+                Bucket = bucket
+            };
 
             var converter = new DomainEntityConverter();
-            var client = InfluxDBClientFactory.Create(options);
+            using var client = new InfluxDBClient(options);
 
             //
             // Prepare data to write
@@ -163,8 +164,6 @@ namespace Examples
             // Print result
             //
             sensors.ForEach(it => Console.WriteLine(it.ToString()));
-
-            client.Dispose();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Client.Legacy.Test
         public async Task WithAuthentication()
         {
             FluxClient =
-                FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user",
+                new FluxClient(new FluxConnectionOptions(MockServerUrl, "my-user",
                     "my-password".ToCharArray()));
 
             MockServer.Given(Request.Create()
@@ -56,7 +56,7 @@ namespace Client.Legacy.Test
         [Test]
         public async Task WithBasicAuthentication()
         {
-            FluxClient = FluxClientFactory.Create(new FluxConnectionOptions(MockServerUrl, "my-user",
+            FluxClient = new FluxClient(new FluxConnectionOptions(MockServerUrl, "my-user",
                 "my-password".ToCharArray(), FluxConnectionOptions.AuthenticationType.BasicAuthentication));
 
             var auth = System.Text.Encoding.UTF8.GetBytes("my-user:my-password");

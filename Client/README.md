@@ -59,13 +59,13 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
             
-            var queryApi = influxDBClient.GetQueryApi();
+            var queryApi = client.GetQueryApi();
 
             //
             // QueryData
@@ -78,8 +78,6 @@ namespace Examples
                     Console.WriteLine($"{record.GetTime()}: {record.GetValueByKey("_value")}");
                 });
             });
-
-            influxDBClient.Dispose();
         }        
     }
 }
@@ -99,13 +97,13 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
             
-            var queryApi = influxDBClient.GetQueryApi();
+            var queryApi = client.GetQueryApi();
 
             //
             // QueryData
@@ -115,8 +113,6 @@ namespace Examples
             {
                 Console.WriteLine($"{temperature.Location}: {temperature.Value} at {temperature.Time}");
             });
-
-            influxDBClient.Dispose();
         }  
         
         [Measurement("temperature")]
@@ -148,13 +144,13 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
 
-            var queryApi = influxDBClient.GetQueryApi();
+            var queryApi = client.GetQueryApi();
 
             //
             // QueryData
@@ -178,8 +174,6 @@ namespace Examples
                 //
                 Console.WriteLine("Query completed");
             }, "org_id");
-
-            influxDBClient.Dispose();
         }
     }
 }
@@ -199,13 +193,13 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
             
-            var queryApi = influxDBClient.GetQueryApi();
+            var queryApi = client.GetQueryApi();
 
             //
             // QueryData
@@ -217,8 +211,6 @@ namespace Examples
                 //
                 Console.WriteLine($"{temperature.Location}: {temperature.Value} at {temperature.Time}");
             }, org: "org_id");
-
-            influxDBClient.Dispose();
         }  
         
         [Measurement("temperature")]
@@ -249,13 +241,13 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
 
-            var queryApi = influxDBClient.GetQueryApi();
+            var queryApi = client.GetQueryApi();
 
             //
             // QueryData
@@ -263,8 +255,6 @@ namespace Examples
             var csv = await queryApi.QueryRawAsync(flux, org: "org_id");
             
             Console.WriteLine($"CSV response: {csv}");
-
-            influxDBClient.Dispose();
         }
     }
 }
@@ -283,13 +273,13 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             var flux = "from(bucket:\"temperature-sensors\") |> range(start: 0)";
 
-            var queryApi = influxDBClient.GetQueryApi();
+            var queryApi = client.GetQueryApi();
 
             //
             // QueryData
@@ -301,8 +291,6 @@ namespace Examples
                 //
                 Console.WriteLine($"Response: {line}");
             }, org: "org_id");
-
-            influxDBClient.Dispose();
         }
     }
 }
@@ -320,9 +308,9 @@ namespace Examples
 {
     public static class SynchronousQuery
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using var client = InfluxDBClientFactory.Create("http://localhost:9999", "my-token");
+            using var client = new InfluxDBClient("http://localhost:9999", "my-token");
 
             const string query = "from(bucket:\"my-bucket\") |> range(start: 0)";
            
@@ -393,14 +381,14 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             //
             // Write Data
             //
-            using (var writeApi = influxDBClient.GetWriteApi())
+            using (var writeApi = client.GetWriteApi())
             {
                 //
                 // Write by POCO
@@ -409,8 +397,6 @@ namespace Examples
 
                 writeApi.WriteMeasurement(temperature, WritePrecision.Ns, "bucket_name", "org_id");
             }
-            
-            influxDBClient.Dispose();
         }
         
         [Measurement("temperature")]
@@ -442,14 +428,14 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             //
             // Write Data
             //
-            using (var writeApi = influxDBClient.GetWriteApi())
+            using (var writeApi = client.GetWriteApi())
             {
                 //
                 // Write by Data Point
@@ -461,8 +447,6 @@ namespace Examples
                 
                 writeApi.WritePoint(point, "bucket_name", "org_id");
             }
-            
-            influxDBClient.Dispose();
         }
     }
 }
@@ -484,14 +468,14 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             //
             // Write Data
             //
-            using (var writeApi = influxDBClient.GetWriteApi())
+            using (var writeApi = client.GetWriteApi())
             {
                 //
                 // Write by Data Point
@@ -511,8 +495,6 @@ namespace Examples
                 
                 writeApi.WritePoint(pointB, "bucket_name", "org_id");
             }
-            
-            influxDBClient.Dispose();
         }
     }
 }
@@ -533,14 +515,14 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             //
             // Write Data
             //
-            using (var writeApi = influxDBClient.GetWriteApi())
+            using (var writeApi = client.GetWriteApi())
             {
                 //
                 //
@@ -548,8 +530,6 @@ namespace Examples
                 //
                 writeApi.WriteRecord("temperature,location=north value=60.0", WritePrecision.Ns,"bucket_name", "org_id");
             }
-            
-            influxDBClient.Dispose();
         }
     }
 }
@@ -578,15 +558,15 @@ namespace Examples
             [Column(IsTimestamp = true)] public DateTime Time { get; set; }
         }
         
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
-            var influxDbClient = InfluxDBClientFactory.Create("http://localhost:8086", 
-                            "my-user", "my-password".ToCharArray());
+            using var client = new InfluxDBClient("http://localhost:8086", 
+                            "my-user", "my-password");
 
             //
             // Write Data
             //
-            var writeApiAsync = influxDbClient.GetWriteApiAsync();
+            var writeApiAsync = client.GetWriteApiAsync();
 
             //
             //
@@ -627,8 +607,6 @@ namespace Examples
                     Console.WriteLine($"{record.GetTime()}: {record.GetValue()}");
                 });
             });
-            
-            influxDbClient.Dispose();
         }
     }
 }
@@ -676,14 +654,17 @@ In a [configuration file](#client-configuration-file) you are able to specify de
 ##### Via API
 
 ```c#
-var options = new InfluxDBClientOptions.Builder()
-    .Url(url)
-    .AuthenticateToken(token)
-    .AddDefaultTag("id", "132-987-655")
-    .AddDefaultTag("customer", "California Miner")
-    .AddDefaultTag("hostname", "${env.Hostname}")
-    .AddDefaultTag("sensor-version", "${SensorVersion}")
-    .Build()    
+var options = new InfluxDBClientOptions(Url)
+{
+    Token = token,
+    DefaultTags = new Dictionary<string, string>
+    {
+        {"id", "132-987-655"},
+        {"customer", "California Miner"},
+    }
+};   
+options.AddDefaultTag("hostname", "${env.Hostname}")
+options.AddDefaultTags(new Dictionary<string, string>{{ "sensor-version", "${SensorVersion}" }})
 ```
 
 Both of configurations will produce the Line protocol:
@@ -775,16 +756,14 @@ namespace Examples
     {
         private static readonly string Token = "";
 
-        public static void Main(string[] args)
+        public static void Main()
         {
-            var influxDBClient = InfluxDBClientFactory.Create("http://localhost:8086", Token);
+            using var client = new InfluxDBClient("http://localhost:8086", Token);
 
             //
             // Delete data
             //
-            await influxDB.GetDeleteApi().Delete(DateTime.UtcNow.AddMinutes(-1), DateTime.Now, "", "bucket", "org");
-            
-            influxDBClient.Dispose();
+            await client.GetDeleteApi().Delete(DateTime.UtcNow.AddMinutes(-1), DateTime.Now, "", "bucket", "org");
         }
     }
 }
@@ -823,13 +802,13 @@ namespace Examples
 {
     public static class ManagementExample
     {
-        public static async Task Main(string[] args)
+        public static async Task Main()
         {
             const string url = "http://localhost:8086";
             const string token = "my-token";
             const string org = "my-org";
             
-            using var client = InfluxDBClientFactory.Create(url, token);
+            using var client = new InfluxDBClient(url, token);
 
             // Find ID of Organization with specified name (PermissionAPI requires ID of Organization).
             var orgId = (await client.GetOrganizationsApi().FindOrganizationsAsync(org: org)).First().Id;
@@ -1026,15 +1005,15 @@ namespace Examples
             const string token = "my-token";
             const string bucket = "my-bucket";
             const string organization = "my-org";
-            var options = new InfluxDBClientOptions.Builder()
-                .Url(host)
-                .AuthenticateToken(token.ToCharArray())
-                .Org(organization)
-                .Bucket(bucket)
-                .Build();
+            var options = new InfluxDBClientOptions(host)
+            {
+                Token = token,
+                Org = organization,
+                Bucket = bucket
+            };
 
             var converter = new DomainEntityConverter();
-            var client = InfluxDBClientFactory.Create(options);
+            using var client = new InfluxDBClient(options);
 
             //
             // Prepare data to write
@@ -1095,8 +1074,6 @@ namespace Examples
             // Print result
             //
             sensors.ForEach(it => Console.WriteLine(it.ToString()));
-
-            client.Dispose();
         }
     }
 }
@@ -1146,7 +1123,7 @@ The `Timeout` supports `ms`, `s` and `m` as unit. Default is milliseconds.
 and then:
 
 ```c#
-var influxDBClient = InfluxDBClientFactory.Create();
+var client = InfluxDBClientFactory.Create();
 ```
 
 ### Client connection string
@@ -1154,8 +1131,7 @@ var influxDBClient = InfluxDBClientFactory.Create();
 A client can be constructed using a connection string that can contain the InfluxDBClientOptions parameters encoded into the URL.  
  
 ```c#
-var influxDBClient = InfluxDBClientFactory
-            .Create("http://localhost:8086?timeout=5000&logLevel=BASIC")
+var client = new InfluxDBClient("http://localhost:8086?timeout=5000&logLevel=BASIC");
 ```
 The following options are supported:
 
@@ -1180,41 +1156,31 @@ influxDBClient.EnableGzip();
 
 ### How to use WebProxy
 
-The `WebProxy` could be configured via `InfluxDBClientOptions.Builder`:
+You can configure the client to tunnel requests through an HTTP proxy. The `WebProxy` could be
+configured via `InfluxDBClientOptions` parameter `WebProxy`:
 
 ```c#
-var options = new InfluxDBClientOptions.Builder()
-    .Url("http://localhost:8086")
-    .AuthenticateToken("my-token".ToCharArray())
-    .Proxy(new WebProxy("http://proxyserver:80/", true))
-    .Build();
+var options = new InfluxDBClientOptions("http://localhost:8086")
+{
+    Token = "my-token",
+    WebProxy = new WebProxy("http://proxyserver:80/", true)
+};
 
-var client = InfluxDBClientFactory.Create(options);
+var client = new InfluxDBClient(options);
 ```
 
-### Proxy and redirects configuration
-
-You can configure the client to tunnel requests through an HTTP proxy. To configure the proxy use `Proxy` configuration option:
-
- ```csharp
-var options = new InfluxDBClientOptions.Builder()
-    .Url("http://localhost:8086")
-    .AuthenticateToken("my-token")
-    .Proxy(new WebProxy("http://proxyserver:80/", true))
-    .Build();
-
-using var client = InfluxDBClientFactory.Create(options);
-```
+### Redirects configuration
 
 Client automatically **doesn't** follows HTTP redirects. You can enable redirects by `AllowRedirects` configuration option:
 
 ```csharp
-var options = new InfluxDBClientOptions.Builder()
-    .Url("http://localhost:8086")
-    .AllowRedirects(true)
-    .Build();
+var options = new InfluxDBClientOptions("http://localhost:8086")
+{
+    Token = "my-token",
+    AllowRedirects = true
+};
 
-using var client = InfluxDBClientFactory.Create(options);
+using var client = new InfluxDBClient(options);
 ```
 
 > :warning: Due to a security reason `Authorization` header is not forwarded when redirect leads to a different domain.
@@ -1226,7 +1192,7 @@ The Requests and Responses can be logged by changing the LogLevel. LogLevel valu
 applying the `Body` LogLevel will disable chunking while streaming and will load the whole response into memory.  
 
 ```c#
-influxDBClient.SetLogLevel(LogLevel.Body)
+client.SetLogLevel(LogLevel.Body)
 ```
 
 #### Check the server status and version

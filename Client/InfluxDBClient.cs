@@ -233,7 +233,86 @@ namespace InfluxDB.Client
 
         private readonly Subject<Unit> _disposeNotification = new Subject<Unit>();
 
-        protected internal InfluxDBClient(InfluxDBClientOptions options)
+        /// <summary>
+        /// Create a instance of the InfluxDB 2.x client. The url could be a connection string with various configurations.
+        /// <para>
+        /// e.g.: "http://localhost:8086?timeout=5000&amp;logLevel=BASIC
+        /// The following options are supported:
+        /// <list type="bullet">
+        /// <item>org - default destination organization for writes and queries</item>
+        /// <item>bucket - default destination bucket for writes</item>
+        /// <item>token - the token to use for the authorization</item>
+        /// <item>logLevel (default - NONE) - rest client verbosity level</item>
+        /// <item>timeout (default - 10000) - The timespan to wait before the HTTP request times out in milliseconds</item>
+        /// <item>allowHttpRedirects (default - false) - Configure automatically following HTTP 3xx redirects</item>
+        /// <item>verifySsl (default - true) - Ignore Certificate Validation Errors when false</item>
+        /// </list>
+        /// Options for logLevel:
+        /// <list type="bullet">
+        /// <item>Basic - Logs request and response lines.</item>
+        /// <item>Body - Logs request and response lines including headers and body (if present). Note that applying the `Body` LogLevel will disable chunking while streaming and will load the whole response into memory.</item>
+        /// <item>Headers - Logs request and response lines including headers.</item>
+        /// <item>None - Disable logging.</item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        /// <param name="url">connection string with various configurations</param>
+        public InfluxDBClient(string url) :
+            this(new InfluxDBClientOptions(url))
+        {
+        }
+
+        /// <summary>
+        /// Create a instance of the InfluxDB 2.x client.
+        /// </summary>
+        /// <param name="url">the url to connect to the InfluxDB 2.x</param>
+        /// <param name="username">the username to use in the basic auth</param>
+        /// <param name="password">the password to use in the basic auth</param>
+        public InfluxDBClient(string url, string username, string password) :
+            this(new InfluxDBClientOptions(url)
+            {
+                Username = username,
+                Password = password
+            })
+        {
+        }
+
+        /// <summary>
+        /// Create a instance of the InfluxDB 2.x client.
+        /// </summary>
+        /// <param name="url">the url to connect to the InfluxDB 2.x</param>
+        /// <param name="token">the token to use for the authorization</param>
+        public InfluxDBClient(string url, string token) :
+            this(new InfluxDBClientOptions(url)
+            {
+                Token = token
+            })
+        {
+        }
+
+        /// <summary>
+        /// Create a instance of the InfluxDB 2.x client to connect into InfluxDB 1.8.
+        /// </summary>
+        /// <param name="url">the url to connect to the InfluxDB 1.8</param>
+        /// <param name="username">authorization username</param>
+        /// <param name="password">authorization password</param>
+        /// <param name="database">database name</param>
+        /// <param name="retentionPolicy">retention policy</param>
+        public InfluxDBClient(string url, string username, string password, string database, string retentionPolicy) :
+            this(new InfluxDBClientOptions(url)
+            {
+                Org = "-",
+                Token = $"{username}:{password}",
+                Bucket = $"{database}/{retentionPolicy}"
+            })
+        {
+        }
+
+        /// <summary>
+        /// Create a instance of the InfluxDB 2.x client.
+        /// </summary>
+        /// <param name="options">the connection configuration</param>
+        public InfluxDBClient(InfluxDBClientOptions options)
         {
             Arguments.CheckNotNull(options, nameof(options));
 
@@ -357,7 +436,7 @@ namespace InfluxDB.Client
         /// <returns>the new client instance for the Write API</returns>
         public WriteApi GetWriteApi(IDomainObjectMapper mapper = null)
         {
-            return GetWriteApi(WriteOptions.CreateNew().Build(), mapper);
+            return GetWriteApi(new WriteOptions(), mapper);
         }
 
         /// <summary>

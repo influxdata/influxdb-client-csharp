@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Net.Security;
@@ -23,29 +24,373 @@ namespace InfluxDB.Client
             RegexOptions.CultureInvariant |
             RegexOptions.RightToLeft);
 
-        public string Url { get; }
-        public LogLevel LogLevel { get; }
+        private string _token;
+        private string _url;
+        private TimeSpan _timeout;
+        private LogLevel _logLevel;
+        private string _username;
+        private string _password;
+        private IWebProxy _webProxy;
+        private bool _allowHttpRedirects;
+        private bool _verifySsl;
+        private X509CertificateCollection _clientCertificates;
 
-        public AuthenticationScheme AuthScheme { get; }
-        public char[] Token { get; }
-        public string Username { get; }
-        public char[] Password { get; }
+        /// <summary>
+        /// Set the url to connect the InfluxDB.
+        /// </summary>
+        public string Url
+        {
+            get => _url;
+            private set
+            {
+                Arguments.CheckNonEmptyString(value, "Url");
+                _url = value;
+            }
+        }
 
-        public string Org { get; }
-        public string Bucket { get; }
+        /// <summary>
+        /// Set the timespan to wait before the HTTP request times out.
+        /// </summary>
+        public TimeSpan Timeout
+        {
+            get => _timeout;
+            set
+            {
+                Arguments.CheckNotNull(value, "Timeout");
+                _timeout = value;
+            }
+        }
 
-        public TimeSpan Timeout { get; }
+        /// <summary>
+        /// Set the log level for the request and response information.
+        /// <list type="bullet">
+        /// <item>Basic - Logs request and response lines.</item>
+        /// <item>Body - Logs request and response lines including headers and body (if present). Note that applying the `Body` LogLevel will disable chunking while streaming and will load the whole response into memory.</item>
+        /// <item>Headers - Logs request and response lines including headers.</item>
+        /// <item>None - Disable logging.</item>
+        /// </list>
+        /// </summary>
+        public LogLevel LogLevel
+        {
+            get => _logLevel;
+            set
+            {
+                Arguments.CheckNotNull(value, "LogLevel");
+                _logLevel = value;
+            }
+        }
 
-        public IWebProxy WebProxy { get; }
-        public bool AllowHttpRedirects { get; }
+        /// <summary>
+        /// The scheme uses to Authentication.
+        /// </summary>
+        public AuthenticationScheme AuthScheme { get; private set; }
 
+        /// <summary>
+        /// Setup authorization by <see cref="AuthenticationScheme.Token"/>.
+        /// </summary>
+        public string Token
+        {
+            get => _token;
+            set
+            {
+                _token = value;
+                Arguments.CheckNonEmptyString(_token, "token");
+
+                AuthScheme = AuthenticationScheme.Token;
+            }
+        }
+
+        /// <summary>
+        /// Setup authorization by <see cref="AuthenticationScheme.Session"/>.
+        /// </summary>
+        public string Username
+        {
+            get => _username;
+            set
+            {
+                Arguments.CheckNonEmptyString(value, "Username");
+                _username = value;
+
+                if (!string.IsNullOrEmpty(_username) && !string.IsNullOrEmpty(Password))
+                {
+                    AuthScheme = AuthenticationScheme.Session;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Setup authorization by <see cref="AuthenticationScheme.Session"/>.
+        /// </summary>
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                Arguments.CheckNotNull(value, "Password");
+                _password = value;
+
+                if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(_password))
+                {
+                    AuthScheme = AuthenticationScheme.Session;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Specify the default destination organization for writes and queries.
+        /// </summary>
+        public string Org { get; set; }
+
+        /// <summary>
+        /// Specify the default destination bucket for writes.
+        /// </summary>
+        public string Bucket { get; set; }
+
+        /// <summary>
+        /// Specify the WebProxy instance to use by the WebRequest to connect to external InfluxDB.
+        /// </summary>
+        public IWebProxy WebProxy
+        {
+            get => _webProxy;
+            set
+            {
+                Arguments.CheckNotNull(value, "WebProxy");
+                _webProxy = value;
+            }
+        }
+
+        /// <summary>
+        /// Configure automatically following HTTP 3xx redirects.
+        /// </summary>
+        public bool AllowHttpRedirects
+        {
+            get => _allowHttpRedirects;
+            set
+            {
+                Arguments.CheckNotNull(value, "AllowHttpRedirects");
+                _allowHttpRedirects = value;
+            }
+        }
+
+        /// <summary>
+        /// Ignore Certificate Validation Errors when `false`.
+        /// </summary>
+        public bool VerifySsl
+        {
+            get => _verifySsl;
+            set
+            {
+                Arguments.CheckNotNull(value, "VerifySsl");
+                _verifySsl = value;
+            }
+        }
+
+        /// <summary>
+        /// Callback function for handling the remote SSL Certificate Validation.
+        /// The callback takes precedence over `VerifySsl`. 
+        /// </summary>
+        public RemoteCertificateValidationCallback VerifySslCallback { get; set; }
+
+        /// <summary>
+        /// Set X509CertificateCollection to be sent with HTTP requests
+        /// </summary>
+        public X509CertificateCollection ClientCertificates
+        {
+            get => _clientCertificates;
+            set
+            {
+                Arguments.CheckNotNull(value, "ClientCertificates");
+                _clientCertificates = value;
+            }
+        }
+
+        /// <summary>
+        /// The setting for store data point: default values, threshold, ...
+        /// </summary>
         public PointSettings PointSettings { get; }
 
-        public bool VerifySsl { get; }
+        /// <summary>
+        /// Default tags that will be use for writes by Point and POJO.
+        /// </summary>
+        public Dictionary<string, string> DefaultTags
+        {
+            get => PointSettings.DefaultTags;
+            set => PointSettings.DefaultTags = value;
+        }
 
-        public RemoteCertificateValidationCallback VerifySslCallback { get; }
+        /// <summary>
+        /// Add default tag that will be use for writes by Point and POJO.
+        /// <para>
+        /// The expressions can be:
+        /// <list type="bullet">
+        /// <item>"California Miner" - static value</item>
+        /// <item>"${version}" - application settings</item>
+        /// <item>"${env.hostname}" - environment property</item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        /// <param name="tagName">the tag name</param>
+        /// <param name="expression">the tag value expression</param>
+        public void AddDefaultTag(string tagName, string expression)
+        {
+            Arguments.CheckNotNull(tagName, nameof(tagName));
+            PointSettings.AddDefaultTag(tagName, expression);
+        }
 
-        public X509CertificateCollection ClientCertificates { get; }
+        /// <summary>
+        /// Add default tags that will be use for writes by Point and POJO.
+        /// <see cref="AddDefaultTag"/>
+        /// </summary>
+        /// <param name="tags">tags dictionary</param>
+        public void AddDefaultTags(Dictionary<string, string> tags)
+        {
+            foreach (var tag in tags)
+            {
+                Arguments.CheckNotNull(tag.Key, "TagName");
+                PointSettings.AddDefaultTag(tag.Key, tag.Value);
+            }
+        }
+
+        /// <summary>
+        /// Create an instance of InfluxDBClientOptions. The url could be a connection string with various configurations.
+        ///<para>
+        /// e.g.: "http://localhost:8086?timeout=5000&amp;logLevel=BASIC
+        /// The following options are supported:
+        /// <list type="bullet">
+        /// <item>Timeout - timespan to wait before the HTTP request times out</item>
+        /// <item>LogLevel - log level for the request and response information</item>
+        /// <item>Token - setup authorization by <see cref="AuthenticationScheme.Token"/></item>
+        /// <item>Username - with Password property setup authorization by <see cref="AuthenticationScheme.Session"/></item>
+        /// <item>Password - with Username property setup authorization by <see cref="AuthenticationScheme.Session"/></item>
+        /// <item>Org - specify the default destination organization for writes and queries</item>
+        /// <item>Bucket - specify the default destination bucket for writes</item>
+        /// <item>WebProxy - specify the WebProxy instance to use by the WebRequest to connect to external InfluxDB.</item>
+        /// <item>AllowHttpRedirects - configure automatically following HTTP 3xx redirects</item>
+        /// <item>VerifySsl - ignore Certificate Validation Errors when `false`</item>
+        /// <item>VerifySslCallback - callback function for handling the remote SSL Certificate Validation. The callback takes precedence over `VerifySsl`</item>
+        /// <item>ClientCertificates - set X509CertificateCollection to be sent with HTTP requests</item>
+        /// <item>DefaultTags - tags that will be use for writes by Point and POJO</item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        /// <param name="url">url to connect the InfluxDB</param>
+        public InfluxDBClientOptions(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentException("The url to connect the InfluxDB has to be defined.");
+            }
+
+            var uri = new Uri(url);
+
+            Url = uri.GetLeftPart(UriPartial.Path);
+            if (string.IsNullOrEmpty(Url))
+            {
+                throw new ArgumentException("The url to connect the InfluxDB has to be defined.");
+            }
+
+            var query = HttpUtility.ParseQueryString(uri.Query);
+            Org = query.Get("org");
+            Bucket = query.Get("bucket");
+            AllowHttpRedirects = Convert.ToBoolean(query.Get("allowHttpRedirects"));
+
+            var verifySslValue = query.Get("verifySsl");
+            var token = query.Get("token");
+            var logLevel = query.Get("logLevel");
+            var timeout = query.Get("timeout");
+
+            VerifySsl = Convert.ToBoolean(string.IsNullOrEmpty(verifySslValue) ? "true" : verifySslValue);
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                Token = token;
+            }
+
+            if (!string.IsNullOrWhiteSpace(logLevel))
+            {
+                Enum.TryParse(logLevel, true, out LogLevel logLevelValue);
+                LogLevel = logLevelValue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(timeout))
+            {
+                Timeout = ToTimeout(timeout);
+            }
+
+            if (Timeout == TimeSpan.Zero || Timeout == TimeSpan.FromMilliseconds(0))
+            {
+                Timeout = TimeSpan.FromSeconds(10);
+            }
+
+            PointSettings = new PointSettings();
+        }
+
+        /// <summary>
+        /// Configure InfluxDBClientOptions via App.config.
+        /// </summary>
+        /// <param name="sectionName">Name of configuration section. Useful for tests.</param>
+        /// <returns><see cref="InfluxDBClientOptions"/></returns>
+        public static InfluxDBClientOptions LoadConfig(string sectionName = "influx2")
+        {
+            var config = (Influx2)ConfigurationManager.GetSection(sectionName);
+            if (config == null)
+            {
+                const string message = "The configuration doesn't contains a 'influx2' section. " +
+                                       "The minimal configuration should contains an url of InfluxDB. " +
+                                       "For more details see: " +
+                                       "https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/README.md#client-configuration-file";
+
+                throw new ConfigurationErrorsException(message);
+            }
+
+            var url = config.Url;
+            var org = config.Org;
+            var bucket = config.Bucket;
+            var token = config.Token;
+            var logLevel = config.LogLevel;
+            var timeout = config.Timeout;
+            var allowHttpRedirects = config.AllowHttpRedirects;
+            var verifySsl = config.VerifySsl;
+
+            var influxDbClientOptions = new InfluxDBClientOptions(url)
+            {
+                Org = org,
+                Bucket = bucket,
+                AllowHttpRedirects = allowHttpRedirects,
+                VerifySsl = verifySsl
+            };
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                influxDbClientOptions.Token = token;
+            }
+
+            if (!string.IsNullOrWhiteSpace(logLevel))
+            {
+                Enum.TryParse(logLevel, true, out LogLevel logLevelValue);
+                influxDbClientOptions.LogLevel = logLevelValue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(timeout))
+            {
+                influxDbClientOptions.Timeout = ToTimeout(timeout);
+            }
+
+            if (influxDbClientOptions.Timeout == TimeSpan.Zero ||
+                influxDbClientOptions.Timeout == TimeSpan.FromMilliseconds(0))
+            {
+                influxDbClientOptions.Timeout = TimeSpan.FromSeconds(10);
+            }
+
+            var tags = config.Tags;
+            if (tags != null)
+            {
+                foreach (Influx2.TagElement o in tags)
+                    influxDbClientOptions.PointSettings.AddDefaultTag(o.Name, o.Value);
+            }
+
+            return influxDbClientOptions;
+        }
 
         private InfluxDBClientOptions(Builder builder)
         {
@@ -54,23 +399,68 @@ namespace InfluxDB.Client
             Url = builder.UrlString;
             LogLevel = builder.LogLevelValue;
             AuthScheme = builder.AuthScheme;
-            Token = builder.Token;
-            Username = builder.Username;
-            Password = builder.Password;
+
+            switch (builder.AuthScheme)
+            {
+                case AuthenticationScheme.Token:
+                    Token = builder.Token;
+                    break;
+                case AuthenticationScheme.Session:
+                    Username = builder.Username;
+                    Password = builder.Password;
+                    break;
+            }
 
             Org = builder.OrgString;
             Bucket = builder.BucketString;
-
             Timeout = builder.Timeout;
-
-            WebProxy = builder.WebProxy;
             AllowHttpRedirects = builder.AllowHttpRedirects;
-
             PointSettings = builder.PointSettings;
-
             VerifySsl = builder.VerifySslCertificates;
             VerifySslCallback = builder.VerifySslCallback;
-            ClientCertificates = builder.CertificateCollection;
+
+            if (builder.WebProxy != null)
+            {
+                WebProxy = builder.WebProxy;
+            }
+
+            if (builder.CertificateCollection != null)
+            {
+                ClientCertificates = builder.CertificateCollection;
+            }
+        }
+
+        private static TimeSpan ToTimeout(string value)
+        {
+            var matcher = DurationRegex.Match(value);
+            if (!matcher.Success)
+            {
+                throw new InfluxException($"'{value}' is not a valid duration");
+            }
+
+            var amount = matcher.Groups["Amount"].Value;
+            var unit = matcher.Groups["Unit"].Value;
+
+            TimeSpan duration;
+            switch (string.IsNullOrWhiteSpace(unit) ? "ms" : unit.ToLower())
+            {
+                case "ms":
+                    duration = TimeSpan.FromMilliseconds(double.Parse(amount));
+                    break;
+
+                case "s":
+                    duration = TimeSpan.FromSeconds(double.Parse(amount));
+                    break;
+
+                case "m":
+                    duration = TimeSpan.FromMinutes(double.Parse(amount));
+                    break;
+
+                default:
+                    throw new InfluxException($"unknown unit for '{value}'");
+            }
+
+            return duration;
         }
 
         /// <summary>
@@ -103,9 +493,9 @@ namespace InfluxDB.Client
             internal LogLevel LogLevelValue;
 
             internal AuthenticationScheme AuthScheme;
-            internal char[] Token;
+            internal string Token;
             internal string Username;
-            internal char[] Password;
+            internal string Password;
             internal TimeSpan Timeout;
 
             internal string OrgString;
@@ -180,7 +570,7 @@ namespace InfluxDB.Client
 
                 AuthScheme = AuthenticationScheme.Session;
                 Username = username;
-                Password = password;
+                Password = new string(password);
 
                 return this;
             }
@@ -195,7 +585,7 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(token, "token");
 
                 AuthScheme = AuthenticationScheme.Token;
-                Token = token;
+                Token = new string(token);
 
                 return this;
             }
@@ -417,39 +807,6 @@ namespace InfluxDB.Client
                 VerifySsl(verifySsl);
 
                 return this;
-            }
-
-            private TimeSpan ToTimeout(string value)
-            {
-                var matcher = DurationRegex.Match(value);
-                if (!matcher.Success)
-                {
-                    throw new InfluxException($"'{value}' is not a valid duration");
-                }
-
-                var amount = matcher.Groups["Amount"].Value;
-                var unit = matcher.Groups["Unit"].Value;
-
-                TimeSpan duration;
-                switch (string.IsNullOrWhiteSpace(unit) ? "ms" : unit.ToLower())
-                {
-                    case "ms":
-                        duration = TimeSpan.FromMilliseconds(double.Parse(amount));
-                        break;
-
-                    case "s":
-                        duration = TimeSpan.FromSeconds(double.Parse(amount));
-                        break;
-
-                    case "m":
-                        duration = TimeSpan.FromMinutes(double.Parse(amount));
-                        break;
-
-                    default:
-                        throw new InfluxException($"unknown unit for '{value}'");
-                }
-
-                return duration;
             }
 
             /// <summary>

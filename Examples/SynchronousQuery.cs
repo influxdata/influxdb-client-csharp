@@ -5,9 +5,9 @@ namespace Examples
 {
     public class SynchronousQuery
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            using var client = InfluxDBClientFactory.Create("http://localhost:9999", "my-token");
+            using var client = new InfluxDBClient("http://localhost:9999", "my-token");
 
             const string query = "from(bucket:\"my-bucket\") |> range(start: 0)";
 

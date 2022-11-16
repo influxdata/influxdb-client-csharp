@@ -21,7 +21,7 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new void SetUp()
         {
-            _client = InfluxDBClientFactory.Create(GetInfluxDb2Url(), "my-token");
+            _client = new InfluxDBClient(GetInfluxDb2Url(), "my-token");
         }
 
         [TearDown]

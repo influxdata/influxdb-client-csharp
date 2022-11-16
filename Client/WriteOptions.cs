@@ -1,3 +1,4 @@
+using System;
 using System.Reactive.Concurrency;
 using InfluxDB.Client.Core;
 
@@ -27,23 +28,56 @@ namespace InfluxDB.Client
         private const int DefaultMaxRetryDelay = 125_000;
         private const int DefaultExponentialBase = 2;
 
+        private int _batchSize;
+        private int _flushInterval;
+        private int _jitterInterval;
+        private int _retryInterval;
+        private int _maxRetries;
+        private int _maxRetryDelay;
+        private int _exponentialBase;
+        private IScheduler _writeScheduler;
+
         /// <summary>
         /// The number of data point to collect in batch.
         /// </summary>
         /// <seealso cref="Builder.BatchSize(int)"/>
-        internal int BatchSize { get; }
+        public int BatchSize
+        {
+            get => _batchSize;
+            set
+            {
+                Arguments.CheckPositiveNumber(value, "batchSize");
+                _batchSize = value;
+            }
+        }
 
         /// <summary>
         /// The time to wait at most (milliseconds).
         /// </summary>
         /// <seealso cref="Builder.FlushInterval(int)"/>
-        internal int FlushInterval { get; }
+        public int FlushInterval
+        {
+            get => _flushInterval;
+            set
+            {
+                Arguments.CheckPositiveNumber(value, "flushInterval");
+                _flushInterval = value;
+            }
+        }
 
         /// <summary>
         /// The batch flush jitter interval value (milliseconds).
         /// </summary>
         /// <seealso cref="Builder.JitterInterval(int)"/>
-        internal int JitterInterval { get; }
+        public int JitterInterval
+        {
+            get => _jitterInterval;
+            set
+            {
+                Arguments.CheckNotNegativeNumber(value, "jitterInterval");
+                _jitterInterval = value;
+            }
+        }
 
         /// <summary>
         /// The time to wait before retry unsuccessful write (milliseconds).
@@ -55,31 +89,98 @@ namespace InfluxDB.Client
         /// </para>
         /// </summary>
         /// <seealso cref="Builder.RetryInterval(int)"/>
-        public int RetryInterval { get; }
+        public int RetryInterval
+        {
+            get => _retryInterval;
+            set
+            {
+                Arguments.CheckPositiveNumber(value, "retryInterval");
+                _retryInterval = value;
+            }
+        }
 
         /// <summary>
         /// The number of max retries when write fails.
         /// </summary>
         /// <seealso cref="Builder.MaxRetries(int)"/>
-        public int MaxRetries { get; }
+        public int MaxRetries
+        {
+            get => _maxRetries;
+            set
+            {
+                Arguments.CheckPositiveNumber(value, "MaxRetries");
+                _maxRetries = value;
+            }
+        }
 
         /// <summary>
         /// The maximum delay between each retry attempt in milliseconds.
         /// </summary>
         /// <seealso cref="Builder.MaxRetryDelay(int)"/>
-        public int MaxRetryDelay { get; }
+        public int MaxRetryDelay
+        {
+            get => _maxRetryDelay;
+            set
+            {
+                Arguments.CheckPositiveNumber(value, "MaxRetryDelay");
+                _maxRetryDelay = value;
+            }
+        }
 
         /// <summary>
         /// The base for the exponential retry delay.
         /// </summary>
         /// <seealso cref="Builder.ExponentialBase(int)"/>
-        public int ExponentialBase { get; }
+        public int ExponentialBase
+        {
+            get => _exponentialBase;
+            set
+            {
+                Arguments.CheckPositiveNumber(value, "ExponentialBase");
+                _exponentialBase = value;
+            }
+        }
 
         /// <summary>
         /// Set the scheduler which is used for write data points.
         /// </summary>
         /// <seealso cref="Builder.WriteScheduler(IScheduler)"/>
-        internal IScheduler WriteScheduler { get; }
+        public IScheduler WriteScheduler
+        {
+            get => _writeScheduler;
+            set
+            {
+                Arguments.CheckNotNull(value, "Write scheduler");
+                _writeScheduler = value;
+            }
+        }
+
+        /// <summary>
+        /// Create an instance of WriteOptions.
+        /// <para>
+        /// WriteOptions properties and their default values:
+        /// <list type="bullet">
+        /// <item>BatchSize:        1000</item>
+        /// <item>FlushInterval:    1000(ms)</item>
+        /// <item>JitterInterval:   0</item>
+        /// <item>RetryInterval:    5000(ms)</item>
+        /// <item>MaxRetries:       5</item>
+        /// <item>MaxRetryDelay:    125_000</item>
+        /// <item>ExponentialBase:  2</item>
+        /// </list>
+        /// </para>
+        /// </summary>
+        public WriteOptions()
+        {
+            _batchSize = DefaultBatchSize;
+            _flushInterval = DefaultFlushInterval;
+            _jitterInterval = DefaultJitterInterval;
+            _retryInterval = DefaultRetryInterval;
+            _maxRetries = DefaultMaxRetries;
+            _maxRetryDelay = DefaultMaxRetryDelay;
+            _exponentialBase = DefaultExponentialBase;
+            _writeScheduler = ThreadPoolScheduler.Instance;
+        }
 
         private WriteOptions(Builder builder)
         {
@@ -225,6 +326,8 @@ namespace InfluxDB.Client
             ///  Build an instance of WriteOptions.
             /// </summary>
             /// <returns><see cref="WriteOptions"/></returns>
+            /// <remarks>Deprecated - please use use object initializer <see cref="WriteOptions()"/></remarks>
+            [Obsolete("This method is deprecated. Call 'WriteOptions' initializer instead.", false)]
             public WriteOptions Build()
             {
                 return new WriteOptions(this);

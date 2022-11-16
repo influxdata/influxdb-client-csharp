@@ -34,15 +34,16 @@ namespace Examples
 
         private static Task BasicEventHandler()
         {
-            using var client = InfluxDBClientFactory.Create("http://localhost:9999",
-                "my-user", "my-password".ToCharArray());
+            using var client = new InfluxDBClient("http://localhost:9999",
+                "my-user", "my-password");
 
-            var options = WriteOptions.CreateNew()
-                .BatchSize(1)
-                .FlushInterval(1000)
-                .RetryInterval(2000)
-                .MaxRetries(3)
-                .Build();
+            var options = new WriteOptions
+            {
+                BatchSize = 1,
+                FlushInterval = 1000,
+                RetryInterval = 2000,
+                MaxRetries = 3
+            };
 
             //
             // Write Data
@@ -150,15 +151,17 @@ namespace Examples
 
         private static Task CustomEventListener()
         {
-            using var client = InfluxDBClientFactory.Create("http://localhost:9999/",
-                "my-user", "my-password".ToCharArray());
+            using var client = new InfluxDBClient("http://localhost:9999",
+                "my-user", "my-password");
 
-            var options = WriteOptions.CreateNew()
-                .BatchSize(5)
-                .FlushInterval(1000)
-                .RetryInterval(2000)
-                .MaxRetries(3)
-                .Build();
+            var options = new WriteOptions
+            {
+                BatchSize = 5,
+                FlushInterval = 1000,
+                RetryInterval = 2000,
+                MaxRetries = 3
+            };
+
             //
             // Write Data
             //

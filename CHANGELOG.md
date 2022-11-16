@@ -1,5 +1,12 @@
 ## 4.8.0 [unreleased]
 
+:warning: The client can be created without `InfluxDBClientFactory`:
+
+    using var client = new InfluxDBClient("http://localhost:8086", "my-token");
+
+### Features
+1. [#388](https://github.com/influxdata/influxdb-client-csharp/pull/388): Initialize C# client without `InfluxDBClientFactory`
+
 ### CI
 1. [#416](https://github.com/influxdata/influxdb-client-csharp/pull/416): Add build for `.NET 7.0`
 

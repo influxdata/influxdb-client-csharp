@@ -31,7 +31,7 @@ namespace InfluxDB.Client.Test
         [SetUp]
         public new void SetUp()
         {
-            _client = InfluxDBClientFactory.Create(MockServerUrl);
+            _client = new InfluxDBClient(MockServerUrl);
         }
 
         [Test]
@@ -185,7 +185,7 @@ namespace InfluxDB.Client.Test
                 request.RequestMessage.AbsoluteUrl);
 
             _client.Dispose();
-            _client = InfluxDBClientFactory.Create(MockServerUrl + "/");
+            _client = new InfluxDBClient(MockServerUrl + "/");
 
             using (var writeApi = _client.GetWriteApi())
             {
@@ -198,8 +198,10 @@ namespace InfluxDB.Client.Test
                 request.RequestMessage.AbsoluteUrl);
 
             _client.Dispose();
-            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder().Url(MockServerUrl)
-                .AuthenticateToken("my-token").Build());
+            _client = new InfluxDBClient(new InfluxDBClientOptions(MockServerUrl)
+            {
+                Token = "my-token"
+            });
 
             using (var writeApi = _client.GetWriteApi())
             {
@@ -212,8 +214,10 @@ namespace InfluxDB.Client.Test
                 request.RequestMessage.AbsoluteUrl);
 
             _client.Dispose();
-            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder().Url(MockServerUrl + "/")
-                .AuthenticateToken("my-token").Build());
+            _client = new InfluxDBClient(new InfluxDBClientOptions(MockServerUrl + "/")
+            {
+                Token = "my-token"
+            });
 
             using (var writeApi = _client.GetWriteApi())
             {
@@ -256,11 +260,11 @@ namespace InfluxDB.Client.Test
         public async Task RedirectToken()
         {
             _client.Dispose();
-            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder()
-                .Url(MockServerUrl)
-                .AuthenticateToken("my-token")
-                .AllowRedirects(true)
-                .Build());
+            _client = new InfluxDBClient(new InfluxDBClientOptions(MockServerUrl)
+            {
+                Token = "my-token",
+                AllowHttpRedirects = true
+            });
 
             var anotherServer = WireMockServer.Start(new WireMockServerSettings
             {
@@ -292,11 +296,12 @@ namespace InfluxDB.Client.Test
         public async Task RedirectCookie()
         {
             _client.Dispose();
-            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder()
-                .Url(MockServerUrl)
-                .Authenticate("my-username", "my-password".ToCharArray())
-                .AllowRedirects(true)
-                .Build());
+            _client = new InfluxDBClient(new InfluxDBClientOptions(MockServerUrl)
+            {
+                Username = "my-username",
+                Password = "my-password",
+                AllowHttpRedirects = true
+            });
 
             var anotherServer = WireMockServer.Start(new WireMockServerSettings
             {
@@ -331,9 +336,7 @@ namespace InfluxDB.Client.Test
         public async Task Anonymous()
         {
             _client.Dispose();
-            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder()
-                .Url(MockServerUrl)
-                .Build());
+            _client = new InfluxDBClient(new InfluxDBClientOptions(MockServerUrl));
 
             MockServer
                 .Given(Request.Create().UsingGet())
@@ -385,10 +388,10 @@ namespace InfluxDB.Client.Test
             var reached = false;
 
             _client.Dispose();
-            _client = InfluxDBClientFactory.Create(new InfluxDBClientOptions.Builder()
-                .Url(mockServerSsl.Urls[0])
-                .RemoteCertificateValidationCallback((sender, certificate, chain, errors) => reached = true)
-                .Build());
+            _client = new InfluxDBClient(new InfluxDBClientOptions(mockServerSsl.Urls[0])
+            {
+                VerifySslCallback = (sender, certificate, chain, errors) => reached = true
+            });
 
             mockServerSsl.Given(Request.Create().WithPath("/ping").UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(204)
@@ -422,7 +425,7 @@ namespace InfluxDB.Client.Test
         public void RedactedAuthorizationHeader()
         {
             _client.Dispose();
-            _client = InfluxDBClientFactory.Create(MockServerUrl, "my-token");
+            _client = new InfluxDBClient(MockServerUrl, "my-token");
 
             var writer = new StringWriter();
             Trace.Listeners.Add(new TextWriterTraceListener(writer));
