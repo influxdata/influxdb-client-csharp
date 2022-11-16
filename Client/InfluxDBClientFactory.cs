@@ -11,6 +11,10 @@ namespace InfluxDB.Client
         /// Create a instance of the InfluxDB 2.x client that is configured via <code>App.config</code>.
         /// </summary>
         /// <returns>client</returns>
+        /// <remarks>Deprecated - please use use object initializer <see cref="InfluxDBClient(InfluxDBClientOptions)"/>
+        /// together with <see cref="InfluxDBClientOptions.LoadConfig"/>
+        /// </remarks>
+        [Obsolete("This method is deprecated. Call 'InfluxDBClient' initializer instead.", false)]
         public static InfluxDBClient Create()
         {
             var options = InfluxDBClientOptions.Builder

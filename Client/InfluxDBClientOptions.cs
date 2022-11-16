@@ -325,6 +325,73 @@ namespace InfluxDB.Client
             PointSettings = new PointSettings();
         }
 
+        /// <summary>
+        /// Configure InfluxDBClientOptions via App.config.
+        /// </summary>
+        /// <param name="sectionName">Name of configuration section. Useful for tests.</param>
+        /// <returns><see cref="InfluxDBClientOptions"/></returns>
+        public static InfluxDBClientOptions LoadConfig(string sectionName = "influx2")
+        {
+            var config = (Influx2)ConfigurationManager.GetSection(sectionName);
+            if (config == null)
+            {
+                const string message = "The configuration doesn't contains a 'influx2' section. " +
+                                       "The minimal configuration should contains an url of InfluxDB. " +
+                                       "For more details see: " +
+                                       "https://github.com/influxdata/influxdb-client-csharp/blob/master/Client/README.md#client-configuration-file";
+
+                throw new ConfigurationErrorsException(message);
+            }
+
+            var url = config.Url;
+            var org = config.Org;
+            var bucket = config.Bucket;
+            var token = config.Token;
+            var logLevel = config.LogLevel;
+            var timeout = config.Timeout;
+            var allowHttpRedirects = config.AllowHttpRedirects;
+            var verifySsl = config.VerifySsl;
+
+            var influxDbClientOptions = new InfluxDBClientOptions(url)
+            {
+                Org = org,
+                Bucket = bucket,
+                AllowHttpRedirects = allowHttpRedirects,
+                VerifySsl = verifySsl
+            };
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                influxDbClientOptions.Token = token;
+            }
+
+            if (!string.IsNullOrWhiteSpace(logLevel))
+            {
+                Enum.TryParse(logLevel, true, out LogLevel logLevelValue);
+                influxDbClientOptions.LogLevel = logLevelValue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(timeout))
+            {
+                influxDbClientOptions.Timeout = ToTimeout(timeout);
+            }
+
+            if (influxDbClientOptions.Timeout == TimeSpan.Zero ||
+                influxDbClientOptions.Timeout == TimeSpan.FromMilliseconds(0))
+            {
+                influxDbClientOptions.Timeout = TimeSpan.FromSeconds(10);
+            }
+
+            var tags = config.Tags;
+            if (tags != null)
+            {
+                foreach (Influx2.TagElement o in tags)
+                    influxDbClientOptions.PointSettings.AddDefaultTag(o.Name, o.Value);
+            }
+
+            return influxDbClientOptions;
+        }
+
         private InfluxDBClientOptions(Builder builder)
         {
             Arguments.CheckNotNull(builder, nameof(builder));

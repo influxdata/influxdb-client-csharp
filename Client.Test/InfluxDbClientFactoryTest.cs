@@ -306,6 +306,33 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        public void LoadFromConfigurationOptions()
+        {
+            CopyAppConfig();
+
+            _client = new InfluxDBClient(InfluxDBClientOptions.LoadConfig());
+
+            var options = GetDeclaredField<InfluxDBClientOptions>(_client.GetType(), _client, "_options");
+            Assert.AreEqual("http://localhost:9999/", options.Url);
+            Assert.AreEqual("my-org", options.Org);
+            Assert.AreEqual("my-bucket", options.Bucket);
+            Assert.AreEqual("my-token".ToCharArray(), options.Token);
+            Assert.AreEqual(LogLevel.Body, options.LogLevel);
+            Assert.AreEqual(LogLevel.Body, _client.GetLogLevel());
+
+            var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
+            Assert.AreEqual(10_000, apiClient.RestClientOptions.MaxTimeout);
+
+            var defaultTags = GetDeclaredField<SortedDictionary<string, string>>(options.PointSettings.GetType(),
+                options.PointSettings, "_defaultTags");
+
+            Assert.AreEqual(4, defaultTags.Count);
+            Assert.AreEqual("132-987-655", defaultTags["id"]);
+            Assert.AreEqual("California Miner", defaultTags["customer"]);
+            Assert.AreEqual("${SensorVersion}", defaultTags["version"]);
+        }
+
+        [Test]
         public void LoadFromConfigurationWithoutUrl()
         {
             CopyAppConfig();
