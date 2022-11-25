@@ -439,6 +439,11 @@ namespace InfluxDB.Client
             {
                 ClientCertificates = builder.CertificateCollection;
             }
+
+            if (builder.HttpClient != null)
+            {
+                HttpClient = builder.HttpClient;
+            }
         }
 
         private static TimeSpan ToTimeout(string value)
@@ -517,6 +522,7 @@ namespace InfluxDB.Client
             internal bool VerifySslCertificates = true;
             internal RemoteCertificateValidationCallback VerifySslCallback;
             internal X509CertificateCollection CertificateCollection;
+            internal HttpClient HttpClient;
 
             internal PointSettings PointSettings = new PointSettings();
 
@@ -725,6 +731,20 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(clientCertificates, nameof(clientCertificates));
 
                 CertificateCollection = clientCertificates;
+
+                return this;
+            }
+
+            /// <summary>
+            /// Set HttpClient
+            /// </summary>
+            /// <param name="httpClient"></param>
+            /// <returns></returns>
+            public Builder SetHttpClient(HttpClient httpClient)
+            {
+                Arguments.CheckNotNull(httpClient, nameof(httpClient));
+
+                HttpClient = httpClient;
 
                 return this;
             }

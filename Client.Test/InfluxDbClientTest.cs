@@ -444,5 +444,27 @@ namespace InfluxDB.Client.Test
 
             StringAssert.Contains("Header: Authorization=***", writer.ToString());
         }
+
+        [Test]
+        public void SetHttpClient()
+        {
+            var httpClient = new HttpClient();
+            var dbClient = new InfluxDBClient(
+                InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url("http://localhost:8086/")
+                .SetHttpClient(httpClient)
+                .Build()
+                );
+            var fieldOfApiClient = dbClient.GetType().GetField("_apiClient", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+            var apiClient = fieldOfApiClient.GetValue(dbClient) as ApiClient;
+
+            var propertydOfHttpClient = apiClient.RestClient.GetType().GetProperty("HttpClient", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+            var client = propertydOfHttpClient.GetValue(apiClient.RestClient) as HttpClient;
+
+            Assert.True(client.GetHashCode() == httpClient.GetHashCode());
+        }
     }
 }

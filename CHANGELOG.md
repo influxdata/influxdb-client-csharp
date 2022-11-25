@@ -1068,3 +1068,4 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 ###  Features
 1. [Influx] (https://github.com/influxdata/influxdb-client-csharp/blob/master/Client#InfluxDBClientOptions): Add a property of httpClient that can by used for dependency injection
 2. [Internal] (https://github.com/influxdata/influxdb-client-csharp/tree/master/Client/Internal#ApiClient): Create an RestClient instance by the httpClient of InfluxDBClientOptions
+2. [Influx] (https://github.com/influxdata/influxdb-client-csharp/tree/master/Client#InfluxDBClientOptions): Add the method SetHttpClient to set value of HttpClient 
