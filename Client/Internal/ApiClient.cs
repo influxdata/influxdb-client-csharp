@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace InfluxDB.Client.Api.Client
         private bool _initializedSessionTokens = false;
         private bool _signout;
 
-        public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler, GzipHandler gzipHandler)
+        public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler, GzipHandler gzipHandler, HttpClient client = null)
         {
             _options = options;
             _loggingHandler = loggingHandler;
@@ -58,7 +59,7 @@ namespace InfluxDB.Client.Api.Client
                 RestClientOptions.ClientCertificates.AddRange(options.ClientCertificates);
             }
 
-            RestClient = new RestClient(RestClientOptions);
+            RestClient = client == null ? new RestClient(RestClientOptions) : new RestClient(client, RestClientOptions);
             Configuration = new Configuration
             {
                 ApiClient = this,
