@@ -1064,3 +1064,7 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 ### Features
 1. [Client](https://github.com/influxdata/influxdb-client-csharp/tree/master/Client#influxdbclient): The reference C# client that allows query, write and InfluxDB 2.0 management
 1. [Client.Legacy](https://github.com/influxdata/influxdb-client-csharp/tree/master/Client.Legacy#influxdbclientflux): The reference C# client that allows you to perform Flux queries against InfluxDB 1.7+
+
+###  Features
+1. [Influx] (https://github.com/influxdata/influxdb-client-csharp/blob/master/Client#InfluxDBClientOptions): Add a property of httpClient that can by used for dependency injection
+2. [Internal] (https://github.com/influxdata/influxdb-client-csharp/tree/master/Client/Internal#ApiClient): Create an RestClient instance by the httpClient of InfluxDBClientOptions
