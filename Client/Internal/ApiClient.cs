@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Api.Client
         private bool _initializedSessionTokens = false;
         private bool _signout;
 
-        public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler, GzipHandler gzipHandler, HttpClient client = null)
+        public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler, GzipHandler gzipHandler)
         {
             _options = options;
             _loggingHandler = loggingHandler;
@@ -59,7 +59,10 @@ namespace InfluxDB.Client.Api.Client
                 RestClientOptions.ClientCertificates.AddRange(options.ClientCertificates);
             }
 
-            RestClient = client == null ? new RestClient(RestClientOptions) : new RestClient(client, RestClientOptions);
+            RestClient = options.HttpClient == null ? 
+                new RestClient(RestClientOptions) : 
+                new RestClient(options.HttpClient, RestClientOptions);
+
             Configuration = new Configuration
             {
                 ApiClient = this,

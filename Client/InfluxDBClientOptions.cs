@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
+using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
@@ -34,6 +35,7 @@ namespace InfluxDB.Client
         private bool _allowHttpRedirects;
         private bool _verifySsl;
         private X509CertificateCollection _clientCertificates;
+        private HttpClient _httpClient;
 
         /// <summary>
         /// Set the url to connect the InfluxDB.
@@ -202,6 +204,15 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(value, "ClientCertificates");
                 _clientCertificates = value;
             }
+        }
+
+        /// <summary>
+        /// An instance of HttpClient that can by used for dependency injection
+        /// </summary>
+        public HttpClient HttpClient
+        {
+            get => _httpClient;
+            set => _httpClient = value;
         }
 
         /// <summary>

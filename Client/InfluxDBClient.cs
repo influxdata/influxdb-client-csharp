@@ -313,8 +313,7 @@ namespace InfluxDB.Client
         /// Create a instance of the InfluxDB 2.x client.
         /// </summary>
         /// <param name="options">the connection configuration</param>
-        /// <param name="client">the http client</param> 
-        public InfluxDBClient(InfluxDBClientOptions options, HttpClient client = null)
+        public InfluxDBClient(InfluxDBClientOptions options)
         {
             Arguments.CheckNotNull(options, nameof(options));
 
@@ -322,7 +321,7 @@ namespace InfluxDB.Client
             _loggingHandler = new LoggingHandler(options.LogLevel);
             _gzipHandler = new GzipHandler();
 
-            _apiClient = new ApiClient(options, _loggingHandler, _gzipHandler, client);
+            _apiClient = new ApiClient(options, _loggingHandler, _gzipHandler);
 
             _exceptionFactory = (methodName, response) =>
                 !response.IsSuccessful ? HttpException.Create(response, response.Content) : null;
