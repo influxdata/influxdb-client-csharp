@@ -15,6 +15,7 @@ Update dependencies:
 
 #### Build:
   - [#418](https://github.com/influxdata/influxdb-client-csharp/pull/418): `RestSharp` to `108.0.3`
+  - [#423](https://github.com/influxdata/influxdb-client-csharp/pull/423): `Newtonsoft.Json` to `13.0.2`
   - [#405](https://github.com/influxdata/influxdb-client-csharp/pull/405): `NodaTime.Serialization.JsonNet` to `3.0.1`
   - [#413](https://github.com/influxdata/influxdb-client-csharp/pull/413): `CsvHelper` to `30.0.1`
 
