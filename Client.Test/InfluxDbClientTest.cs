@@ -452,7 +452,7 @@ namespace InfluxDB.Client.Test
             var dbClient = new InfluxDBClient(
                 InfluxDBClientOptions.Builder
                 .CreateNew()
-                .Url("http://localhost:8086/")
+                .Url(MockServerUrl)
                 .SetHttpClient(httpClient)
                 .Build()
                 );
