@@ -23,7 +23,7 @@ Update dependencies:
   - [#424](https://github.com/influxdata/influxdb-client-csharp/pull/424): `Radzen.Blazor` to `4.3.8`
 
 #### Test:
-  - [#407](https://github.com/influxdata/influxdb-client-csharp/pull/407): `WireMock.Net` to `1.5.10`
+  - [#422](https://github.com/influxdata/influxdb-client-csharp/pull/422): `WireMock.Net` to `1.5.11`
   - [#412](https://github.com/influxdata/influxdb-client-csharp/pull/412): `Microsoft.NET.Test.Sdk` to `17.4.0`
   - [#417](https://github.com/influxdata/influxdb-client-csharp/pull/417): `NUnit3TestAdapter` to `4.3.1`
 
