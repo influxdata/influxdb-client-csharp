@@ -444,5 +444,35 @@ namespace InfluxDB.Client.Test
 
             StringAssert.Contains("Header: Authorization=***", writer.ToString());
         }
+
+        [Test]
+        public void SetHttpClient()
+        {
+            var httpClient1 = new HttpClient();
+
+            var options = InfluxDBClientOptions.Builder
+                .CreateNew()
+                .Url("http://localhost:8086/")
+                .AuthenticateToken(("EMnOtfL2y09sf8_2MCuoogkjlxzPSlpAlIKC-5v5RWSGCPS4v6TU4GqE6kNQlrb6zyVC9sTkK9aC8xEjymDc5Q==").ToArray())
+                .SetHttpClient(httpClient1)
+                .Build();
+
+            var dbClient = new InfluxDBClient(options);
+
+            var apiClient = dbClient.GetType().GetField("_apiClient",
+               BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(dbClient) as ApiClient;
+
+            var httpClient2 = apiClient.RestClient.GetType()
+                .GetProperty("HttpClient", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                .GetValue(apiClient.RestClient) as HttpClient;
+
+            Assert.True(httpClient1.GetHashCode() == httpClient2.GetHashCode());
+
+            using (var writeApi = dbClient.GetWriteApi())
+            {
+                writeApi.WriteRecord("h2o_feet,location=coyote_creek water_level=1.0 1", WritePrecision.Ns, "test",
+                    "seck");
+            }
+        }
     }
 }

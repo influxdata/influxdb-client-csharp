@@ -58,7 +58,10 @@ namespace InfluxDB.Client.Api.Client
                 RestClientOptions.ClientCertificates.AddRange(options.ClientCertificates);
             }
 
-            RestClient = new RestClient(RestClientOptions);
+            RestClient = options.HttpClient == null ?
+                new RestClient(RestClientOptions) :
+                new RestClient(options.HttpClient, RestClientOptions);
+
             Configuration = new Configuration
             {
                 ApiClient = this,
