@@ -456,11 +456,13 @@ namespace InfluxDB.Client.Test
                 .SetHttpClient(httpClient)
                 .Build()
                 );
-            var fieldOfApiClient = dbClient.GetType().GetField("_apiClient", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var fieldOfApiClient = dbClient.GetType().GetField("_apiClient", 
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
             var apiClient = fieldOfApiClient.GetValue(dbClient) as ApiClient;
 
-            var propertydOfHttpClient = apiClient.RestClient.GetType().GetProperty("HttpClient", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var propertydOfHttpClient = apiClient.RestClient.GetType()
+                .GetProperty("HttpClient", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
             var client = propertydOfHttpClient.GetValue(apiClient.RestClient) as HttpClient;
 
