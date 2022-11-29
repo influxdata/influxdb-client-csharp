@@ -453,14 +453,16 @@ namespace InfluxDB.Client.Test
             var options = InfluxDBClientOptions.Builder
                 .CreateNew()
                 .Url("http://localhost:8086/")
-                .AuthenticateToken(("EMnOtfL2y09sf8_2MCuoogkjlxzPSlpAlIKC-5v5RWSGCPS4v6TU4GqE6kNQlrb6zyVC9sTkK9aC8xEjymDc5Q==").ToArray())
+                .AuthenticateToken(
+                    "EMnOtfL2y09sf8_2MCuoogkjlxzPSlpAlIKC-5v5RWSGCPS4v6TU4GqE6kNQlrb6zyVC9sTkK9aC8xEjymDc5Q=="
+                        .ToArray())
                 .SetHttpClient(httpClient1)
                 .Build();
 
             var dbClient = new InfluxDBClient(options);
 
             var apiClient = dbClient.GetType().GetField("_apiClient",
-               BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(dbClient) as ApiClient;
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(dbClient) as ApiClient;
 
             var httpClient2 = apiClient.RestClient.GetType()
                 .GetProperty("HttpClient", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
