@@ -384,9 +384,9 @@ namespace InfluxDB.Client.Test
                 .RespondWith(Response.Create().WithStatusCode(204)
                     .WithHeader("x-influxdb-version", "2.0.1")
                     .WithHeader("x-influxdb-version", "2.0.0"));
-            
+
             var response = _client.CreateService<PingService>(typeof(PingService)).GetPingWithHttpInfo();
-            
+
             Assert.AreEqual("2.0.0, 2.0.1", response.Headers["x-influxdb-version"]);
         }
 
