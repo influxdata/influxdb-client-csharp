@@ -378,6 +378,19 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        public void DuplicatedHeader()
+        {
+            MockServer.Given(Request.Create().WithPath("/ping").UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(204)
+                    .WithHeader("x-influxdb-version", "2.0.1")
+                    .WithHeader("x-influxdb-version", "2.0.0"));
+
+            var response = _client.CreateService<PingService>(typeof(PingService)).GetPingWithHttpInfo();
+
+            Assert.AreEqual("2.0.0", response.Headers["x-influxdb-version"]);
+        }
+
+        [Test]
         public async Task CustomCertificateValidationCallback()
         {
             using var mockServerSsl = WireMockServer.Start(new WireMockServerSettings

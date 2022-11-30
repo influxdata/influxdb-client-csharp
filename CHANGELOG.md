@@ -7,6 +7,9 @@
 ### Features
 1. [#388](https://github.com/influxdata/influxdb-client-csharp/pull/388): Initialize C# client without `InfluxDBClientFactory`
 
+### Bug Fixes
+1. [#426](https://github.com/influxdata/influxdb-client-csharp/pull/426): Parsing HTTP headers with duplicated name
+
 ### CI
 1. [#416](https://github.com/influxdata/influxdb-client-csharp/pull/416): Add build for `.NET 7.0`
 

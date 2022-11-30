@@ -268,7 +268,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<TelegrafPlugins>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (TelegrafPlugins)Configuration.ApiClient.Deserialize(localVarResponse, typeof(TelegrafPlugins)));
         }
 
@@ -507,7 +507,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<TelegrafPlugins>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (TelegrafPlugins)Configuration.ApiClient.Deserialize(localVarResponse, typeof(TelegrafPlugins)));
         }
 

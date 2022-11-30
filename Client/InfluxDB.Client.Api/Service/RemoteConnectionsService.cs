@@ -500,7 +500,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 null);
         }
 
@@ -759,7 +759,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 null);
         }
 
@@ -925,7 +925,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
 
@@ -1188,7 +1188,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
 
@@ -1371,7 +1371,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RemoteConnections>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RemoteConnections)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnections)));
         }
 
@@ -1684,7 +1684,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RemoteConnections>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RemoteConnections)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnections)));
         }
 
@@ -1887,7 +1887,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
 
@@ -2214,7 +2214,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
 
@@ -2397,7 +2397,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
 
@@ -2656,7 +2656,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RemoteConnection>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RemoteConnection)Configuration.ApiClient.Deserialize(localVarResponse, typeof(RemoteConnection)));
         }
 

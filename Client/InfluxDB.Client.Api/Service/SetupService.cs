@@ -309,7 +309,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<IsOnboarding>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (IsOnboarding)Configuration.ApiClient.Deserialize(localVarResponse, typeof(IsOnboarding)));
         }
 
@@ -525,7 +525,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<IsOnboarding>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (IsOnboarding)Configuration.ApiClient.Deserialize(localVarResponse, typeof(IsOnboarding)));
         }
 
@@ -681,7 +681,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<OnboardingResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (OnboardingResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(OnboardingResponse)));
         }
 
@@ -956,7 +956,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<OnboardingResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (OnboardingResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(OnboardingResponse)));
         }
 
