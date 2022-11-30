@@ -594,10 +594,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 null);
         }
 
@@ -856,10 +853,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 null);
         }
 
@@ -1017,10 +1011,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Sources>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Sources)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Sources)));
         }
 
@@ -1259,10 +1250,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Sources>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Sources)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Sources)));
         }
 
@@ -1420,10 +1408,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Source)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
         }
 
@@ -1683,10 +1668,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Source)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
         }
 
@@ -1860,10 +1842,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Buckets>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Buckets)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Buckets)));
         }
 
@@ -2152,10 +2131,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Buckets>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Buckets)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Buckets)));
         }
 
@@ -2328,10 +2304,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<HealthCheck>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (HealthCheck)Configuration.ApiClient.Deserialize(localVarResponse, typeof(HealthCheck)));
         }
 
@@ -2592,10 +2565,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<HealthCheck>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (HealthCheck)Configuration.ApiClient.Deserialize(localVarResponse, typeof(HealthCheck)));
         }
 
@@ -2780,10 +2750,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Source)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
         }
 
@@ -3101,10 +3068,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Source)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
         }
 
@@ -3291,10 +3255,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Source)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
         }
 
@@ -3566,10 +3527,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<Source>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (Source)Configuration.ApiClient.Deserialize(localVarResponse, typeof(Source)));
         }
 

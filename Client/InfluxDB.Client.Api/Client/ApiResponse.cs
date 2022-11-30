@@ -10,6 +10,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using RestSharp;
 
 namespace InfluxDB.Client.Api.Client
 {
@@ -42,10 +45,12 @@ namespace InfluxDB.Client.Api.Client
         /// <param name="statusCode">HTTP status code.</param>
         /// <param name="headers">HTTP headers.</param>
         /// <param name="data">Data (parsed HTTP body)</param>
-        public ApiResponse(int statusCode, IDictionary<string, string> headers, T data)
+        public ApiResponse(int statusCode, IReadOnlyCollection<HeaderParameter> headers, T data)
         {
             StatusCode = statusCode;
-            Headers = headers;
+            Headers = (headers ?? ImmutableArray<HeaderParameter>.Empty)
+                .GroupBy(h => h.Name)
+                .ToDictionary(g => g.Key, g => g.FirstOrDefault()?.ToString());
             Data = data;
         }
     }

@@ -309,10 +309,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<IsOnboarding>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (IsOnboarding)Configuration.ApiClient.Deserialize(localVarResponse, typeof(IsOnboarding)));
         }
 
@@ -528,10 +525,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<IsOnboarding>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (IsOnboarding)Configuration.ApiClient.Deserialize(localVarResponse, typeof(IsOnboarding)));
         }
 
@@ -687,10 +681,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<OnboardingResponse>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (OnboardingResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(OnboardingResponse)));
         }
 
@@ -965,10 +956,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<OnboardingResponse>(localVarStatusCode,
-                localVarResponse.Headers
-                    .GroupBy(h => h.Name)
-                    .ToDictionary(g => g.Key,
-                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
+                localVarResponse.Headers,
                 (OnboardingResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(OnboardingResponse)));
         }
 
