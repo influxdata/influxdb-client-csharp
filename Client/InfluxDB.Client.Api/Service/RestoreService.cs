@@ -564,7 +564,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<byte[]>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (byte[])Configuration.ApiClient.Deserialize(localVarResponse, typeof(byte[])));
         }
 
@@ -909,7 +909,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<byte[]>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (byte[])Configuration.ApiClient.Deserialize(localVarResponse, typeof(byte[])));
         }
 
@@ -1107,7 +1107,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RestoredBucketMappings>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RestoredBucketMappings)Configuration.ApiClient.Deserialize(localVarResponse,
                     typeof(RestoredBucketMappings)));
         }
@@ -1390,7 +1390,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<RestoredBucketMappings>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (RestoredBucketMappings)Configuration.ApiClient.Deserialize(localVarResponse,
                     typeof(RestoredBucketMappings)));
         }
@@ -1584,7 +1584,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<PostRestoreKVResponse>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (PostRestoreKVResponse)Configuration.ApiClient.Deserialize(localVarResponse,
                     typeof(PostRestoreKVResponse)));
         }
@@ -1910,7 +1910,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<PostRestoreKVResponse>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (PostRestoreKVResponse)Configuration.ApiClient.Deserialize(localVarResponse,
                     typeof(PostRestoreKVResponse)));
         }
@@ -2116,7 +2116,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 null);
         }
 
@@ -2437,7 +2437,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 null);
         }
 
@@ -2656,7 +2656,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 null);
         }
 
@@ -3020,7 +3020,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 null);
         }
 

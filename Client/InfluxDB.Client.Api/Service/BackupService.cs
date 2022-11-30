@@ -372,7 +372,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 
@@ -591,7 +591,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 
@@ -738,7 +738,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<MetadataBackup>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (MetadataBackup)Configuration.ApiClient.Deserialize(localVarResponse, typeof(MetadataBackup)));
         }
 
@@ -982,7 +982,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<MetadataBackup>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (MetadataBackup)Configuration.ApiClient.Deserialize(localVarResponse, typeof(MetadataBackup)));
         }
 
@@ -1159,7 +1159,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 
@@ -1472,7 +1472,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 

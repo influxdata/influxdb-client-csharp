@@ -255,7 +255,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<HealthCheck>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (HealthCheck)Configuration.ApiClient.Deserialize(localVarResponse, typeof(HealthCheck)));
         }
 
@@ -471,7 +471,7 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<HealthCheck>(localVarStatusCode,
-                localVarResponse.Headers,
+                localVarResponse.Headers.Select(h => (h.Name, h.Value)),
                 (HealthCheck)Configuration.ApiClient.Deserialize(localVarResponse, typeof(HealthCheck)));
         }
 
