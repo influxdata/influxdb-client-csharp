@@ -309,7 +309,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<IsOnboarding>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (IsOnboarding)Configuration.ApiClient.Deserialize(localVarResponse, typeof(IsOnboarding)));
         }
 
@@ -525,7 +528,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<IsOnboarding>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (IsOnboarding)Configuration.ApiClient.Deserialize(localVarResponse, typeof(IsOnboarding)));
         }
 
@@ -681,7 +687,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<OnboardingResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (OnboardingResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(OnboardingResponse)));
         }
 
@@ -956,7 +965,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<OnboardingResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (OnboardingResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(OnboardingResponse)));
         }
 

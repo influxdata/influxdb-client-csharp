@@ -355,7 +355,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (View)Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
         }
 
@@ -662,7 +665,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (View)Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
         }
 
@@ -876,7 +882,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (View)Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
         }
 
@@ -1239,7 +1248,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<View>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (View)Configuration.ApiClient.Deserialize(localVarResponse, typeof(View)));
         }
 

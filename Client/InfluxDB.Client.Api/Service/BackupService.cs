@@ -372,7 +372,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 
@@ -591,7 +594,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 
@@ -738,7 +744,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<MetadataBackup>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (MetadataBackup)Configuration.ApiClient.Deserialize(localVarResponse, typeof(MetadataBackup)));
         }
 
@@ -982,7 +991,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<MetadataBackup>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (MetadataBackup)Configuration.ApiClient.Deserialize(localVarResponse, typeof(MetadataBackup)));
         }
 
@@ -1159,7 +1171,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 
@@ -1472,7 +1487,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<System.IO.Stream>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (System.IO.Stream)Configuration.ApiClient.Deserialize(localVarResponse, typeof(System.IO.Stream)));
         }
 

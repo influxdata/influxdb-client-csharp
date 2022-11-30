@@ -730,7 +730,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRule>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRule)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
         }
 
@@ -980,7 +983,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRule>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRule)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
         }
 
@@ -1140,7 +1146,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 null);
         }
 
@@ -1396,7 +1405,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 null);
         }
 
@@ -1573,7 +1585,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 null);
         }
 
@@ -1873,7 +1888,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 null);
         }
 
@@ -2084,7 +2102,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRules>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRules)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRules)));
         }
 
@@ -2443,7 +2464,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRules>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRules)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRules)));
         }
 
@@ -2637,7 +2661,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRule>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRule)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
         }
 
@@ -2896,7 +2923,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRule>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRule)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
         }
 
@@ -3060,7 +3090,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<LabelsResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (LabelsResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
         }
 
@@ -3320,7 +3353,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<LabelsResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (LabelsResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelsResponse)));
         }
 
@@ -3505,7 +3541,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRule>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRule)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
         }
 
@@ -3828,7 +3867,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRule>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRule)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
         }
 
@@ -4032,7 +4074,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<LabelResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (LabelResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
         }
 
@@ -4351,7 +4396,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<LabelResponse>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (LabelResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(LabelResponse)));
         }
 
@@ -4554,7 +4602,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRule>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRule)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
         }
 
@@ -4874,7 +4925,10 @@ namespace InfluxDB.Client.Api.Service
             }
 
             return new ApiResponse<NotificationRule>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                localVarResponse.Headers
+                    .GroupBy(h => h.Name)
+                    .ToDictionary(g => g.Key,
+                        g => string.Join(", ", g.Select(h => h.Value?.ToString()))),
                 (NotificationRule)Configuration.ApiClient.Deserialize(localVarResponse, typeof(NotificationRule)));
         }
 
