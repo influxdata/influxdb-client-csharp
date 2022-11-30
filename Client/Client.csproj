@@ -30,7 +30,7 @@
 
     <ItemGroup>
         <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
-        <None Include=".\README.md" Pack="true" PackagePath="\"/>
+        <None Include=".\README.md" Pack="true" PackagePath="\" />
         <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
     </ItemGroup>
 
