@@ -1,4 +1,4 @@
-## 4.8.0 [unreleased]
+## 4.8.0 [2022-12-01]
 
 :warning: The client can be created without `InfluxDBClientFactory`:
 
