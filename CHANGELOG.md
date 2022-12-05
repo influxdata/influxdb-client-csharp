@@ -1,5 +1,8 @@
 ## 4.9.0 [unreleased]
 
+### Others
+1. [#433](https://github.com/influxdata/influxdb-client-csharp/pull/433): Add `.NET 7.0` to supported `.NET` versions
+
 ### Dependencies
 Update dependencies:
 
