@@ -6,6 +6,9 @@ Update dependencies:
 #### Build:
   - [#430](https://github.com/influxdata/influxdb-client-csharp/pull/430): `NodaTime` to `3.1.6`
 
+#### Test:
+  - [#431](https://github.com/influxdata/influxdb-client-csharp/pull/431): `Moq` to `4.18.3`
+
 ## 4.8.0 [2022-12-01]
 
 :warning: The client can be created without `InfluxDBClientFactory`:
