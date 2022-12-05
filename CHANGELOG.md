@@ -6,6 +6,9 @@ Update dependencies:
 #### Build:
   - [#430](https://github.com/influxdata/influxdb-client-csharp/pull/430): `NodaTime` to `3.1.6`
 
+#### Examples:
+  - [#432](https://github.com/influxdata/influxdb-client-csharp/pull/432): `Radzen.Blazor` to `4.4.2`
+
 #### Test:
   - [#431](https://github.com/influxdata/influxdb-client-csharp/pull/431): `Moq` to `4.18.3`
   - [#428](https://github.com/influxdata/influxdb-client-csharp/pull/428): `WireMock.Net` to `1.5.12`
