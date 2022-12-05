@@ -61,7 +61,7 @@ jobs:
     parameters:
       dotnet-image:
         type: string
-        default: &default-dotnet-image "mcr.microsoft.com/dotnet/sdk:6.0"
+        default: &default-dotnet-image "mcr.microsoft.com/dotnet/sdk:7.0"
       dotnet-target-version:
         type: string
         default: "netstandard2.1"
@@ -214,9 +214,9 @@ workflows:
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
       - tests-dotnet:
           name: dotnet-6.0
+          dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
       - tests-dotnet:
           name: dotnet-7.0
-          dotnet-image: "mcr.microsoft.com/dotnet/sdk:7.0"
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:
