@@ -8,6 +8,7 @@ Update dependencies:
 
 #### Test:
   - [#431](https://github.com/influxdata/influxdb-client-csharp/pull/431): `Moq` to `4.18.3`
+  - [#428](https://github.com/influxdata/influxdb-client-csharp/pull/428): `WireMock.Net` to `1.5.12`
 
 ## 4.8.0 [2022-12-01]
 
