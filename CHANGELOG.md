@@ -1,4 +1,4 @@
-## 4.9.0 [unreleased]
+## 4.9.0 [2020-12-06]
 
 ### Bug Fixes
 1. [#408](https://github.com/influxdata/influxdb-client-csharp/issues/408): Conversion of double to string can result in a loss of precision
