@@ -165,8 +165,8 @@ namespace InfluxDB.Client.Test
                 .Field("example", 459.29587181322927);
 
             var expected =
-                "sensor double=250.69,double15=15.333333333333332,double16=16.33333333333332," +
-                "double17=17.33333333333332,example=459.29587181322927";
+                "sensor double=250.69,double15=15.333333333333332,double16=16.333333333333332," +
+                "double17=17.333333333333332,example=459.29587181322927";
 
             Assert.AreEqual(expected, point.ToLineProtocol());
         }
