@@ -57,7 +57,8 @@ namespace InfluxDB.Client.Test
 
             var lineProtocol = _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol();
 
-            Assert.AreEqual("poco,tag=tag\\ val value=15.444,ValueWithEmptyName=25,ValueWithoutDefaultName=20i 864000",
+            Assert.AreEqual(
+                "poco,tag=tag\\ val value=15.444000000000001,ValueWithEmptyName=25,ValueWithoutDefaultName=20i 864000",
                 lineProtocol);
         }
 
@@ -111,7 +112,8 @@ namespace InfluxDB.Client.Test
 
             var lineProtocol = _mapper.ToPoint(poco, WritePrecision.S).ToLineProtocol();
 
-            Assert.AreEqual("poco,tag=tag\\ val value=15.444,ValueWithEmptyName=25,ValueWithoutDefaultName=20i 864000",
+            Assert.AreEqual(
+                "poco,tag=tag\\ val value=15.444000000000001,ValueWithEmptyName=25,ValueWithoutDefaultName=20i 864000",
                 lineProtocol);
         }
 

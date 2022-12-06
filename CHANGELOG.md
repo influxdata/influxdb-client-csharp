@@ -1,5 +1,8 @@
 ## 4.9.0 [unreleased]
 
+### Bug Fixes
+1. [#408](https://github.com/influxdata/influxdb-client-csharp/issues/408): Conversion of double to string can result in a loss of precision
+
 ### Others
 1. [#433](https://github.com/influxdata/influxdb-client-csharp/pull/433): Add `.NET 7.0` to supported `.NET` versions
 
@@ -712,7 +715,7 @@ This release also uses new version of InfluxDB OSS API definitions - [oss.yml](h
 
 ### Dependencies
 [#283](https://github.com/influxdata/influxdb-client-csharp/pull/283): Update dependencies:
- 
+
 #### Build:
     - RestSharp to 107.3.0
     - CsvHelper to 27.2.1
@@ -811,7 +814,7 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
   - `Check` <- `CheckDiscriminator` <- `CheckBase`
   - `NotificationEndpoint` <- `NotificationEndpointDiscriminator` <- `NotificationEndpointBase`
   - `NotificationRule` <- `NotificationRuleDiscriminator` <- `NNotificationRuleBase`
-- Flux AST literals extends the AST `Expression` object 
+- Flux AST literals extends the AST `Expression` object
 
 ### Deprecates
 - `AuthorizationsApi.CreateAuthorizationAsync(Authorization)`: instead use `AuthorizationsApi.CreateAuthorizationAsync(AuthorizationPostRequest)`
@@ -831,7 +834,7 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
     - Microsoft.Extensions.ObjectPool to 5.0.7
 
 ### Documentation
-1. [#213](https://github.com/influxdata/influxdb-client-csharp/pull/213): API documentation is deploy to [GitHub Pages](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.html) 
+1. [#213](https://github.com/influxdata/influxdb-client-csharp/pull/213): API documentation is deploy to [GitHub Pages](https://influxdata.github.io/influxdb-client-csharp/api/InfluxDB.Client.html)
 
 ## 1.19.0 [2021-06-04]
 
@@ -951,7 +954,7 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 1. [#102](https://github.com/influxdata/influxdb-client-csharp/pull/102): Added WriteApiAsync for asynchronous write without batching
 
 ### Bug Fixes
-1. [#106](https://github.com/influxdata/influxdb-client-csharp/pull/106): Fixed serialization of `\n`, `\r` and `\t` to Line Protocol, `=` is valid sign for measurement name  
+1. [#106](https://github.com/influxdata/influxdb-client-csharp/pull/106): Fixed serialization of `\n`, `\r` and `\t` to Line Protocol, `=` is valid sign for measurement name
 1. [#108](https://github.com/influxdata/influxdb-client-csharp/issues/108): Replaced useless .ContinueWith in Api by direct call
 
 ## 1.9.0 [2020-06-19]
@@ -967,8 +970,8 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 1. [#104](https://github.com/influxdata/influxdb-client-csharp/pull/104): Upgraded InfluxDB 1.7 to 1.8
 
 ### Bug Fixes
-1. [#100](https://github.com/influxdata/influxdb-client-csharp/pull/100): Thread-safety disposing of clients 
-1. [#101](https://github.com/influxdata/influxdb-client-csharp/pull/101/): Use Trace output when disposing WriteApi 
+1. [#100](https://github.com/influxdata/influxdb-client-csharp/pull/100): Thread-safety disposing of clients
+1. [#101](https://github.com/influxdata/influxdb-client-csharp/pull/101/): Use Trace output when disposing WriteApi
 
 ## 1.8.0 [2020-05-15]
 
@@ -1064,7 +1067,7 @@ This release introduces a support for new InfluxDB OSS API definitions - [oss.ym
 ## 1.0.0 [2019-08-23]
 
 ### Features
-1. [#29](https://github.com/influxdata/influxdb-client-csharp/issues/29): Added support for gzip compression of query response and write body 
+1. [#29](https://github.com/influxdata/influxdb-client-csharp/issues/29): Added support for gzip compression of query response and write body
 
 ### Bug Fixes
 1. [#27](https://github.com/influxdata/influxdb-client-csharp/issues/27): The org parameter takes either the ID or Name interchangeably
