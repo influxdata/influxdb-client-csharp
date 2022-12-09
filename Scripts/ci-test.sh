@@ -14,7 +14,7 @@ echo "Configuration: $*, Coverage Report: $CODE_COVERAGE_REPORT"
 #
 # Prepare compatible version
 #
-NET_TEST_VERSION=$(dotnet --version | awk -F. '{printf "netcoreapp"$1"."$2;}')
+NET_TEST_VERSION=$(dotnet --version | awk -F. '{printf "net"$1"."$2;}')
 echo "$NET_TEST_VERSION"
 
 DEFAULT_NET_TARGET_VERSION="netstandard2.1"
