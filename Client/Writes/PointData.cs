@@ -259,11 +259,6 @@ namespace InfluxDB.Client.Writes
                 var _ => timestamp
             };
 
-            if (utcTimestamp.Kind != DateTimeKind.Utc)
-            {
-                throw new ArgumentException("Timestamps must be specified as UTC", nameof(timestamp));
-            }
-
             var timeSpan = utcTimestamp.Subtract(EpochStart);
 
             return Timestamp(timeSpan, timeUnit);
