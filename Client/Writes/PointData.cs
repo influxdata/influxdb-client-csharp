@@ -252,12 +252,19 @@ namespace InfluxDB.Client.Writes
         /// <returns></returns>
         public PointData Timestamp(DateTime timestamp, WritePrecision timeUnit)
         {
-            if (timestamp != null && timestamp.Kind != DateTimeKind.Utc)
+            var utcTimestamp = timestamp.Kind switch
+            {
+                DateTimeKind.Local => timestamp.ToUniversalTime(),
+                DateTimeKind.Unspecified => DateTime.SpecifyKind(timestamp, DateTimeKind.Utc),
+                var _ => timestamp
+            };
+
+            if (utcTimestamp.Kind != DateTimeKind.Utc)
             {
                 throw new ArgumentException("Timestamps must be specified as UTC", nameof(timestamp));
             }
 
-            var timeSpan = timestamp.Subtract(EpochStart);
+            var timeSpan = utcTimestamp.Subtract(EpochStart);
 
             return Timestamp(timeSpan, timeUnit);
         }
