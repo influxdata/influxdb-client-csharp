@@ -605,14 +605,15 @@ namespace InfluxDB.Client.Test
     public class SimpleModel
     {
         private int _value;
-        
+
         [Column(IsTimestamp = true)] public DateTime Time { get; set; }
 
         [Column("device", IsTag = true)] public string Device { get; set; }
 
-        [Column("value")] public int Value
+        [Column("value")]
+        public int Value
         {
-            get => _value == -1 ? throw new ArgumentException("Something is wrong"): _value;
+            get => _value == -1 ? throw new ArgumentException("Something is wrong") : _value;
             set => _value = value;
         }
     }
