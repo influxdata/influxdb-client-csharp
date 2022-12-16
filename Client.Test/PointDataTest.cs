@@ -290,15 +290,37 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
-        public void DateTimeUtc()
+        public void DateTimeUnspecified()
         {
-            var dateTime = new DateTime(2015, 10, 15, 8, 20, 15);
+            var dateTime = new DateTime(2015, 10, 15, 8, 20, 15, DateTimeKind.Unspecified);
 
             var point = PointData.Measurement("h2o")
                 .Tag("location", "europe")
-                .Field("level", 2);
+                .Field("level", 2)
+                .Timestamp(dateTime, WritePrecision.Ms);
 
-            Assert.Throws<ArgumentException>(() => point.Timestamp(dateTime, WritePrecision.Ms));
+            Assert.AreEqual("h2o,location=europe level=2i 1444897215000", point.ToLineProtocol());
+        }
+
+        [Test]
+        public void DateTimeLocal()
+        {
+            var dateTime = new DateTime(2015, 10, 15, 8, 20, 15, DateTimeKind.Local);
+
+            var point = PointData.Measurement("h2o")
+                .Tag("location", "europe")
+                .Field("level", 2)
+                .Timestamp(dateTime, WritePrecision.Ms);
+
+            var lineProtocolLocal = point.ToLineProtocol();
+
+            point = PointData.Measurement("h2o")
+                .Tag("location", "europe")
+                .Field("level", 2)
+                .Timestamp(TimeZoneInfo.ConvertTimeToUtc(dateTime), WritePrecision.Ms);
+            var lineProtocolUtc = point.ToLineProtocol();
+
+            Assert.AreEqual(lineProtocolUtc, lineProtocolLocal);
         }
 
         [Test]
