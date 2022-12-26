@@ -12,6 +12,7 @@ Update dependencies:
 #### Test:
   - [#439](https://github.com/influxdata/influxdb-client-csharp/pull/439): `WireMock.Net` to `1.5.13`
   - [#445](https://github.com/influxdata/influxdb-client-csharp/pull/445): `Microsoft.NET.Test.Sdk` to `17.4.1`
+  - [#447](https://github.com/influxdata/influxdb-client-csharp/pull/447): `Tomlyn.Signed` to `0.16.2`
 
 ## 4.9.0 [2020-12-06]
 
