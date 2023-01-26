@@ -1,4 +1,4 @@
-## 4.10.0 [unreleased]
+## 4.10.0 [2023-01-26]
 
 ### Bug Fixes
 1. [#442](https://github.com/influxdata/influxdb-client-csharp/pull/442): Allow to use `DateTimeKind.Local` and `DateTimeKind.Local` as a timestamp for Data point
