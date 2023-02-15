@@ -1,5 +1,8 @@
 ## 4.11.0 [unreleased]
 
+### Bug Fixes
+  - Revert [#408] conversion of double to string can result in a loss of precision
+
 ## 4.10.0 [2023-01-26]
 
 ### Bug Fixes
