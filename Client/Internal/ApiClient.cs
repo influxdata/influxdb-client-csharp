@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace InfluxDB.Client.Api.Client
                 RestClientOptions.ClientCertificates.AddRange(options.ClientCertificates);
             }
 
-            RestClient = new RestClient(RestClientOptions);
+            RestClient = new RestClient(RestClientOptions, options.ConfigureDefaultHeadersAction);
             Configuration = new Configuration
             {
                 ApiClient = this,

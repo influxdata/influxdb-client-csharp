@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using InfluxDB.Client.Api.Client;
@@ -554,11 +557,46 @@ AJvDAFTSr5A9GSjJ3OyIeKoI8Q6xuaQBitpZR90P/Ah/Ymg490rpXavk";
             return (T)field?.GetValue(instance);
         }
 
+        private static T GetDeclaredProperty<T>(IReflect type, object instance, string propertyName)
+        {
+            const BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                                           | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            var property = type.GetProperty(propertyName, bindFlags);
+            return (T)property?.GetValue(instance);
+        }
+
         private static void CopyAppConfig()
         {
             // copy App.config to assemble format
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             File.Copy(Directory.GetCurrentDirectory() + "/../../../App.config", config.FilePath, true);
+        }
+
+        [Test]
+        public void RequestHeadersAction()
+        {
+            string headerName = "api-subscriptionkey";
+            string headerValue = "my-key";
+
+            var action = new Action<System.Net.Http.Headers.HttpRequestHeaders>(T =>
+            {
+                T.Add(headerName, headerValue);
+            });
+
+            var options = new InfluxDBClientOptions.Builder()
+                .Url("http://localhost:8086")
+                .AuthenticateToken("my-token".ToCharArray())
+                .ConfigureDefaultHttpRequestHeadersAction(action).Build();
+
+            _client = new InfluxDBClient(options);
+
+            var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
+            var restClient = apiClient.RestClient;
+
+            var httpClient = GetDeclaredProperty<System.Net.Http.HttpClient>(restClient.GetType(), restClient, "HttpClient");
+
+            Assert.IsTrue(httpClient.DefaultRequestHeaders.Contains(headerName));
+            Assert.IsTrue(httpClient.DefaultRequestHeaders.GetValues(headerName).FirstOrDefault() == headerValue);
         }
     }
 }

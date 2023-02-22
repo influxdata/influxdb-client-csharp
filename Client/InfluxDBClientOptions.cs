@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
@@ -34,6 +35,7 @@ namespace InfluxDB.Client
         private bool _allowHttpRedirects;
         private bool _verifySsl;
         private X509CertificateCollection _clientCertificates;
+        private Action<HttpRequestHeaders> _configureDefaultHeadersAction;
 
         /// <summary>
         /// Set the url to connect the InfluxDB.
@@ -205,6 +207,20 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Set the action to be performed on HttpRequestHeaders being used by the client
+        /// This action can be used to define additional request headers as defined in RFC 2616
+        /// </summary>
+        public Action<HttpRequestHeaders> ConfigureDefaultHeadersAction
+        {
+            get => _configureDefaultHeadersAction;
+            set
+            {
+                Arguments.CheckNotNull(value, "ConfigureDefaultHeadersAction");
+                _configureDefaultHeadersAction = value;
+            }
+        }
+
+        /// <summary>
         /// The setting for store data point: default values, threshold, ...
         /// </summary>
         public PointSettings PointSettings { get; }
@@ -270,6 +286,7 @@ namespace InfluxDB.Client
         /// <item>VerifySslCallback - callback function for handling the remote SSL Certificate Validation. The callback takes precedence over `VerifySsl`</item>
         /// <item>ClientCertificates - set X509CertificateCollection to be sent with HTTP requests</item>
         /// <item>DefaultTags - tags that will be use for writes by Point and POJO</item>
+        /// <item>ConfigureDefaultHeadersAction - action to define additional request headers as defined in RFC 2616</item> 
         /// </list>
         /// </para>
         /// </summary>
@@ -428,6 +445,12 @@ namespace InfluxDB.Client
             {
                 ClientCertificates = builder.CertificateCollection;
             }
+
+            if (builder.ConfigureDefaultHeadersAction != null)
+            {
+                ConfigureDefaultHeadersAction = builder.ConfigureDefaultHeadersAction;
+            }
+
         }
 
         private static TimeSpan ToTimeout(string value)
@@ -506,6 +529,7 @@ namespace InfluxDB.Client
             internal bool VerifySslCertificates = true;
             internal RemoteCertificateValidationCallback VerifySslCallback;
             internal X509CertificateCollection CertificateCollection;
+            internal Action<HttpRequestHeaders> ConfigureDefaultHeadersAction;
 
             internal PointSettings PointSettings = new PointSettings();
 
@@ -714,6 +738,20 @@ namespace InfluxDB.Client
                 Arguments.CheckNotNull(clientCertificates, nameof(clientCertificates));
 
                 CertificateCollection = clientCertificates;
+
+                return this;
+            }
+
+            /// <summary>
+            /// Set the action to be used to define additional request headers as defined in RFC 2616
+            /// </summary>
+            /// <param name="configureDefaultHeadersAction">HttpRequestHeaders action</param>
+            /// <returns><see cref="Builder"/></returns>
+            public Builder ConfigureDefaultHttpRequestHeadersAction(Action<HttpRequestHeaders> configureDefaultHeadersAction)
+            {
+                Arguments.CheckNotNull(configureDefaultHeadersAction, nameof(configureDefaultHeadersAction));
+
+                ConfigureDefaultHeadersAction = configureDefaultHeadersAction;
 
                 return this;
             }
