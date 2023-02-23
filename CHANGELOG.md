@@ -1,4 +1,4 @@
-## 4.11.0 [unreleased]
+## 4.11.0 [2023-02-23]
 
 ### Bug Fixes
   - Revert [#408] conversion of double to string can result in a loss of precision
@@ -6,7 +6,7 @@
 ## 4.10.0 [2023-01-26]
 
 ### Bug Fixes
-1. [#442](https://github.com/influxdata/influxdb-client-csharp/pull/442): Allow to use `DateTimeKind.Local` and `DateTimeKind.Local` as a timestamp for Data point
+  - [#442](https://github.com/influxdata/influxdb-client-csharp/pull/442): Allow to use `DateTimeKind.Local` and `DateTimeKind.Local` as a timestamp for Data point
 
 ### Dependencies
 Update dependencies:
