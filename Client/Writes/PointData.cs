@@ -472,14 +472,9 @@ namespace InfluxDB.Client.Writes
                 EscapeKey(sb, key);
                 sb.Append('=');
 
-                if (value is float)
+                if (value is double || value is float)
                 {
                     sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
-                }
-                else if (value is double)
-                {
-                    var valueStr = ((double)value).ToString("G17", CultureInfo.InvariantCulture);
-                    sb.Append((IConvertible)valueStr);
                 }
                 else if (value is uint || value is ulong || value is ushort)
                 {
