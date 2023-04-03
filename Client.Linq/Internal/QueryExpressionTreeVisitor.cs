@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Linq.Internal.Expressions;
+using InfluxDB.Client.Linq.Internal.Expressions.String;
 using Remotion.Linq.Clauses;
 using Remotion.Linq.Clauses.Expressions;
 using Remotion.Linq.Clauses.ResultOperators;
@@ -187,6 +188,62 @@ namespace InfluxDB.Client.Linq.Internal
                 return expression;
             }
 
+            if (expression.Method.DeclaringType == typeof(string))
+            {
+                _context.QueryAggregator.AddImport("strings");
+                var partsCount = _expressionParts.Count;
+                Visit(expression.Object);
+                var part = GetAndRemoveExpressionParts(partsCount, _expressionParts.Count);
+                IEnumerable<IExpressionPart> part2 = null;
+                IEnumerable<IExpressionPart> part3 = null;
+                if (expression.Arguments.Count > 0)
+                {
+                    partsCount = _expressionParts.Count;
+                    Visit(expression.Arguments[0]);
+                    part2 = GetAndRemoveExpressionParts(partsCount, _expressionParts.Count);
+                }
+
+                if (expression.Arguments.Count > 1)
+                {
+                    partsCount = _expressionParts.Count;
+                    Visit(expression.Arguments[1]);
+                    part3 = GetAndRemoveExpressionParts(partsCount, _expressionParts.Count);
+                }
+
+                switch (expression.Method.Name)
+                {
+                    case "ToLower":
+                        _expressionParts.Add(new ToLower(part));
+                        return expression;
+                    case "ToUpper":
+                        _expressionParts.Add(new ToUpper(part));
+                        return expression;
+                    case "Contains":
+                        _expressionParts.Add(new ContainsStr(part, part2));
+                        return expression;
+                    case "StartsWith":
+                        _expressionParts.Add(new HasPrefix(part, part2));
+                        return expression;
+                    case "EndsWith":
+                        _expressionParts.Add(new HasSuffix(part, part2));
+                        return expression;
+                    case "Replace":
+                        _expressionParts.Add(new ReplaceAll(part, part2, part3));
+                        return expression;
+                }
+
+                throw new NotSupportedException(expression.Method.Name + " of String class is not yet supported.");
+            }
+
+            if (expression.Method.Name.Equals("ToString"))
+            {
+                var partsCount = _expressionParts.Count;
+                Visit(expression.Object);
+                var part = GetAndRemoveExpressionParts(partsCount, _expressionParts.Count);
+                _expressionParts.Add(new ToString(part));
+                return expression;
+            }
+
             return base.VisitMethodCall(expression);
         }
 
@@ -292,6 +349,13 @@ namespace InfluxDB.Client.Linq.Internal
             }
 
             NormalizeNamedFieldValue();
+        }
+
+        private IEnumerable<IExpressionPart> GetAndRemoveExpressionParts(int start, int end)
+        {
+            var parts = _expressionParts.GetRange(start, end - start);
+            for (var i = start; i < end; i++) _expressionParts.RemoveAt(i);
+            return parts;
         }
 
         /// <summary>

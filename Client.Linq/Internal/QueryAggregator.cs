@@ -65,6 +65,7 @@ namespace InfluxDB.Client.Linq.Internal
         private ResultFunction _resultFunction;
         private readonly List<string> _filterByTags;
         private readonly List<string> _filterByFields;
+        private HashSet<string> _imports;
         private readonly List<(string, string, bool, string)> _orders;
         private (string Every, string Period, string Fn)? _aggregateWindow;
 
@@ -81,6 +82,16 @@ namespace InfluxDB.Client.Linq.Internal
         internal void AddBucket(string bucket)
         {
             _bucketAssignment = bucket;
+        }
+
+        internal void AddImport(string import)
+        {
+            if (_imports == null)
+            {
+                _imports = new HashSet<string>();
+            }
+
+            _imports.Add(import);
         }
 
         internal void AddRangeStart(string rangeStart, RangeExpressionType expressionType)
@@ -219,6 +230,7 @@ namespace InfluxDB.Client.Linq.Internal
 
             var query = new StringBuilder();
 
+            query.Append(BuildImports());
             query.Append(JoinList(transforms, "\n"));
             query.Append("\n\n");
             query.Append(JoinList(parts, " |> "));
@@ -332,6 +344,16 @@ namespace InfluxDB.Client.Linq.Internal
             filter.Append(")");
 
             return filter.ToString();
+        }
+
+        private string BuildImports()
+        {
+            if (_imports != null)
+            {
+                return string.Join("", _imports.Select(x => "import \"" + x + "\"\n"));
+            }
+
+            return string.Empty;
         }
 
         private string BuildOperator(string operatorName, params object[] variables)

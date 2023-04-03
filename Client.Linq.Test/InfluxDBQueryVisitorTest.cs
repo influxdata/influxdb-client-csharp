@@ -39,6 +39,48 @@ namespace Client.Linq.Test
         }
 
         [Test]
+        public void StringFunctionsQuery()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.SensorId.ToLower().Contains("aaa")
+                select s;
+            var visitor = BuildQueryVisitor(query);
+
+            const string expected =
+                "import \"strings\"\nstart_shifted = int(v: time(v: p2))\n\nfrom(bucket: p1) |> range(start: time(v: start_shifted)) |> filter(fn: (r) => strings.containsStr(v: strings.toLower(v: r[\"sensor_id\"]), substr: p3)) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") |> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) |> filter(fn: (r) => strings.containsStr(v: strings.toLower(v: r[\"sensor_id\"]), substr: p3))";
+            var qry = visitor.BuildFluxQuery();
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+
+        [Test]
+        public void ToStringFunctionQuery()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.Value.ToString() == "3"
+                select s;
+            var visitor = BuildQueryVisitor(query);
+
+            const string expected =
+                "start_shifted = int(v: time(v: p2))\n\nfrom(bucket: p1) |> range(start: time(v: start_shifted)) |> filter(fn: (r) => (string(v: r[\"data\"]) == p3)) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") |> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) |> filter(fn: (r) => (string(v: r[\"data\"]) == p3))";
+            var qry = visitor.BuildFluxQuery();
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+
+        [Test]
+        public void ReplaceAllFunctionQuery()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.SensorId.ToLower().Replace("a", "b") == "b"
+                select s;
+            var visitor = BuildQueryVisitor(query);
+
+            const string expected =
+                "import \"strings\"\nstart_shifted = int(v: time(v: p2))\n\nfrom(bucket: p1) |> range(start: time(v: start_shifted)) |> filter(fn: (r) => (strings.replaceAll(v: strings.toLower(v: r[\"sensor_id\"]), t: p3, u: p4) == p5)) |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\") |> drop(columns: [\"_start\", \"_stop\", \"_measurement\"]) |> filter(fn: (r) => (strings.replaceAll(v: strings.toLower(v: r[\"sensor_id\"]), t: p3, u: p4) == p5))";
+            var qry = visitor.BuildFluxQuery();
+            Assert.AreEqual(expected, visitor.BuildFluxQuery());
+        }
+
+        [Test]
         public void DefaultQuery()
         {
             var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
