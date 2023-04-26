@@ -93,7 +93,7 @@ namespace InfluxDB.Client.Api.Client
             {
                 InitToken();
             }
-            
+
             request.CookieContainer = _cookieContainerCookieContainer;
             request.Authenticator = _authenticator;
 

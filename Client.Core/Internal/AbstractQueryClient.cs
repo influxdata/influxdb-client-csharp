@@ -188,7 +188,8 @@ namespace InfluxDB.Client.Core.Internal
         }
 
         protected async IAsyncEnumerable<T> QueryEnumerable<T>(
-            Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> queryFn, Func<FluxRecord, T> convert,
+            Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> queryFn,
+            Func<FluxRecord, T> convert,
             [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNotNull(queryFn, nameof(queryFn));
@@ -383,7 +384,8 @@ namespace InfluxDB.Client.Core.Internal
 
         private RestResponse FromHttpResponseMessage(HttpResponseMessage response, RestRequest request)
         {
-            return new RestResponse(request) {
+            return new RestResponse(request)
+            {
                 ErrorException = response.IsSuccessStatusCode
                     ? null
                     : new HttpRequestException($"Request failed with status code {response.StatusCode}")

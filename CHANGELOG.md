@@ -7,6 +7,7 @@ Update dependencies:
   - [#497](https://github.com/influxdata/influxdb-client-csharp/pull/497): `NodaTime` to `3.1.9`
   - [#485](https://github.com/influxdata/influxdb-client-csharp/pull/485): `Newtonsoft.Json` to `13.0.3`
   - [#506](https://github.com/influxdata/influxdb-client-csharp/pull/506): `Microsoft.Extensions.ObjectPool` to `7.0.5`
+  - [#509](https://github.com/influxdata/influxdb-client-csharp/pull/509): `RestSharp` to `110.2.0`
 
 #### Examples:
   - [#511](https://github.com/influxdata/influxdb-client-csharp/pull/511): `Radzen.Blazor` to `4.10.1`
