@@ -39,7 +39,7 @@ namespace InfluxDB.Client.Core.Internal
             _csvParser = csvParser;
         }
 
-        protected Task Query(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn,
+        protected Task Query(Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> queryFn,
             FluxCsvParser.IFluxResponseConsumer responseConsumer,
             Action<Exception> onError,
             Action onComplete, CancellationToken cancellationToken)
@@ -59,7 +59,7 @@ namespace InfluxDB.Client.Core.Internal
             return Query(queryFn, Consumer, onError, onComplete, cancellationToken);
         }
 
-        protected Task QueryRaw(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn,
+        protected Task QueryRaw(Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> queryFn,
             Action<string> onResponse,
             Action<Exception> onError,
             Action onComplete, CancellationToken cancellationToken)
@@ -79,7 +79,7 @@ namespace InfluxDB.Client.Core.Internal
             return Query(queryFn, Consumer, onError, onComplete, cancellationToken);
         }
 
-        protected void QuerySync(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn,
+        protected void QuerySync(Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> queryFn,
             FluxCsvParser.IFluxResponseConsumer responseConsumer,
             Action<Exception> onError,
             Action onComplete,
@@ -100,7 +100,7 @@ namespace InfluxDB.Client.Core.Internal
             QuerySync(queryFn, Consumer, onError, onComplete, cancellationToken);
         }
 
-        private async Task Query(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn,
+        private async Task Query(Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> queryFn,
             Action<Stream> consumer,
             Action<Exception> onError, Action onComplete, CancellationToken cancellationToken)
         {
@@ -111,7 +111,7 @@ namespace InfluxDB.Client.Core.Internal
 
             try
             {
-                var query = queryFn.Invoke(response =>
+                var query = queryFn.Invoke((response, request) =>
                 {
                     var result = GetStreamFromResponse(response, cancellationToken);
                     result = AfterIntercept((int)response.StatusCode,
@@ -121,7 +121,7 @@ namespace InfluxDB.Client.Core.Internal
                     RaiseForInfluxError(response, result);
                     consumer(result);
 
-                    return FromHttpResponseMessage(response);
+                    return FromHttpResponseMessage(response, request);
                 });
 
                 BeforeIntercept(query);
@@ -144,7 +144,7 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-        private void QuerySync(Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn,
+        private void QuerySync(Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> queryFn,
             Action<CancellationToken, Stream> consumer,
             Action<Exception> onError, Action onComplete, CancellationToken cancellationToken)
         {
@@ -155,7 +155,7 @@ namespace InfluxDB.Client.Core.Internal
 
             try
             {
-                var query = queryFn.Invoke(response =>
+                var query = queryFn.Invoke((response, request) =>
                 {
                     var result = GetStreamFromResponse(response, cancellationToken);
                     result = AfterIntercept((int)response.StatusCode,
@@ -165,7 +165,7 @@ namespace InfluxDB.Client.Core.Internal
                     RaiseForInfluxError(response, result);
                     consumer(cancellationToken, result);
 
-                    return FromHttpResponseMessage(response);
+                    return FromHttpResponseMessage(response, request);
                 });
 
                 BeforeIntercept(query);
@@ -188,13 +188,13 @@ namespace InfluxDB.Client.Core.Internal
         }
 
         protected async IAsyncEnumerable<T> QueryEnumerable<T>(
-            Func<Func<HttpResponseMessage, RestResponse>, RestRequest> queryFn, Func<FluxRecord, T> convert,
+            Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> queryFn, Func<FluxRecord, T> convert,
             [EnumeratorCancellation] CancellationToken cancellationToken)
         {
             Arguments.CheckNotNull(queryFn, nameof(queryFn));
 
             Stream stream = null;
-            var query = queryFn.Invoke(response =>
+            var query = queryFn.Invoke((response, request) =>
             {
                 stream = GetStreamFromResponse(response, cancellationToken);
                 stream = AfterIntercept((int)response.StatusCode,
@@ -202,7 +202,7 @@ namespace InfluxDB.Client.Core.Internal
 
                 RaiseForInfluxError(response, stream);
 
-                return FromHttpResponseMessage(response);
+                return FromHttpResponseMessage(response, request);
             });
 
             BeforeIntercept(query);
@@ -381,10 +381,9 @@ namespace InfluxDB.Client.Core.Internal
             }
         }
 
-        private RestResponse FromHttpResponseMessage(HttpResponseMessage response)
+        private RestResponse FromHttpResponseMessage(HttpResponseMessage response, RestRequest request)
         {
-            return new RestResponse
-            {
+            return new RestResponse(request) {
                 ErrorException = response.IsSuccessStatusCode
                     ? null
                     : new HttpRequestException($"Request failed with status code {response.StatusCode}")

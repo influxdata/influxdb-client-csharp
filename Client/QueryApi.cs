@@ -783,7 +783,7 @@ namespace InfluxDB.Client
                 cancellationToken);
         }
 
-        private Func<Func<HttpResponseMessage, RestResponse>, RestRequest> CreateRequest(Query query, string org = null)
+        private Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> CreateRequest(Query query, string org = null)
         {
             Arguments.CheckNotNull(query, nameof(query));
 
