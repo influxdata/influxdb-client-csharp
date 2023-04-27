@@ -263,7 +263,8 @@ namespace InfluxDB.Client.Test
         {
             var bytes = (byte[])restResponse.Request?.Parameters
                             .GetParameters(ParameterType.RequestBody)
-                            .TryFind("text/plain")?.Value ??
+                            .First()
+                            .Value ??
                         throw new AssertionException("The body is required.");
             return Encoding.Default.GetString(bytes);
         }

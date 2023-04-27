@@ -28,7 +28,7 @@ namespace InfluxDB.Client.Core.Internal
         }
 
         internal static RestRequest AddAdvancedResponseHandler(this RestRequest restRequest,
-            Func<HttpResponseMessage, RestResponse> advancedResponseWriter)
+            Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
         {
             var field = restRequest.GetType()
                 .GetField("_advancedResponseHandler", BindingFlags.Instance | BindingFlags.NonPublic);

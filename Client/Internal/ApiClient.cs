@@ -25,6 +25,8 @@ namespace InfluxDB.Client.Api.Client
 
         private bool _initializedSessionTokens = false;
         private bool _signout;
+        private IAuthenticator _authenticator;
+        private CookieContainer _cookieContainerCookieContainer;
 
         public ApiClient(InfluxDBClientOptions options, LoggingHandler loggingHandler, GzipHandler gzipHandler)
         {
@@ -92,6 +94,9 @@ namespace InfluxDB.Client.Api.Client
                 InitToken();
             }
 
+            request.CookieContainer = _cookieContainerCookieContainer;
+            request.Authenticator = _authenticator;
+
             _loggingHandler.BeforeIntercept(request);
             _gzipHandler.BeforeIntercept(request);
         }
@@ -141,7 +146,12 @@ namespace InfluxDB.Client.Api.Client
                             .FirstOrDefault(it =>
                                 string.Equals("Set-Cookie", it.Name, StringComparison.OrdinalIgnoreCase));
 
-                        RestClient.Authenticator = new CookieRedirectAuthenticator(headerParameter);
+                        _authenticator = new CookieRedirectAuthenticator(headerParameter);
+                    }
+                    else
+                    {
+                        _cookieContainerCookieContainer = new CookieContainer();
+                        _cookieContainerCookieContainer.Add(authResponse.Cookies);
                     }
                 }
             }
@@ -159,10 +169,11 @@ namespace InfluxDB.Client.Api.Client
             _signout = true;
 
             _initializedSessionTokens = false;
+            _cookieContainerCookieContainer = null;
 
             var request = new RestRequest("/api/v2/signout", Method.Post);
             RestClient.ExecuteAsync(request).ConfigureAwait(false).GetAwaiter().GetResult();
-            RestClient.Authenticator = null;
+            _authenticator = null;
         }
     }
 
