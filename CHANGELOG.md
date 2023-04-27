@@ -7,6 +7,9 @@ Update dependencies:
   - [#497](https://github.com/influxdata/influxdb-client-csharp/pull/497): `NodaTime` to `3.1.9`
   - [#485](https://github.com/influxdata/influxdb-client-csharp/pull/485): `Newtonsoft.Json` to `13.0.3`
 
+#### Examples:
+  - [#511](https://github.com/influxdata/influxdb-client-csharp/pull/511): `Radzen.Blazor` to `4.10.1`
+
 #### Test:
   - [#508](https://github.com/influxdata/influxdb-client-csharp/pull/508): `WireMock.Net` to `1.5.23`
   - [#480](https://github.com/influxdata/influxdb-client-csharp/pull/480): `NUnit3TestAdapter` to `4.4.2`
