@@ -180,7 +180,7 @@ namespace InfluxDB.Client.Linq.Internal
                 //
                 var fn = ((ConstantExpression)expression.Arguments[3]).Value as string;
                 Arguments.CheckNonEmptyString(fn, "fn");
-                var fnVariable = _context.Variables.AddNamedVariable(new Identifier("Identifier", "mean"));
+                var fnVariable = _context.Variables.AddNamedVariable(new Identifier("Identifier", fn));
 
                 _context.QueryAggregator.AddAggregateWindow(everyVariable, periodVariable, fnVariable);
 
