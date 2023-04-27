@@ -1038,7 +1038,7 @@ namespace Client.Linq.Test
             Assert.AreEqual("p5", fnAssignment?.Id.Name);
             Assert.AreEqual("mean", (fnAssignment.Init as Identifier)?.Name);
         }
-        
+
         [Test]
         public void AggregateWindowCustomFunction()
         {
