@@ -1,7 +1,7 @@
-## 4.12.0 [unreleased]
+## 4.12.0 [2023-04-28]
 
 ### Bug Fixes
-- [#510](https://github.com/influxdata/influxdb-client-csharp/pull/510): Passing aggregation function to AggregateWindow for LINQ queries
+  - [#510](https://github.com/influxdata/influxdb-client-csharp/pull/510): Passing aggregation function to AggregateWindow for LINQ queries
 
 ### Dependencies
 Update dependencies:
