@@ -9,7 +9,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Client.Linq\Client.Linq.csproj" />
         <ProjectReference Include="..\..\Client\Client.csproj" />
-        <PackageReference Include="Radzen.Blazor" Version="4.10.3" />
+        <PackageReference Include="Radzen.Blazor" Version="4.11.1" />
     </ItemGroup>
 
     <ItemGroup>
