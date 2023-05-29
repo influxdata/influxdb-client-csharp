@@ -1,5 +1,11 @@
 ## 4.13.0 [unreleased]
 
+### Dependencies
+Update dependencies:
+
+#### Test:
+  - [#524](https://github.com/influxdata/influxdb-client-csharp/pull/524): `coverlet.collector` to `6.0.0`
+
 ## 4.12.0 [2023-04-28]
 
 ### Bug Fixes
