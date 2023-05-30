@@ -3,6 +3,9 @@
 ### Dependencies
 Update dependencies:
 
+#### Examples:
+  - [#526](https://github.com/influxdata/influxdb-client-csharp/pull/526): `Radzen.Blazor` to `4.11.2`
+
 #### Test:
   - [#523](https://github.com/influxdata/influxdb-client-csharp/pull/523): `Microsoft.NET.Test.Sdk` to `17.6.0`
   - [#524](https://github.com/influxdata/influxdb-client-csharp/pull/524): `coverlet.collector` to `6.0.0`
