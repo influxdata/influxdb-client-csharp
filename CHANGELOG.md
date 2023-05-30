@@ -4,7 +4,7 @@
 Update dependencies:
 
 #### Build:
-  - [#525](https://github.com/influxdata/influxdb-client-csharp/pull/525): `NodaTime` to `6.0.0`
+  - [#525](https://github.com/influxdata/influxdb-client-csharp/pull/525): `System.Reactive` to `6.0.0`
 
 #### Examples:
   - [#526](https://github.com/influxdata/influxdb-client-csharp/pull/526): `Radzen.Blazor` to `4.11.2`
