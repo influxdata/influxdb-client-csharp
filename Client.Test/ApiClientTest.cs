@@ -1,8 +1,11 @@
 using System;
 using System.Net;
+using System.Net.Http;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using NUnit.Framework;
 
 namespace InfluxDB.Client.Test
@@ -60,6 +63,36 @@ namespace InfluxDB.Client.Test
             _apiClient = new ApiClient(options, new LoggingHandler(LogLevel.Body), new GzipHandler());
 
             Assert.AreEqual(webProxy, _apiClient.RestClientOptions.Proxy);
+        }
+
+        [Test]
+        public void InjectHttpClient()
+        {
+            var webProxy = new WebProxy("my-proxy", 8088);
+
+            var options = new InfluxDBClientOptions("http://localhost:8086")
+            {
+                Token = "my-token",
+                WebProxy = webProxy
+            };
+            var services = new ServiceCollection();
+
+            services.AddHttpClient();
+
+            services.AddTransient(p =>
+            {
+                var client = p.GetService<HttpClient>();
+
+                options.HttpClient = client;
+
+                return new ApiClient(options, new LoggingHandler(LogLevel.Body), new GzipHandler());
+            });
+
+            var builder = services.BuildServiceProvider();
+
+            var apiClient = builder.GetRequiredService<ApiClient>();
+
+            Assert.NotNull(apiClient);
         }
     }
 }
