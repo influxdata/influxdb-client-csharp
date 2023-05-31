@@ -1,3 +1,6 @@
+### Features
+1. [#528](https://github.com/influxdata/influxdb-client-csharp/pull/528): Add HttpClient as a part of InfluxDBClientOptions
+
 ## 4.10.0 [unreleased]
 
 ## 4.9.0 [2020-12-06]
