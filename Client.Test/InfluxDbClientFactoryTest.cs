@@ -574,7 +574,8 @@ AJvDAFTSr5A9GSjJ3OyIeKoI8Q6xuaQBitpZR90P/Ah/Ymg490rpXavk";
 
             var restClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient").RestClient;
 
-            var httpClient = GetDeclaredField<HttpClient>(restClient.GetType(), restClient, "<HttpClient>k__BackingField");
+            var httpClient = 
+                GetDeclaredField<HttpClient>(restClient.GetType(), restClient, "<HttpClient>k__BackingField");
 
             Assert.AreEqual(options.HttpClient, httpClient);
         }
