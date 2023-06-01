@@ -569,13 +569,14 @@ AJvDAFTSr5A9GSjJ3OyIeKoI8Q6xuaQBitpZR90P/Ah/Ymg490rpXavk";
                 return new InfluxDBClient(options);
             });
             var builder = services.BuildServiceProvider();
-            
+
             _client = builder.GetRequiredService<InfluxDBClient>();
 
             var restClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient").RestClient;
 
-            Assert.AreEqual(options.HttpClient, 
-                GetDeclaredField<HttpClient>(restClient.GetType(), restClient, "<HttpClient>k__BackingField"));
+            var httpClient = GetDeclaredField<HttpClient>(restClient.GetType(), restClient, "<HttpClient>k__BackingField");
+
+            Assert.AreEqual(options.HttpClient, httpClient);
         }
 
         private static T GetDeclaredField<T>(IReflect type, object instance, string fieldName)
