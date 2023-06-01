@@ -556,28 +556,25 @@ AJvDAFTSr5A9GSjJ3OyIeKoI8Q6xuaQBitpZR90P/Ah/Ymg490rpXavk";
             {
                 Token = "my-token"
             };
+
             var services = new ServiceCollection();
 
             services.AddHttpClient();
-
             services.AddTransient(p =>
             {
                 var httpClientFactory = p.GetService<IHttpClientFactory>();
-
                 options.HttpClient = httpClientFactory.CreateClient();
-
                 return new InfluxDBClient(options);
             });
+
             var builder = services.BuildServiceProvider();
 
             _client = builder.GetRequiredService<InfluxDBClient>();
 
             var restClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient").RestClient;
 
-            var httpClient = 
-                GetDeclaredField<HttpClient>(restClient.GetType(), restClient, "<HttpClient>k__BackingField");
-
-            Assert.AreEqual(options.HttpClient, httpClient);
+            Assert.AreEqual(options.HttpClient,
+                GetDeclaredField<HttpClient>(restClient.GetType(), restClient, "<HttpClient>k__BackingField"));
         }
 
         private static T GetDeclaredField<T>(IReflect type, object instance, string fieldName)
