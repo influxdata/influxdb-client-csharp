@@ -564,9 +564,9 @@ AJvDAFTSr5A9GSjJ3OyIeKoI8Q6xuaQBitpZR90P/Ah/Ymg490rpXavk";
             {
                 var httpClientFactory = p.GetService<IHttpClientFactory>();
 
-                 options.HttpClient = httpClientFactory.CreateClient();
+                options.HttpClient = httpClientFactory.CreateClient();
 
-                 return new InfluxDBClient(options);
+                return new InfluxDBClient(options);
             });
             var builder = services.BuildServiceProvider();
             
