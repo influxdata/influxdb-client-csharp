@@ -423,7 +423,7 @@ namespace InfluxDB.Client.Flux
             return new RestRequest("ping");
         }
 
-        private Func<Func<HttpResponseMessage, RestResponse>, RestRequest> QueryRequest(string query)
+        private Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> QueryRequest(string query)
         {
             return advancedResponseWriter => new RestRequest("api/v2/query", Method.Post)
                 .AddAdvancedResponseHandler(advancedResponseWriter)

@@ -252,12 +252,14 @@ namespace InfluxDB.Client.Writes
         /// <returns></returns>
         public PointData Timestamp(DateTime timestamp, WritePrecision timeUnit)
         {
-            if (timestamp != null && timestamp.Kind != DateTimeKind.Utc)
+            var utcTimestamp = timestamp.Kind switch
             {
-                throw new ArgumentException("Timestamps must be specified as UTC", nameof(timestamp));
-            }
+                DateTimeKind.Local => timestamp.ToUniversalTime(),
+                DateTimeKind.Unspecified => DateTime.SpecifyKind(timestamp, DateTimeKind.Utc),
+                var _ => timestamp
+            };
 
-            var timeSpan = timestamp.Subtract(EpochStart);
+            var timeSpan = utcTimestamp.Subtract(EpochStart);
 
             return Timestamp(timeSpan, timeUnit);
         }
@@ -470,14 +472,9 @@ namespace InfluxDB.Client.Writes
                 EscapeKey(sb, key);
                 sb.Append('=');
 
-                if (value is float)
+                if (value is double || value is float)
                 {
                     sb.Append(((IConvertible)value).ToString(CultureInfo.InvariantCulture));
-                }
-                else if (value is double)
-                {
-                    var valueStr = ((double)value).ToString("G17", CultureInfo.InvariantCulture);
-                    sb.Append((IConvertible)valueStr);
                 }
                 else if (value is uint || value is ulong || value is ushort)
                 {

@@ -494,14 +494,14 @@ namespace InfluxDB.Client.Test
             {
                 Time = new DateTime(2020, 11, 15, 8, 20, 15),
                 Device = "id-1",
-                Value = 15
+                Value = -1
             };
             _writeApi.WriteMeasurement(measurement, WritePrecision.S, "b1", "org1");
 
             var error = listener.Get<WriteRuntimeExceptionEvent>();
 
             Assert.IsNotNull(error);
-            StringAssert.StartsWith("Timestamps must be specified as UTC", error.Exception.Message);
+            StringAssert.StartsWith("Something is wrong", error.Exception.InnerException?.Message);
 
             Assert.AreEqual(0, MockServer.LogEntries.Count());
         }
@@ -604,10 +604,17 @@ namespace InfluxDB.Client.Test
     [Measurement("m")]
     public class SimpleModel
     {
+        private int _value;
+
         [Column(IsTimestamp = true)] public DateTime Time { get; set; }
 
         [Column("device", IsTag = true)] public string Device { get; set; }
 
-        [Column("value")] public int Value { get; set; }
+        [Column("value")]
+        public int Value
+        {
+            get => _value == -1 ? throw new ArgumentException("Something is wrong") : _value;
+            set => _value = value;
+        }
     }
 }

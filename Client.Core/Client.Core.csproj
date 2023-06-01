@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
@@ -7,7 +7,7 @@
         <Description>InfluxDB Client Core - exceptions, validations, REST client.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Core</AssemblyName>
-        <VersionPrefix>4.10.0</VersionPrefix>
+        <VersionPrefix>4.13.0</VersionPrefix>
         <VersionSuffix>dev</VersionSuffix>
 
         <PackageId>InfluxDB.Client.Core</PackageId>
@@ -22,7 +22,7 @@
         <PackageReleaseNotes>https://github.com/influxdata/influxdb-client-csharp/blob/master/CHANGELOG.md</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RootNamespace>InfluxDB.Client.Core</RootNamespace>
-        
+
         <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
     </PropertyGroup>
@@ -30,13 +30,13 @@
     <ItemGroup>
         <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
     </ItemGroup>
-    
+
     <ItemGroup>
       <PackageReference Include="CsvHelper" Version="30.0.1" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-      <PackageReference Include="NodaTime" Version="3.1.6" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="NodaTime" Version="3.1.9" />
       <PackageReference Include="NodaTime.Serialization.JsonNet" Version="3.0.1" />
-      <PackageReference Include="RestSharp" Version="108.0.3" />
+      <PackageReference Include="RestSharp" Version="110.1.0" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,64 @@
 ### Features
 1. [#528](https://github.com/influxdata/influxdb-client-csharp/pull/528): Add HttpClient as a part of InfluxDBClientOptions
 
-## 4.10.0 [unreleased]
+## 4.13.0 [unreleased]
+
+### Dependencies
+Update dependencies:
+
+#### Build:
+  - [#525](https://github.com/influxdata/influxdb-client-csharp/pull/525): `System.Reactive` to `6.0.0`
+
+#### Examples:
+  - [#526](https://github.com/influxdata/influxdb-client-csharp/pull/526): `Radzen.Blazor` to `4.11.2`
+
+#### Test:
+  - [#523](https://github.com/influxdata/influxdb-client-csharp/pull/523): `Microsoft.NET.Test.Sdk` to `17.6.0`
+  - [#524](https://github.com/influxdata/influxdb-client-csharp/pull/524): `coverlet.collector` to `6.0.0`
+  - [#527](https://github.com/influxdata/influxdb-client-csharp/pull/527): `WireMock.Net` to `1.5.26`
+
+## 4.12.0 [2023-04-28]
+
+### Bug Fixes
+  - [#510](https://github.com/influxdata/influxdb-client-csharp/pull/510): Passing aggregation function to AggregateWindow for LINQ queries
+
+### Dependencies
+Update dependencies:
+
+#### Build:
+  - [#497](https://github.com/influxdata/influxdb-client-csharp/pull/497): `NodaTime` to `3.1.9`
+  - [#485](https://github.com/influxdata/influxdb-client-csharp/pull/485): `Newtonsoft.Json` to `13.0.3`
+  - [#506](https://github.com/influxdata/influxdb-client-csharp/pull/506): `Microsoft.Extensions.ObjectPool` to `7.0.5`
+  - [#509](https://github.com/influxdata/influxdb-client-csharp/pull/509): `RestSharp` to `110.2.0`
+
+#### Examples:
+  - [#511](https://github.com/influxdata/influxdb-client-csharp/pull/511): `Radzen.Blazor` to `4.10.1`
+
+#### Test:
+  - [#508](https://github.com/influxdata/influxdb-client-csharp/pull/508): `WireMock.Net` to `1.5.23`
+  - [#480](https://github.com/influxdata/influxdb-client-csharp/pull/480): `NUnit3TestAdapter` to `4.4.2`
+  - [#473](https://github.com/influxdata/influxdb-client-csharp/pull/473): `Microsoft.NET.Test.Sdk` to `17.5.0`
+
+## 4.11.0 [2023-02-23]
+
+### Bug Fixes
+  - Revert [#408] conversion of double to string can result in a loss of precision
+
+## 4.10.0 [2023-01-26]
+
+### Bug Fixes
+  - [#442](https://github.com/influxdata/influxdb-client-csharp/pull/442): Allow to use `DateTimeKind.Local` and `DateTimeKind.Local` as a timestamp for Data point
+
+### Dependencies
+Update dependencies:
+
+#### Examples:
+  - [#446](https://github.com/influxdata/influxdb-client-csharp/pull/446): `Radzen.Blazor` to `4.4.7`
+
+#### Test:
+  - [#439](https://github.com/influxdata/influxdb-client-csharp/pull/439): `WireMock.Net` to `1.5.13`
+  - [#445](https://github.com/influxdata/influxdb-client-csharp/pull/445): `Microsoft.NET.Test.Sdk` to `17.4.1`
+  - [#447](https://github.com/influxdata/influxdb-client-csharp/pull/447): `Tomlyn.Signed` to `0.16.2`
 
 ## 4.9.0 [2020-12-06]
 

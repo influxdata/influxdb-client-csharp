@@ -146,6 +146,12 @@ jobs:
       - image: *default-dotnet-image
     steps:
       - checkout
+      - run: |
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Examples/Examples.csproj
       - run:
           name: Check compilation warnings
           command: |
