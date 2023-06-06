@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
+using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
@@ -34,6 +35,7 @@ namespace InfluxDB.Client
         private bool _allowHttpRedirects;
         private bool _verifySsl;
         private X509CertificateCollection _clientCertificates;
+        private HttpClient _httpClient;
 
         /// <summary>
         /// Set the url to connect the InfluxDB.
@@ -252,6 +254,15 @@ namespace InfluxDB.Client
         }
 
         /// <summary>
+        /// Add a HttpClient as a part of InfluxDBClientOptions
+        /// </summary>
+        public HttpClient HttpClient
+        {
+            get => _httpClient;
+            set => _httpClient = value;
+        }
+
+        /// <summary>
         /// Create an instance of InfluxDBClientOptions. The url could be a connection string with various configurations.
         ///<para>
         /// e.g.: "http://localhost:8086?timeout=5000&amp;logLevel=BASIC
@@ -428,6 +439,11 @@ namespace InfluxDB.Client
             {
                 ClientCertificates = builder.CertificateCollection;
             }
+
+            if (builder.HttpClient != null)
+            {
+                HttpClient = builder.HttpClient;
+            }
         }
 
         private static TimeSpan ToTimeout(string value)
@@ -506,6 +522,7 @@ namespace InfluxDB.Client
             internal bool VerifySslCertificates = true;
             internal RemoteCertificateValidationCallback VerifySslCallback;
             internal X509CertificateCollection CertificateCollection;
+            internal HttpClient HttpClient;
 
             internal PointSettings PointSettings = new PointSettings();
 
@@ -827,6 +844,20 @@ namespace InfluxDB.Client
                 }
 
                 return new InfluxDBClientOptions(this);
+            }
+
+            /// <summary>
+            /// Configure HttpClient
+            /// </summary>
+            /// <param name="httpClient"></param>
+            /// <returns></returns>
+            public Builder SetHttpClient(HttpClient httpClient)
+            {
+                Arguments.CheckNotNull(httpClient, nameof(httpClient));
+
+                HttpClient = httpClient;
+
+                return this;
             }
         }
     }
