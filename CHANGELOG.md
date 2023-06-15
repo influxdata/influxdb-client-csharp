@@ -10,12 +10,13 @@ Update dependencies:
   - [#525](https://github.com/influxdata/influxdb-client-csharp/pull/525): `System.Reactive` to `6.0.0`
 
 #### Examples:
-  - [#526](https://github.com/influxdata/influxdb-client-csharp/pull/526): `Radzen.Blazor` to `4.11.2`
+  - [#535](https://github.com/influxdata/influxdb-client-csharp/pull/535): `Radzen.Blazor` to `4.13.0`
 
 #### Test:
-  - [#523](https://github.com/influxdata/influxdb-client-csharp/pull/523): `Microsoft.NET.Test.Sdk` to `17.6.0`
+  - [#536](https://github.com/influxdata/influxdb-client-csharp/pull/536): `Microsoft.NET.Test.Sdk` to `17.6.2`
   - [#524](https://github.com/influxdata/influxdb-client-csharp/pull/524): `coverlet.collector` to `6.0.0`
-  - [#527](https://github.com/influxdata/influxdb-client-csharp/pull/527): `WireMock.Net` to `1.5.26`
+  - [#534](https://github.com/influxdata/influxdb-client-csharp/pull/534): `WireMock.Net` to `1.5.28`
+  - [#529](https://github.com/influxdata/influxdb-client-csharp/pull/529): `NUnit3TestAdapter` to `4.5.0`
 
 ## 4.12.0 [2023-04-28]
 
