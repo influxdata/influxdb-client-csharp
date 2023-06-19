@@ -10,7 +10,7 @@ Update dependencies:
   - [#525](https://github.com/influxdata/influxdb-client-csharp/pull/525): `System.Reactive` to `6.0.0`
 
 #### Examples:
-  - [#535](https://github.com/influxdata/influxdb-client-csharp/pull/535): `Radzen.Blazor` to `4.13.0`
+  - [#539](https://github.com/influxdata/influxdb-client-csharp/pull/539): `Radzen.Blazor` to `4.13.2`
 
 #### Test:
   - [#536](https://github.com/influxdata/influxdb-client-csharp/pull/536): `Microsoft.NET.Test.Sdk` to `17.6.2`
