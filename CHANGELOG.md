@@ -16,7 +16,7 @@ Update dependencies:
 #### Test:
   - [#536](https://github.com/influxdata/influxdb-client-csharp/pull/536): `Microsoft.NET.Test.Sdk` to `17.6.2`
   - [#524](https://github.com/influxdata/influxdb-client-csharp/pull/524): `coverlet.collector` to `6.0.0`
-  - [#534](https://github.com/influxdata/influxdb-client-csharp/pull/534): `WireMock.Net` to `1.5.28`
+  - [#541](https://github.com/influxdata/influxdb-client-csharp/pull/541): `WireMock.Net` to `1.5.29`
   - [#529](https://github.com/influxdata/influxdb-client-csharp/pull/529): `NUnit3TestAdapter` to `4.5.0`
 
 ## 4.12.0 [2023-04-28]
