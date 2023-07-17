@@ -8,7 +8,7 @@ Update dependencies:
 
 #### Build:
   - [#525](https://github.com/influxdata/influxdb-client-csharp/pull/525): `System.Reactive` to `6.0.0`
-  - [#540](https://github.com/influxdata/influxdb-client-csharp/pull/540): `Microsoft.Extensions.ObjectPool` to `7.0.8`
+  - [#549](https://github.com/influxdata/influxdb-client-csharp/pull/549): `Microsoft.Extensions.ObjectPool` to `7.0.9`
 
 #### Examples:
   - [#551](https://github.com/influxdata/influxdb-client-csharp/pull/551): `Radzen.Blazor` to `4.13.6`
