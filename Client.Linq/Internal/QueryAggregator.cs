@@ -129,12 +129,18 @@ namespace InfluxDB.Client.Linq.Internal
 
         internal void AddFilterByTags(string filter)
         {
-            _filterByTags.Add(filter);
+            if (!string.IsNullOrEmpty(filter))
+            {
+                _filterByTags.Add(filter);
+            }
         }
 
         internal void AddFilterByFields(string filter)
         {
-            _filterByFields.Add(filter);
+            if (!string.IsNullOrEmpty(filter))
+            {
+                _filterByFields.Add(filter);
+            }
         }
 
         internal void AddSubQueries(QueryAggregator aggregator)
