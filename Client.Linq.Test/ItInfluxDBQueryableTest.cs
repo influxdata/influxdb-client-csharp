@@ -72,6 +72,24 @@ namespace Client.Linq.Test
         }
 
         [Test]
+        public void QueryExampleNestedOr()
+        {
+            // https://github.com/influxdata/influxdb-client-csharp/issues/481
+            var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
+                    where (((((s.SensorId == "id-1") || (s.SensorId == "id-no-5")) || (s.SensorId == "id-no-8")) || (s.SensorId == "id-no-10")) || (s.SensorId == "id-no-12"))
+                    where s.Value > 12
+                    where s.Timestamp > new DateTime(2019, 11, 16, 8, 20, 15, DateTimeKind.Utc)
+                    where s.Timestamp < new DateTime(2021, 01, 10, 5, 10, 0, DateTimeKind.Utc)
+                    select s)
+                .Take(2)
+                .Skip(2);
+
+            var sensors = query.ToList();
+
+            Assert.AreEqual(1, sensors.Count);
+        }
+
+        [Test]
         public void QueryExampleCount()
         {
             var query = (from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _client.GetQueryApiSync())
