@@ -376,20 +376,14 @@ namespace InfluxDB.Client.Linq.Internal
                     // "( or (r["sensor_id"] != p4))"
                     if (index >= 1 && parts[index - 1] is LeftParenthesis && parts[index + 1] is LeftParenthesis)
                     {
-                        eliminators.Add(Tuple.Create<int, Action>(1, () =>
-                        {
-                            parts.RemoveAt(index);
-                        }));
+                        eliminators.Add(Tuple.Create<int, Action>(1, () => { parts.RemoveAt(index); }));
                         continue;
                     }
 
                     // "(r["sensor_id"] != p4) or )"
                     if (index >= 1 && parts[index - 1] is RightParenthesis && parts[index + 1] is RightParenthesis)
                     {
-                        eliminators.Add(Tuple.Create<int, Action>(1, () =>
-                        {
-                            parts.RemoveAt(index);
-                        }));
+                        eliminators.Add(Tuple.Create<int, Action>(1, () => { parts.RemoveAt(index); }));
                         continue;
                     }
                 }
