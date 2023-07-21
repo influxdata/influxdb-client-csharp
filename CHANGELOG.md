@@ -2,6 +2,8 @@
 
 ### Features
 1. [#528](https://github.com/influxdata/influxdb-client-csharp/pull/528): Add HttpClient as a part of InfluxDBClientOptions
+
+### Bug Fixes
 1. [#555](https://github.com/influxdata/influxdb-client-csharp/pull/555): Chaining multiple conditions in LINQ queries
 
 ### Dependencies
