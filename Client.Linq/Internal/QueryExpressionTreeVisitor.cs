@@ -331,61 +331,69 @@ namespace InfluxDB.Client.Linq.Internal
                 var indexes = Enumerable.Range(0, parts.Count)
                     .Where(i => parts[i] is BinaryOperator)
                     .ToList();
+                var eliminators = new List<Tuple<int, Action>>();
 
                 foreach (var index in indexes)
                 {
                     // "( and )"
                     if (index >= 1 && parts[index - 1] is LeftParenthesis && parts[index + 1] is RightParenthesis)
                     {
-                        parts.RemoveAt(index + 1);
-                        parts.RemoveAt(index);
-                        parts.RemoveAt(index - 1);
-
-                        NormalizeExpressions(parts);
-                        return;
+                        eliminators.Add(Tuple.Create<int, Action>(1, () =>
+                        {
+                            parts.RemoveAt(index + 1);
+                            parts.RemoveAt(index);
+                            parts.RemoveAt(index - 1);
+                        }));
+                        continue;
                     }
 
                     // "( timestamp > )"
                     if (index >= 2 && parts[index - 2] is LeftParenthesis && parts[index + 1] is RightParenthesis)
                     {
-                        parts.RemoveAt(index + 1);
-                        parts.RemoveAt(index);
-                        parts.RemoveAt(index - 1);
-                        parts.RemoveAt(index - 2);
-
-                        NormalizeExpressions(parts);
-                        return;
+                        eliminators.Add(Tuple.Create<int, Action>(1, () =>
+                        {
+                            parts.RemoveAt(index + 1);
+                            parts.RemoveAt(index);
+                            parts.RemoveAt(index - 1);
+                            parts.RemoveAt(index - 2);
+                        }));
+                        continue;
                     }
 
                     // "( < timestamp )"  
                     if (index >= 1 && parts[index - 1] is LeftParenthesis && parts[index + 2] is RightParenthesis)
                     {
-                        parts.RemoveAt(index + 2);
-                        parts.RemoveAt(index + 1);
-                        parts.RemoveAt(index);
-                        parts.RemoveAt(index - 1);
-
-                        NormalizeExpressions(parts);
-                        return;
+                        eliminators.Add(Tuple.Create<int, Action>(10, () =>
+                        {
+                            parts.RemoveAt(index + 2);
+                            parts.RemoveAt(index + 1);
+                            parts.RemoveAt(index);
+                            parts.RemoveAt(index - 1);
+                        }));
+                        continue;
                     }
 
                     // "( or (r["sensor_id"] != p4))"
                     if (index >= 1 && parts[index - 1] is LeftParenthesis && parts[index + 1] is LeftParenthesis)
                     {
-                        parts.RemoveAt(index);
-
-                        NormalizeExpressions(parts);
-                        return;
+                        eliminators.Add(Tuple.Create<int, Action>(1, () => { parts.RemoveAt(index); }));
+                        continue;
                     }
 
                     // "(r["sensor_id"] != p4) or )"
                     if (index >= 1 && parts[index - 1] is RightParenthesis && parts[index + 1] is RightParenthesis)
                     {
-                        parts.RemoveAt(index);
-
-                        NormalizeExpressions(parts);
-                        return;
+                        eliminators.Add(Tuple.Create<int, Action>(1, () => { parts.RemoveAt(index); }));
+                        continue;
                     }
+                }
+
+                if (eliminators.Count > 0)
+                {
+                    eliminators.Sort((e1, e2) => e2.Item1.CompareTo(e1.Item1)); // descending order
+                    eliminators[0].Item2();
+                    NormalizeExpressions(parts);
+                    return;
                 }
             }
 
