@@ -14,7 +14,7 @@ Update dependencies:
   - [#549](https://github.com/influxdata/influxdb-client-csharp/pull/549): `Microsoft.Extensions.ObjectPool` to `7.0.9`
 
 #### Examples:
-  - [#551](https://github.com/influxdata/influxdb-client-csharp/pull/551): `Radzen.Blazor` to `4.14.1`
+  - [#556](https://github.com/influxdata/influxdb-client-csharp/pull/556): `Radzen.Blazor` to `4.14.1`
 
 #### Test:
   - [#543](https://github.com/influxdata/influxdb-client-csharp/pull/543): `Microsoft.NET.Test.Sdk` to `17.6.3`
