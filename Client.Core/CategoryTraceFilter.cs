@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.Linq;
-using System;
 
 namespace InfluxDB.Client.Core
 {
@@ -20,6 +19,13 @@ namespace InfluxDB.Client.Core
         public override bool ShouldTrace(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string formatOrMessage, object[] args, object data, object[] dataArray)
         {
             return categoryToFilter.Any(x => x == source) ^ keep;
+        }
+
+        public static CategoryTraceFilter SuppressInflux()
+        {
+            return new CategoryTraceFilter(new string[] {
+                CategoryInflux
+            }, false);
         }
     }
 }
