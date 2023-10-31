@@ -769,6 +769,31 @@ namespace Examples
 }
 ```
 
+## Filter trace verbose
+
+```cs
+using System;
+using System.Diagnostics;
+using InfluxDB.Client.Core;
+
+namespace Examples
+{
+  public static class MyProgram
+  {
+    public static void Main()
+    {
+      TraceListener ConsoleOutListener = new TextWriterTraceListener(Console.Out)
+      {
+        Filter = CategoryTraceFilter.SuppressInflux(),
+      };
+      Trace.Listeners.Add(ConsoleOutListener);
+
+      // My code ...
+    }
+  }
+}
+````
+
 ## Management API
 
 The client has following management API:
