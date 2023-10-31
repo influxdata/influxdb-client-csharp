@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using InfluxDB.Client.Api.Domain;
+using InfluxDB.Client.Core;
 
 namespace InfluxDB.Client.Writes
 {
@@ -18,7 +19,7 @@ namespace InfluxDB.Client.Writes
 
         internal override void LogEvent()
         {
-            Trace.WriteLine("The data was successfully written to InfluxDB 2.", "Influxdb-WRITE");
+            Trace.WriteLine("The data was successfully written to InfluxDB 2.", CategoryTraceFilter.CategoryInflux);
         }
     }
 

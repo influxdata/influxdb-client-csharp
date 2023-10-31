@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Core.Internal
             var isBody = Level == LogLevel.Body;
             var isHeader = isBody || Level == LogLevel.Headers;
 
-            Trace.WriteLine($"--> {request.Method} {request.Resource}");
+            Trace.WriteLine($"--> {request.Method} {request.Resource}", CategoryTraceFilter.CategoryInflux);
 
             if (isHeader)
             {
@@ -56,12 +56,12 @@ namespace InfluxDB.Client.Core.Internal
                         stringBody = body.Value.ToString();
                     }
 
-                    Trace.WriteLine($"--> Body: {stringBody}");
+                    Trace.WriteLine($"--> Body: {stringBody}", CategoryTraceFilter.CategoryInflux);
                 }
             }
 
-            Trace.WriteLine("--> END");
-            Trace.WriteLine("-->");
+            Trace.WriteLine("--> END", CategoryTraceFilter.CategoryInflux);
+            Trace.WriteLine("-->", CategoryTraceFilter.CategoryInflux);
         }
 
         public object AfterIntercept(int statusCode, Func<IEnumerable<HeaderParameter>> headers, object body)
@@ -75,7 +75,7 @@ namespace InfluxDB.Client.Core.Internal
             var isBody = Level == LogLevel.Body;
             var isHeader = isBody || Level == LogLevel.Headers;
 
-            Trace.WriteLine($"<-- {statusCode}");
+            Trace.WriteLine($"<-- {statusCode}", CategoryTraceFilter.CategoryInflux);
 
             if (isHeader)
             {
@@ -101,11 +101,11 @@ namespace InfluxDB.Client.Core.Internal
 
                 if (!string.IsNullOrEmpty(stringBody))
                 {
-                    Trace.WriteLine($"<-- Body: {stringBody}");
+                    Trace.WriteLine($"<-- Body: {stringBody}", CategoryTraceFilter.CategoryInflux);
                 }
             }
 
-            Trace.WriteLine("<-- END");
+            Trace.WriteLine("<-- END", CategoryTraceFilter.CategoryInflux);
 
             return freshBody;
         }
@@ -131,7 +131,7 @@ namespace InfluxDB.Client.Core.Internal
                 var value = string.Equals(emp.Name, "Authorization", StringComparison.OrdinalIgnoreCase)
                     ? "***"
                     : emp.Value;
-                Trace.WriteLine($"{direction} {type}: {emp.Name}={value}");
+                Trace.WriteLine($"{direction} {type}: {emp.Name}={value}", CategoryTraceFilter.CategoryInflux);
             }
         }
     }

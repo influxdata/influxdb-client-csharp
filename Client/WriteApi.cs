@@ -300,14 +300,17 @@ namespace InfluxDB.Client
                         switch (notification.Kind)
                         {
                             case NotificationKind.OnNext:
-                                Trace.WriteLine($"The batch item: {notification} was processed successfully.");
+                                Trace.WriteLine($"The batch item: {notification} was processed successfully."
+                                , CategoryTraceFilter.CategoryInflux);
                                 break;
                             case NotificationKind.OnError:
                                 Trace.WriteLine(
-                                    $"The batch item wasn't processed successfully because: {notification.Exception}");
+                                    $"The batch item wasn't processed successfully because: {notification.Exception}"
+                                    , CategoryTraceFilter.CategoryInflux);
                                 break;
                             default:
-                                Trace.WriteLine($"The batch item: {notification} was processed");
+                                Trace.WriteLine($"The batch item: {notification} was processed"
+                                , CategoryTraceFilter.CategoryInflux);
                                 break;
                         }
                     },
@@ -315,12 +318,14 @@ namespace InfluxDB.Client
                     {
                         Publish(new WriteRuntimeExceptionEvent(exception));
                         _disposed = true;
-                        Trace.WriteLine($"The unhandled exception occurs: {exception}");
+                        Trace.WriteLine($"The unhandled exception occurs: {exception}"
+                        , CategoryTraceFilter.CategoryInflux);
                     },
                     () =>
                     {
                         _disposed = true;
-                        Trace.WriteLine("The WriteApi was disposed.");
+                        Trace.WriteLine("The WriteApi was disposed."
+                        , CategoryTraceFilter.CategoryInflux);
                     });
         }
 
@@ -337,7 +342,7 @@ namespace InfluxDB.Client
         {
             _unsubscribeDisposeCommand.Dispose(); // avoid duplicate call to dispose
 
-            Trace.WriteLine("Flushing batches before shutdown.");
+            Trace.WriteLine("Flushing batches before shutdown.", CategoryTraceFilter.CategoryInflux);
 
             if (!_subject.IsDisposed)
             {
@@ -572,7 +577,7 @@ namespace InfluxDB.Client
         {
             if (!_point.HasFields())
             {
-                Trace.WriteLine($"The point: ${_point} doesn't contains any fields, skipping");
+                Trace.WriteLine($"The point: ${_point} doesn't contains any fields, skipping", CategoryTraceFilter.CategoryInflux);
 
                 return null;
             }
@@ -603,7 +608,7 @@ namespace InfluxDB.Client
             var point = _converter.ConvertToPointData(_measurement, Options.Precision);
             if (!point.HasFields())
             {
-                Trace.WriteLine($"The point: ${point} doesn't contains any fields, skipping");
+                Trace.WriteLine($"The point: ${point} doesn't contains any fields, skipping", CategoryTraceFilter.CategoryInflux);
 
                 return null;
             }

@@ -1,11 +1,12 @@
 using System.Diagnostics;
 using System.Linq;
+using System;
 
 namespace InfluxDB.Client.Core
 {
     public class CategoryTraceFilter : TraceFilter
     {
-        public const string CategoryWrite = "influxdb-write";
+        public const string CategoryInflux = "influx-client";
 
         private readonly string[] categoryToFilter;
         private readonly bool keep;

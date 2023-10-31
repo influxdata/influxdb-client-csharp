@@ -7,6 +7,7 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -133,8 +134,8 @@ namespace InfluxDB.Client.Api.Client
                 }
                 catch (IOException e)
                 {
-                    Trace.WriteLine("Cannot retrieve the Session token!");
-                    Trace.WriteLine(e);
+                    Trace.WriteLine("Cannot retrieve the Session token!", CategoryTraceFilter.CategoryInflux);
+                    Trace.WriteLine(e, CategoryTraceFilter.CategoryInflux);
                     return;
                 }
 

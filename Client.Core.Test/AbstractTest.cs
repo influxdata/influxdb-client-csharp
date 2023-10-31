@@ -14,7 +14,7 @@ namespace InfluxDB.Client.Core.Test
         private static readonly TraceListener ConsoleOutListener = new TextWriterTraceListener(Console.Out)
         {
             Filter = new CategoryTraceFilter(new string[] {
-                CategoryTraceFilter.CategoryWrite
+                CategoryTraceFilter.CategoryInflux
             }, false),
         };
         private static readonly int DefaultWait = 10;
