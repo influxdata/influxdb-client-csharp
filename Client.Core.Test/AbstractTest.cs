@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -10,28 +9,13 @@ using NUnit.Framework;
 
 namespace InfluxDB.Client.Core.Test
 {
-    public class CategoryTraceFilter : TraceFilter
-    {
-        private readonly string[] categoryToFilter;
-        private readonly bool keep;
-
-        public CategoryTraceFilter(string[] categoryToFilter, bool keep)
-        {
-            this.categoryToFilter = categoryToFilter;
-            this.keep = keep;
-        }
-
-        public override bool ShouldTrace(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string formatOrMessage, object[] args, object data, object[] dataArray)
-        {
-            return categoryToFilter.Any(x => x == source) ^ keep;
-        }
-    }
-
     public class AbstractTest
     {
         private static readonly TraceListener ConsoleOutListener = new TextWriterTraceListener(Console.Out)
         {
-            Filter = new CategoryTraceFilter(new string[] { "Influxdb-WRITE" }, false),
+            Filter = new CategoryTraceFilter(new string[] {
+                CategoryTraceFilter.CategoryWrite
+            }, false),
         };
         private static readonly int DefaultWait = 10;
         private static readonly int DefaultInfluxDBSleep = 100;
