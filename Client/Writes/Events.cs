@@ -18,7 +18,7 @@ namespace InfluxDB.Client.Writes
 
         internal override void LogEvent()
         {
-            Trace.WriteLine("The data was successfully written to InfluxDB 2.");
+            Trace.WriteLine("The data was successfully written to InfluxDB 2.", "Influxdb-WRITE");
         }
     }
 
