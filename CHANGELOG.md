@@ -3,9 +3,11 @@
 ### Dependencies
 Update dependencies:
 
+#### Build:
+  - [#588](https://github.com/influxdata/influxdb-client-csharp/pull/588): `Microsoft.Extensions.ObjectPool` to `7.0.13`
+
 #### Examples:
   - [#557](https://github.com/influxdata/influxdb-client-csharp/pull/557): `Radzen.Blazor` to `4.14.3`
-  - [#588](https://github.com/influxdata/influxdb-client-csharp/pull/588): `Microsoft.Extensions.ObjectPool` to `7.0.13`
 
 ## 4.13.0 [2023-07-28]
 
