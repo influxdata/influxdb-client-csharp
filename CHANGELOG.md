@@ -9,6 +9,9 @@ Update dependencies:
 #### Examples:
   - [#589](https://github.com/influxdata/influxdb-client-csharp/pull/589): `Radzen.Blazor` to `4.19.1`
 
+#### Test:
+  - [#587](https://github.com/influxdata/influxdb-client-csharp/pull/587): `WireMock.Net` to `1.5.39`
+
 ## 4.13.0 [2023-07-28]
 
 ### Features
