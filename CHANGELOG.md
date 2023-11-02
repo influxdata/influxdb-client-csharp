@@ -11,6 +11,7 @@ Update dependencies:
 
 #### Test:
   - [#587](https://github.com/influxdata/influxdb-client-csharp/pull/587): `WireMock.Net` to `1.5.39`
+  - [#573](https://github.com/influxdata/influxdb-client-csharp/pull/573): `Microsoft.NET.Test.Sdk` to `17.7.2`
 
 ## 4.13.0 [2023-07-28]
 
