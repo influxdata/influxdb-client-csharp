@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
       <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
@@ -7,7 +7,7 @@
       <Description>The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.x.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client</AssemblyName>
-        <VersionPrefix>4.12.0</VersionPrefix>
+        <VersionPrefix>4.14.0</VersionPrefix>
         <VersionSuffix>dev</VersionSuffix>
 
         <PackageId>InfluxDB.Client</PackageId>
@@ -36,11 +36,11 @@
 
     <ItemGroup>
         <PackageReference Include="JsonSubTypes" Version="2.0.1" />
-        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="7.0.2" />
+        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="7.0.13" />
         <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
         <PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.1" />
-        <PackageReference Include="System.Reactive" Version="5.0.0" />
+        <PackageReference Include="System.Reactive" Version="6.0.0" />
     </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
-using System;
-using System.Net;
 using InfluxDB.Client.Api.Client;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Internal;
 using NUnit.Framework;
+using System;
+using System.Net;
 
 namespace InfluxDB.Client.Test
 {

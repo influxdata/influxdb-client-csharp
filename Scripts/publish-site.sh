@@ -20,13 +20,7 @@ set -ev
 SCRIPT_PATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
 cd "$SCRIPT_PATH"/..
 
-echo "# Install Git"
-apt-get update \
-  && apt-get install git --yes \
-
 echo "# Clone client and switch to branch for GH-Pages"
-chown root:$USER ~/.ssh/config
-chmod 644 ~/.ssh/config
 git clone git@github.com:influxdata/influxdb-client-csharp.git \
   && cd influxdb-client-csharp \
   && git switch -C gh-pages
@@ -43,5 +37,5 @@ cp -R "${SCRIPT_PATH}"/../.circleci/ "$SCRIPT_PATH"/../influxdb-client-csharp/
 echo "# Deploy site"
 cd "$SCRIPT_PATH"/../influxdb-client-csharp
 git add -f .
-git -c commit.gpgsign=false commit -m "Pushed the latest Docs to GitHub pages [skip CI]"
+git commit -m "Pushed the latest Docs to GitHub pages [skip CI]"
 git push -fq origin gh-pages

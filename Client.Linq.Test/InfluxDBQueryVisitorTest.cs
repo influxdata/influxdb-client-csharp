@@ -1040,6 +1040,22 @@ namespace Client.Linq.Test
         }
 
         [Test]
+        public void AggregateWindowCustomFunction()
+        {
+            var query = from s in InfluxDBQueryable<Sensor>.Queryable("my-bucket", "my-org", _queryApi)
+                where s.Timestamp.AggregateWindow(TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(40), "min")
+                where s.Value == 5
+                select s;
+
+            var visitor = BuildQueryVisitor(query);
+            var ast = visitor.BuildFluxAST();
+
+            var fnAssignment = ((OptionStatement)ast.Body[4]).Assignment as VariableAssignment;
+            Assert.AreEqual("p5", fnAssignment?.Id.Name);
+            Assert.AreEqual("min", (fnAssignment.Init as Identifier)?.Name);
+        }
+
+        [Test]
         public void AggregateWindowFluxQuery()
         {
             var queries = new[]

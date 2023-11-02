@@ -136,7 +136,7 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerPoco<T>(poco => { measurements.Add(poco); }, Mapper);
 
-            RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter)
+            RestRequest QueryFn(Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
             {
                 return _service
                     .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query)
@@ -188,7 +188,7 @@ namespace InfluxDB.Client
             var optionsOrg = org ?? _options.Org;
             Arguments.CheckNonEmptyString(optionsOrg, OrgArgumentValidation);
 
-            RestRequest QueryFn(Func<HttpResponseMessage, RestResponse> advancedResponseWriter)
+            RestRequest QueryFn(Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
             {
                 return _service
                     .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query)

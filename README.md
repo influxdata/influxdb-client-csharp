@@ -8,9 +8,9 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/influxdata/influxdb-client-csharp.svg)](https://github.com/influxdata/influxdb-client-csharp/pulls)
 [![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://www.influxdata.com/slack)
 
-This repository contains the reference C# client for the InfluxDB 2.x.
+This repository contains the C# client library for use with InfluxDB 2.x and Flux. InfluxDB 3.x users should instead use the lightweight [v3 client library](https://github.com/InfluxCommunity/influxdb3-csharp). InfluxDB 1.x users should use the [v1 client library](https://github.com/influxdata/influxdb-csharp).
 
-#### Note: Use this client library with InfluxDB 2.x and InfluxDB 1.8+ ([see details](#influxdb-18-api-compatibility)). For connecting to InfluxDB 1.7 or earlier instances, use the [influxdb-csharp](https://github.com/influxdata/influxdb-csharp) client library.
+For ease of migration and a consistent query and write experience, v2 users should consider using InfluxQL and the [v1 client library](https://github.com/influxdata/influxdb-csharp).
 
 - [Features](#features)
 - [Documentation](#documentation)

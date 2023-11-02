@@ -300,7 +300,7 @@ namespace InfluxDB.Client
                 cancellationToken);
         }
 
-        private Func<Func<HttpResponseMessage, RestResponse>, RestRequest> CreateRequest(string scriptId,
+        private Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> CreateRequest(string scriptId,
             Dictionary<string, object> bindParams = default)
         {
             Arguments.CheckNonEmptyString(scriptId, nameof(scriptId));

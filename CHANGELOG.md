@@ -1,4 +1,65 @@
-## 4.12.0 [unreleased]
+## 4.14.0 [unreleased]
+
+### Dependencies
+Update dependencies:
+
+#### Build:
+  - [#588](https://github.com/influxdata/influxdb-client-csharp/pull/588): `Microsoft.Extensions.ObjectPool` to `7.0.13`
+  - [#572](https://github.com/influxdata/influxdb-client-csharp/pull/572): `NodaTime.Serialization.JsonNet` to `3.1.0`
+
+#### Examples:
+  - [#589](https://github.com/influxdata/influxdb-client-csharp/pull/589): `Radzen.Blazor` to `4.19.1`
+
+#### Test:
+  - [#587](https://github.com/influxdata/influxdb-client-csharp/pull/587): `WireMock.Net` to `1.5.39`
+  - [#573](https://github.com/influxdata/influxdb-client-csharp/pull/573): `Microsoft.NET.Test.Sdk` to `17.7.2`
+  - [#568](https://github.com/influxdata/influxdb-client-csharp/pull/568): `Moq` to `4.20.69`
+
+## 4.13.0 [2023-07-28]
+
+### Features
+1. [#528](https://github.com/influxdata/influxdb-client-csharp/pull/528): Add HttpClient as a part of InfluxDBClientOptions
+
+### Bug Fixes
+1. [#555](https://github.com/influxdata/influxdb-client-csharp/pull/555): Chaining multiple conditions in LINQ queries
+
+### Dependencies
+Update dependencies:
+
+#### Build:
+  - [#525](https://github.com/influxdata/influxdb-client-csharp/pull/525): `System.Reactive` to `6.0.0`
+  - [#549](https://github.com/influxdata/influxdb-client-csharp/pull/549): `Microsoft.Extensions.ObjectPool` to `7.0.9`
+
+#### Examples:
+  - [#556](https://github.com/influxdata/influxdb-client-csharp/pull/556): `Radzen.Blazor` to `4.14.1`
+
+#### Test:
+  - [#543](https://github.com/influxdata/influxdb-client-csharp/pull/543): `Microsoft.NET.Test.Sdk` to `17.6.3`
+  - [#524](https://github.com/influxdata/influxdb-client-csharp/pull/524): `coverlet.collector` to `6.0.0`
+  - [#550](https://github.com/influxdata/influxdb-client-csharp/pull/550): `WireMock.Net` to `1.5.32`
+  - [#529](https://github.com/influxdata/influxdb-client-csharp/pull/529): `NUnit3TestAdapter` to `4.5.0`
+
+## 4.12.0 [2023-04-28]
+
+### Bug Fixes
+  - [#510](https://github.com/influxdata/influxdb-client-csharp/pull/510): Passing aggregation function to AggregateWindow for LINQ queries
+
+### Dependencies
+Update dependencies:
+
+#### Build:
+  - [#497](https://github.com/influxdata/influxdb-client-csharp/pull/497): `NodaTime` to `3.1.9`
+  - [#485](https://github.com/influxdata/influxdb-client-csharp/pull/485): `Newtonsoft.Json` to `13.0.3`
+  - [#506](https://github.com/influxdata/influxdb-client-csharp/pull/506): `Microsoft.Extensions.ObjectPool` to `7.0.5`
+  - [#509](https://github.com/influxdata/influxdb-client-csharp/pull/509): `RestSharp` to `110.2.0`
+
+#### Examples:
+  - [#511](https://github.com/influxdata/influxdb-client-csharp/pull/511): `Radzen.Blazor` to `4.10.1`
+
+#### Test:
+  - [#508](https://github.com/influxdata/influxdb-client-csharp/pull/508): `WireMock.Net` to `1.5.23`
+  - [#480](https://github.com/influxdata/influxdb-client-csharp/pull/480): `NUnit3TestAdapter` to `4.4.2`
+  - [#473](https://github.com/influxdata/influxdb-client-csharp/pull/473): `Microsoft.NET.Test.Sdk` to `17.5.0`
 
 ## 4.11.0 [2023-02-23]
 
