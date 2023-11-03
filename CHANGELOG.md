@@ -1,5 +1,9 @@
 ## 4.14.0 [unreleased]
 
+### Features
+
+1. [#590](https://github.com/influxdata/influxdb-client-csharp/pull/590): Allows disable Trace verbose messages
+
 ### Dependencies
 Update dependencies:
 
