@@ -7,8 +7,17 @@
 ### Dependencies
 Update dependencies:
 
+#### Build:
+  - [#588](https://github.com/influxdata/influxdb-client-csharp/pull/588): `Microsoft.Extensions.ObjectPool` to `7.0.13`
+  - [#572](https://github.com/influxdata/influxdb-client-csharp/pull/572): `NodaTime.Serialization.JsonNet` to `3.1.0`
+
 #### Examples:
-  - [#557](https://github.com/influxdata/influxdb-client-csharp/pull/557): `Radzen.Blazor` to `4.14.3`
+  - [#589](https://github.com/influxdata/influxdb-client-csharp/pull/589): `Radzen.Blazor` to `4.19.1`
+
+#### Test:
+  - [#587](https://github.com/influxdata/influxdb-client-csharp/pull/587): `WireMock.Net` to `1.5.39`
+  - [#573](https://github.com/influxdata/influxdb-client-csharp/pull/573): `Microsoft.NET.Test.Sdk` to `17.7.2`
+  - [#568](https://github.com/influxdata/influxdb-client-csharp/pull/568): `Moq` to `4.20.69`
 
 ## 4.13.0 [2023-07-28]
 
