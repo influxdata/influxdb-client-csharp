@@ -13,7 +13,7 @@ namespace InfluxDB.Client.Core.Test
     {
         private static readonly TraceListener ConsoleOutListener = new TextWriterTraceListener(Console.Out)
         {
-            Filter = CategoryTraceFilter.SuppressInflux()
+            Filter = CategoryTraceFilter.SuppressInfluxVerbose()
         };
 
         private static readonly int DefaultWait = 10;

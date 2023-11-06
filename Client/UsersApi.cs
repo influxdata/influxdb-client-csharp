@@ -307,7 +307,7 @@ namespace InfluxDB.Client
             var me = await MeAsync(cancellationToken).ConfigureAwait(false);
             if (me == null)
             {
-                Trace.WriteLine("User is not authenticated.", CategoryTraceFilter.CategoryInflux);
+                Trace.WriteLine("User is not authenticated.", CategoryTraceFilter.CategoryInfluxError);
                 return;
             }
 

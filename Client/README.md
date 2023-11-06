@@ -784,7 +784,7 @@ namespace Examples
     {
       TraceListener ConsoleOutListener = new TextWriterTraceListener(Console.Out)
       {
-        Filter = CategoryTraceFilter.SuppressInflux(),
+        Filter = CategoryTraceFilter.SuppressInfluxVerbose(),
       };
       Trace.Listeners.Add(ConsoleOutListener);
 

@@ -301,16 +301,16 @@ namespace InfluxDB.Client
                         {
                             case NotificationKind.OnNext:
                                 Trace.WriteLine($"The batch item: {notification} was processed successfully."
-                                    , CategoryTraceFilter.CategoryInflux);
+                                    , CategoryTraceFilter.CategoryInfluxWrite);
                                 break;
                             case NotificationKind.OnError:
                                 Trace.WriteLine(
                                     $"The batch item wasn't processed successfully because: {notification.Exception}"
-                                    , CategoryTraceFilter.CategoryInflux);
+                                    , CategoryTraceFilter.CategoryInfluxWriteError);
                                 break;
                             default:
                                 Trace.WriteLine($"The batch item: {notification} was processed"
-                                    , CategoryTraceFilter.CategoryInflux);
+                                    , CategoryTraceFilter.CategoryInfluxWrite);
                                 break;
                         }
                     },
@@ -319,13 +319,13 @@ namespace InfluxDB.Client
                         Publish(new WriteRuntimeExceptionEvent(exception));
                         _disposed = true;
                         Trace.WriteLine($"The unhandled exception occurs: {exception}"
-                            , CategoryTraceFilter.CategoryInflux);
+                            , CategoryTraceFilter.CategoryInfluxWriteError);
                     },
                     () =>
                     {
                         _disposed = true;
                         Trace.WriteLine("The WriteApi was disposed."
-                            , CategoryTraceFilter.CategoryInflux);
+                            , CategoryTraceFilter.CategoryInfluxWrite);
                     });
         }
 
@@ -342,7 +342,7 @@ namespace InfluxDB.Client
         {
             _unsubscribeDisposeCommand.Dispose(); // avoid duplicate call to dispose
 
-            Trace.WriteLine("Flushing batches before shutdown.", CategoryTraceFilter.CategoryInflux);
+            Trace.WriteLine("Flushing batches before shutdown.", CategoryTraceFilter.CategoryInfluxWrite);
 
             if (!_subject.IsDisposed)
             {
@@ -578,7 +578,7 @@ namespace InfluxDB.Client
             if (!_point.HasFields())
             {
                 Trace.WriteLine($"The point: ${_point} doesn't contains any fields, skipping",
-                    CategoryTraceFilter.CategoryInflux);
+                    CategoryTraceFilter.CategoryInfluxWrite);
 
                 return null;
             }
@@ -610,7 +610,7 @@ namespace InfluxDB.Client
             if (!point.HasFields())
             {
                 Trace.WriteLine($"The point: ${point} doesn't contains any fields, skipping",
-                    CategoryTraceFilter.CategoryInflux);
+                    CategoryTraceFilter.CategoryInfluxWrite);
 
                 return null;
             }

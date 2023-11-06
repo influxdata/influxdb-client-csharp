@@ -6,6 +6,12 @@ namespace InfluxDB.Client.Core
     public class CategoryTraceFilter : TraceFilter
     {
         public const string CategoryInflux = "influx-client";
+        public const string CategoryInfluxError = "influx-client-error";
+        public const string CategoryInfluxQuery = "influx-client-query";
+        public const string CategoryInfluxQueryError = "influx-client-query-error";
+        public const string CategoryInfluxWrite = "influx-client-write";
+        public const string CategoryInfluxWriteError = "influx-client-write-error";
+        public const string CategoryInfluxLogger = "influx-client-logger";
 
         private readonly string[] categoryToFilter;
         private readonly bool keep;
@@ -26,7 +32,24 @@ namespace InfluxDB.Client.Core
         {
             return new CategoryTraceFilter(new string[]
             {
-                CategoryInflux
+                CategoryInflux,
+                CategoryInfluxError,
+                CategoryInfluxQuery,
+                CategoryInfluxQueryError,
+                CategoryInfluxWrite,
+                CategoryInfluxWriteError,
+                CategoryInfluxLogger
+            }, false);
+        }
+
+        public static CategoryTraceFilter SuppressInfluxVerbose()
+        {
+            return new CategoryTraceFilter(new string[]
+            {
+                CategoryInflux,
+                CategoryInfluxQuery,
+                CategoryInfluxWrite,
+                CategoryInfluxLogger
             }, false);
         }
     }
