@@ -301,7 +301,7 @@ namespace InfluxDB.Client
                         {
                             case NotificationKind.OnNext:
                                 Trace.WriteLine($"The batch item: {notification} was processed successfully."
-                                , CategoryTraceFilter.CategoryInflux);
+                                    , CategoryTraceFilter.CategoryInflux);
                                 break;
                             case NotificationKind.OnError:
                                 Trace.WriteLine(
@@ -310,7 +310,7 @@ namespace InfluxDB.Client
                                 break;
                             default:
                                 Trace.WriteLine($"The batch item: {notification} was processed"
-                                , CategoryTraceFilter.CategoryInflux);
+                                    , CategoryTraceFilter.CategoryInflux);
                                 break;
                         }
                     },
@@ -319,13 +319,13 @@ namespace InfluxDB.Client
                         Publish(new WriteRuntimeExceptionEvent(exception));
                         _disposed = true;
                         Trace.WriteLine($"The unhandled exception occurs: {exception}"
-                        , CategoryTraceFilter.CategoryInflux);
+                            , CategoryTraceFilter.CategoryInflux);
                     },
                     () =>
                     {
                         _disposed = true;
                         Trace.WriteLine("The WriteApi was disposed."
-                        , CategoryTraceFilter.CategoryInflux);
+                            , CategoryTraceFilter.CategoryInflux);
                     });
         }
 
@@ -577,7 +577,8 @@ namespace InfluxDB.Client
         {
             if (!_point.HasFields())
             {
-                Trace.WriteLine($"The point: ${_point} doesn't contains any fields, skipping", CategoryTraceFilter.CategoryInflux);
+                Trace.WriteLine($"The point: ${_point} doesn't contains any fields, skipping",
+                    CategoryTraceFilter.CategoryInflux);
 
                 return null;
             }
@@ -608,7 +609,8 @@ namespace InfluxDB.Client
             var point = _converter.ConvertToPointData(_measurement, Options.Precision);
             if (!point.HasFields())
             {
-                Trace.WriteLine($"The point: ${point} doesn't contains any fields, skipping", CategoryTraceFilter.CategoryInflux);
+                Trace.WriteLine($"The point: ${point} doesn't contains any fields, skipping",
+                    CategoryTraceFilter.CategoryInflux);
 
                 return null;
             }

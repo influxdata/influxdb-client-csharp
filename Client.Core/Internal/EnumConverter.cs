@@ -16,7 +16,8 @@ namespace InfluxDB.Client.Core.Internal
             }
             catch (JsonSerializationException e)
             {
-                Trace.WriteLine($"Error converting enum value. Returning null. {e}", CategoryTraceFilter.CategoryInflux);
+                Trace.WriteLine($"Error converting enum value. Returning null. {e}",
+                    CategoryTraceFilter.CategoryInflux);
 
                 return null;
             }
