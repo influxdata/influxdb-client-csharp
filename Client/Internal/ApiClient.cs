@@ -134,8 +134,8 @@ namespace InfluxDB.Client.Api.Client
                 }
                 catch (IOException e)
                 {
-                    Trace.WriteLine("Cannot retrieve the Session token!", CategoryTraceFilter.CategoryInfluxError);
-                    Trace.WriteLine(e, CategoryTraceFilter.CategoryInfluxError);
+                    Trace.WriteLine("Cannot retrieve the Session token!", InfluxDBTraceFilter.CategoryInfluxError);
+                    Trace.WriteLine(e, InfluxDBTraceFilter.CategoryInfluxError);
                     return;
                 }
 

@@ -27,7 +27,7 @@ namespace InfluxDB.Client.Core.Internal
             var isBody = Level == LogLevel.Body;
             var isHeader = isBody || Level == LogLevel.Headers;
 
-            Trace.WriteLine($"--> {request.Method} {request.Resource}", CategoryTraceFilter.CategoryInfluxLogger);
+            Trace.WriteLine($"--> {request.Method} {request.Resource}", InfluxDBTraceFilter.CategoryInfluxLogger);
 
             if (isHeader)
             {
@@ -56,12 +56,12 @@ namespace InfluxDB.Client.Core.Internal
                         stringBody = body.Value.ToString();
                     }
 
-                    Trace.WriteLine($"--> Body: {stringBody}", CategoryTraceFilter.CategoryInfluxLogger);
+                    Trace.WriteLine($"--> Body: {stringBody}", InfluxDBTraceFilter.CategoryInfluxLogger);
                 }
             }
 
-            Trace.WriteLine("--> END", CategoryTraceFilter.CategoryInfluxLogger);
-            Trace.WriteLine("-->", CategoryTraceFilter.CategoryInfluxLogger);
+            Trace.WriteLine("--> END", InfluxDBTraceFilter.CategoryInfluxLogger);
+            Trace.WriteLine("-->", InfluxDBTraceFilter.CategoryInfluxLogger);
         }
 
         public object AfterIntercept(int statusCode, Func<IEnumerable<HeaderParameter>> headers, object body)
@@ -75,7 +75,7 @@ namespace InfluxDB.Client.Core.Internal
             var isBody = Level == LogLevel.Body;
             var isHeader = isBody || Level == LogLevel.Headers;
 
-            Trace.WriteLine($"<-- {statusCode}", CategoryTraceFilter.CategoryInfluxLogger);
+            Trace.WriteLine($"<-- {statusCode}", InfluxDBTraceFilter.CategoryInfluxLogger);
 
             if (isHeader)
             {
@@ -101,11 +101,11 @@ namespace InfluxDB.Client.Core.Internal
 
                 if (!string.IsNullOrEmpty(stringBody))
                 {
-                    Trace.WriteLine($"<-- Body: {stringBody}", CategoryTraceFilter.CategoryInfluxLogger);
+                    Trace.WriteLine($"<-- Body: {stringBody}", InfluxDBTraceFilter.CategoryInfluxLogger);
                 }
             }
 
-            Trace.WriteLine("<-- END", CategoryTraceFilter.CategoryInfluxLogger);
+            Trace.WriteLine("<-- END", InfluxDBTraceFilter.CategoryInfluxLogger);
 
             return freshBody;
         }
@@ -131,7 +131,7 @@ namespace InfluxDB.Client.Core.Internal
                 var value = string.Equals(emp.Name, "Authorization", StringComparison.OrdinalIgnoreCase)
                     ? "***"
                     : emp.Value;
-                Trace.WriteLine($"{direction} {type}: {emp.Name}={value}", CategoryTraceFilter.CategoryInfluxLogger);
+                Trace.WriteLine($"{direction} {type}: {emp.Name}={value}", InfluxDBTraceFilter.CategoryInfluxLogger);
             }
         }
     }

@@ -359,8 +359,8 @@ namespace InfluxDB.Client
             }
             catch (Exception e)
             {
-                Trace.WriteLine("The signout exception", CategoryTraceFilter.CategoryInfluxError);
-                Trace.WriteLine(e, CategoryTraceFilter.CategoryInfluxError);
+                Trace.WriteLine("The signout exception", InfluxDBTraceFilter.CategoryInfluxError);
+                Trace.WriteLine(e, InfluxDBTraceFilter.CategoryInfluxError);
             }
 
             // 

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace InfluxDB.Client.Core
 {
-    public class CategoryTraceFilter : TraceFilter
+    public class InfluxDBTraceFilter : TraceFilter
     {
         public const string CategoryInflux = "influx-client";
         public const string CategoryInfluxError = "influx-client-error";
@@ -13,24 +13,28 @@ namespace InfluxDB.Client.Core
         public const string CategoryInfluxWriteError = "influx-client-write-error";
         public const string CategoryInfluxLogger = "influx-client-logger";
 
-        private readonly string[] categoryToFilter;
-        private readonly bool keep;
+        private readonly string[] _categoryToFilter;
+        private readonly bool _keep;
 
-        public CategoryTraceFilter(string[] categoryToFilter, bool keep)
+        public InfluxDBTraceFilter(string[] categoryToFilter, bool keep)
         {
-            this.categoryToFilter = categoryToFilter;
-            this.keep = keep;
+            _categoryToFilter = categoryToFilter;
+            _keep = keep;
         }
 
         public override bool ShouldTrace(TraceEventCache eventCache, string source, TraceEventType eventType, int id,
             string formatOrMessage, object[] args, object data, object[] dataArray)
         {
-            return categoryToFilter.Any(x => x == source) ^ keep;
+            return _categoryToFilter.Any(x => x == source) ^ _keep;
         }
 
-        public static CategoryTraceFilter SuppressInflux()
+        /// <summary>
+        /// Suppress all client trace messages.
+        /// </summary>
+        /// <returns>Trace Filter</returns>
+        public static InfluxDBTraceFilter SuppressInflux()
         {
-            return new CategoryTraceFilter(new string[]
+            return new InfluxDBTraceFilter(new string[]
             {
                 CategoryInflux,
                 CategoryInfluxError,
@@ -42,9 +46,13 @@ namespace InfluxDB.Client.Core
             }, false);
         }
 
-        public static CategoryTraceFilter SuppressInfluxVerbose()
+        /// <summary>
+        /// Suppress all client trace messages except <see cref="CategoryInfluxError"/>, <see cref="CategoryInfluxQueryError"/>, <see cref="CategoryInfluxWriteError"/>.
+        /// </summary>
+        /// <returns>Trace Filter</returns>
+        public static InfluxDBTraceFilter SuppressInfluxVerbose()
         {
-            return new CategoryTraceFilter(new string[]
+            return new InfluxDBTraceFilter(new string[]
             {
                 CategoryInflux,
                 CategoryInfluxQuery,

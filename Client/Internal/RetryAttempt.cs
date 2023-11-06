@@ -143,7 +143,7 @@ namespace InfluxDB.Client.Internal
 
             Trace.WriteLine("The InfluxDB does not specify \"Retry-After\". " +
                             $"Use the default retryInterval: {retryInterval}"
-                , CategoryTraceFilter.CategoryInflux);
+                , InfluxDBTraceFilter.CategoryInflux);
 
             return retryInterval;
         }

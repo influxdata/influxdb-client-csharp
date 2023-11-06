@@ -322,8 +322,8 @@ namespace InfluxDB.Client.Core.Internal
             if (IsCloseException(exception))
             {
                 Trace.WriteLine("Socket closed by remote server or end of data",
-                    CategoryTraceFilter.CategoryInfluxQueryError);
-                Trace.WriteLine(exception, CategoryTraceFilter.CategoryInfluxQueryError);
+                    InfluxDBTraceFilter.CategoryInfluxQueryError);
+                Trace.WriteLine(exception, InfluxDBTraceFilter.CategoryInfluxQueryError);
             }
             else
             {

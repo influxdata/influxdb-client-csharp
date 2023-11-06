@@ -25,7 +25,7 @@ namespace InfluxDB.Client.Core.Internal
             }
             catch (Exception e)
             {
-                Trace.WriteLine($"Error: {e.Message}", CategoryTraceFilter.CategoryInfluxError);
+                Trace.WriteLine($"Error: {e.Message}", InfluxDBTraceFilter.CategoryInfluxError);
                 return false;
             }
         }
