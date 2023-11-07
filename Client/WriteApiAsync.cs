@@ -411,7 +411,8 @@ namespace InfluxDB.Client
             var sb = ToLineProtocolBody(data);
             if (sb.Length == 0)
             {
-                Trace.WriteLine($"The writes: {data} doesn't contains any Line Protocol, skipping");
+                Trace.WriteLine($"The writes: {data} doesn't contains any Line Protocol, skipping",
+                    InfluxDBTraceFilter.CategoryInfluxWrite);
                 return Task.CompletedTask;
             }
 

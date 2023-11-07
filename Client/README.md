@@ -769,6 +769,33 @@ namespace Examples
 }
 ```
 
+## Filter trace verbose
+
+You can filter out verbose messages from `InfluxDB.Client` by using TraceListener.
+
+```cs
+using System;
+using System.Diagnostics;
+using InfluxDB.Client.Core;
+
+namespace Examples
+{
+  public static class MyProgram
+  {
+    public static void Main()
+    {
+      TraceListener ConsoleOutListener = new TextWriterTraceListener(Console.Out)
+      {
+        Filter = CategoryTraceFilter.SuppressInfluxVerbose(),
+      };
+      Trace.Listeners.Add(ConsoleOutListener);
+
+      // My code ...
+    }
+  }
+}
+````
+
 ## Management API
 
 The client has following management API:

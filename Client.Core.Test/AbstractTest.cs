@@ -11,7 +11,11 @@ namespace InfluxDB.Client.Core.Test
 {
     public class AbstractTest
     {
-        private static readonly TraceListener ConsoleOutListener = new TextWriterTraceListener(Console.Out);
+        private static readonly TraceListener ConsoleOutListener = new TextWriterTraceListener(Console.Out)
+        {
+            Filter = InfluxDBTraceFilter.SuppressInfluxVerbose()
+        };
+
         private static readonly int DefaultWait = 10;
         private static readonly int DefaultInfluxDBSleep = 100;
 

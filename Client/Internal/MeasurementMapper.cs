@@ -97,7 +97,8 @@ namespace InfluxDB.Client.Internal
                     }
                     else
                     {
-                        Trace.WriteLine($"{value} is not supported as Timestamp");
+                        Trace.WriteLine($"{value} is not supported as Timestamp",
+                            InfluxDBTraceFilter.CategoryInfluxError);
                     }
                 }
                 else

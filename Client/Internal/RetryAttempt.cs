@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
+using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 
 namespace InfluxDB.Client.Internal
@@ -141,7 +142,8 @@ namespace InfluxDB.Client.Internal
             var retryInterval = (long)(rangeStart + (rangeStop - rangeStart) * _random.NextDouble());
 
             Trace.WriteLine("The InfluxDB does not specify \"Retry-After\". " +
-                            $"Use the default retryInterval: {retryInterval}");
+                            $"Use the default retryInterval: {retryInterval}"
+                , InfluxDBTraceFilter.CategoryInflux);
 
             return retryInterval;
         }
