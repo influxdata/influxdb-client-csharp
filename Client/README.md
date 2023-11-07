@@ -771,6 +771,8 @@ namespace Examples
 
 ## Filter trace verbose
 
+You can filter out verbose messages from `InfluxDB.Client` by using TraceListener.
+
 ```cs
 using System;
 using System.Diagnostics;

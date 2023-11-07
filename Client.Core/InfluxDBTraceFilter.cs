@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace InfluxDB.Client.Core
 {
+    /// <summary>
+    /// The <see cref="InfluxDBTraceFilter"/> is used to filter client trace messages by category.
+    /// </summary>
     public class InfluxDBTraceFilter : TraceFilter
     {
         public const string CategoryInflux = "influx-client";
