@@ -13,6 +13,7 @@ Update dependencies:
   - [#597](https://github.com/influxdata/influxdb-client-csharp/pull/597): `Microsoft.Extensions.ObjectPool` to `8.0.0`
   - [#572](https://github.com/influxdata/influxdb-client-csharp/pull/572): `NodaTime.Serialization.JsonNet` to `3.1.0`
   - [#595](https://github.com/influxdata/influxdb-client-csharp/pull/595): `System.Collections.Immutable` to `8.0.0`
+  - [#599](https://github.com/influxdata/influxdb-client-csharp/pull/599): `System.Configuration.ConfigurationManager` to `8.0.0`
 
 #### Examples:
   - [#593](https://github.com/influxdata/influxdb-client-csharp/pull/593): `Radzen.Blazor` to `4.22.1`
