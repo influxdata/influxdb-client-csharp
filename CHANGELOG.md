@@ -10,7 +10,7 @@
 Update dependencies:
 
 #### Build:
-  - [#588](https://github.com/influxdata/influxdb-client-csharp/pull/588): `Microsoft.Extensions.ObjectPool` to `7.0.13`
+  - [#597](https://github.com/influxdata/influxdb-client-csharp/pull/597): `Microsoft.Extensions.ObjectPool` to `8.0.0`
   - [#572](https://github.com/influxdata/influxdb-client-csharp/pull/572): `NodaTime.Serialization.JsonNet` to `3.1.0`
   - [#595](https://github.com/influxdata/influxdb-client-csharp/pull/595): `System.Collections.Immutable` to `8.0.0`
 
