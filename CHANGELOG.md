@@ -14,7 +14,7 @@ Update dependencies:
   - [#572](https://github.com/influxdata/influxdb-client-csharp/pull/572): `NodaTime.Serialization.JsonNet` to `3.1.0`
 
 #### Examples:
-  - [#589](https://github.com/influxdata/influxdb-client-csharp/pull/589): `Radzen.Blazor` to `4.19.1`
+  - [#593](https://github.com/influxdata/influxdb-client-csharp/pull/593): `Radzen.Blazor` to `4.22.1`
 
 #### Test:
   - [#587](https://github.com/influxdata/influxdb-client-csharp/pull/587): `WireMock.Net` to `1.5.39`
