@@ -9,31 +9,24 @@
  */
 
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using OpenAPIDateConverter = InfluxDB.Client.Api.Client.OpenAPIDateConverter;
+using NodaTime;
 
 namespace InfluxDB.Client.Api.Domain
 {
     /// <summary>
-    /// Represents an instant in time with nanosecond precision using the syntax of golang&#39;s RFC3339 Nanosecond variant
+    /// Represents an instant in time with nanosecond precision using the syntax of golang&#39;s RFC3339 Nanosecond variant.
     /// </summary>
     [DataContract]
     public partial class DateTimeLiteral : Expression, IEquatable<DateTimeLiteral>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DateTimeLiteral" /> class.
+        /// Initializes a new instance of the <see cref="DateTimeLiteral" /> class with <see cref="DateTime"/>&#39;s ticks precision.
         /// </summary>
         /// <param name="type">Type of AST node.</param>
-        /// <param name="value">value.</param>
+        /// <param name="value"><see cref="DateTime"/> value.</param>
         public DateTimeLiteral(string type = default, DateTime? value = default) : base()
         {
             Type = type;
@@ -41,17 +34,37 @@ namespace InfluxDB.Client.Api.Domain
         }
 
         /// <summary>
-        /// Type of AST node
+        /// Initializes a new instance of the <see cref="DateTimeLiteral" /> class with nanosecond precision.
         /// </summary>
-        /// <value>Type of AST node</value>
+        /// <param name="type">Type of AST node.</param>
+        /// <param name="value"><see cref="Instant"/> value.</param>
+        public DateTimeLiteral(string type = default, Instant? value = default) : base()
+        {
+            Type = type;
+            ValueInstant = value;
+        }
+
+        /// <summary>
+        /// Type of AST node.
+        /// </summary>
+        /// <value>Type of AST node.</value>
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Value
+        /// Gets or sets the value as a <see cref="DateTime"/>.
+        /// </summary>
+        public DateTime? Value
+        {
+            get => ValueInstant?.ToDateTimeUtc();
+            set => ValueInstant = value.HasValue ? Instant.FromDateTimeUtc(value.Value.ToUniversalTime()) : (Instant?)null;
+        }
+
+        /// <summary>
+        /// Gets or sets the value as an <see cref="Instant"/>.
         /// </summary>
         [DataMember(Name = "value", EmitDefaultValue = false)]
-        public DateTime? Value { get; set; }
+        public Instant? ValueInstant { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -105,8 +118,8 @@ namespace InfluxDB.Client.Api.Domain
                        Type != null && Type.Equals(input.Type)
                    ) && base.Equals(input) &&
                    (
-                       Value == input.Value ||
-                       Value != null && Value.Equals(input.Value)
+                       ValueInstant == input.ValueInstant ||
+                       ValueInstant != null && ValueInstant.Equals(input.ValueInstant)
                    );
         }
 
@@ -125,9 +138,9 @@ namespace InfluxDB.Client.Api.Domain
                     hashCode = hashCode * 59 + Type.GetHashCode();
                 }
 
-                if (Value != null)
+                if (ValueInstant != null)
                 {
-                    hashCode = hashCode * 59 + Value.GetHashCode();
+                    hashCode = hashCode * 59 + ValueInstant.GetHashCode();
                 }
 
                 return hashCode;
