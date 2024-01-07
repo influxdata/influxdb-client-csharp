@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Api.Domain;
+using NodaTime;
 
 namespace InfluxDB.Client.Linq.Internal
 {
@@ -61,12 +62,21 @@ namespace InfluxDB.Client.Linq.Internal
                 float or double or decimal => new FloatLiteral("FloatLiteral", Convert.ToDecimal(variable.Value)),
                 DateTime d => new DateTimeLiteral("DateTimeLiteral", d),
                 DateTimeOffset o => new DateTimeLiteral("DateTimeLiteral", o.UtcDateTime),
+#if NET6_0_OR_GREATER
+                DateOnly d => new DateTimeLiteral("DateTimeLiteral", d.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc)),
+#endif
+                Instant i => new DateTimeLiteral("DateTimeLiteral", i),
+                ZonedDateTime z => new DateTimeLiteral("DateTimeLiteral", z.ToInstant()),
+                OffsetDateTime o => new DateTimeLiteral("DateTimeLiteral", o.ToInstant()),
+                OffsetDate o => new DateTimeLiteral("DateTimeLiteral", o.At(LocalTime.Midnight).ToInstant()),
+                LocalDateTime l => new DateTimeLiteral("DateTimeLiteral", l.InUtc().ToInstant()),
+                LocalDate l => new DateTimeLiteral("DateTimeLiteral", l.At(LocalTime.Midnight).InUtc().ToInstant()),
                 IEnumerable e => new ArrayExpression("ArrayExpression",
                     e.Cast<object>()
                         .Select(o => CreateExpression(new NamedVariable { Value = o, IsTag = variable.IsTag }))
                         .ToList()),
                 TimeSpan timeSpan => new DurationLiteral("DurationLiteral",
-                    [new Duration("Duration", (long)(1000.0 * timeSpan.TotalMilliseconds), "us")]),
+                    [new Api.Domain.Duration("Duration", (long)(1000.0 * timeSpan.TotalMilliseconds), "us")]),
                 Expression e => e,
                 _ => CreateStringLiteral(variable)
             };
