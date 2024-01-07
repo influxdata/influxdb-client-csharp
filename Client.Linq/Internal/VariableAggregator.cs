@@ -55,21 +55,18 @@ namespace InfluxDB.Client.Linq.Internal
 
             return variable.Value switch
             {
-                int i => new IntegerLiteral("IntegerLiteral", Convert.ToString(i)),
-                long l => new IntegerLiteral("IntegerLiteral", Convert.ToString(l)),
                 bool b => new BooleanLiteral("BooleanLiteral", b),
-                double d => new FloatLiteral("FloatLiteral", Convert.ToDecimal(d)),
-                float f => new FloatLiteral("FloatLiteral", Convert.ToDecimal(f)),
+                sbyte or short or int or long => new IntegerLiteral("IntegerLiteral", Convert.ToString(variable.Value)),
+                byte or ushort or uint or ulong => new UnsignedIntegerLiteral("UnsignedIntegerLiteral", Convert.ToString(variable.Value)),
+                float or double or decimal => new FloatLiteral("FloatLiteral", Convert.ToDecimal(variable.Value)),
                 DateTime d => new DateTimeLiteral("DateTimeLiteral", d),
                 DateTimeOffset o => new DateTimeLiteral("DateTimeLiteral", o.UtcDateTime),
                 IEnumerable e => new ArrayExpression("ArrayExpression",
                     e.Cast<object>()
                         .Select(o => CreateExpression(new NamedVariable { Value = o, IsTag = variable.IsTag }))
                         .ToList()),
-                TimeSpan timeSpan => new DurationLiteral("DurationLiteral", new List<Duration>
-                {
-                    new Duration("Duration", (long)(1000.0 * timeSpan.TotalMilliseconds), "us")
-                }),
+                TimeSpan timeSpan => new DurationLiteral("DurationLiteral",
+                    [new Duration("Duration", (long)(1000.0 * timeSpan.TotalMilliseconds), "us")]),
                 Expression e => e,
                 _ => CreateStringLiteral(variable)
             };
