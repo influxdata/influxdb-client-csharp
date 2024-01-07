@@ -53,40 +53,26 @@ namespace InfluxDB.Client.Linq.Internal
                 return CreateStringLiteral(variable);
             }
 
-            switch (variable.Value)
+            return variable.Value switch
             {
-                case int i:
-                    return new IntegerLiteral("IntegerLiteral", Convert.ToString(i));
-                case long l:
-                    return new IntegerLiteral("IntegerLiteral", Convert.ToString(l));
-                case bool b:
-                    return new BooleanLiteral("BooleanLiteral", b);
-                case double d:
-                    return new FloatLiteral("FloatLiteral", Convert.ToDecimal(d));
-                case float f:
-                    return new FloatLiteral("FloatLiteral", Convert.ToDecimal(f));
-                case DateTime d:
-                    return new DateTimeLiteral("DateTimeLiteral", d);
-                case DateTimeOffset o:
-                    return new DateTimeLiteral("DateTimeLiteral", o.UtcDateTime);
-                case IEnumerable e:
+                int i => new IntegerLiteral("IntegerLiteral", Convert.ToString(i)),
+                long l => new IntegerLiteral("IntegerLiteral", Convert.ToString(l)),
+                bool b => new BooleanLiteral("BooleanLiteral", b),
+                double d => new FloatLiteral("FloatLiteral", Convert.ToDecimal(d)),
+                float f => new FloatLiteral("FloatLiteral", Convert.ToDecimal(f)),
+                DateTime d => new DateTimeLiteral("DateTimeLiteral", d),
+                DateTimeOffset o => new DateTimeLiteral("DateTimeLiteral", o.UtcDateTime),
+                IEnumerable e => new ArrayExpression("ArrayExpression",
+                    e.Cast<object>()
+                        .Select(o => CreateExpression(new NamedVariable { Value = o, IsTag = variable.IsTag }))
+                        .ToList()),
+                TimeSpan timeSpan => new DurationLiteral("DurationLiteral", new List<Duration>
                 {
-                    var expressions =
-                        e.Cast<object>()
-                            .Select(o => new NamedVariable { Value = o, IsTag = variable.IsTag })
-                            .Select(CreateExpression)
-                            .ToList();
-                    return new ArrayExpression("ArrayExpression", expressions);
-                }
-                case TimeSpan timeSpan:
-                    var timeSpanTotalMilliseconds = 1000.0 * timeSpan.TotalMilliseconds;
-                    var duration = new Duration("Duration", (long)timeSpanTotalMilliseconds, "us");
-                    return new DurationLiteral("DurationLiteral", new List<Duration> { duration });
-                case Expression e:
-                    return e;
-                default:
-                    return CreateStringLiteral(variable);
-            }
+                    new Duration("Duration", (long)(1000.0 * timeSpan.TotalMilliseconds), "us")
+                }),
+                Expression e => e,
+                _ => CreateStringLiteral(variable)
+            };
         }
 
         private StringLiteral CreateStringLiteral(NamedVariable variable)
