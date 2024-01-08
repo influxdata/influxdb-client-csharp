@@ -76,7 +76,11 @@ namespace InfluxDB.Client.Linq.Internal
                         .Select(o => CreateExpression(new NamedVariable { Value = o, IsTag = variable.IsTag }))
                         .ToList()),
                 TimeSpan timeSpan => new DurationLiteral("DurationLiteral",
-                    [new Api.Domain.Duration("Duration", (long)(1000.0 * timeSpan.TotalMilliseconds), "us")]),
+                    [new Api.Domain.Duration("Duration", timeSpan.Ticks * 100L, "ns")]),
+                NodaTime.Duration d => new DurationLiteral("DurationLiteral",
+                    [new Api.Domain.Duration("Duration", d.ToInt64Nanoseconds(), "ns")]),
+                Period p => new DurationLiteral("DurationLiteral",
+                    [new Api.Domain.Duration("Duration", p.ToDuration().ToInt64Nanoseconds(), "ns")]),
                 Expression e => e,
                 _ => CreateStringLiteral(variable)
             };
