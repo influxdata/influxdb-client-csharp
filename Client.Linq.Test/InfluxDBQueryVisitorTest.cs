@@ -1026,13 +1026,13 @@ namespace Client.Linq.Test
 
             var everyAssignment = ((OptionStatement)ast.Body[2]).Assignment as VariableAssignment;
             Assert.AreEqual("p3", everyAssignment?.Id.Name);
-            Assert.AreEqual(20000000, (everyAssignment.Init as DurationLiteral)?.Values[0].Magnitude);
-            Assert.AreEqual("us", (everyAssignment.Init as DurationLiteral)?.Values[0].Unit);
+            Assert.AreEqual(20_000_000_000, (everyAssignment.Init as DurationLiteral)?.Values[0].Magnitude);
+            Assert.AreEqual("ns", (everyAssignment.Init as DurationLiteral)?.Values[0].Unit);
 
             var periodAssignment = ((OptionStatement)ast.Body[3]).Assignment as VariableAssignment;
             Assert.AreEqual("p4", periodAssignment?.Id.Name);
-            Assert.AreEqual(40000000, (periodAssignment.Init as DurationLiteral)?.Values[0].Magnitude);
-            Assert.AreEqual("us", (periodAssignment.Init as DurationLiteral)?.Values[0].Unit);
+            Assert.AreEqual(40_000_000_000, (periodAssignment.Init as DurationLiteral)?.Values[0].Magnitude);
+            Assert.AreEqual("ns", (periodAssignment.Init as DurationLiteral)?.Values[0].Unit);
 
             var fnAssignment = ((OptionStatement)ast.Body[4]).Assignment as VariableAssignment;
             Assert.AreEqual("p5", fnAssignment?.Id.Name);

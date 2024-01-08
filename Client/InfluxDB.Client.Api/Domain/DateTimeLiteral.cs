@@ -57,7 +57,7 @@ namespace InfluxDB.Client.Api.Domain
         public DateTime? Value
         {
             get => ValueInstant?.ToDateTimeUtc();
-            set => ValueInstant = value.HasValue ? Instant.FromDateTimeUtc(value.Value.ToUniversalTime()) : (Instant?)null;
+            set => ValueInstant = value.HasValue ? Instant.FromDateTimeUtc(value.Value.ToUniversalTime()) : null;
         }
 
         /// <summary>
