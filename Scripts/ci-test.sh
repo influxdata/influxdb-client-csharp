@@ -2,52 +2,65 @@
 
 set -e
 
-if [[ "$*" == *true* ]]
-then
-    CODE_COVERAGE_REPORT=true
-else
-    CODE_COVERAGE_REPORT=false 
-fi
-
-echo "Configuration: $*, Coverage Report: $CODE_COVERAGE_REPORT"
-
 #
-# Prepare compatible version
+# Parameters with default value
 #
-NET_TEST_VERSION=$(dotnet --version | awk -F. '{printf "netcoreapp"$1"."$2;}')
-echo "$NET_TEST_VERSION"
-
-DEFAULT_NET_TARGET_VERSION="netstandard2.1"
-NET_TARGET_VERSION="${NET_TARGET_VERSION:-$DEFAULT_NET_TARGET_VERSION}"
-
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Test/Client.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Examples/Examples.csproj
-
-sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Core/Client.Core.csproj
-sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client/Client.csproj
-sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Legacy/Client.Legacy.csproj
-sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1;net6.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Linq/Client.Linq.csproj
-
-TRX2JUNIT_VERSION=""
+CODE_COVERAGE_REPORT=false
+DOTNET_RUNTIME=dotnet
+DOTNET_RUNTIME_VERSIONS=()
+TRX2JUNIT_VERSION="2.0.4"
 TEST_PARAMS=()
 
-if [[ "$CODE_COVERAGE_REPORT" = true ]]
+#
+# Read command line arguments
+#
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --code-coverage-report)
+      CODE_COVERAGE_REPORT=true
+      shift # Past argument
+      ;;
+    --dotnet-runtime)
+      DOTNET_RUNTIME="$2"
+      shift # Past argument
+      shift # Past value
+      ;;
+    --dotnet-runtime-versions)
+      IFS=',' read -a DOTNET_RUNTIME_VERSIONS <<< "$2" # Split runtime versions separated by ";"
+      shift # Past argument
+      shift # Past value
+      ;;
+    *)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+  esac
+done
+
+echo "Code Coverage Report: $CODE_COVERAGE_REPORT"
+echo ".NET Runtime to install: $DOTNET_RUNTIME"
+echo ".NET Runtime version(s) to install: ${DOTNET_RUNTIME_VERSIONS[@]}"
+
+#
+# Install missing .NET runtimes (required to run tests)
+#
+if [[ "$DOTNET_RUNTIME" != "" && "${DOTNET_RUNTIME_VERSIONS[@]}" != "" ]]
 then
-  TRX2JUNIT_VERSION="1.6.0"
-  TEST_PARAMS=(--collect:"XPlat Code Coverage")
-else
-  TRX2JUNIT_VERSION="1.3.2"
+  wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+  chmod +x ./dotnet-install.sh
+
+  for version in "${DOTNET_RUNTIME_VERSIONS[@]}"
+  do
+    ./dotnet-install.sh --channel $version --runtime $DOTNET_RUNTIME --install-dir /usr/share/dotnet
+  done
+
+  apt-get install libssl1.1 -y
 fi
 
-if [[ "$NET_TEST_VERSION" = "netcoreapp6.0" || "$NET_TEST_VERSION" = "netcoreapp7.0" ]]
-then
-  TRX2JUNIT_VERSION="2.0.4"
-else
-  dotnet sln remove Examples/ExampleBlazor/ExampleBlazor.csproj
-fi
+#
+# Display information about the .NET environment
+#
+dotnet --info
 
 #
 # Generate testing certificates
@@ -68,12 +81,14 @@ dotnet build --no-restore
 #
 # Test
 #
+if [[ "$CODE_COVERAGE_REPORT" = true ]]
+then
+  TEST_PARAMS=(--collect:"XPlat Code Coverage")
+fi
+
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+
 dotnet test Client.Core.Test/Client.Core.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
 dotnet test Client.Test/Client.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
 dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
 dotnet test Client.Linq.Test/Client.Linq.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
-
-#
-# Convert test results to Junit format
-#
-./trx2junit/trx2junit ./**/TestResults/*.trx

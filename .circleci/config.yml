@@ -1,28 +1,33 @@
 version: 2.1
 
 commands:
-  influxdb-onboarding:
-    steps:
-      - run:
-          name: "Post onBoarding request to InfluxDB 2"
-          command: ./Scripts/influxdb-onboarding.sh
   prepare:
     description: "Prepare environment to tests"
     steps:
       - checkout
       - influxdb-onboarding
+  
+  influxdb-onboarding:
+    steps:
+      - run:
+          name: "Post onBoarding request to InfluxDB 2"
+          command: ./Scripts/influxdb-onboarding.sh
+  
   client-test:
     parameters:
       code-coverage-report:
         type: boolean
         default: false
+      dotnet-runtime-versions:
+        type: string
+        default: ""
     steps:
       - run:
           name: "Running tests"
-          command: ./Scripts/ci-test.sh << parameters.code-coverage-report >>
+          command: ./Scripts/ci-test.sh --dotnet-runtime aspnetcore --dotnet-runtime-versions <<parameters.dotnet-runtime-versions>> <<#parameters.code-coverage-report>>--code-coverage-report<</parameters.code-coverage-report>>
       - run:
-          name: "Converting test results to Junit format"
-          when: on_fail
+          name: "Converting test results to JUnit format"
+          when: always
           command: ./trx2junit/trx2junit ./**/TestResults/*.trx
   
   storing-test-results:
@@ -61,10 +66,7 @@ jobs:
     parameters:
       dotnet-image:
         type: string
-        default: &default-dotnet-image "mcr.microsoft.com/dotnet/sdk:7.0"
-      dotnet-target-version:
-        type: string
-        default: "netstandard2.1"
+        default: &default-dotnet-image "mcr.microsoft.com/dotnet/sdk:8.0"
       influxdb-image:
         type: string
         default: &default-influxdb-image "influxdb:latest"
@@ -73,8 +75,6 @@ jobs:
         default: false
     docker:
       - image: << parameters.dotnet-image >>
-        environment:
-          NET_TARGET_VERSION: << parameters.dotnet-target-version >>
       - image: &influx-image << parameters.influxdb-image >>
         environment:
           INFLUXD_HTTP_BIND_ADDRESS: :9999
@@ -91,6 +91,7 @@ jobs:
     steps:
       - prepare
       - client-test:
+          dotnet-runtime-versions: "3.1,5.0,6.0,7.0" # Additional runtime versions to install
           code-coverage-report: << parameters.code-coverage-report >>
       - storing-test-results
       - storing-artifacts
@@ -166,7 +167,7 @@ jobs:
       - restore_cache:
           name: Restoring reSharper Cache
           keys:
-              - &cache-key reSharper-cache-2022_1_0
+            - &cache-key reSharper-cache-2022_1_0
       - run:
           name: Check code formatting
           command: |
@@ -176,7 +177,7 @@ jobs:
             name: Saving reSharper Cache
             key: *cache-key
             paths:
-                - ./reSharperCLI
+              - ./reSharperCLI
   
   deploy-preview:
     parameters:
@@ -208,37 +209,24 @@ workflows:
       - check-compilation-warnings
       - check-code-formatting
       - tests-dotnet:
-          name: dotnet-3.1-nightly
-          influxdb-image: "quay.io/influxdb/influxdb:nightly"
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
-      - tests-dotnet:
-          name: dotnet-3.1
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
-      - tests-dotnet:
-          name: dotnet-5.0
+          name: dotnet-docker
           code-coverage-report: true
-          dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
       - tests-dotnet:
-          name: dotnet-6.0
-          dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
-      - tests-dotnet:
-          name: dotnet-7.0
+          name: dotnet-docker-nightly
+          influxdb-image: "quay.io/influxdb/influxdb:nightly"
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:
           requires:
             - check-compilation-warnings
             - check-code-formatting
-            - dotnet-3.1-nightly
-            - dotnet-3.1
-            - dotnet-5.0
-            - dotnet-6.0
-            - dotnet-7.0
+            - dotnet-docker
+            - dotnet-docker-nightly
             - dotnet-windows
           filters:
             branches:
               only: master
-
+  
   nightly:
     when:
       equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]

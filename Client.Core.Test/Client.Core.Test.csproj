@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
+        <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
         <LangVersion>12.0</LangVersion>
 
         <IsPackable>false</IsPackable>
@@ -13,6 +13,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="coverlet.collector" Version="6.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
         <PackageReference Include="NUnit" Version="3.13.3" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
@@ -21,17 +25,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
-    </ItemGroup>
-
-    <PropertyGroup>
-        <NetCore5PlusFrameworks>|net5.0|net6.0|net7.0|</NetCore5PlusFrameworks>
-    </PropertyGroup>
-
-    <ItemGroup Condition="$(NetCore5PlusFrameworks.Contains('|$(TargetFramework)|'))">
-        <PackageReference Include="coverlet.collector" Version="6.0.0">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
     </ItemGroup>
 
 </Project>
