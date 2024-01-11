@@ -1,16 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
-        <LangVersion>8</LangVersion>
+        <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+        <LangVersion>12.0</LangVersion>
 
         <IsPackable>false</IsPackable>
-        
+        <IsTestProject>true</IsTestProject>
+        <AssemblyName>InfluxDB.Client.Linq.Test</AssemblyName>
+        <RootNamespace>InfluxDB.Client.Linq.Test</RootNamespace>
+
         <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="coverlet.collector" Version="6.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
         <PackageReference Include="Moq" Version="4.20.69" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
@@ -18,19 +25,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Client.Linq\Client.Linq.csproj" />
-      <ProjectReference Include="..\Client.Core.Test\Client.Core.Test.csproj" />
+        <ProjectReference Include="..\Client.Linq\Client.Linq.csproj" />
+        <ProjectReference Include="..\Client.Core.Test\Client.Core.Test.csproj" />
     </ItemGroup>
 
-    <PropertyGroup>
-        <NetCore5PlusFrameworks>|net5.0|net6.0|net7.0|</NetCore5PlusFrameworks>
-    </PropertyGroup>
-
-    <ItemGroup Condition="$(NetCore5PlusFrameworks.Contains('|$(TargetFramework)|'))">
-        <PackageReference Include="coverlet.collector" Version="6.0.0">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-    </ItemGroup>
-    
 </Project>

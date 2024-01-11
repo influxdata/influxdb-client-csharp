@@ -7,27 +7,6 @@ using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Flux.Domain;
 using NodaTime;
 
-[assembly: InternalsVisibleTo("Client.Legacy.Test, PublicKey=00240000048000009400000006020000002400005" +
-                              "25341310004000001000100efaac865f88dd35c90dc548945405aae34056eedbe42cad60971f89a861a78" +
-                              "437e86d95804a1aeeb0de18ac3728782f9dc8dbae2e806167a8bb64c0402278edcefd78c13dbe7f8d13de" +
-                              "36eb36221ec215c66ee2dfe7943de97b869c5eea4d92f92d345ced67de5ac8fc3cd2f8dd7e3c0c53bdb0c" +
-                              "c433af859033d069cad397a7")]
-[assembly: InternalsVisibleTo("Client.Linq.Test, PublicKey=00240000048000009400000006020000002400005" +
-                              "25341310004000001000100efaac865f88dd35c90dc548945405aae34056eedbe42cad60971f89a861a78" +
-                              "437e86d95804a1aeeb0de18ac3728782f9dc8dbae2e806167a8bb64c0402278edcefd78c13dbe7f8d13de" +
-                              "36eb36221ec215c66ee2dfe7943de97b869c5eea4d92f92d345ced67de5ac8fc3cd2f8dd7e3c0c53bdb0c" +
-                              "c433af859033d069cad397a7")]
-[assembly: InternalsVisibleTo("InfluxDB.Client, PublicKey=00240000048000009400000006020000002400005" +
-                              "25341310004000001000100efaac865f88dd35c90dc548945405aae34056eedbe42cad60971f89a861a78" +
-                              "437e86d95804a1aeeb0de18ac3728782f9dc8dbae2e806167a8bb64c0402278edcefd78c13dbe7f8d13de" +
-                              "36eb36221ec215c66ee2dfe7943de97b869c5eea4d92f92d345ced67de5ac8fc3cd2f8dd7e3c0c53bdb0c" +
-                              "c433af859033d069cad397a7")]
-[assembly: InternalsVisibleTo("InfluxDB.Client.Flux, PublicKey=00240000048000009400000006020000002400005" +
-                              "25341310004000001000100efaac865f88dd35c90dc548945405aae34056eedbe42cad60971f89a861a78" +
-                              "437e86d95804a1aeeb0de18ac3728782f9dc8dbae2e806167a8bb64c0402278edcefd78c13dbe7f8d13de" +
-                              "36eb36221ec215c66ee2dfe7943de97b869c5eea4d92f92d345ced67de5ac8fc3cd2f8dd7e3c0c53bdb0c" +
-                              "c433af859033d069cad397a7")]
-
 namespace InfluxDB.Client.Core.Flux.Internal
 {
     internal class FluxResultMapper : IFluxResultMapper

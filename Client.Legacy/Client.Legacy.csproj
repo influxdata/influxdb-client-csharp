@@ -1,9 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-      <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <OutputType>Library</OutputType>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <LangVersion>12.0</LangVersion>
 
-      <Description>The client that allow perform Flux Query against the InfluxDB 1.7+.</Description>
+        <Description>The client that allow perform Flux Query against the InfluxDB 1.7+.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Flux</AssemblyName>
         <VersionPrefix>4.15.0</VersionPrefix>
@@ -28,8 +30,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
-        <None Include=".\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="\" />
+        <None Include=".\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
     </ItemGroup>
 
