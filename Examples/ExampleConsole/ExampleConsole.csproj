@@ -9,19 +9,15 @@
         <VersionSuffix>dev</VersionSuffix>
         <IsPackable>false</IsPackable>
 
-        <AssemblyOriginatorKeyFile>../Keys/Key.snk</AssemblyOriginatorKeyFile>
+        <AssemblyOriginatorKeyFile>../../Keys/Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
         <StartupObject>Examples.RunExamples</StartupObject>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Client.Legacy\Client.Legacy.csproj" />
-        <ProjectReference Include="..\Client.Linq\Client.Linq.csproj" />
-        <ProjectReference Include="..\Client\Client.csproj" />
-        <Content Remove="ExampleBlazor\**" />
-        <Compile Remove="ExampleBlazor\**" />
-        <EmbeddedResource Remove="ExampleBlazor\**" />
-        <None Remove="ExampleBlazor\**" />
+        <ProjectReference Include="..\..\Client.Legacy\Client.Legacy.csproj" />
+        <ProjectReference Include="..\..\Client.Linq\Client.Linq.csproj" />
+        <ProjectReference Include="..\..\Client\Client.csproj" />
     </ItemGroup>
 
 </Project>
