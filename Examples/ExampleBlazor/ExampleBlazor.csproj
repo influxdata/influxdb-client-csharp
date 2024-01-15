@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="..\wwwroot\assets\Readme" />
+        <Folder Include="..\wwwroot\assets\readme" />
     </ItemGroup>
 
 </Project>
