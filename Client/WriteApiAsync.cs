@@ -34,7 +34,7 @@ namespace InfluxDB.Client
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        Task WriteRecordsAsync(List<string> records, WritePrecision precision = WritePrecision.Ns,
+        Task WriteRecordsAsync(IEnumerable<string> records, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace InfluxDB.Client
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        Task WritePointsAsync(List<PointData> points, string bucket = null, string org = null,
+        Task WritePointsAsync(IEnumerable<PointData> points, string bucket = null, string org = null,
             CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace InfluxDB.Client
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        Task WriteMeasurementsAsync<TM>(List<TM> measurements, WritePrecision precision = WritePrecision.Ns,
+        Task WriteMeasurementsAsync<TM>(IEnumerable<TM> measurements, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -200,11 +200,11 @@ namespace InfluxDB.Client
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public Task WriteRecordsAsync(List<string> records, WritePrecision precision = WritePrecision.Ns,
+        public Task WriteRecordsAsync(IEnumerable<string> records, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null, CancellationToken cancellationToken = default)
         {
             var options = new BatchWriteOptions(bucket ?? _options.Bucket, org ?? _options.Org, precision);
-            var list = records.Select(record => new BatchWriteRecord(options, record)).ToList();
+            var list = records.Select(record => new BatchWriteRecord(options, record));
 
             return WriteData(options.OrganizationId, options.Bucket, precision, list, cancellationToken);
         }
@@ -220,7 +220,7 @@ namespace InfluxDB.Client
         public Task WriteRecordsAsync(string[] records, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null, CancellationToken cancellationToken = default)
         {
-            return WriteRecordsAsync(records.ToList(), precision, bucket, org, cancellationToken);
+            return WriteRecordsAsync(records, precision, bucket, org, cancellationToken);
         }
 
         /// <summary>
@@ -269,15 +269,14 @@ namespace InfluxDB.Client
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public async Task WritePointsAsync(List<PointData> points, string bucket = null, string org = null,
+        public async Task WritePointsAsync(IEnumerable<PointData> points, string bucket = null, string org = null,
             CancellationToken cancellationToken = default)
         {
             foreach (var grouped in points.GroupBy(it => it.Precision))
             {
                 var options = new BatchWriteOptions(bucket ?? _options.Bucket, org ?? _options.Org, grouped.Key);
                 var groupedPoints = grouped
-                    .Select(it => new BatchWritePoint(options, _options, it))
-                    .ToList();
+                    .Select(it => new BatchWritePoint(options, _options, it));
 
                 await WriteData(options.OrganizationId, options.Bucket, grouped.Key, groupedPoints, cancellationToken)
                     .ConfigureAwait(false);
@@ -294,7 +293,7 @@ namespace InfluxDB.Client
         public Task WritePointsAsync(PointData[] points, string bucket = null, string org = null,
             CancellationToken cancellationToken = default)
         {
-            return WritePointsAsync(points.ToList(), bucket, org, cancellationToken);
+            return WritePointsAsync(points, bucket, org, cancellationToken);
         }
 
         /// <summary>
@@ -353,7 +352,7 @@ namespace InfluxDB.Client
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public Task WriteMeasurementsAsync<TM>(List<TM> measurements, WritePrecision precision = WritePrecision.Ns,
+        public Task WriteMeasurementsAsync<TM>(IEnumerable<TM> measurements, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null, CancellationToken cancellationToken = default)
         {
             var list = new List<BatchWriteData>();
@@ -380,7 +379,7 @@ namespace InfluxDB.Client
         public Task WriteMeasurementsAsync<TM>(TM[] measurements, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null, CancellationToken cancellationToken = default)
         {
-            return WriteMeasurementsAsync(measurements.ToList(), precision, bucket, org, cancellationToken);
+            return WriteMeasurementsAsync(measurements, precision, bucket, org, cancellationToken);
         }
 
         /// <summary>
@@ -403,7 +402,6 @@ namespace InfluxDB.Client
 
             return WriteDataAsyncWithIRestResponse(batch, bucket, org, precision, cancellationToken);
         }
-
 
         private Task WriteData(string org, string bucket, WritePrecision precision, IEnumerable<BatchWriteData> data,
             CancellationToken cancellationToken)

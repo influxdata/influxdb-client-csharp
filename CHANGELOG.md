@@ -15,6 +15,7 @@ Update dependencies:
 ### Features
 
 1. [#590](https://github.com/influxdata/influxdb-client-csharp/pull/590): Allows disable Trace verbose messages
+2. [#606](https://github.com/influxdata/influxdb-client-csharp/pull/606): Use IEnumerable in WriteApi to eliminate unnescessary memmory allocations
 
 ### Dependencies
 Update dependencies:
