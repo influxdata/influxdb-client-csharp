@@ -42,7 +42,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
-        void WriteRecords(List<string> records, WritePrecision precision = WritePrecision.Ns,
+        void WriteRecords(IEnumerable<string> records, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace InfluxDB.Client
         /// <param name="points">specifies the Data points to write into bucket</param>
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
-        void WritePoints(List<PointData> points, string bucket = null, string org = null);
+        void WritePoints(IEnumerable<PointData> points, string bucket = null, string org = null);
 
         /// <summary>
         /// Write Data points into specified bucket.
@@ -98,7 +98,7 @@ namespace InfluxDB.Client
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        void WriteMeasurements<TM>(List<TM> measurements, WritePrecision precision = WritePrecision.Ns,
+        void WriteMeasurements<TM>(IEnumerable<TM> measurements, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null);
 
         /// <summary>
@@ -388,10 +388,10 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol; default Nanoseconds</param>
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
-        public void WriteRecords(List<string> records, WritePrecision precision = WritePrecision.Ns,
+        public void WriteRecords(IEnumerable<string> records, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null)
         {
-            records.ForEach(record => WriteRecord(record, precision, bucket, org));
+            foreach (var record in records) WriteRecord(record, precision, bucket, org);
         }
 
         /// <summary>
@@ -430,7 +430,7 @@ namespace InfluxDB.Client
         /// <param name="points">specifies the Data points to write into bucket</param>
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
-        public void WritePoints(List<PointData> points, string bucket = null, string org = null)
+        public void WritePoints(IEnumerable<PointData> points, string bucket = null, string org = null)
         {
             foreach (var point in points) WritePoint(point, bucket, org);
         }
@@ -443,7 +443,7 @@ namespace InfluxDB.Client
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         public void WritePoints(PointData[] points, string bucket = null, string org = null)
         {
-            WritePoints(points.ToList(), bucket, org);
+            WritePoints(points.AsEnumerable(), bucket, org);
         }
 
         /// <summary>
@@ -475,7 +475,7 @@ namespace InfluxDB.Client
         /// <param name="bucket">specifies the destination bucket for writes. If the bucket is not specified then is used config from <see cref="InfluxDBClientOptions.Bucket" />.</param>
         /// <param name="org">specifies the destination organization for writes. If the org is not specified then is used config from <see cref="InfluxDBClientOptions.Org" />.</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public void WriteMeasurements<TM>(List<TM> measurements, WritePrecision precision = WritePrecision.Ns,
+        public void WriteMeasurements<TM>(IEnumerable<TM> measurements, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null)
         {
             foreach (var measurement in measurements) WriteMeasurement(measurement, precision, bucket, org);
@@ -492,7 +492,7 @@ namespace InfluxDB.Client
         public void WriteMeasurements<TM>(TM[] measurements, WritePrecision precision = WritePrecision.Ns,
             string bucket = null, string org = null)
         {
-            WriteMeasurements(measurements.ToList(), precision, bucket, org);
+            WriteMeasurements(measurements.AsEnumerable(), precision, bucket, org);
         }
 
         /// <summary>
