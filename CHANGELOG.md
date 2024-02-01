@@ -5,9 +5,10 @@ Update dependencies:
 
 #### Build:
   - [#609](https://github.com/influxdata/influxdb-client-csharp/pull/609): `CsvHelper` to `30.1.0`
+  - [#612](https://github.com/influxdata/influxdb-client-csharp/pull/612): `Microsoft.Extensions.ObjectPool` to `8.0.1`
 
 #### Examples:
-  - [#604](https://github.com/influxdata/influxdb-client-csharp/pull/604): `Radzen.Blazor` to `4.23.4`
+  - [#611](https://github.com/influxdata/influxdb-client-csharp/pull/611): `Radzen.Blazor` to `4.24.4`
   - [#603](https://github.com/influxdata/influxdb-client-csharp/pull/603): `NodaTime` to `3.1.10`
 
 #### Test:
