@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using InfluxDB.Client.Api.Domain;
+using NodaTime;
 
 namespace InfluxDB.Client.Linq.Internal
 {
@@ -53,40 +54,36 @@ namespace InfluxDB.Client.Linq.Internal
                 return CreateStringLiteral(variable);
             }
 
-            switch (variable.Value)
+            return variable.Value switch
             {
-                case int i:
-                    return new IntegerLiteral("IntegerLiteral", Convert.ToString(i));
-                case long l:
-                    return new IntegerLiteral("IntegerLiteral", Convert.ToString(l));
-                case bool b:
-                    return new BooleanLiteral("BooleanLiteral", b);
-                case double d:
-                    return new FloatLiteral("FloatLiteral", Convert.ToDecimal(d));
-                case float f:
-                    return new FloatLiteral("FloatLiteral", Convert.ToDecimal(f));
-                case DateTime d:
-                    return new DateTimeLiteral("DateTimeLiteral", d);
-                case DateTimeOffset o:
-                    return new DateTimeLiteral("DateTimeLiteral", o.UtcDateTime);
-                case IEnumerable e:
-                {
-                    var expressions =
-                        e.Cast<object>()
-                            .Select(o => new NamedVariable { Value = o, IsTag = variable.IsTag })
-                            .Select(CreateExpression)
-                            .ToList();
-                    return new ArrayExpression("ArrayExpression", expressions);
-                }
-                case TimeSpan timeSpan:
-                    var timeSpanTotalMilliseconds = 1000.0 * timeSpan.TotalMilliseconds;
-                    var duration = new Duration("Duration", (long)timeSpanTotalMilliseconds, "us");
-                    return new DurationLiteral("DurationLiteral", new List<Duration> { duration });
-                case Expression e:
-                    return e;
-                default:
-                    return CreateStringLiteral(variable);
-            }
+                bool b => new BooleanLiteral("BooleanLiteral", b),
+                sbyte or short or int or long => new IntegerLiteral("IntegerLiteral", Convert.ToString(variable.Value)),
+                byte or ushort or uint or ulong => new UnsignedIntegerLiteral("UnsignedIntegerLiteral", Convert.ToString(variable.Value)),
+                float or double or decimal => new FloatLiteral("FloatLiteral", Convert.ToDecimal(variable.Value)),
+                DateTime d => new DateTimeLiteral("DateTimeLiteral", d),
+                DateTimeOffset o => new DateTimeLiteral("DateTimeLiteral", o.UtcDateTime),
+#if NET6_0_OR_GREATER
+                DateOnly d => new DateTimeLiteral("DateTimeLiteral", d.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc)),
+#endif
+                Instant i => new DateTimeLiteral("DateTimeLiteral", i),
+                ZonedDateTime z => new DateTimeLiteral("DateTimeLiteral", z.ToInstant()),
+                OffsetDateTime o => new DateTimeLiteral("DateTimeLiteral", o.ToInstant()),
+                OffsetDate o => new DateTimeLiteral("DateTimeLiteral", o.At(LocalTime.Midnight).ToInstant()),
+                LocalDateTime l => new DateTimeLiteral("DateTimeLiteral", l.InUtc().ToInstant()),
+                LocalDate l => new DateTimeLiteral("DateTimeLiteral", l.At(LocalTime.Midnight).InUtc().ToInstant()),
+                IEnumerable e => new ArrayExpression("ArrayExpression",
+                    e.Cast<object>()
+                        .Select(o => CreateExpression(new NamedVariable { Value = o, IsTag = variable.IsTag }))
+                        .ToList()),
+                TimeSpan timeSpan => new DurationLiteral("DurationLiteral",
+                    [new Api.Domain.Duration("Duration", timeSpan.Ticks * 100L, "ns")]),
+                NodaTime.Duration d => new DurationLiteral("DurationLiteral",
+                    [new Api.Domain.Duration("Duration", d.ToInt64Nanoseconds(), "ns")]),
+                Period p => new DurationLiteral("DurationLiteral",
+                    [new Api.Domain.Duration("Duration", p.ToDuration().ToInt64Nanoseconds(), "ns")]),
+                Expression e => e,
+                _ => CreateStringLiteral(variable)
+            };
         }
 
         private StringLiteral CreateStringLiteral(NamedVariable variable)

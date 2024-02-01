@@ -62,7 +62,7 @@ namespace InfluxDB.Client.Core.Flux.Domain
         {
             var time = GetTime();
 
-            return time?.InUtc().ToDateTimeUtc() ?? default(DateTime);
+            return time?.ToDateTimeUtc() ?? default(DateTime);
         }
 
         /// <returns>the value of the record</returns>

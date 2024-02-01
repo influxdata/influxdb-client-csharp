@@ -3,7 +3,7 @@
 set -e
 
 #
-# Nuget repository
+# NuGet repository
 #
 DEFAULT_BONITOO_NUGET_URL="https://apitea.com/nexus/service/local/nuget/bonitoo-nuget/"
 BONITOO_NUGET_URL="${BONITOO_NUGET_URL:-$DEFAULT_BONITOO_NUGET_URL}"
