@@ -6,12 +6,13 @@ Update dependencies:
 #### Build:
   - [#612](https://github.com/influxdata/influxdb-client-csharp/pull/612): `Microsoft.Extensions.ObjectPool` to `8.0.1`
 
+#### Test:
+  - [#608](https://github.com/influxdata/influxdb-client-csharp/pull/608): `NUnit` to `3.14.0`
+  - [#610](https://github.com/influxdata/influxdb-client-csharp/pull/610): `WireMock.Net` to `1.5.47`
+
 #### Examples:
   - [#611](https://github.com/influxdata/influxdb-client-csharp/pull/611): `Radzen.Blazor` to `4.24.4`
   - [#603](https://github.com/influxdata/influxdb-client-csharp/pull/603): `NodaTime` to `3.1.10`
-
-#### Test:
-  - [#610](https://github.com/influxdata/influxdb-client-csharp/pull/610): `WireMock.Net` to `1.5.47`
 
 ## 4.14.0 [2023-11-07]
 
