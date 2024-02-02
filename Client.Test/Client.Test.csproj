@@ -31,4 +31,12 @@
         <ProjectReference Include="..\Client.Core.Test\Client.Core.Test.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Update="App.config">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <Import Project="..\Scripts\copy-coverlet-collector.targets" />
+
 </Project>

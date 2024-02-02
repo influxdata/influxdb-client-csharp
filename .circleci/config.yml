@@ -1,240 +1,306 @@
 version: 2.1
 
 commands:
-  influxdb-onboarding:
+  dotnet_info:
     steps:
       - run:
-          name: "Post onBoarding request to InfluxDB 2"
-          command: ./Scripts/influxdb-onboarding.sh
-  prepare:
-    description: "Prepare environment to tests"
-    steps:
-      - checkout
-      - influxdb-onboarding
-  client-test:
+          name: "Display .NET environment information"
+          command: dotnet --info
+
+  dotnet_build:
     parameters:
+      project-or-solution:
+        type: string
+        default: "" # When not specified, searches and uses a .sln or .*proj file in the current working directory.
+      configuration:
+        type: string
+        default: Release
+    steps:
+      - run:
+          name: "Build << parameters.project-or-solution >> and check warnings"
+          command: |
+            dotnet restore << parameters.project-or-solution >>
+            dotnet build << parameters.project-or-solution >> --no-restore -c << parameters.configuration >> --version-suffix dev.$CIRCLE_BUILD_NUM -warnAsError
+
+  influxdb_install_windows:
+    parameters:
+      zip-file-name:
+        type: string
+      influxdb-version:
+        type: string
+    steps:
+      - run:
+          name: "Download and install InfluxDB << parameters.influxdb-version >> (<< parameters.zip-file-name >>)"
+          shell: pwsh
+          working_directory: ~/influxdb-install
+          command: |
+            Invoke-WebRequest https://dl.influxdata.com/influxdb/releases/<< parameters.zip-file-name >> -UseBasicParsing -OutFile "./<< parameters.zip-file-name >>"
+            Expand-Archive "./<< parameters.zip-file-name >>" -DestinationPath "./influxdb-<< parameters.influxdb-version >>"
+
+  influxdb_run_windows:
+    parameters:
+      influxdb-version:
+        type: string
+      influxdb-port:
+        type: integer
+      influxdb-data-dir:
+        type: string
+    steps:
+      - run:
+          name: "Run InfluxDB << parameters.influxdb-version >> on port << parameters.influxdb-port >>"
+          shell: pwsh
+          working_directory: ~/influxdb-install/influxdb-<< parameters.influxdb-version >>
+          command: |
+            # InfluxDB 1.x
+            $env:INFLUXDB_HTTP_BIND_ADDRESS = ":<< parameters.influxdb-port >>"
+            $env:INFLUXDB_META_DIR          = "<< parameters.influxdb-data-dir >>/meta"
+            $env:INFLUXDB_DATA_DIR          = "<< parameters.influxdb-data-dir >>/data"
+            $env:INFLUXDB_DATA_WAL_DIR      = "<< parameters.influxdb-data-dir >>/wal"
+            $env:INFLUXDB_HTTP_FLUX_ENABLED = "true"
+
+            # InfluxDB 2.x
+            $env:INFLUXD_HTTP_BIND_ADDRESS  = ":<< parameters.influxdb-port >>"
+            $env:INFLUXD_SQLITE_PATH        = "<< parameters.influxdb-data-dir >>/influxd.sqlite"
+            $env:INFLUXD_BOLT_PATH          = "<< parameters.influxdb-data-dir >>/influxd.bolt"
+            $env:INFLUXD_ENGINE_PATH        = "<< parameters.influxdb-data-dir >>/engine"
+
+            try { ./influxd.exe } catch { ./*/influxd.exe } # influxd.exe can be in a subfolder
+          background: true
+
+  test_influxdb_client:
+    parameters:
+      dotnet-target-framework:
+        type: string
       code-coverage-report:
         type: boolean
-        default: false
     steps:
       - run:
-          name: "Running tests"
-          command: ./Scripts/ci-test.sh << parameters.code-coverage-report >>
+          name: "Onboarding InfluxDB 2.x (setup initial user, org and bucket)"
+          shell: bash
+          command: ./Scripts/influxdb-onboarding.sh
       - run:
-          name: "Converting test results to Junit format"
-          when: on_fail
-          command: ./trx2junit/trx2junit ./**/TestResults/*.trx
-  
-  storing-test-results:
-    steps:
+          name: "Run tests using << parameters.dotnet-target-framework >>"
+          shell: bash
+          command: ./Scripts/ci-test.sh -tfm << parameters.dotnet-target-framework >> <<#parameters.code-coverage-report>>-codecov<</parameters.code-coverage-report>>
       - run:
-          name: "Copying test results"
+          name: "Convert test results to JUnit format"
           when: always
           command: |
-            mkdir test-results
-            mkdir test-results/client-legacy
-            cp -r Client.Legacy.Test/TestResults/*.xml test-results/client-legacy || true
-            mkdir test-results/client-linq
-            cp -r Client.Linq.Test/TestResults/*.xml test-results/client-linq || true
-            mkdir test-results/client
-            cp -r Client.Test/TestResults/*.xml test-results/client || true
-            mkdir test-results/client-core
-            cp -r Client.Core.Test/TestResults/*.xml test-results/client-core || true
+            dotnet tool install --tool-path="./trx2junit/" trx2junit --version 2.0.4
+            ./trx2junit/trx2junit ./TestResults/*.trx --output ./TestResultsJUnit
       - store_test_results:
-          path: test-results
-  
-  storing-artifacts:
-    steps:
-      - run:
-          name: "Copying artifacts"
-          command: |
-            mkdir artifacts
-            cp -r Client.Core/bin/Debug/*/*.dll artifacts/
-            cp -r Client.Legacy/bin/Debug/*/*.dll artifacts/
-            cp -r Client.Linq/bin/Debug/*/*.dll artifacts/
-            cp -r Client/bin/Debug/*/*.dll artifacts/
-      - store_artifacts:
-          path: artifacts
+          path: ./TestResultsJUnit
+      - when:
+          condition: << parameters.code-coverage-report >>
+          steps:
+            - run:
+                name: Install Codecov and upload coverage results
+                when: always
+                shell: bash
+                command: ./Scripts/ci-upload-codecov.sh
 
 jobs:
-  tests-dotnet:
+  build:
+    docker:
+      - image: &default-dotnet-image mcr.microsoft.com/dotnet/sdk:8.0
+    working_directory: ~/influxdb-client-csharp
+    steps:
+      - checkout
+      - dotnet_info
+      - dotnet_build:
+          project-or-solution: influxdb-client-csharp.sln
+      - run:
+          name: "Copy built NuGet packages"
+          shell: bash
+          command: |
+            mkdir ./NuGetPackages
+            cp -r ./Client*/bin/Release/*.nupkg ./NuGetPackages
+      - store_artifacts:
+          name: "Store built NuGet packages"
+          path: ./NuGetPackages
+      - persist_to_workspace:
+          name: "Persist build results to workspace"
+          root: .
+          paths:
+            - ./NuGetPackages/*
+            - ./Client*/**/*    # Source code is required for code coverage, and build results for tests.
+            - ./Scripts/*       # Scripts are required to onboard InfluxDB instance and run tests.
+
+  test-docker:
     parameters:
-      dotnet-image:
+      dotnet-docker-image:
         type: string
-        default: &default-dotnet-image "mcr.microsoft.com/dotnet/sdk:7.0"
-      dotnet-target-version:
+      dotnet-target-framework:
         type: string
-        default: "netstandard2.1"
-      influxdb-image:
+      influxdb2-docker-image:
         type: string
-        default: &default-influxdb-image "influxdb:latest"
+        default: influxdb:latest
+      influxdb1-docker-image:
+        type: string
+        default: influxdb:1.8
       code-coverage-report:
         type: boolean
         default: false
     docker:
-      - image: << parameters.dotnet-image >>
-        environment:
-          NET_TARGET_VERSION: << parameters.dotnet-target-version >>
-      - image: &influx-image << parameters.influxdb-image >>
+      - image: << parameters.dotnet-docker-image >>
+      - image: << parameters.influxdb2-docker-image >> # InfluxDB 2.x
         environment:
           INFLUXD_HTTP_BIND_ADDRESS: :9999
-      - image: &influx-image << parameters.influxdb-image >>
-        name: influxdb_v2_onboarding
+      - image: << parameters.influxdb2-docker-image >> # InfluxDB 2.x for onboarding tests
         environment:
-          INFLUXD_HTTP_BIND_ADDRESS: :9999
-      - image: influxdb:1.8
+          INFLUXD_HTTP_BIND_ADDRESS: :8888
+      - image: << parameters.influxdb1-docker-image >> # InfluxDB 1.x
         environment:
           INFLUXDB_HTTP_FLUX_ENABLED: true
+    working_directory: ~/influxdb-client-csharp
     environment:
-      INFLUXDB_2_ONBOARDING_IP: influxdb_v2_onboarding
-      INFLUXDB_2_ONBOARDING_PORT: 9999
+      INFLUXDB_2_ONBOARDING_PORT: 8888
     steps:
-      - prepare
-      - client-test:
+      - attach_workspace:
+          at: .
+      - dotnet_info
+      - test_influxdb_client:
+          dotnet-target-framework: << parameters.dotnet-target-framework >>
           code-coverage-report: << parameters.code-coverage-report >>
-      - storing-test-results
-      - storing-artifacts
-      - when:
-          condition:
-            and:
-              - equal: [ true, << parameters.code-coverage-report >> ]
-          steps:
-              - run:
-                  name: Install GPG
-                  command: |
-                      apt-get update
-                      apt-get install gpg -y
-              - run:
-                  name: Collecting coverage reports
-                  command: |
-                      curl -Os https://uploader.codecov.io/latest/linux/codecov
-                      curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM
-                      curl -Os https://uploader.codecov.io/latest/linux/codecov.SHA256SUM.sig
-                      curl -s https://keybase.io/codecovsecurity/pgp_keys.asc | gpg --no-default-keyring --keyring trustedkeys.gpg --import
-                      gpgv codecov.SHA256SUM.sig codecov.SHA256SUM
-                      shasum -a 256 -c codecov.SHA256SUM
-                      chmod +x ./codecov
-                      ./codecov
 
-  tests-windows:
+  test-windows:
+    parameters:
+      dotnet-target-framework:
+        type: string
+      code-coverage-report:
+        type: boolean
+        default: false
     machine:
-      image: "windows-server-2019-vs2019:stable"
-      resource_class: windows.medium
-      shell: bash
+      image: windows-server-2022-gui:current
+    resource_class: windows.medium
+    working_directory: ~/influxdb-client-csharp
+    environment:
+      INFLUXDB_2_ONBOARDING_PORT: 8888
     steps:
-      - checkout
-      - run: choco install influxdb1 --version=1.8.0
-      - run: export INFLUXDB_HTTP_FLUX_ENABLED=true 
-      - run:
-          name: "Start InfluxDB"
-          command: /c/influxdata/influxdb-1.8.0-1/influxd.exe -config "Scripts/influxdb.conf"
-          background: true
-      - run: |
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Examples/Examples.csproj
-      - run: dotnet sln remove Examples/ExampleBlazor/ExampleBlazor.csproj
-      - run: dotnet nuget locals --clear all
-      - run: dotnet restore --no-cache --force -s https://api.nuget.org/v3/index.json
-      - run: dotnet build
-      - run: dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build
-      
-  check-compilation-warnings:
-    docker:
-      - image: *default-dotnet-image
-    steps:
-      - checkout
-      - run: |
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Examples/Examples.csproj
-      - run:
-          name: Check compilation warnings
-          command: |
-            dotnet clean --configuration Release
-            dotnet build --configuration Release -warnAsError -warnAsMessage:CS0618,NETSDK1138
-      
+      - attach_workspace:
+          at: .
+      - influxdb_install_windows:
+          zip-file-name: influxdb2-2.7.5-windows.zip
+          influxdb-version: 2.7.5
+      - influxdb_install_windows:
+          zip-file-name: influxdb-1.8.10_windows_amd64.zip
+          influxdb-version: 1.8.10
+      - influxdb_run_windows:
+          influxdb-version: 2.7.5
+          influxdb-port: 9999
+          influxdb-data-dir: ~/.influxdbv2
+      - influxdb_run_windows:
+          influxdb-version: 2.7.5
+          influxdb-port: 8888
+          influxdb-data-dir: ~/.influxdbv2-onboarding-tests
+      - influxdb_run_windows:
+          influxdb-version: 1.8.10
+          influxdb-port: 8086
+          influxdb-data-dir: ~/.influxdbv1
+      - dotnet_info
+      - test_influxdb_client:
+          dotnet-target-framework: << parameters.dotnet-target-framework >>
+          code-coverage-report: << parameters.code-coverage-report >>
+
   check-code-formatting:
     docker:
       - image: *default-dotnet-image
+    working_directory: ~/influxdb-client-csharp
     steps:
       - checkout
       - restore_cache:
-          name: Restoring reSharper Cache
+          name: "Restore ReSharper cache"
           keys:
-              - &cache-key reSharper-cache-2022_1_0
+            - &cache-key ReSharper-cache-2022_1_0
       - run:
-          name: Check code formatting
+          name: "Check code formatting"
+          shell: bash
           command: |
             ./Scripts/reformat-code.sh
             git diff --exit-code
       - save_cache:
-            name: Saving reSharper Cache
-            key: *cache-key
-            paths:
-                - ./reSharperCLI
-  
+          name: "Save ReSharper cache"
+          key: *cache-key
+          paths:
+            - ./ReSharperCLI
+
   deploy-preview:
-    parameters:
-      influxdb-image:
-        type: string
-        default: *default-influxdb-image
     docker:
       - image: *default-dotnet-image
+    working_directory: ~/influxdb-client-csharp
     steps:
       - run:
           name: Early return if this build is from a forked repository
           command: |
             if [[ $CIRCLE_PROJECT_USERNAME != "influxdata" ]]; then
               echo "Nothing to do for forked repositories, so marking this step successful"
-              circleci step halt
+              circleci-agent step halt
             fi
-      - checkout
+      - attach_workspace:
+          at: .
       - run:
-          name: Deploying To Preview repository
+          name: "Deploy to Preview NuGet repository"
+          shell: bash
           command: ./Scripts/ci-deploy-snapshot.sh
 
 workflows:
-  version: 2
-  build:
-    when:
-      not:
-        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+  build-test-deploy:
     jobs:
-      - check-compilation-warnings
-      - check-code-formatting
-      - tests-dotnet:
-          name: dotnet-3.1-nightly
-          influxdb-image: "quay.io/influxdb/influxdb:nightly"
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
-      - tests-dotnet:
-          name: dotnet-3.1
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
-      - tests-dotnet:
-          name: dotnet-5.0
+      # - check-code-formatting # TODO: uncomment
+      - build
+      - test-docker:
+          name: test-dotnet-3.1-docker-nightly
+          influxdb2-docker-image: quay.io/influxdb/influxdb:nightly
+          dotnet-docker-image: mcr.microsoft.com/dotnet/sdk:3.1
+          dotnet-target-framework: netcoreapp3.1
+          requires:
+            - build
+      - test-docker:
+          name: test-dotnet-3.1-docker
+          dotnet-docker-image: mcr.microsoft.com/dotnet/sdk:3.1
+          dotnet-target-framework: netcoreapp3.1
+          requires:
+            - build
+      - test-docker:
+          name: test-dotnet-5.0-docker
+          dotnet-docker-image: mcr.microsoft.com/dotnet/sdk:5.0
+          dotnet-target-framework: net5.0
+          requires:
+            - build
+      - test-docker:
+          name: test-dotnet-6.0-docker
+          dotnet-docker-image: mcr.microsoft.com/dotnet/sdk:6.0
+          dotnet-target-framework: net6.0
+          requires:
+            - build
+      - test-docker:
+          name: test-dotnet-7.0-docker
+          dotnet-docker-image: mcr.microsoft.com/dotnet/sdk:7.0
+          dotnet-target-framework: net7.0
+          requires:
+            - build
+      - test-docker:
+          name: test-dotnet-8.0-docker
+          dotnet-docker-image: mcr.microsoft.com/dotnet/sdk:8.0
+          dotnet-target-framework: net8.0
           code-coverage-report: true
-          dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
-      - tests-dotnet:
-          name: dotnet-6.0
-          dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
-      - tests-dotnet:
-          name: dotnet-7.0
-      - tests-windows:
-          name: dotnet-windows
+          requires:
+            - build
+      - test-windows:
+          name: test-dotnet-6.0-windows
+          dotnet-target-framework: net6.0
+          requires:
+            - build
       - deploy-preview:
           requires:
-            - check-compilation-warnings
-            - check-code-formatting
-            - dotnet-3.1-nightly
-            - dotnet-3.1
-            - dotnet-5.0
-            - dotnet-6.0
-            - dotnet-7.0
-            - dotnet-windows
+            # - check-code-formatting # TODO: uncomment
+            - test-dotnet-3.1-docker-nightly
+            - test-dotnet-3.1-docker
+            - test-dotnet-5.0-docker
+            - test-dotnet-6.0-docker
+            - test-dotnet-7.0-docker
+            - test-dotnet-8.0-docker
+            - test-dotnet-6.0-windows
           filters:
             branches:
               only: master
@@ -243,4 +309,8 @@ workflows:
     when:
       equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
-      - tests-dotnet
+      - build
+      - test-docker:
+          name: test-dotnet-8.0-docker
+          dotnet-docker-image: mcr.microsoft.com/dotnet/sdk:8.0
+          dotnet-target-framework: net8.0

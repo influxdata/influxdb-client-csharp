@@ -45,13 +45,12 @@ docker rm influxdb_v2_onboarding || true
 docker network rm influx_network || true
 docker network create -d ${DOCKER_NET_DRIVER} influx_network --subnet 192.168.0.0/24 --gateway 192.168.0.1
 
-echo
-echo "Restarting InfluxDB [${INFLUXDB_IMAGE}] ..."
-echo
-
 #
-# InfluxDB
+# InfluxDB 1.x
 #
+echo
+echo "Restarting InfluxDB 1.x [${INFLUXDB_IMAGE}] ..."
+echo
 
 docker pull ${INFLUXDB_IMAGE} || true
 docker run \
@@ -63,8 +62,8 @@ docker run \
        --volume ${SCRIPT_PATH}/influxdb.conf:/etc/influxdb/influxdb.conf \
        ${INFLUXDB_IMAGE}
 
-echo "Wait to start InfluxDB"
-wget -S --spider --tries=20 --retry-connrefused --waitretry=5 http://localhost:8086/ping
+echo "Wait to start InfluxDB 1.x"
+curl --fail --include --head --retry 20 --retry-connrefused --retry-delay 5 --ipv4 http://localhost:8086/ping
 
 #
 # InfluxDB 2.x
@@ -83,10 +82,10 @@ docker run \
        ${INFLUXDB_V2_IMAGE}
 
 echo "Wait to start InfluxDB 2.x"
-wget -S --spider --tries=20 --retry-connrefused --waitretry=5 http://localhost:9999/metrics
+curl --fail --include --head --retry 20 --retry-connrefused --retry-delay 5 --ipv4 http://localhost:9999/metrics
 
 echo
-echo "Post onBoarding request, to setup initial user (my-user@my-password), org (my-org) and bucketSetup (my-bucket)"
+echo "Post onboarding request, to setup initial user (my-user@my-password), org (my-org) and bucket (my-bucket)"
 echo
 curl -i -X POST http://localhost:9999/api/v2/setup -H 'accept: application/json' \
     -d '{
@@ -98,10 +97,10 @@ curl -i -X POST http://localhost:9999/api/v2/setup -H 'accept: application/json'
         }'
 
 #
-# InfluxDB 2.x
+# InfluxDB 2.x for onboarding tests
 #
 echo
-echo "Restarting InfluxDB 2.x for onboarding test... "
+echo "Restarting InfluxDB 2.x for onboarding tests... "
 echo
 
 docker run \

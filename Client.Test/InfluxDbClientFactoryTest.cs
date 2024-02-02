@@ -587,9 +587,9 @@ AJvDAFTSr5A9GSjJ3OyIeKoI8Q6xuaQBitpZR90P/Ah/Ymg490rpXavk";
 
         private static void CopyAppConfig()
         {
-            // copy App.config to assemble format
+            // Copy App.config to assembly format (eg. testhost.dll.config)
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            File.Copy(Directory.GetCurrentDirectory() + "/../../../App.config", config.FilePath, true);
+            File.Copy("App.config", config.FilePath, true);
         }
     }
 }

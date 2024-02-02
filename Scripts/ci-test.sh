@@ -2,52 +2,48 @@
 
 set -e
 
-if [[ "$*" == *true* ]]
+#
+# Read arguments
+#
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -tfm|--dotnet-target-framework)
+      DOTNET_TARGET_FRAMEWORK="$2"
+      shift # Past argument
+      shift # Past value
+      ;;
+    -codecov|--code-coverage-report)
+      CODE_COVERAGE_REPORT=true
+      shift # Past argument
+      ;;
+    *)
+      echo "Unknown argument $1"
+      exit 1
+      ;;
+  esac
+done
+
+
+#
+# Validate arguments
+#
+if [[ -z "$DOTNET_TARGET_FRAMEWORK" ]]
 then
-    CODE_COVERAGE_REPORT=true
-else
-    CODE_COVERAGE_REPORT=false 
+  echo "Please set the .NET target framework (TFM) to use for testing with the \"--dotnet-target-framework <tfm>\" argument."
+  exit 1
 fi
 
-echo "Configuration: $*, Coverage Report: $CODE_COVERAGE_REPORT"
-
-#
-# Prepare compatible version
-#
-NET_TEST_VERSION=$(dotnet --version | awk -F. '{printf "netcoreapp"$1"."$2;}')
-echo "$NET_TEST_VERSION"
-
-DEFAULT_NET_TARGET_VERSION="netstandard2.1"
-NET_TARGET_VERSION="${NET_TARGET_VERSION:-$DEFAULT_NET_TARGET_VERSION}"
-
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Test/Client.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Examples/Examples.csproj
-
-sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Core/Client.Core.csproj
-sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client/Client.csproj
-sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Legacy/Client.Legacy.csproj
-sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Linq/Client.Linq.csproj
-
-TRX2JUNIT_VERSION=""
+CODE_COVERAGE_REPORT="${CODE_COVERAGE_REPORT:-false}"
 TEST_PARAMS=()
 
 if [[ "$CODE_COVERAGE_REPORT" = true ]]
 then
-  TRX2JUNIT_VERSION="1.6.0"
   TEST_PARAMS=(--collect:"XPlat Code Coverage")
+  echo "Running tests using $DOTNET_TARGET_FRAMEWORK with Code Coverage report..."
 else
-  TRX2JUNIT_VERSION="1.3.2"
+  echo "Running tests using $DOTNET_TARGET_FRAMEWORK without Code Coverage report..."
 fi
 
-if [[ "$NET_TEST_VERSION" = "netcoreapp6.0" || "$NET_TEST_VERSION" = "netcoreapp7.0" ]]
-then
-  TRX2JUNIT_VERSION="2.0.4"
-else
-  dotnet sln remove Examples/ExampleBlazor/ExampleBlazor.csproj
-fi
 
 #
 # Generate testing certificates
@@ -55,25 +51,9 @@ fi
 dotnet dev-certs https
 
 #
-# Install testing tools
-#
-dotnet tool install --tool-path="./trx2junit/" trx2junit --version ${TRX2JUNIT_VERSION}
-
-#
-# Build
-#
-dotnet restore
-dotnet build --no-restore
-
-#
 # Test
 #
-dotnet test Client.Core.Test/Client.Core.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
-dotnet test Client.Test/Client.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
-dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
-dotnet test Client.Linq.Test/Client.Linq.Test.csproj --no-build --verbosity normal --logger trx "${TEST_PARAMS[@]}"
-
-#
-# Convert test results to Junit format
-#
-./trx2junit/trx2junit ./**/TestResults/*.trx
+dotnet test   "Client.Core.Test/bin/Release/$DOTNET_TARGET_FRAMEWORK/InfluxDB.Client.Core.Test.dll"   --verbosity normal --logger trx "${TEST_PARAMS[@]}"
+dotnet test        "Client.Test/bin/Release/$DOTNET_TARGET_FRAMEWORK/InfluxDB.Client.Test.dll"        --verbosity normal --logger trx "${TEST_PARAMS[@]}"
+dotnet test "Client.Legacy.Test/bin/Release/$DOTNET_TARGET_FRAMEWORK/InfluxDB.Client.Legacy.Test.dll" --verbosity normal --logger trx "${TEST_PARAMS[@]}"
+dotnet test   "Client.Linq.Test/bin/Release/$DOTNET_TARGET_FRAMEWORK/InfluxDB.Client.Linq.Test.dll"   --verbosity normal --logger trx "${TEST_PARAMS[@]}"

@@ -29,4 +29,6 @@
         <ProjectReference Include="..\Client.Core.Test\Client.Core.Test.csproj" />
     </ItemGroup>
 
+    <Import Project="..\Scripts\copy-coverlet-collector.targets" />
+
 </Project>
