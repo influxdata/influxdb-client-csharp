@@ -29,7 +29,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CreateSlackEndpoint()
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.UtcNow.AddMilliseconds(-10);
 
             var name = GenerateName("slack");
             var endpoint = await _notificationEndpointsApi
@@ -79,7 +79,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CreatePagerDutyEndpoint()
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.UtcNow.AddMilliseconds(-10);
 
             var name = GenerateName("pager-duty");
             var endpoint = await _notificationEndpointsApi
@@ -119,7 +119,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CreateHttpEndpoint()
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.UtcNow.AddMilliseconds(-10);
 
             var name = GenerateName("http");
             var endpoint = await _notificationEndpointsApi
@@ -152,7 +152,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CreateHttpEndpointBasic()
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.UtcNow.AddMilliseconds(-10);
 
             var name = GenerateName("http");
             var endpoint = await _notificationEndpointsApi
@@ -185,7 +185,7 @@ namespace InfluxDB.Client.Test
         [Test]
         public async Task CreateHttpEndpointBearer()
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.UtcNow.AddMilliseconds(-10);
 
             var name = GenerateName("http");
             var endpoint = await _notificationEndpointsApi
