@@ -287,6 +287,11 @@ workflows:
           requires:
             - build
       - test-windows:
+          name: test-dotnet-4.8-windows
+          dotnet-target-framework: net48
+          requires:
+            - build
+      - test-windows:
           name: test-dotnet-6.0-windows
           dotnet-target-framework: net6.0
           requires:
@@ -300,6 +305,7 @@ workflows:
             - test-dotnet-6.0-docker
             - test-dotnet-7.0-docker
             - test-dotnet-8.0-docker
+            - test-dotnet-4.8-windows
             - test-dotnet-6.0-windows
           filters:
             branches:

@@ -893,7 +893,7 @@ namespace InfluxDB.Client.Test
 
             for (var i = 0; i < count; i++)
                 measurements.Add(new H20Measurement
-                    { Level = i, Time = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i)), Location = "Europe" });
+                    { Level = i, Time = DateTimeEx.UnixEpoch.Add(TimeSpan.FromSeconds(i)), Location = "Europe" });
 
             var successEvents = new List<WriteSuccessEvent>();
             _writeApi = Client.GetWriteApi(new WriteOptions { BatchSize = batchSize, FlushInterval = 10_000 });
@@ -926,7 +926,7 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual(10, successEvents.Count);
             foreach (var successEvent in successEvents)
-                Assert.AreEqual(50_000, successEvent.LineProtocol.Split("\n").Length);
+                Assert.AreEqual(50_000, successEvent.LineProtocol.Split('\n').Length);
         }
 
         [Test]

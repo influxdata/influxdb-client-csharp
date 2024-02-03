@@ -95,6 +95,7 @@ namespace Client.Linq.Test
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
 
+#if NETCOREAPP2_0_OR_GREATER
         [Test]
         public void ResultOperatorTakeLast()
         {
@@ -111,6 +112,7 @@ namespace Client.Linq.Test
             expected = FluxStart + " " + "|> tail(n: p3, offset: p4)";
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
+#endif
 
         [Test]
         public void ResultOperatorSkip()
@@ -197,9 +199,9 @@ namespace Client.Linq.Test
                 Assert.AreEqual(expected, visitor.BuildFluxQuery(),
                     $"Expected Flux: {flux} for expression {expression}.");
 
-                foreach (var (index, value) in assignments)
-                    Assert.AreEqual(value, GetLiteral<IntegerLiteral>(ast, index).Value,
-                        $"Expected: {value} with index: {index} for Queryable expression: {queryable}");
+                foreach (var kvp in assignments)
+                    Assert.AreEqual(kvp.Value, GetLiteral<IntegerLiteral>(ast, kvp.Key).Value,
+                        $"Expected: {kvp.Value} with index: {kvp.Key} for Queryable expression: {queryable}");
             }
         }
 
@@ -499,9 +501,9 @@ namespace Client.Linq.Test
                 Assert.AreEqual(expected, visitor.BuildFluxQuery(),
                     $"Expected Range: {range}, Shift: {shift}, Queryable expression: {queryable.Expression}");
 
-                foreach (var (index, dateTime) in assignments)
-                    Assert.AreEqual(dateTime, GetLiteral<DateTimeLiteral>(ast, index).Value,
-                        $"Expected DateTime: {dateTime} with index: {index} for Queryable expression: {queryable.Expression}");
+                foreach (var kvp in assignments)
+                    Assert.AreEqual(kvp.Value, GetLiteral<DateTimeLiteral>(ast, kvp.Key).Value,
+                        $"Expected DateTime: {kvp.Value} with index: {kvp.Key} for Queryable expression: {queryable.Expression}");
             }
         }
 
@@ -607,9 +609,9 @@ namespace Client.Linq.Test
                 Assert.AreEqual(expected, visitor.BuildFluxQuery(),
                     $"Expected Filter: {filter}, Queryable expression: {queryable.Expression}");
 
-                foreach (var (index, value) in assignments)
-                    Assert.AreEqual(value, GetLiteral<StringLiteral>(ast, index).Value,
-                        $"Expected Literal: {value} with index: {index} for Queryable expression: {queryable.Expression}");
+                foreach (var kvp in assignments)
+                    Assert.AreEqual(kvp.Value, GetLiteral<StringLiteral>(ast, kvp.Key).Value,
+                        $"Expected Literal: {kvp.Value} with index: {kvp.Key} for Queryable expression: {queryable.Expression}");
             }
         }
 
@@ -865,18 +867,18 @@ namespace Client.Linq.Test
                 Assert.AreEqual(expected, visitor.BuildFluxQuery(),
                     $"Expected Sort: {sort}, Queryable expression: {queryable.Expression}");
 
-                foreach (var (index, value) in assignments)
+                foreach (var kvp in assignments)
                 {
                     var message =
-                        $"Expected Literal: {value} with index: {index} for Queryable expression: {queryable.Expression}";
+                        $"Expected Literal: {kvp.Value} with index: {kvp.Key} for Queryable expression: {queryable.Expression}";
 
-                    switch (value)
+                    switch (kvp.Value)
                     {
                         case string _:
-                            Assert.AreEqual(value, GetLiteral<StringLiteral>(ast, index).Value, message);
+                            Assert.AreEqual(kvp.Value, GetLiteral<StringLiteral>(ast, kvp.Key).Value, message);
                             break;
                         case bool _:
-                            Assert.AreEqual(value, GetLiteral<BooleanLiteral>(ast, index).Value, message);
+                            Assert.AreEqual(kvp.Value, GetLiteral<BooleanLiteral>(ast, kvp.Key).Value, message);
                             break;
                     }
                 }
@@ -1189,6 +1191,7 @@ namespace Client.Linq.Test
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
 
+#if NETCOREAPP2_0_OR_GREATER
         [Test]
         public void AlignLimitFunctionBeforePivot()
         {
@@ -1214,6 +1217,7 @@ namespace Client.Linq.Test
                        "|> drop(columns: [\"_start\", \"_stop\", \"_measurement\"])";
             Assert.AreEqual(expected, visitor.BuildFluxQuery());
         }
+#endif
 
         private InfluxDBQueryVisitor BuildQueryVisitor(IQueryable queryable, Expression expression = null)
         {

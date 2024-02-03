@@ -33,7 +33,8 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(HealthCheck.StatusEnum.Fail, health.Status);
             Assert.IsTrue(health.Message.Contains("Connection refused") ||
                           health.Message.Contains("Cannot assign requested address") ||
-                          health.Message.Contains("No connection could be made because the target machine actively refused it"),
+                          health.Message.Contains("No connection could be made because the target machine actively refused it") ||
+                          health.Message.Contains("An error occurred while sending the request"),
                 $"The health message: {health.Message}");
 
             clientNotRunning.Dispose();
