@@ -1,5 +1,4 @@
-Contents
---------
+# Contents
 
 - Key.public.snk: Public key to verify strong name of `influxdb-client-csharp`.
 - Key.snk: Signing key to provide strong name of `influxdb-client-csharp`.

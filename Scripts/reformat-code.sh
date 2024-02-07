@@ -8,9 +8,9 @@ cd "$SCRIPT_PATH"/..
 #
 # Install ReSharper command line tools
 #
-dotnet tool install --tool-path="./reSharperCLI" JetBrains.ReSharper.GlobalTools --version 2022.1.0 || true
+dotnet tool install --tool-path="./ReSharperCLI" JetBrains.ReSharper.GlobalTools --version 2022.1.0 || true
 
 #
 # Reformat code
 #
-./reSharperCLI/jb cleanupcode --profile="Built-in: Reformat & Apply Syntax Style" --build influxdb-client-csharp.sln
+./ReSharperCLI/jb cleanupcode --profile="Built-in: Reformat & Apply Syntax Style" --build influxdb-client-csharp.sln

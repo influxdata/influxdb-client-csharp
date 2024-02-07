@@ -35,7 +35,7 @@ namespace InfluxDB.Client.Test
         public void SetUp()
         {
             for (var i = 0; i < CountToWrite; i++)
-                bars.Add(new HistoryBar { Value = i, Date = DateTime.UnixEpoch.Add(TimeSpan.FromSeconds(i)) });
+                bars.Add(new HistoryBar { Value = i, Date = DateTimeEx.UnixEpoch.Add(TimeSpan.FromSeconds(i)) });
         }
 
         [Test]

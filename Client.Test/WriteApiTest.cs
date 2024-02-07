@@ -64,7 +64,7 @@ namespace InfluxDB.Client.Test
                 {
                     _autoResetEvent.Reset();
 
-                    var timeout = TimeSpan.FromSeconds(10);
+                    var timeout = TimeSpan.FromSeconds(20);
 
                     var waitOne = _autoResetEvent.WaitOne(timeout);
                     if (!waitOne)

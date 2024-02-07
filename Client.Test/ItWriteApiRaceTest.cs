@@ -110,7 +110,7 @@ namespace InfluxDB.Client.Test
 
             foreach (var batch in batches)
             {
-                var length = batch.LineProtocol.Split("\n").Length;
+                var length = batch.LineProtocol.Split('\n').Length;
 
                 Trace.WriteLine($"Count: {length} {batch.Bucket}");
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -360,8 +359,13 @@ namespace InfluxDB.Client.Test
                 apiClient!.RestClient.GetType()
                     .GetProperty("HttpClient", BindingFlags.NonPublic | BindingFlags.Instance);
             var httpClient = (HttpClient)httpClientInfo!.GetValue(apiClient.RestClient);
+
             var disposedInfo =
+#if NETFRAMEWORK
+                httpClient!.GetType().GetField("disposed", BindingFlags.NonPublic | BindingFlags.Instance);
+#else
                 httpClient!.GetType().GetField("_disposed", BindingFlags.NonPublic | BindingFlags.Instance);
+#endif
             var disposed = (bool)disposedInfo!.GetValue(httpClient)!;
 
             Assert.AreEqual(true, disposed);

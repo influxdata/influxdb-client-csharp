@@ -56,8 +56,13 @@ namespace Client.Legacy.Test
             var httpClientInfo =
                 restClient.GetType().GetProperty("HttpClient", BindingFlags.NonPublic | BindingFlags.Instance);
             var httpClient = (HttpClient)httpClientInfo!.GetValue(restClient);
+
             var disposedInfo =
+#if NETFRAMEWORK
+                httpClient!.GetType().GetField("disposed", BindingFlags.NonPublic | BindingFlags.Instance);
+#else
                 httpClient!.GetType().GetField("_disposed", BindingFlags.NonPublic | BindingFlags.Instance);
+#endif
             var disposed = (bool)disposedInfo!.GetValue(httpClient)!;
 
             Assert.AreEqual(true, disposed);

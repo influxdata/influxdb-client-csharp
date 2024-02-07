@@ -23,14 +23,14 @@
 
 set -e
 
-echo "Wait to start InfluxDB"
-wget -S --spider --tries=20 --retry-connrefused --waitretry=5 http://localhost:8086/ping
+echo "Wait to start InfluxDB 1.x"
+curl --fail --include --head --retry 20 --retry-connrefused --retry-delay 5 --ipv4 http://localhost:8086/ping
 
 echo "Wait to start InfluxDB 2.x"
-wget -S --spider --tries=20 --retry-connrefused --waitretry=5 http://localhost:9999/metrics
+curl --fail --include --head --retry 20 --retry-connrefused --retry-delay 5 --ipv4 http://localhost:9999/metrics
 
 echo
-echo "Post onBoarding request, to setup initial user (my-user@my-password), org (my-org) and bucketSetup (my-bucket)"
+echo "Post onboarding request, to setup initial user (my-user@my-password), org (my-org) and bucket (my-bucket)"
 echo
 curl -i -X POST http://localhost:9999/api/v2/setup -H 'accept: application/json' \
     -d '{
