@@ -63,7 +63,7 @@ The following example demonstrates how to write data to InfluxDB 2.x and read th
 
 Use the latest version:
 
-##### .Net CLI
+##### .NET CLI
 ```bash
 dotnet add package InfluxDB.Client
 ```
@@ -155,7 +155,7 @@ The following example demonstrates how to use a InfluxDB 2.x Management API. For
 
 Use the latest version:
 
-##### .Net CLI
+##### .NET CLI
 ```bash
 dotnet add package InfluxDB.Client
 ```
@@ -242,7 +242,7 @@ The following example demonstrates querying using the Flux language.
 
 Use the latest version:
 
-##### .Net CLI
+##### .NET CLI
 ```bash
 dotnet add package InfluxDB.Client.Flux
 ```

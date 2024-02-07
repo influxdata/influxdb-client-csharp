@@ -1,7 +1,7 @@
 <div style="max-width: 1200px; min-width: 600px; font-size: 18px; margin: auto; padding: 50px;">
 
 
-<h1>Example<a style="color: #d30971 !important;">Blazor.</a> Build on <a style="color: #d30971 !important;"> InfluxDB.</a></h1>
+# Example<span style="color: #d30971 !important;">Blazor.</span> Built on <a style="color: #d30971 !important;"> InfluxDB.</a>
 
 <img src="wwwroot/assets/readme/homepage.png" alt="drawing">
 
@@ -19,12 +19,12 @@
 
 ### Prerequisites
 
-- dotnet - [Download .NET](https://dotnet.microsoft.com/en-us/download)
-- Docker - [Get started with docker](https://www.docker.com/get-started)
-- **InfluxDB** on port **8086** (influxdb 2.0 OSS)home
-    - for start use docker-compose.yaml:
+- .NET - [Download .NET](https://dotnet.microsoft.com/en-us/download)
+- Docker - [Get started with Docker](https://www.docker.com/get-started)
+- **InfluxDB** on port **8086** (InfluxDB 2.0 OSS)
+    - To start use `docker-compose.yaml`:
       ```bash
-      docker-compose up
+      docker compose up
       ```
 
 ## Run Application
@@ -32,8 +32,7 @@
 Launch app by typing the following commands in a terminal window:
 
 ```bash
-cd ExampleBlazor
-dotnet compose start
+docker compose start
 ```
 
 After a few seconds, you should get your application up and running. Take a look at your terminal window to get the
@@ -67,7 +66,7 @@ public static async Task<bool> CheckClient(Client? client)
 <img src="wwwroot/assets/readme/homepage-device-registration.png" alt="drawing">
 
 Load active devices (`_value` field cannot be empty) to `RadzenDataGrid` from InfluxDB using `GetQueryApi` with following query -
-[FetchDeviceList](/Data/InfluxModel#L148):
+[FetchDeviceList](./Data/InfluxModel.cs#L148):
 ```csharp
 var query = $"from(bucket: \"{bucket}\")" +
              " |> range(start: -30d)" +
@@ -81,7 +80,7 @@ Each row contains `button` for deleting device. After deleting device **isn't** 
 authorization** and **IoT Authorization**.
 
 Removed device has in InfluxDB empty fields `key` and `token`, it means, that device authorization was removed via
-`GetWriteApi`- [_removeDeviceAuthorization](/Data/InfluxModel#L313):
+`GetWriteApi`- [_removeDeviceAuthorization](./Data/InfluxModel.cs#L310):
 ```csharp
  var point = PointData.Measurement("deviceauth")
                     .Tag("deviceId", deviceId)
@@ -91,7 +90,7 @@ using var writeApi = influxDbClient.GetWriteApi();
 writeApi.WritePoint(point, bucket, orgId);
 ```
 
-IoT Authorization is also removed, in this case `GetAuthorizationsApi` is used - [_deleteIoTAuthorization](/Data/InfluxModel#L339):
+IoT Authorization is also removed, in this case `GetAuthorizationsApi` is used - [_deleteIoTAuthorization](./Data/InfluxModel.cs#L336):
 ```csharp
 var authorizationApi = influxDbClient.GetAuthorizationsApi();
 await authorizationApi.DeleteAuthorizationAsync(key);
@@ -109,7 +108,7 @@ for selected bucket
 For adding new device, to `input` enter device id, click to button for create. Device is automatically
 registered in InfluxDB - it's write as point via `WriteService` with its authorization.
 
-Example of creating device point in InfluxDB - [CreateDevice](/Data/InfluxModel#L199):
+Example of creating device point in InfluxDB - [CreateDevice](./Data/InfluxModel.cs#L199):
 ```csharp
 var createdAt = DateTime.UtcNow.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz", CultureInfo.InvariantCulture);
 var point = PointData.Measurement("deviceauth")
@@ -122,7 +121,7 @@ writeApi.WritePoint(point, bucket, orgId);
 await _createDeviceAuthorization(deviceId, bucket, orgId);
 ```
 
-Creating device IoT authorization via `GetAuthorizationsApi` - [_createIoTAuthorization](/Data/InfluxModel#L248):
+Creating device IoT authorization via `GetAuthorizationsApi` - [_createIoTAuthorization](./Data/InfluxModel.cs#L245):
 ```csharp
 var bucketId = await GetBucketId(bucket);
 var influxDbClient = Client.GetClient();
@@ -163,7 +162,7 @@ On right top corner are following elements:
 - `button` for write emulated data to InfluxDB
 - `button` for refresh
 
-Emulated data are written to InfluxDB by `GetWriteApi` - [WriteEmulatedData](/Data/InfluxModel#L617):
+Emulated data are written to InfluxDB by `GetWriteApi` - [WriteEmulatedData](./Data/InfluxModel.cs#L613):
 ```csharp
 var writeApi = influxDbClient.GetWriteApi();
 
@@ -191,7 +190,7 @@ while (lastTime < toTime)
 ```
 
 Each `RadzenRadialGauge` contains data from InfluxDB using `GetWriteApi` - 
-[FetchDataMean](/Data/InfluxModel#L419):
+[FetchDataMean](./Data/InfluxModel.cs#L416):
 
 ```csharp
 var fluxQuery = $"from(bucket: \"{bucket}\")"
@@ -205,7 +204,7 @@ return (await influxDbClient.GetQueryApi().QueryAsync(fluxQuery, orgId)).FirstOr
 ```
 
 Measurements in `RadzenDataGrid` are getting from InfluxDB using `GetQueryApi` -
-[FetchMeasurements](/Data/InfluxModel#L461):
+[FetchMeasurements](./Data/InfluxModel.cs#L458):
 
 ```csharp
 var fluxQuery = $"deviceData = from(bucket: \"{bucket}\")"
@@ -255,7 +254,7 @@ On right top corner are following elements:
 - `button` for refresh
 
 Device Configuration `RadzenCard` contains basic device information. Registration time is getting from InfluxDB using 
-`GetWriteApi` - [FetchDeviceCreatedAt](/Data/InfluxModel#L169):
+`GetWriteApi` - [FetchDeviceCreatedAt](./Data/InfluxModel.cs#L169):
 ```csharp
  var query = $"from(bucket: \"{bucket}\")" +
               " |> range(start: -30d)" +
@@ -267,7 +266,7 @@ Device Configuration `RadzenCard` contains basic device information. Registratio
 var result = await influxDbClient.GetQueryApi().QueryAsync(query, orgId);
 ```
 Measurements in `RadzenDataGrid` are getting from InfluxDB using `GetQueryApi` -
-[FetchMeasurements](/Data/InfluxModel#L461):
+[FetchMeasurements](./Data/InfluxModel.cs#L458):
 
 #### Measurements Detail
 
@@ -279,7 +278,7 @@ On right top corner are following elements:
 - `button` for refresh
 
 Data in `RadzenChart` and `RadzenDataGrid` are getting from InfluxDB using `Client.Linq` -
-[FetchDataLinq](/Data/InfluxModel#L556):
+[FetchDataLinq](./Data/InfluxModel.cs#L553):
 ```csharp
 var query = from s in InfluxDBQueryable<MeasurementPoint>.Queryable(bucket, Client.Org, influxDbClient.GetQueryApiSync())
                 where s.DeviceId == deviceId
@@ -300,7 +299,7 @@ On right top corner are following elements:
 - `button` for refresh buckets
 
 For adding new bucket, to `input` enter bucket name, click to button for create. Bucket is created in InfluxDB via 
-`GetBucketsApi` with it's authorization via `GetAuthorizationsApi` - [CreateBucket](/Data/InfluxModel#L83):
+`GetBucketsApi` with it's authorization via `GetAuthorizationsApi` - [CreateBucket](./Data/InfluxModel.cs#L83):
 ```csharp
 var retention = new BucketRetentionRules(BucketRetentionRules.TypeEnum.Expire, 3600);
 
@@ -313,17 +312,17 @@ var write = new Permission(Permission.ActionEnum.Write, resource);
 await influxDbClient.GetAuthorizationsApi().CreateAuthorizationAsync(orgId, new List<Permission> {read, write});
 ```
 
-Load buckets to `RadzenDataGrid` from InfluxDB using `GetBucketsApi` - [FetchBuckets](/Data/InfluxModel#L137):
+Load buckets to `RadzenDataGrid` from InfluxDB using `GetBucketsApi` - [FetchBuckets](./Data/InfluxModel.cs#L137):
 ```csharp
  var bucketList = await influxDbClient.GetBucketsApi().FindBucketsAsync();
 ```
 
 Each row contains `button` for deleting and clone bucket. Bucket is removed or cloned via `GetBucketsApi`- 
-[DeleteBucket](/Data/InfluxModel#L57):
+[DeleteBucket](./Data/InfluxModel.cs#L57):
 ```csharp
 await influxDbClient.GetBucketsApi().DeleteBucketAsync(bucket);
 ```
-[CloneBucket](/Data/InfluxModel#L70):
+[CloneBucket](./Data/InfluxModel.cs#L70):
 ```csharp
 await influxDbClient.GetBucketsApi().CloneBucketAsync(name, bucket);
 ```
