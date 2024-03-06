@@ -4,7 +4,7 @@
 Update dependencies:
 
 #### Build:
-  - [#609](https://github.com/influxdata/influxdb-client-csharp/pull/609): `CsvHelper` to `30.1.0`
+  - [#619](https://github.com/influxdata/influxdb-client-csharp/pull/619): `CsvHelper` to `31.0.2`
   - [#612](https://github.com/influxdata/influxdb-client-csharp/pull/612): `Microsoft.Extensions.ObjectPool` to `8.0.1`
 
 #### Test:
