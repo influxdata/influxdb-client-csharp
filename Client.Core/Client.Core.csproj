@@ -34,7 +34,7 @@
     <ItemGroup>
       <PackageReference Include="CsvHelper" Version="30.1.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-      <PackageReference Include="NodaTime" Version="3.1.10" />
+      <PackageReference Include="NodaTime" Version="3.1.11" />
       <PackageReference Include="NodaTime.Serialization.JsonNet" Version="3.1.0" />
       <PackageReference Include="RestSharp" Version="110.1.0" />
     </ItemGroup>
