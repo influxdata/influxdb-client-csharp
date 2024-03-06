@@ -123,7 +123,9 @@ jobs:
       shell: bash
     steps:
       - checkout
-      - run: choco install influxdb1 --version=1.8.0
+      - run: |
+          choco feature enable -n allowGlobalConfirmation
+          choco install influxdb1 --version=1.8.0
       - run: export INFLUXDB_HTTP_FLUX_ENABLED=true 
       - run:
           name: "Start InfluxDB"
