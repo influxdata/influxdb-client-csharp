@@ -10,6 +10,7 @@ Update dependencies:
 #### Test:
   - [#608](https://github.com/influxdata/influxdb-client-csharp/pull/608): `NUnit` to `3.14.0`
   - [#610](https://github.com/influxdata/influxdb-client-csharp/pull/610): `WireMock.Net` to `1.5.47`
+  - [#618](https://github.com/influxdata/influxdb-client-csharp/pull/618): `coverlet.collector` to `6.0.1`
 
 #### Examples:
   - [#611](https://github.com/influxdata/influxdb-client-csharp/pull/611): `Radzen.Blazor` to `4.24.4`
