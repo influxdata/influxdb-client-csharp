@@ -5,15 +5,15 @@ Update dependencies:
 
 #### Build:
   - [#619](https://github.com/influxdata/influxdb-client-csharp/pull/619): `CsvHelper` to `31.0.2`
-  - [#612](https://github.com/influxdata/influxdb-client-csharp/pull/612): `Microsoft.Extensions.ObjectPool` to `8.0.1`
+  - [#620](https://github.com/influxdata/influxdb-client-csharp/pull/620): `Microsoft.Extensions.ObjectPool` to `8.0.2`
 
 #### Test:
   - [#608](https://github.com/influxdata/influxdb-client-csharp/pull/608): `NUnit` to `3.14.0`
-  - [#610](https://github.com/influxdata/influxdb-client-csharp/pull/610): `WireMock.Net` to `1.5.47`
   - [#616](https://github.com/influxdata/influxdb-client-csharp/pull/616): `Microsoft.NET.Test.Sdk` to `17.9.0`
+  - [#625](https://github.com/influxdata/influxdb-client-csharp/pull/625): `WireMock.Net` to `1.5.49`
 
 #### Examples:
-  - [#611](https://github.com/influxdata/influxdb-client-csharp/pull/611): `Radzen.Blazor` to `4.24.4`
+  - [#624](https://github.com/influxdata/influxdb-client-csharp/pull/624): `Radzen.Blazor` to `4.25.12`
   - [#622](https://github.com/influxdata/influxdb-client-csharp/pull/622): `NodaTime` to `3.1.11`
 
 ## 4.14.0 [2023-11-07]
