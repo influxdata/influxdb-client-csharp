@@ -14,7 +14,7 @@ Update dependencies:
   - [#628](https://github.com/influxdata/influxdb-client-csharp/pull/628): `WireMock.Net` to `1.5.51`
 
 #### Examples:
-  - [#624](https://github.com/influxdata/influxdb-client-csharp/pull/624): `Radzen.Blazor` to `4.25.12`
+  - [#627](https://github.com/influxdata/influxdb-client-csharp/pull/627): `Radzen.Blazor` to `4.29.1`
   - [#622](https://github.com/influxdata/influxdb-client-csharp/pull/622): `NodaTime` to `3.1.11`
 
 ## 4.14.0 [2023-11-07]
