@@ -5,16 +5,16 @@ Update dependencies:
 
 #### Build:
   - [#619](https://github.com/influxdata/influxdb-client-csharp/pull/619): `CsvHelper` to `31.0.2`
-  - [#620](https://github.com/influxdata/influxdb-client-csharp/pull/620): `Microsoft.Extensions.ObjectPool` to `8.0.2`
+  - [#629](https://github.com/influxdata/influxdb-client-csharp/pull/629): `Microsoft.Extensions.ObjectPool` to `8.0.3`
 
 #### Test:
   - [#608](https://github.com/influxdata/influxdb-client-csharp/pull/608): `NUnit` to `3.14.0`
   - [#616](https://github.com/influxdata/influxdb-client-csharp/pull/616): `Microsoft.NET.Test.Sdk` to `17.9.0`
   - [#626](https://github.com/influxdata/influxdb-client-csharp/pull/626): `coverlet.collector` to `6.0.2`
-  - [#625](https://github.com/influxdata/influxdb-client-csharp/pull/625): `WireMock.Net` to `1.5.49`
+  - [#628](https://github.com/influxdata/influxdb-client-csharp/pull/628): `WireMock.Net` to `1.5.51`
 
 #### Examples:
-  - [#624](https://github.com/influxdata/influxdb-client-csharp/pull/624): `Radzen.Blazor` to `4.25.12`
+  - [#627](https://github.com/influxdata/influxdb-client-csharp/pull/627): `Radzen.Blazor` to `4.29.1`
   - [#622](https://github.com/influxdata/influxdb-client-csharp/pull/622): `NodaTime` to `3.1.11`
 
 ## 4.14.0 [2023-11-07]
