@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-      <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+      <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
       <LangVersion>8</LangVersion>
 
       <Description>The reference client that allows query, write and management (bucket, organization, users) for the InfluxDB 2.x.</Description>
@@ -42,9 +42,11 @@
         <PackageReference Include="JsonSubTypes" Version="2.0.1" />
         <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="8.0.8" />
         <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
-        <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
         <PackageReference Include="System.Reactive" Version="6.0.1" />
     </ItemGroup>
 
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1'">
+        <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+    </ItemGroup>
 </Project>
