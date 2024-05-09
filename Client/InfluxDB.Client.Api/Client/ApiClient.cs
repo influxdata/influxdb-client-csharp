@@ -116,7 +116,7 @@ namespace InfluxDB.Client.Api.Client
             string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
-            string contentType, 
+            string contentType,
             HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
             var request = new RestRequest(path, method)

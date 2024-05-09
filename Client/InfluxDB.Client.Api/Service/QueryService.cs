@@ -1548,7 +1548,7 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="httpCompletionOption">Specify http completion to enable fully stream queries for async.</param>
         /// <returns>ApiResponse of string</returns>
         public RestRequest PostQueryWithRestRequest(string zapTraceSpan = null, string acceptEncoding = null,
-            string contentType = null, string org = null, string orgID = null, Query query = null, 
+            string contentType = null, string org = null, string orgID = null, Query query = null,
             HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
             var localVarPath = "/api/v2/query";
