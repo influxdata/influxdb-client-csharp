@@ -139,7 +139,8 @@ namespace InfluxDB.Client
             RestRequest QueryFn(Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
             {
                 return _service
-                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query)
+                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query, 
+                        HttpCompletionOption.ResponseHeadersRead)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
             }
 
@@ -191,7 +192,7 @@ namespace InfluxDB.Client
             RestRequest QueryFn(Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
             {
                 return _service
-                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query)
+                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query, HttpCompletionOption.ResponseHeadersRead)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
             }
 

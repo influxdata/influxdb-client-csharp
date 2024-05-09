@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using RestSharp;
 using InfluxDB.Client.Api.Client;
@@ -1544,9 +1545,11 @@ namespace InfluxDB.Client.Api.Service
         /// <param name="org">Specifies the name of the organization executing the query. Takes either the ID or Name. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="orgID">Specifies the ID of the organization executing the query. If both &#x60;orgID&#x60; and &#x60;org&#x60; are specified, &#x60;org&#x60; takes precedence. (optional)</param>
         /// <param name="query">Flux query or specification to execute (optional)</param>
+        /// <param name="httpCompletionOption">Specify http completion to enable fully stream queries for async.</param>
         /// <returns>ApiResponse of string</returns>
         public RestRequest PostQueryWithRestRequest(string zapTraceSpan = null, string acceptEncoding = null,
-            string contentType = null, string org = null, string orgID = null, Query query = null)
+            string contentType = null, string org = null, string orgID = null, Query query = null, 
+            HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
             var localVarPath = "/api/v2/query";
             var localVarPathParams = new Dictionary<string, string>();
@@ -1621,7 +1624,7 @@ namespace InfluxDB.Client.Api.Service
             return Configuration.ApiClient.PrepareRequest(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
+                localVarPathParams, localVarHttpContentType, httpCompletionOption);
         }
 
         /// <summary>
