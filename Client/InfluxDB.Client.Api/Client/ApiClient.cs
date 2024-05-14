@@ -15,6 +15,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
@@ -115,9 +116,13 @@ namespace InfluxDB.Client.Api.Client
             string path, Method method, List<KeyValuePair<string, string>> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
-            string contentType)
+            string contentType,
+            HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead)
         {
-            var request = new RestRequest(path, method);
+            var request = new RestRequest(path, method)
+            {
+                CompletionOption = httpCompletionOption
+            };
 
             // add path parameter, if any
             foreach (var param in pathParams)

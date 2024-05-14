@@ -75,6 +75,10 @@ namespace InfluxDB.Client
 
     /// <summary>
     /// The synchronous version of QueryApi.
+    ///
+    /// The client uses <see cref="System.Net.Http.HttpClient"/> to send the request and parse responses to InfluxDB 2.0.
+    /// The `HttpClient` is supposed to use maximus size of the body to int.MaxValue. 
+    /// If you want to query large data, use <see cref="QueryApi.QueryAsync"/> method.
     /// </summary>
     public class QueryApiSync : AbstractQueryClient, IQueryApiSync
     {
@@ -139,7 +143,8 @@ namespace InfluxDB.Client
             RestRequest QueryFn(Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
             {
                 return _service
-                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query)
+                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query,
+                        HttpCompletionOption.ResponseHeadersRead)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
             }
 
@@ -191,7 +196,8 @@ namespace InfluxDB.Client
             RestRequest QueryFn(Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
             {
                 return _service
-                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query)
+                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query,
+                        HttpCompletionOption.ResponseHeadersRead)
                     .AddAdvancedResponseHandler(advancedResponseWriter);
             }
 
