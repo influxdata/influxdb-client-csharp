@@ -11,6 +11,7 @@ Update dependencies:
 #### Build:
   - [#619](https://github.com/influxdata/influxdb-client-csharp/pull/619): `CsvHelper` to `31.0.2`
   - [#629](https://github.com/influxdata/influxdb-client-csharp/pull/629): `Microsoft.Extensions.ObjectPool` to `8.0.3`
+  - [#633](https://github.com/influxdata/influxdb-client-csharp/pull/633): Add package XML documentation.
 
 #### Test:
   - [#608](https://github.com/influxdata/influxdb-client-csharp/pull/608): `NUnit` to `3.14.0`
