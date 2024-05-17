@@ -1,4 +1,4 @@
-## 4.15.0 [unreleased]
+## 4.15.0 [2024-05-17]
 
 ### Bug Fixes
 1. [#632](https://github.com/influxdata/influxdb-client-csharp/pull/632): Use HttpCompletionOption.ResponseHeadersRead for streaming
