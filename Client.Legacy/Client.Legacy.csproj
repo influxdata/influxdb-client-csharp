@@ -37,12 +37,4 @@
         <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
     </ItemGroup>
 
-    <Target Name="CopyReferenceFiles" BeforeTargets="Build">
-        <ItemGroup>
-            <XmlReferenceFiles Condition="Exists('$(OutputPath)%(Filename).dll')" Include="%(Reference.RelativeDir)%(Reference.Filename).xml" />
-        </ItemGroup>
-        <Message Text="Copying reference files to $(OutputPath)" Importance="High" />
-        <Copy SourceFiles="@(XmlReferenceFiles)" DestinationFolder="$(OutputPath)" Condition="Exists('%(RootDir)%(Directory)%(Filename)%(Extension)')" />
-    </Target>
-
 </Project>
