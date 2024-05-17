@@ -28,6 +28,10 @@
         <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
         <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
         <None Include=".\README.md" Pack="true" PackagePath="\" />
@@ -42,5 +46,13 @@
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
         <PackageReference Include="System.Reactive" Version="6.0.0" />
     </ItemGroup>
+
+    <Target Name="CopyReferenceFiles" BeforeTargets="Build">
+        <ItemGroup>
+            <XmlReferenceFiles Condition="Exists('$(OutputPath)%(Filename).dll')" Include="%(Reference.RelativeDir)%(Reference.Filename).xml" />
+        </ItemGroup>
+        <Message Text="Copying reference files to $(OutputPath)" Importance="High" />
+        <Copy SourceFiles="@(XmlReferenceFiles)" DestinationFolder="$(OutputPath)" Condition="Exists('%(RootDir)%(Directory)%(Filename)%(Extension)')" />
+    </Target>
 
 </Project>

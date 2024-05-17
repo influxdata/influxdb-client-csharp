@@ -27,6 +27,10 @@
         <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
         <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
     </ItemGroup>
@@ -38,5 +42,13 @@
       <PackageReference Include="NodaTime.Serialization.JsonNet" Version="3.1.0" />
       <PackageReference Include="RestSharp" Version="110.1.0" />
     </ItemGroup>
+
+    <Target Name="CopyReferenceFiles" BeforeTargets="Build">
+        <ItemGroup>
+            <XmlReferenceFiles Condition="Exists('$(OutputPath)%(Filename).dll')" Include="%(Reference.RelativeDir)%(Reference.Filename).xml" />
+        </ItemGroup>
+        <Message Text="Copying reference files to $(OutputPath)" Importance="High" />
+        <Copy SourceFiles="@(XmlReferenceFiles)" DestinationFolder="$(OutputPath)" Condition="Exists('%(RootDir)%(Directory)%(Filename)%(Extension)')" />
+    </Target>
 
 </Project>
