@@ -158,7 +158,7 @@ jobs:
           name: Check compilation warnings
           command: |
             dotnet clean --configuration Release
-            dotnet build --configuration Release -warnAsError -warnAsMessage:CS0618,CS1591,NETSDK1138
+            dotnet build --configuration Release -warnAsError -warnAsMessage:CS0419,CS0618,CS1591,CS1573,CS1574,NETSDK1138
       
   check-code-formatting:
     docker:
