@@ -27,6 +27,10 @@
         <SignAssembly>true</SignAssembly>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
         <None Include="..\Assets\influxdata.jpg" Pack="true" PackagePath="" />
         <None Include=".\README.md" Pack="true" PackagePath="\"/>
