@@ -140,7 +140,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Headers, _client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(1_000, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(1_000, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
         }
 
         [Test]
@@ -160,7 +160,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Headers, _client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(1_000, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(1_000, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
         }
 
         [Test]
@@ -178,7 +178,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Headers, _client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(1, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(1, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
         }
 
         [Test]
@@ -197,7 +197,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Headers, _client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(1, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(1, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
         }
 
         [Test]
@@ -215,7 +215,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Headers, _client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(1, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(1, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
         }
 
         [Test]
@@ -234,7 +234,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Headers, _client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(1, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(1, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
         }
 
         [Test]
@@ -297,7 +297,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Body, _client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(10_000, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(10_000, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
 
             var defaultTags = GetDeclaredField<SortedDictionary<string, string>>(options.PointSettings.GetType(),
                 options.PointSettings, "_defaultTags");
@@ -324,7 +324,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(LogLevel.Body, _client.GetLogLevel());
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(10_000, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(10_000, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
 
             var defaultTags = GetDeclaredField<SortedDictionary<string, string>>(options.PointSettings.GetType(),
                 options.PointSettings, "_defaultTags");
@@ -416,7 +416,7 @@ namespace InfluxDB.Client.Test
             _client = new InfluxDBClient(options);
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(20_000, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(20_000, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
         }
 
         [Test]
@@ -432,7 +432,7 @@ namespace InfluxDB.Client.Test
             _client = InfluxDBClientFactory.Create(options);
 
             var apiClient = GetDeclaredField<ApiClient>(_client.GetType(), _client, "_apiClient");
-            Assert.AreEqual(20_000, apiClient.RestClientOptions.MaxTimeout);
+            Assert.AreEqual(20_000, apiClient.RestClientOptions.Timeout.Value.TotalMilliseconds);
         }
 
         [Test]
