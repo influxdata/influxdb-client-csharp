@@ -6,6 +6,9 @@
 ### Dependencies
 Update dependencies:
 
+#### Build:
+  - [#638](https://github.com/influxdata/influxdb-client-csharp/pull/638): `System.Reactive` to `6.0.1`
+    
 #### Test:
   - [#639](https://github.com/influxdata/influxdb-client-csharp/pull/639): `Microsoft.NET.Test.Sdk` to `17.10.0`
 
