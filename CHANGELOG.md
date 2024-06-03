@@ -1,7 +1,13 @@
 ## 4.16.0 [unreleased]
 
-#### Build:
+### Features:
   - [#633](https://github.com/influxdata/influxdb-client-csharp/pull/633): Add package XML documentation.
+
+### Dependencies
+Update dependencies:
+
+#### Test:
+  - [#639](https://github.com/influxdata/influxdb-client-csharp/pull/639): `Microsoft.NET.Test.Sdk` to `17.10.0`
 
 ## 4.15.0 [2024-05-17]
 
