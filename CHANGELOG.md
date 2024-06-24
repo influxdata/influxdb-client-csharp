@@ -1,4 +1,4 @@
-## 4.16.0 [unreleased]
+## 4.16.0 [2024-06-24]
 
 ### Features:
   - [#633](https://github.com/influxdata/influxdb-client-csharp/pull/633): Add package XML documentation.
