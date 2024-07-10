@@ -40,7 +40,7 @@ namespace InfluxDB.Client.Core.Internal
         internal static RestResponse ExecuteSync(this RestClient client,
             RestRequest request, CancellationToken cancellationToken = default)
         {
-            return client.Execute(request, cancellationToken);
+            return client.ExecuteAsync(request, cancellationToken).Result;
         }
     }
 }
