@@ -1,5 +1,8 @@
 ## 4.17.0 [unreleased]
 
+### Bug Fixes
+1. [#649](https://github.com/influxdata/influxdb-client-csharp/pull/649): Use HttpCompletionOption.ResponseHeadersRead for asynchronous QueryApi
+
 ## 4.16.0 [2024-06-24]
 
 ### Features:
