@@ -1,7 +1,19 @@
 ## 4.17.0 [unreleased]
 
+### Breaking Changes
+
+#### API
+
+- `ApiResponse` headers has been changed to `IEnumerable<(string Name, string Value)>`
+
 ### Bug Fixes
 1. [#649](https://github.com/influxdata/influxdb-client-csharp/pull/649): Use HttpCompletionOption.ResponseHeadersRead for asynchronous QueryApi
+
+### Dependencies
+Update dependencies:
+
+#### Build:
+- [#650](https://github.com/influxdata/influxdb-client-csharp/pull/650): `RestSharp` to `111.4.0`
 
 ## 4.16.0 [2024-06-24]
 
