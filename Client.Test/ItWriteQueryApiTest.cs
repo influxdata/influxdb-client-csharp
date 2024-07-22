@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Writes;
@@ -943,6 +944,38 @@ namespace InfluxDB.Client.Test
 
             Assert.AreEqual(1000, tables.Count);
             Assert.AreEqual(1, tables[0].Records.Count);
+        }
+
+        [Test]
+        public async Task QueryAsyncEnumerableGzip()
+        {
+            Client.EnableGzip();
+            Client.SetLogLevel(LogLevel.Body);
+
+            await Client.GetWriteApiAsync().WriteMeasurementsAsync(new[]
+            {
+                new H20Measurement
+                {
+                    Location = "angel_bay", Level = 2.927, Time = DateTime.UtcNow.Add(-TimeSpan.FromSeconds(10))
+                },
+                new H20Measurement
+                {
+                    Location = "angel_bay", Level = 1.927, Time = DateTime.UtcNow.Add(-TimeSpan.FromSeconds(20))
+                }
+            });
+
+            var query = $@"from(bucket: ""{_bucket.Name}"")
+                |> range(start: 0)
+                |> filter(fn: (r) => r[""location""] == ""angel_bay"")
+                |> pivot(rowKey:[""_time""], columnKey: [""_field""], valueColumn: ""_value"")";
+
+            var list = new List<H20Measurement>();
+            await foreach (var item in _queryApi.QueryAsyncEnumerable<H20Measurement>(query).ConfigureAwait(false))
+                list.Add(item);
+
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(1.927, list[0].Level);
+            Assert.AreEqual(2.927, list[1].Level);
         }
     }
 }

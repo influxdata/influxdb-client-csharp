@@ -300,14 +300,13 @@ namespace InfluxDB.Client
                 cancellationToken);
         }
 
-        private Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> CreateRequest(string scriptId,
+        private RestRequest CreateRequest(string scriptId,
             Dictionary<string, object> bindParams = default)
         {
             Arguments.CheckNonEmptyString(scriptId, nameof(scriptId));
 
-            return advancedResponseWriter => _service
-                .PostScriptsIDInvokeWithRestRequest(scriptId, new ScriptInvocationParams(bindParams))
-                .AddAdvancedResponseHandler(advancedResponseWriter);
+            return _service
+                .PostScriptsIDInvokeWithRestRequest(scriptId, new ScriptInvocationParams(bindParams));
         }
     }
 }

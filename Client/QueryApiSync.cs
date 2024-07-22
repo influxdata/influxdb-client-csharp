@@ -140,15 +140,11 @@ namespace InfluxDB.Client
 
             var consumer = new FluxResponseConsumerPoco<T>(poco => { measurements.Add(poco); }, Mapper);
 
-            RestRequest QueryFn(Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
-            {
-                return _service
-                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query,
-                        HttpCompletionOption.ResponseHeadersRead)
-                    .AddAdvancedResponseHandler(advancedResponseWriter);
-            }
+            var restRequest = _service
+                .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query,
+                    HttpCompletionOption.ResponseHeadersRead);
 
-            QuerySync(QueryFn, consumer, ErrorConsumer, EmptyAction, cancellationToken);
+            QuerySync(restRequest, consumer, ErrorConsumer, EmptyAction, cancellationToken);
 
             return measurements;
         }
@@ -193,15 +189,11 @@ namespace InfluxDB.Client
             var optionsOrg = org ?? _options.Org;
             Arguments.CheckNonEmptyString(optionsOrg, OrgArgumentValidation);
 
-            RestRequest QueryFn(Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
-            {
-                return _service
-                    .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query,
-                        HttpCompletionOption.ResponseHeadersRead)
-                    .AddAdvancedResponseHandler(advancedResponseWriter);
-            }
+            var restRequest = _service
+                .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query,
+                    HttpCompletionOption.ResponseHeadersRead);
 
-            QuerySync(QueryFn, consumer, ErrorConsumer, EmptyAction, cancellationToken);
+            QuerySync(restRequest, consumer, ErrorConsumer, EmptyAction, cancellationToken);
 
             return consumer.Tables;
         }

@@ -43,7 +43,7 @@ namespace InfluxDB.Client.Api.Client
         /// <param name="statusCode">HTTP status code.</param>
         /// <param name="headers">HTTP headers.</param>
         /// <param name="data">Data (parsed HTTP body)</param>
-        public ApiResponse(int statusCode, IEnumerable<(string Name, object Value)> headers, T data)
+        public ApiResponse(int statusCode, IEnumerable<(string Name, string Value)> headers, T data)
         {
             StatusCode = statusCode;
             Headers = headers
