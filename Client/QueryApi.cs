@@ -792,7 +792,8 @@ namespace InfluxDB.Client
             Arguments.CheckNonEmptyString(optionsOrg, OrgArgumentValidation);
 
             return advancedResponseWriter => _service
-                .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query, HttpCompletionOption.ResponseHeadersRead)
+                .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query,
+                    HttpCompletionOption.ResponseHeadersRead)
                 .AddAdvancedResponseHandler(advancedResponseWriter);
         }
 
