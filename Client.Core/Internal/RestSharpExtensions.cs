@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using RestSharp;
 
 namespace InfluxDB.Client.Core.Internal
@@ -27,20 +23,10 @@ namespace InfluxDB.Client.Core.Internal
                 .Select(x => new HeaderParameter(x.Key, x.y));
         }
 
-        internal static RestRequest AddAdvancedResponseHandler(this RestRequest restRequest,
-            Func<HttpResponseMessage, RestRequest, RestResponse> advancedResponseWriter)
-        {
-            var field = restRequest.GetType()
-                .GetField("_advancedResponseHandler", BindingFlags.Instance | BindingFlags.NonPublic);
-            field!.SetValue(restRequest, advancedResponseWriter);
-
-            return restRequest;
-        }
-
         internal static RestResponse ExecuteSync(this RestClient client,
             RestRequest request, CancellationToken cancellationToken = default)
         {
-            return client.Execute(request, cancellationToken);
+            return client.Execute(request);
         }
     }
 }

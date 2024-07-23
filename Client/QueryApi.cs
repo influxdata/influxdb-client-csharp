@@ -783,18 +783,18 @@ namespace InfluxDB.Client
                 cancellationToken);
         }
 
-        private Func<Func<HttpResponseMessage, RestRequest, RestResponse>, RestRequest> CreateRequest(Query query,
-            string org = null)
+        private RestRequest CreateRequest(Query query, string org = null)
         {
             Arguments.CheckNotNull(query, nameof(query));
 
             var optionsOrg = org ?? _options.Org;
             Arguments.CheckNonEmptyString(optionsOrg, OrgArgumentValidation);
 
-            return advancedResponseWriter => _service
+            var postQueryWithRestRequest = _service
                 .PostQueryWithRestRequest(null, "application/json", null, optionsOrg, null, query,
-                    HttpCompletionOption.ResponseHeadersRead)
-                .AddAdvancedResponseHandler(advancedResponseWriter);
+                    HttpCompletionOption.ResponseHeadersRead);
+
+            return postQueryWithRestRequest;
         }
 
         internal static Query CreateQuery(string query, Dialect dialect = null)
