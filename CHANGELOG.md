@@ -17,6 +17,7 @@ Update dependencies:
 
 #### Test:
   - [#652](https://github.com/influxdata/influxdb-client-csharp/pull/652): `NUnit3TestAdapter` to `4.6.0`
+  - [#654](https://github.com/influxdata/influxdb-client-csharp/pull/654): `WireMock.Net` to `1.5.62`
 
 ## 4.16.0 [2024-06-24]
 
