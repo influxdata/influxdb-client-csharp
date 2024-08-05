@@ -13,8 +13,11 @@
 Update dependencies:
 
 #### Build:
-- [#650](https://github.com/influxdata/influxdb-client-csharp/pull/650): `RestSharp` to `111.4.0`
+  - [#650](https://github.com/influxdata/influxdb-client-csharp/pull/650): `RestSharp` to `111.4.0`
   - [#655](https://github.com/influxdata/influxdb-client-csharp/pull/655): `Microsoft.Extensions.ObjectPool` to `8.0.7`
+
+#### Test:
+  - [#652](https://github.com/influxdata/influxdb-client-csharp/pull/652): `NUnit3TestAdapter` to `4.6.0`
 
 ## 4.16.0 [2024-06-24]
 
