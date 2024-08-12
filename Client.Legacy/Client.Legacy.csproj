@@ -6,8 +6,8 @@
       <Description>The client that allow perform Flux Query against the InfluxDB 1.7+.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Flux</AssemblyName>
-        <VersionPrefix>4.17.0</VersionPrefix>
-        <VersionSuffix></VersionSuffix>
+        <VersionPrefix>4.18.0</VersionPrefix>
+        <VersionSuffix>dev</VersionSuffix>
 
         <PackageId>InfluxDB.Client.Flux</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb</PackageTags>
