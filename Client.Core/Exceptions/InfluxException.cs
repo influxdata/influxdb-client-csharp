@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using InfluxDB.Client.Core.Internal;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -55,6 +56,11 @@ namespace InfluxDB.Client.Core.Exceptions
         ///     The retry interval is used when the InfluxDB server does not specify "Retry-After" header.
         /// </summary>
         public int? RetryAfter { get; set; }
+
+        /// <summary>
+        ///     The response headers
+        /// </summary>
+        public IEnumerable<HeaderParameter> Headers;
 
         public static HttpException Create(RestResponse requestResult, object body)
         {
@@ -162,6 +168,7 @@ namespace InfluxDB.Client.Core.Exceptions
 
             err.ErrorBody = errorBody;
             err.RetryAfter = retryAfter;
+            err.Headers = headers;
 
             return err;
         }
