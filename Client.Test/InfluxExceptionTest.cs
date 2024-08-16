@@ -24,23 +24,18 @@ namespace InfluxDB.Client.Test
                         new HeaderParameter("Trace-Id", "123456789ABCDEF0"),
                         new HeaderParameter("X-Influx-Version", "1.0.0"),
                         new HeaderParameter("X-Platform-Error-Code", "unavailable"),
-                        new HeaderParameter("Retry-After", "60000"),
+                        new HeaderParameter("Retry-After", "60000")
                     },
                     null,
                     HttpStatusCode.ServiceUnavailable);
             }
             catch (HttpException he)
             {
-                // Assert.AreEqual("error in content object", he?.Message);
-                Console.WriteLine("DEBUG he.Message {0}", he.Message);
-            
-            
+                Assert.AreEqual("error in content object", he?.Message);
+
                 Assert.AreEqual(4, he?.Headers.Count());
-                Dictionary<String, String> headers = new Dictionary<String, String>();
-                foreach (HeaderParameter header in he?.Headers)
-                {
-                    headers.Add(header.Name, header.Value);
-                }
+                var headers = new Dictionary<string, string>();
+                foreach (var header in he?.Headers) headers.Add(header.Name, header.Value);
                 Assert.AreEqual("123456789ABCDEF0", headers["Trace-Id"]);
                 Assert.AreEqual("1.0.0", headers["X-Influx-Version"]);
                 Assert.AreEqual("unavailable", headers["X-Platform-Error-Code"]);
