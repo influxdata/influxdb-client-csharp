@@ -61,11 +61,13 @@ namespace Examples
             {
                 Console.WriteLine("   WARNING write failed");
                 var headersDix = Headers2Dictionary(he.Headers);
-                Console.WriteLine("   Caught Exception({0}) {1} with the following headers:",
+                Console.WriteLine("   Caught Exception({0}) \"{1}\"",
                     he.GetType(),
                     he.Message);
+                Console.WriteLine("      Response Status: {0}", he.Status);
+                Console.WriteLine("      Headers:");
                 foreach (var key in headersDix.Keys)
-                    Console.WriteLine($"      {key}: {headersDix[key]}");
+                    Console.WriteLine($"         {key}: {headersDix[key]}");
             }
             finally
             {
@@ -77,7 +79,7 @@ namespace Examples
         {
             Console.WriteLine("Write records with error event.");
 
-            var caughtErrorCount = 0;
+            var caughtError = false;
             using (var writeApi = _client.GetWriteApi())
             {
                 writeApi.EventHandler += (sender, eventArgs) =>
@@ -94,7 +96,7 @@ namespace Examples
                             var headersDix = Headers2Dictionary(wee.GetHeaders());
                             foreach (var key in headersDix.Keys)
                                 Console.WriteLine($"         {key}: {headersDix[key]}");
-                            caughtErrorCount++;
+                            caughtError = true;
                             break;
                         default:
                             throw new Exception("Should only receive WriteErrorEvent");
@@ -103,9 +105,13 @@ namespace Examples
                 Console.WriteLine("Trying the records list");
                 writeApi.WriteRecords(_lpRecords, WritePrecision.Ms, "my-bucket", "my-org");
                 var slept = 0;
-                while (caughtErrorCount == 0 && slept < 3001) slept += 1000;
-                Thread.Sleep(1000);
-                if (slept > 3000)
+                while (!caughtError && slept < 3001)
+                {
+                    Thread.Sleep(1000);
+                    slept += 1000;
+                }
+
+                if (!caughtError)
                 {
                     Console.WriteLine("WARN, did not encounter expected error");
                 }
@@ -114,10 +120,15 @@ namespace Examples
                 // manually retry the bad record
                 Console.WriteLine("Manually retrying the bad record.");
                 writeApi.WriteRecord(_lpRecords[2], WritePrecision.Ms, "my-bucket", "my-org");
+                caughtError = false;
                 slept = 0;
-                while (caughtErrorCount == 1 && slept < 3001) slept += 1000;
-                Thread.Sleep(1000);
-                if (slept > 3000)
+                while (!caughtError && slept < 3001)
+                {
+                    Thread.Sleep(1000);
+                    slept += 1000;
+                }
+
+                if (!caughtError)
                 {
                     Console.WriteLine("WARN, did not encounter expected error");
                 }
