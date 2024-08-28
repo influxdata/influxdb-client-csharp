@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
+using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Test;
 using InfluxDB.Client.Writes;
@@ -184,6 +186,29 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(1, query[0].Records.Count);
 
             Assert.AreEqual(ulong.MaxValue, query[0].Records[0].GetValue());
+        }
+
+        [Test]
+        public async Task WriteWithError()
+        {
+            try
+            {
+                await _writeApi.WriteRecordAsync("h2o,location=fox_hollow water_level=");
+                Assert.Fail("Call should fail");
+            }
+            catch (HttpException exception)
+            {
+                Assert.AreEqual("unable to parse 'h2o,location=fox_hollow water_level=': missing field value",
+                    exception.Message);
+                Assert.AreEqual(400, exception.Status);
+                Assert.GreaterOrEqual(4, exception.Headers.Count());
+                var headers = new Dictionary<string, string>();
+                foreach (var header in exception?.Headers) headers.Add(header.Name, header.Value);
+                Assert.AreEqual("OSS", headers["X-Influxdb-Build"]);
+                Assert.AreEqual("invalid", headers["X-Platform-Error-Code"]);
+                Assert.IsTrue(headers["X-Influxdb-Version"].StartsWith('v'));
+                Assert.NotNull(headers["Date"]);
+            }
         }
     }
 }

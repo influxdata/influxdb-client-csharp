@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Castle.Core.Smtp;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
@@ -504,6 +505,62 @@ namespace InfluxDB.Client.Test
             StringAssert.StartsWith("Something is wrong", error.Exception.InnerException?.Message);
 
             Assert.AreEqual(0, MockServer.LogEntries.Count());
+        }
+
+       [Test]
+        public void WriteExceptionWithHeaders()
+        {
+            var localWriteApi = _client.GetWriteApi(new WriteOptions { RetryInterval = 1_000 });
+
+            var traceId = Guid.NewGuid().ToString();
+            const string buildName = "TestBuild";
+            const string version = "v99.9.9";
+
+            localWriteApi.EventHandler += (sender, eventArgs) =>
+            {
+                switch (eventArgs)
+                {
+                    case WriteErrorEvent errorEvent:
+                        Assert.AreEqual("just a test", errorEvent.Exception.Message);
+                        var errHeaders = errorEvent.GetHeaders();
+                        var headers = new Dictionary<string, string>();
+                        foreach (var h in errHeaders)
+                            headers.Add(h.Name, h.Value);
+                        Assert.AreEqual(6, headers.Count);
+                        Assert.AreEqual(traceId, headers["Trace-Id"]);
+                        Assert.AreEqual(buildName, headers["X-Influxdb-Build"]);
+                        Assert.AreEqual(version, headers["X-Influxdb-Version"]);
+                        break;
+                    default:
+                        Assert.Fail("Expect only WriteErrorEvents but got {0}", eventArgs.GetType());
+                        break;
+                }
+            };
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/write").UsingPost())
+                .RespondWith(
+                    CreateResponse("{ \"message\": \"just a test\", \"status-code\": \"Bad Request\"}")
+                        .WithStatusCode(400)
+                        .WithHeaders(new Dictionary<string, string>()
+                        {
+                            {"Content-Type", "application/json"},
+                            {"Trace-Id", traceId},
+                            {"X-Influxdb-Build", buildName},
+                            {"X-Influxdb-Version", version},
+                        })
+                );
+
+
+            var measurement = new SimpleModel
+            {
+                Time = new DateTime(2024, 09, 01, 6, 15, 00),
+                Device = "R2D2",
+                Value = 1976
+            };
+
+            localWriteApi.WriteMeasurement(measurement, WritePrecision.S, "b1", "org1");
+
+            localWriteApi.Dispose();
         }
 
         [Test]
