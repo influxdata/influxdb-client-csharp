@@ -46,6 +46,9 @@ namespace InfluxDB.Client.Writes
             Trace.TraceError($"The error occurred during writing of data: {Exception.Message}");
         }
 
+        /// <summary>
+        /// Get headers from the nested exception.
+        /// </summary>
         public IEnumerable<HeaderParameter> GetHeaders()
         {
             return ((HttpException)Exception)?.Headers;
