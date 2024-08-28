@@ -2,7 +2,6 @@ using System;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Writes;
 
@@ -67,7 +66,7 @@ namespace InfluxDB.Client.Test
                             Assert.Fail("Call should not succeed");
                             break;
                         case WriteErrorEvent errorEvent:
-                            Assert.AreEqual("unable to parse 'velocity,unit=C3PO mps=': missing field value", 
+                            Assert.AreEqual("unable to parse 'velocity,unit=C3PO mps=': missing field value",
                                 errorEvent.Exception.Message);
                             var eventHeaders = errorEvent.GetHeaders();
                             if (eventHeaders == null)
@@ -75,7 +74,7 @@ namespace InfluxDB.Client.Test
                                 Assert.Fail("WriteErrorEvent must return headers.");
                             }
 
-                            var headers = new Dictionary<string, string> {};
+                            var headers = new Dictionary<string, string> { };
                             foreach (var hp in eventHeaders)
                             {
                                 Console.WriteLine("DEBUG {0}: {1}", hp.Name, hp.Value);
@@ -99,6 +98,6 @@ namespace InfluxDB.Client.Test
 
                 writeApi.WriteRecord("velocity,unit=C3PO mps=", WritePrecision.S, _bucket.Name, _org.Name);
             }
-        } 
+        }
     }
 }

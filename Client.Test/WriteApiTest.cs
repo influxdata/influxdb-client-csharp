@@ -507,7 +507,7 @@ namespace InfluxDB.Client.Test
             Assert.AreEqual(0, MockServer.LogEntries.Count());
         }
 
-       [Test]
+        [Test]
         public void WriteExceptionWithHeaders()
         {
             var localWriteApi = _client.GetWriteApi(new WriteOptions { RetryInterval = 1_000 });
@@ -543,10 +543,10 @@ namespace InfluxDB.Client.Test
                         .WithStatusCode(400)
                         .WithHeaders(new Dictionary<string, string>()
                         {
-                            {"Content-Type", "application/json"},
-                            {"Trace-Id", traceId},
-                            {"X-Influxdb-Build", buildName},
-                            {"X-Influxdb-Version", version},
+                            { "Content-Type", "application/json" },
+                            { "Trace-Id", traceId },
+                            { "X-Influxdb-Build", buildName },
+                            { "X-Influxdb-Version", version }
                         })
                 );
 
