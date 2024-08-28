@@ -102,11 +102,25 @@ namespace Examples
                 };
                 Console.WriteLine("Trying the records list");
                 writeApi.WriteRecords(_lpRecords, WritePrecision.Ms, "my-bucket", "my-org");
-                while (caughtErrorCount == 0) Thread.Sleep(1000);
+                var slept = 0;
+                while (caughtErrorCount == 0 && slept < 3001) slept += 1000;
+                Thread.Sleep(1000);
+                if (slept > 3000)
+                {
+                    Console.WriteLine("WARN, did not encounter expected error");
+                }
+
+
                 // manually retry the bad record
                 Console.WriteLine("Manually retrying the bad record.");
                 writeApi.WriteRecord(_lpRecords[2], WritePrecision.Ms, "my-bucket", "my-org");
-                while (caughtErrorCount == 1) Thread.Sleep(1000);
+                slept = 0;
+                while (caughtErrorCount == 1 && slept < 3001) slept += 1000;
+                Thread.Sleep(1000);
+                if (slept > 3000)
+                {
+                    Console.WriteLine("WARN, did not encounter expected error");
+                }
             }
         }
 
