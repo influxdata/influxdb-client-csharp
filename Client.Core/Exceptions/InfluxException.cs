@@ -60,7 +60,7 @@ namespace InfluxDB.Client.Core.Exceptions
         /// <summary>
         ///     The response headers
         /// </summary>
-        public IEnumerable<HeaderParameter> Headers;
+        public IEnumerable<HeaderParameter>? Headers { get; private set; }
 
         public static HttpException Create(RestResponse requestResult, object body)
         {
