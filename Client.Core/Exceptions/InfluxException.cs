@@ -57,10 +57,12 @@ namespace InfluxDB.Client.Core.Exceptions
         /// </summary>
         public int? RetryAfter { get; set; }
 
+#nullable enable
         /// <summary>
         ///     The response headers
         /// </summary>
         public IEnumerable<HeaderParameter>? Headers { get; private set; }
+#nullable disable
 
         public static HttpException Create(RestResponse requestResult, object body)
         {
