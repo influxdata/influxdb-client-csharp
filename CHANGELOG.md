@@ -1,7 +1,13 @@
 ## 4.18.0 [unreleased]
 
 ### Features:
-  - [#658](https://github.com/influxdata/influxdb-client-csharp/pull/658): Add HttpHeaders as `IEnumerable<RestSharp.HttpParameter>` to `HttpException` and facilitate access in `WriteErrorEvent`.  Includes new example `HttpErrorHandling`.
+1. [#658](https://github.com/influxdata/influxdb-client-csharp/pull/658): Add HttpHeaders as `IEnumerable<RestSharp.HttpParameter>` to `HttpException` and facilitate access in `WriteErrorEvent`.  Includes new example `HttpErrorHandling`.
+ 
+### Dependencies
+Update dependencies:
+
+#### Build:
+  - [#659](https://github.com/influxdata/influxdb-client-csharp/pull/659): `RestSharp` to `112.0.0`
 
 ## 4.17.0 [2024-08-12]
 
