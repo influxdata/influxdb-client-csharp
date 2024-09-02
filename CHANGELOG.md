@@ -1,5 +1,11 @@
 ## 4.18.0 [unreleased]
 
+### Dependencies
+Update dependencies:
+
+#### Build:
+  - [#659](https://github.com/influxdata/influxdb-client-csharp/pull/659): `RestSharp` to `112.0.0`
+
 ## 4.17.0 [2024-08-12]
 
 ### Breaking Changes
