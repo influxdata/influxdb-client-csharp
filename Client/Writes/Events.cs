@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core;
+using InfluxDB.Client.Core.Exceptions;
+using RestSharp;
 
 namespace InfluxDB.Client.Writes
 {
@@ -41,6 +44,14 @@ namespace InfluxDB.Client.Writes
         internal override void LogEvent()
         {
             Trace.TraceError($"The error occurred during writing of data: {Exception.Message}");
+        }
+
+        /// <summary>
+        /// Get headers from the nested exception.
+        /// </summary>
+        public IEnumerable<HeaderParameter> GetHeaders()
+        {
+            return ((HttpException)Exception)?.Headers;
         }
     }
 

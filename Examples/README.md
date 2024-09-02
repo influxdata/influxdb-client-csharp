@@ -2,6 +2,7 @@
 
 ## Writes
 - [WriteEventHandlerExample.cs](WriteEventHandlerExample.cs) - How to use WriteAPI with batch options and how to handle events
+- [HttpErrorHandling.cs](HttpErrorHandling.cs) - How to handle errors on write and retrieve response headers.
 
 ## Others
 - [InvokableScripts.cs](InvokableScripts.cs) - How to use Invokable scripts Cloud API to create custom endpoints that query data
