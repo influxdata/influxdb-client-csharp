@@ -398,7 +398,7 @@ namespace InfluxDB.Client.Test
             _writeApi.Flush();
 
             var writeSuccessEvent = listener.Get<WriteSuccessEvent>();
-            Assert.AreEqual("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 X",
+            Assert.AreEqual("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
                 writeSuccessEvent.LineProtocol);
         }
 
