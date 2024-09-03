@@ -391,7 +391,7 @@ namespace InfluxDB.Client.Test
                 .Given(Request.Create().UsingPost())
                 .RespondWith(CreateResponse(
                     "OK",
-                    401));
+                    201));
 
             _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
                 WritePrecision.Ns, "b1", "org1");
