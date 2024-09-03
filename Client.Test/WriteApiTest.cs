@@ -382,6 +382,27 @@ namespace InfluxDB.Client.Test
         }
 
         [Test]
+        public void Created()
+        {
+            var listener = new EventListener(_writeApi);
+
+            MockServer.Reset();
+            MockServer
+                .Given(Request.Create().UsingPost())
+                .RespondWith(CreateResponse(
+                    "OK",
+                    201));
+
+            _writeApi.WriteRecord("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                WritePrecision.Ns, "b1", "org1");
+            _writeApi.Flush();
+
+            var writeSuccessEvent = listener.Get<WriteSuccessEvent>();
+            Assert.AreEqual("h2o_feet,location=coyote_creek level\\ description=\"feet 1\",water_level=1.0 1",
+                writeSuccessEvent.LineProtocol);
+        }
+
+        [Test]
         public void TwiceDispose()
         {
             _writeApi.Dispose();
