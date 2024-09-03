@@ -20,7 +20,7 @@ Update dependencies:
 
 #### Test:
   - [#652](https://github.com/influxdata/influxdb-client-csharp/pull/652): `NUnit3TestAdapter` to `4.6.0`
-  - [#654](https://github.com/influxdata/influxdb-client-csharp/pull/654): `WireMock.Net` to `1.5.62`
+  - [#663](https://github.com/influxdata/influxdb-client-csharp/pull/663): `WireMock.Net` to `1.6.1`
 
 #### Examples:
   - [#657](https://github.com/influxdata/influxdb-client-csharp/pull/657): `Radzen.Blazor` to `5.0.6`
