@@ -72,6 +72,9 @@ namespace Examples
                     case "RecordRowExample":
                         await RecordRowExample.Main();
                         break;
+                    case "HttpErrorHandling":
+                        await HttpErrorHandling.Main();
+                        break;
                 }
             }
             else

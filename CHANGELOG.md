@@ -1,5 +1,14 @@
 ## 4.18.0 [unreleased]
 
+### Features:
+1. [#658](https://github.com/influxdata/influxdb-client-csharp/pull/658): Add HttpHeaders as `IEnumerable<RestSharp.HttpParameter>` to `HttpException` and facilitate access in `WriteErrorEvent`.  Includes new example `HttpErrorHandling`.
+ 
+### Dependencies
+Update dependencies:
+
+#### Build:
+  - [#659](https://github.com/influxdata/influxdb-client-csharp/pull/659): `RestSharp` to `112.0.0`
+
 ## 4.17.0 [2024-08-12]
 
 ### Breaking Changes
@@ -16,14 +25,15 @@ Update dependencies:
 
 #### Build:
   - [#650](https://github.com/influxdata/influxdb-client-csharp/pull/650): `RestSharp` to `111.4.0`
-  - [#655](https://github.com/influxdata/influxdb-client-csharp/pull/655): `Microsoft.Extensions.ObjectPool` to `8.0.7`
+  - [#662](https://github.com/influxdata/influxdb-client-csharp/pull/662): `Microsoft.Extensions.ObjectPool` to `8.0.8`
 
 #### Test:
   - [#652](https://github.com/influxdata/influxdb-client-csharp/pull/652): `NUnit3TestAdapter` to `4.6.0`
   - [#663](https://github.com/influxdata/influxdb-client-csharp/pull/663): `WireMock.Net` to `1.6.1`
+  - [#661](https://github.com/influxdata/influxdb-client-csharp/pull/661): `Microsoft.NET.Test.Sdk` to `17.11.0`
 
 #### Examples:
-  - [#657](https://github.com/influxdata/influxdb-client-csharp/pull/657): `Radzen.Blazor` to `5.0.6`
+  - [#664](https://github.com/influxdata/influxdb-client-csharp/pull/664): `Radzen.Blazor` to `5.1.6`
 
 ## 4.16.0 [2024-06-24]
 
