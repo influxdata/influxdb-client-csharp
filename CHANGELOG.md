@@ -33,7 +33,7 @@ Update dependencies:
   - [#661](https://github.com/influxdata/influxdb-client-csharp/pull/661): `Microsoft.NET.Test.Sdk` to `17.11.0`
 
 #### Examples:
-  - [#657](https://github.com/influxdata/influxdb-client-csharp/pull/657): `Radzen.Blazor` to `5.0.6`
+  - [#664](https://github.com/influxdata/influxdb-client-csharp/pull/664): `Radzen.Blazor` to `5.1.6`
 
 ## 4.16.0 [2024-06-24]
 
