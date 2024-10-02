@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Domain;
@@ -248,15 +246,13 @@ namespace InfluxDB.Client
         /// <param name="bindParams">Represent key/value pairs parameters to be injected into script</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>stream of FluxRecord</returns>
-        public async IAsyncEnumerable<FluxRecord> InvokeScriptEnumerableAsync(string scriptId,
+        public IAsyncEnumerable<FluxRecord> InvokeScriptEnumerableAsync(string scriptId,
             Dictionary<string, object> bindParams = default,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default)
         {
             var requestMessage = CreateRequest(scriptId, bindParams);
 
-            await foreach (var record in QueryEnumerable(requestMessage, it => it, cancellationToken)
-                               .ConfigureAwait(false))
-                yield return record;
+            return QueryEnumerable(requestMessage, r => r, cancellationToken);
         }
 
         /// <summary>
@@ -266,15 +262,13 @@ namespace InfluxDB.Client
         /// <param name="bindParams">Represent key/value pairs parameters to be injected into script</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>stream of Measurement</returns>
-        public async IAsyncEnumerable<T> InvokeScriptMeasurementsEnumerableAsync<T>(string scriptId,
+        public IAsyncEnumerable<T> InvokeScriptMeasurementsEnumerableAsync<T>(string scriptId,
             Dictionary<string, object> bindParams = default,
-            [EnumeratorCancellation] CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default)
         {
             var requestMessage = CreateRequest(scriptId, bindParams);
 
-            await foreach (var record in QueryEnumerable(requestMessage, it => Mapper.ConvertToEntity<T>(it),
-                               cancellationToken).ConfigureAwait(false))
-                yield return record;
+            return QueryEnumerable(requestMessage, r => Mapper.ConvertToEntity<T>(r), cancellationToken);
         }
 
         protected override void BeforeIntercept(RestRequest request)

@@ -203,10 +203,11 @@ namespace InfluxDB.Client.Core.Internal
                 )
             };
 
-            var stream = await RestClient.DownloadStreamAsync(query, cancellationToken).ConfigureAwait(false);
+            using var stream = await RestClient.DownloadStreamAsync(query, cancellationToken).ConfigureAwait(false);
+            using var sr = new StreamReader(stream);
+
             await foreach (var (_, record) in _csvParser
-                               .ParseFluxResponseAsync(new StreamReader(stream), cancellationToken)
-                               .ConfigureAwait(false))
+                               .ParseFluxResponseAsync(sr, cancellationToken).ConfigureAwait(false))
                 if (!(record is null))
                 {
                     yield return convert.Invoke(record);
