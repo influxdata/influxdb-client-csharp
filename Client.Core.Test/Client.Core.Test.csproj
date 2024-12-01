@@ -16,7 +16,7 @@
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
         <PackageReference Include="NUnit" Version="3.14.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
-        <PackageReference Include="WireMock.Net" Version="1.6.5" />
+        <PackageReference Include="WireMock.Net" Version="1.6.8" />
     </ItemGroup>
 
     <ItemGroup>
