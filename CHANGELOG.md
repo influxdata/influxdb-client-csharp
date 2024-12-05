@@ -1,17 +1,8 @@
 ## 4.19.0 [unreleased]
 
 ### Dependencies
-Update dependencies:
 
-#### Build:
-  - [#668](https://github.com/influxdata/influxdb-client-csharp/pull/668): `NodaTime` to `3.1.12`
-
-#### Test:
-  - [#670](https://github.com/influxdata/influxdb-client-csharp/pull/670): `WireMock.Net` to `1.6.5`
-  - [#667](https://github.com/influxdata/influxdb-client-csharp/pull/667): `Microsoft.NET.Test.Sdk` to `17.11.01`
-
-#### Examples:
-  - [#669](https://github.com/influxdata/influxdb-client-csharp/pull/669): `Radzen.Blazor` to `5.2.5`
+⚠️ Important Notice: Starting from this release, we won’t be listing every dependency change in our changelog. This helps us maintain the project faster and focus on important features for our InfluxDB client.
 
 ## 4.18.0 [2024-09-13]
 
