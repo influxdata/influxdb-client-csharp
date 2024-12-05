@@ -40,7 +40,7 @@
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="NodaTime" Version="3.1.12" />
       <PackageReference Include="NodaTime.Serialization.JsonNet" Version="3.1.0" />
-      <PackageReference Include="RestSharp" Version="112.0.0" />
+      <PackageReference Include="RestSharp" Version="112.1.0" />
     </ItemGroup>
 
 </Project>
