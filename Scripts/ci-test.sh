@@ -42,9 +42,9 @@ else
   TRX2JUNIT_VERSION="1.3.2"
 fi
 
-if [[ "$NET_TEST_VERSION" = "netcoreapp6.0" || "$NET_TEST_VERSION" = "netcoreapp7.0" ]]
+if [[ "$NET_TEST_VERSION" = "netcoreapp6.0" || "$NET_TEST_VERSION" = "netcoreapp7.0" || "$NET_TEST_VERSION" = "netcoreapp8.0" ]]
 then
-  TRX2JUNIT_VERSION="2.0.4"
+  TRX2JUNIT_VERSION="2.1.0"
 else
   dotnet sln remove Examples/ExampleBlazor/ExampleBlazor.csproj
 fi
