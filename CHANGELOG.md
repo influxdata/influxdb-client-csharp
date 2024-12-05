@@ -4,6 +4,9 @@
 
 ⚠️ Important Notice: Starting from this release, we won’t be listing every dependency change in our changelog. This helps us maintain the project faster and focus on important features for our InfluxDB client.
 
+### CI
+1. [#681](https://github.com/influxdata/influxdb-client-csharp/pull/681): Add build for `dotnet8`
+
 ## 4.18.0 [2024-09-13]
 
 ### Features:

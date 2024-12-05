@@ -61,7 +61,7 @@ jobs:
     parameters:
       dotnet-image:
         type: string
-        default: &default-dotnet-image "mcr.microsoft.com/dotnet/sdk:7.0"
+        default: &default-dotnet-image "mcr.microsoft.com/dotnet/sdk:8.0"
       dotnet-target-version:
         type: string
         default: "netstandard2.1"
@@ -132,11 +132,11 @@ jobs:
           command: /c/influxdata/influxdb-1.8.0-1/influxd.exe -config "Scripts/influxdb.conf"
           background: true
       - run: |
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Examples/Examples.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net5.0'<\/TargetFramework>' Examples/Examples.csproj
       - run: dotnet sln remove Examples/ExampleBlazor/ExampleBlazor.csproj
       - run: dotnet nuget locals --clear all
       - run: dotnet restore --no-cache --force -s https://api.nuget.org/v3/index.json
@@ -149,11 +149,11 @@ jobs:
     steps:
       - checkout
       - run: |
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
-          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'net7.0'<\/TargetFramework>' Examples/Examples.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net8.0'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net8.0'<\/TargetFramework>' Client.Test/Client.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net8.0'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net8.0'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
+          sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'net8.0'<\/TargetFramework>' Examples/Examples.csproj
       - run:
           name: Check compilation warnings
           command: |
@@ -225,6 +225,9 @@ workflows:
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
       - tests-dotnet:
           name: dotnet-7.0
+          dotnet-image: "mcr.microsoft.com/dotnet/sdk:7.0"
+      - tests-dotnet:
+          name: dotnet-8.0
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:
@@ -236,6 +239,7 @@ workflows:
             - dotnet-5.0
             - dotnet-6.0
             - dotnet-7.0
+            - dotnet-8.0
             - dotnet-windows
           filters:
             branches:
