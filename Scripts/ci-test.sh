@@ -20,11 +20,11 @@ echo "$NET_TEST_VERSION"
 DEFAULT_NET_TARGET_VERSION="netstandard2.1"
 NET_TARGET_VERSION="${NET_TARGET_VERSION:-$DEFAULT_NET_TARGET_VERSION}"
 
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Test/Client.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
-sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Examples/Examples.csproj
+sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Core.Test/Client.Core.Test.csproj
+sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Test/Client.Test.csproj
+sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Legacy.Test/Client.Legacy.Test.csproj
+sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Client.Linq.Test/Client.Linq.Test.csproj
+sed -i '/<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TEST_VERSION}"'<\/TargetFramework>' Examples/Examples.csproj
 
 sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client.Core/Client.Core.csproj
 sed -i '/<TargetFrameworks>netstandard2.0;netstandard2.1<\/TargetFrameworks>/c\<TargetFramework>'"${NET_TARGET_VERSION}"'<\/TargetFramework>' Client/Client.csproj
@@ -42,10 +42,13 @@ else
   TRX2JUNIT_VERSION="1.3.2"
 fi
 
-if [[ "$NET_TEST_VERSION" = "netcoreapp6.0" || "$NET_TEST_VERSION" = "netcoreapp7.0" ]]
+if [[ "$NET_TEST_VERSION" = "netcoreapp6.0" || "$NET_TEST_VERSION" = "netcoreapp7.0" || "$NET_TEST_VERSION" = "netcoreapp8.0" ]]
 then
-  TRX2JUNIT_VERSION="2.0.4"
-else
+  TRX2JUNIT_VERSION="2.1.0"
+fi
+
+if [[ "$NET_TEST_VERSION" != "netcoreapp8.0" ]]
+then
   dotnet sln remove Examples/ExampleBlazor/ExampleBlazor.csproj
 fi
 
