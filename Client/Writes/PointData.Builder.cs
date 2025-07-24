@@ -212,7 +212,7 @@ namespace InfluxDB.Client.Writes
             /// <returns></returns>
             public Builder Timestamp(DateTime timestamp, WritePrecision timeUnit)
             {
- if (
+                if (
 #if !NETSTANDARD
                     timestamp != null &&
 #endif

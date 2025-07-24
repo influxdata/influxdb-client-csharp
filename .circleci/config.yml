@@ -214,9 +214,6 @@ workflows:
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
       - tests-dotnet:
-          name: dotnet-5.0
-          dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
-      - tests-dotnet:
           name: dotnet-6.0
           code-coverage-report: true
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
@@ -231,7 +228,7 @@ workflows:
           requires:
             - check-compilation-warnings
             - check-code-formatting
-            - dotnet-5.0
+            - dotnet-6.0
             - dotnet-6.0-nightly
             - dotnet-7.0
             - dotnet-8.0
