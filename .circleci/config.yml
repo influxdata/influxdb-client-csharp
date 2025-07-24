@@ -210,18 +210,12 @@ workflows:
       - check-compilation-warnings
       - check-code-formatting
       - tests-dotnet:
-          name: dotnet-3.1-nightly
+          name: dotnet-6.0-nightly
           influxdb-image: "quay.io/influxdb/influxdb:nightly"
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
-      - tests-dotnet:
-          name: dotnet-3.1
-          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
-      - tests-dotnet:
-          name: dotnet-5.0
-          code-coverage-report: true
-          dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
+          dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
       - tests-dotnet:
           name: dotnet-6.0
+          code-coverage-report: true
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
       - tests-dotnet:
           name: dotnet-7.0
@@ -234,10 +228,8 @@ workflows:
           requires:
             - check-compilation-warnings
             - check-code-formatting
-            - dotnet-3.1-nightly
-            - dotnet-3.1
-            - dotnet-5.0
             - dotnet-6.0
+            - dotnet-6.0-nightly
             - dotnet-7.0
             - dotnet-8.0
             - dotnet-windows
