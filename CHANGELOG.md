@@ -8,7 +8,7 @@
 1. [#681](https://github.com/influxdata/influxdb-client-csharp/pull/681): Add build for `dotnet8`
 
 ### Features
-2. [#606](https://github.com/influxdata/influxdb-client-csharp/pull/606): Use IEnumerable in WriteApi to eliminate unnescessary memmory allocations
+2. [#615](https://github.com/influxdata/influxdb-client-csharp/pull/615): Use IEnumerable in WriteApi to eliminate unnescessary memmory allocations
 
 ## 4.18.0 [2024-09-13]
 
