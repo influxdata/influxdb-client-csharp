@@ -1,4 +1,4 @@
-## 4.19.0 [unreleased]
+## 5.0.0 [unreleased]
 
 ### Dependencies
 
@@ -6,6 +6,9 @@
 
 ### CI
 1. [#681](https://github.com/influxdata/influxdb-client-csharp/pull/681): Add build for `dotnet8`
+
+### Features
+2. [#615](https://github.com/influxdata/influxdb-client-csharp/pull/615): Use IEnumerable in WriteApi to eliminate unnescessary memmory allocations
 
 ## 4.18.0 [2024-09-13]
 
@@ -94,7 +97,6 @@ Update dependencies:
 ### Features
 
 1. [#590](https://github.com/influxdata/influxdb-client-csharp/pull/590): Allows disable Trace verbose messages
-2. [#606](https://github.com/influxdata/influxdb-client-csharp/pull/606): Use IEnumerable in WriteApi to eliminate unnescessary memmory allocations
 
 ### Dependencies
 Update dependencies:
