@@ -98,6 +98,31 @@ namespace InfluxDB.Client.Test
             await foreach (var item in measurements.ConfigureAwait(false)) list.Add(item);
 
             Assert.AreEqual(2, list.Count);
+            Assert.AreEqual("mem", list[0].Measurement);
+            Assert.AreEqual("mem", list[1].Measurement);
+            Assert.AreEqual(12.25, list[0].Value);
+            Assert.AreEqual(13.00, list[1].Value);
+        }
+
+        [Test]
+        public async Task QueryAsyncEnumerableOfFluxRecords()
+        {
+            MockServer
+                .Given(Request.Create().WithPath("/api/v2/query").UsingPost())
+                .RespondWith(CreateResponse(Data));
+
+            var measurements = _queryApi.QueryAsyncEnumerable(
+                new Query(null, "from(...)"),
+                "my-org");
+
+            var list = new List<FluxRecord>();
+            await foreach (var item in measurements.ConfigureAwait(false)) list.Add(item);
+
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual("mem", list[0].GetMeasurement());
+            Assert.AreEqual("mem", list[1].GetMeasurement());
+            Assert.AreEqual(12.25, list[0].GetValue());
+            Assert.AreEqual(13.00, list[1].GetValue());
         }
 
         [Test]
