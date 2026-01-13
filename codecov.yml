@@ -1,6 +1,0 @@
-ignore:
-  - "Client/InfluxDB.Client.Api/**/*"
-  - "Client.Core.Test/*"
-  - "Client.Test/**/*"
-  - "Client.Legacy.Test/**/*"
-  - "Client.Linq.Test/**/*"
