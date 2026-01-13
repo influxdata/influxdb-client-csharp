@@ -17,6 +17,10 @@
 
 set -ev
 
+# Install Git
+apt-get -y update
+apt-get -y install git
+
 SCRIPT_PATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
 cd "$SCRIPT_PATH"/..
 

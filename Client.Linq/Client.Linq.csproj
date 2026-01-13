@@ -7,8 +7,8 @@
       <Description>The library supports querying InfluxDB 2.x by LINQ expressions.</Description>
         <Authors>influxdb-client-csharp Contributors</Authors>
         <AssemblyName>InfluxDB.Client.Linq</AssemblyName>
-        <VersionPrefix>5.0.0</VersionPrefix>
-        <VersionSuffix></VersionSuffix>
+        <VersionPrefix>5.1.0</VersionPrefix>
+        <VersionSuffix>dev</VersionSuffix>
 
         <PackageId>InfluxDB.Client.Linq</PackageId>
         <PackageTags>influxdata;timeseries;flux;influxdb;linq</PackageTags>
