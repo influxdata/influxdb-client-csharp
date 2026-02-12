@@ -38,7 +38,7 @@ namespace InfluxDB.Client.Api.Client
             var version = AssemblyHelper.GetVersion(typeof(InfluxDBClient));
             RestClientOptions = new RestClientOptions(options.Url)
             {
-                MaxTimeout = (int)options.Timeout.TotalMilliseconds,
+                Timeout = options.Timeout,
                 UserAgent = $"influxdb-client-csharp/{version}",
                 Proxy = options.WebProxy,
                 FollowRedirects = options.AllowHttpRedirects,
