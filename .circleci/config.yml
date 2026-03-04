@@ -102,9 +102,9 @@ jobs:
               - run:
                   name: Install GPG
                   command: |
+                      apt-get update
                       apt-get install gnupg2
                       wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-                      apt-get update
                       apt-get install gpg -y
               - run:
                   name: Collecting coverage reports
