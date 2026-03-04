@@ -1,5 +1,8 @@
 ## 5.1.0 [unreleased]
 
+### CI
+1. [#712](https://github.com/influxdata/influxdb-client-csharp/pull/721): Update dotnet-5.0 image from "mcr.microsoft.com/dotnet/sdk:5.0" to "mcr.microsoft.com/dotnet/sdk:5.0-bullseye-slim".
+
 ## 5.0.0 [2026-01-13]
 
 ### Dependencies
