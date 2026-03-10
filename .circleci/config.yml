@@ -198,8 +198,7 @@ jobs:
       - checkout
       - run:
           name: Deploying To Preview repository
-          command: |
-            ./Scripts/ci-deploy-snapshot.sh
+          command: ./Scripts/ci-deploy-snapshot.sh
 
 workflows:
   version: 2
