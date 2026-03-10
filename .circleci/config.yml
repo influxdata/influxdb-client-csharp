@@ -199,6 +199,8 @@ jobs:
       - run:
           name: Deploying To Preview repository
           command: |
+            dotnet clean
+            dotnet build -c Release
             ./Scripts/ci-deploy-snapshot.sh
 
 workflows:
