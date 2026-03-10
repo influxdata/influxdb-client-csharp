@@ -198,7 +198,9 @@ jobs:
       - checkout
       - run:
           name: Deploying To Preview repository
-          command: ./Scripts/ci-deploy-snapshot.sh
+          command: |
+            dotnet build -c Debug
+            ./Scripts/ci-deploy-snapshot.sh
 
 workflows:
   version: 2
