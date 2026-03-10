@@ -199,9 +199,6 @@ jobs:
       - run:
           name: Deploying To Preview repository
           command: |
-            dotnet clean
-            mkdir -p /root/project/Client.Core/bin/Debug  
-            dotnet build -c Release
             ./Scripts/ci-deploy-snapshot.sh
 
 workflows:
