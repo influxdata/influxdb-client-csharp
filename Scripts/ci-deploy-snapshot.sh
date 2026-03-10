@@ -12,6 +12,7 @@ BONITOO_NUGET_URL="${BONITOO_NUGET_URL:-$DEFAULT_BONITOO_NUGET_URL}"
 # Deploy to Preview repository
 #
 dotnet pack Client.Core --version-suffix=dev.$CIRCLE_BUILD_NUM
+dotnet pack -c Debug
 #dotnet pack Client.Legacy --version-suffix=dev.$CIRCLE_BUILD_NUM
 #dotnet pack Client --version-suffix=dev.$CIRCLE_BUILD_NUM
 #dotnet pack Client.Linq --version-suffix=dev.$CIRCLE_BUILD_NUM
