@@ -1,8 +1,16 @@
-## 4.19.0 [unreleased]
+## 5.1.0 [unreleased]
+
+### CI
+1. [#712](https://github.com/influxdata/influxdb-client-csharp/pull/721): Update dotnet-5.0 image from "mcr.microsoft.com/dotnet/sdk:5.0" to "mcr.microsoft.com/dotnet/sdk:5.0-bullseye-slim".
+
+## 5.0.0 [2026-01-13]
 
 ### Dependencies
 
 ⚠️ Important Notice: Starting from this release, we won’t be listing every dependency change in our changelog. This helps us maintain the project faster and focus on important features for our InfluxDB client.
+
+### Features
+1. [#615](https://github.com/influxdata/influxdb-client-csharp/pull/615): Use IEnumerable in WriteApi to eliminate unnescessary memmory allocations
 
 ### CI
 1. [#681](https://github.com/influxdata/influxdb-client-csharp/pull/681): Add build for `dotnet8`
