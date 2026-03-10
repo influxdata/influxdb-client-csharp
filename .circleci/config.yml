@@ -241,9 +241,9 @@ workflows:
             - dotnet-7.0
             - dotnet-8.0
             - dotnet-windows
-          filters:
-            branches:
-              only: master
+#          filters:
+#            branches:
+#              only: master
 
   nightly:
     when:
