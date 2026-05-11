@@ -4,6 +4,7 @@
 1. [#712](https://github.com/influxdata/influxdb-client-csharp/pull/721): Update dotnet-5.0 image from "mcr.microsoft.com/dotnet/sdk:5.0" to "mcr.microsoft.com/dotnet/sdk:5.0-bullseye-slim".
 1. [#724](https://github.com/influxdata/influxdb-client-csharp/pull/724): Set snapshot version properly in ci-deploy-snapshot.sh
 1. [#728](https://github.com/influxdata/influxdb-client-csharp/pull/728): Set up auto merge dependabot workflow.
+1. [#738](https://github.com/influxdata/influxdb-client-csharp/pull/738): The token in the Management API is no longer plain text.
 
 ## 5.0.0 [2026-01-13]
 
