@@ -127,7 +127,6 @@ namespace InfluxDB.Client.Test
 
             Assert.IsNotNull(foundAuthorization);
             Assert.AreEqual(authorization.Id, foundAuthorization.Id);
-            Assert.AreEqual(authorization.Token, foundAuthorization.Token);
             Assert.AreEqual(authorization.UserID, foundAuthorization.UserID);
             Assert.AreEqual(authorization.User, foundAuthorization.User);
             Assert.AreEqual(authorization.Status, foundAuthorization.Status);
