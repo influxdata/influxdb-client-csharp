@@ -109,7 +109,7 @@ namespace InfluxDB.Client.Test
             Assert.IsNotNull(telegrafConfig.Metadata.Buckets);
             Assert.AreEqual(1, telegrafConfig.Metadata.Buckets.Count);
 
-            var toml = Toml.Parse(telegrafConfig.Config).ToModel();
+            var toml = TomlSerializer.Deserialize<TomlTable>(telegrafConfig.Config);
             var agent = (TomlTable)toml["agent"];
             Assert.IsNotNull(agent);
             Assert.AreEqual("10s", agent["interval"]);
