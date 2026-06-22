@@ -134,8 +134,8 @@ jobs:
       - run: dotnet sln remove Examples/ExampleBlazor/ExampleBlazor.csproj
       - run: dotnet nuget locals --clear all
       - run: dotnet restore --no-cache --force -s https://api.nuget.org/v3/index.json
-      - run: dotnet build
-      - run: dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build
+      - run: dotnet build Client.Legacy.Test/Client.Legacy.Test.csproj --no-restore --framework="net5.0"
+      - run: dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build --framework="net5.0"
       
   check-compilation-warnings:
     docker:
@@ -146,7 +146,7 @@ jobs:
           name: Check compilation warnings
           command: |
             dotnet clean --configuration Release
-            dotnet build --configuration Release -warnAsError -warnAsMessage:CS0419,CS0618,CS1591,CS1573,CS1574,NETSDK1138
+            dotnet build --framework="net8.0" --configuration Release -warnAsError -warnAsMessage:CS0419,CS0618,CS1591,CS1573,CS1574,NETSDK1138
       
   check-code-formatting:
     docker:

@@ -44,7 +44,7 @@ dotnet restore
 dotnet build Client.Core.Test/Client.Core.Test.csproj --no-restore --framework="${NET_TARGET_VERSION}"
 dotnet build Client.Test/Client.Test.csproj --no-restore --framework="${NET_TARGET_VERSION}"
 dotnet build Client.Legacy.Test/Client.Legacy.Test.csproj --no-restore --framework="${NET_TARGET_VERSION}"
-dotnet biild Client.Linq.Test/Client.Linq.Test.csproj --no-restore --framework="${NET_TARGET_VERSION}"
+dotnet build Client.Linq.Test/Client.Linq.Test.csproj --no-restore --framework="${NET_TARGET_VERSION}"
 
 #
 # Test
