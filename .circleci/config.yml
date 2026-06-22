@@ -133,7 +133,7 @@ jobs:
           background: true
       - run: dotnet sln remove Examples/ExampleBlazor/ExampleBlazor.csproj
       - run: dotnet nuget locals --clear all
-      - run: dotnet restore --no-cache --force -s https://api.nuget.org/v3/index.json
+      - run: dotnet restore --no-cache --framework="net5.0" --force -s https://api.nuget.org/v3/index.json
       - run: dotnet build Client.Legacy.Test/Client.Legacy.Test.csproj --no-restore --framework="net5.0"
       - run: dotnet test Client.Legacy.Test/Client.Legacy.Test.csproj --no-build --framework="net5.0"
       
@@ -198,6 +198,11 @@ workflows:
       - check-compilation-warnings
       - check-code-formatting
       - tests-dotnet:
+          name: dotnet-3.1-nightly
+          influxdb-image: "quay.io/influxdb/influxdb:nightly"
+          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
+          dotnet-target-version: netcoreapp3.1
+      - tests-dotnet:
           name: dotnet-3.1
           dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
           dotnet-target-version: netcoreapp3.1
@@ -224,6 +229,7 @@ workflows:
           requires:
             - check-compilation-warnings
             - check-code-formatting
+            - dotnet-3.1-nightly
             - dotnet-3.1
             - dotnet-5.0
             - dotnet-6.0
