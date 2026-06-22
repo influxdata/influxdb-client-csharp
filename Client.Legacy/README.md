@@ -94,7 +94,7 @@ fluxClient.QueryAsync(fluxQuery, record =>
             (error) =>
             {
                 // error handling while processing result
-                Console.WriteLine($"Error occured: {error}");
+                Console.WriteLine($"Error occurred: {error}");
             }, 
             () =>
             {
