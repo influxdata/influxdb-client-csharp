@@ -199,19 +199,24 @@ workflows:
       - check-code-formatting
       - tests-dotnet:
           name: dotnet-3.1
+          dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
           dotnet-target-version: netcoreapp3.1
       - tests-dotnet:
           name: dotnet-5.0
           code-coverage-report: true
+          dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0"
           dotnet-target-version: net5.0
       - tests-dotnet:
           name: dotnet-6.0
+          dotnet-image: "mcr.microsoft.com/dotnet/sdk:6.0"
           dotnet-target-version: net6.0
       - tests-dotnet:
           name: dotnet-7.0
+          dotnet-image: "mcr.microsoft.com/dotnet/sdk:7.0"
           dotnet-target-version: net7.0
       - tests-dotnet:
           name: dotnet-8.0
+          dotnet-image: "mcr.microsoft.com/dotnet/sdk:8.0"
           dotnet-target-version: net8.0
       - tests-windows:
           name: dotnet-windows

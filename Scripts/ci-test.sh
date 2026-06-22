@@ -41,7 +41,10 @@ dotnet tool install --tool-path="./trx2junit/" trx2junit --version ${TRX2JUNIT_V
 # Build
 #
 dotnet restore
-dotnet build --no-restore
+dotnet build Client.Core.Test/Client.Core.Test.csproj --no-restore --framework="${NET_TARGET_VERSION}"
+dotnet build Client.Test/Client.Test.csproj --no-restore --framework="${NET_TARGET_VERSION}"
+dotnet build Client.Legacy.Test/Client.Legacy.Test.csproj --no-restore --framework="${NET_TARGET_VERSION}"
+dotnet biild Client.Linq.Test/Client.Linq.Test.csproj --no-restore --framework="${NET_TARGET_VERSION}"
 
 #
 # Test
