@@ -26,7 +26,8 @@ set -e
 PKCS12_PASSWORD="changeit"
 INFLUXDB_SERVER_NAME="influxdb"
 OTHER_SERVER_NAME="other-server"
-CERTS_DIR="/Users/home/Documents/sources/influxdb-client-csharp/Client.Test/certificates"
+CERTS_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
+cd "$CERTS_DIR"
 
 # Gen Server .crt and .key with SAN (Subject Alternative Names) then convert to .p12 file
 for SERVER_NAME in "$INFLUXDB_SERVER_NAME" "$OTHER_SERVER_NAME"; do
@@ -48,6 +49,3 @@ openssl req -new -x509 -key client.key -out client.crt -days 3650 \
   -subj "/CN=test-client/O=Development/C=US"
 openssl pkcs12 -export -in client.crt -inkey client.key \
   -out client.p12 -name "myalias" -password "pass:$PKCS12_PASSWORD"
-
-#Encrypt pkcs8 for client.key for testing
-openssl pkcs8 -topk8 -v2 aes-256-cbc -iter 1000000 -in client.key -out client_pkcs8.key
