@@ -12,7 +12,7 @@ namespace Examples
 
         public static async Task Main()
         {
-            var option = new InfluxDBClientOptions("https://127.0.0.1:433")
+            var option = new InfluxDBClientOptions("https://127.0.0.1:443")
             {
                 VerifySslCallback = (sender, certificate, chain, sslPolicyErrors) =>
                 {
