@@ -1,5 +1,9 @@
 ## 5.2.0 [unreleased]
 
+### Examples
+
+1. [#791](https://github.com/influxdata/influxdb-client-csharp/pull/791): Add examples for configure TLS/mTLS for the Influxdb client.
+
 ## 5.1.0 [2026-06-10]
 
 ### CI
