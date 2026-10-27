@@ -75,6 +75,9 @@ namespace Examples
                     case "HttpErrorHandling":
                         await HttpErrorHandling.Main();
                         break;
+                    case "TlsExample":
+                        await TlsExample.Main();
+                        break;
                 }
             }
             else
@@ -84,7 +87,7 @@ namespace Examples
                                   "FluxClientPocoExample, PlatformExample, WriteEventHandlerExample, WriteApiAsyncExample, " +
                                   "CustomDomainMapping, PocoQueryWriteExample, CustomDomainMappingAndLinq, " +
                                   "SynchronousQuery, InfluxDB18Example, QueryLinqCloud, ManagementExample, " +
-                                  " InvokableScripts, ParametrizedQuery, RecordRowExample");
+                                  " InvokableScripts, ParametrizedQuery, RecordRowExample, TlsExample");
             }
         }
     }
