@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using InfluxDB.Client.Api.Client;
@@ -14,6 +14,7 @@ using InfluxDB.Client.Core;
 using InfluxDB.Client.Core.Exceptions;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Core.Test;
+using InfluxDB.Client.Test.utils;
 using Moq;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
@@ -456,6 +457,112 @@ namespace InfluxDB.Client.Test
             }
 
             StringAssert.Contains("Header: Authorization=***", writer.ToString());
+        }
+
+        private static readonly string ServerCertificatePath = TestUtils.ResolveCertificatePath("influxdb.p12");
+        private static readonly string ClientCertificatePath = TestUtils.ResolveCertificatePath("client.p12");
+
+        private static readonly string OtherServerCertificatePath =
+            TestUtils.ResolveCertificatePath("other-server.p12");
+
+        private const string Password = "changeit";
+
+        [Test]
+        public async Task Tls()
+        {
+            var settings = new WireMockServerSettings
+            {
+                UseSSL = true,
+                Urls = new[] { "https://localhost:8443" },
+                CertificateSettings = new WireMockCertificateSettings
+                {
+                    X509CertificateFilePath = ServerCertificatePath,
+                    X509CertificatePassword = Password
+                }
+            };
+            var server = WireMockServer.Start(settings);
+            server.Given(Request.Create().WithPath("/ping").UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(204)
+                    .WithHeader("x-influxdb-version", "2.0.0"));
+
+            foreach (var isSuccessful in new List<bool>
+                     {
+                         true,
+                         false
+                     })
+            {
+                var certificatePath = isSuccessful ? ServerCertificatePath : OtherServerCertificatePath;
+                _client.Dispose();
+                _client = new InfluxDBClient(new InfluxDBClientOptions(server.Url)
+                {
+                    VerifySslCallback = (sender, certificate, chain, sslPolicyErrors) =>
+                    {
+                        var expectedCert = new X509Certificate2(certificatePath, Password);
+                        if (certificate == null)
+                        {
+                            return false;
+                        }
+
+                        var receivedCert = new X509Certificate2(certificate);
+                        return receivedCert.Thumbprint == expectedCert.Thumbprint;
+                    }
+                });
+                if (isSuccessful)
+                {
+                    Assert.AreEqual("2.0.0", await _client.VersionAsync());
+                }
+                else
+                {
+                    var ex = Assert.ThrowsAsync<InfluxException>(async () => await _client.VersionAsync());
+                    Assert.IsNotNull(ex);
+                    Assert.AreEqual("The SSL connection could not be established, see inner exception.", ex.Message);
+                }
+            }
+        }
+
+        [Test]
+        public async Task MutualTls()
+        {
+            using var testWebFactory = new TestWebFactory();
+
+            foreach (var isSuccessful in new List<bool>
+                     {
+                         true,
+                         false
+                     })
+            {
+                var certificatePath = isSuccessful ? ClientCertificatePath : OtherServerCertificatePath;
+                _client.Dispose();
+                _client = new InfluxDBClient(new InfluxDBClientOptions(testWebFactory.GetAddress())
+                {
+                    VerifySslCallback = (sender, certificate, chain, sslPolicyErrors) =>
+                    {
+                        var expectedCert = new X509Certificate2(ServerCertificatePath, Password);
+                        if (certificate == null)
+                        {
+                            return false;
+                        }
+
+                        var receivedCert = new X509Certificate2(certificate);
+                        return receivedCert.Thumbprint == expectedCert.Thumbprint;
+                    },
+                    ClientCertificates = new X509CertificateCollection
+                    {
+                        new X509Certificate2(certificatePath, Password)
+                    }
+                });
+
+                if (isSuccessful)
+                {
+                    Assert.AreEqual("2.0.0", await _client.VersionAsync());
+                }
+                else
+                {
+                    var ex = Assert.ThrowsAsync<InfluxException>(async () => await _client.VersionAsync());
+                    Assert.IsNotNull(ex);
+                    Assert.AreEqual("An error occurred while sending the request.", ex.Message);
+                }
+            }
         }
     }
 }
