@@ -2,7 +2,7 @@
 
 ### Examples
 
-1. [#790](https://github.com/influxdata/influxdb-client-python/pull/790): Add examples for configure TLS/mTLS for the Influxdb client.
+1. [#790](https://github.com/influxdata/influxdb-client-csharp/pull/790): Add examples for configure TLS/mTLS for the Influxdb client.
 
 ## 5.1.0 [2026-06-10]
 
