@@ -19,7 +19,7 @@ namespace Examples
 
         public static void Main()
         {
-            // Change Host, Token, Org, Bucket,... to you real values.
+            // Change Host, Token, Org, Bucket,... to your real values.
             var option = new InfluxDBClientOptions("https://127.0.0.1:8443")
             {
                 Token = "MyInitialAdminToken0==",
