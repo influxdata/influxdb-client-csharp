@@ -14,7 +14,7 @@ namespace InfluxDB.Client.Test
         [Obsolete("Obsolete")]
         public async Task Health()
         {
-            var healthMessages = new string[2]{"ready for queries and writes", "healthy"};
+            var healthMessages = new string[2] {"ready for queries and writes", "healthy"};
             var health = await Client.HealthAsync();
 
             Assert.IsNotNull(health);
