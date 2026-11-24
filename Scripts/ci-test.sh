@@ -39,7 +39,7 @@ then
   TRX2JUNIT_VERSION="1.6.0"
   TEST_PARAMS=(--collect:"XPlat Code Coverage")
 else
-  TRX2JUNIT_VERSION="1.3.2"
+  TRX2JUNIT_VERSION="1.4.1"
 fi
 
 if [[ "$NET_TEST_VERSION" = "netcoreapp6.0" || "$NET_TEST_VERSION" = "netcoreapp7.0" || "$NET_TEST_VERSION" = "netcoreapp8.0" ]]
