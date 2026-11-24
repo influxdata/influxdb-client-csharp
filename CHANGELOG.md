@@ -4,6 +4,10 @@
 
 1. [#798](https://github.com/influxdata/influxdb-client-csharp/pull/798): Update default trx2junit version to 1.4.1 and start using the net8.0 build for measuring code coverage.
 
+### Examples
+
+1. [#791](https://github.com/influxdata/influxdb-client-csharp/pull/791): Add examples for configure TLS/mTLS for the Influxdb client.
+
 ## 5.1.0 [2026-06-10]
 
 ### CI
