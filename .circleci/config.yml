@@ -103,7 +103,7 @@ jobs:
                   name: Install GPG
                   command: |
                       apt-get update
-                      apt-get install -t bullseye gpg -y
+                      apt-get install gpg -y
               - run:
                   name: Collecting coverage reports
                   command: |
@@ -218,7 +218,6 @@ workflows:
           dotnet-image: "mcr.microsoft.com/dotnet/core/sdk:3.1"
       - tests-dotnet:
           name: dotnet-5.0
-          code-coverage-report: true
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:5.0-bullseye-slim"
       - tests-dotnet:
           name: dotnet-6.0
@@ -228,6 +227,7 @@ workflows:
           dotnet-image: "mcr.microsoft.com/dotnet/sdk:7.0"
       - tests-dotnet:
           name: dotnet-8.0
+          code-coverage-report: true
       - tests-windows:
           name: dotnet-windows
       - deploy-preview:
